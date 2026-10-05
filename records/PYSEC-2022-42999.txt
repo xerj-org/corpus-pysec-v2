@@ -1,0 +1,16 @@
+PYSEC-2022-42999 PyPI/python-libnmap — ** DISPUTED ** In the python-libnmap package through 0.7.2 for Python, remote command execution can 
+package: python-libnmap
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.7.3 (ECOSYSTEM)
+aliases: CVE-2022-30284, GHSA-qwqv-j7jr-4hp6
+references:
+  https://github.com/savon-noir/python-libnmap/releases
+  https://www.swascan.com/security-advisory-libnmap-2/
+  https://www.swascan.com/security-advisory-libnmap-2/
+  https://pypi.org/project/python-libnmap/
+  https://libnmap.readthedocs.io/en/latest/process.html#using-libnmap-process
+  https://libnmap.readthedocs.io/en/latest/process.html#using-libnmap-process
+  https://github.com/advisories/GHSA-qwqv-j7jr-4hp6
+
+** DISPUTED ** In the python-libnmap package through 0.7.2 for Python, remote command execution can occur (if used in a client application that does not validate arguments). NOTE: the vendor believes it would be unrealistic for an application to call NmapProcess with arguments taken from input data that arrived over an untrusted network, and thus the CVSS score corresponds to an unrealistic use case. None of the NmapProcess documentation implies that this is an expected use case.

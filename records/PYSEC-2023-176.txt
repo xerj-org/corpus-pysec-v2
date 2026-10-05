@@ -1,0 +1,11 @@
+PYSEC-2023-176 PyPI/geonode — GeoNode is an open source platform that facilitates the creation, sharing, and collaborative use of 
+package: geonode
+ecosystem: PyPI
+versions affected:
+  >= 3.2.0 (ECOSYSTEM)
+aliases: CVE-2023-42439, GHSA-pxg5-h34r-7q8p
+references:
+  https://github.com/GeoNode/geonode/security/advisories/GHSA-pxg5-h34r-7q8p
+  https://github.com/GeoNode/geonode/security/advisories/GHSA-pxg5-h34r-7q8p
+
+GeoNode is an open source platform that facilitates the creation, sharing, and collaborative use of geospatial data. A SSRF vulnerability exists starting in version 3.2.0, bypassing existing controls on the software. This can allow a user to request internal services for a full read SSRF, returning any data from the internal network. The application is using a whitelist, but the whitelist can be bypassed. The bypass will trick the application that the first host is a whitelisted address, but the browser will use `@` or `%40` as a credential to the host geoserver on port 8080, this will return the data to that host on the response. As of time of publication, no patched version is available.

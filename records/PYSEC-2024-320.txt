@@ -1,0 +1,11 @@
+PYSEC-2024-320 PyPI/geonode — GeoNode is a geospatial content management system, a platform for the management and publication of 
+package: geonode
+ecosystem: PyPI
+versions affected:
+  >= 3.2.1, < 4.2.3 (ECOSYSTEM)
+aliases: CVE-2024-27091, GHSA-rwcv-whm8-fmxm
+references:
+  https://github.com/GeoNode/geonode/security/advisories/GHSA-rwcv-whm8-fmxm
+  https://github.com/GeoNode/geonode/commit/e53bdeff331f4b577918927d60477d4b50cca02f
+
+GeoNode is a geospatial content management system, a platform for the management and publication of geospatial data. An issue exists within GEONODE where the current rich text editor is vulnerable to Stored XSS. The applications cookies are set securely, but it is possible to retrieve a victims CSRF token and issue a request to change another user's email address to perform a full account takeover. Due to the script element not impacting the CORS policy, requests will succeed. This vulnerability is fixed in 4.2.3.

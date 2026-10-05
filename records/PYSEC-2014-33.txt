@@ -1,0 +1,14 @@
+PYSEC-2014-33 PyPI/plone — z3c.form, as used in Plone before 4.2.3 and 4.3 before beta 1, allows remote attackers to obtain the
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.2.3, >= 4.3a0, < 4.3b1 (ECOSYSTEM)
+aliases: CVE-2012-5491, GHSA-f8pg-wp5j-rjxx
+references:
+  https://plone.org/products/plone/security/advisories/20121106/07
+  https://github.com/plone/Products.CMFPlone/blob/4.2.3/docs/CHANGES.txt
+  http://www.openwall.com/lists/oss-security/2012/11/10/1
+  https://plone.org/products/plone-hotfix/releases/20121106
+  https://github.com/advisories/GHSA-f8pg-wp5j-rjxx
+
+z3c.form, as used in Plone before 4.2.3 and 4.3 before beta 1, allows remote attackers to obtain the default form field values by leveraging knowledge of the form location and the element id.

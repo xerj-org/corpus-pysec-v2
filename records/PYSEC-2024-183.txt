@@ -1,0 +1,13 @@
+PYSEC-2024-183 PyPI/codechecker — CodeChecker is an analyzer tooling, defect database and viewer extension for the Clang Static Analyz
+package: codechecker
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.24.2 (ECOSYSTEM)
+aliases: CVE-2024-10082, GHSA-fpm5-2wcj-vfr7
+references:
+  https://github.com/Ericsson/codechecker/security/advisories/GHSA-fpm5-2wcj-vfr7
+
+CodeChecker is an analyzer tooling, defect database and viewer extension for the Clang Static Analyzer and Clang Tidy. 
+Authentication method confusion allows logging in as the built-in root user from an external service. The built-in root user up until 6.24.1 is generated in a weak manner, cannot be disabled, and has universal access.This vulnerability allows an attacker who can create an account on an enabled external authentication service, to log in as the root user, and access and control everything that can be controlled via the web interface. The attacker needs to acquire the username of the root user to be successful.
+
+This issue affects CodeChecker: through 6.24.1.

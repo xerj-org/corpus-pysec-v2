@@ -1,0 +1,18 @@
+PYSEC-2017-102 PyPI/radicale — Radicale before 1.1.2 and 2.x before 2.0.0rc2 is prone to timing oracles and simple brute-force atta
+package: radicale
+ecosystem: PyPI
+versions affected:
+  >= 0, < 190b1dd795f0c552a4992445a231da760211183b, < 059ba8dec1f22ccbeab837e288b3833a099cee2d (GIT: https://github.com/Kozea/Radicale)
+  >= 0, < 1.1.2 (ECOSYSTEM)
+aliases: CVE-2017-8342, GHSA-rpv4-63g3-9x23
+references:
+  https://github.com/Kozea/Radicale/commit/190b1dd795f0c552a4992445a231da760211183b
+  https://github.com/Kozea/Radicale/commit/059ba8dec1f22ccbeab837e288b3833a099cee2d
+  https://github.com/Kozea/Radicale/blob/1.1.2/NEWS.rst
+  https://bugs.debian.org/861514
+  https://lists.debian.org/debian-lts-announce/2020/04/msg00019.html
+  https://pypi.org/project/radicale
+  https://nvd.nist.gov/vuln/detail/CVE-2017-8342
+  https://github.com/advisories/GHSA-rpv4-63g3-9x23
+
+Radicale before 1.1.2 and 2.x before 2.0.0rc2 is prone to timing oracles and simple brute-force attacks when using the htpasswd authentication method.

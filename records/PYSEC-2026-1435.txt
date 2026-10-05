@@ -1,0 +1,18 @@
+PYSEC-2026-1435 PyPI/h2 — h2 allows HTTP Request Smuggling due to illegal characters in headers
+package: h2
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.3.0 (ECOSYSTEM)
+aliases: CVE-2025-57804, GHSA-847f-9342-265h
+references:
+  https://github.com/python-hyper/h2/security/advisories/GHSA-847f-9342-265h
+  https://nvd.nist.gov/vuln/detail/CVE-2025-57804
+  https://github.com/python-hyper/h2/commit/035e9899f95e3709af098f578bfc3cd302298e3a
+  https://github.com/python-hyper/h2
+  https://lists.debian.org/debian-lts-announce/2025/09/msg00004.html
+  https://pypi.org/project/h2
+  https://github.com/advisories/GHSA-847f-9342-265h
+
+### Summary
+
+HTTP/2 request splitting vulnerability allows attackers to perform request smuggling attacks by injecting CRLF characters into headers. This occurs when servers downgrade HTTP/2 requests to HTTP/1.1 without properly validating header names/values, enabling attackers to manipulate request boundaries and bypass security controls.

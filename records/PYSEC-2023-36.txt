@@ -1,0 +1,15 @@
+PYSEC-2023-36 PyPI/modoboa — Cross-Site Request Forgery (CSRF) in GitHub repository modoboa/modoboa prior to 2.1.0.
+package: modoboa
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5d886f3d06373d2c3292911bac0772bcd5102343 (GIT: https://github.com/modoboa/modoboa)
+  >= 0, < 2.1.0 (ECOSYSTEM)
+aliases: CVE-2023-2228, GHSA-6pvf-cq4f-hfjp
+references:
+  https://huntr.dev/bounties/619fb490-69ad-4a2a-b686-4c42a62404a9
+  https://huntr.dev/bounties/619fb490-69ad-4a2a-b686-4c42a62404a9
+  https://huntr.dev/bounties/619fb490-69ad-4a2a-b686-4c42a62404a9
+  https://github.com/modoboa/modoboa/commit/5d886f3d06373d2c3292911bac0772bcd5102343
+  https://github.com/advisories/GHSA-6pvf-cq4f-hfjp
+
+Cross-Site Request Forgery (CSRF) in GitHub repository modoboa/modoboa prior to 2.1.0.

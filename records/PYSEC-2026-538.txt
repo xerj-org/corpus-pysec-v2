@@ -1,0 +1,15 @@
+PYSEC-2026-538 PyPI/sglang — SGLang's multimodal generation runtime has an unauthenticated path traversal vulnerability
+package: sglang
+ecosystem: PyPI
+versions affected:
+  >= 0.5.5, <= 0.5.12 (ECOSYSTEM)
+aliases: CVE-2026-7302, GHSA-qwrp-wghp-94q2
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-7302
+  https://antiproof.ai/blog/three-rces-in-sglang
+  https://github.com/sgl-project/sglang
+  https://github.com/sgl-project/sglang/tree/main/python/sglang
+  https://pypi.org/project/sglang
+  https://github.com/advisories/GHSA-qwrp-wghp-94q2
+
+SGLang's multimodal generation runtime is vulnerable to an unauthenticated path traversal vulnerability, allowing an attacker to write arbitrary files anywhere the server process has write access, by including ../ sequences in the upload filename when sent to specific endpoints.

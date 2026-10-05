@@ -1,0 +1,12 @@
+PYSEC-2024-151 PyPI/vyper — Vyper is a pythonic Smart Contract Language for the ethereum virtual machine. Vyper compiler allows 
+package: vyper
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.4.0b1 (ECOSYSTEM)
+aliases: CVE-2024-24567, GHSA-x2c2-q32w-4w6m
+references:
+  https://github.com/vyperlang/vyper/security/advisories/GHSA-x2c2-q32w-4w6m
+  https://github.com/vyperlang/vyper/security/advisories/GHSA-x2c2-q32w-4w6m
+  https://github.com/vyperlang/vyper/blob/9136169468f317a53b4e7448389aa315f90b95ba/vyper/builtins/functions.py#L1100
+
+Vyper is a pythonic Smart Contract Language for the ethereum virtual machine. Vyper compiler allows passing a value in builtin raw_call even if the call is a delegatecall or a staticcall. But in the context of delegatecall and staticcall the handling of value is not possible due to the semantics of the respective opcodes, and vyper will silently ignore the value= argument. If the semantics of the EVM are unknown to the developer, he could suspect that by specifying the `value` kwarg, exactly the given amount will be sent along to the target. This vulnerability affects 0.3.10 and earlier versions.

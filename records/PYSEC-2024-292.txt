@@ -1,0 +1,10 @@
+PYSEC-2024-292 PyPI/pyassimp — A heap-buffer-overflow vulnerability has been identified in the OpenDDLParser::parseStructure functi
+package: pyassimp
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 5.4.3 (ECOSYSTEM)
+aliases: CVE-2024-48424
+references:
+  https://github.com/assimp/assimp/issues/5787
+
+A heap-buffer-overflow vulnerability has been identified in the OpenDDLParser::parseStructure function within the Assimp library, specifically during the processing of OpenGEX files.

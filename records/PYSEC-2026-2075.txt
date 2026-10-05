@@ -1,0 +1,29 @@
+PYSEC-2026-2075 PyPI/zope — Information disclosure in AccessControl
+package: zope
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.8.9, >= 5.0.0, < 5.8.4 (ECOSYSTEM)
+aliases: CVE-2023-41050, GHSA-8xv7-89vj-q48c
+references:
+  https://github.com/zopefoundation/AccessControl/security/advisories/GHSA-8xv7-89vj-q48c
+  https://nvd.nist.gov/vuln/detail/CVE-2023-41050
+  https://github.com/zopefoundation/AccessControl/commit/6bc32692e0d4b8d5cf64eae3d19de987c7375bc9
+  https://github.com/zopefoundation/AccessControl
+  https://pypi.org/project/zope
+  https://github.com/advisories/GHSA-8xv7-89vj-q48c
+
+### Impact
+Python's "format" functionality allows someone controlling the format string to "read" objects accessible (recursively) via attribute access and subscription from accessible objects. Those attribute accesses and subscriptions use Python's full blown `getattr` and `getitem`, not the policy restricted `AccessControl` variants `_getattr_` and `_getitem_`. This can lead to critical information disclosure.
+
+`AccessControl` already provides a safe variant for `str.format` and denies access to `string.Formatter`. However, `str.format_map` is still unsafe.
+
+Affected are all users who allow untrusted users to create `AccessControl` controlled Python code and execute it.
+
+### Patches
+A fix will be introduced in the versions 4.4, 5.8 and 6.2.
+
+### Workarounds
+There are no workarounds.
+
+### References
+https://github.com/zopefoundation/RestrictedPython/security/advisories/GHSA-xjw2-6jm9-rf67 describes the corresponding problem for `RestrictedPython`.

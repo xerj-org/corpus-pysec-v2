@@ -1,0 +1,12 @@
+PYSEC-2022-43146 PyPI/py-cord — py-cord is a an API wrapper for Discord written in Python. Bots creating using py-cord version 2.0.0
+package: py-cord
+ecosystem: PyPI
+versions affected:
+  >= 2.0.0, < 2.0.1 (ECOSYSTEM)
+aliases: CVE-2022-36024, GHSA-qmhj-m29v-gvmr
+references:
+  https://github.com/Pycord-Development/pycord/security/advisories/GHSA-qmhj-m29v-gvmr
+  https://github.com/Pycord-Development/pycord/pull/1568
+  https://github.com/Pycord-Development/pycord/pull/1568
+
+py-cord is a an API wrapper for Discord written in Python. Bots creating using py-cord version 2.0.0 are vulnerable to remote shutdown if they are added to the server with the `application.commands` scope without the `bot` scope. Currently, it appears that all public bots that use slash commands are affected. This issue has been patched in version 2.0.1. There are currently no recommended workarounds - please upgrade to a patched version.

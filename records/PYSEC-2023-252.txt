@@ -1,0 +1,15 @@
+PYSEC-2023-252 PyPI/mlflow — Path Traversal: '\..\filename' in GitHub repository mlflow/mlflow prior to 2.9.2.
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1da75dfcecd4d169e34809ade55748384e8af6c1 (GIT: https://github.com/mlflow/mlflow)
+  >= 0, < 2.9.2 (ECOSYSTEM)
+aliases: CVE-2023-6909, GHSA-5r3q-93q3-f978
+references:
+  https://huntr.com/bounties/11209efb-0f84-482f-add0-587ea6b7e850
+  https://huntr.com/bounties/11209efb-0f84-482f-add0-587ea6b7e850
+  https://huntr.com/bounties/11209efb-0f84-482f-add0-587ea6b7e850
+  https://github.com/mlflow/mlflow/commit/1da75dfcecd4d169e34809ade55748384e8af6c1
+  https://github.com/advisories/GHSA-5r3q-93q3-f978
+
+Path Traversal: '\..\filename' in GitHub repository mlflow/mlflow prior to 2.9.2.

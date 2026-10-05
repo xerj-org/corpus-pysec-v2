@@ -1,0 +1,13 @@
+PYSEC-2026-2195 PyPI/litestar — Litestar is an Asynchronous Server Gateway Interface (ASGI) framework. Prior to 2.20.0, CORSConfig.a
+package: litestar
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.20.0 (ECOSYSTEM)
+aliases: CVE-2026-25478, GHSA-2p2x-hpg8-cqp2
+references:
+  https://docs.litestar.dev/2/release-notes/changelog.html#2.20.0
+  https://github.com/litestar-org/litestar/releases/tag/v2.20.0
+  https://github.com/litestar-org/litestar/commit/eb87703b309efcc0d1b087dcb12784e76b003d5a
+  https://github.com/litestar-org/litestar/security/advisories/GHSA-2p2x-hpg8-cqp2
+
+Litestar is an Asynchronous Server Gateway Interface (ASGI) framework. Prior to 2.20.0, CORSConfig.allowed_origins_regex is constructed using a regex built from configured allowlist values and used with fullmatch() for validation. Because metacharacters are not escaped, a malicious origin can match unexpectedly. The check relies on allowed_origins_regex.fullmatch(origin). This vulnerability is fixed in 2.20.0.

@@ -1,0 +1,14 @@
+PYSEC-2022-42973 PyPI/flower — Flower, a web UI for the Celery Python RPC framework, all versions as of 05-02-2022 is vulnerable to
+package: flower
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.2.0 (ECOSYSTEM)
+aliases: CVE-2022-30034, GHSA-q4qm-xhf9-4p8f
+references:
+  https://tprynn.github.io/2022/05/26/flower-vulns.html
+  https://tprynn.github.io/2022/05/26/flower-vulns.html
+  http://githubcommherflower.com
+  https://github.com/mher/flower/issues/1217
+  https://github.com/advisories/GHSA-q4qm-xhf9-4p8f
+
+Flower, a web UI for the Celery Python RPC framework, all versions as of 05-02-2022 is vulnerable to an OAuth authentication bypass. An attacker could then access the Flower API to discover and invoke arbitrary Celery RPC calls or deny service by shutting down Celery task nodes.

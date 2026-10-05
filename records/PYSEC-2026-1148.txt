@@ -1,0 +1,24 @@
+PYSEC-2026-1148 PyPI/apache-airflow-providers-ftp — Improper Certificate Validation vulnerability in Apache Airflow FTP Provider
+package: apache-airflow-providers-ftp
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.7.0 (ECOSYSTEM)
+aliases: CVE-2024-29733, GHSA-3gg8-mc87-cq3h
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-29733
+  https://github.com/apache/airflow/pull/38266
+  https://docs.python.org/3/library/ssl.html#best-defaults
+  https://github.com/apache/airflow
+  https://github.com/apache/airflow/blob/95e26118b828c364755f3a8c96870f3591b01c31/airflow/providers/ftp/hooks/ftp.py#L280
+  https://lists.apache.org/thread/265t5zbmtjs6h9fkw52wtp03nsbplky2
+  http://www.openwall.com/lists/oss-security/2024/04/19/3
+  https://pypi.org/project/apache-airflow-providers-ftp
+  https://github.com/advisories/GHSA-3gg8-mc87-cq3h
+
+Improper Certificate Validation vulnerability in Apache Airflow FTP Provider.
+
+The FTP hook lacks complete certificate validation in FTP_TLS connections, which can potentially be leveraged. Implementing proper certificate validation by passing context=ssl.create_default_context() during FTP_TLS instantiation is used as mitigation to validate the certificates properly.
+
+This issue affects Apache Airflow FTP Provider: before 3.7.0.
+
+Users are recommended to upgrade to version 3.7.0, which fixes the issue.

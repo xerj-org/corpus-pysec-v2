@@ -1,0 +1,11 @@
+PYSEC-2020-251 PyPI/scalyr-agent-2 — The Scalyr Agent before 2.1.10 has Missing SSL Certificate Validation because, in some circumstances
+package: scalyr-agent-2
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.1.10 (ECOSYSTEM)
+aliases: CVE-2020-24714, GHSA-w6xv-mf6f-r5f6
+references:
+  https://scalyr-static.s3.amazonaws.com/technical-details/index.html
+  https://github.com/advisories/GHSA-w6xv-mf6f-r5f6
+
+The Scalyr Agent before 2.1.10 has Missing SSL Certificate Validation because, in some circumstances, the openssl binary is called without the -verify_hostname option.

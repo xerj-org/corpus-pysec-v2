@@ -1,0 +1,18 @@
+PYSEC-2019-17 PyPI/django — In Django 1.11.x before 1.11.18, 2.0.x before 2.0.10, and 2.1.x before 2.1.5, an Improper Neutraliza
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 1.11, < 1.11.18, >= 2.0, < 2.0.10, >= 2.1, < 2.1.5 (ECOSYSTEM)
+aliases: CVE-2019-3498, GHSA-337x-4q8g-prc5
+references:
+  https://www.djangoproject.com/weblog/2019/jan/04/security-releases/
+  https://groups.google.com/forum/#!topic/django-announce/VYU7xQQTEPQ
+  https://docs.djangoproject.com/en/dev/releases/security/
+  https://www.debian.org/security/2019/dsa-4363
+  https://usn.ubuntu.com/3851-1/
+  https://lists.debian.org/debian-lts-announce/2019/01/msg00005.html
+  http://www.securityfocus.com/bid/106453
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/HVXDOVCXLD74SHR2BENGCE2OOYYYWJHZ/
+  https://github.com/advisories/GHSA-337x-4q8g-prc5
+
+In Django 1.11.x before 1.11.18, 2.0.x before 2.0.10, and 2.1.x before 2.1.5, an Improper Neutralization of Special Elements in Output Used by a Downstream Component issue exists in django.views.defaults.page_not_found(), leading to content spoofing (in a 404 error page) if a user fails to recognize that a crafted URL has malicious content.

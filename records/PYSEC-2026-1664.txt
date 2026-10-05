@@ -1,0 +1,13 @@
+PYSEC-2026-1664 PyPI/mltable — Exposure of Sensitive Information in mltable
+package: mltable
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.5.0 (ECOSYSTEM)
+aliases: CVE-2023-35625, GHSA-m5pc-86x8-wcxg
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-35625
+  https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-35625
+  https://pypi.org/project/mltable
+  https://github.com/advisories/GHSA-m5pc-86x8-wcxg
+
+Azure Machine Learning Compute Instance for SDK Users Information Disclosure Vulnerability

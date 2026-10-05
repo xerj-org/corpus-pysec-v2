@@ -1,0 +1,11 @@
+PYSEC-2023-302 PyPI/upydev — An issue in /upydev/keygen.py in upydev v0.4.3 allows attackers to decrypt sensitive information via
+package: upydev
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.4.3 (ECOSYSTEM)
+aliases: CVE-2023-48051, GHSA-qc4j-hrj6-cppf
+references:
+  https://github.com/Carglglz/upydev/issues/38
+  https://github.com/Carglglz/upydev/issues/38
+
+An issue in /upydev/keygen.py in upydev v0.4.3 allows attackers to decrypt sensitive information via weak encryption padding.

@@ -1,0 +1,19 @@
+PYSEC-2026-862 PyPI/nova — OpenStack Compute (Nova) Resource limit circumvention in Nova private flavors
+package: nova
+ecosystem: PyPI
+versions affected:
+  >= 0, < 12.0.0a0 (ECOSYSTEM)
+aliases: CVE-2013-4278, GHSA-43cm-73px-5v4m
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2013-4278
+  https://github.com/openstack/nova/commit/4054cc4a22a1fea997dec76afb5646fd6c6ea6b9
+  https://github.com/openstack/nova/commit/6825959560e06725d26625fd21f5c0b78b305492
+  https://github.com/openstack/nova/commit/8b686195afe7e6dfb46c56c1ef2fe9c993d8e495
+  https://bugs.launchpad.net/ossa/+bug/1212179
+  https://github.com/openstack/nova
+  http://lists.openstack.org/pipermail/openstack-announce/2013-August/000138.html
+  http://rhn.redhat.com/errata/RHSA-2013-1199.html
+  https://pypi.org/project/nova
+  https://github.com/advisories/GHSA-43cm-73px-5v4m
+
+The "create an instance" API in OpenStack Compute (Nova) Folsom, Grizzly, and Havana does not properly enforce the os-flavor-access:is_public property, which allows remote authenticated users to boot arbitrary flavors by guessing the flavor id.  NOTE: this issue is due to an incomplete fix for CVE-2013-2256.

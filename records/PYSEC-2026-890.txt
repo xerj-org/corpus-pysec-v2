@@ -1,0 +1,34 @@
+PYSEC-2026-890 PyPI/openzeppelin-cairo-contracts — OpenZeppelin Contracts for Cairo account cannot process transactions on Goerli
+package: openzeppelin-cairo-contracts
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.2.1 (ECOSYSTEM)
+aliases: CVE-2022-31153, GHSA-8mjr-jr5h-q2xr
+references:
+  https://github.com/OpenZeppelin/cairo-contracts/security/advisories/GHSA-8mjr-jr5h-q2xr
+  https://nvd.nist.gov/vuln/detail/CVE-2022-31153
+  https://github.com/OpenZeppelin/cairo-contracts/issues/386
+  https://github.com/OpenZeppelin/cairo-contracts/pull/387
+  https://github.com/OpenZeppelin/cairo-contracts/commit/2cd60279c3332285d47edf9ee3888b71257acdc9
+  https://github.com/OpenZeppelin/cairo-contracts
+  https://github.com/OpenZeppelin/cairo-contracts/blob/release-0.2.0/src/openzeppelin/account/library.cairo#L203
+  https://github.com/OpenZeppelin/cairo-contracts/releases/tag/v0.2.1
+  https://github.com/pypa/advisory-database/tree/main/vulns/openzeppelin-cairo-contracts-test/PYSEC-2022-43143.yaml
+  https://pypi.org/project/openzeppelin-cairo-contracts
+  https://github.com/advisories/GHSA-8mjr-jr5h-q2xr
+
+### Impact
+This vulnerability affects all accounts (vanilla and ethereum flavors) in the [v0.2.0 release of OpenZeppelin Contracts for Cairo](https://github.com/OpenZeppelin/cairo-contracts/releases/tag/v0.2.0), which are not whitelisted on StarkNet mainnet, so only goerli deployments of v0.2.0 accounts are affected.
+
+This faulty behavior is not observed in [StarkNet's testing framework](https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/starknet/testing/starknet.py), so don't rely on it passing to detect this issue on custom accounts.
+
+### Patches
+This bug has been patched in [v0.2.1](https://github.com/OpenZeppelin/cairo-contracts/releases/tag/v0.2.1).
+
+### References
+The issue is detailed in https://github.com/OpenZeppelin/cairo-contracts/issues/386.
+
+### For more information
+If you have any questions or comments about this advisory:
+* Open an issue in [the Contracts for Cairo repo](https://github.com/OpenZeppelin/cairo-contracts/issues/new/choose)
+* Email us at [security@openzeppelin.com](mailto:security@openzeppelin.com)

@@ -1,0 +1,13 @@
+PYSEC-2018-90 PyPI/mercurial — The mpatch_decode function in mpatch.c in Mercurial before 4.6.1 mishandles certain situations where
+package: mercurial
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.6.1 (ECOSYSTEM)
+aliases: CVE-2018-13348, GHSA-3v62-ww8w-758m
+references:
+  https://www.mercurial-scm.org/wiki/WhatsNew#Mercurial_4.6.1_.282018-06-06.29
+  https://www.mercurial-scm.org/repo/hg/rev/90a274965de7
+  https://lists.debian.org/debian-lts-announce/2020/07/msg00032.html
+  https://github.com/advisories/GHSA-3v62-ww8w-758m
+
+The mpatch_decode function in mpatch.c in Mercurial before 4.6.1 mishandles certain situations where there should be at least 12 bytes remaining after the current position in the patch data, but actually are not, aka OVE-20180430-0001.

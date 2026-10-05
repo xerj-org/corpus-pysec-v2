@@ -1,0 +1,10 @@
+PYSEC-2026-180 PyPI/streamlink — Streamlink is a CLI utility which pipes video streams from various services into a video player. Pri
+package: streamlink
+ecosystem: PyPI
+versions affected:
+  >= 0, < 8.4.0 (ECOSYSTEM)
+aliases: CVE-2026-44353, GHSA-hgqw-6m45-hw5f
+references:
+  https://github.com/streamlink/streamlink/security/advisories/GHSA-hgqw-6m45-hw5f
+
+Streamlink is a CLI utility which pipes video streams from various services into a video player. Prior to 8.4.0, Streamlink's HLS and DASH parsers do not validate the URI scheme of segment entries and other resources. A remote .m3u8 HLS playlist or .mpd DASH manifest can list file:///path/to/file as a segment, and streamlink will read that local file and write its contents to the output stream. This vulnerability is fixed in 8.4.0.

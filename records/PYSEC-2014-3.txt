@@ -1,0 +1,17 @@
+PYSEC-2014-3 PyPI/django — The (1) FilePathField, (2) GenericIPAddressField, and (3) IPAddressField model field classes in Djan
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.11, >= 1.5, < 1.5.6, >= 1.6, < 1.6.3 (ECOSYSTEM)
+aliases: CVE-2014-0474, GHSA-wqjj-hx84-v449
+references:
+  https://www.djangoproject.com/weblog/2014/apr/21/security/
+  http://www.ubuntu.com/usn/USN-2169-1
+  http://rhn.redhat.com/errata/RHSA-2014-0457.html
+  http://www.debian.org/security/2014/dsa-2934
+  http://rhn.redhat.com/errata/RHSA-2014-0456.html
+  http://lists.opensuse.org/opensuse-updates/2014-09/msg00023.html
+  http://secunia.com/advisories/61281
+  https://github.com/advisories/GHSA-wqjj-hx84-v449
+
+The (1) FilePathField, (2) GenericIPAddressField, and (3) IPAddressField model field classes in Django before 1.4.11, 1.5.x before 1.5.6, 1.6.x before 1.6.3, and 1.7.x before 1.7 beta 2 do not properly perform type conversion, which allows remote attackers to have unspecified impact and vectors, related to "MySQL typecasting."

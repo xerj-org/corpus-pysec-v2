@@ -1,0 +1,27 @@
+PYSEC-2026-3021 PyPI/pypdf — pypdf has long runtimes for wrong size values in cross-reference and object streams
+package: pypdf
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.10.1 (ECOSYSTEM)
+aliases: CVE-2026-41168, GHSA-jj6c-8h6c-hppx
+references:
+  https://github.com/py-pdf/pypdf/security/advisories/GHSA-jj6c-8h6c-hppx
+  https://nvd.nist.gov/vuln/detail/CVE-2026-41168
+  https://github.com/py-pdf/pypdf/pull/3733
+  https://github.com/py-pdf/pypdf/commit/62338e9d36419cf193ccec7331784f45df1d70b3
+  https://github.com/py-pdf/pypdf
+  https://github.com/py-pdf/pypdf/releases/tag/6.10.1
+  https://pypi.org/project/pypdf
+  https://github.com/advisories/GHSA-jj6c-8h6c-hppx
+
+### Impact
+
+An attacker who uses this vulnerability can craft a PDF which leads to long runtimes. This requires cross-reference streams with wrong large `/Size` values or object streams with wrong large `/N` values.
+
+### Patches
+
+This has been fixed in [pypdf==6.10.1](https://github.com/py-pdf/pypdf/releases/tag/6.10.1).
+
+### Workarounds
+
+If you cannot upgrade yet, consider applying the changes from PR [#3733](https://github.com/py-pdf/pypdf/pull/3733).

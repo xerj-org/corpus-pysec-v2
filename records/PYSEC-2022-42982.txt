@@ -1,0 +1,16 @@
+PYSEC-2022-42982 PyPI/apache-airflow — A vulnerability in Example Dags of Apache Airflow allows an attacker with UI access who can trigger 
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.4.0 (ECOSYSTEM)
+aliases: CVE-2022-40127, GHSA-6pw3-8h9w-32gc
+references:
+  https://github.com/apache/airflow/pull/25960
+  https://github.com/apache/airflow/pull/25960
+  https://lists.apache.org/thread/cf132hgm6jvzvsbpsozl3plf1r4cwysy
+  https://lists.apache.org/thread/cf132hgm6jvzvsbpsozl3plf1r4cwysy
+  http://www.openwall.com/lists/oss-security/2022/11/14/2
+  http://www.openwall.com/lists/oss-security/2022/11/14/2
+  https://github.com/advisories/GHSA-6pw3-8h9w-32gc
+
+A vulnerability in Example Dags of Apache Airflow allows an attacker with UI access who can trigger DAGs, to execute arbitrary commands via manually provided run_id parameter. This issue affects Apache Airflow Apache Airflow versions prior to 2.4.0.

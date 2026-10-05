@@ -1,0 +1,13 @@
+PYSEC-2022-43070 PyPI/apache-iotdb — Apache IoTDB grafana-connector version 0.13.0 contains an interface without authorization, which may
+package: apache-iotdb
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-38370
+references:
+  https://lists.apache.org/thread/kcpqgstvgf8sxy9ktxm1836nlwc8xy3j
+  https://lists.apache.org/thread/kcpqgstvgf8sxy9ktxm1836nlwc8xy3j
+  http://www.openwall.com/lists/oss-security/2022/09/05/2
+  http://www.openwall.com/lists/oss-security/2022/09/05/2
+
+Apache IoTDB grafana-connector version 0.13.0 contains an interface without authorization, which may expose the internal structure of database. Users should upgrade to version 0.13.1 which addresses this issue.

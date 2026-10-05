@@ -1,0 +1,13 @@
+PYSEC-2020-40 PyPI/drf-jwt — An issue was discovered in drf-jwt 1.15.x before 1.15.1. It allows attackers with access to a notion
+package: drf-jwt
+ecosystem: PyPI
+versions affected:
+  >= 1.15.0, < 1.15.1 (ECOSYSTEM)
+aliases: CVE-2020-10594, GHSA-fpjm-rp2g-3r4c
+references:
+  https://github.com/jpadilla/django-rest-framework-jwt/issues/484
+  https://pypi.org/project/drf-jwt/1.15.1/#history
+  https://github.com/Styria-Digital/django-rest-framework-jwt/issues/36
+  https://github.com/advisories/GHSA-fpjm-rp2g-3r4c
+
+An issue was discovered in drf-jwt 1.15.x before 1.15.1. It allows attackers with access to a notionally invalidated token to obtain a new, working token via the refresh endpoint, because the blacklist protection mechanism is incompatible with the token-refresh feature. NOTE: drf-jwt is a fork of jpadilla/django-rest-framework-jwt, which is unmaintained.

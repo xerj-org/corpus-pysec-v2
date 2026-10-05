@@ -1,0 +1,15 @@
+PYSEC-2026-690 PyPI/nova — Openstack nova qcow format could expose host filesystem information
+package: nova
+ecosystem: PyPI
+versions affected:
+  >= 0, < 12.0.0a0 (ECOSYSTEM)
+aliases: CVE-2011-3147, GHSA-hqfx-4x4w-vmwp
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2011-3147
+  https://github.com/openstack/nova/commit/ff9d353b2f4fee469e530fbc8dc231a41f6fed84
+  https://bugs.launchpad.net/nova/+bug/853330
+  http://bazaar.launchpad.net/~hudson-openstack/nova/trunk/revision/1604
+  https://pypi.org/project/nova
+  https://github.com/advisories/GHSA-hqfx-4x4w-vmwp
+
+Versions of nova before 2012.1 could expose hypervisor host files to a guest operating system when processing a maliciously constructed qcow filesystem.

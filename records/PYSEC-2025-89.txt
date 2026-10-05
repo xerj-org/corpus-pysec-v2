@@ -1,0 +1,15 @@
+PYSEC-2025-89 PyPI/cashu — NUT-14 allows cashu tokens to be created with a preimage hash. However, nutshell (cashubtc/nuts) bef
+package: cashu
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.18.0 (ECOSYSTEM)
+aliases: CVE-2025-65548
+references:
+  https://delvingbitcoin.org/t/public-disclosure-denial-of-service-using-htlc-in-cashu/2090
+  https://preimage007.github.io/
+  https://bitcointalk.org/index.php?topic=5564329
+  https://github.com/cashubtc/nuts/blob/main/07.md
+  https://github.com/cashubtc/nuts/blob/main/14.md
+  https://github.com/jamesob/delving-bitcoin-archive/blob/master/archive/rendered-topics/2025-11-November/2025-11-02-public-disclosure-denial-of-service-using-htlc-in-cashu-id2090.md
+
+NUT-14 allows cashu tokens to be created with a preimage hash. However, nutshell (cashubtc/nuts) before 0.18.0 do not validate the size of preimage when the token is spent. The preimage is stored by the mint and attacker can exploit this vulnerability to fill the mint's db nd disk with arbitrary data.

@@ -1,0 +1,14 @@
+PYSEC-2026-1318 PyPI/dspy — DSPy does not properly restrict file reads
+package: dspy
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 3.0.3 (ECOSYSTEM)
+aliases: CVE-2025-12695, GHSA-vvw2-h478-xwr3
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-12695
+  https://github.com/stanfordnlp/dspy
+  https://research.jfrog.com/vulnerabilities/dspy-sandbox-escape-arbitrary-file-read-jfsa-2025-001495652
+  https://pypi.org/project/dspy
+  https://github.com/advisories/GHSA-vvw2-h478-xwr3
+
+The overly permissive sandbox configuration in DSPy allows attackers to steal sensitive files in cases when users build an AI agent which consumes user input and uses the “PythonInterpreter” class.

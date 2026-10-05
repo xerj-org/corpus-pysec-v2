@@ -1,0 +1,16 @@
+PYSEC-2008-13 PyPI/moin — Multiple cross-site scripting (XSS) vulnerabilities in macro/AdvancedSearch.py in moin (and MoinMoin
+package: moin
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.6.4, >= 1.7.0, < 1.7.1 (ECOSYSTEM)
+aliases: CVE-2008-3381, GHSA-q7q4-5g8p-33fq
+references:
+  http://hg.moinmo.in/moin/1.6/rev/8686a10f1f58
+  http://hg.moinmo.in/moin/1.7/rev/383196922b03
+  http://moinmo.in/SecurityFixes
+  http://www.securityfocus.com/bid/30297
+  http://secunia.com/advisories/31135
+  http://www.vupen.com/english/advisories/2008/2147/references
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/43899
+
+Multiple cross-site scripting (XSS) vulnerabilities in macro/AdvancedSearch.py in moin (and MoinMoin) 1.6.3 and 1.7.0 allow remote attackers to inject arbitrary web script or HTML via unspecified vectors.

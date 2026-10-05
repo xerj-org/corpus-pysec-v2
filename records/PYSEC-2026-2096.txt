@@ -1,0 +1,12 @@
+PYSEC-2026-2096 PyPI/aiohttp — AIOHTTP is an asynchronous HTTP client/server framework for asyncio and Python. Prior to version 3.1
+package: aiohttp
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.13.4 (ECOSYSTEM)
+aliases: CVE-2026-34514, GHSA-2vrm-gr82-f7m5
+references:
+  https://github.com/aio-libs/aiohttp/releases/tag/v3.13.4
+  https://github.com/aio-libs/aiohttp/commit/9a6ada97e2c6cf1ce31727c6c9fcea17c21f6f06
+  https://github.com/aio-libs/aiohttp/security/advisories/GHSA-2vrm-gr82-f7m5
+
+AIOHTTP is an asynchronous HTTP client/server framework for asyncio and Python. Prior to version 3.13.4, an attacker who controls the content_type parameter in aiohttp could use this to inject extra headers or similar exploits. This issue has been patched in version 3.13.4.

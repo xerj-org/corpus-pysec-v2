@@ -1,0 +1,12 @@
+PYSEC-2026-2268 PyPI/pyopenssl — pyOpenSSL is a Python wrapper around the OpenSSL library. Starting in version 0.14.0 and prior to ve
+package: pyopenssl
+ecosystem: PyPI
+versions affected:
+  >= 0.14, < 26.0.0 (ECOSYSTEM)
+aliases: CVE-2026-27448, GHSA-vp96-hxj8-p424
+references:
+  https://github.com/pyca/pyopenssl/blob/358cbf29c4e364c59930e53a270116249581eaa3/CHANGELOG.rst#L27
+  https://github.com/pyca/pyopenssl/security/advisories/GHSA-vp96-hxj8-p424
+  https://github.com/pyca/pyopenssl/commit/d41a814759a9fb49584ca8ab3f7295de49a85aa0
+
+pyOpenSSL is a Python wrapper around the OpenSSL library. Starting in version 0.14.0 and prior to version 26.0.0, if a user provided callback to `set_tlsext_servername_callback` raised an unhandled exception, this would result in a connection being accepted. If a user was relying on this callback for any security-sensitive behavior, this could allow bypassing it. Starting in version 26.0.0, unhandled exceptions now result in rejecting the connection.

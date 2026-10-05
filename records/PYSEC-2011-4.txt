@@ -1,0 +1,18 @@
+PYSEC-2011-4 PyPI/django — Django before 1.2.7 and 1.3.x before 1.3.1 uses a request's HTTP Host header to construct a full URL
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.2.7, >= 1.3, < 1.3.1 (ECOSYSTEM)
+aliases: CVE-2011-4139, GHSA-rm2j-x595-q9cj
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=737366
+  https://www.djangoproject.com/weblog/2011/sep/09/
+  http://openwall.com/lists/oss-security/2011/09/11/1
+  https://www.djangoproject.com/weblog/2011/sep/10/127/
+  http://openwall.com/lists/oss-security/2011/09/13/2
+  http://secunia.com/advisories/46614
+  http://www.debian.org/security/2011/dsa-2332
+  https://hermes.opensuse.org/messages/14700881
+  https://github.com/advisories/GHSA-rm2j-x595-q9cj
+
+Django before 1.2.7 and 1.3.x before 1.3.1 uses a request's HTTP Host header to construct a full URL in certain circumstances, which allows remote attackers to conduct cache poisoning attacks via a crafted request.

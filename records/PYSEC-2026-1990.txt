@@ -1,0 +1,15 @@
+PYSEC-2026-1990 PyPI/trytond — trytond allows remote attackers to obtain sensitive trace-back (server setup) information
+package: trytond
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.0.70, >= 7.0.0, < 7.0.40, >= 7.1.0, < 7.4.21, >= 7.5.0, < 7.6.11 (ECOSYSTEM)
+aliases: CVE-2025-66422, GHSA-jqfc-9q34-prhg
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-66422
+  https://discuss.tryton.org/t/security-release-for-issue-14354/8950
+  https://foss.heptapod.net/tryton/tryton/-/issues/14354
+  https://github.com/tryton/trytond
+  https://pypi.org/project/trytond
+  https://github.com/advisories/GHSA-jqfc-9q34-prhg
+
+Tryton trytond before 7.6.11 allows remote attackers to obtain sensitive trace-back (server setup) information. This is fixed in 7.6.11, 7.4.21, 7.0.40, and 6.0.70.

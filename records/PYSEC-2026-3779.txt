@@ -1,0 +1,11 @@
+PYSEC-2026-3779 PyPI/openssl-encrypt — openssl_encrypt versions before 1.4.9 fail to validate encryption status of embedded post-quantum pr
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.9 (ECOSYSTEM)
+aliases: CVE-2026-81703, GHSA-qqfq-g2cv-j7v3
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-qqfq-g2cv-j7v3
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-1.4.9-authentication-bypass-via-unencrypted-pqc-key
+
+openssl_encrypt versions before 1.4.9 fail to validate encryption status of embedded post-quantum private keys in file metadata. Attackers can craft files with unencrypted embedded PQC keys that decrypt under any password, bypassing authentication and producing attacker-chosen plaintext with false integrity verification.

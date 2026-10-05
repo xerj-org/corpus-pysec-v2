@@ -1,0 +1,14 @@
+PYSEC-2017-132 PyPI/exiv2 — An Invalid memory address dereference was discovered in Exiv2::StringValueBase::read in value.cpp in
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2017-14859
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=1494780
+  https://bugzilla.redhat.com/show_bug.cgi?id=1494780
+  https://usn.ubuntu.com/3852-1/
+  https://lists.debian.org/debian-lts-announce/2023/01/msg00004.html
+  https://lists.debian.org/debian-lts-announce/2023/01/msg00004.html
+
+An Invalid memory address dereference was discovered in Exiv2::StringValueBase::read in value.cpp in Exiv2 0.26. The vulnerability causes a segmentation fault and application crash, which leads to denial of service.

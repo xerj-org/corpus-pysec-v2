@@ -1,0 +1,13 @@
+PYSEC-2018-11 PyPI/luigi — Luigi version prior to version 2.8.0; after commit 53b52e12745075a8acc016d33945d9d6a7a6aaeb; after G
+package: luigi
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.8.0 (ECOSYSTEM)
+aliases: CVE-2018-1000843, GHSA-p69g-f978-xxv9
+references:
+  https://groups.google.com/forum/#!topic/luigi-user/ZgfRTpBsVUY
+  https://github.com/spotify/luigi/pull/1870
+  https://github.com/spotify/luigi/blob/2.7.9/luigi/server.py#L67
+  https://github.com/advisories/GHSA-p69g-f978-xxv9
+
+Luigi version prior to version 2.8.0; after commit 53b52e12745075a8acc016d33945d9d6a7a6aaeb; after GitHub PR spotify/luigi/pull/1870 contains a Cross ite Request Forgery (CSRF) vulnerability in API endpoint: /api/<method> that can result in Task metadata such as task name, id, parameter, etc. will be leaked to unauthorized users. This attack appear to be exploitable via The victim must visit a specially crafted webpage from the network where their Luigi server is accessible.. This vulnerability appears to have been fixed in 2.8.0 and later.

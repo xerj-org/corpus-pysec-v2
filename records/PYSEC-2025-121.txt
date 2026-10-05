@@ -1,0 +1,13 @@
+PYSEC-2025-121 PyPI/keras — An issue in keras 3.7.0 allows attackers to write arbitrary files to the user's machine via download
+package: keras
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 3.7.0 (ECOSYSTEM)
+aliases: CVE-2024-55459, GHSA-cjgq-5qmw-rcj6
+references:
+  https://keras.io
+  https://river-bicycle-f1e.notion.site/Arbitrary-File-Write-Vulnerability-in-get_file-function-11888e31952580179224e50892976d32
+  https://github.com/keras-team/keras
+  https://github.com/advisories/GHSA-cjgq-5qmw-rcj6
+
+An issue in keras 3.7.0 allows attackers to write arbitrary files to the user's machine via downloading a crafted tar file through the get_file function.

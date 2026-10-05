@@ -1,0 +1,13 @@
+PYSEC-2026-626 PyPI/contentful — Cross-site scripting in Contentful
+package: contentful
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.12.4 (ECOSYSTEM)
+aliases: CVE-2020-13258, GHSA-g5j6-r3x9-gf2m
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2020-13258
+  https://github.com/contentful/the-example-app.py/issues/44
+  https://pypi.org/project/contentful
+  https://github.com/advisories/GHSA-g5j6-r3x9-gf2m
+
+Contentful through 2020-05-21 for Python allows reflected XSS, as demonstrated by the api parameter to the-example-app.py.

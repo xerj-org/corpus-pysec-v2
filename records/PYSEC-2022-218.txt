@@ -1,0 +1,12 @@
+PYSEC-2022-218 PyPI/django-navbar-client — The django-navbar-client package of v0.9.50 to v1.0.1 was discovered to contain a code execution bac
+package: django-navbar-client
+ecosystem: PyPI
+versions affected:
+  >= 0.9.50, < 1.0.2 (ECOSYSTEM)
+aliases: CVE-2022-32996
+references:
+  http://pypi.doubanio.com/simple/request
+  https://pypi.org/project/django-navbar-client/
+  https://github.com/josubg/django_navbar_client/issues/1
+
+The django-navbar-client package of v0.9.50 to v1.0.1 was discovered to contain a code execution backdoor via the request package. This vulnerability allows attackers to access sensitive user information and digital currency keys, as well as escalate privileges.

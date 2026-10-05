@@ -1,0 +1,12 @@
+PYSEC-2021-101 PyPI/localstack — The dashboard component of StackLift LocalStack 0.12.6 allows attackers to inject arbitrary shell co
+package: localstack
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.12.6.1 (ECOSYSTEM)
+aliases: CVE-2021-32090, GHSA-hpr6-f4vq-mxch
+references:
+  https://portswigger.net/daily-swig/localstack-zero-day-vulnerabilities-chained-to-achieve-remote-takeover-of-local-instances
+  https://blog.sonarsource.com/hack-the-stack-with-localstack
+  https://github.com/advisories/GHSA-hpr6-f4vq-mxch
+
+The dashboard component of StackLift LocalStack 0.12.6 allows attackers to inject arbitrary shell commands via the functionName parameter.

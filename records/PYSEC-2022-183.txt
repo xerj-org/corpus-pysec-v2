@@ -1,0 +1,15 @@
+PYSEC-2022-183 PyPI/httpx — Encode OSS httpx <=1.0.0.beta0 is affected by improper input validation in `httpx.URL`, `httpx.Clien
+package: httpx
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.20.0 (ECOSYSTEM)
+aliases: CVE-2021-41945, GHSA-h8pj-cxx2-jfg2
+references:
+  https://github.com/encode/httpx
+  https://github.com/encode/httpx/discussions/1831
+  https://gist.github.com/lebr0nli/4edb76bbd3b5ff993cf44f2fbce5e571
+  http://encode.com
+  https://github.com/encode/httpx/issues/2184
+  https://github.com/advisories/GHSA-h8pj-cxx2-jfg2
+
+Encode OSS httpx <=1.0.0.beta0 is affected by improper input validation in `httpx.URL`, `httpx.Client` and some functions using `httpx.URL.copy_with`.

@@ -1,0 +1,14 @@
+PYSEC-2010-10 PyPI/pyftpdlib — Memory leak in the on_dtp_close function in ftpserver.py in pyftpdlib before 0.5.2 allows remote aut
+package: pyftpdlib
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.5.2 (ECOSYSTEM)
+aliases: CVE-2009-5013, GHSA-8gv6-x88p-3f6h
+references:
+  http://code.google.com/p/pyftpdlib/source/browse/trunk/HISTORY
+  http://code.google.com/p/pyftpdlib/source/diff?spec=svn615&r=615&format=side&path=/trunk/pyftpdlib/ftpserver.py
+  http://code.google.com/p/pyftpdlib/issues/detail?id=119
+  http://code.google.com/p/pyftpdlib/source/detail?r=615
+  https://github.com/advisories/GHSA-8gv6-x88p-3f6h
+
+Memory leak in the on_dtp_close function in ftpserver.py in pyftpdlib before 0.5.2 allows remote authenticated users to cause a denial of service (memory consumption) by sending a QUIT command during a data transfer.

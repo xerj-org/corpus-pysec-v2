@@ -1,0 +1,16 @@
+PYSEC-2026-389 PyPI/litellm — litellm vulnerable to remote code execution based on using eval unsafely
+package: litellm
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.40.16 (ECOSYSTEM)
+aliases: CVE-2024-5751, GHSA-gppg-gqw8-wh9g
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-5751
+  https://github.com/BerriAI/litellm/pull/4228
+  https://github.com/BerriAI/litellm/commit/fcea4c22ad96b24436f196ae709f71932e84b0b8
+  https://github.com/berriai/litellm
+  https://huntr.com/bounties/ae623c2f-b64b-4245-9ed4-f13a0a5824ce
+  https://pypi.org/project/litellm
+  https://github.com/advisories/GHSA-gppg-gqw8-wh9g
+
+BerriAI/litellm version v1.35.8 contains a vulnerability where an attacker can achieve remote code execution. The vulnerability exists in the `add_deployment` function, which decodes and decrypts environment variables from base64 and assigns them to `os.environ`. An attacker can exploit this by sending a malicious payload to the `/config/update` endpoint, which is then processed and executed by the server when the `get_secret` function is triggered. This requires the server to use Google KMS and a database to store a model.

@@ -1,0 +1,16 @@
+PYSEC-2020-339 PyPI/pyamf — XML external entity (XXE) vulnerability in PyAMF before 0.8.0 allows remote attackers to cause a den
+package: pyamf
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.8.0 (ECOSYSTEM)
+aliases: CVE-2015-8549, GHSA-m7m4-4vm8-55wg
+references:
+  http://www.securityfocus.com/archive/1/archive/1/537151/100/0/threaded
+  https://github.com/hydralabs/pyamf/releases/tag/v0.8.0
+  https://github.com/hydralabs/pyamf/pull/58
+  http://www.ocert.org/advisories/ocert-2015-011.html
+  https://pypi.org/project/pyamf
+  https://nvd.nist.gov/vuln/detail/CVE-2015-8549
+  https://github.com/advisories/GHSA-m7m4-4vm8-55wg
+
+XML external entity (XXE) vulnerability in PyAMF before 0.8.0 allows remote attackers to cause a denial of service or read arbitrary files via a crafted Action Message Format (AMF) payload.

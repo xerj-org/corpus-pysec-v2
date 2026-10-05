@@ -1,0 +1,15 @@
+PYSEC-2026-535 PyPI/sglang — SGLang: Unauthenticated RCE via --enable-custom-logit-processor
+package: sglang
+ecosystem: PyPI
+versions affected:
+  >= 0.4.1.post7, <= 0.5.12 (ECOSYSTEM)
+aliases: CVE-2026-7304, GHSA-36m8-w8qf-g76p
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-7304
+  https://antiproof.ai/blog/three-rces-in-sglang
+  https://github.com/sgl-project/sglang
+  https://github.com/sgl-project/sglang/tree/main/python/sglang
+  https://pypi.org/project/sglang
+  https://github.com/advisories/GHSA-36m8-w8qf-g76p
+
+SGLang's multimodal generation runtime is vulnerable to unauthenticated remote code execution when the --enable-custom-logit-processor option is enabled, as Python objects loaded via dill.loads() will be deserialized without validation.

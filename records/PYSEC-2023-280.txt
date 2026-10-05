@@ -1,0 +1,13 @@
+PYSEC-2023-280 PyPI/mlflow — OS Command Injection in GitHub repository mlflow/mlflow prior to 2.6.0.
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6dde93758d42455cb90ef324407919ed67668b9b (GIT: https://github.com/mlflow/mlflow)
+  >= 0, < 2.6.0 (ECOSYSTEM)
+aliases: CVE-2023-4033, GHSA-ffw3-6378-cqgp
+references:
+  https://github.com/mlflow/mlflow/commit/6dde93758d42455cb90ef324407919ed67668b9b
+  https://huntr.dev/bounties/5312d6f8-67a5-4607-bd47-5e19966fa321
+  https://github.com/advisories/GHSA-ffw3-6378-cqgp
+
+OS Command Injection in GitHub repository mlflow/mlflow prior to 2.6.0.

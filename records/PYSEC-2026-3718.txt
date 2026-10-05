@@ -1,0 +1,11 @@
+PYSEC-2026-3718 PyPI/surrealdb — SurrealDB before 1.0.1 sets default table permissions to FULL instead of NONE, allowing SELECT, CREA
+package: surrealdb
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0.1 (ECOSYSTEM)
+aliases: CVE-2023-54366, GHSA-x5fr-7hhj-34j3
+references:
+  https://github.com/surrealdb/surrealdb/security/advisories/GHSA-x5fr-7hhj-34j3
+  https://www.vulncheck.com/advisories/surrealdb-before-insecure-default-table-permissions
+
+SurrealDB before 1.0.1 sets default table permissions to FULL instead of NONE, allowing SELECT, CREATE, UPDATE, and DELETE operations on tables without explicit permissions. Attackers with database access or unauthenticated users on publicly exposed instances can perform unrestricted operations on unprotected tables within their authorization scope.

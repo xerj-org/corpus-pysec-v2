@@ -1,0 +1,14 @@
+PYSEC-2014-46 PyPI/plone — Cross-site scripting (XSS) vulnerability in widget_traversal.py in Plone before 4.2.3 and 4.3 before
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.2.3, >= 4.3a0, < 4.3b1 (ECOSYSTEM)
+aliases: CVE-2012-5504, GHSA-5whw-5cmm-9jw4
+references:
+  http://www.openwall.com/lists/oss-security/2012/11/10/1
+  https://plone.org/products/plone-hotfix/releases/20121106
+  https://plone.org/products/plone/security/advisories/20121106/20
+  https://github.com/plone/Products.CMFPlone/blob/4.2.3/docs/CHANGES.txt
+  https://github.com/advisories/GHSA-5whw-5cmm-9jw4
+
+Cross-site scripting (XSS) vulnerability in widget_traversal.py in Plone before 4.2.3 and 4.3 before beta 1 allows remote attackers to inject arbitrary web script or HTML via unspecified vectors.

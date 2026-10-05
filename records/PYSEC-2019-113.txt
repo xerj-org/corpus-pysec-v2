@@ -1,0 +1,11 @@
+PYSEC-2019-113 PyPI/pypiserver — CRLF Injection in pypiserver 1.2.5 and below allows attackers to set arbitrary HTTP headers and poss
+package: pypiserver
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.2.6 (ECOSYSTEM)
+aliases: CVE-2019-6802, GHSA-mh24-7wvg-v88g
+references:
+  https://github.com/pypiserver/pypiserver/issues/237
+  https://github.com/advisories/GHSA-mh24-7wvg-v88g
+
+CRLF Injection in pypiserver 1.2.5 and below allows attackers to set arbitrary HTTP headers and possibly conduct XSS attacks via a %0d%0a in a URI.

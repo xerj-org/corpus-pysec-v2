@@ -1,0 +1,12 @@
+PYSEC-2022-43137 PyPI/lief — LIEF commit 365a16a was discovered to contain a reachable assertion abort via the component BinarySt
+package: lief
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.12.2 (ECOSYSTEM)
+aliases: CVE-2022-38496
+references:
+  https://github.com/lief-project/LIEF/issues/765
+  https://github.com/lief-project/LIEF/issues/765
+  https://github.com/lief-project/LIEF/issues/765
+
+LIEF commit 365a16a was discovered to contain a reachable assertion abort via the component BinaryStream.hpp.

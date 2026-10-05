@@ -1,0 +1,12 @@
+PYSEC-2026-2276 PyPI/scitokens — SciTokens is a reference library for generating and using SciTokens. Prior to version 1.9.6, the Enf
+package: scitokens
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.9.6 (ECOSYSTEM)
+aliases: CVE-2026-32716, GHSA-w8fp-g9rh-34jh
+references:
+  https://github.com/scitokens/scitokens/releases/tag/v1.9.6
+  https://github.com/scitokens/scitokens/commit/7a237c0f642efb9e8c36ac564b745895cca83583
+  https://github.com/scitokens/scitokens/security/advisories/GHSA-w8fp-g9rh-34jh
+
+SciTokens is a reference library for generating and using SciTokens. Prior to version 1.9.6, the Enforcer incorrectly validates scope paths by using a simple prefix match (startswith). This allows a token with access to a specific path (e.g., /john) to also access sibling paths that start with the same prefix (e.g., /johnathan, /johnny), which is an Authorization Bypass. This issue has been patched in version 1.9.6.

@@ -1,0 +1,12 @@
+PYSEC-2020-269 PyPI/tensorflow-cpu — TensorFlow before 1.7.0 has an integer overflow that causes an out-of-bounds read, possibly causing 
+package: tensorflow-cpu
+ecosystem: PyPI
+versions affected:
+  >= 0, < 49f73c55d56edffebde4bca4a407ad69c1cae433 (GIT: https://github.com/tensorflow/tensorflow)
+  >= 0, < 1.7.0 (ECOSYSTEM)
+aliases: CVE-2018-21233
+references:
+  https://github.com/tensorflow/tensorflow/commit/49f73c55d56edffebde4bca4a407ad69c1cae433
+  https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/advisory/tfsa-2018-001.md
+
+TensorFlow before 1.7.0 has an integer overflow that causes an out-of-bounds read, possibly causing disclosure of the contents of process memory. This occurs in the DecodeBmp feature of the BMP decoder in core/kernels/decode_bmp_op.cc.

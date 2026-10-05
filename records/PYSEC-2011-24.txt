@@ -1,0 +1,15 @@
+PYSEC-2011-24 PyPI/apache-libcloud — libcloud before 0.4.1 does not verify SSL certificates for HTTPS connections, which allows remote at
+package: apache-libcloud
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.4.2 (ECOSYSTEM)
+aliases: CVE-2010-4340, GHSA-w3j6-8j34-q43x
+references:
+  http://mail-archives.apache.org/mod_mbox/incubator-libcloud/201009.mbox/%3C5860913.463891285776633273.JavaMail.jira@thor%3E
+  http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=598463
+  http://mail-archives.apache.org/mod_mbox/incubator-libcloud/201011.mbox/browser
+  http://wiki.apache.org/incubator/LibcloudSSL
+  https://issues.apache.org/jira/browse/LIBCLOUD-55
+  https://github.com/advisories/GHSA-w3j6-8j34-q43x
+
+libcloud before 0.4.1 does not verify SSL certificates for HTTPS connections, which allows remote attackers to spoof certificates and bypass intended access restrictions via a man-in-the-middle (MITM) attack.

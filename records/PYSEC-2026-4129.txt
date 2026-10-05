@@ -1,0 +1,37 @@
+PYSEC-2026-4129 PyPI/open-webui — Open WebUI: Users denied by the OAuth role policy can still sign in via token exchange
+package: open-webui
+ecosystem: PyPI
+versions affected:
+  >= 0.8.0, < 0.11.1 (ECOSYSTEM)
+aliases: CVE-2026-88006, GHSA-wvm9-9g5j-623f
+references:
+  https://github.com/open-webui/open-webui/security/advisories/GHSA-wvm9-9g5j-623f
+  https://nvd.nist.gov/vuln/detail/CVE-2026-88006
+  https://github.com/open-webui/open-webui/commit/d799e81edbdc971c6deb096b6474cd95b93504bf
+  https://github.com/open-webui/open-webui
+  https://github.com/open-webui/open-webui/releases/tag/v0.11.1
+  https://pypi.org/project/open-webui
+  https://github.com/advisories/GHSA-wvm9-9g5j-623f
+
+## Summary
+Open WebUI's OAuth token exchange endpoint issues a session for a provider access token without running the OAuth role management that the normal OAuth login callback runs. A user whose provider roles the login callback would refuse, or would demote, could still obtain a working session at their existing role through this endpoint.
+
+## Preconditions
+- `ENABLE_OAUTH_TOKEN_EXCHANGE=True`. It is disabled by default, so a default deployment is not affected.
+- `ENABLE_OAUTH_ROLE_MANAGEMENT=True` together with `OAUTH_ALLOWED_ROLES` or `OAUTH_ADMIN_ROLES`. Role management is off by default, and deployments not using it are not affected.
+- A valid, unexpired access token on the configured provider.
+- An Open WebUI account already linked to that provider subject, or an account with a matching email when `OAUTH_MERGE_ACCOUNTS_BY_EMAIL` is enabled. This endpoint never creates accounts, so a token for a subject with no existing account is rejected.
+
+## Impact
+An admin who relies on OAuth role management expects a user to lose access, or lose admin, as soon as the identity provider stops reporting the required role. The login callback does enforce this on the next sign-in. Token exchange kept issuing sessions and never re-evaluated the role, so the user retained working access as their existing account at its existing role, including an admin role the provider had already revoked. The endpoint cannot create an account and cannot raise anyone's role, so this grants continued access rather than new or elevated access.
+
+## Fix
+d799e81ed, released in 0.11.1, runs the same role evaluation on the provider's response that the login callback runs. The exchange is denied with 403 when the reported roles match no allowed or admin role, and the account's role is updated to match the provider otherwise. Upgrading restores the check with no further action.
+
+## Root cause
+The affected component is the OAuth token exchange endpoint in `backend/open_webui/routers/auths.py`, present in builds from 0.8.0 onward.
+
+The endpoint was added as a second entry point into the same session-issuing path the OAuth login callback uses, but it re-implemented only the identity lookup and not the policy checks surrounding it. Role evaluation lived inside the callback's own body rather than in shared code, so the second caller inherited none of it.
+
+## Credits
+@Classic298

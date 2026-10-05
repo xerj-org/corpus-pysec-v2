@@ -1,0 +1,142 @@
+PYSEC-2026-3493 PyPI/pillow — Pillow: Out-of-bounds read via attacker-controlled row stride on Pillow's mmap path (McIdas AREA files)
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 12.3.0 (ECOSYSTEM)
+aliases: CVE-2026-54058, GHSA-62p4-gmf7-7g93
+references:
+  https://github.com/python-pillow/Pillow/security/advisories/GHSA-62p4-gmf7-7g93
+  https://nvd.nist.gov/vuln/detail/CVE-2026-54058
+  https://github.com/python-pillow/Pillow/pull/9719
+  https://github.com/python-pillow/Pillow/commit/6a8de891fb00968e5ea79bfa84368ed90b3cfc1d
+  https://github.com/python-pillow/Pillow
+  https://github.com/python-pillow/Pillow/releases/tag/12.3.0
+  https://pypi.org/project/pillow
+  https://github.com/advisories/GHSA-62p4-gmf7-7g93
+
+## Summary
+
+When Pillow loads an uncompressed image whose tile uses the `raw` codec and a mode in `Image._MAPMODES`, and the image was opened **from a filename**, it memory-maps the file and builds the image's row pointers directly into the mapping via `PyImaging_MapBuffer` (`src/map.c`). The per-row spacing (`stride`) is taken from the tile arguments. `map.c` validates `offset + ysize*stride <= buffer_len` but **never checks that `stride` is at least the natural row width `xsize * pixelsize`**.
+
+The **McIdas** AREA plugin (`McIdasImagePlugin.py`) derives `stride`, `offset`, `xsize`, and `ysize` directly from attacker-controlled 32-bit header words with no validation. By supplying a `stride` far smaller than the row width, an attacker makes each row pointer read `xsize*pixelsize` bytes that run past the mapped region. Accessing the pixels (e.g. `Image.tobytes()`,
+`getpixel`, `convert`, `save`) then reads adjacent process memory (information disclosure) or faults (SIGBUS, denial of service).
+
+
+## Complete Code Trace
+
+**Step 1: `McIdasImageFile._open`** - turns attacker header words into image size, file offset, and row stride with no validation.
+
+```python
+# src/PIL/McIdasImagePlugin.py:41-70
+s = self.fp.read(256)
+if not _accept(s) or len(s) != 256:        # _accept: prefix == b"\x00\x00\x00\x00\x00\x00\x00\x04"
+    raise SyntaxError(...)
+self.area_descriptor = w = [0, *struct.unpack("!64i", s)]   # w[1..64] = signed BE int32, ALL attacker-controlled
+
+if w[11] == 1:
+    mode = rawmode = "L"                    # pixelsize 1, in _MAPMODES
+elif w[11] == 2:
+    mode = rawmode = "I;16B"                # pixelsize 2, in _MAPMODES
+...
+self._mode = mode
+self._size = w[10], w[9]                    # (xsize, ysize)  <-- attacker
+offset = w[34] + w[15]                       # <-- attacker
+stride = w[15] + w[10] * w[11] * w[14]       # <-- attacker (set w[14]=0, w[15]=1 => stride=1)
+self.tile = [
+    ImageFile._Tile("raw", (0, 0) + self.size, offset, (rawmode, stride, 1))
+]
+```
+
+**Step 2: `ImageFile.load` (mmap branch)** - selects mmap and delegates to `map_buffer`.
+
+```python
+# src/PIL/ImageFile.py:322-348
+if use_mmap:                                 # use_mmap = self.filename and len(self.tile) == 1
+    decoder_name, extents, offset, args = self.tile[0]
+    if (decoder_name == "raw" and isinstance(args, tuple) and len(args) >= 3
+            and args[0] == self.mode and args[0] in Image._MAPMODES):
+        if offset < 0:                       # only lower-bound guard on offset
+            raise ValueError("Tile offset cannot be negative")
+        with open(self.filename) as fp:
+            self.map = mmap.mmap(fp.fileno(), 0, access=mmap.ACCESS_READ)
+        if offset + self.size[1] * args[1] > self.map.size():   # == offset + ysize*stride; NO stride>=linesize check
+            raise OSError("buffer is not large enough")
+        self.im = Image.core.map_buffer(
+            self.map, self.size, decoder_name, offset, args      # args = ("L", stride, 1)
+        )
+```
+
+**Step 3: `PyImaging_MapBuffer`** - builds row pointers at `stride` spacing into the mmap; validates everything except `stride >= row width`.
+
+```c
+/* src/map.c:65-140 */
+if (!PyArg_ParseTuple(args, "O(ii)sn(sii)",
+        &target, &xsize, &ysize, &codec, &offset, &mode_name, &stride, &ystep))
+    return NULL;
+...
+const ModeID mode = findModeID(mode_name);          /* "L" */
+
+if (stride <= 0) {                                  /* attacker sets stride=1 (>0) -> NOT recomputed */
+    if (mode == IMAGING_MODE_L || mode == IMAGING_MODE_P) stride = xsize;
+    else if (isModeI16(mode)) stride = xsize * 2;
+    else stride = xsize * 4;
+}
+
+if (stride > 0 && ysize > PY_SSIZE_T_MAX / stride) {/* overflow guard only */
+    PyErr_SetString(PyExc_MemoryError, "Integer overflow in ysize"); return NULL;
+}
+size = (Py_ssize_t)ysize * stride;                  /* = 1*1 = 1 */
+
+if (offset > PY_SSIZE_T_MAX - size) { ... }
+...
+if (offset + size > view.len) {                     /* 1 + 1 = 2 <= 256 -> PASSES */
+    PyErr_SetString(PyExc_ValueError, "buffer is not large enough");
+    PyBuffer_Release(&view); return NULL;
+}
+
+im = ImagingNewPrologueSubtype(mode, xsize, ysize, sizeof(ImagingBufferInstance));
+/* im->linesize = xsize * pixelsize = 200000  (the REAL per-row read width) */
+
+/* setup file pointers -- NO check that stride >= im->linesize */
+if (ystep > 0) {
+    for (y = 0; y < ysize; y++) {
+        im->image[y] = (char *)view.buf + offset + y * stride;   /* row points into mmap, spacing=1 */
+    }
+} else { ... }
+```
+
+`im->linesize` (the number of bytes any consumer reads per row) is `xsize * pixelsize = 200000`, but the row pointers are only `stride = 1` byte apart and the buffer is only `offset + ysize*stride = 2` bytes "claimed". Nothing reconciles the two.
+
+**Step 4: pixel access (`Image.tobytes()` → raw encoder `copy1`)** - reads `linesize` bytes from `im->image[0]`, i.e. `xsize` bytes starting at `view.buf + offset`, running far past the mmap.
+
+```c
+/* the raw "L" packer copies linesize (=xsize) bytes per row from im->image[y];
+   for row 0 that is view.buf+1 .. view.buf+1+200000, vs a 256-byte file. */
+```
+
+## Chain Summary
+
+```
+SOURCE: McIdas AREA header words w[9],w[10],w[11],w[14],w[15],w[34]  (Image.open on a path)
+  ↓ McIdasImagePlugin._open: stride = w[15]+w[10]*w[11]*w[14]  -> attacker sets stride=1   [McIdasImagePlugin.py:66]
+  ↓ tile = ("raw", (0,0,xsize,1), offset, ("L", 1, 1))                                     [McIdasImagePlugin.py:68]
+GADGET: ImageFile.load mmap branch -- only checks offset+ysize*stride<=len  <- BUG: no stride>=linesize check  [ImageFile.py:343]
+  ↓ core.map_buffer(map, (xsize,1), "raw", offset, ("L",1,1))                              [ImageFile.py:346]
+SINK: PyImaging_MapBuffer: im->image[0] = view.buf + offset + 0*stride; linesize=xsize   [map.c:134]
+  ↓ Image.tobytes() raw "L" encoder reads linesize (=xsize) bytes from im->image[0]
+IMPACT: reads xsize bytes from a tiny mmap -> OOB read of adjacent process memory (leak) or SIGBUS (DoS)
+```
+## Proof of Concept
+
+See attached [poc.zip](https://github.com/user-attachments/files/28460498/poc.zip)
+
+
+## Impact on a Parent Application
+
+Any application that opens image files supplied by users **from a path on disk** (the common pattern: save upload to a temp file, then `Image.open(path)`), has the default plugin set (McIdas is registered by default), and subsequently reads/returns/re-encodes the decoded pixels (thumbnailing, format conversion, serving a preview), is exposed:
+
+- **Information disclosure (High):** the decoded "image" contains bytes of the   worker process's adjacent heap/mapped memory, which the app then serves or stores - potentially leaking secrets, credentials, or other users' data.
+- **Denial of service (High):** a larger `xsize` reliably crashes the worker with SIGBUS.
+
+## Suggested fix
+Core fix in `src/map.c` (`PyImaging_MapBuffer`): reject `offset < 0` and `stride < im->linesize`. Defense-in-depth in `McIdasImagePlugin._open`: reject `offset < 0` or `stride < xsize*pixelsize` .

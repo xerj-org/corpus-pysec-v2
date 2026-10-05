@@ -1,0 +1,12 @@
+PYSEC-2024-255 PyPI/gradio — Gradio before 4.20 allows credential leakage on Windows.
+package: gradio
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.20.0 (ECOSYSTEM)
+aliases: CVE-2024-34510, GHSA-rvfh-h6c7-fc3c
+references:
+  https://github.com/gradio-app/gradio/
+  https://www.gradio.app/changelog#4-20-0
+  https://github.com/advisories/GHSA-rvfh-h6c7-fc3c
+
+Gradio before 4.20 allows credential leakage on Windows.

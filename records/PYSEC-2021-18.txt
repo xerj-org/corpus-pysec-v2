@@ -1,0 +1,12 @@
+PYSEC-2021-18 PyPI/indico — CERN Indico before 2.3.4 can use an attacker-supplied Host header in a password reset link.
+package: indico
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.3.4 (ECOSYSTEM)
+aliases: CVE-2021-30185, GHSA-wgpj-7c2j-vfjm
+references:
+  https://github.com/indico/indico/releases/tag/v2.3.4
+  https://www.shorebreaksecurity.com/blog/
+  https://github.com/advisories/GHSA-wgpj-7c2j-vfjm
+
+CERN Indico before 2.3.4 can use an attacker-supplied Host header in a password reset link.

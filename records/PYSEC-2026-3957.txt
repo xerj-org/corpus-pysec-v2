@@ -1,0 +1,11 @@
+PYSEC-2026-3957 PyPI/openssl-encrypt — openssl_encrypt versions before 1.4.9 fail to authenticate recovery-slot presence in envelope-format
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.9 (ECOSYSTEM)
+aliases: CVE-2026-81680, GHSA-grhj-cpmg-f5mx
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-grhj-cpmg-f5mx
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-1.4.9-authentication-bypass-via-recovery-slot-removal
+
+openssl_encrypt versions before 1.4.9 fail to authenticate recovery-slot presence in envelope-format encrypted files, allowing attackers to remove recovery slots without re-encrypting the payload. Attackers can modify the file header to delete recovery-slot fields and bypass authentication, silently removing recovery paths the owner deliberately added.

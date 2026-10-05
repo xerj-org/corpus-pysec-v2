@@ -1,0 +1,16 @@
+PYSEC-2026-1604 PyPI/markdownify — markdownify allows large headline prefixes such as <h9999999>, which causes memory consumption
+package: markdownify
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.14.1 (ECOSYSTEM)
+aliases: CVE-2025-46656, GHSA-7mpr-5m44-h73r
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-46656
+  https://github.com/matthewwithanm/python-markdownify/issues/143
+  https://github.com/matthewwithanm/python-markdownify/commit/959561879693bf4a576f99c6733b50b01186aa08
+  https://github.com/matthewwithanm/python-markdownify
+  https://github.com/matthewwithanm/python-markdownify/compare/0.14.0...0.14.1
+  https://pypi.org/project/markdownify
+  https://github.com/advisories/GHSA-7mpr-5m44-h73r
+
+python-markdownify (aka markdownify) before 0.14.1 allows large headline prefixes such as <h9999999> in addition to <h1> through <h6>. This causes memory consumption.

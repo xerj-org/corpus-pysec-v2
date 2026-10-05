@@ -1,0 +1,13 @@
+PYSEC-2023-59 PyPI/apache-airflow — Privilege Context Switching Error vulnerability in Apache Software Foundation Apache Airflow.This is
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.6.0 (ECOSYSTEM)
+aliases: CVE-2023-25754, GHSA-jchm-fm4q-c2fp
+references:
+  https://github.com/apache/airflow/pull/29506
+  https://lists.apache.org/thread/3y83gr0qb8t49ppfk4fb2yk7md8ltq4v
+  https://github.com/advisories/GHSA-jchm-fm4q-c2fp
+
+Privilege Context Switching Error vulnerability in Apache Software Foundation Apache Airflow.This issue affects Apache Airflow: before 2.6.0.
+

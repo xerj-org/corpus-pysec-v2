@@ -1,0 +1,14 @@
+PYSEC-2026-1422 PyPI/gradio — Gradio arbitrary file upload vulnerability
+package: gradio
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 3.27.0 (ECOSYSTEM)
+aliases: CVE-2023-41626, GHSA-v4q9-qgqf-7jwp
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-41626
+  https://gist.github.com/impose1/590472eb0544ef1ec36c8a5a40122adb
+  https://github.com/gradio-app/gradio
+  https://pypi.org/project/gradio
+  https://github.com/advisories/GHSA-v4q9-qgqf-7jwp
+
+Gradio v3.27.0 was discovered to contain an arbitrary file upload vulnerability via the `/upload` interface.

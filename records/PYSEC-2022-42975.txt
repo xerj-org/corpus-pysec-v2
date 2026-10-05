@@ -1,0 +1,14 @@
+PYSEC-2022-42975 PyPI/octoprint — Failure to Sanitize Special Elements into a Different Plane (Special Element Injection) in GitHub re
+package: octoprint
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3cca3a43f3d085e9bbe5a5840c8255bb1b5d052e (GIT: https://github.com/octoprint/octoprint)
+  >= 0, < 1.8.3 (ECOSYSTEM)
+aliases: CVE-2022-3607, GHSA-rj5f-vm79-5j84
+references:
+  https://huntr.dev/bounties/2d1db3c9-93e8-4902-a55b-5ea53c22aa11
+  https://huntr.dev/bounties/2d1db3c9-93e8-4902-a55b-5ea53c22aa11
+  https://github.com/octoprint/octoprint/commit/3cca3a43f3d085e9bbe5a5840c8255bb1b5d052e
+  https://github.com/advisories/GHSA-rj5f-vm79-5j84
+
+Failure to Sanitize Special Elements into a Different Plane (Special Element Injection) in GitHub repository octoprint/octoprint prior to 1.8.3.

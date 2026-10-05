@@ -1,0 +1,12 @@
+PYSEC-2026-2134 PyPI/copier — Copier is a library and CLI app for rendering project templates. Prior to version 9.14.1, Copier's _
+package: copier
+ecosystem: PyPI
+versions affected:
+  >= 0, < 9.14.1 (ECOSYSTEM)
+aliases: CVE-2026-34726, GHSA-85v3-4m8g-hrh6
+references:
+  https://github.com/copier-org/copier/releases/tag/v9.14.1
+  https://github.com/copier-org/copier/commit/cb80a3ffc9c3787de3ed837e04ca29a0ff8ca3df
+  https://github.com/copier-org/copier/security/advisories/GHSA-85v3-4m8g-hrh6
+
+Copier is a library and CLI app for rendering project templates. Prior to version 9.14.1, Copier's _subdirectory setting is documented as the subdirectory to use as the template root. However, the current implementation accepts parent-directory traversal such as .. and uses it directly when selecting the template root. As a result, a template can escape its own directory and make Copier render files from the parent directory without --UNSAFE. This issue has been patched in version 9.14.1.

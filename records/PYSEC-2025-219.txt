@@ -1,0 +1,13 @@
+PYSEC-2025-219 PyPI/tutor — An issue was discovered in Overhang.IO (tutor-open-edx) (overhangio/tutor) 20.0.2 allowing local una
+package: tutor
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 20.0.2 (ECOSYSTEM)
+aliases: CVE-2025-65681, GHSA-gq25-78jf-v78c
+references:
+  https://docs.tutor.edly.io
+  https://github.com/Rivek619/CVE-2025-65681
+  https://github.com/overhangio/tutor
+  https://github.com/advisories/GHSA-gq25-78jf-v78c
+
+An issue was discovered in Overhang.IO (tutor-open-edx) (overhangio/tutor) 20.0.2 allowing local unauthorized attackers to gain access to sensitive information due to the absence of proper cache-control HTTP headers and client-side session checks.

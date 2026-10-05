@@ -1,0 +1,13 @@
+PYSEC-2022-14 PyPI/loguru — Improper Privilege Management in Conda loguru prior to 0.5.3.
+package: loguru
+ecosystem: PyPI
+versions affected:
+  >= 0, < ea39375e62f9b8f18e2ca798a5c0fb8c972b7eaa (GIT: https://github.com/delgan/loguru)
+  >= 0, < 0.5.3 (ECOSYSTEM)
+aliases: CVE-2022-0338, GHSA-39ph-wr67-j4xq
+references:
+  https://huntr.dev/bounties/359bea50-2bc6-426a-b2f9-175d401b1ed0
+  https://github.com/delgan/loguru/commit/ea39375e62f9b8f18e2ca798a5c0fb8c972b7eaa
+  https://github.com/advisories/GHSA-39ph-wr67-j4xq
+
+Improper Privilege Management in Conda loguru prior to 0.5.3.

@@ -1,0 +1,11 @@
+PYSEC-2026-2113 PyPI/aiohttp — AIOHTTP is an asynchronous HTTP client/server framework for asyncio and Python. Prior to 3.14.1, pay
+package: aiohttp
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.14.1 (ECOSYSTEM)
+aliases: CVE-2026-54280, GHSA-9x8q-7h8h-wcw9
+references:
+  https://github.com/aio-libs/aiohttp/security/advisories/GHSA-9x8q-7h8h-wcw9
+  https://github.com/aio-libs/aiohttp/commit/a762eda5242f6490d6ba667533193f8b473ad587
+
+AIOHTTP is an asynchronous HTTP client/server framework for asyncio and Python. Prior to 3.14.1, payload resources are not closed correctly when a client disconnects in the middle of a write. If a payload is using an open file or similar limited resource, then an attacker may be able to cause resource starvation temporarily until garbage collection or similar closes the file. This vulnerability is fixed in 3.14.1.

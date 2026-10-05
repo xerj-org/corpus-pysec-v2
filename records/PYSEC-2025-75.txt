@@ -1,0 +1,10 @@
+PYSEC-2025-75 PyPI/keras — A safe mode bypass vulnerability in the `Model.load_model` method in Keras versions 3.0.0 through 3.
+package: keras
+ecosystem: PyPI
+aliases: CVE-2025-8747, GHSA-c9rc-mg46-23w3
+references:
+  https://jfrog.com/blog/keras-safe_mode-bypass-vulnerability/
+  https://github.com/keras-team/keras/pull/21429
+  https://github.com/advisories/GHSA-c9rc-mg46-23w3
+
+A safe mode bypass vulnerability in the `Model.load_model` method in Keras versions 3.0.0 through 3.10.0 allows an attacker to achieve arbitrary code execution by convincing a user to load a specially crafted `.keras` model archive.

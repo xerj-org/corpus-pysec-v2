@@ -1,0 +1,18 @@
+PYSEC-2026-2975 PyPI/pyblade — PyBlade: SSTI/RCE via Bypassed AST Validation in sandbox.py
+package: pyblade
+ecosystem: PyPI
+versions affected:
+  >= 0.1.8-alpha, <= 0.2.0-alpha (ECOSYSTEM)
+aliases: CVE-2026-5559, GHSA-23jg-5f8m-gw8c
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-5559
+  https://github.com/AntaresMugisho/PyBlade/issues/1
+  https://github.com/AntaresMugisho/PyBlade/issues/1#issue-4086730906
+  https://github.com/AntaresMugisho/PyBlade
+  https://vuldb.com/submit/782904
+  https://vuldb.com/vuln/355329
+  https://vuldb.com/vuln/355329/cti
+  https://pypi.org/project/pyblade
+  https://github.com/advisories/GHSA-23jg-5f8m-gw8c
+
+A vulnerability has been found in AntaresMugisho PyBlade 0.1.8-alpha/0.1.9-alpha. The affected element is the function _is_safe_ast of the file sandbox.py of the component AST Validation. Such manipulation leads to improper neutralization of special elements used in a template engine. The attack may be performed from remote. The exploit has been disclosed to the public and may be used. The project was informed of the problem early through an issue report but has not responded yet.

@@ -1,0 +1,11 @@
+PYSEC-2021-377 PyPI/apache-superset — Apache Superset up to and including 1.1 does not sanitize titles correctly on the Explore page. This
+package: apache-superset
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.2.0 (ECOSYSTEM)
+aliases: CVE-2021-32609, GHSA-f8vc-f28w-x9c9
+references:
+  https://lists.apache.org/thread.html/r2c09254e98b4f8b3deb422762bd0e2aa6d743b72d96c2f90cbaae31a%40%3Cdev.superset.apache.org%3E
+  https://github.com/advisories/GHSA-f8vc-f28w-x9c9
+
+Apache Superset up to and including 1.1 does not sanitize titles correctly on the Explore page. This allows an attacker with Explore access to save a chart with a malicious title, injecting html (including scripts) into the page.

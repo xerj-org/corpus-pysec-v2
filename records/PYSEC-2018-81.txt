@@ -1,0 +1,21 @@
+PYSEC-2018-81 PyPI/ansible — In ansible it was found that inventory variables are loaded from current working directory when runn
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.4.6.0, >= 2.5, < 2.5.6, >= 2.6, < 2.6.1 (ECOSYSTEM)
+aliases: CVE-2018-10874, GHSA-3xvg-x47j-x75w
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2018-10874
+  https://access.redhat.com/errata/RHSA-2018:2166
+  https://access.redhat.com/errata/RHSA-2018:2152
+  https://access.redhat.com/errata/RHSA-2018:2151
+  https://access.redhat.com/errata/RHSA-2018:2150
+  https://access.redhat.com/errata/RHSA-2018:2321
+  http://www.securitytracker.com/id/1041396
+  https://access.redhat.com/errata/RHSA-2018:2585
+  https://access.redhat.com/errata/RHBA-2018:3788
+  https://access.redhat.com/errata/RHSA-2019:0054
+  https://usn.ubuntu.com/4072-1/
+  https://github.com/advisories/GHSA-3xvg-x47j-x75w
+
+In ansible it was found that inventory variables are loaded from current working directory when running ad-hoc command which are under attacker's control, allowing to run arbitrary code as a result.

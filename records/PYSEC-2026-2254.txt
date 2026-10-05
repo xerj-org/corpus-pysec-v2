@@ -1,0 +1,12 @@
+PYSEC-2026-2254 PyPI/pillow — Pillow is a Python imaging library. Prior to 12.3.0, PIL/FontFile.py FontFile.compile() assembled pe
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 12.3.0 (ECOSYSTEM)
+aliases: CVE-2026-54060, GHSA-5x94-69rx-g8h2
+references:
+  https://github.com/python-pillow/Pillow/blob/main/docs/releasenotes/12.3.0.rst
+  https://github.com/python-pillow/Pillow/commit/0a263e6264aa5399988d9acd3bbfbca2ca3ec77d
+  https://github.com/python-pillow/Pillow/security/advisories/GHSA-5x94-69rx-g8h2
+
+Pillow is a Python imaging library. Prior to 12.3.0, PIL/FontFile.py FontFile.compile() assembled per-glyph images into a combined bitmap with Image.new("1", (xsize, ysize)) without calling Image._decompression_bomb_check(), allowing a font to trigger excessive allocation during conversion or saving. This issue is fixed in version 12.3.0.

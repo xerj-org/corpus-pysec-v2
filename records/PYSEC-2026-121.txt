@@ -1,0 +1,10 @@
+PYSEC-2026-121 PyPI/pyload-ng — pyLoad is a free and open-source download manager written in Python. From version 0.5.0b3.dev13 to 0
+package: pyload-ng
+ecosystem: PyPI
+versions affected:
+  >= 0.5.0b3.dev13, < 0.5.0b3.dev97 (ECOSYSTEM)
+aliases: CVE-2026-29778, GHSA-6px9-j4qr-xfjw
+references:
+  https://github.com/pyload/pyload/security/advisories/GHSA-6px9-j4qr-xfjw
+
+pyLoad is a free and open-source download manager written in Python. From version 0.5.0b3.dev13 to 0.5.0b3.dev96, the edit_package() function implements insufficient sanitization for the pack_folder parameter. The current protection relies on a single-pass string replacement of "../", which can be bypassed using crafted recursive traversal sequences. This issue has been patched in version 0.5.0b3.dev97.

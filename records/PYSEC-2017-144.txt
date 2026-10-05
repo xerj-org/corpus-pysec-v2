@@ -1,0 +1,12 @@
+PYSEC-2017-144 PyPI/koji — Koji 1.13.0 does not properly validate SCM paths, allowing an attacker to work around blacklisted pa
+package: koji
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2017-1002153, GHSA-vwp5-w4rq-g4cc
+references:
+  https://pagure.io/koji/issue/563
+  https://pagure.io/koji/issue/563
+  https://github.com/advisories/GHSA-vwp5-w4rq-g4cc
+
+Koji 1.13.0 does not properly validate SCM paths, allowing an attacker to work around blacklisted paths for build submission.

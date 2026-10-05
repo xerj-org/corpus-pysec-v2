@@ -1,0 +1,17 @@
+PYSEC-2026-2157 PyPI/gdal — A vulnerability has been found in OSGeo gdal up to 3.13.0dev-4. Affected by this issue is the functi
+package: gdal
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.13.0 (ECOSYSTEM)
+aliases: CVE-2026-8213
+references:
+  https://github.com/OSGeo/gdal/
+  https://vuldb.com/vuln/362430
+  https://vuldb.com/vuln/362430/cti
+  https://github.com/OSGeo/gdal/commit/3e04c0385630e4d42517046d9a4967dfccfeb7fd
+  https://github.com/OSGeo/gdal/issues/14399
+  https://github.com/OSGeo/gdal/releases/tag/v3.13.0RC1
+  https://github.com/biniamf/pocs/tree/main/gdal-gdsdfldsrch_oob-read
+  https://vuldb.com/submit/808128
+
+A vulnerability has been found in OSGeo gdal up to 3.13.0dev-4. Affected by this issue is the function GDSDfldsrch of the file frmts/hdf4/hdf-eos/GDapi.c of the component Grid File Handler. The manipulation leads to heap-based buffer overflow. An attack has to be approached locally. The exploit has been disclosed to the public and may be used. Upgrading to version 3.13.0RC1 can resolve this issue. The identifier of the patch is 3e04c0385630e4d42517046d9a4967dfccfeb7fd. It is suggested to upgrade the affected component.

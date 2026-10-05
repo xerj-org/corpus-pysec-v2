@@ -1,0 +1,16 @@
+PYSEC-2026-850 PyPI/mxnet — Apache MXNet vulnerable to potential denial-of-service by excessive resource consumption
+package: mxnet
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.9.1 (ECOSYSTEM)
+aliases: CVE-2022-24294, GHSA-xxj3-55p6-xg3h
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2022-24294
+  https://github.com/apache/mxnet
+  https://github.com/apache/mxnet/releases/tag/1.9.1
+  https://lists.apache.org/thread/b1fbfmvzlr2bbp95lqoh3mtovclfcl3o
+  http://www.openwall.com/lists/oss-security/2022/07/24/2
+  https://pypi.org/project/mxnet
+  https://github.com/advisories/GHSA-xxj3-55p6-xg3h
+
+A regular expression used in Apache MXNet (incubating) is vulnerable to a potential denial-of-service by excessive resource consumption. The bug could be exploited when loading a model in Apache MXNet that has a specially crafted operator name that would cause the regular expression evaluation to use excessive resources to attempt a match. This issue affects Apache MXNet versions prior to 1.9.1.

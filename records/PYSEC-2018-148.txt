@@ -1,0 +1,14 @@
+PYSEC-2018-148 PyPI/exiv2 — In the DataBuf class in include/exiv2/types.hpp in Exiv2 0.26, an issue exists in the constructor wi
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2018-9145
+references:
+  https://github.com/xiaoqx/pocs/tree/master/exiv2
+  https://github.com/xiaoqx/pocs/tree/master/exiv2
+  https://bugzilla.redhat.com/show_bug.cgi?id=1564281
+  https://bugzilla.novell.com/show_bug.cgi?id=1087879
+  https://security.gentoo.org/glsa/201811-14
+
+In the DataBuf class in include/exiv2/types.hpp in Exiv2 0.26, an issue exists in the constructor with an initial buffer size. A large size value may lead to a SIGABRT during an attempt at memory allocation. NOTE: some third parties have been unable to reproduce the SIGABRT when using the 4-DataBuf-abort-1 PoC file.

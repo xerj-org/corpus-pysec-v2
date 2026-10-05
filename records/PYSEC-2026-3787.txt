@@ -1,0 +1,11 @@
+PYSEC-2026-3787 PyPI/gitpython — GitPython before 3.1.59 omits --separate-git-dir from unsafe_git_clone_options, allowing attackers t
+package: gitpython
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.1.59 (ECOSYSTEM)
+aliases: CVE-2026-78677, GHSA-8mcc-hrx5-hvxc
+references:
+  https://www.vulncheck.com/advisories/gitpython-before-path-traversal-via-separate-git-dir
+  https://github.com/gitpython-developers/GitPython/security/advisories/GHSA-8mcc-hrx5-hvxc
+
+GitPython before 3.1.59 omits --separate-git-dir from unsafe_git_clone_options, allowing attackers to create arbitrary git directories outside the intended clone destination. Attackers can pass a separate_git_dir parameter to Repo.clone_from() or Repo.clone() to redirect repository metadata to an attacker-controlled filesystem path, enabling arbitrary directory creation and potential hook execution.

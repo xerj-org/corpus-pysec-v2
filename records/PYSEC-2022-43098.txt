@@ -1,0 +1,12 @@
+PYSEC-2022-43098 PyPI/democritus-file-system — The d8s-urls for python, as distributed on PyPI, included a potential code-execution backdoor insert
+package: democritus-file-system
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-40811
+references:
+  https://pypi.org/project/democritus-file-system/
+  https://github.com/democritus-project/d8s-urls/issues/11
+  https://github.com/democritus-project/d8s-urls/issues/11
+
+The d8s-urls for python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. The backdoor is the democritus-file-system package. The affected version is 0.1.0.

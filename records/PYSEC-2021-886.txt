@@ -1,0 +1,12 @@
+PYSEC-2021-886 PyPI/exiv2 — A buffer overflow vulnerability in the Databuf function in types.cpp of Exiv2 v0.27.1 leads to a den
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2020-19716
+references:
+  https://github.com/Exiv2/exiv2/issues/980
+  https://lists.debian.org/debian-lts-announce/2022/11/msg00013.html
+  https://lists.debian.org/debian-lts-announce/2022/11/msg00013.html
+
+A buffer overflow vulnerability in the Databuf function in types.cpp of Exiv2 v0.27.1 leads to a denial of service (DOS).

@@ -1,0 +1,16 @@
+PYSEC-2026-2960 PyPI/pretix — pretix vulnerable to Authorization Bypass Through User-Controlled Key
+package: pretix
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2026.4.2 (ECOSYSTEM)
+aliases: CVE-2026-9712, GHSA-72p9-6vv6-gvqh
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-9712
+  https://github.com/pretix/pretix
+  https://pretix.eu/about/en/blog/20260527-release-2026-4-2
+  https://pypi.org/project/pretix
+  https://github.com/advisories/GHSA-72p9-6vv6-gvqh
+
+When creating an export through the pretix API, API clients are returned an UUID value for their export job (a long, random string like 35742818-c375-4d15-839f-d49aecce94d6). Using this UUID, the API client can then request the actual file for download. The same kind of UUID is used in other places in pretix when temporary files are generated for internal use or download.
+
+One remaining API endpoint, however, wrongfully did not verify if the UUID used for download actually belongs to a file that is supposed to be downloadable and belongs to the correct user. In reality, this is hard to exploit because an attacker would need to have access to a valid UUID for the file they desire which is unlikely to happen without a separate security problem giving them access to logs etc.

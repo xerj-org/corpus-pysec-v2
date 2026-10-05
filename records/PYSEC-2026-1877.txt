@@ -1,0 +1,14 @@
+PYSEC-2026-1877 PyPI/ryu — Ryu Infinite Loop vulnerability
+package: ryu
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 4.34 (ECOSYSTEM)
+aliases: CVE-2024-34489, GHSA-59p2-v62x-gxj8
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-34489
+  https://github.com/faucetsdn/ryu/issues/195
+  https://github.com/faucetsdn/ryu
+  https://pypi.org/project/ryu
+  https://github.com/advisories/GHSA-59p2-v62x-gxj8
+
+`OFPHello` in parser.py in Faucet SDN Ryu 4.34 allows attackers to cause a denial of service (infinite loop) via `length=0`.

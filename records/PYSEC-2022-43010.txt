@@ -1,0 +1,15 @@
+PYSEC-2022-43010 PyPI/rdiffweb — Improper Access Control in GitHub repository ikus060/rdiffweb prior to 2.5.5.
+package: rdiffweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < c4a19cf67d575c4886171b8efcbf4675d51f3929 (GIT: https://github.com/ikus060/rdiffweb)
+  >= 0, < 2.5.5 (ECOSYSTEM)
+aliases: CVE-2022-4724, GHSA-m8r9-qxx8-mrxp
+references:
+  https://github.com/ikus060/rdiffweb/commit/c4a19cf67d575c4886171b8efcbf4675d51f3929
+  https://huntr.dev/bounties/e6fb1931-8d9c-4895-be4a-59839b4b6445
+  https://huntr.dev/bounties/e6fb1931-8d9c-4895-be4a-59839b4b6445
+  https://huntr.dev/bounties/e6fb1931-8d9c-4895-be4a-59839b4b6445
+  https://github.com/advisories/GHSA-m8r9-qxx8-mrxp
+
+Improper Access Control in GitHub repository ikus060/rdiffweb prior to 2.5.5.

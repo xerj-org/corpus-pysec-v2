@@ -1,0 +1,15 @@
+PYSEC-2022-260 PyPI/mako — Sqlalchemy mako before 1.2.2 is vulnerable to Regular expression Denial of Service when using the Le
+package: mako
+ecosystem: PyPI
+versions affected:
+  >= 0, < 925760291d6efec64fda6e9dd1fd9cfbd5be068c (GIT: https://github.com/sqlalchemy/mako)
+  >= 0, < 1.2.2 (ECOSYSTEM)
+aliases: CVE-2022-40023, GHSA-v973-fxgf-6xhp
+references:
+  https://github.com/sqlalchemy/mako/commit/925760291d6efec64fda6e9dd1fd9cfbd5be068c
+  https://pyup.io/vulnerabilities/CVE-2022-40023/50870/
+  https://github.com/sqlalchemy/mako/issues/366
+  https://github.com/sqlalchemy/mako/blob/c2f392e0be52dc67d1b9770ab8cce6a9c736d547/mako/ext/extract.py#L21
+  https://github.com/advisories/GHSA-v973-fxgf-6xhp
+
+Sqlalchemy mako before 1.2.2 is vulnerable to Regular expression Denial of Service when using the Lexer class to parse. This also affects babelplugin and linguaplugin.

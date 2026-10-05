@@ -1,0 +1,12 @@
+PYSEC-2023-155 PyPI/jupyter-server — jupyter-server is the backend for Jupyter web applications. Open Redirect Vulnerability. Maliciously
+package: jupyter-server
+ecosystem: PyPI
+versions affected:
+  >= 0, < 290362593b2ffb23c59f8114d76f77875de4b925 (GIT: https://github.com/jupyter-server/jupyter_server)
+  >= 0, < 2.7.2 (ECOSYSTEM)
+aliases: CVE-2023-39968, GHSA-r726-vmfq-j9j3
+references:
+  https://github.com/jupyter-server/jupyter_server/commit/290362593b2ffb23c59f8114d76f77875de4b925
+  https://github.com/jupyter-server/jupyter_server/security/advisories/GHSA-r726-vmfq-j9j3
+
+jupyter-server is the backend for Jupyter web applications. Open Redirect Vulnerability. Maliciously crafted login links to known Jupyter Servers can cause successful login or an already logged-in session to be redirected to arbitrary sites, which should be restricted to Jupyter Server-served URLs. This issue has been addressed in commit `29036259` which is included in release 2.7.2. Users are advised to upgrade. There are no known workarounds for this vulnerability.

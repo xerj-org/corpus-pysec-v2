@@ -1,0 +1,25 @@
+PYSEC-2026-2646 PyPI/microdot — Microdot has HTTP response splitting in Response.set_cookie()
+package: microdot
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.6.1 (ECOSYSTEM)
+aliases: CVE-2026-42874, GHSA-7wc8-wvc4-m498
+references:
+  https://github.com/miguelgrinberg/microdot/security/advisories/GHSA-7wc8-wvc4-m498
+  https://nvd.nist.gov/vuln/detail/CVE-2026-42874
+  https://github.com/miguelgrinberg/microdot/commit/99b281b45faef8472410f2d56bfef496dfbd95d5
+  https://github.com/miguelgrinberg/microdot
+  https://github.com/miguelgrinberg/microdot/blob/main/CHANGES.md
+  https://pypi.org/project/microdot
+  https://github.com/advisories/GHSA-7wc8-wvc4-m498
+
+### Impact
+The `Response.set_cookie()` method does not sanitize its string arguments, and in particular will not detect the presence of the `\r\n` sequence in them. This can be a potential source of header injection attacks.
+
+For a header injection attack through this issue to be possible, an attacker must first infiltrate the client (for example through an independent XSS attack), so that it can send malicious information that is destined to be stored in a cookie by the server on behalf of the victim. An attacker that infiltrates one client can only orchestrate a header injection attack for that client, all other clients that were not infiltrated are safe.
+
+### Patches
+Upgrade to version 2.6.1.
+
+### Workarounds
+Do not pass untrusted data to the `Response.set_cookie()` method.

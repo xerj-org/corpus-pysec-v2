@@ -1,0 +1,17 @@
+PYSEC-2023-25 PyPI/mechanize — mechanize, a library for automatically interacting with HTTP web servers, contains a regular express
+package: mechanize
+ecosystem: PyPI
+versions affected:
+  >= 0, < dd05334448e9f39814bab044d2eaa5ef69b410d6 (GIT: https://github.com/python-mechanize/mechanize)
+  >= 0, < 0.4.6 (ECOSYSTEM)
+aliases: CVE-2021-32837, GHSA-g3pv-pj5f-3hfq
+references:
+  https://securitylab.github.com/advisories/GHSL-2021-108-python-mechanize-mechanize/
+  https://securitylab.github.com/advisories/GHSL-2021-108-python-mechanize-mechanize/
+  https://github.com/python-mechanize/mechanize/commit/dd05334448e9f39814bab044d2eaa5ef69b410d6
+  https://github.com/python-mechanize/mechanize/blob/3acb1836f3fd8edc5a758a417dd46b53832ae3b5/mechanize/_urllib2_fork.py#L878-L879
+  https://github.com/python-mechanize/mechanize/blob/3acb1836f3fd8edc5a758a417dd46b53832ae3b5/mechanize/_urllib2_fork.py#L878-L879
+  https://github.com/python-mechanize/mechanize/releases/tag/v0.4.6
+  https://github.com/advisories/GHSA-g3pv-pj5f-3hfq
+
+mechanize, a library for automatically interacting with HTTP web servers, contains a regular expression that is vulnerable to regular expression denial of service (ReDoS) prior to version 0.4.6. If a web server responds in a malicious way, then mechanize could crash. Version 0.4.6 has a patch for the issue.

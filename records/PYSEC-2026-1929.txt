@@ -1,0 +1,17 @@
+PYSEC-2026-1929 PyPI/skyvern — Skyvern has a Jinja runtime leak
+package: skyvern
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.2.0 (ECOSYSTEM)
+aliases: CVE-2025-49619, GHSA-h92g-3xc3-ww2r
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-49619
+  https://github.com/Skyvern-AI/skyvern/commit/db856cd8433a204c8b45979c70a4da1e119d949d
+  https://cristibtz.blog/posts/CVE-2025-49619
+  https://cristibtz.github.io/posts/CVE-2025-49619
+  https://github.com/Skyvern-AI/skyvern
+  https://www.exploit-db.com/exploits/52335
+  https://pypi.org/project/skyvern
+  https://github.com/advisories/GHSA-h92g-3xc3-ww2r
+
+Skyvern through 0.2.0 has a Jinja runtime leak in sdk/workflow/models/block.py.

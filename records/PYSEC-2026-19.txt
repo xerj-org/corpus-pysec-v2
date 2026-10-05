@@ -1,0 +1,15 @@
+PYSEC-2026-19 PyPI/apache-airflow — Secrets in Variables saved as JSON dictionaries were not properly redacted - in case thee variables 
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 3.0.0, < 3.2.0 (ECOSYSTEM)
+aliases: CVE-2026-32690, GHSA-w9r4-94fj-xp69
+references:
+  http://www.openwall.com/lists/oss-security/2026/04/17/6
+  https://lists.apache.org/thread/7rnzxofntcznqxnhsmjvvlvygwph7rn5
+  https://github.com/apache/airflow/pull/63480
+  https://github.com/advisories/GHSA-w9r4-94fj-xp69
+
+Secrets in Variables saved as JSON dictionaries were not properly redacted - in case thee variables were retrieved by the user the secrets stored as nested fields were not masked.
+
+If you do not store variables with sensitive values in JSON form, you are not affected. Otherwise please upgrade to Apache Airflow 3.2.0 that has the fix implemented

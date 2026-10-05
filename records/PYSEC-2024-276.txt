@@ -1,0 +1,10 @@
+PYSEC-2024-276 PyPI/greykite — greykite v1.0.0 was discovered to contain an arbitrary file upload vulnerability in the load_obj fun
+package: greykite
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 1.0.0 (ECOSYSTEM)
+aliases: CVE-2024-28425
+references:
+  https://github.com/bayuncao/vul-cve-17
+
+greykite v1.0.0 was discovered to contain an arbitrary file upload vulnerability in the load_obj function at /templates/pickle_utils.py. This vulnerability allows attackers to execute arbitrary code via uploading a crafted file.

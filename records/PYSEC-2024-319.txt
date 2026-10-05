@@ -1,0 +1,11 @@
+PYSEC-2024-319 PyPI/chuanhuchatgpt — A path traversal vulnerability exists in gaizhenbiao/chuanhuchatgpt version 20240410, allowing any u
+package: chuanhuchatgpt
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 20240410 (ECOSYSTEM)
+aliases: CVE-2024-6090
+references:
+  https://github.com/gaizhenbiao/chuanhuchatgpt/commit/526c615c437377ee9c71f866fd0f19011910f705
+  https://huntr.com/bounties/bd0f8f89-5c8a-4662-89aa-a6861d84cf4c
+
+A path traversal vulnerability exists in gaizhenbiao/chuanhuchatgpt version 20240410, allowing any user to delete other users' chat histories. This vulnerability can also be exploited to delete any files ending in `.json` on the target system, leading to a denial of service as users are unable to authenticate.

@@ -1,0 +1,15 @@
+PYSEC-2019-177 PyPI/ecdsa — An error-handling flaw was found in python-ecdsa before version 0.13.3. During signature decoding, m
+package: ecdsa
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.13.3 (ECOSYSTEM)
+aliases: CVE-2019-14853, GHSA-2mrj-435v-c2cr, GHSA-pwfw-mgfj-7g3g
+references:
+  https://github.com/warner/python-ecdsa/releases/tag/python-ecdsa-0.13.3
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2019-14853
+  https://www.debian.org/security/2019/dsa-4588
+  https://seclists.org/bugtraq/2019/Dec/33
+  https://github.com/advisories/GHSA-2mrj-435v-c2cr
+  https://github.com/advisories/GHSA-pwfw-mgfj-7g3g
+
+An error-handling flaw was found in python-ecdsa before version 0.13.3. During signature decoding, malformed DER signatures could raise unexpected exceptions (or no exceptions at all), which could lead to a denial of service.

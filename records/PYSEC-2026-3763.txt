@@ -1,0 +1,11 @@
+PYSEC-2026-3763 PyPI/openssl-encrypt — openssl_encrypt versions before 1.4.0 contain a plugin sandbox bypass vulnerability where the Plugin
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.0 (ECOSYSTEM)
+aliases: CVE-2026-74886, GHSA-9pgj-v69p-q586
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-9pgj-v69p-q586
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-plugin-import-guard-bypass
+
+openssl_encrypt versions before 1.4.0 contain a plugin sandbox bypass vulnerability where the PluginImportGuard blocks a different set of modules than the AST analyzer's DANGEROUS_MODULES set. Attackers can bypass AST analysis through string obfuscation or encoding to import unblocked dangerous modules like sys, shutil, multiprocessing, importlib, and pickle for arbitrary code execution.

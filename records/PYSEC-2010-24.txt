@@ -1,0 +1,14 @@
+PYSEC-2010-24 PyPI/pyftpdlib — The ftp_STOU function in FTPServer.py in pyftpdlib before 0.2.0 does not limit the number of attempt
+package: pyftpdlib
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.2.0 (ECOSYSTEM)
+aliases: CVE-2007-6740, GHSA-cx59-cp6c-9fr8
+references:
+  http://code.google.com/p/pyftpdlib/source/detail?r=37
+  http://code.google.com/p/pyftpdlib/source/diff?spec=svn37&r=37&format=side&path=/trunk/pyftpdlib/FTPServer.py
+  http://code.google.com/p/pyftpdlib/source/browse/trunk/HISTORY
+  http://code.google.com/p/pyftpdlib/issues/detail?id=25
+  https://github.com/advisories/GHSA-cx59-cp6c-9fr8
+
+The ftp_STOU function in FTPServer.py in pyftpdlib before 0.2.0 does not limit the number of attempts to discover a unique filename, which might allow remote authenticated users to cause a denial of service via a STOU command.

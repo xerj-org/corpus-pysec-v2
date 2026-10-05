@@ -1,0 +1,15 @@
+PYSEC-2024-138 PyPI/paddlepaddle — FPE in paddle.lerp in PaddlePaddle before 2.6.0. This flaw can cause a runtime crash and a denial of
+package: paddlepaddle
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.6.0 (ECOSYSTEM)
+aliases: CVE-2023-52306, GHSA-rg9q-m8hv-xxr6
+references:
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-015.md
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-015.md
+  https://github.com/advisories/GHSA-rg9q-m8hv-xxr6
+
+FPE in paddle.lerp in PaddlePaddle before 2.6.0. This flaw can cause a runtime crash and a denial of service.
+
+
+

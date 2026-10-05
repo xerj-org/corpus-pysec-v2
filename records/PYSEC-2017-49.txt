@@ -1,0 +1,14 @@
+PYSEC-2017-49 PyPI/kerberos — The checkPassword function in python-kerberos does not authenticate the KDC it attempts to communica
+package: kerberos
+ecosystem: PyPI
+versions affected:
+  >= 0.0 (ECOSYSTEM)
+aliases: CVE-2015-3206
+references:
+  https://pypi.python.org/pypi/kerberos
+  https://github.com/apple/ccs-pykerberos/issues/31
+  https://bugzilla.redhat.com/show_bug.cgi?id=1223802
+  http://www.securityfocus.com/bid/74760
+  http://www.openwall.com/lists/oss-security/2015/05/21/3
+
+The checkPassword function in python-kerberos does not authenticate the KDC it attempts to communicate with, which allows remote attackers to cause a denial of service (bad response), or have other unspecified impact by performing a man-in-the-middle attack.

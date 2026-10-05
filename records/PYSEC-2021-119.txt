@@ -1,0 +1,12 @@
+PYSEC-2021-119 PyPI/yamale — 23andMe Yamale before 3.0.8 allows remote attackers to execute arbitrary code via a crafted schema f
+package: yamale
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.0.8 (ECOSYSTEM)
+aliases: CVE-2021-38305, GHSA-435p-f82x-mxwm
+references:
+  https://github.com/23andMe/Yamale/releases/tag/3.0.8
+  https://github.com/23andMe/Yamale/pull/165
+  https://github.com/advisories/GHSA-435p-f82x-mxwm
+
+23andMe Yamale before 3.0.8 allows remote attackers to execute arbitrary code via a crafted schema file. The schema parser uses eval as part of its processing, and tries to protect from malicious expressions by limiting the builtins that are passed to the eval. When processing the schema, each line is run through Python's eval function to make the validator available. A well-constructed string within the schema rules can execute system commands; thus, by exploiting the vulnerability, an attacker can run arbitrary code on the image that invokes Yamale.

@@ -1,0 +1,18 @@
+PYSEC-2026-1074 PyPI/ray-mcp-server — Malicious code in ray-mcp-server (PyPI)
+package: ray-mcp-server
+ecosystem: PyPI
+versions affected:
+  0.2.1
+aliases: MAL-2026-5325
+references:
+  https://inspector.pypi.io/project/ray-mcp-server/0.2.1/packages/40/35/d09e9a3b7802bbbae86b8b9a207b9687101dcb0534e35e3cb35d0383a4de/ray_mcp_server-0.2.1-py3-none-any.whl/ray_mcp_server-setup.pth
+  https://www.endorlabs.com/learn/shai-hulud-hades-wave-hits-six-pypi-bioinformatics-packages
+  https://www.stepsecurity.io/blog/the-hades-campaign-pypi-packages
+
+Part of the "Hades" wave of the Shai-Hulud supply-chain campaign. On 2026-06-08,
+malicious phantom releases of ray-mcp-server were published to PyPI using stolen
+credentials. The package executes a bundled JavaScript payload (via the Bun
+runtime) on import that harvests and exfiltrates credentials and attempts
+self-propagation. This entry is a summary; behavior may not be fully
+characterized here. See the linked references for detailed analysis and
+indicators of compromise.

@@ -1,0 +1,16 @@
+PYSEC-2026-1896 PyPI/salt — Salt's worker process vulnerable to denial of service through file read operation
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 3007.0rc1, < 3007.4, >= 3006.0rc1, < 3006.12 (ECOSYSTEM)
+aliases: CVE-2025-22242, GHSA-989c-m532-p2hv
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-22242
+  https://github.com/saltstack/salt/commit/e39116fb87bf4db9bcb9aade8258c66df87d41fe
+  https://docs.saltproject.io/en/3006/topics/releases/3006.12.html
+  https://docs.saltproject.io/en/3007/topics/releases/3007.4.html
+  https://github.com/saltstack/salt
+  https://pypi.org/project/salt
+  https://github.com/advisories/GHSA-989c-m532-p2hv
+
+Worker process denial of service through file read operation. .A vulnerability exists in the Master's “pub_ret” method which is exposed to all minions. The un-sanitized input value “jid” is used to construct a path which is then opened for reading. An attacker could exploit this vulnerabilities by attempting to read from a filename that will not return any data, e.g. by targeting a pipe node on the proc file system.

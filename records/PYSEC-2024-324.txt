@@ -1,0 +1,11 @@
+PYSEC-2024-324 PyPI/llama-index — A command injection vulnerability exists in the RunGptLLM class of the llama_index library, version 
+package: llama-index
+ecosystem: PyPI
+versions affected:
+  >= 0.9.47, < 0.10.13 (ECOSYSTEM)
+aliases: CVE-2024-4181
+references:
+  https://github.com/run-llama/llama_index/commit/d73715eaf0642705583e7897c78b9c8dd2d3a7ba
+  https://huntr.com/bounties/1a204520-598a-434e-b13d-0d34f2a5ddc1
+
+A command injection vulnerability exists in the RunGptLLM class of the llama_index library, version 0.9.47, used by the RunGpt framework from JinaAI to connect to Language Learning Models (LLMs). The vulnerability arises from the improper use of the eval function, allowing a malicious or compromised LLM hosting provider to execute arbitrary commands on the client's machine. This issue was fixed in version 0.10.13. The exploitation of this vulnerability could lead to a hosting provider gaining full control over client machines.

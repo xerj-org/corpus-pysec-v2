@@ -1,0 +1,15 @@
+PYSEC-2026-1262 PyPI/composio — ComposioHQ has a directory traversal vulnerability
+package: composio
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.7.20 (ECOSYSTEM)
+aliases: CVE-2025-56427, GHSA-3mwv-j45g-vp3w
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-56427
+  https://github.com/ComposioHQ/composio
+  https://github.com/ComposioHQ/composio/blob/master/python/composio/server/api.py#L278
+  https://github.com/TOAST-Research/pocs/blob/main/composio/composio_1.md
+  https://pypi.org/project/composio
+  https://github.com/advisories/GHSA-3mwv-j45g-vp3w
+
+Directory Traversal vulnerability in ComposioHQ v.0.7.20 allows a remote attacker to obtain sensitive information via the _download_file_or_dir function.

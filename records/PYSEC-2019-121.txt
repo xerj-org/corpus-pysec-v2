@@ -1,0 +1,14 @@
+PYSEC-2019-121 PyPI/slixmpp — slixmpp version before commit 7cd73b594e8122dddf847953fcfc85ab4d316416 contains an incorrect Access 
+package: slixmpp
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.2 (ECOSYSTEM)
+aliases: CVE-2019-1000021, GHSA-4g62-mfwx-4q48
+references:
+  https://xmpp.org/extensions/xep-0223.html#howitworks
+  https://lab.louiz.org/poezio/slixmpp/commit/7cd73b594e8122dddf847953fcfc85ab4d316416
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/GKBXN7EAAR7ENEZUBKV6C6MP6QBXYTWT/
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/WIBP4LD2V4TBJSLZXDUAGQMD6CUI2TZR/
+  https://github.com/advisories/GHSA-4g62-mfwx-4q48
+
+slixmpp version before commit 7cd73b594e8122dddf847953fcfc85ab4d316416 contains an incorrect Access Control vulnerability in XEP-0223 plugin (Persistent Storage of Private Data via PubSub) options profile, used for the configuration of default access model that can result in all of the contacts of the victim can see private data having been published to a PEP node. This attack appears to be exploitable if the user of this library publishes any private data on PEP, the node isn't configured to be private. This vulnerability appears to have been fixed in commit 7cd73b594e8122dddf847953fcfc85ab4d316416 which is included in slixmpp 1.4.2.

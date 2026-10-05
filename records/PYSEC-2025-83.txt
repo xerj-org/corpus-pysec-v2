@@ -1,0 +1,11 @@
+PYSEC-2025-83 PyPI/agentscope — A directory traversal vulnerability exists in modelscope/agentscope version 0.0.4. An attacker can e
+package: agentscope
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.0.4 (ECOSYSTEM)
+aliases: CVE-2024-8524, GHSA-6v28-q95m-93qr
+references:
+  https://huntr.com/bounties/cc4acf33-700d-4220-8a8a-db28f5c4cc8f
+  https://github.com/advisories/GHSA-6v28-q95m-93qr
+
+A directory traversal vulnerability exists in modelscope/agentscope version 0.0.4. An attacker can exploit this vulnerability to read any local JSON file by sending a crafted POST request to the /read-examples endpoint.

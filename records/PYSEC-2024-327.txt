@@ -1,0 +1,14 @@
+PYSEC-2024-327 PyPI/wasmtime — wasmtime is a runtime for WebAssembly. The 19.0.0 release of Wasmtime contains a regression introduc
+package: wasmtime
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 19.0.0 (ECOSYSTEM)
+aliases: CVE-2024-30266, GHSA-75hq-h6g9-h4q5
+references:
+  https://github.com/bytecodealliance/wasmtime/security/advisories/GHSA-75hq-h6g9-h4q5
+  https://github.com/bytecodealliance/wasmtime/issues/8281
+  https://github.com/bytecodealliance/wasmtime/commit/7f57d0bb0948fa56cc950278d0db230ed10e8664
+  https://github.com/bytecodealliance/wasmtime/pull/8018
+  https://github.com/bytecodealliance/wasmtime/pull/8283
+
+wasmtime is a runtime for WebAssembly. The 19.0.0 release of Wasmtime contains a regression introduced during its development which can lead to a guest WebAssembly module causing a panic in the host runtime. A valid WebAssembly module, when executed at runtime, may cause this panic. This vulnerability has been patched in version 19.0.1.

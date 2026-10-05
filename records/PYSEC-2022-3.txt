@@ -1,0 +1,13 @@
+PYSEC-2022-3 PyPI/django — Storage.save in Django 2.2 before 2.2.26, 3.2 before 3.2.11, and 4.0 before 4.0.1 allows directory t
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 2.2, < 2.2.26, >= 3.2, < 3.2.11, >= 4.0, < 4.0.1 (ECOSYSTEM)
+aliases: CVE-2021-45452, GHSA-jrh2-hc4r-7jwx
+references:
+  https://docs.djangoproject.com/en/4.0/releases/security/
+  https://groups.google.com/forum/#!forum/django-announce
+  https://www.djangoproject.com/weblog/2022/jan/04/security-releases/
+  https://github.com/advisories/GHSA-jrh2-hc4r-7jwx
+
+Storage.save in Django 2.2 before 2.2.26, 3.2 before 3.2.11, and 4.0 before 4.0.1 allows directory traversal if crafted filenames are directly passed to it.

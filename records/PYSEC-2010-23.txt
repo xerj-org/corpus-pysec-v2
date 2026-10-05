@@ -1,0 +1,14 @@
+PYSEC-2010-23 PyPI/pyftpdlib — FTPServer.py in pyftpdlib before 0.2.0 allows remote attackers to cause a denial of service via a lo
+package: pyftpdlib
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.2.0 (ECOSYSTEM)
+aliases: CVE-2007-6739, GHSA-5f3f-pg2c-cxcv
+references:
+  http://code.google.com/p/pyftpdlib/source/diff?spec=svn20&r=20&format=side&path=/trunk/pyftpdlib/FTPServer.py
+  http://code.google.com/p/pyftpdlib/issues/detail?id=3
+  http://code.google.com/p/pyftpdlib/source/detail?r=20
+  http://code.google.com/p/pyftpdlib/source/browse/trunk/HISTORY
+  https://github.com/advisories/GHSA-5f3f-pg2c-cxcv
+
+FTPServer.py in pyftpdlib before 0.2.0 allows remote attackers to cause a denial of service via a long command.

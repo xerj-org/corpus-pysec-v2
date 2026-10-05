@@ -1,0 +1,60 @@
+PYSEC-2026-3563 PyPI/datamodel-code-generator — datamodel-code-generator: Authorization / request headers leaked to cross-origin redirect target when fetching remote schemas
+package: datamodel-code-generator
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.63.0 (ECOSYSTEM)
+aliases: CVE-2026-55403, GHSA-r5vv-ff45-prp2
+references:
+  https://github.com/koxudaxi/datamodel-code-generator/security/advisories/GHSA-r5vv-ff45-prp2
+  https://github.com/koxudaxi/datamodel-code-generator/commit/a585c037c8307b7aae815de193b7fe1c4c44994b
+  https://github.com/koxudaxi/datamodel-code-generator
+  https://github.com/koxudaxi/datamodel-code-generator/releases/tag/0.63.0
+  https://pypi.org/project/datamodel-code-generator
+  https://github.com/advisories/GHSA-r5vv-ff45-prp2
+  https://nvd.nist.gov/vuln/detail/CVE-2026-55403
+
+### Summary
+
+When `datamodel-code-generator` fetches a remote schema and follows an HTTP redirect, it re-sends the original request headers, including any `Authorization` header, to the redirect target even when the redirect changes origin (host/port/scheme). Credentials that an operator scoped to a trusted schema host are therefore forwarded to an attacker-controlled or otherwise different host, leaking them.
+
+### Details
+
+In `src/datamodel_code_generator/http.py`, `get_body()` follows redirects manually and re-issues each hop with the same `headers` argument, with no check that the origin is unchanged:
+
+```python
+for redirect_count in range(MAX_HTTP_REDIRECTS + 1):
+    _validate_url_for_fetch(current_url, allow_private_network=allow_private_network)
+    response = httpx.get(current_url, headers=headers, follow_redirects=False, ...)  # same headers every hop
+    if (redirect_url := _get_redirect_url(httpx, current_url, response)) is None:
+        break
+    current_url = redirect_url
+```
+
+Browsers and HTTP clients such as `requests`/`httpx` strip `Authorization` when a redirect crosses origin; here it is preserved unconditionally. Headers are operator-supplied via `--http-headers` (and credentials can also arrive through `--url` userinfo), so a redirect from the trusted host to any other host discloses them.
+
+### PoC
+
+Self-contained reproducer: https://gist.github.com/thegr1ffyn/ade3035d7f2be95e16f11698259cdbc2  
+Host A (the trusted schema host) 302-redirects to host B (a different origin) which records received headers; the request carries an auth token scoped to A. 
+
+(The PoC uses loopback servers; `allow_private_network=True` is only to avoid the separate SSRF guard blocking loopback and has no bearing on the leak.)
+
+### Impact
+
+Exposure of sensitive information to an unauthorized actor (CWE-200). Affects operators who pass authentication headers/credentials to fetch a remote schema (`--http-headers`, `--url` with userinfo) when the configured host issues a redirect to a different origin — e.g. a compromised or open-redirect-prone schema host, or a redirect chain influenced by an attacker-supplied `$ref`. The leaked credential can then be replayed against the trusted host. This is a credential-scoping weakness secondary to, and in the same component as, the project's other SSRF hardening.
+
+### Suggested remediation
+
+When a redirect changes the origin (scheme/host/port), drop `Authorization` and other sensitive headers before following it, matching the behavior of mainstream HTTP clients.
+
+### Maintainer status
+
+Confirmed by maintainer review and regression tests. The private fix PR was merged and released in `0.63.0`: https://github.com/koxudaxi/datamodel-code-generator-ghsa-r5vv-ff45-prp2/pull/1
+
+Fix summary: strip `Authorization`, `Cookie`, and `Proxy-Authorization` headers when a redirect crosses origin; preserve headers for same-origin redirects.
+
+Release status: fixed in `0.63.0`; `0.62.0` and earlier are affected.
+
+Validation: `uv run --group test --extra http pytest tests/test_http.py` passed locally for the redirect regression coverage; `uv run --group fix ruff check src/datamodel_code_generator/http.py tests/test_http.py` passed.
+
+Submitted by: Hamza Haroon (thegr1ffyn)

@@ -1,0 +1,13 @@
+PYSEC-2021-61 PyPI/clickhouse-driver — clickhouse-driver before 0.1.5 allows a malicious clickhouse server to trigger a crash or execute ar
+package: clickhouse-driver
+ecosystem: PyPI
+versions affected:
+  >= 0, < d708ed548e1d6f254ba81a21de8ba543a53b5598, < 3e990547e064b8fca916b23a0f7d6fe8c63c7f6b (GIT: https://github.com/mymarilyn/clickhouse-driver)
+  >= 0, < 0.1.5 (ECOSYSTEM)
+aliases: CVE-2020-26759, GHSA-vgv5-cxvh-vfxh
+references:
+  https://github.com/mymarilyn/clickhouse-driver/commit/d708ed548e1d6f254ba81a21de8ba543a53b5598
+  https://github.com/mymarilyn/clickhouse-driver/commit/3e990547e064b8fca916b23a0f7d6fe8c63c7f6b
+  https://github.com/advisories/GHSA-vgv5-cxvh-vfxh
+
+clickhouse-driver before 0.1.5 allows a malicious clickhouse server to trigger a crash or execute arbitrary code (on a database client) via a crafted server response, due to a buffer overflow.

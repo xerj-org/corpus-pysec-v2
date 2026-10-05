@@ -1,0 +1,15 @@
+PYSEC-2026-1081 PyPI/aim — Aim denial of service vulnerability
+package: aim
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 3.19.3 (ECOSYSTEM)
+aliases: CVE-2024-6227, GHSA-36h2-g4c8-9xcm
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-6227
+  https://github.com/aimhubio/aim
+  https://github.com/aimhubio/aim/blob/2e7b8aff8dcba9ddd5043dfec88cf2319ba8a87c/aim/sdk/repo.py#L195
+  https://huntr.com/bounties/abcea7c6-bb3b-45e9-aa15-9eb6b224451a
+  https://pypi.org/project/aim
+  https://github.com/advisories/GHSA-36h2-g4c8-9xcm
+
+A vulnerability in aimhubio/aim version 3.19.3 allows an attacker to cause an infinite loop by configuring the remote tracking server to point at itself. This results in the server endlessly connecting to itself, rendering it unable to respond to other connections.

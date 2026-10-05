@@ -1,0 +1,13 @@
+PYSEC-2022-43147 PyPI/pyanxdns — pyanxdns package in PyPI version 0.2 is vulnerable to code execution backdoor. The impact is: execut
+package: pyanxdns
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-30882
+references:
+  https://github.com/egeback/pyanxdns/issues/1
+  https://github.com/egeback/pyanxdns/issues/1
+  https://pypi.org/project/pyanxdns/
+  http://pypi.doubanio.com/simple/request
+
+pyanxdns package in PyPI version 0.2 is vulnerable to code execution backdoor. The impact is: execute arbitrary code (remote). When installing the pyanxdns package of version 0.2, the request package will be installed.

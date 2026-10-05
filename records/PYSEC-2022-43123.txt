@@ -1,0 +1,13 @@
+PYSEC-2022-43123 PyPI/democritus-strings — The d8s-netstrings for python, as distributed on PyPI, included a potential code-execution backdoor 
+package: democritus-strings
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-38885
+references:
+  https://pypi.org/project/d8s-netstrings/
+  https://github.com/democritus-project/d8s-netstrings/issues/4
+  https://github.com/democritus-project/d8s-netstrings/issues/4
+  https://pypi.org/project/democritus-strings/
+
+The d8s-netstrings for python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. The backdoor is the democritus-strings package. The affected version is 0.1.0.

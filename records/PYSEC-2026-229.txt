@@ -1,0 +1,12 @@
+PYSEC-2026-229 PyPI/crawl4ai — Crawl4AI before 0.8.7 contains an authentication bypass vulnerability in the monitor router endpoint
+package: crawl4ai
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.8.7 (ECOSYSTEM)
+aliases: CVE-2026-56262, GHSA-xrfj-6m49-wfmm
+references:
+  https://github.com/advisories/GHSA-xrfj-6m49-wfmm
+  https://www.vulncheck.com/advisories/crawl4ai-unauthenticated-access-to-monitor-endpoints-via-docker-api-server
+  https://github.com/unclecode/crawl4ai
+
+Crawl4AI before 0.8.7 contains an authentication bypass vulnerability in the monitor router endpoints that allows unauthenticated attackers to access destructive operations. Remote attackers can invoke the /monitor/actions/cleanup endpoint and manipulate monitoring state without authentication, causing service disruption.

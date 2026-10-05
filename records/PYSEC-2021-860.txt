@@ -1,0 +1,13 @@
+PYSEC-2021-860 PyPI/asterix-decoder — Croatia Control Asterix 2.8.1 (python_v0.7.2) has a heap-based buffer over-read, with additional det
+package: asterix-decoder
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3f765d387d239ccc44e278a2ffa600fb6a6587f9 (GIT: https://github.com/croatiacontrolltd/asterix)
+  >= 0, < 0.7.2 (ECOSYSTEM)
+aliases: CVE-2021-44144, GHSA-6mmf-v5q7-vw2w
+references:
+  https://github.com/CroatiaControlLtd/asterix/issues/183
+  https://github.com/croatiacontrolltd/asterix/commit/3f765d387d239ccc44e278a2ffa600fb6a6587f9
+  https://github.com/advisories/GHSA-6mmf-v5q7-vw2w
+
+Croatia Control Asterix 2.8.1 (python_v0.7.2) has a heap-based buffer over-read, with additional details to be disclosed at a later date.

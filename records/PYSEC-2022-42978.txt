@@ -1,0 +1,13 @@
+PYSEC-2022-42978 PyPI/rdiffweb — Business Logic Errors in GitHub repository ikus060/rdiffweb prior to 2.5.0a7.
+package: rdiffweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < c27c46bac656b1da74f28eac1b52dfa5df76e6f2 (GIT: https://github.com/ikus060/rdiffweb)
+  >= 0, < 2.5.0 (ECOSYSTEM)
+aliases: CVE-2022-3363, GHSA-jw36-mrvg-j5fx
+references:
+  https://huntr.dev/bounties/b8a40ba6-2452-4abe-a80a-2d065ee8891e
+  https://github.com/ikus060/rdiffweb/commit/c27c46bac656b1da74f28eac1b52dfa5df76e6f2
+  https://github.com/advisories/GHSA-jw36-mrvg-j5fx
+
+Business Logic Errors in GitHub repository ikus060/rdiffweb prior to 2.5.0a7.

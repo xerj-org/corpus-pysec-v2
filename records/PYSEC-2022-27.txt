@@ -1,0 +1,15 @@
+PYSEC-2022-27 PyPI/twisted — twisted is an event-driven networking engine written in Python. In affected versions twisted exposes
+package: twisted
+ecosystem: PyPI
+versions affected:
+  >= 0, < af8fe78542a6f2bf2235ccee8158d9c88d31e8e2 (GIT: https://github.com/twisted/twisted)
+  >= 11.1.0, < 22.1.0 (ECOSYSTEM)
+aliases: CVE-2022-21712, GHSA-92x2-jw7w-xvvx
+references:
+  https://github.com/twisted/twisted/commit/af8fe78542a6f2bf2235ccee8158d9c88d31e8e2
+  https://github.com/twisted/twisted/releases/tag/twisted-22.1.0
+  https://github.com/twisted/twisted/security/advisories/GHSA-92x2-jw7w-xvvx
+  https://nvd.nist.gov/vuln/detail/CVE-2022-21712
+  https://pypi.org/project/Twisted/
+
+twisted is an event-driven networking engine written in Python. In affected versions twisted exposes cookies and authorization headers when following cross-origin redirects. This issue is present in the `twited.web.RedirectAgent` and `twisted.web. BrowserLikeRedirectAgent` functions. Users are advised to upgrade. There are no known workarounds.

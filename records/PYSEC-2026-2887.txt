@@ -1,0 +1,16 @@
+PYSEC-2026-2887 PyPI/plone-app-theming — SSRF attacks via tracebacks in Plone
+package: plone-app-theming
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.1.6 (ECOSYSTEM)
+aliases: CVE-2020-28735, GHSA-x7wf-5mjc-6x76
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2020-28735
+  https://github.com/plone/Products.CMFPlone/issues/3209
+  https://dist.plone.org/release/5.2.3/RELEASE-NOTES.txt
+  https://github.com/advisories/GHSA-x7wf-5mjc-6x76
+  https://github.com/pypa/advisory-database/tree/main/vulns/plone/PYSEC-2020-247.yaml
+  https://www.misakikata.com/codes/plone/python-en.html
+  https://pypi.org/project/plone-app-theming
+
+Plone before 5.2.3 allows SSRF attacks via the tracebacks feature (only available to the Manager role).

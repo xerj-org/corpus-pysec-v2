@@ -1,0 +1,11 @@
+PYSEC-2026-3801 PyPI/openssl-encrypt — openssl_encrypt (pip package openssl-encrypt) before 1.4.9 contains two weaknesses in the portable U
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.9 (ECOSYSTEM)
+aliases: CVE-2026-81717, GHSA-8jx3-27qf-3p97
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-8jx3-27qf-3p97
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-1.4.9-integrity-bypass-via-added-files
+
+openssl_encrypt (pip package openssl-encrypt) before 1.4.9 contains two weaknesses in the portable USB drive feature, whose threat model treats the removable drive as untrusted (attacker with physical write access). USBDriveCreator._verify_integrity_file only validates files listed in the manifest, so files added to the drive — including a root-level autorun payload — are not detected and integrity verification still passes. Additionally, a globally constant, source-embedded KDF salt (_LEGACY_FIXED_SALT) is used to derive the drive encryption key for any drive lacking a per-drive salt file, defeating precomputation resistance and enabling an offline rainbow-table attack.

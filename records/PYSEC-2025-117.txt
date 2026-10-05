@@ -1,0 +1,11 @@
+PYSEC-2025-117 PyPI/gdal — Buffer Overflow vulnerability in gdal 3.10.2 allows a local attacker to cause a denial of service vi
+package: gdal
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 3.10.2-NA (ECOSYSTEM)
+aliases: CVE-2025-29480
+references:
+  https://github.com/OSGeo/gdal/issues/12188#issuecomment-2847873794
+  https://github.com/lmarch2/poc/blob/main/gdal/gdal.md
+
+Buffer Overflow vulnerability in gdal 3.10.2 allows a local attacker to cause a denial of service via the OGRSpatialReference::Release function. NOTE: the Supplier indicates that the report is invalid and could not be reproduced.

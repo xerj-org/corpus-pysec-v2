@@ -1,0 +1,15 @@
+PYSEC-2026-2222 PyPI/mlflow — A vulnerability in mlflow/mlflow versions prior to 3.11.0 allows for the resolution of environment v
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.11.0 (ECOSYSTEM)
+aliases: CVE-2026-4035, GHSA-g35p-px32-whv6
+references:
+  https://access.redhat.com/security/cve/CVE-2026-4035
+  https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-4035.json
+  https://bugzilla.redhat.com/show_bug.cgi?id=2484318
+  https://github.com/mlflow/mlflow/commit/4a3f2f720cb4f058c9e0c5b883e0acc9ab64a7f3
+  https://huntr.com/bounties/f8e591a0-0f19-4910-b82e-16c9956f2233
+  https://github.com/advisories/GHSA-g35p-px32-whv6
+
+A vulnerability in mlflow/mlflow versions prior to 3.11.0 allows for the resolution of environment variables in AI Gateway secrets, which can be exploited to exfiltrate sensitive server-side environment credentials to an attacker-controlled endpoint. This issue arises because the `api_key` field in gateway secrets can accept `$ENV_VAR` references, which are resolved against the MLflow server's environment during runtime. The resolved secrets are then sent in provider authentication headers to the configured upstream `api_base`. This vulnerability can be exploited by low-privileged authenticated users in basic-auth deployments or by unauthenticated users in default deployments without `basic-auth`. The impact includes potential leakage of sensitive credentials such as cloud artifact credentials (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`), which could lead to artifact poisoning and cross-boundary code execution in downstream environments. The issue is fixed in version 3.11.0.

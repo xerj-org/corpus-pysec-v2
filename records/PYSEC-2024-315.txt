@@ -1,0 +1,10 @@
+PYSEC-2024-315 PyPI/diagrams — Airflow-Diagrams v2.1.0 was discovered to contain an arbitrary file upload vulnerability in the unsa
+package: diagrams
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 2.1.0 (ECOSYSTEM)
+aliases: CVE-2024-28423
+references:
+  https://github.com/bayuncao/vul-cve-15
+
+Airflow-Diagrams v2.1.0 was discovered to contain an arbitrary file upload vulnerability in the unsafe_load function at cli.py. This vulnerability allows attackers to execute arbitrary code via uploading a crafted YML file.

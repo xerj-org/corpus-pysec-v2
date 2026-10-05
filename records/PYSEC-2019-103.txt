@@ -1,0 +1,11 @@
+PYSEC-2019-103 PyPI/linotp — KeyIdentity LinOTP before 2.10.5.3 has Incorrect Access Control (issue 1 of 2).
+package: linotp
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.11.1 (ECOSYSTEM)
+aliases: CVE-2019-12887, GHSA-rqg8-xjp2-pg9w
+references:
+  https://www.linotp.org/CVE-2019-12887.txt
+  https://github.com/advisories/GHSA-rqg8-xjp2-pg9w
+
+KeyIdentity LinOTP before 2.10.5.3 has Incorrect Access Control (issue 1 of 2).

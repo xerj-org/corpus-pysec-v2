@@ -1,0 +1,15 @@
+PYSEC-2026-2310 PyPI/weblate — Weblate is a web based localization tool. Prior to version 5.16.1, the REST API's `AddonViewSet` (`w
+package: weblate
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.16.1 (ECOSYSTEM)
+aliases: CVE-2026-27457, GHSA-wppc-7cq7-cgfv
+references:
+  https://github.com/WeblateOrg/weblate/releases/tag/weblate-5.16.1
+  https://github.com/WeblateOrg/weblate/commit/3f58f9a4152bc0cbdd6eff5954f9c7bc4d9f0af9
+  https://github.com/WeblateOrg/weblate/commit/7802c9b121eb407c48d4adddd4f2458fb3efef0f
+  https://github.com/WeblateOrg/weblate/pull/18107
+  https://github.com/WeblateOrg/weblate/pull/18164
+  https://github.com/WeblateOrg/weblate/security/advisories/GHSA-wppc-7cq7-cgfv
+
+Weblate is a web based localization tool. Prior to version 5.16.1, the REST API's `AddonViewSet` (`weblate/api/views.py`, line 2831) uses `queryset = Addon.objects.all()` without overriding `get_queryset()` to scope results by user permissions. This allows any authenticated user (or anonymous users if `REQUIRE_LOGIN` is not set) to list and retrieve ALL addons across all projects and components via `GET /api/addons/` and `GET /api/addons/{id}/`. Version 5.16.1 fixes the issue.

@@ -1,0 +1,15 @@
+PYSEC-2023-31 PyPI/modoboa — Cross-site Scripting (XSS) - Stored in GitHub repository modoboa/modoboa prior to 2.0.4.
+package: modoboa
+ecosystem: PyPI
+versions affected:
+  >= 0, < eef9ab72b5305578a3ad7a7463bd284aa645e98b (GIT: https://github.com/modoboa/modoboa)
+  >= 0, < 2.0.4 (ECOSYSTEM)
+aliases: CVE-2023-0519, GHSA-jm3m-wr3p-hjrq
+references:
+  https://huntr.dev/bounties/891ad0cb-d12f-4c5e-aac8-d7326caf2129
+  https://huntr.dev/bounties/891ad0cb-d12f-4c5e-aac8-d7326caf2129
+  https://huntr.dev/bounties/891ad0cb-d12f-4c5e-aac8-d7326caf2129
+  https://github.com/modoboa/modoboa/commit/eef9ab72b5305578a3ad7a7463bd284aa645e98b
+  https://github.com/advisories/GHSA-jm3m-wr3p-hjrq
+
+Cross-site Scripting (XSS) - Stored in GitHub repository modoboa/modoboa prior to 2.0.4.

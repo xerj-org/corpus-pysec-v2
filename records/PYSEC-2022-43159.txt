@@ -1,0 +1,13 @@
+PYSEC-2022-43159 PyPI/rdiffweb — Allocation of Resources Without Limits or Throttling in GitHub repository ikus060/rdiffweb prior to 
+package: rdiffweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < b78ec09f4582e363f6f449df6f987127e126c311 (GIT: https://github.com/ikus060/rdiffweb)
+  >= 0, < 2.5.0 (ECOSYSTEM)
+aliases: CVE-2022-3439, GHSA-x8x2-wc2h-wc48
+references:
+  https://github.com/ikus060/rdiffweb/commit/b78ec09f4582e363f6f449df6f987127e126c311
+  https://huntr.dev/bounties/37b86c45-b240-4626-bd53-b6f02d10e0d7
+  https://github.com/advisories/GHSA-x8x2-wc2h-wc48
+
+Allocation of Resources Without Limits or Throttling in GitHub repository ikus060/rdiffweb prior to 2.5.0.

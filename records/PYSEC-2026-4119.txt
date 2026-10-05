@@ -1,0 +1,38 @@
+PYSEC-2026-4119 PyPI/open-webui — Open WebUI: Users denied by the OAuth domain allowlist or role policy can still sign in via token exchange
+package: open-webui
+ecosystem: PyPI
+versions affected:
+  >= 0.8.0, < 0.9.0 (ECOSYSTEM)
+aliases: CVE-2026-88005, GHSA-4qg5-cxx4-g927
+references:
+  https://github.com/open-webui/open-webui/security/advisories/GHSA-4qg5-cxx4-g927
+  https://github.com/open-webui/open-webui/pull/23639
+  https://github.com/open-webui/open-webui/commit/fb5ef978bfb451c3f2221931e08e54250cec58ca
+  https://github.com/open-webui/open-webui
+  https://github.com/open-webui/open-webui/releases/tag/v0.9.0
+  https://pypi.org/project/open-webui
+  https://github.com/advisories/GHSA-4qg5-cxx4-g927
+  https://nvd.nist.gov/vuln/detail/CVE-2026-88005
+
+## Summary
+Open WebUI's OAuth token exchange endpoint issues a session for a provider access token without applying the email domain allowlist that the normal OAuth login callback enforces. An account whose email domain the login callback would refuse could still obtain a working session through this endpoint.
+
+## Preconditions
+- `ENABLE_OAUTH_TOKEN_EXCHANGE=True`. It is disabled by default, so a default deployment is not affected.
+- `OAUTH_ALLOWED_DOMAINS` set to something other than `*`. Deployments without a domain allowlist are not affected.
+- A valid, unexpired access token on the configured provider.
+- An Open WebUI account already linked to that provider subject, or an account with a matching email when `OAUTH_MERGE_ACCOUNTS_BY_EMAIL` is enabled. This endpoint never creates accounts, so a token for a subject with no existing account is rejected.
+
+## Impact
+An admin who narrows the domain allowlist expects users outside it to lose access at their next sign-in. The login callback does deny them. Token exchange kept issuing sessions, so a user whose domain was removed retained working access as their existing account at its existing role. The endpoint cannot create an account and cannot raise anyone's role, so this grants continued access rather than new or elevated access.
+
+## Fix
+fb5ef978b, released in 0.9.0, adds the same domain allowlist check to the token exchange endpoint that the login callback runs, and denies the exchange with 403 when the email domain is not allowed. Upgrading restores the check with no further action.
+
+## Root cause
+The affected component is the OAuth token exchange endpoint in `backend/open_webui/routers/auths.py`, present in builds from 0.8.0 onward.
+
+The endpoint was added as a second entry point into the same session-issuing path the OAuth login callback uses, but it re-implemented only the identity lookup and not the policy checks surrounding it. The domain allowlist check lived inside the callback's own body rather than in shared code, so the second caller inherited none of it.
+
+## Credits
+@Classic298

@@ -1,0 +1,18 @@
+PYSEC-2008-5 PyPI/trac — Cross-site scripting (XSS) vulnerability in the wiki engine in Trac before 0.10.5 allows remote atta
+package: trac
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.10.5 (ECOSYSTEM)
+aliases: CVE-2008-3328, GHSA-x6jf-c7wh-7m7w
+references:
+  http://trac.edgewall.org/wiki/ChangeLog
+  http://secunia.com/advisories/31314
+  http://www.securityfocus.com/bid/30400
+  https://www.redhat.com/archives/fedora-package-announce/2008-July/msg01270.html
+  http://secunia.com/advisories/31231
+  https://www.redhat.com/archives/fedora-package-announce/2008-July/msg01261.html
+  http://www.vupen.com/english/advisories/2008/2223/references
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/44016
+  https://github.com/advisories/GHSA-x6jf-c7wh-7m7w
+
+Cross-site scripting (XSS) vulnerability in the wiki engine in Trac before 0.10.5 allows remote attackers to inject arbitrary web script or HTML via unknown vectors.

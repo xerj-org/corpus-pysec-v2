@@ -1,0 +1,14 @@
+PYSEC-2022-226 PyPI/whoogle-search — The package whoogle-search before 0.7.2 are vulnerable to Cross-site Scripting (XSS) via the query s
+package: whoogle-search
+ecosystem: PyPI
+versions affected:
+  >= 0, < abc30d7da3b5c67be7ce84d4699f327442d44606 (GIT: https://github.com/benbusby/whoogle-search)
+  >= 0, < 0.7.2 (ECOSYSTEM)
+aliases: CVE-2022-25303, SNYK-PYTHON-WHOOGLESEARCH-2803306, GHSA-mxvc-fwgx-j778
+references:
+  https://github.com/benbusby/whoogle-search/blob/6d362ca5c7a00d2f691a2512461c5dfbfc01cbb3/app/routes.py%23L448
+  https://snyk.io/vuln/SNYK-PYTHON-WHOOGLESEARCH-2803306
+  https://github.com/benbusby/whoogle-search/commit/abc30d7da3b5c67be7ce84d4699f327442d44606
+  https://github.com/advisories/GHSA-mxvc-fwgx-j778
+
+The package whoogle-search before 0.7.2 are vulnerable to Cross-site Scripting (XSS) via the query string parameter q. In the case where it does not contain the http string, it is used to build the error_message that is then rendered in the error.html template, using the [flask.render_template](https://flask.palletsprojects.com/en/2.1.x/api/flask.render_template) function. However, the error_message is rendered using the [| safe filter](https://jinja.palletsprojects.com/en/3.1.x/templates/working-with-automatic-escaping), meaning the user input is not escaped.

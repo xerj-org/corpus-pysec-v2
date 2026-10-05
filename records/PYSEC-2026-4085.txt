@@ -1,0 +1,114 @@
+PYSEC-2026-4085 PyPI/mcp-atlassian — MCP Atlassian: SSRF redirect protection missing for basic-auth and OAuth authentication branches
+package: mcp-atlassian
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.22.0 (ECOSYSTEM)
+aliases: CVE-2026-77261, GHSA-6529-c226-h328
+references:
+  https://github.com/sooperset/mcp-atlassian/security/advisories/GHSA-6529-c226-h328
+  https://nvd.nist.gov/vuln/detail/CVE-2026-77261
+  https://github.com/sooperset/mcp-atlassian/pull/1448
+  https://github.com/sooperset/mcp-atlassian/commit/b041733473f95119dd539542a43c280737a8e460
+  https://github.com/sooperset/mcp-atlassian
+  https://github.com/sooperset/mcp-atlassian/releases/tag/v0.22.0
+  https://pypi.org/project/mcp-atlassian
+  https://github.com/advisories/GHSA-6529-c226-h328
+
+### Summary
+
+`_make_ssrf_safe_hook()` blocks HTTP redirects to private/internal IPs by validating the `Location` header before the client follows a `3xx` response. The problem is that this hook is only attached in one of three authentication branches — the header-PAT path. Basic auth and OAuth branches skip it entirely, so if the connected Atlassian server returns a redirect to something like `http://169.254.169.254/`, the `requests` session follows it without complaint.
+
+This is an incomplete fix for GHSA-7r34-79r5-rcc9. The hook works fine when it's there — it just isn't there for most production auth configurations.
+
+### Details
+
+In `src/mcp_atlassian/servers/dependencies.py`, three branches construct a fetcher and call `_create_and_validate()`. Only Branch 1 passes `attach_ssrf_hook=True`:
+
+```python
+# Branch 1 (header PAT) — hook attached
+return _create_and_validate(request, spec, header_config, "header_pat",
+                             attach_ssrf_hook=True)
+
+# Branch 2 (basic auth) — hook missing
+return _create_and_validate(request, spec, user_config, "basic",
+                             user_email=user_email)
+
+# Branch 3 (OAuth/PAT) — hook missing
+return _create_and_validate(request, spec, user_config, "oauth_pat",
+                             user_email=user_email)
+```
+
+`attach_ssrf_hook` defaults to `False`, so branches 2 and 3 silently skip the protection. The hook itself (`_make_ssrf_safe_hook`) is straightforward — it checks `response.is_redirect`, grabs the `Location` header, and calls `validate_url_for_ssrf()` to reject private IPs. It works correctly when present.
+
+Typical attack flow:
+
+1. Attacker controls or compromises an Atlassian instance (Cloud or Server)
+2. MCP server connects using basic auth or OAuth credentials (most production setups)
+3. Atlassian returns `302 Location: http://169.254.169.254/latest/meta-data/iam/security-credentials/`
+4. The unprotected session follows the redirect
+5. AWS IAM credentials (or other internal service data) are returned to the attacker
+
+### PoC
+
+Tested on commit `d8bc786` (v0.21.1). No real credentials needed.
+
+```python
+from unittest.mock import MagicMock
+import requests
+
+from mcp_atlassian.servers.dependencies import _make_ssrf_safe_hook
+from mcp_atlassian.utils.urls import validate_url_for_ssrf
+from mcp_atlassian.jira import JiraFetcher
+from mcp_atlassian.jira.config import JiraConfig
+
+config = JiraConfig(
+    url="https://attacker.atlassian.net",
+    auth_type="basic",
+    username="victim@example.com",
+    api_token="victim-token",
+)
+fetcher = JiraFetcher(config=config)
+session = fetcher.jira._session
+
+hooks = session.hooks.get("response", [])
+print("hooks on basic-auth session:", [h.__name__ for h in hooks] or "none")
+
+fake_redirect = MagicMock(spec=requests.Response)
+fake_redirect.is_redirect = True
+fake_redirect.headers = {"Location": "http://169.254.169.254/latest/meta-data/"}
+
+blocked = False
+for h in hooks:
+    try:
+        h(fake_redirect)
+    except ValueError as e:
+        blocked = True
+        print("blocked:", e)
+
+if not blocked:
+    print("redirect to 169.254.169.254 not blocked on basic-auth session")
+
+# show header-PAT branch does block it
+hook = _make_ssrf_safe_hook(validate_url_for_ssrf)
+try:
+    hook(fake_redirect)
+except ValueError as e:
+    print("header-PAT branch blocks:", e)
+```
+
+Output:
+
+<img width="2490" height="214" alt="image" src="https://github.com/user-attachments/assets/c7d9d7e2-4c37-4abd-95a3-4ddd9f6bd735" />
+
+```
+$ uv run python3 /tmp/test.py
+hooks on basic-auth session: none
+redirect to 169.254.169.254 not blocked on basic-auth session
+header-PAT branch blocks: Redirect blocked (SSRF): Blocked IP address: 169.254.169.254 (non-global)
+```
+
+### Impact
+
+Basic auth and OAuth cover most production Atlassian Cloud deployments, so this affects the majority of HTTP-mode multi-user setups. An attacker with control over the Atlassian server can redirect MCP server requests to internal infrastructure — cloud metadata endpoints, internal Kubernetes API, databases, or any service reachable from the MCP server's network.
+
+The fix is one line per affected branch: pass `attach_ssrf_hook=True` to `_create_and_validate()` in branches 2 and 3, the same way branch 1 already does.

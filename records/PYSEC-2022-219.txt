@@ -1,0 +1,12 @@
+PYSEC-2022-219 PyPI/rootinteractive — The RootInteractive package in PyPI v0.0.5 to v0.0.19b0 was discovered to contain a code execution b
+package: rootinteractive
+ecosystem: PyPI
+versions affected:
+  >= 0.0.5, < 0.0.19 (ECOSYSTEM)
+aliases: CVE-2022-32997
+references:
+  https://github.com/miranov25/RootInteractive/issues/206
+  https://pypi.org/project/RootInteractive/
+  http://pypi.doubanio.com/simple/request
+
+The RootInteractive package in PyPI v0.0.5 to v0.0.19b0 was discovered to contain a code execution backdoor via the request package. This vulnerability allows attackers to access sensitive user information and digital currency keys, as well as escalate privileges.

@@ -1,0 +1,11 @@
+PYSEC-2025-224 PyPI/vtk — Kitware VTK (Visualization Toolkit) up to 9.5.0 is vulnerable to Buffer Overflow in vtkGLTFDocumentL
+package: vtk
+ecosystem: PyPI
+versions affected:
+  >= 0, < 9.5.1 (ECOSYSTEM)
+aliases: CVE-2025-57106
+references:
+  https://gitlab.kitware.com/vtk/vtk/-/issues/19733
+  https://gitlab.kitware.com/vtk/vtk/-/issues/19734
+
+Kitware VTK (Visualization Toolkit) up to 9.5.0 is vulnerable to Buffer Overflow in vtkGLTFDocumentLoader. The vulnerability occurs in the BufferDataExtractionWorker template function when processing GLTF accessor data.

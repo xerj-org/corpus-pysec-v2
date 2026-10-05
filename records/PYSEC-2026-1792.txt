@@ -1,0 +1,46 @@
+PYSEC-2026-1792 PyPI/picklescan — Picklescan is missing detection when calling built-in python ensurepip._run_pip
+package: picklescan
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.0.30 (ECOSYSTEM)
+aliases: CVE-2025-71344, GHSA-xp4f-hrf8-rxw7
+references:
+  https://github.com/mmaitre314/picklescan/security/advisories/GHSA-xp4f-hrf8-rxw7
+  https://github.com/mmaitre314/picklescan/commit/1931c2d04eaca8d20597705ff39cab78ba364e4b
+  https://github.com/mmaitre314/picklescan
+  https://pypi.org/project/picklescan
+  https://github.com/advisories/GHSA-xp4f-hrf8-rxw7
+  https://nvd.nist.gov/vuln/detail/CVE-2025-71344
+
+### Summary
+
+Using ensurepip._run_pip function, which is a built-in python library function to execute remote pickle file.
+
+### Details
+
+The attack payload executes in the following steps:
+
+First, the attacker craft the payload by calling to ensurepip._run_pip function in reduce method
+Then when the victim after checking whether the pickle file is safe by using Picklescan library and this library doesn't dectect any dangerous functions, decide to pickle.load() this malicious pickle file, thus lead to remote code execution.
+
+### PoC
+
+```
+from ensurepip import _run_pip
+
+class EvilEnsurepipRunpip:
+    def __reduce__(self):
+        payload = "[(__import__('os').system('whoami'),)]"
+        return _run_pip, (payload,)
+```
+
+### Impact
+
+Who is impacted? Any organization or individual relying on picklescan to detect malicious pickle files inside PyTorch models.
+What is the impact? Attackers can embed malicious code in pickle file that remains undetected but executes when the pickle file is loaded.
+Supply Chain Attack: Attackers can distribute infected pickle files across ML models, APIs, or saved Python objects.
+
+### Corresponding
+
+https://github.com/FredericDT
+https://github.com/Qhaoduoyu

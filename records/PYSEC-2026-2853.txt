@@ -1,0 +1,16 @@
+PYSEC-2026-2853 PyPI/openstack-cyborg — OpenStack Cyborg uses rule:allow (check_str='@') as the default policy for multiple API endpoints
+package: openstack-cyborg
+ecosystem: PyPI
+versions affected:
+  >= 0, < 16.0.1 (ECOSYSTEM)
+aliases: CVE-2026-40213, GHSA-mm7j-mhhj-hj36
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-40213
+  https://bugs.launchpad.net/openstack-cyborg/+bug/2143263
+  https://github.com/openstack/cyborg
+  https://security.openstack.org/ossa/OSSA-2026-011.html
+  https://www.openwall.com/lists/oss-security/2026/05/07/6
+  https://pypi.org/project/openstack-cyborg
+  https://github.com/advisories/GHSA-mm7j-mhhj-hj36
+
+OpenStack Cyborg before 16.0.1 uses rule:allow (check_str='@') as the default policy for multiple API endpoints. This unconditionally authorizes any request carrying a valid Keystone token regardless of roles, project membership, or scope. An authenticated user with zero role assignments can complete various actions such as reprogramming FPGA bitstreams on arbitrary compute nodes via agent RPC.

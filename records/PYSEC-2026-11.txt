@@ -1,0 +1,15 @@
+PYSEC-2026-11 PyPI/apache-airflow — Apache Airflow versions 3.1.0 through 3.1.6 contain an authorization flaw that can allow an authenti
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 3.1.0, < 3.1.7 (ECOSYSTEM)
+aliases: CVE-2026-22922, GHSA-pm44-x5x7-24c4
+references:
+  http://www.openwall.com/lists/oss-security/2026/02/09/2
+  https://lists.apache.org/thread/gdb7vffhpmrj5hp1j0oj1j13o4vmsq40
+  https://github.com/apache/airflow/pull/60412
+  https://github.com/advisories/GHSA-pm44-x5x7-24c4
+
+Apache Airflow versions 3.1.0 through 3.1.6 contain an authorization flaw that can allow an authenticated user with custom permissions limited to task access to view task logs without having task log access. 
+
+Users are recommended to upgrade to Apache Airflow 3.1.7 or later, which resolves this issue.

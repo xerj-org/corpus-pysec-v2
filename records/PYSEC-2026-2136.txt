@@ -1,0 +1,11 @@
+PYSEC-2026-2136 PyPI/copyparty — Copyparty is a portable file server. In versions prior to 1.20.9, an XSS allows for reflected cross-
+package: copyparty
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.20.9 (ECOSYSTEM)
+aliases: CVE-2026-27948, GHSA-62cr-6wp5-q43h
+references:
+  https://github.com/9001/copyparty/security/advisories/GHSA-62cr-6wp5-q43h
+  https://github.com/9001/copyparty/commit/31b2801fd041f803f4a3d5c12c7d7cb5419048bc
+
+Copyparty is a portable file server. In versions prior to 1.20.9, an XSS allows for reflected cross-site scripting via URL-parameter `?setck=...`. Version 1.20.9 fixes the issue.

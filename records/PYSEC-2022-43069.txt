@@ -1,0 +1,14 @@
+PYSEC-2022-43069 PyPI/apache-iotdb — Apache IoTDB version 0.13.0 is vulnerable by session id attack. Users should upgrade to version 0.13
+package: apache-iotdb
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.13.1 (ECOSYSTEM)
+aliases: CVE-2022-38369, GHSA-g6vm-3ch8-c6jq
+references:
+  https://lists.apache.org/thread/7nk03ywvx3t3yjbcxzt7zy4nyc89y9b0
+  https://lists.apache.org/thread/7nk03ywvx3t3yjbcxzt7zy4nyc89y9b0
+  http://www.openwall.com/lists/oss-security/2022/09/05/1
+  http://www.openwall.com/lists/oss-security/2022/09/05/1
+  https://github.com/advisories/GHSA-g6vm-3ch8-c6jq
+
+Apache IoTDB version 0.13.0 is vulnerable by session id attack. Users should upgrade to version 0.13.1 which addresses this issue.

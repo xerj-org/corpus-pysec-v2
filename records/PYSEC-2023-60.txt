@@ -1,0 +1,15 @@
+PYSEC-2023-60 PyPI/apache-airflow — Task instance details page in the UI is vulnerable to a stored XSS.This issue affects Apache Airflow
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.6.0 (ECOSYSTEM)
+aliases: CVE-2023-29247, GHSA-vcf6-3wv2-5vcr
+references:
+  https://github.com/apache/airflow/pull/30779
+  https://github.com/apache/airflow/pull/30447
+  https://lists.apache.org/thread/kqf5lxmko133780clsp827xfsh4xd3fl
+  https://github.com/advisories/GHSA-vcf6-3wv2-5vcr
+
+Task instance details page in the UI is vulnerable to a stored XSS.This issue affects Apache Airflow: before 2.6.0.
+
+

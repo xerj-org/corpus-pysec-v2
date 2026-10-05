@@ -1,0 +1,11 @@
+PYSEC-2024-25 PyPI/duckdb — DuckDB <=0.9.2 and DuckDB extension-template <=0.9.2 are vulnerable to malicious extension injection
+package: duckdb
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.9.3.dev6 (ECOSYSTEM)
+aliases: CVE-2024-22682
+references:
+  https://github.com/Tu0Laj1/database_test
+  https://github.com/Tu0Laj1/database_test
+
+DuckDB <=0.9.2 and DuckDB extension-template <=0.9.2 are vulnerable to malicious extension injection via the custom extension feature.

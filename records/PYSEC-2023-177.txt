@@ -1,0 +1,13 @@
+PYSEC-2023-177 PyPI/gevent — An issue in Gevent before version 23.9.0 allows a remote attacker to escalate privileges via a craft
+package: gevent
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2f53c851eaf926767fbac62385615efd4886221c (GIT: https://github.com/gevent/gevent)
+  >= 0, < 23.9.0 (ECOSYSTEM)
+aliases: CVE-2023-41419, GHSA-x7m3-jprg-wc5g
+references:
+  https://github.com/gevent/gevent/issues/1989
+  https://github.com/gevent/gevent/commit/2f53c851eaf926767fbac62385615efd4886221c
+  https://github.com/advisories/GHSA-x7m3-jprg-wc5g
+
+An issue in Gevent before version 23.9.0 allows a remote attacker to escalate privileges via a crafted script to the WSGIServer component.

@@ -1,0 +1,15 @@
+PYSEC-2023-35 PyPI/modoboa — Improper Authorization in GitHub repository modoboa/modoboa prior to 2.1.0.
+package: modoboa
+ecosystem: PyPI
+versions affected:
+  >= 0, < 7bcd3f6eb264d4e3e01071c97c2bac51cdd6fe97 (GIT: https://github.com/modoboa/modoboa)
+  >= 0, < 2.1.0 (ECOSYSTEM)
+aliases: CVE-2023-2227, GHSA-67mg-gm8m-ph5r
+references:
+  https://github.com/modoboa/modoboa/commit/7bcd3f6eb264d4e3e01071c97c2bac51cdd6fe97
+  https://huntr.dev/bounties/351f9055-2008-4af0-b820-01ff66678bf3
+  https://huntr.dev/bounties/351f9055-2008-4af0-b820-01ff66678bf3
+  https://huntr.dev/bounties/351f9055-2008-4af0-b820-01ff66678bf3
+  https://github.com/advisories/GHSA-67mg-gm8m-ph5r
+
+Improper Authorization in GitHub repository modoboa/modoboa prior to 2.1.0.

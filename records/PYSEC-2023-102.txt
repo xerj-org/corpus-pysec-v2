@@ -1,0 +1,16 @@
+PYSEC-2023-102 PyPI/scipy — A refcounting issue which leads to potential memory leak was discovered in scipy commit 8627df31ab i
+package: scipy
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.10.0 (ECOSYSTEM)
+aliases: CVE-2023-25399, GHSA-9jx5-6pgf-crrp
+references:
+  https://github.com/scipy/scipy/issues/16235
+  https://github.com/scipy/scipy/issues/16235
+  https://github.com/scipy/scipy/issues/16235
+  https://github.com/scipy/scipy/issues/16235
+  https://github.com/scipy/scipy/pull/16397
+  http://www.square16.org/achievement/cve-2023-25399/
+  https://github.com/advisories/GHSA-9jx5-6pgf-crrp
+
+A refcounting issue which leads to potential memory leak was discovered in scipy commit 8627df31ab in Py_FindObjects() function.

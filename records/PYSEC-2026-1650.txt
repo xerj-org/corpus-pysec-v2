@@ -1,0 +1,14 @@
+PYSEC-2026-1650 PyPI/mlflow — mlflow Path Traversal vulnerability
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.12.1 (ECOSYSTEM)
+aliases: CVE-2024-1483, GHSA-f82r-jj5r-6g97
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-1483
+  https://github.com/mlflow/mlflow
+  https://huntr.com/bounties/52a3855d-93ff-4460-ac24-9c7e4334198d
+  https://pypi.org/project/mlflow
+  https://github.com/advisories/GHSA-f82r-jj5r-6g97
+
+A path traversal vulnerability exists in mlflow/mlflow version 2.9.2, allowing attackers to access arbitrary files on the server. By crafting a series of HTTP POST requests with specially crafted 'artifact_location' and 'source' parameters, using a local URI with '#' instead of '?', an attacker can traverse the server's directory structure. The issue occurs due to insufficient validation of user-supplied input in the server's handlers.

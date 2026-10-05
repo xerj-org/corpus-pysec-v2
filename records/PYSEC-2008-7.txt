@@ -1,0 +1,15 @@
+PYSEC-2008-7 PyPI/trac — Unspecified vulnerability in the HTML sanitizer filter in Trac before 0.11.2 allows attackers to con
+package: trac
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.11.2 (ECOSYSTEM)
+aliases: CVE-2008-5647, GHSA-ww53-wxxr-8f9w
+references:
+  http://www.securityfocus.com/bid/32226
+  http://secunia.com/advisories/32652
+  http://trac.edgewall.org/wiki/ChangeLog
+  http://www.vupen.com/english/advisories/2008/3080
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/46491
+  https://github.com/advisories/GHSA-ww53-wxxr-8f9w
+
+Unspecified vulnerability in the HTML sanitizer filter in Trac before 0.11.2 allows attackers to conduct phishing attacks via unknown attack vectors.

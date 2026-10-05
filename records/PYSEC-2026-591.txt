@@ -1,0 +1,18 @@
+PYSEC-2026-591 PyPI/funcdesc — Malicious code in funcdesc (PyPI)
+package: funcdesc
+ecosystem: PyPI
+versions affected:
+  0.2.2, 0.2.3
+aliases: MAL-2026-5300
+references:
+  https://inspector.pypi.io/project/funcdesc/0.2.3/packages/ee/07/a3a5d522d90245b00ba11d6f40608c46ce63b4dad69e51f1a197323c4053/funcdesc-0.2.3-py3-none-any.whl//funcdesc-setup.pth
+  https://www.endorlabs.com/learn/shai-hulud-hades-wave-hits-six-pypi-bioinformatics-packages
+  https://www.stepsecurity.io/blog/the-hades-campaign-pypi-pack
+
+Part of the "Hades" wave of the Shai-Hulud supply-chain campaign. On 2026-06-08,
+malicious phantom releases of funcdesc were published to PyPI using stolen
+credentials. The package executes a bundled JavaScript payload (via the Bun
+runtime) on import that harvests and exfiltrates credentials and attempts
+self-propagation. This entry is a summary; behavior may not be fully
+characterized here. See the linked references for detailed analysis and
+indicators of compromise.

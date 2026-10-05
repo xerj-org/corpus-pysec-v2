@@ -1,0 +1,13 @@
+PYSEC-2026-115 PyPI/pycti — OpenCTI 3.3.1 is vulnerable to a reflected cross-site scripting (XSS) attack via the /graphql endpoi
+package: pycti
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 3.3.1 (ECOSYSTEM)
+aliases: CVE-2020-37044
+references:
+  https://www.opencti.io/
+  https://www.vulncheck.com/advisories/opencti-cross-site-scripting
+  https://github.com/OpenCTI-Platform/opencti
+  https://www.exploit-db.com/exploits/48595
+
+OpenCTI 3.3.1 is vulnerable to a reflected cross-site scripting (XSS) attack via the /graphql endpoint. An attacker can inject arbitrary JavaScript code by sending a crafted GET request with a malicious payload in the query string, leading to execution of JavaScript in the victim's browser. For example, a request to /graphql?'"--></style></scRipt><scRipt>alert('Raif_Berkay')</scRipt> will trigger an alert. This vulnerability was discovered by Raif Berkay Dincel and confirmed on Linux Mint and Windows 10.

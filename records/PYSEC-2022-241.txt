@@ -1,0 +1,12 @@
+PYSEC-2022-241 PyPI/eziod — The eziod package in PyPI before v0.0.1 included a code execution backdoor inserted by a third party
+package: eziod
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.0.2 (ECOSYSTEM)
+aliases: CVE-2022-34982
+references:
+  https://pypi.org/project/eziod/
+  http://pypi.doubanio.com/simple/request
+  https://github.com/alexw994/eziod/issues/1
+
+The eziod package in PyPI before v0.0.1 included a code execution backdoor inserted by a third party.

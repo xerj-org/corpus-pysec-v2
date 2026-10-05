@@ -1,0 +1,16 @@
+PYSEC-2020-213 PyPI/tornado — Tornado before 3.2.2 sends arbitrary responses that contain a fixed CSRF token and may be sent with 
+package: tornado
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1c36307463b1e8affae100bf9386948e6c1b2308 (GIT: https://github.com/tornadoweb/tornado)
+  >= 0, < 3.2.2 (ECOSYSTEM)
+aliases: CVE-2014-9720, GHSA-8vpw-mgpf-mpvv
+references:
+  https://github.com/tornadoweb/tornado/commit/1c36307463b1e8affae100bf9386948e6c1b2308
+  https://bugzilla.novell.com/show_bug.cgi?id=930362
+  http://openwall.com/lists/oss-security/2015/05/19/4
+  https://bugzilla.redhat.com/show_bug.cgi?id=1222816
+  http://www.tornadoweb.org/en/stable/releases/v3.2.2.html
+  https://github.com/advisories/GHSA-8vpw-mgpf-mpvv
+
+Tornado before 3.2.2 sends arbitrary responses that contain a fixed CSRF token and may be sent with HTTP compression, which makes it easier for remote attackers to conduct a BREACH attack and determine this token via a series of crafted requests.

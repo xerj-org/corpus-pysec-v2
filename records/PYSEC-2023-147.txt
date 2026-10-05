@@ -1,0 +1,14 @@
+PYSEC-2023-147 PyPI/langchain — An issue in langchain langchain-ai v.0.0.232 and before allows a remote attacker to execute arbitrar
+package: langchain
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.0.233 (ECOSYSTEM)
+aliases: CVE-2023-39659, GHSA-prgp-w7vf-ch62
+references:
+  https://github.com/langchain-ai/langchain/issues/7700
+  https://github.com/langchain-ai/langchain/issues/7700
+  https://github.com/langchain-ai/langchain/pull/5640
+  https://github.com/langchain-ai/langchain/pull/5640
+  https://github.com/advisories/GHSA-prgp-w7vf-ch62
+
+An issue in langchain langchain-ai v.0.0.232 and before allows a remote attacker to execute arbitrary code via a crafted script to the PythonAstREPLTool._run component.

@@ -1,0 +1,39 @@
+PYSEC-2026-4013 PyPI/virtualenv — virtualenv bash and fish activation scripts execute commands embedded in paths
+package: virtualenv
+ecosystem: PyPI
+versions affected:
+  >= 0, < 21.7.13 (ECOSYSTEM)
+aliases: CVE-2026-102925, GHSA-p58f-9548-mpm2
+references:
+  https://github.com/pypa/virtualenv/security/advisories/GHSA-p58f-9548-mpm2
+  https://github.com/pypa/virtualenv/pull/3252
+  https://github.com/pypa/virtualenv/commit/4d5a105ec2a2723b8c7f4571bb68f4f71d01e3f6
+  https://github.com/pypa/virtualenv/releases/tag/21.7.13
+  https://github.com/pypa/virtualenv
+  https://pypi.org/project/virtualenv
+
+The generated `activate` (bash/zsh) and `activate.fish` scripts interpolate a
+`shlex.quote`-ed value into a position that quotes it a second time. The extra
+quotes terminate the quoted run early and leave part of the value parsed as
+shell code, so a path containing shell metacharacters runs commands when a user
+sources the activation script.
+
+`activate` is affected through the virtual environment's own path, on the branch
+that reports a relocated environment (`Virtual environment directory
+__VIRTUAL_ENV__ does not exist!`). For a destination named `x'$(id)'y`,
+`shlex.quote` emits `'x'"'"'$(id)'"'"'y'`; the inner `"` closes the enclosing
+double quote and `$(id)` is left unquoted. This branch runs whenever the
+recorded path is absent, which is the normal case for a virtual environment
+copied or distributed to another machine.
+
+`activate.fish` is affected through the interpreter's Tcl/Tk library paths
+(`set -gx TCL_LIBRARY '__TCL_LIBRARY__'`). The rendered line becomes
+`''/tcl/(cmd)/lib''`, and fish expands the `(cmd)` left between the adjacent
+quoted runs. The same doubling splits a path containing a space into two list
+elements, corrupting `TCL_LIBRARY` and `TK_LIBRARY`.
+
+This is the same defect class as GHSA-x78j-v8h9-3j2q, which covered
+`activate.bat`.
+
+Fixed in 21.7.13 by moving the placeholders outside the surrounding quotes, so
+each value keeps only the quoting `shlex.quote` applied.

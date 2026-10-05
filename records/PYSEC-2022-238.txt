@@ -1,0 +1,13 @@
+PYSEC-2022-238 PyPI/codecov — This affects the package codecov before 2.0.16. The vulnerability occurs due to not sanitizing gcov 
+package: codecov
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2a80aa434f74feb31242b6f213b75ce63ae97902 (GIT: https://github.com/codecov/codecov-python)
+  >= 0, < 2.0.16 (ECOSYSTEM)
+aliases: CVE-2019-10800, SNYK-PYTHON-CODECOV-552149, GHSA-h3qr-fjhm-jphw
+references:
+  https://snyk.io/vuln/SNYK-PYTHON-CODECOV-552149
+  https://github.com/codecov/codecov-python/commit/2a80aa434f74feb31242b6f213b75ce63ae97902
+  https://github.com/advisories/GHSA-h3qr-fjhm-jphw
+
+This affects the package codecov before 2.0.16. The vulnerability occurs due to not sanitizing gcov arguments before being being provided to the popen method.

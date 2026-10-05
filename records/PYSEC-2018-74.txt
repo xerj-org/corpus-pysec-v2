@@ -1,0 +1,12 @@
+PYSEC-2018-74 PyPI/superset — Versions of Superset prior to 0.23 used an unsafe load method from the pickle library to deserialize
+package: superset
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.23.0 (ECOSYSTEM)
+aliases: CVE-2018-8021, GHSA-vxp9-wv2f-wqmw
+references:
+  https://github.com/apache/incubator-superset/pull/4243
+  https://www.exploit-db.com/exploits/45933/
+  https://github.com/advisories/GHSA-vxp9-wv2f-wqmw
+
+Versions of Superset prior to 0.23 used an unsafe load method from the pickle library to deserialize data leading to possible remote code execution. Note Superset 0.23 was released prior to any Superset release under the Apache Software Foundation.

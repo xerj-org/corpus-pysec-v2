@@ -1,0 +1,13 @@
+PYSEC-2026-57 PyPI/dokuwiki — DokuWiki 2018-04-22b contains a username enumeration vulnerability in its password reset functionali
+package: dokuwiki
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 2018-04-22b (ECOSYSTEM)
+aliases: CVE-2019-25338
+references:
+  https://download.dokuwiki.org/
+  https://www.dokuwiki.org/dokuwiki
+  https://www.vulncheck.com/advisories/dokuwiki-b-username-enumeration
+  https://www.exploit-db.com/exploits/47731
+
+DokuWiki 2018-04-22b contains a username enumeration vulnerability in its password reset functionality that allows attackers to identify valid user accounts. Attackers can submit different usernames to the password reset endpoint and distinguish between existing and non-existing accounts by analyzing the server's error response messages.

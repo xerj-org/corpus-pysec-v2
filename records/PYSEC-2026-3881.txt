@@ -1,0 +1,16 @@
+PYSEC-2026-3881 PyPI/openharness-ai — OpenHarness remote resume commands expose other users' saved session snapshots
+package: openharness-ai
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.1.9 (ECOSYSTEM)
+aliases: CVE-2026-56695, GHSA-399c-3gm2-p29v
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-56695
+  https://github.com/HKUDS/OpenHarness/pull/276
+  https://github.com/HKUDS/OpenHarness/commit/92e298852c9b9c8c2266236292073623418c640a
+  https://github.com/HKUDS/OpenHarness
+  https://www.vulncheck.com/advisories/openharness-cross-session-disclosure-via-resume-and-summary-commands
+  https://pypi.org/project/openharness-ai
+  https://github.com/advisories/GHSA-399c-3gm2-p29v
+
+OpenHarness ohmo gateway /resume and /summary slash commands default remote_invocable to True, allowing admitted remote senders to enumerate and load arbitrary session snapshots by ID. Attackers can exploit this to access victim snapshots containing private prompts, credentials, tool output, and file paths via shared gateway channels.

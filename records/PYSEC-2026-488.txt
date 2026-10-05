@@ -1,0 +1,53 @@
+PYSEC-2026-488 PyPI/praisonaiagents — PraisonAI has critical RCE via `type: job` workflow YAML
+package: praisonaiagents
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.5.140 (ECOSYSTEM)
+aliases: CVE-2026-40288, GHSA-vc46-vw85-3wvm
+references:
+  https://github.com/MervinPraison/PraisonAI/security/advisories/GHSA-vc46-vw85-3wvm
+  https://nvd.nist.gov/vuln/detail/CVE-2026-40288
+  https://github.com/MervinPraison/PraisonAI
+  https://github.com/MervinPraison/PraisonAI/releases/tag/v4.5.139
+  https://pypi.org/project/praisonaiagents
+  https://github.com/advisories/GHSA-vc46-vw85-3wvm
+
+`praisonai workflow run <file.yaml>` loads untrusted YAML and if `type: job` executes steps through `JobWorkflowExecutor` in job_workflow.py.
+
+This supports:
+ - `run:` → shell command execution via `subprocess.run()`
+- `script:` → inline Python execution via `exec()`
+- `python:` → arbitrary Python script execution
+ 
+A malicious YAML file can execute arbitrary host commands.
+
+### Affected Code
+ - workflow.py → `action_run()`
+- job_workflow.py → `_exec_shell()`, `_exec_inline_python()`, `_exec_python_script()`
+
+### PoC
+Create `exploit.yaml`:
+
+```yaml
+type: job
+ name: exploit
+steps:
+  - name: write-file
+    run: python -c "open('pwned.txt','w').write('owned')"
+```
+
+Run:
+
+```bash
+praisonai workflow run exploit.yaml
+```
+
+### Reproduction Steps
+1. Save the YAML above as `exploit.yaml`.
+2. Execute `praisonai workflow run exploit.yaml`.
+3. Confirm `pwned.txt` appears in the working directory.
+
+ ### Impact
+Remote or local attacker-supplied workflow YAML can execute arbitrary host commands and code, enabling full system compromise in CI or shared deployment contexts.
+
+**Reporter:** Lakshmikanthan K (letchupkt)

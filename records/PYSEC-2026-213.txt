@@ -1,0 +1,11 @@
+PYSEC-2026-213 PyPI/daphne — daphne before 4.2.2 did not pass maxFramePayloadSize or maxMessagePayloadSize to Autobahn's WebSocke
+package: daphne
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.2.2 (ECOSYSTEM)
+aliases: CVE-2026-44545, GHSA-rrc9-mx66-ffcm
+references:
+  https://github.com/django/daphne/blob/main/CHANGELOG.txt
+  https://github.com/advisories/GHSA-rrc9-mx66-ffcm
+
+daphne before 4.2.2 did not pass maxFramePayloadSize or maxMessagePayloadSize to Autobahn's WebSocketServerFactory. Because Autobahn defaults both values to 0 (unlimited), an unauthenticated remote attacker could send arbitrarily large WebSocket messages or frames, causing excessive memory consumption and a denial of service.

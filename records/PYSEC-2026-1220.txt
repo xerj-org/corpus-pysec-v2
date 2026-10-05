@@ -1,0 +1,17 @@
+PYSEC-2026-1220 PyPI/bigflow — Allegro Tech BigFlow vulnerable to Missing SSL Certificate Validation
+package: bigflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.6.0 (ECOSYSTEM)
+aliases: CVE-2023-25392, GHSA-w6q2-48ch-fj26
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-25392
+  https://github.com/allegro/bigflow/pull/357
+  https://github.com/allegro/bigflow/commit/4ce197ff99bd38693dea59ab5e9b781fbcef4276
+  https://github.com/allegro/bigflow/commit/7e956661f76907594e8c82e8fb0af76dbea2a0fc
+  https://github.com/allegro/bigflow
+  https://lutrasecurity.com/en/articles/cve-2023-25392
+  https://pypi.org/project/bigflow
+  https://github.com/advisories/GHSA-w6q2-48ch-fj26
+
+Allegro Tech BigFlow prior to 1.6.0 is vulnerable to Missing SSL Certificate Validation.

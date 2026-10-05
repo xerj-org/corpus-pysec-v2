@@ -1,0 +1,15 @@
+PYSEC-2026-445 PyPI/paddlepaddle — PaddlePaddle vulnerable to remote code execution
+package: paddlepaddle
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 2.6.0 (ECOSYSTEM)
+aliases: CVE-2024-0917, GHSA-mrmm-qmrj-xgp6
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-0917
+  https://github.com/PaddlePaddle/Paddle
+  https://github.com/PaddlePaddle/Paddle/blob/develop/python/paddle/distributed/fleet/utils/fs.py#L723
+  https://huntr.com/bounties/2d840735-e255-4700-9709-6f7361829119
+  https://pypi.org/project/paddlepaddle
+  https://github.com/advisories/GHSA-mrmm-qmrj-xgp6
+
+remote code execution in paddlepaddle/paddle 2.6.0

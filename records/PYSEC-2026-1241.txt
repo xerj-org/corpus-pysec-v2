@@ -1,0 +1,20 @@
+PYSEC-2026-1241 PyPI/changedetection-io — ChangeDetection.io XSS in watch overview
+package: changedetection-io
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.50.4 (ECOSYSTEM)
+aliases: CVE-2025-52558, GHSA-hwpg-x5hw-vpv9
+references:
+  https://github.com/dgtlmoon/changedetection.io/security/advisories/GHSA-hwpg-x5hw-vpv9
+  https://nvd.nist.gov/vuln/detail/CVE-2025-52558
+  https://github.com/dgtlmoon/changedetection.io/commit/3d5a544ea674cfce517adcd498877a8d760d0931
+  https://github.com/dgtlmoon/changedetection.io
+  https://pypi.org/project/changedetection-io
+  https://github.com/advisories/GHSA-hwpg-x5hw-vpv9
+
+### Impact
+XSS - Errors in filters from website page change detection watches were not being filtered.
+
+### Patches
+
+0.50.4

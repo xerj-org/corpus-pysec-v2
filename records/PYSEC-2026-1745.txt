@@ -1,0 +1,21 @@
+PYSEC-2026-1745 PyPI/opencolorio — AcademySoftwareFoundation OpenColorIO has an out-of-bounds vulnerability
+package: opencolorio
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.5.1 (ECOSYSTEM)
+aliases: CVE-2025-15506, GHSA-m86r-wr74-693h
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-15506
+  https://github.com/AcademySoftwareFoundation/OpenColorIO/issues/2228
+  https://github.com/AcademySoftwareFoundation/OpenColorIO/pull/2231
+  https://github.com/cozdas/OpenColorIO/commit/ebdbb75123c9d5f4643e041314e2bc988a13f20d
+  https://github.com/AcademySoftwareFoundation/OpenColorIO
+  https://github.com/AcademySoftwareFoundation/OpenColorIO/milestone/11
+  https://github.com/oneafter/1225/blob/main/uaf
+  https://vuldb.com/?ctiid.340444
+  https://vuldb.com/?id.340444
+  https://vuldb.com/?submit.733332
+  https://pypi.org/project/opencolorio
+  https://github.com/advisories/GHSA-m86r-wr74-693h
+
+A vulnerability was found in AcademySoftwareFoundation OpenColorIO up to 2.5.0. This issue affects the function ConvertToRegularExpression of the file src/OpenColorIO/FileRules.cpp. Performing a manipulation results in out-of-bounds read. The attack needs to be approached locally. The exploit has been made public and could be used. The patch is named ebdbb75123c9d5f4643e041314e2bc988a13f20d. To fix this issue, it is recommended to deploy a patch. The fix was added to the 2.5.1 milestone.

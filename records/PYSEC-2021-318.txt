@@ -1,0 +1,11 @@
+PYSEC-2021-318 PyPI/salt — An issue was discovered in SaltStack Salt before 3003.3. A user who has control of the source, and s
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3003.3 (ECOSYSTEM)
+aliases: CVE-2021-21996, GHSA-pf7h-h2wq-m7pg
+references:
+  https://saltproject.io/security_announcements/salt-security-advisory-2021-sep-02/
+  https://github.com/advisories/GHSA-pf7h-h2wq-m7pg
+
+An issue was discovered in SaltStack Salt before 3003.3. A user who has control of the source, and source_hash URLs can gain full file system access as root on a salt minion.

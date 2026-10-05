@@ -1,0 +1,17 @@
+PYSEC-2026-1283 PyPI/cryptography — Python Cryptography package vulnerable to Bleichenbacher timing oracle attack
+package: cryptography
+ecosystem: PyPI
+versions affected:
+  >= 0, < 42.0.0 (ECOSYSTEM)
+aliases: CVE-2023-50782, GHSA-3ww4-gg4f-jr7f
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-50782
+  https://github.com/pyca/cryptography/issues/9785
+  https://access.redhat.com/security/cve/CVE-2023-50782
+  https://bugzilla.redhat.com/show_bug.cgi?id=2254432
+  https://github.com/pyca/cryptography
+  https://www.couchbase.com/alerts
+  https://pypi.org/project/cryptography
+  https://github.com/advisories/GHSA-3ww4-gg4f-jr7f
+
+A flaw was found in the python-cryptography package. This issue may allow a remote attacker to decrypt captured messages in TLS servers that use RSA key exchanges, which may lead to exposure of confidential or sensitive data.

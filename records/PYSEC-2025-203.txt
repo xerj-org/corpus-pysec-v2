@@ -1,0 +1,11 @@
+PYSEC-2025-203 PyPI/torch — An issue in the component torch.linalg.lu of pytorch v2.8.0 allows attackers to cause a Denial of Se
+package: torch
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.9.0 (ECOSYSTEM)
+aliases: CVE-2025-55551
+references:
+  https://gist.github.com/shaoyuyoung/0e7d2a586297ae9c8ed14d8706749efc
+  https://github.com/pytorch/pytorch/issues/151401
+
+An issue in the component torch.linalg.lu of pytorch v2.8.0 allows attackers to cause a Denial of Service (DoS) when performing a slice operation.

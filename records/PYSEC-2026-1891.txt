@@ -1,0 +1,16 @@
+PYSEC-2026-1891 PyPI/salt — Path traversal in saltstack
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3005.5, >= 3006.0, < 3006.6 (ECOSYSTEM)
+aliases: CVE-2024-22232, GHSA-2qw3-2wv6-p64x
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-22232
+  https://github.com/saltstack/salt/commit/e0cdb80b55123f4a024759ffcf2b3f0e0788e7ab
+  https://github.com/saltstack/salt
+  https://saltproject.io/security-announcements/2024-01-31-advisory
+  https://pypi.org/project/salt
+  https://github.com/advisories/GHSA-2qw3-2wv6-p64x
+
+A specially crafted url can be created which leads to a directory traversal in the salt file server.
+A malicious user can read an arbitrary file from a Salt master’s filesystem.

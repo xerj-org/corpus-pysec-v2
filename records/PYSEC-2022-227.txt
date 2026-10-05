@@ -1,0 +1,18 @@
+PYSEC-2022-227 PyPI/bottle — Bottle before 0.12.20 mishandles errors during early request binding.
+package: bottle
+ecosystem: PyPI
+versions affected:
+  >= 0, < e140e1b54da721a660f2eb9d58a106b7b3ff2f00, < a2b0ee6bb4ce88895429ec4aca856616244c4c4c (GIT: https://github.com/bottlepy/bottle)
+  >= 0, < 0.12.20 (ECOSYSTEM)
+aliases: CVE-2022-31799, GHSA-xhp9-4947-rq78
+references:
+  https://github.com/bottlepy/bottle/compare/0.12.19...0.12.20
+  https://github.com/bottlepy/bottle/commit/e140e1b54da721a660f2eb9d58a106b7b3ff2f00
+  https://github.com/bottlepy/bottle/commit/a2b0ee6bb4ce88895429ec4aca856616244c4c4c
+  https://lists.debian.org/debian-lts-announce/2022/06/msg00010.html
+  https://www.debian.org/security/2022/dsa-5159
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/IE7U6J45PUEXIYYVWJKPM6QXIRKDK4HD/
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/KTLOQGMDZEPIYTFC2G53OQV2ULCGYS3F/
+  https://github.com/advisories/GHSA-xhp9-4947-rq78
+
+Bottle before 0.12.20 mishandles errors during early request binding.

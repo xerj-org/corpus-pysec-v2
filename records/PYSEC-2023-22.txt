@@ -1,0 +1,14 @@
+PYSEC-2023-22 PyPI/mailman — An issue was discovered in Mailman Core before 3.3.5. An attacker with access to the REST API could 
+package: mailman
+ecosystem: PyPI
+versions affected:
+  >= 0, < e4a39488c4510fcad8851217f10e7337a196bb51 (GIT: https://gitlab.com/mailman/mailman)
+  >= 0, < 3.3.5 (ECOSYSTEM)
+aliases: CVE-2021-34337, GHSA-2jg5-xgvv-4wq7
+references:
+  https://gitlab.com/mailman/mailman/-/commit/e4a39488c4510fcad8851217f10e7337a196bb51
+  https://gitlab.com/mailman/mailman/-/tags
+  https://gitlab.com/mailman/mailman/-/issues/911
+  https://github.com/advisories/GHSA-2jg5-xgvv-4wq7
+
+An issue was discovered in Mailman Core before 3.3.5. An attacker with access to the REST API could use timing attacks to determine the value of the configured REST API password and then make arbitrary REST API calls. The REST API is bound to localhost by default, limiting the ability for attackers to exploit this, but can optionally be made to listen on other interfaces.

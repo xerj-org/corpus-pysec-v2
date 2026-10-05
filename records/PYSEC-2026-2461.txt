@@ -1,0 +1,22 @@
+PYSEC-2026-2461 PyPI/dtale — D-Tale affected by Remote Code Execution through the /save-column-filter endpoint
+package: dtale
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.20.0 (ECOSYSTEM)
+aliases: CVE-2026-27194, GHSA-c87c-78rc-vmv2
+references:
+  https://github.com/man-group/dtale/security/advisories/GHSA-c87c-78rc-vmv2
+  https://nvd.nist.gov/vuln/detail/CVE-2026-27194
+  https://github.com/man-group/dtale/commit/431c6148d3c799de20e1dec86c4432f48e3d0746
+  https://github.com/man-group/dtale
+  https://pypi.org/project/dtale
+  https://github.com/advisories/GHSA-c87c-78rc-vmv2
+
+### Impact
+Users hosting D-Tale publicly can be vulnerable to remote code execution allowing attackers to run malicious code on the server.
+
+### Patches
+Users should upgrade to version 3.20.0.
+
+### Workarounds
+There are no workarounds for versions < 3.20.0

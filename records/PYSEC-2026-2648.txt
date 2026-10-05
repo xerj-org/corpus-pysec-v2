@@ -1,0 +1,17 @@
+PYSEC-2026-2648 PyPI/mindsdb — MindsDB has an Improper Access Control Issue
+package: mindsdb
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 26.0.1 (ECOSYSTEM)
+aliases: CVE-2026-7711, GHSA-9f6m-65v9-x9g2
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-7711
+  https://github.com/mindsdb/mindsdb
+  https://github.com/nn0nkey/JD-Security-SHENYI-Team/blob/main/MindsDB_BYOM_RCE.md
+  https://vuldb.com/submit/806822
+  https://vuldb.com/vuln/360887
+  https://vuldb.com/vuln/360887/cti
+  https://pypi.org/project/mindsdb
+  https://github.com/advisories/GHSA-9f6m-65v9-x9g2
+
+A weakness has been identified in MindsDB up to 26.01. This impacts the function exec of the file mindsdb/integrations/handlers/byom_handler/proc_wrapper.py of the component Engine Handler. Executing a manipulation can lead to unrestricted upload. The attack can be executed remotely. The exploit has been made available to the public and could be used for attacks. The vendor was contacted early about this disclosure but did not respond in any way.

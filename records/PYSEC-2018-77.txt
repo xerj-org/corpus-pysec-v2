@@ -1,0 +1,12 @@
+PYSEC-2018-77 PyPI/tryton — The client in Tryton 5.x before 5.0.1 tries to make a connection to the bus in cleartext instead of 
+package: tryton
+ecosystem: PyPI
+versions affected:
+  >= 5.0.0, < 5.0.1 (ECOSYSTEM)
+aliases: CVE-2018-19443, GHSA-32w7-9whp-cjp9
+references:
+  https://discuss.tryton.org/t/security-release-for-issue7792/830
+  https://bugs.tryton.org/issue7792
+  https://github.com/advisories/GHSA-32w7-9whp-cjp9
+
+The client in Tryton 5.x before 5.0.1 tries to make a connection to the bus in cleartext instead of encrypted under certain circumstances in bus.py and jsonrpc.py. This connection attempt fails, but it contains in the header the current session of the user. This session could then be stolen by a man-in-the-middle.

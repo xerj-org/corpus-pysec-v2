@@ -1,0 +1,16 @@
+PYSEC-2026-55 PyPI/django — An issue was discovered in 6.0 before 6.0.5 and 5.2 before 5.2.14. `django.middleware.cache.UpdateCa
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 5.2, < 5.2.14, >= 6.0, < 6.0.5 (ECOSYSTEM)
+aliases: CVE-2026-6907, GHSA-5hrc-gvxj-w55p
+references:
+  https://docs.djangoproject.com/en/dev/releases/security/
+  https://groups.google.com/g/django-announce
+  https://www.djangoproject.com/weblog/2026/may/05/security-releases/
+  https://github.com/advisories/GHSA-5hrc-gvxj-w55p
+
+An issue was discovered in 6.0 before 6.0.5 and 5.2 before 5.2.14.
+`django.middleware.cache.UpdateCacheMiddleware` erroneously caches requests where the `Vary` header contained an asterisk (`'*'`). This can lead to private data being stored and served.
+Earlier, unsupported Django series (such as 5.0.x, 4.1.x, and 3.2.x) were not evaluated and may also be affected.
+Django would like to thank Ahmad Sadeddin for reporting this issue.

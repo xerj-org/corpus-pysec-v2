@@ -1,0 +1,14 @@
+PYSEC-2026-3070 PyPI/snorkel — Snorkel MultitaskClassifier.load uses an unsafe torch.load
+package: snorkel
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.10.0 (ECOSYSTEM)
+aliases: CVE-2026-31224, GHSA-gpx5-7xm4-229w
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-31224
+  https://github.com/snorkel-team/snorkel
+  https://www.notion.so/CVE-2026-31224-35d1e1393188814185f3f6db86c9a4e9
+  https://pypi.org/project/snorkel
+  https://github.com/advisories/GHSA-gpx5-7xm4-229w
+
+The snorkel library thru v0.10.0 contains an insecure deserialization vulnerability (CWE-502) in the MultitaskClassifier.load() method of the MultitaskClassifier class. The method loads model weight files using torch.load() without enabling the security-restrictive weights_only=True parameter. This default behavior allows the deserialization of arbitrary Python objects via the Pickle module. A remote attacker can exploit this by providing a maliciously crafted model file, leading to arbitrary code execution on the victim's system when the file is loaded via the vulnerable method.

@@ -1,0 +1,18 @@
+PYSEC-2026-593 PyPI/magique-ai — Malicious code in magique-ai (PyPI)
+package: magique-ai
+ecosystem: PyPI
+versions affected:
+  0.4.4, 0.4.5
+aliases: MAL-2026-5294
+references:
+  https://inspector.pypi.io/project/magique-ai/0.4.5/packages/33/51/f36b85977bd09b12a88aff94531b608659312497c8856b73353603f11405/magique_ai-0.4.5-py3-none-any.whl//magique_ai-setup.pth
+  https://www.endorlabs.com/learn/shai-hulud-hades-wave-hits-six-pypi-bioinformatics-packages
+  https://www.stepsecurity.io/blog/the-hades-campaign-pypi-pack
+
+Part of the "Hades" wave of the Shai-Hulud supply-chain campaign. On 2026-06-08,
+malicious phantom releases of magique-ai were published to PyPI using stolen
+credentials. The package executes a bundled JavaScript payload (via the Bun
+runtime) on import that harvests and exfiltrates credentials and attempts
+self-propagation. This entry is a summary; behavior may not be fully
+characterized here. See the linked references for detailed analysis and
+indicators of compromise.

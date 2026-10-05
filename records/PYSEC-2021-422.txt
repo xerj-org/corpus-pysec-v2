@@ -1,0 +1,11 @@
+PYSEC-2021-422 PyPI/botframework-connector — Bot Framework SDK Information Disclosure Vulnerability
+package: botframework-connector
+ecosystem: PyPI
+versions affected:
+  >= 4.7.0, < 4.7.2, >= 4.8.0, < 4.8.1, >= 4.9.0, < 4.9.3, >= 4.10.0, < 4.10.1 (ECOSYSTEM)
+aliases: CVE-2021-1725, GHSA-cqff-fx2x-p86v
+references:
+  https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2021-1725
+  https://github.com/microsoft/botbuilder-python/security/advisories/GHSA-cqff-fx2x-p86v
+
+Bot Framework SDK Information Disclosure Vulnerability

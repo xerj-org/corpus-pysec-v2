@@ -1,0 +1,14 @@
+PYSEC-2013-17 PyPI/django — The form library in Django 1.3.x before 1.3.6, 1.4.x before 1.4.4, and 1.5 before release candidate 
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 1.3, < 1.3.6, >= 1.4, < 1.4.4 (ECOSYSTEM)
+aliases: CVE-2013-0306, GHSA-g8xg-jgj6-49r3
+references:
+  https://www.djangoproject.com/weblog/2013/feb/19/security/
+  http://www.debian.org/security/2013/dsa-2634
+  http://ubuntu.com/usn/usn-1757-1
+  http://rhn.redhat.com/errata/RHSA-2013-0670.html
+  https://github.com/advisories/GHSA-g8xg-jgj6-49r3
+
+The form library in Django 1.3.x before 1.3.6, 1.4.x before 1.4.4, and 1.5 before release candidate 2 allows remote attackers to bypass intended resource limits for formsets and cause a denial of service (memory consumption) or trigger server errors via a modified max_num parameter.

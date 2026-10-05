@@ -1,0 +1,18 @@
+PYSEC-2026-4010 PyPI/local-operator — Arbitrary file read via workspace confinement bypass in local-operator /v1/chat/agents/{id}/edit
+package: local-operator
+ecosystem: PyPI
+versions affected:
+  >= 0, < 29fc4c68a3ed1d238b8abf6b6a6136a3361416a5 (GIT: https://github.com/damianvtran/local-operator)
+  >= 0, < 0.47.5 (ECOSYSTEM)
+aliases: GHSA-3xjw-9qpc-53mh
+references:
+  https://github.com/damianvtran/local-operator/security/advisories/GHSA-3xjw-9qpc-53mh
+  https://github.com/damianvtran/local-operator/pull/643
+  https://github.com/damianvtran/local-operator/commit/29fc4c68a3ed1d238b8abf6b6a6136a3361416a5
+  https://github.com/damianvtran/local-operator/releases/tag/v0.47.5
+  https://pypi.org/project/local-operator/
+
+The `/v1/chat/agents/{agent_id}/edit` endpoint in local-operator versions before 0.47.5 resolves the caller-supplied `file_path` with `expanduser().resolve()` and reads it without checking that it lies inside the agent's workspace. An unauthenticated client with network access to the API can supply an absolute path or a path containing traversal sequences and obtain the contents of any file readable by the server process, which are placed in the model prompt and returned in the response.
+
+Version 0.47.5 resolves server-side reads within the agent's configured workspace and rejects canonical paths outside it (including symlink and junction escapes) before any model call, adds an optional `file_content` request field so clients can submit a buffer without host path resolution, and binds `lop serve` to 127.0.0.1 by default.
+

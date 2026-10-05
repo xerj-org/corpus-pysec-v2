@@ -1,0 +1,44 @@
+PYSEC-2026-207 PyPI/durabletask — durabletask 1.4.1, 1.4.2, and 1.4.3 contain malicious code distributed via a compromised maintainer account
+package: durabletask
+ecosystem: PyPI
+versions affected:
+  1.4.1, 1.4.2, 1.4.3
+aliases: MAL-2026-4174
+references:
+  https://github.com/microsoft/durabletask-python/issues/137
+  https://safedep.io/malicious-durabletask-pypi-supply-chain-attack
+  https://bad-packages.kam193.eu/pypi/campaign/2026-05-compr-durabletask
+  https://www.upwind.io/feed/newly-discovered-durabletask-malware-targeted-kubernetes-cloud-secrets-and-ci-cd-infrastructure
+  https://www.aikido.dev/blog/durabletask-package-compromised-mini-shai-hulud
+  https://www.wiz.io/blog/durabletask-teampcp-supply-chain-attack
+  https://pypi.org/project/durabletask/
+
+`durabletask` versions 1.4.1, 1.4.2, and 1.4.3 were published on 2026-05-19 within a
+35-minute window through a compromised PyPI maintainer account and contained
+ malicious code.
+
+On import, the package fetched a remote payload (`rope.pyz`) from an
+attacker-controlled host and executed it.
+The payload was a credential-theft framework that interrogated cloud instance metadata
+(AWS/Azure/GCP) and secret stores, harvested Kubernetes service-account tokens,
+HashiCorp Vault tokens, and credentials from known filesystem paths,
+attempted to brute-force password manager vaults.
+Anything obtained was exfiltrated to command-and-control infrastructure
+ with a GitHub dead-drop fallback.
+It established persistence via a systemd unit (`pgsql-monitor.service`)
+and included a geo-targeted destructive wiper.
+
+Indicators of compromise:
+- Dropped payload: rope.pyz
+  (sha256 069ac1dc7f7649b76bc72a11ac700f373804bfd81dab7e561157b703999f44ce)
+ - Primary C2: check.git-service[.]com (160.119.64.3)
+- Secondary C2: t.m-kosche[.]com (185.95.159.32)
+- Persistence unit: pgsql-monitor.service
+
+The affected releases have been removed from PyPI.
+The known-good versions remain available.
+`durabletask` version 1.5.0 has been released by the maintainers.
+
+This campaign is likely attributable to the threat actor tracked as
+TeamPCP, based on shared infrastructure and payload overlap with prior
+supply chain compromises (including the @antv and guardrails-ai waves).

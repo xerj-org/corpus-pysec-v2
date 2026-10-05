@@ -1,0 +1,18 @@
+PYSEC-2017-91 PyPI/mercurial — In Mercurial before 4.1.3, "hg serve --stdio" allows remote authenticated users to launch the Python
+package: mercurial
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.1.3 (ECOSYSTEM)
+aliases: CVE-2017-9462, GHSA-ghjx-3jg5-h6r2
+references:
+  https://www.mercurial-scm.org/wiki/WhatsNew#Mercurial_4.1.3_.282017-4-18.29
+  https://www.mercurial-scm.org/repo/hg/rev/77eaf9539499
+  https://bugs.debian.org/861243
+  http://www.securityfocus.com/bid/99123
+  https://security.gentoo.org/glsa/201709-18
+  http://www.debian.org/security/2017/dsa-3963
+  https://access.redhat.com/errata/RHSA-2017:1576
+  https://lists.debian.org/debian-lts-announce/2018/07/msg00005.html
+  https://github.com/advisories/GHSA-ghjx-3jg5-h6r2
+
+In Mercurial before 4.1.3, "hg serve --stdio" allows remote authenticated users to launch the Python debugger, and consequently execute arbitrary code, by using --debugger as a repository name.

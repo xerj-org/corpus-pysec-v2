@@ -1,0 +1,12 @@
+PYSEC-2022-216 PyPI/perdido — The Perdido package in PyPI v0.0.1 to v0.0.2 was discovered to contain a code execution backdoor via
+package: perdido
+ecosystem: PyPI
+versions affected:
+  >= 0.0.1, < 0.0.3 (ECOSYSTEM)
+aliases: CVE-2022-34054
+references:
+  https://pypi.org/project/perdido/
+  https://github.com/ludovicmoncla/perdido/issues/1
+  http://pypi.doubanio.com/simple/request
+
+The Perdido package in PyPI v0.0.1 to v0.0.2 was discovered to contain a code execution backdoor via the request package. This vulnerability allows attackers to access sensitive user information and digital currency keys, as well as escalate privileges.

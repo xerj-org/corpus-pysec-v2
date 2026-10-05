@@ -1,0 +1,13 @@
+PYSEC-2017-2 PyPI/ansible — The user module in ansible before 1.6.6 allows remote authenticated users to execute arbitrary comma
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 0, < 8ed6350e65c82292a631f08845dfaacffe7f07f5 (GIT: https://github.com/ansible/ansible)
+  >= 0, < 1.6.6 (ECOSYSTEM)
+aliases: CVE-2014-3498, GHSA-4cvm-5776-jx9f
+references:
+  https://github.com/ansible/ansible/commit/8ed6350e65c82292a631f08845dfaacffe7f07f5
+  https://bugzilla.redhat.com/show_bug.cgi?id=1335551
+  https://github.com/advisories/GHSA-4cvm-5776-jx9f
+
+The user module in ansible before 1.6.6 allows remote authenticated users to execute arbitrary commands.

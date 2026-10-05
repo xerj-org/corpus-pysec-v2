@@ -1,0 +1,13 @@
+PYSEC-2023-143 PyPI/wger — Cross Site Scripting vulnerability in wger Project wger Workout Manager v.2.2.0a3 allows a remote at
+package: wger
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2023-38758, GHSA-8m9p-3926-gffr
+references:
+  https://github.com/0x72303074/CVE-Disclosures
+  https://github.com/0x72303074/CVE-Disclosures
+  https://wger.de
+  https://github.com/advisories/GHSA-8m9p-3926-gffr
+
+Cross Site Scripting vulnerability in wger Project wger Workout Manager v.2.2.0a3 allows a remote attacker to gain privileges via the license_author field in the add-ingredient function in the templates/ingredients/view.html, models/ingredients.py, and views/ingredients.py components.

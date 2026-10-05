@@ -1,0 +1,12 @@
+PYSEC-2019-21 PyPI/donfig — An issue was discovered in Donfig 0.3.0. There is a vulnerability in the collect_yaml method in conf
+package: donfig
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.4.0 (ECOSYSTEM)
+aliases: CVE-2019-7537, GHSA-3qr5-h7w4-3gx3
+references:
+  https://github.com/pytroll/donfig/issues/5
+  https://github.com/pytroll/donfig/commits/master
+  https://github.com/advisories/GHSA-3qr5-h7w4-3gx3
+
+An issue was discovered in Donfig 0.3.0. There is a vulnerability in the collect_yaml method in config_obj.py. It can execute arbitrary Python commands, resulting in command execution.

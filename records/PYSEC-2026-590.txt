@@ -1,0 +1,18 @@
+PYSEC-2026-590 PyPI/executor-http — Malicious code in executor-http (PyPI)
+package: executor-http
+ecosystem: PyPI
+versions affected:
+  0.1.3, 0.1.4
+aliases: MAL-2026-5281
+references:
+  https://inspector.pypi.io/project/executor-http/0.1.4/packages/bf/21/0ed9e6a37bee872e733993b53467b1d2d47468fd2cfab157fc9fb01ecf2a/executor_http-0.1.4-py3-none-any.whl//executor_http-setup.pth
+  https://www.endorlabs.com/learn/shai-hulud-hades-wave-hits-six-pypi-bioinformatics-packages
+  https://www.stepsecurity.io/blog/the-hades-campaign-pypi-packages
+
+Part of the "Hades" wave of the Shai-Hulud supply-chain campaign. On 2026-06-08,
+malicious phantom releases of executor-http were published to PyPI using stolen
+credentials. The package executes a bundled JavaScript payload (via the Bun
+runtime) on import that harvests and exfiltrates credentials and attempts
+self-propagation. This entry is a summary; behavior may not be fully
+characterized here. See the linked references for detailed analysis and
+indicators of compromise.

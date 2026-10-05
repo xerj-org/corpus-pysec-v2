@@ -1,0 +1,13 @@
+PYSEC-2020-30 PyPI/bsdiff4 — A buffer overflow in the patching routine of bsdiff4 before 1.2.0 allows an attacker to write to hea
+package: bsdiff4
+ecosystem: PyPI
+versions affected:
+  >= 0, < 49a4cee2feef7deaf9d89e5e793a8824930284d7 (GIT: https://github.com/ilanschnell/bsdiff4)
+  >= 0, < 1.2.0 (ECOSYSTEM)
+aliases: CVE-2020-15904, GHSA-f8m3-jpxr-hm5x
+references:
+  https://github.com/ilanschnell/bsdiff4/commit/49a4cee2feef7deaf9d89e5e793a8824930284d7
+  https://github.com/ilanschnell/bsdiff4/blob/master/CHANGELOG.txt
+  https://github.com/advisories/GHSA-f8m3-jpxr-hm5x
+
+A buffer overflow in the patching routine of bsdiff4 before 1.2.0 allows an attacker to write to heap memory (beyond allocated bounds) via a crafted patch file.

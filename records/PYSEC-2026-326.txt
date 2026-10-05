@@ -1,0 +1,34 @@
+PYSEC-2026-326 PyPI/dcap-qvl — dcap-qvl has Missing Verification for QE Identity
+package: dcap-qvl
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.3.9 (ECOSYSTEM)
+aliases: CVE-2026-22696, GHSA-796p-j2gh-9m2q
+references:
+  https://github.com/Phala-Network/dcap-qvl/security/advisories/GHSA-796p-j2gh-9m2q
+  https://nvd.nist.gov/vuln/detail/CVE-2026-22696
+  https://github.com/Phala-Network/dcap-qvl
+  https://pypi.org/project/dcap-qvl
+  https://github.com/advisories/GHSA-796p-j2gh-9m2q
+
+## Impact
+This vulnerability involves a critical gap in the cryptographic verification process within the dcap-qvl.
+
+The library fetches QE Identity collateral (including qe_identity, qe_identity_signature, and qe_identity_issuer_chain) from the PCCS. However, it skips to verify the QE Identity signature against its certificate chain and does not enforce policy constraints on the QE Report.
+
+## Consequences
+ An attacker can forge the QE Identity data to whitelist a malicious or non-Intel Quoting Enclave. This allows the attacker to forge the QE and sign untrusted quotes that the verifier will accept as valid. Effectively, this bypasses the entire remote attestation security model, as the verifier can no longer trust the entity responsible for signing the quotes.
+
+## Who is impacted
+All deployments utilizing the dcap-qvl library for SGX or TDX quote verification are affected.
+
+## Patches
+The vulnerability has been patched in dcap-qvl version 0.3.9. The fix implements the missing cryptographic verification for the QE Identity signature and enforces the required checks for MRSIGNER, ISVPRODID, and ISVSVN against the QE Report.
+
+Users of the `@phala/dcap-qvl-node` and `@phala/dcap-qvl-web` packages should switch to the pure JavaScript implementation, `@phala/dcap-qvl`.
+
+## Workarounds
+There are no known workarounds for this vulnerability. Users must upgrade to the patched version to ensure that QE Identity collateral is properly verified.
+
+## Credit
+This bug was reported by Rahul Saxena <saxenism@bluethroatlabs.com>.

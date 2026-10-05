@@ -1,0 +1,11 @@
+PYSEC-2020-17 PyPI/apache-airflow — An issue was found in Apache Airflow versions 1.10.10 and below. It was discovered that many of the 
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.10.11rc1 (ECOSYSTEM)
+aliases: CVE-2020-11983, GHSA-q4p3-qw5c-mhpc
+references:
+  https://lists.apache.org/thread.html/r7255cf0be3566f23a768e2a04b40fb09e52fcd1872695428ba9afe91%40%3Cusers.airflow.apache.org%3E
+  https://github.com/advisories/GHSA-q4p3-qw5c-mhpc
+
+An issue was found in Apache Airflow versions 1.10.10 and below. It was discovered that many of the admin management screens in the new/RBAC UI handled escaping incorrectly, allowing authenticated users with appropriate permissions to create stored XSS attacks.

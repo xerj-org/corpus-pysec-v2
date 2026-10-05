@@ -1,0 +1,19 @@
+PYSEC-2026-1176 PyPI/apache-superset — Apache Superset's chart visualization has a stored Cross-Site Scripting (XSS) vulnerability
+package: apache-superset
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.0.0 (ECOSYSTEM)
+aliases: CVE-2025-55672, GHSA-fj97-2v9x-w5m4
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-55672
+  https://github.com/apache/superset
+  https://lists.apache.org/thread/rvh7fdjfzxzjhcfwoz7twc2brhvochdj
+  http://www.openwall.com/lists/oss-security/2025/08/14/4
+  https://pypi.org/project/apache-superset
+  https://github.com/advisories/GHSA-fj97-2v9x-w5m4
+
+A stored Cross-Site Scripting (XSS) vulnerability exists in Apache Superset's chart visualization. An authenticated user with permissions to edit charts can inject a malicious payload into a column's label. The payload is not properly sanitized and gets executed in the victim's browser when they hover over the chart, potentially leading to session hijacking or the execution of arbitrary commands on behalf of the user.
+
+This issue affects Apache Superset: before 5.0.0.
+
+Users are recommended to upgrade to version 5.0.0, which fixes the issue.

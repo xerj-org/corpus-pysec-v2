@@ -1,0 +1,27 @@
+PYSEC-2026-1126 PyPI/ansibleguy-webui — ansibleguy-webui Cross-site Scripting vulnerability
+package: ansibleguy-webui
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.0.21 (ECOSYSTEM)
+aliases: CVE-2024-36110, GHSA-927p-xrc2-x2gj
+references:
+  https://github.com/ansibleguy/webui/security/advisories/GHSA-927p-xrc2-x2gj
+  https://nvd.nist.gov/vuln/detail/CVE-2024-36110
+  https://github.com/ansibleguy/webui/issues/44
+  https://github.com/ansibleguy/webui/commit/7737b47e7f7ddbfec7b1418c724598363718d522
+  https://github.com/ansibleguy/webui
+  https://github.com/ansibleguy/webui/files/15358522/Report.pdf
+  https://pypi.org/project/ansibleguy-webui
+  https://github.com/advisories/GHSA-927p-xrc2-x2gj
+
+### Impact
+Multiple forms in version <0.0.21 allowed injection of HTML elements.
+These are returned to the user after executing job actions and thus evaluated by the browser.
+
+### Patches
+We recommend to upgrade to version >= [0.0.21](https://github.com/ansibleguy/webui/releases/tag/0.0.21)
+
+### References
+
+* [Report](https://github.com/ansibleguy/webui/files/15358522/Report.pdf)
+* [GitHub Issue 44](https://github.com/ansibleguy/webui/issues/44)

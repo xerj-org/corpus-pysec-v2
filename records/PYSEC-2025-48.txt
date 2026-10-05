@@ -1,0 +1,14 @@
+PYSEC-2025-48 PyPI/mobsf — Mobile Security Framework (MobSF) is a pen-testing, malware analysis and security assessment framewo
+package: mobsf
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4b8bab5a9858c69fe13be4631b82d82186e0d3bd (GIT: https://github.com/mobsf/mobile-security-framework-mobsf)
+  >= 0, < 4.3.2 (ECOSYSTEM)
+aliases: CVE-2025-31116, GHSA-fcfq-m8p6-gw56
+references:
+  https://github.com/MobSF/Mobile-Security-Framework-MobSF/security/advisories/GHSA-fcfq-m8p6-gw56
+  https://github.com/MobSF/Mobile-Security-Framework-MobSF/security/advisories/GHSA-fcfq-m8p6-gw56
+  https://github.com/MobSF/Mobile-Security-Framework-MobSF/commit/4b8bab5a9858c69fe13be4631b82d82186e0d3bd
+  https://github.com/advisories/GHSA-fcfq-m8p6-gw56
+
+Mobile Security Framework (MobSF) is a pen-testing, malware analysis and security assessment framework capable of performing static and dynamic analysis. The mitigation for CVE-2024-29190 in valid_host() uses socket.gethostbyname(), which is vulnerable to SSRF abuse using DNS rebinding technique. This vulnerability is fixed in 4.3.2.

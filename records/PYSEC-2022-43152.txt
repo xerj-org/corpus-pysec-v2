@@ -1,0 +1,13 @@
+PYSEC-2022-43152 PyPI/python-scciclient — A flaw was found in the python-scciclient when making an HTTPS connection to a server where the serv
+package: python-scciclient
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.12.0 (ECOSYSTEM)
+aliases: CVE-2022-2996, GHSA-rf3f-3p37-2qh4
+references:
+  https://opendev.org/x/python-scciclient/commit/274dca0344b65b4ac113d3271d21c17e970a636c
+  https://opendev.org/x/python-scciclient/commit/274dca0344b65b4ac113d3271d21c17e970a636c
+  https://lists.debian.org/debian-lts-announce/2022/11/msg00006.html
+  https://lists.debian.org/debian-lts-announce/2022/11/msg00006.html
+
+A flaw was found in the python-scciclient when making an HTTPS connection to a server where the server's certificate would not be verified. This issue opens up the connection to possible Man-in-the-middle (MITM) attacks.

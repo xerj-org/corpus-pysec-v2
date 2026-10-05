@@ -1,0 +1,13 @@
+PYSEC-2022-43066 PyPI/aamiles — The AAmiles package in PyPI v0.1.0 was discovered to contain a code execution backdoor via the reque
+package: aamiles
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-33001
+references:
+  https://github.com/bOrionis/AAmiles/issues/1
+  https://github.com/bOrionis/AAmiles/issues/1
+  http://pypi.doubanio.com/simple/request
+  https://pypi.org/project/AAmiles/
+
+The AAmiles package in PyPI v0.1.0 was discovered to contain a code execution backdoor via the request package. This vulnerability allows attackers to access sensitive user information and digital currency keys, as well as escalate privileges.

@@ -1,0 +1,19 @@
+PYSEC-2020-345 PyPI/django — Withdrawn as duplicate of PYSEC-2020-36. Django 1.11 before 1.11.29, 2.2 before 2.2.11, and 3.0 befo
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 1.11, < 1.11.29, >= 2.2, < 2.2.11, >= 3.0, < 3.0.4 (ECOSYSTEM)
+aliases: CVE-2020-9402
+references:
+  https://groups.google.com/forum/#%21topic/django-announce/fLUh_pOaKrY
+  https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/4A2AP4T7RKPBCLTI2NNQG3T6MINDUUMZ/
+  https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/UZMN2NKAGTFE3YKMNM2JVJG7R2W7LLHY/
+  https://lists.debian.org/debian-lts-announce/2022/05/msg00035.html
+  https://security.gentoo.org/glsa/202004-17
+  https://security.netapp.com/advisory/ntap-20200327-0004/
+  https://usn.ubuntu.com/4296-1/
+  https://www.debian.org/security/2020/dsa-4705
+  https://docs.djangoproject.com/en/3.0/releases/security/
+  https://www.djangoproject.com/weblog/2020/mar/04/security-releases/
+
+Withdrawn as duplicate of PYSEC-2020-36. Django 1.11 before 1.11.29, 2.2 before 2.2.11, and 3.0 before 3.0.4 allows SQL Injection if untrusted data is used as a tolerance parameter in GIS functions and aggregates on Oracle. By passing a suitably crafted tolerance to GIS functions and aggregates on Oracle, it was possible to break escaping and inject malicious SQL.

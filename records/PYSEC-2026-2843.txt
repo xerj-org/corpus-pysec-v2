@@ -1,0 +1,103 @@
+PYSEC-2026-2843 PyPI/openexr — OpenEXR Makes Use of Uninitialized Memory
+package: openexr
+ecosystem: PyPI
+versions affected:
+  >= 3.3.0, < 3.3.6, >= 3.4.0, < 3.4.3 (ECOSYSTEM)
+aliases: CVE-2025-64181, GHSA-3h9h-qfvw-98hq
+references:
+  https://github.com/AcademySoftwareFoundation/openexr/security/advisories/GHSA-3h9h-qfvw-98hq
+  https://nvd.nist.gov/vuln/detail/CVE-2025-64181
+  https://github.com/AcademySoftwareFoundation/openexr
+  https://github.com/user-attachments/files/23024726/archive0.zip
+  https://github.com/user-attachments/files/23024736/archive1.zip
+  https://github.com/user-attachments/files/23024740/archive2.zip
+  https://github.com/user-attachments/files/23024744/archive3.zip
+  https://github.com/user-attachments/files/23024746/archive4.zip
+  https://pypi.org/project/openexr
+  https://github.com/advisories/GHSA-3h9h-qfvw-98hq
+
+### Summary
+While fuzzing `openexr_exrcheck_fuzzer`, Valgrind reports a conditional branch depending on uninitialized data inside `generic_unpack`. This indicates a use of uninitialized memory (CWE-457). The issue is reproducible with the current OSS-Fuzz harness and a single-file PoC.
+
+### Details
+
+**Environment:**
+- Tooling: `valgrind --tool=memcheck --track-origins=yes`
+- Target: `openexr_exrcheck_fuzzer`
+- OS: Ubuntu 20.04.6 LTS focal x86_64
+- openexr version and Git-commit hash: ` openexr 3.4.2 | commit fd657e8a41e157e5841c7cc2e2a5efe094b069a1 (grafted, HEAD -> main, origin/main, origin/HEAD)`
+
+Function: `generic_unpack`
+
+Possible root cause (based on observed symptoms):
+The unpacker is branching on bytes in a scratch buffer that were never written because the decode step didn’t fully populate it.
+- The first use flagged is in `generic_unpack()`. That function reads from the decompressed/expanded pixel buffer to scatter data into the framebuffer. A “conditional jump depends on uninitialised value(s)” means it’s consulting bytes in that buffer before they were written.
+- Valgrind says the uninitialised value “was created by a heap allocation (malloc)”, not the stack: this matches a per-tile/per-scanline decode scratch buffer allocated in `exr_decoding_run()`.
+
+**Valgrind Trace (top frames):**
+```bash
+==454== Conditional jump or move depends on uninitialised value(s)
+==454==    at 0x4539BE: generic_unpack (in /out/openexr_exrcheck_fuzzer)
+==454==    by 0x44B85F: exr_decoding_run (in /out/openexr_exrcheck_fuzzer)
+==454==    by 0x38BC5F: Imf_4_0::(anonymous namespace)::TileProcess::run_decode(_priv_exr_context_t const*, int, Imf_4_0::FrameBuffer const*, std::__1::vector<Imf_4_0::Slice, std::__1::allocator<Imf_4_0::Slice> > const&) (in /out/openexr_exrcheck_fuzzer)
+==454==    by 0x388BE1: Imf_4_0::TiledInputFile::Data::readTiles(int, int, int, int, int, int) (in /out/openexr_exrcheck_fuzzer)
+==454==    by 0x388619: Imf_4_0::TiledInputFile::readTiles(int, int, int, int, int, int) (in /out/openexr_exrcheck_fuzzer)
+==454==    by 0x353755: Imf_4_0::InputFile::Data::bufferedReadPixels(int, int) (in /out/openexr_exrcheck_fuzzer)
+==454==    by 0x352286: Imf_4_0::InputFile::readPixels(int) (in /out/openexr_exrcheck_fuzzer)
+==454==    by 0x3190FA: Imf_4_0::(anonymous namespace)::readMultiPart(Imf_4_0::MultiPartInputFile&, bool, bool) (in /out/openexr_exrcheck_fuzzer)
+==454==    by 0x314C4D: Imf_4_0::checkOpenEXRFile(char const*, unsigned long, bool, bool, bool) (in /out/openexr_exrcheck_fuzzer)
+==454==  Uninitialised value was created by a heap allocation at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+```
+
+### PoC
+In the attached archive, you will find:
+- The executable used for our tests.
+- The testcase used to trigger the bug.
+
+To observe the bug, simply run the OSS-Fuzz helper script:
+```bash
+git clone https://github.com/google/oss-fuzz.git
+cd oss-fuzz
+
+python3 infra/helper.py build_image openexr
+python3 infra/helper.py build_fuzzers --sanitizer=none openexr
+python3 infra/helper.py shell openexr
+
+apt update && apt install -y valgrind
+ulimit -n 65535
+valgrind --tool=memcheck --track-origins=yes /out/openexr_exrcheck_fuzzer /path/to/poc
+```
+
+### Impact
+- Undefined Behavior
+- Potential crash
+- Denial of Service
+
+**Credit:** Aldo Ristori
+[archive0.zip](https://github.com/user-attachments/files/23024726/archive0.zip)
+
+
+
+### Update Note:
+Other saved testcases from the fuzzing campaign trigger the same underlying bug, but with a different manifestation. So there is one root cause (missing post-decode validation / zero-init before any unpack), with different call-sites. Below there are several archives, formatted like the previous one, that reproduce the other test cases.
+
+**Other observed sinks (distinct manifestations of the same bug):**
+
+**Deep pointers path:**
+generic_unpack_deep_pointers (deep scanline/tiled)
+[archive1.zip](https://github.com/user-attachments/files/23024736/archive1.zip)
+
+
+**Deep sample table path:**
+unpack_sample_table (deep scanline)
+[archive2.zip](https://github.com/user-attachments/files/23024740/archive2.zip)
+
+
+**Half conversion path:**
+half_to_float_buffer_f16c via unpack_half_to_float_3chan_planar
+[archive3.zip](https://github.com/user-attachments/files/23024744/archive3.zip)
+
+
+**Deep compositing:**
+CompositeDeepScanLine::readPixels → ThreadPool::addTask → LineCompositeTask::execute
+[archive4.zip](https://github.com/user-attachments/files/23024746/archive4.zip)

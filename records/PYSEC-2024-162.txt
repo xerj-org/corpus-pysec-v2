@@ -1,0 +1,16 @@
+PYSEC-2024-162 PyPI/scrapy — A Regular Expression Denial of Service (ReDoS) vulnerability exists in the XMLFeedSpider class of th
+package: scrapy
+ecosystem: PyPI
+versions affected:
+  >= 0, < 479619b340f197a8f24c5db45bc068fb8755f2c5, < 479619b340f197a8f24c5db45bc068fb8755f2c5 (GIT: https://github.com/scrapy/scrapy)
+  >= 0, < 2.11.1 (ECOSYSTEM)
+aliases: CVE-2024-1892, GHSA-cc65-xxvf-f7r9
+references:
+  https://huntr.com/bounties/271f94f2-1e05-4616-ac43-41752389e26b
+  https://github.com/scrapy/scrapy/commit/479619b340f197a8f24c5db45bc068fb8755f2c5
+  https://huntr.com/bounties/271f94f2-1e05-4616-ac43-41752389e26b
+  https://huntr.com/bounties/271f94f2-1e05-4616-ac43-41752389e26b
+  https://huntr.com/bounties/271f94f2-1e05-4616-ac43-41752389e26b
+  https://github.com/advisories/GHSA-cc65-xxvf-f7r9
+
+A Regular Expression Denial of Service (ReDoS) vulnerability exists in the XMLFeedSpider class of the scrapy/scrapy project, specifically in the parsing of XML content. By crafting malicious XML content that exploits inefficient regular expression complexity used in the parsing process, an attacker can cause a denial-of-service (DoS) condition. This vulnerability allows for the system to hang and consume significant resources, potentially rendering services that utilize Scrapy for XML processing unresponsive.

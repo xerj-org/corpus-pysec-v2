@@ -1,0 +1,20 @@
+PYSEC-2018-60 PyPI/ansible — Execution of Ansible playbooks on Windows platforms with PowerShell ScriptBlock logging and Module l
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 2.7.0, < 2.7.4, >= 2.7.5, < 2.8.1, >= 0, < 2.5.13, >= 2.6.0, < 2.6.10 (ECOSYSTEM)
+aliases: CVE-2018-16859, GHSA-v735-2pp6-h86r
+references:
+  https://github.com/ansible/ansible/pull/49142
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2018-16859
+  http://www.securityfocus.com/bid/106004
+  https://access.redhat.com/errata/RHSA-2018:3773
+  https://access.redhat.com/errata/RHSA-2018:3772
+  https://access.redhat.com/errata/RHSA-2018:3771
+  https://access.redhat.com/errata/RHSA-2018:3770
+  http://lists.opensuse.org/opensuse-security-announce/2019-04/msg00021.html
+  http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00077.html
+  http://lists.opensuse.org/opensuse-security-announce/2019-08/msg00020.html
+  https://github.com/advisories/GHSA-v735-2pp6-h86r
+
+Execution of Ansible playbooks on Windows platforms with PowerShell ScriptBlock logging and Module logging enabled can allow for 'become' passwords to appear in EventLogs in plaintext. A local user with administrator privileges on the machine can view these logs and discover the plaintext password. Ansible Engine 2.8 and older are believed to be vulnerable.

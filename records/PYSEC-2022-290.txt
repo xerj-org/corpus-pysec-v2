@@ -1,0 +1,13 @@
+PYSEC-2022-290 PyPI/rdiffweb — Session Fixation in GitHub repository ikus060/rdiffweb prior to 2.4.7.
+package: rdiffweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < 39e7dcd4a1f44d2a7bd92b79d78a800910b1b22b (GIT: https://github.com/ikus060/rdiffweb)
+  >= 0, < 2.4.7 (ECOSYSTEM)
+aliases: CVE-2022-3269, GHSA-j3q4-gmj4-mj95
+references:
+  https://huntr.dev/bounties/67c25969-5e7a-4424-817e-e1a918f63cc6
+  https://github.com/ikus060/rdiffweb/commit/39e7dcd4a1f44d2a7bd92b79d78a800910b1b22b
+  https://github.com/advisories/GHSA-j3q4-gmj4-mj95
+
+Session Fixation in GitHub repository ikus060/rdiffweb prior to 2.4.7.

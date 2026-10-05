@@ -1,0 +1,12 @@
+PYSEC-2020-4 PyPI/ansible — A flaw was found in the Ansible Engine when using module_args. Tasks executed with check mode (--che
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 2.8.0, < 2.8.14, >= 2.9.0, < 2.9.12 (ECOSYSTEM)
+aliases: CVE-2020-14332, GHSA-j667-c2hm-f2wp
+references:
+  https://github.com/ansible/ansible/pull/71033
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2020-14332
+  https://github.com/advisories/GHSA-j667-c2hm-f2wp
+
+A flaw was found in the Ansible Engine when using module_args. Tasks executed with check mode (--check-mode) do not properly neutralize sensitive data exposed in the event data. This flaw allows unauthorized users to read this data. The highest threat from this vulnerability is to confidentiality.

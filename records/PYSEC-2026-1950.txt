@@ -1,0 +1,74 @@
+PYSEC-2026-1950 PyPI/tendenci — Tendenci Affected by Authenticated Remote Code Execution via Pickle Deserialization
+package: tendenci
+ecosystem: PyPI
+versions affected:
+  >= 0, < 15.3.12 (ECOSYSTEM)
+aliases: CVE-2026-23946, GHSA-339m-4qw5-j2g3
+references:
+  https://github.com/tendenci/tendenci/security/advisories/GHSA-339m-4qw5-j2g3
+  https://nvd.nist.gov/vuln/detail/CVE-2020-14942
+  https://nvd.nist.gov/vuln/detail/CVE-2026-23946
+  https://github.com/tendenci/tendenci/issues/867
+  https://github.com/tendenci/tendenci/commit/23d9fd85ab7654e9c83cfc86cb4175c0bd7a77f1
+  https://github.com/tendenci/tendenci/commit/2ff0a457614944a1b417081c543ea4c5bb95d636
+  https://github.com/tendenci/tendenci/commit/63e1b84a5b163466d1d8d811d35e7021a7ca0d0e
+  https://docs.python.org/3/library/pickle.html#restricting-globals
+  https://github.com/advisories/GHSA-jqmc-fxxp-r589
+  https://github.com/tendenci/tendenci
+  https://github.com/tendenci/tendenci/releases/tag/v15.3.12
+  https://pypi.org/project/tendenci
+  https://github.com/advisories/GHSA-339m-4qw5-j2g3
+
+A critical deserialization vulnerability exists in Tendenci Helpdesk module (NOTE, by default, Helpdesk is NOT enabled), affecting the version 15.3.11 and earlier. This vulnerability allows remote code execution (RCE) by an authenticated user with staff security level due to using Python's pickle module on the helpdesk /reports/. The damage is contained to the user that your Tendenci application runs.
+
+**Key Finding:** The original CVE-2020-14942 was incompletely patched. While `ticket_list()` was fixed to use safe JSON deserialization, the `run_report()` function still uses unsafe `pickle.loads()`.
+
+**Permission Scoping:** The impact is limited to the permissions of the user running the application, typically www-data, which generally lacks write (except for upload directories) and execute permissions.
+
+## Vulnerability Details
+
+### Affected Version
+- **Version:** Tendenci 15.3.11 and earlier (all versions since incomplete CVE-2020-14942 patch)
+- **Component:** `tendenci/apps/helpdesk/views/staff.py`
+
+### Related CVE
+- **CVE-2020-14942:** Original pickle deserialization vulnerability (partially patched)
+- **GitHub Advisory:** GHSA-jqmc-fxxp-r589
+- **Original Issue:** https://github.com/tendenci/tendenci/issues/867
+
+### Tendenci User Role Hierarchy
+
+| Level | Role | Description |
+|-------|------|-------------|
+| 0 | `is_superuser` | Highest privilege - full Django admin |
+| 1 | `is_staff` | user with Staff security level - can access helpdesk module |
+| 2 | Authenticated User | Basic user access |
+| 3 | Anonymous User | Public read-only access |
+
+`is_staff` is a commonly assigned role (by a superuser) for helpdesk operators who manage support tickets - not system administrators. 
+
+
+### Code Comparison (Patched vs Vulnerable)
+
+| Function | Line | Deserialization | Status |
+|----------|------|-----------------|--------|
+| `ticket_list()` | 763 | `simplejson.loads()` | ✅ SAFE |
+| `run_report()` | 1062 | `pickle.loads()` | ❌ VULNERABLE |
+
+## Why This Qualifies for CVE Assignment
+
+This vulnerability represents an **incomplete patch bypass** for CVE-2020-14942 with a clear exploitation path. The flaw allows a malicious user with Staff security level to achieve Remote Code Execution via Python's pickle.loads. Though the damage is contained to the user that your Tendenci application runs. 
+
+## Remediation
+
+Update Tendenci to the latest version (v15.3.12 as of now) immediately if you have Helpdesk enabled. Note that Helpdesk is not enabled by default. All of our hosted sites have been patched, although **none** of our client sites have the Helpdesk enabled.
+
+
+## References
+
+- Tendenci GitHub: https://github.com/tendenci/tendenci
+- CVE-2020-14942: https://nvd.nist.gov/vuln/detail/CVE-2020-14942
+- GitHub Advisory: https://github.com/advisories/GHSA-jqmc-fxxp-r589
+- Original Issue: https://github.com/tendenci/tendenci/issues/867
+- CWE-502: https://cwe.mitre.org/data/definitions/502.html
+- Python Pickle Security: https://docs.python.org/3/library/pickle.html#restricting-globals

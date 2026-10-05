@@ -1,0 +1,14 @@
+PYSEC-2022-164 PyPI/ansible — A flaw was found in Ansible Engine's ansible-connection module, where sensitive information such as 
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 0, < fe28767970c8ec62aabe493c46b53a5de1e5fac0 (GIT: https://github.com/ansible/ansible)
+  >= 0, < 2.9.27 (ECOSYSTEM)
+aliases: CVE-2021-3620, GHSA-4r65-35qq-ch8j
+references:
+  https://github.com/ansible/ansible/commit/fe28767970c8ec62aabe493c46b53a5de1e5fac0
+  https://github.com/ansible/ansible/blob/stable-2.9/changelogs/CHANGELOG-v2.9.rst#security-fixes
+  https://bugzilla.redhat.com/show_bug.cgi?id=1975767
+  https://github.com/advisories/GHSA-4r65-35qq-ch8j
+
+A flaw was found in Ansible Engine's ansible-connection module, where sensitive information such as the Ansible user credentials is disclosed by default in the traceback error message. The highest threat from this vulnerability is to confidentiality.

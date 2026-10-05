@@ -1,0 +1,11 @@
+PYSEC-2026-2106 PyPI/aiohttp — AIOHTTP is an asynchronous HTTP client/server framework for asyncio and Python. Prior to 3.14.0, att
+package: aiohttp
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.14.0 (ECOSYSTEM)
+aliases: CVE-2026-50269, GHSA-m6qw-4cw2-hm4m
+references:
+  https://github.com/aio-libs/aiohttp/security/advisories/GHSA-m6qw-4cw2-hm4m
+  https://github.com/aio-libs/aiohttp/commit/bf88077ebb14f4c29924b8e8904cba20c55c28b8
+
+AIOHTTP is an asynchronous HTTP client/server framework for asyncio and Python. Prior to 3.14.0, attacker-controlled input included into multipart/payload headers can be used to modify a request to inject additional headers or similar. In the unlikely situation that an application is passing user-controlled strings into MultipartWriter.append(headers=...) or Payload.headers, then an attacker may be able to modify the request to inject headers or change the contents of the request. This vulnerability is fixed in 3.14.0.

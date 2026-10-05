@@ -1,0 +1,13 @@
+PYSEC-2021-147 PyPI/sickrage — in SiCKRAGE, versions 4.2.0 to 10.0.11.dev1 are vulnerable to Stored Cross-Site-Scripting (XSS) due 
+package: sickrage
+ecosystem: PyPI
+versions affected:
+  >= 0, < 9f42426727e16609ad3d1337f6637588b8ed28e4 (GIT: https://github.com/SiCKRAGE/SiCKRAGE)
+  >= 4.2.0, < 10.0.12.dev1 (ECOSYSTEM)
+aliases: CVE-2021-25925, GHSA-rmp7-f2vp-3rq4
+references:
+  https://github.com/SiCKRAGE/SiCKRAGE/commit/9f42426727e16609ad3d1337f6637588b8ed28e4
+  https://www.whitesourcesoftware.com/vulnerability-database/CVE-2021-25925
+  https://github.com/advisories/GHSA-rmp7-f2vp-3rq4
+
+in SiCKRAGE, versions 4.2.0 to 10.0.11.dev1 are vulnerable to Stored Cross-Site-Scripting (XSS) due to user input not being validated properly when processed by the server. Therefore, an attacker can inject arbitrary JavaScript code inside the application, and possibly steal a user’s sensitive information.

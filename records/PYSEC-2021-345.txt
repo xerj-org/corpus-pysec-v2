@@ -1,0 +1,15 @@
+PYSEC-2021-345 PyPI/rencode — The rencode package through 1.0.6 for Python allows an infinite loop in typecode decoding (such as v
+package: rencode
+ecosystem: PyPI
+versions affected:
+  >= 0, < 572ff74586d9b1daab904c6f7f7009ce0143bb75 (GIT: https://github.com/aresch/rencode)
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2021-40839, GHSA-gh8j-2pgf-x458
+references:
+  https://github.com/aresch/rencode/pull/29
+  https://pypi.org/project/rencode/#history
+  https://seclists.org/fulldisclosure/2021/Sep/16
+  https://github.com/aresch/rencode/commit/572ff74586d9b1daab904c6f7f7009ce0143bb75
+  https://github.com/advisories/GHSA-gh8j-2pgf-x458
+
+The rencode package through 1.0.6 for Python allows an infinite loop in typecode decoding (such as via ;\x2f\x7f), enabling a remote attack that consumes CPU and memory.

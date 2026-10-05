@@ -1,0 +1,11 @@
+PYSEC-2020-198 PyPI/ansible — Ansible prior to 1.5.4 mishandles the evaluation of some strings.
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.5.4 (ECOSYSTEM)
+aliases: CVE-2014-2686, GHSA-49m5-2838-q2rv
+references:
+  https://groups.google.com/forum/#!searchin/ansible-project/1.5.4/ansible-project/MUQxiKwSQDc/id6aVaawVboJ
+  https://github.com/advisories/GHSA-49m5-2838-q2rv
+
+Ansible prior to 1.5.4 mishandles the evaluation of some strings.

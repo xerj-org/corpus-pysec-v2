@@ -1,0 +1,11 @@
+PYSEC-2026-102 PyPI/ollama — An issue in ollama v.0.12.10 allows a remote attacker to cause a denial of service via the fs/ggml/g
+package: ollama
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.12.10-NA (ECOSYSTEM)
+aliases: CVE-2025-66960
+references:
+  https://github.com/ollama/ollama/issues/9820
+  https://zero.shotlearni.ng/blog/cve-2025-66960guf-v1-string-length-cause-panic-in-readggufv1string/
+
+An issue in ollama v.0.12.10 allows a remote attacker to cause a denial of service via the fs/ggml/gguf.go, function readGGUFV1String reads a string length from untrusted GGUF metadata

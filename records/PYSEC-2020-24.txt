@@ -1,0 +1,12 @@
+PYSEC-2020-24 PyPI/asyncpg — asyncpg before 0.21.0 allows a malicious PostgreSQL server to trigger a crash or execute arbitrary c
+package: asyncpg
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.21.0 (ECOSYSTEM)
+aliases: CVE-2020-17446, GHSA-2xpj-f5g2-8p7m
+references:
+  https://github.com/MagicStack/asyncpg/releases/tag/v0.21.0
+  https://lists.debian.org/debian-lts-announce/2020/09/msg00002.html
+  https://github.com/advisories/GHSA-2xpj-f5g2-8p7m
+
+asyncpg before 0.21.0 allows a malicious PostgreSQL server to trigger a crash or execute arbitrary code (on a database client) via a crafted server response, because of access to an uninitialized pointer in the array data decoder.

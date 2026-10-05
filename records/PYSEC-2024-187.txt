@@ -1,0 +1,13 @@
+PYSEC-2024-187 PyPI/virtualenv — virtualenv before 20.26.6 allows command injection through the activation scripts for a virtual envi
+package: virtualenv
+ecosystem: PyPI
+versions affected:
+  >= 0, < 20.26.6 (ECOSYSTEM)
+aliases: CVE-2024-53899, GHSA-rqc4-2hc7-8c8v
+references:
+  https://github.com/pypa/virtualenv/issues/2768
+  https://github.com/pypa/virtualenv/pull/2771
+  https://github.com/pypa/virtualenv/releases/tag/20.26.6
+  https://github.com/advisories/GHSA-rqc4-2hc7-8c8v
+
+virtualenv before 20.26.6 allows command injection through the activation scripts for a virtual environment. Magic template strings are not quoted correctly when replacing. NOTE: this is not the same as CVE-2024-9287.

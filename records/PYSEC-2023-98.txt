@@ -1,0 +1,12 @@
+PYSEC-2023-98 PyPI/langchain — An issue in langchain v.0.0.199 allows an attacker to execute arbitrary code via the PALChain in the
+package: langchain
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.0.247 (ECOSYSTEM)
+aliases: CVE-2023-36258, GHSA-2qmj-7962-cjq8
+references:
+  https://github.com/langchain-ai/langchain/issues/5872
+  https://github.com/langchain-ai/langchain/issues/5872
+  https://github.com/advisories/GHSA-2qmj-7962-cjq8
+
+An issue in langchain v.0.0.199 allows an attacker to execute arbitrary code via the PALChain in the python exec method.

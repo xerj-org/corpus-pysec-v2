@@ -1,0 +1,10 @@
+PYSEC-2019-226 PyPI/tensorflow-cpu — Google TensorFlow 1.7 and below is affected by: Buffer Overflow. The impact is: execute arbitrary co
+package: tensorflow-cpu
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.7.1 (ECOSYSTEM)
+aliases: CVE-2018-8825
+references:
+  https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/advisory/tfsa-2018-003.md
+
+Google TensorFlow 1.7 and below is affected by: Buffer Overflow. The impact is: execute arbitrary code (local).

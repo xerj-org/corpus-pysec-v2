@@ -1,0 +1,18 @@
+PYSEC-2026-4073 PyPI/litellm — LiteLLM: PROXY_ADMIN database API Key Generator Has Insufficient Session Expiration
+package: litellm
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 1.82.2 (ECOSYSTEM)
+aliases: CVE-2026-12772, GHSA-mf52-j94g-746m
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-12772
+  https://gist.github.com/YLChen-007/39ed709ce322431658a05b951e91f278
+  https://github.com/BerriAI/litellm
+  https://vuldb.com/cve/CVE-2026-12772
+  https://vuldb.com/submit/811281
+  https://vuldb.com/vuln/372514
+  https://vuldb.com/vuln/372514/cti
+  https://pypi.org/project/litellm
+  https://github.com/advisories/GHSA-mf52-j94g-746m
+
+A security flaw has been discovered in BerriAI litellm up to 1.82.2. This impacts the function authenticate_user of the file litellm/proxy/auth/login_utils.py of the component PROXY_ADMIN database API Key Generator. Performing a manipulation results in session expiration. The attack may be initiated remotely. The exploit has been released to the public and may be used for attacks. The vendor was contacted early about this disclosure.

@@ -1,0 +1,17 @@
+PYSEC-2026-537 PyPI/sglang — SGLang's encoder parallel disaggregation system is vulnerable to unauthenticated remote code execution through the disaggregation module
+package: sglang
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.5.10 (ECOSYSTEM)
+aliases: CVE-2026-3060, GHSA-jx93-g359-86wm
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-3060
+  https://github.com/sgl-project/sglang/pull/20904
+  https://github.com/sgl-project/sglang
+  https://github.com/sgl-project/sglang/blob/main/python/sglang/srt/disaggregation/encode_receiver.py
+  https://github.com/sgl-project/sglang/releases/tag/v0.5.10
+  https://orca.security/resources/blog/sglang-llm-framework-rce-vulnerabilities
+  https://pypi.org/project/sglang
+  https://github.com/advisories/GHSA-jx93-g359-86wm
+
+SGLang's encoder parallel disaggregation system is vulnerable to unauthenticated remote code execution through the disaggregation module, which deserializes untrusted data using pickle.loads() without authentication.

@@ -1,0 +1,11 @@
+PYSEC-2026-3740 PyPI/nltk — NLTK through 3.10.3 contains a path traversal vulnerability in model-artifact APIs that bypass paths
+package: nltk
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.10.3 (ECOSYSTEM)
+aliases: CVE-2026-81726, GHSA-8mgp-746c-j5xp
+references:
+  https://www.vulncheck.com/advisories/nltk-through-3.10.3-path-traversal-via-model-artifact-apis
+  https://github.com/nltk/nltk/security/advisories/GHSA-8mgp-746c-j5xp
+
+NLTK through 3.10.3 contains a path traversal vulnerability in model-artifact APIs that bypass pathsec enforcement by using raw file operations on caller-controlled paths. Attackers can read or write files outside allowed sandbox roots through TransitionParser, AveragedPerceptron, PerceptronTagger, and maxent parameter APIs when pathsec is enabled.

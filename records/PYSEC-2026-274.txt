@@ -1,0 +1,15 @@
+PYSEC-2026-274 PyPI/apache-airflow-providers-apache-hive — Apache Airflow Hive Provider vulnerable to Command Injection
+package: apache-airflow-providers-apache-hive
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.0.0 (ECOSYSTEM)
+aliases: CVE-2022-46421, GHSA-rc58-qr9j-cpgw
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2022-46421
+  https://github.com/apache/airflow/pull/28101
+  https://github.com/apache/airflow
+  https://lists.apache.org/thread/09twdoyoybldlfj5gvk0qswtofh0rmp4
+  https://pypi.org/project/apache-airflow-providers-apache-hive
+  https://github.com/advisories/GHSA-rc58-qr9j-cpgw
+
+Improper Neutralization of Special Elements used in a Command ('Command Injection') vulnerability in Apache Software Foundation Apache Airflow Hive Provider.This issue affects Apache Airflow Hive Provider before 5.0.0.

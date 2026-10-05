@@ -1,0 +1,14 @@
+PYSEC-2022-253 PyPI/ansible-runner — A flaw was found in ansible-runner. An improper escaping of the shell command, while calling the ans
+package: ansible-runner
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3533f265f4349a3f2a0283158cd01b59a6bbc7bd (GIT: https://github.com/ansible/ansible-runner)
+  >= 0, < 2.1.0 (ECOSYSTEM)
+aliases: CVE-2021-4041, GHSA-6j58-grhv-2769
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=2028074
+  https://access.redhat.com/security/cve/CVE-2021-4041
+  https://github.com/ansible/ansible-runner/commit/3533f265f4349a3f2a0283158cd01b59a6bbc7bd
+  https://github.com/advisories/GHSA-6j58-grhv-2769
+
+A flaw was found in ansible-runner. An improper escaping of the shell command, while calling the ansible_runner.interface.run_command, can lead to parameters getting executed as host's shell command. A developer could unintentionally write code that gets executed in the host rather than the virtual environment.

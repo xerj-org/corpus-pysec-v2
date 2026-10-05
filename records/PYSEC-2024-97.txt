@@ -1,0 +1,24 @@
+PYSEC-2024-97 PyPI/apache-submarine — ** UNSUPPORTED WHEN ASSIGNED ** Improper Authentication vulnerability in Apache Submarine Commons Ut
+package: apache-submarine
+ecosystem: PyPI
+versions affected:
+  >= 0.8.0 (ECOSYSTEM)
+aliases: CVE-2024-36264, GHSA-jwcg-wv5x-vg3g
+references:
+  https://github.com/apache/submarine/pull/1125
+  https://github.com/apache/submarine/pull/1125
+  https://github.com/apache/submarine/pull/1125
+  https://lists.apache.org/thread/7mo0c7vbhpo8thvybl8wwvb0bccrg7r4
+  https://lists.apache.org/thread/7mo0c7vbhpo8thvybl8wwvb0bccrg7r4
+  http://www.openwall.com/lists/oss-security/2024/06/12/2
+  http://www.openwall.com/lists/oss-security/2024/06/12/2
+  https://github.com/advisories/GHSA-jwcg-wv5x-vg3g
+
+** UNSUPPORTED WHEN ASSIGNED ** Improper Authentication vulnerability in Apache Submarine Commons Utils.
+
+This issue affects Apache Submarine Commons Utils: from 0.8.0.
+
+As this project is retired, we do not plan to release a version that fixes this issue. Users are recommended to find an alternative or restrict access to the instance to trusted users.
+
+NOTE: This vulnerability only affects products that are no longer supported by the maintainer.
+

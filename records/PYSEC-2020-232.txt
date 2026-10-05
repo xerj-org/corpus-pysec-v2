@@ -1,0 +1,12 @@
+PYSEC-2020-232 PyPI/freewvs — In freewvs before 0.1.1, a user could create a large file that freewvs will try to read, which will 
+package: freewvs
+ecosystem: PyPI
+versions affected:
+  >= 0, < 18bbf2043e53f69e0119d24f8ae4edb274afb9b2 (GIT: https://github.com/schokokeksorg/freewvs)
+  >= 0, < 0.1.1 (ECOSYSTEM)
+aliases: CVE-2020-15100, GHSA-9cfv-9463-8gqv
+references:
+  https://github.com/schokokeksorg/freewvs/commit/18bbf2043e53f69e0119d24f8ae4edb274afb9b2
+  https://github.com/schokokeksorg/freewvs/security/advisories/GHSA-9cfv-9463-8gqv
+
+In freewvs before 0.1.1, a user could create a large file that freewvs will try to read, which will terminate a scan process. This has been patched in 0.1.1.

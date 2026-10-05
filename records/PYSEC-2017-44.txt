@@ -1,0 +1,14 @@
+PYSEC-2017-44 PyPI/django — In Django 1.10.x before 1.10.8 and 1.11.x before 1.11.5, HTML autoescaping was disabled in a portion
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 1.10, < 1.10.8, >= 1.11, < 1.11.5 (ECOSYSTEM)
+aliases: CVE-2017-12794, GHSA-9r8w-6x8c-6jr9
+references:
+  https://www.djangoproject.com/weblog/2017/sep/05/security-releases/
+  http://www.securitytracker.com/id/1039264
+  http://www.securityfocus.com/bid/100643
+  https://usn.ubuntu.com/3559-1/
+  https://github.com/advisories/GHSA-9r8w-6x8c-6jr9
+
+In Django 1.10.x before 1.10.8 and 1.11.x before 1.11.5, HTML autoescaping was disabled in a portion of the template for the technical 500 debug page. Given the right circumstances, this allowed a cross-site scripting attack. This vulnerability shouldn't affect most production sites since you shouldn't run with "DEBUG = True" (which makes this page accessible) in your production settings.

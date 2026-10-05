@@ -1,0 +1,13 @@
+PYSEC-2020-247 PyPI/plone — Plone before 5.2.3 allows SSRF attacks via the tracebacks feature (only available to the Manager rol
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.2.3 (ECOSYSTEM)
+aliases: CVE-2020-28735, GHSA-x7wf-5mjc-6x76
+references:
+  https://dist.plone.org/release/5.2.3/RELEASE-NOTES.txt
+  https://github.com/plone/Products.CMFPlone/issues/3209
+  https://www.misakikata.com/codes/plone/python-en.html
+  https://github.com/advisories/GHSA-x7wf-5mjc-6x76
+
+Plone before 5.2.3 allows SSRF attacks via the tracebacks feature (only available to the Manager role).

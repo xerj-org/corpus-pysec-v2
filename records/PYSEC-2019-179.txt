@@ -1,0 +1,11 @@
+PYSEC-2019-179 PyPI/flask — The Pallets Project Flask before 1.0 is affected by: unexpected memory usage. The impact is: denial 
+package: flask
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0 (ECOSYSTEM)
+aliases: CVE-2019-1010083, GHSA-5wv5-4vpf-pj6m
+references:
+  https://www.palletsprojects.com/blog/flask-1-0-released/
+  https://github.com/advisories/GHSA-5wv5-4vpf-pj6m
+
+The Pallets Project Flask before 1.0 is affected by: unexpected memory usage. The impact is: denial of service. The attack vector is: crafted encoded JSON data. The fixed version is: 1. NOTE: this may overlap CVE-2018-1000656.

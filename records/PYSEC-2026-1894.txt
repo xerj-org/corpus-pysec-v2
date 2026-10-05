@@ -1,0 +1,16 @@
+PYSEC-2026-1894 PyPI/salt — Salt junos Module Vulnerable to Code Injection via Specially Crafted YAML Payload
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3006.17 (ECOSYSTEM)
+aliases: CVE-2025-62348, GHSA-77w2-v593-vxvv
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-62348
+  https://github.com/saltstack/salt/issues/68469
+  https://github.com/saltstack/salt/pull/68472/commits/c17fd645edef208233dcac855615fced69409a00
+  https://docs.saltproject.io/en/latest/topics/releases/3006.17.html
+  https://github.com/saltstack/salt
+  https://pypi.org/project/salt
+  https://github.com/advisories/GHSA-77w2-v593-vxvv
+
+Salt's junos execution module contained an unsafe YAML decode/load usage. A specially crafted YAML payload processed by the junos module could lead to unintended code execution under the context of the Salt process.

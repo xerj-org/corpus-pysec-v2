@@ -1,0 +1,10 @@
+PYSEC-2026-615 PyPI/wagtail — Wagtail is an open source content management system built on Django. In versions prior to 7.0.8, 7.3
+package: wagtail
+ecosystem: PyPI
+versions affected:
+  >= 0, < 7.0.8, >= 7.1, < 7.3.3, >= 7.4, < 7.4.2 (ECOSYSTEM)
+aliases: CVE-2026-54262, GHSA-8634-mr4j-r72c
+references:
+  https://github.com/wagtail/wagtail/security/advisories/GHSA-8634-mr4j-r72c
+
+Wagtail is an open source content management system built on Django. In versions prior to 7.0.8, 7.3.3 and 7.4.2, a low-level user with the "Can submit translation" permission can create translations for any page, including those they do not have permissions for. This issue has been fixed in versions 7.0.8, 7.3.3, and 7.4.2.

@@ -1,0 +1,19 @@
+PYSEC-2009-3 PyPI/django — The Admin media handler in core/servers/basehttp.py in Django 1.0 and 0.96 does not properly map URL
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.1 (ECOSYSTEM)
+aliases: CVE-2009-2659, GHSA-9xg7-gg9m-rmq9
+references:
+  http://www.securityfocus.com/bid/35859
+  http://code.djangoproject.com/changeset/11353
+  http://www.djangoproject.com/weblog/2009/jul/28/security/
+  http://www.openwall.com/lists/oss-security/2009/07/29/2
+  http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=539134
+  http://secunia.com/advisories/36137
+  http://secunia.com/advisories/36153
+  https://www.redhat.com/archives/fedora-package-announce/2009-August/msg00055.html
+  https://www.redhat.com/archives/fedora-package-announce/2009-August/msg00069.html
+  https://github.com/advisories/GHSA-9xg7-gg9m-rmq9
+
+The Admin media handler in core/servers/basehttp.py in Django 1.0 and 0.96 does not properly map URL requests to expected "static media files," which allows remote attackers to conduct directory traversal attacks and read arbitrary files via a crafted URL.

@@ -1,0 +1,12 @@
+PYSEC-2024-306 PyPI/pywasm3 — wasm3 139076a contains a Use-After-Free in ForEachModule.
+package: pywasm3
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 139076a (ECOSYSTEM)
+aliases: CVE-2024-27530, GHSA-46r6-92jg-22jg
+references:
+  https://gist.github.com/haruki3hhh/94dd274487b58e037bcc8839dc88b203
+  https://github.com/wasm3/wasm3/issues/458
+  https://github.com/advisories/GHSA-46r6-92jg-22jg
+
+wasm3 139076a contains a Use-After-Free in ForEachModule.

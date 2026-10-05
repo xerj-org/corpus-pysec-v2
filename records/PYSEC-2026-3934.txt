@@ -1,0 +1,111 @@
+PYSEC-2026-3934 PyPI/vllm — vLLM: SSRF + arbitrary local file read in MiMoV2OmniMultiModalProcessor `_fetch_image` and audio loader bypass MediaConnector protections
+package: vllm
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.26.0 (ECOSYSTEM)
+aliases: CVE-2026-73560, GHSA-4hhp-h66f-j5j7
+references:
+  https://github.com/vllm-project/vllm/security/advisories/GHSA-4hhp-h66f-j5j7
+  https://nvd.nist.gov/vuln/detail/CVE-2026-73560
+  https://github.com/vllm-project/vllm/pull/43117
+  https://github.com/vllm-project/vllm/commit/54503ecec0f3ac31e5ecfc5f28652e4cc42307b5
+  https://github.com/vllm-project/vllm
+  https://github.com/vllm-project/vllm/releases/tag/v0.26.0
+  https://pypi.org/project/vllm
+  https://github.com/advisories/GHSA-4hhp-h66f-j5j7
+
+### Summary
+
+`vllm/transformers_utils/processors/mimo_v2_omni.py` — the multimodal processor for `MiMoV2OmniForCausalLM` — issues `requests.get(...)` directly on user-supplied image and audio URL strings and `Image.open(...)` on user-supplied local paths, **without** the SSRF / `allowed_local_media_path` checks that `vllm.multimodal.utils.MediaConnector` was hardened with in **GHSA-qh4c-xf7m-gxfc**, **GHSA-v359-jj2v-j536**, and **GHSA-pf3h-qjgv-vcpr**.
+
+This is the same bug class as those three published advisories, in a code path the patches missed. When a user passes a URL or local-file string through `multi_modal_data` (e.g. `LLM.generate(multi_modal_data={"image": "http://..."})`), the processor takes the unsanitized string and dispatches it without any URL-scheme allowlist, network-target allowlist, size cap, or local-path allowlist.
+
+### Details
+
+**File:** `vllm/transformers_utils/processors/mimo_v2_omni.py` (current `main`)
+
+**Sink 1 — image SSRF + local-file read (`_fetch_image`, lines 231–249):**
+
+```python
+def _fetch_image(src: Any) -> Image.Image:
+    if isinstance(src, Image.Image):
+        return _to_rgb(src)
+    if isinstance(src, bytes):
+        return _to_rgb(copy.deepcopy(Image.open(BytesIO(src))))
+    if isinstance(src, str):
+        if src.startswith(("http://", "https://")):
+            r = requests.get(src, timeout=30)              # SSRF: no allowlist, follows redirects
+            r.raise_for_status()
+            return _to_rgb(copy.deepcopy(Image.open(BytesIO(r.content))))
+        if src.startswith("file://"):
+            return _to_rgb(Image.open(src[7:]))            # arbitrary local file read
+        if src.startswith("data:image"):
+            ...
+        return _to_rgb(Image.open(src))                    # fallback also opens local files
+    raise ValueError(f"Unrecognized image source: {type(src)}")
+```
+
+**Sink 2 — audio SSRF (around line 471):**
+
+```python
+elif audio.startswith(("http://", "https://")):
+    r = requests.get(audio, timeout=30)                    # SSRF: same pattern
+    r.raise_for_status()
+    file_obj = io.BytesIO(r.content)
+```
+
+**Reachability.** `_fetch_image` is invoked from `MiMoVLProcessor.process_image`:
+
+```python
+def process_image(self, image: ImageInput) -> torch.Tensor:
+    kw = self._resolve_img_kw(image)
+    src = image.image
+    if isinstance(src, (str, bytes)):
+        src = _fetch_image(src)
+    ...
+```
+
+`MiMoVLProcessor` is wrapped by `MiMoV2OmniMultiModalProcessor` and registered for the `MiMoV2OmniForCausalLM` model architecture (`vllm/model_executor/models/mimo_v2_omni.py:1169`). Whenever a user passes a string into `multi_modal_data["image"]` (or `["audio"]`) for this model, the unsanitized URL/path reaches the sink.
+
+**Comparison to the recent fixes.** The remediation pattern adopted in the three earlier advisories was to route every external resource fetch through `MediaConnector`, which checks `allowed_local_media_path` and applies SSRF protection before issuing the network request. `chat_utils.py` (lines 838, 902, 924, 963, 1053, 1081) already uses `self._connector.fetch_image / fetch_audio / fetch_video`. The model processor in `mimo_v2_omni.py` was added later and skipped the connector — it calls `requests.get` and `Image.open` directly. Result: the public OpenAI chat-completion path is protected, but library use (`LLM.generate(multi_modal_data=...)`), batch processing, and any other path that lets a string reach the processor receive no protection.
+
+### Impact
+
+1. **SSRF — internal-network probing / cloud-metadata theft.** Standard `requests.get` follows redirects and accepts any URL. An attacker who controls a `multi_modal_data` value can:
+   - read AWS / GCP / Azure instance metadata (e.g. `http://169.254.169.254/latest/meta-data/iam/security-credentials/`),
+   - probe internal services on the vLLM host (`http://127.0.0.1:<port>`, `http://10.x.y.z`),
+   - exfiltrate via DNS / HTTP timing oracles even when the body is rejected by `Image.open`.
+2. **Arbitrary local file read** via `file://path` (line 242) and the unguarded fallback `Image.open(src)` (line 248). Any file readable by the vLLM process is reachable through the model pipeline; with suitable formats this exposes `/etc/passwd`, `~/.aws/credentials`, etc.
+3. **Server-side traffic generation / amplification** by hammering arbitrary URLs from the vLLM host, with a 30-second timeout per request.
+
+### Suggested remediation
+
+Replace direct `requests.get` and bare `Image.open` paths with `MediaConnector.fetch_image` / `fetch_audio_async` (or pass the inputs through `MediaConnector` before they reach the processor):
+
+```python
+# vllm/transformers_utils/processors/mimo_v2_omni.py
+from vllm.multimodal.utils import MediaConnector
+
+_connector = MediaConnector()
+
+def _fetch_image(src):
+    if isinstance(src, Image.Image):
+        return _to_rgb(src)
+    if isinstance(src, bytes):
+        return _to_rgb(copy.deepcopy(Image.open(BytesIO(src))))
+    if isinstance(src, str):
+        return _to_rgb(_connector.fetch_image(src))   # delegates to the hardened path
+    raise ValueError(f"Unrecognized image source: {type(src)}")
+```
+
+Same change for the audio loader at line 471. This re-uses the SSRF allowlist, `allowed_local_media_path` policy, and size caps that the previous patches added.
+
+Alternative: forbid `str` `src` from reaching the processor and require all multi-modal pre-processing to go through `chat_utils.py` / `MediaConnector` before hitting the model. Larger surface change, but completes the architectural fix.
+
+### Discovery
+
+Static review on `vllm@main` (HEAD as of 2026-04-30) — found by triaging the file list against the three recent SSRF advisories: the `mimo_v2_omni.py` processor, added after those fixes, reintroduced the same bypass class.
+
+### Reporter
+
+Ievgen Bondarenko — `sactransport2000@gmail.com` — GitHub `@ibondarenko1`

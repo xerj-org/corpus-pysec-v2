@@ -1,0 +1,32 @@
+PYSEC-2026-918 PyPI/sanic — sanic vulnerable to Path Traversal when using `app.static` if using encoded `%2F` URLs
+package: sanic
+ecosystem: PyPI
+versions affected:
+  >= 0, < 20.12.7, >= 22.0.0, < 22.6.1, >= 21.0.0, < 21.12.2 (ECOSYSTEM)
+aliases: CVE-2022-35920, GHSA-8cw9-5hmv-77w6
+references:
+  https://github.com/sanic-org/sanic/security/advisories/GHSA-8cw9-5hmv-77w6
+  https://nvd.nist.gov/vuln/detail/CVE-2022-35920
+  https://github.com/sanic-org/sanic/issues/2478
+  https://github.com/sanic-org/sanic/pull/2495
+  https://github.com/sanic-org/sanic
+  https://pypi.org/project/sanic
+  https://github.com/advisories/GHSA-8cw9-5hmv-77w6
+
+### Impact
+Access to lateral directories when using `app.static` if using encoded `%2F` URLs. Parent directory traversal is not impacted.
+
+### Patches
+- v20.12.7 (LTS)
+- v21.12.2 (LTS)
+- v22.6.1
+
+### References
+https://github.com/sanic-org/sanic/issues/2478
+https://github.com/sanic-org/sanic/pull/2495
+
+### For more information
+If you have any questions or comments about this advisory:
+* Open an issue in [the community forums](https://community.sanicframework.org/)
+* Ping us on [the Discord server](https://discord.gg/FARQzAEMAA)
+

@@ -1,0 +1,11 @@
+PYSEC-2025-149 PyPI/openc3 — A remote code execution (RCE) vulnerability in the Plugin Management component of OpenC3 COSMOS v6.0
+package: openc3
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 6.0.0 (ECOSYSTEM)
+aliases: CVE-2025-28386
+references:
+  https://openc3.com/
+  https://visionspace.com/openc3-cosmos-a-security-assessment-of-an-open-source-mission-framework/
+
+A remote code execution (RCE) vulnerability in the Plugin Management component of OpenC3 COSMOS v6.0.0 allows attackers to execute arbitrary code via uploading a crafted .txt file.

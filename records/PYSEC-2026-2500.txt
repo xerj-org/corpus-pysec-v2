@@ -1,0 +1,17 @@
+PYSEC-2026-2500 PyPI/google-cloud-aiplatform — Google Cloud Vertex AI has a a vulnerability involving predictable bucket naming
+package: google-cloud-aiplatform
+ecosystem: PyPI
+versions affected:
+  >= 1.21.0, < 1.133.0 (ECOSYSTEM)
+aliases: CVE-2026-2473, GHSA-wh2j-26j7-9728
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-2473
+  https://docs.cloud.google.com/support/bulletins#gcp-2026-012
+  https://github.com/googleapis/python-aiplatform
+  https://github.com/googleapis/python-aiplatform/releases/tag/v1.133.0
+  https://pypi.org/project/google-cloud-aiplatform
+  https://github.com/advisories/GHSA-wh2j-26j7-9728
+
+Predictable bucket naming in Vertex AI Experiments in Google Cloud Vertex AI from version 1.21.0 up to (but not including) 1.133.0 on Google Cloud Platform allows an unauthenticated remote attacker to achieve cross-tenant remote code execution, model theft, and poisoning via pre-creating predictably named Cloud Storage buckets (Bucket Squatting).
+
+This vulnerability was patched and no customer action is needed.

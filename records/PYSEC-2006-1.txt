@@ -1,0 +1,19 @@
+PYSEC-2006-1 PyPI/cherrypy — Directory traversal vulnerability in the staticfilter component in CherryPy before 2.1.1 allows remo
+package: cherrypy
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.1.1 (ECOSYSTEM)
+aliases: CVE-2006-0847, GHSA-vx77-5pf4-c9wr
+references:
+  http://sourceforge.net/project/shownotes.php?release_id=384316&group_id=56099
+  http://groups.google.com/group/cherrypy-announce/browse_thread/thread/92b2972f774fe6df/2f63afc9433dc306#2f63afc9433dc306
+  http://www.securityfocus.com/bid/16760
+  http://www.cherrypy.org/
+  http://secunia.com/advisories/18944
+  http://www.gentoo.org/security/en/glsa/glsa-200605-16.xml
+  http://secunia.com/advisories/20344
+  http://www.vupen.com/english/advisories/2006/0677
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/24809
+  https://github.com/advisories/GHSA-vx77-5pf4-c9wr
+
+Directory traversal vulnerability in the staticfilter component in CherryPy before 2.1.1 allows remote attackers to read arbitrary files via ".." sequences in unspecified vectors.

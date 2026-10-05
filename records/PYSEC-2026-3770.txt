@@ -1,0 +1,11 @@
+PYSEC-2026-3770 PyPI/openssl-encrypt — openssl_encrypt versions before 1.4.0 fail to apply sandbox restrictions in the default process isol
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.0 (ECOSYSTEM)
+aliases: CVE-2026-74895, GHSA-623h-chj7-hfx8
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-623h-chj7-hfx8
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-plugin-sandbox-bypass-via-process-isolation
+
+openssl_encrypt versions before 1.4.0 fail to apply sandbox restrictions in the default process isolation mode for plugin execution. Attackers can execute malicious plugins with unrestricted access to the filesystem, network, subprocess execution, and all Python modules.

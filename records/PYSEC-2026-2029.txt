@@ -1,0 +1,46 @@
+PYSEC-2026-2029 PyPI/vyper — Vyper's `concat()` builtin may elide side-effects for zero-length arguments
+package: vyper
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.4.2rc1 (ECOSYSTEM)
+aliases: CVE-2025-47285, GHSA-qhr6-mgqr-mchm
+references:
+  https://github.com/vyperlang/vyper/security/advisories/GHSA-qhr6-mgqr-mchm
+  https://nvd.nist.gov/vuln/detail/CVE-2025-47285
+  https://github.com/vyperlang/vyper/pull/4644
+  https://github.com/vyperlang/vyper
+  https://github.com/vyperlang/vyper/blob/68b68c4b30c5ef2f312b4674676170b8a6eaa316/vyper/builtins/functions.py#L560-L562
+  https://pypi.org/project/vyper
+  https://github.com/advisories/GHSA-qhr6-mgqr-mchm
+
+### Impact
+`concat()` may skip evaluation of side effects when the length of an argument is zero. this is due to a fastpath in the implementation which skips evaluation of argument expressions when their length is zero:
+https://github.com/vyperlang/vyper/blob/68b68c4b30c5ef2f312b4674676170b8a6eaa316/vyper/builtins/functions.py#L560-L562
+
+in practice, it would be very unusual in user code to construct zero-length bytestrings using an expression with side-effects, since zero-length bytestrings are typically constructed with the empty literal `b""`; the only way to construct an empty bytestring which has side effects would be with the ternary operator introduced in v0.3.8, e.g. `b"" if self.do_some_side_effect() else b""`.
+
+the following example demonstrates how the issue would look in user code
+```vyper
+counter: public(uint256)
+
+@external
+def test() -> Bytes[256]:
+    a: Bytes[256] = concat(b"" if self.sideeffect() else b"", b"aaaa")
+    return a
+
+def sideeffect() -> bool:
+    self.counter += 1
+    return True
+```
+
+the severity assigned is low, since, as mentioned, this would be a very unusual pattern in user-code.
+
+### Patches
+
+fix is tracked in https://github.com/vyperlang/vyper/pull/4644
+
+### Workarounds
+don't have side effects in expressions which construct zero-length bytestrings.
+
+### References
+_Are there any links users can visit to find out more?_

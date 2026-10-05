@@ -1,0 +1,11 @@
+PYSEC-2024-76 PyPI/ebookmeta — An XML External Entity (XXE) vulnerability in the ebookmeta.get_metadata function of ebookmeta befor
+package: ebookmeta
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.2.8 (ECOSYSTEM)
+aliases: CVE-2024-36827, GHSA-whf4-fpj8-pgg8
+references:
+  https://github.com/dnkorpushov/ebookmeta/issues/16#issue-2317712335
+  https://github.com/advisories/GHSA-whf4-fpj8-pgg8
+
+An XML External Entity (XXE) vulnerability in the ebookmeta.get_metadata function of ebookmeta before v1.2.8 allows attackers to access sensitive information or cause a Denial of Service (DoS) via crafted XML input.

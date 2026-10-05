@@ -1,0 +1,14 @@
+PYSEC-2021-317 PyPI/pillow — The package pillow from 0 and before 8.3.2 are vulnerable to Regular Expression Denial of Service (R
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 9e08eb8f78fdfd2f476e1b20b7cf38683754866b (GIT: https://github.com/python-pillow/Pillow)
+  >= 0, < 8.3.2 (ECOSYSTEM)
+aliases: CVE-2021-23437, SNYK-PYTHON-PILLOW-1319443, GHSA-98vv-pw6r-q6q4
+references:
+  https://pillow.readthedocs.io/en/stable/releasenotes/8.3.2.html
+  https://github.com/python-pillow/Pillow/commit/9e08eb8f78fdfd2f476e1b20b7cf38683754866b
+  https://snyk.io/vuln/SNYK-PYTHON-PILLOW-1319443
+  https://github.com/advisories/GHSA-98vv-pw6r-q6q4
+
+The package pillow from 0 and before 8.3.2 are vulnerable to Regular Expression Denial of Service (ReDoS) via the getrgb function.

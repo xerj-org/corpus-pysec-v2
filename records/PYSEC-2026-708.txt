@@ -1,0 +1,16 @@
+PYSEC-2026-708 PyPI/opencv-contrib-python — Improper Input Validation in OpenCV
+package: opencv-contrib-python
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.3.1.11 (ECOSYSTEM)
+aliases: CVE-2016-1517, GHSA-fffj-9qwg-qmh5
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2016-1517
+  https://github.com/opencv/opencv/issues/5956
+  https://github.com/opencv/opencv/pull/9376
+  https://arxiv.org/pdf/1701.04739.pdf
+  https://github.com/opencv/opencv-python
+  https://pypi.org/project/opencv-contrib-python
+  https://github.com/advisories/GHSA-fffj-9qwg-qmh5
+
+OpenCV 3.0.0 allows remote attackers to cause a denial of service (segfault) via vectors involving corrupt chunks. This issue was fixed in OpenCV version 3.3.1 (corresponding to OpenCV 3.3.1.11).

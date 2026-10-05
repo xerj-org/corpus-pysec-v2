@@ -1,0 +1,10 @@
+PYSEC-2022-43187 PyPI/wabt — wasm-interp v1.0.29 was discovered to contain a heap overflow via the component std::vector<wabt::Ty
+package: wabt
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 1.0.29 (ECOSYSTEM)
+aliases: CVE-2022-43281
+references:
+  https://github.com/WebAssembly/wabt/issues/1981
+
+wasm-interp v1.0.29 was discovered to contain a heap overflow via the component std::vector<wabt::Type, std::allocator<wabt::Type>>::size() at /bits/stl_vector.h.

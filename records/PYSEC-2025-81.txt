@@ -1,0 +1,11 @@
+PYSEC-2025-81 PyPI/agentscope — A Cross-Origin Resource Sharing (CORS) vulnerability exists in modelscope/agentscope version v0.0.4.
+package: agentscope
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.0.4 (ECOSYSTEM)
+aliases: CVE-2024-8487, GHSA-75v5-6885-59f9
+references:
+  https://huntr.com/bounties/7aca7507-a94e-4e63-83a2-15648e5c4067
+  https://github.com/advisories/GHSA-75v5-6885-59f9
+
+A Cross-Origin Resource Sharing (CORS) vulnerability exists in modelscope/agentscope version v0.0.4. The CORS configuration on the agentscope server does not properly restrict access to only trusted origins, allowing any external domain to make requests to the API. This can lead to unauthorized data access, information disclosure, and potential further exploitation, thereby compromising the integrity and confidentiality of the system.

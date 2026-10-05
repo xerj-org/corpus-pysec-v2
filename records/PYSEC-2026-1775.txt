@@ -1,0 +1,15 @@
+PYSEC-2026-1775 PyPI/pgadmin4 — OAuth2 client ID and secret exposed through the web browser
+package: pgadmin4
+ecosystem: PyPI
+versions affected:
+  >= 0, < 8.12 (ECOSYSTEM)
+aliases: CVE-2024-9014, GHSA-jm9x-rx9x-wpqj
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-9014
+  https://github.com/pgadmin-org/pgadmin4/issues/7945
+  https://github.com/pgadmin-org/pgadmin4
+  https://www.pgadmin.org/docs/pgadmin4/8.12/release_notes_8_12.html
+  https://pypi.org/project/pgadmin4
+  https://github.com/advisories/GHSA-jm9x-rx9x-wpqj
+
+pgAdmin versions 8.11 and earlier are vulnerable to a security flaw in OAuth2 authentication. This vulnerability allows an attacker to potentially obtain the client ID and secret, leading to unauthorized access to user data.

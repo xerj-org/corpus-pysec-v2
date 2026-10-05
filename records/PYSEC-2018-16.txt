@@ -1,0 +1,13 @@
+PYSEC-2018-16 PyPI/mayan-edms-ng — An issue was discovered in Mayan EDMS before 3.0.2. The Appearance app sets window.location directly
+package: mayan-edms-ng
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.0.2 (ECOSYSTEM)
+aliases: CVE-2018-16405, GHSA-fpcv-j2q9-vqhw
+references:
+  https://gitlab.com/mayan-edms/mayan-edms/issues/494
+  https://gitlab.com/mayan-edms/mayan-edms/commit/9ebe80595afe4fdd1e2c74358d6a9421f4ce130e
+  https://gitlab.com/mayan-edms/mayan-edms/blob/master/HISTORY.rst
+  https://github.com/advisories/GHSA-fpcv-j2q9-vqhw
+
+An issue was discovered in Mayan EDMS before 3.0.2. The Appearance app sets window.location directly, leading to XSS.

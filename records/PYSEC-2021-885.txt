@@ -1,0 +1,12 @@
+PYSEC-2021-885 PyPI/exiv2 — A stack exhaustion issue in the printIFDStructure function of Exiv2 0.27 allows remote attackers to 
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2020-18898
+references:
+  https://github.com/Exiv2/exiv2/issues/741
+  https://github.com/Exiv2/exiv2/issues/741
+  https://cwe.mitre.org/data/definitions/674.html
+
+A stack exhaustion issue in the printIFDStructure function of Exiv2 0.27 allows remote attackers to cause a denial of service (DOS) via a crafted file.

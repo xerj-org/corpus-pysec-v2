@@ -1,0 +1,11 @@
+PYSEC-2026-169 PyPI/distributed — Dask distributed is a distributed task scheduler for Dask. Prior to 2026.1.0, when Jupyter Lab, jupy
+package: distributed
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2026.1.0 (ECOSYSTEM)
+aliases: CVE-2026-23528, GHSA-c336-7962-wfj2
+references:
+  https://github.com/dask/distributed/security/advisories/GHSA-c336-7962-wfj2
+  https://github.com/dask/distributed/commit/ab72092a8a938923c2bb51a2cd14ca26614827fa
+
+Dask distributed is a distributed task scheduler for Dask. Prior to 2026.1.0, when Jupyter Lab, jupyter-server-proxy, and Dask distributed are all run together, it is possible to craft a URL which will result in code being executed by Jupyter due to a cross-side-scripting (XSS) bug in the Dask dashboard. It is possible for attackers to craft a phishing URL that assumes Jupyter Lab and Dask may be running on localhost and using default ports. If a user clicks on the malicious link it will open an error page in the Dask Dashboard via the Jupyter Lab proxy which will cause code to be executed by the default Jupyter Python kernel. This vulnerability is fixed in 2026.1.0.

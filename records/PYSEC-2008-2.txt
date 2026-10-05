@@ -1,0 +1,20 @@
+PYSEC-2008-2 PyPI/django — The administration application in Django 0.91, 0.95, and 0.96 stores unauthenticated HTTP POST reque
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.1 (ECOSYSTEM)
+aliases: CVE-2008-3909, GHSA-r5cj-wv24-92p5
+references:
+  http://www.openwall.com/lists/oss-security/2008/09/03/4
+  http://www.djangoproject.com/weblog/2008/sep/02/security/
+  http://secunia.com/advisories/31837
+  https://bugzilla.redhat.com/show_bug.cgi?id=460966
+  https://www.redhat.com/archives/fedora-package-announce/2008-September/msg00091.html
+  https://www.redhat.com/archives/fedora-package-announce/2008-September/msg00131.html
+  http://www.debian.org/security/2008/dsa-1640
+  http://secunia.com/advisories/31961
+  http://osvdb.org/47906
+  http://www.vupen.com/english/advisories/2008/2533
+  https://github.com/advisories/GHSA-r5cj-wv24-92p5
+
+The administration application in Django 0.91, 0.95, and 0.96 stores unauthenticated HTTP POST requests and processes them after successful authentication occurs, which allows remote attackers to conduct cross-site request forgery (CSRF) attacks and delete or modify data via unspecified requests.

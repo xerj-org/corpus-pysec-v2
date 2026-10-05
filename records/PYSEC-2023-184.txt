@@ -1,0 +1,11 @@
+PYSEC-2023-184 PyPI/opencv-python-headless — opencv-python-headless versions before v4.8.1.78 bundled libwebp binaries in wheels that are vulnera
+package: opencv-python-headless
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.8.1.78 (ECOSYSTEM)
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-4863
+  https://github.com/opencv/opencv/wiki/ChangeLog#version481
+  https://github.com/opencv/opencv/pull/24274
+
+opencv-python-headless versions before v4.8.1.78 bundled libwebp binaries in wheels that are vulnerable to CVE-2023-4863. opencv-python-headless v4.8.1.78 upgrades the bundled libwebp binary to v1.3.2.

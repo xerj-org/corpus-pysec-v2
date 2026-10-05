@@ -1,0 +1,12 @@
+PYSEC-2026-2100 PyPI/aiohttp — AIOHTTP is an asynchronous HTTP client/server framework for asyncio and Python. Prior to version 3.1
+package: aiohttp
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.13.4 (ECOSYSTEM)
+aliases: CVE-2026-34518, GHSA-966j-vmvw-g2g9
+references:
+  https://github.com/aio-libs/aiohttp/releases/tag/v3.13.4
+  https://github.com/aio-libs/aiohttp/commit/5351c980dcec7ad385730efdf4e1f4338b24fdb6
+  https://github.com/aio-libs/aiohttp/security/advisories/GHSA-966j-vmvw-g2g9
+
+AIOHTTP is an asynchronous HTTP client/server framework for asyncio and Python. Prior to version 3.13.4, when following redirects to a different origin, aiohttp drops the Authorization header, but retains the Cookie and Proxy-Authorization headers. This issue has been patched in version 3.13.4.

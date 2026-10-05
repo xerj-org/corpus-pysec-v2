@@ -1,0 +1,11 @@
+PYSEC-2026-3625 PyPI/msgpack — MessagePack is the serializer implementation for Python msgpack.org. Prior to 1.2.1, there is an Out
+package: msgpack
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.2.1 (ECOSYSTEM)
+aliases: CVE-2026-57585, GHSA-6v7p-g79w-8964
+references:
+  https://github.com/msgpack/msgpack-python/security/advisories/GHSA-6v7p-g79w-8964
+  https://github.com/msgpack/msgpack-python/commit/2c56ddb5d0025ed481d962c0f5d62d19dec7476d
+
+MessagePack is the serializer implementation for Python msgpack.org. Prior to 1.2.1, there is an Out-of-bounds read/crash on Unpacker reuse after a caught error, potentially leading to a DoS attack.  If the Unpacker is used repeatedly after an error occurs, the process may crash with a SEGV. This issue has been fixed in version 1.2.1.

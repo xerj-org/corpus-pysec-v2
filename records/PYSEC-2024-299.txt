@@ -1,0 +1,10 @@
+PYSEC-2024-299 PyPI/pyd3tn — Reachable Assertion in BPv7 parser in µD3TN v0.14.0 allows attacker to disrupt service via malformed
+package: pyd3tn
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.14.0-NA (ECOSYSTEM)
+aliases: CVE-2024-10455
+references:
+  https://gitlab.com/d3tn/ud3tn/-/issues/227
+
+Reachable Assertion in BPv7 parser in µD3TN v0.14.0 allows attacker to disrupt service via malformed Extension Block

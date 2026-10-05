@@ -1,0 +1,18 @@
+PYSEC-2026-236 PyPI/pyphetools — Malicious code in pyphetools (PyPI)
+package: pyphetools
+ecosystem: PyPI
+versions affected:
+  0.9.120
+aliases: MAL-2026-5324
+references:
+  https://inspector.pypi.io/project/pyphetools/0.9.120/packages/d3/24/d2a5d61332a4d5d1a7694286462d4108c1c67b3137a0d05e1dc9583b83bb/pyphetools-0.9.120-py3-none-any.whl/pyphetools-setup.pth
+  https://www.endorlabs.com/learn/shai-hulud-hades-wave-hits-six-pypi-bioinformatics-packages
+  https://www.stepsecurity.io/blog/the-hades-campaign-pypi-packages
+
+Part of the "Hades" wave of the Shai-Hulud supply-chain campaign. On 2026-06-08,
+malicious phantom releases of pyphetools were published to PyPI using stolen
+credentials. The package executes a bundled JavaScript payload (via the Bun
+runtime) on import that harvests and exfiltrates credentials and attempts
+self-propagation. This entry is a summary; behavior may not be fully
+characterized here. See the linked references for detailed analysis and
+indicators of compromise.

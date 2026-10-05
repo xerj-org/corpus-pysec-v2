@@ -1,0 +1,12 @@
+PYSEC-2026-2253 PyPI/pillow — Pillow is a Python imaging library. Prior to 12.3.0, PIL/PcfFontFile.py _load_bitmaps() read glyph d
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 12.3.0 (ECOSYSTEM)
+aliases: CVE-2026-54059, GHSA-8v84-f9pq-wr9x
+references:
+  https://github.com/python-pillow/Pillow/blob/main/docs/releasenotes/12.3.0.rst
+  https://github.com/python-pillow/Pillow/commit/0a263e6264aa5399988d9acd3bbfbca2ca3ec77d
+  https://github.com/python-pillow/Pillow/security/advisories/GHSA-8v84-f9pq-wr9x
+
+Pillow is a Python imaging library. Prior to 12.3.0, PIL/PcfFontFile.py _load_bitmaps() read glyph dimensions from the PCF METRICS section and passed them directly to Image.frombytes() without calling Image._decompression_bomb_check(), allowing crafted PCF font data to cause excessive memory allocation. This issue is fixed in version 12.3.0.

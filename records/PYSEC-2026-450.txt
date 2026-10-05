@@ -1,0 +1,17 @@
+PYSEC-2026-450 PyPI/pgadmin4 — pgadmin4 has a Meta-Command Filter Command Execution
+package: pgadmin4
+ecosystem: PyPI
+versions affected:
+  >= 0, < 9.11 (ECOSYSTEM)
+aliases: CVE-2025-13780, GHSA-fxmw-jcgr-w44v
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-13780
+  https://github.com/pgadmin-org/pgadmin4/issues/9368
+  https://github.com/pgadmin-org/pgadmin4/pull/9426
+  https://github.com/pgadmin-org/pgadmin4/commit/1d397395f75320ca1d4ed5e9ca721c603415e836
+  https://github.com/pgadmin-org/pgadmin4/commit/d5a909f14cb9713d89b49481ad1929fad89f4576
+  https://github.com/pgadmin-org/pgadmin4
+  https://pypi.org/project/pgadmin4
+  https://github.com/advisories/GHSA-fxmw-jcgr-w44v
+
+The PLAIN restore meta-command filter introduced in pgAdmin as part of the fix for CVE-2025-12762 does not detect meta-commands when a SQL file begins with a UTF-8 Byte Order Mark (EF BB BF) or other special byte sequences. The implemented filter uses the function `has_meta_commands()`, which scans raw bytes using a regular expression. The regex does not treat the bytes as ignorable, so meta-commands such as `\\!` remain undetected. When pgAdmin invokes psql with --file, psql strips the bytes and executes the command. This can result in remote command execution during a restore operation.

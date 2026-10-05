@@ -1,0 +1,11 @@
+PYSEC-2021-37 PyPI/pillow — An issue was discovered in Pillow before 8.1.1. In TiffDecode.c, there is an out-of-bounds read in T
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 8.1.1 (ECOSYSTEM)
+aliases: CVE-2021-25291, GHSA-mvg9-xffr-p774
+references:
+  https://pillow.readthedocs.io/en/stable/releasenotes/8.1.1.html
+  https://github.com/advisories/GHSA-mvg9-xffr-p774
+
+An issue was discovered in Pillow before 8.1.1. In TiffDecode.c, there is an out-of-bounds read in TiffreadRGBATile via invalid tile boundaries.

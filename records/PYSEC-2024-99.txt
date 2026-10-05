@@ -1,0 +1,10 @@
+PYSEC-2024-99 PyPI/openslides — OpenSlides 4.0.15 was discovered to be using a weak hashing algorithm to store passwords.
+package: openslides
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2024-22892
+references:
+  https://gist.github.com/mdickopp/0cab0d7f91b1f4ea0d326dd976db70e5
+
+OpenSlides 4.0.15 was discovered to be using a weak hashing algorithm to store passwords.

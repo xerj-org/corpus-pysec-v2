@@ -1,0 +1,11 @@
+PYSEC-2026-3774 PyPI/openssl-encrypt — openssl_encrypt versions before 1.4.9 fail to escape attacker-controlled key_id values printed to st
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.9 (ECOSYSTEM)
+aliases: CVE-2026-81695, GHSA-jwfm-99h7-2w5x
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-jwfm-99h7-2w5x
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-1.4.9-terminal-injection-via-key-id
+
+openssl_encrypt versions before 1.4.9 fail to escape attacker-controlled key_id values printed to stderr during decrypt auto-detection. Attackers can craft encrypted files with malicious key_id containing escape sequences to repaint terminal output and forge authenticity verification blocks.

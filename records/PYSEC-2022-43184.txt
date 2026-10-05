@@ -1,0 +1,10 @@
+PYSEC-2022-43184 PyPI/rdiffweb — Withdrawn as duplicate of PYSEC-2022-292. Improper Handling of Length Parameter Inconsistency in Git
+package: rdiffweb
+ecosystem: PyPI
+aliases: CVE-2022-3290, GHSA-5v95-j4rr-6f3c
+references:
+  https://github.com/ikus060/rdiffweb/commit/667657c6fe2b336c90be37f37fb92f65df4feee3
+  https://huntr.dev/bounties/d8b8519d-96a5-484c-8141-624c54290bf5
+  https://github.com/advisories/GHSA-5v95-j4rr-6f3c
+
+Withdrawn as duplicate of PYSEC-2022-292. Improper Handling of Length Parameter Inconsistency in GitHub repository ikus060/rdiffweb prior to 2.4.8.

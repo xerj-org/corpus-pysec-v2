@@ -1,0 +1,15 @@
+PYSEC-2026-2392 PyPI/bbot — BBOT: Path traversal (Zip-Slip) in unarchive module - incomplete fix for CVE-2025-10284
+package: bbot
+ecosystem: PyPI
+versions affected:
+  >= 2.3.1, < 2.8.5 (ECOSYSTEM)
+aliases: CVE-2026-12565, GHSA-3vgw-585j-4m45
+references:
+  https://github.com/blacklanternsecurity/bbot/security/advisories/GHSA-3vgw-585j-4m45
+  https://nvd.nist.gov/vuln/detail/CVE-2026-12565
+  https://github.com/blacklanternsecurity/bbot/commit/4fb38fd6e
+  https://github.com/blacklanternsecurity/bbot
+  https://pypi.org/project/bbot
+  https://github.com/advisories/GHSA-3vgw-585j-4m45
+
+The `unarchive` internal module's archive extraction commands perform no code-level validation on extracted file paths, relying entirely on the behavior of external tools (e.g. GNU tar) which varies by platform. While CVE-2025-10284 addressed git-specific RCE vectors, the underlying archive extraction path traversal was never fixed. On systems with GNU tar < 1.34 (Ubuntu 20.04, Debian Buster, CentOS 7, many Docker base images), a malicious archive can write files outside the intended extraction directory.

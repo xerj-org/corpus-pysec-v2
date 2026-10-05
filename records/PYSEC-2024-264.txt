@@ -1,0 +1,14 @@
+PYSEC-2024-264 PyPI/apache-airflow — Apache Airflow version 2.9.0 has a vulnerability that allows an authenticated attacker to inject mal
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 2.9.0-NA, <= 2.9.0-beta1, <= 2.9.0-beta2, <= 2.9.0-rc1, <= 2.9.0-rc2, <= 2.9.0-rc3 (ECOSYSTEM)
+aliases: CVE-2024-32077, GHSA-52gm-qmg3-r4qp
+references:
+  http://www.openwall.com/lists/oss-security/2024/05/14/1
+  https://lists.apache.org/thread/gsjmnrqb3m5fzp0vgpty1jxcywo91v77
+  https://github.com/apache/airflow/pull/38882
+  https://github.com/advisories/GHSA-52gm-qmg3-r4qp
+
+Apache Airflow version 2.9.0 has a vulnerability that allows an authenticated attacker to inject malicious data into the task instance logs. 
+Users are recommended to upgrade to version 2.9.1, which fixes this issue.

@@ -1,0 +1,11 @@
+PYSEC-2023-42 PyPI/pretix — rami.io pretix before 4.17.1 allows OAuth application authorization from a logged-out session. The f
+package: pretix
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.17.1 (ECOSYSTEM)
+aliases: CVE-2023-27891, GHSA-r76w-3wwq-jv6v
+references:
+  https://pretix.eu/about/en/blog/20230306-release-4171/
+  https://github.com/advisories/GHSA-r76w-3wwq-jv6v
+
+rami.io pretix before 4.17.1 allows OAuth application authorization from a logged-out session. The fixed versions are 4.15.1, 4.16.1, and 4.17.1.

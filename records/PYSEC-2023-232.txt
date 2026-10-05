@@ -1,0 +1,17 @@
+PYSEC-2023-232 PyPI/apache-airflow — We failed to apply CVE-2023-40611 in 2.7.1 and this vulnerability was marked as fixed then. Apache A
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.7.3 (ECOSYSTEM)
+aliases: CVE-2023-47037, GHSA-hm9r-7f84-25c9
+references:
+  https://github.com/apache/airflow/pull/33413
+  https://lists.apache.org/thread/04y4vrw1t2xl030gswtctc4nt1w90cb0
+  https://github.com/advisories/GHSA-hm9r-7f84-25c9
+
+We failed to apply CVE-2023-40611 in 2.7.1 and this vulnerability was marked as fixed then. 
+
+Apache Airflow, versions before 2.7.3, is affected by a vulnerability that allows authenticated and DAG-view authorized Users to modify some DAG run detail values when submitting notes. This could have them alter details such as configuration parameters, start date, etc. 
+
+Users should upgrade to version 2.7.3 or later which has removed the vulnerability.
+

@@ -1,0 +1,43 @@
+PYSEC-2026-4165 PyPI/social-auth-core — social-auth-core: VK App backend accepts unsigned callback data when auth_key is missing
+package: social-auth-core
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.0.0 (ECOSYSTEM)
+aliases: CVE-2026-57178, GHSA-3c93-f73f-qc9h
+references:
+  https://github.com/python-social-auth/social-core/security/advisories/GHSA-3c93-f73f-qc9h
+  https://nvd.nist.gov/vuln/detail/CVE-2026-57178
+  https://github.com/python-social-auth/social-core/pull/1811
+  https://github.com/python-social-auth/social-core/commit/1bfacdd0379e5eb46e169a99ab648b835e9bb6a2
+  https://github.com/python-social-auth/social-core
+  https://github.com/python-social-auth/social-core/releases/tag/5.0.0
+  https://pypi.org/project/social-auth-core
+  https://github.com/advisories/GHSA-3c93-f73f-qc9h
+
+### Impact
+
+The `vk-app` backend accepted VK application callback data without verifying the callback signature when the `auth_key` parameter was omitted.
+
+Applications using this backend could treat unsigned attacker-controlled data as a verified VK identity. An attacker could choose callback fields such as `viewer_id`, `access_token`, `api_id`, and `api_result`, potentially allowing authentication as an arbitrary VK user ID.
+
+The issue affects only applications using the `vk-app` backend.
+
+### Patches
+
+The issue has been fixed by requiring `auth_key` to be present and valid before callback data is trusted.
+
+Users should upgrade to a patched version.
+
+Fix:
+
+* https://github.com/python-social-auth/social-core/pull/1811
+
+### Workarounds
+
+Applications that cannot upgrade immediately should disable the `vk-app` backend by removing `social_core.backends.vk.VKAppOAuth2` from `SOCIAL_AUTH_AUTHENTICATION_BACKENDS`.
+
+There is no complete workaround while continuing to use the vulnerable backend.
+
+### Credits
+
+Reported by @lalalala5678 through GitHub private vulnerability reporting.

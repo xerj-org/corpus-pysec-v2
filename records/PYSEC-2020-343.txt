@@ -1,0 +1,14 @@
+PYSEC-2020-343 PyPI/blosc2 — blosc2.c in Blosc C-Blosc2 through 2.0.0.beta.5 has a heap-based buffer overflow when there is a lac
+package: blosc2
+ecosystem: PyPI
+versions affected:
+  >= 0, < c4c6470e88210afc95262c8b9fcc27e30ca043ee (GIT: https://github.com/Blosc/c-blosc2)
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2020-29367, GHSA-8c7c-2c8j-3xfp
+references:
+  https://github.com/Blosc/c-blosc2/commit/c4c6470e88210afc95262c8b9fcc27e30ca043ee
+  https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=26442
+  https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=26442
+  https://github.com/advisories/GHSA-8c7c-2c8j-3xfp
+
+blosc2.c in Blosc C-Blosc2 through 2.0.0.beta.5 has a heap-based buffer overflow when there is a lack of space to write compressed data.

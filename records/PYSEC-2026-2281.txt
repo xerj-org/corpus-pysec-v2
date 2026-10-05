@@ -1,0 +1,19 @@
+PYSEC-2026-2281 PyPI/starlette — Starlette is a lightweight ASGI framework/toolkit. In versions 1.0.1 and earlier, StaticFiles on Win
+package: starlette
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.1.0 (ECOSYSTEM)
+aliases: CVE-2026-48818, GHSA-wqp7-x3pw-xc5r
+references:
+  https://access.redhat.com/security/cve/CVE-2026-48818
+  https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-48818.json
+  https://access.redhat.com/errata/RHSA-2026:30087
+  https://access.redhat.com/errata/RHSA-2026:30088
+  https://access.redhat.com/errata/RHSA-2026:30089
+  https://github.com/Kludex/starlette/releases/tag/1.1.0
+  https://github.com/Kludex/starlette/security/advisories/GHSA-wqp7-x3pw-xc5r
+  https://bugzilla.redhat.com/show_bug.cgi?id=2490020
+  https://github.com/Kludex/starlette/commit/fd53168a7767b6b55ba5af787fd88f49e33cabc5
+  https://github.com/Kludex/starlette/pull/3287
+
+Starlette is a lightweight ASGI framework/toolkit. In versions 1.0.1 and earlier, StaticFiles on Windows is vulnerable to SSRF. An UNC path such as \\attacker.com\share can cause os.path.realpath to initiate an outbound SMB connection before the path is rejected, exposing the service account’s NTLMv2 credentials for offline cracking or relay even though the HTTP response is only a 404. The issue affects default follow_symlink=False deployments, including frameworks built on Starlette such as FastAPI; POSIX systems and follow_symlink=True are unaffected. The issue is fixed in 1.1.0.

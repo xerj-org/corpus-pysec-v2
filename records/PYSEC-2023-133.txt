@@ -1,0 +1,13 @@
+PYSEC-2023-133 PyPI/vyper — Vyper is a Pythonic programming language that targets the Ethereum Virtual Machine (EVM). Prior to v
+package: vyper
+ecosystem: PyPI
+versions affected:
+  >= 0, < 019a37ab98ff53f04fecfadf602b6cd5ac748f7f (GIT: https://github.com/vyperlang/vyper)
+  >= 0, < 0.3.9 (ECOSYSTEM)
+aliases: CVE-2023-37902, GHSA-f5x6-7qgp-jhf3
+references:
+  https://github.com/vyperlang/vyper/security/advisories/GHSA-f5x6-7qgp-jhf3
+  https://github.com/vyperlang/vyper/security/advisories/GHSA-f5x6-7qgp-jhf3
+  https://github.com/vyperlang/vyper/commit/019a37ab98ff53f04fecfadf602b6cd5ac748f7f
+
+Vyper is a Pythonic programming language that targets the Ethereum Virtual Machine (EVM). Prior to version 0.3.10, the ecrecover precompile does not fill the output buffer if the signature does not verify. However, the ecrecover builtin will still return whatever is at memory location 0. This means that the if the compiler has been convinced to write to the 0 memory location with specially crafted data (generally, this can happen with a hashmap access or immutable read) just before the ecrecover, a signature check might pass on an invalid signature. Version 0.3.10 contains a patch for this issue.

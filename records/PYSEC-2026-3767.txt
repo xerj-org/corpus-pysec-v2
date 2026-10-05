@@ -1,0 +1,11 @@
+PYSEC-2026-3767 PyPI/openssl-encrypt — openssl_encrypt versions before 1.4.0 contain hardcoded database credentials in standalone server co
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.0 (ECOSYSTEM)
+aliases: CVE-2026-74891, GHSA-v4vm-4xf2-fhqj
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-v4vm-4xf2-fhqj
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-hardcoded-database-credentials
+
+openssl_encrypt versions before 1.4.0 contain hardcoded database credentials in standalone server configuration files. Attackers on the same network can access PostgreSQL databases using well-known default credentials to retrieve sensitive data.

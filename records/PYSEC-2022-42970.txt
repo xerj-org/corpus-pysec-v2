@@ -1,0 +1,15 @@
+PYSEC-2022-42970 PyPI/apache-airflow — In Apache Airflow versions prior to 2.4.2, the "Trigger DAG with config" screen was susceptible to X
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.4.2 (ECOSYSTEM)
+aliases: CVE-2022-43982, GHSA-h63r-9xxf-f2c7
+references:
+  https://lists.apache.org/thread/vqnvdrfsw9z7v7c46qh3psjgr7wy959l
+  https://lists.apache.org/thread/vqnvdrfsw9z7v7c46qh3psjgr7wy959l
+  https://lists.apache.org/thread/vqnvdrfsw9z7v7c46qh3psjgr7wy959l
+  https://github.com/apache/airflow/pull/27143
+  https://github.com/apache/airflow/pull/27143
+  https://github.com/advisories/GHSA-h63r-9xxf-f2c7
+
+In Apache Airflow versions prior to 2.4.2, the "Trigger DAG with config" screen was susceptible to XSS attacks via the `origin` query argument.

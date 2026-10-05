@@ -1,0 +1,11 @@
+PYSEC-2026-2283 PyPI/strawberry-graphql — Strawberry GraphQL is a library for creating GraphQL APIs. In versions 0.71.0 through 0.315.6, the Q
+package: strawberry-graphql
+ecosystem: PyPI
+versions affected:
+  >= 0.71.0, < 0.315.7 (ECOSYSTEM)
+aliases: CVE-2026-47706, GHSA-qfwv-87qj-98xq
+references:
+  https://github.com/strawberry-graphql/strawberry/releases/tag/0.315.7
+  https://github.com/strawberry-graphql/strawberry/security/advisories/GHSA-qfwv-87qj-98xq
+
+Strawberry GraphQL is a library for creating GraphQL APIs. In versions 0.71.0 through 0.315.6, the QueryDepthLimiter extension is vulnerable to an Application-level DOS due to a lack of cycle detection in fragment spreads. When a query contains circular fragment references the determine_depth function enters an infinite recursion, leading to a RecursionError and crashing the validation process. Version 0.315.7 patches the issue.

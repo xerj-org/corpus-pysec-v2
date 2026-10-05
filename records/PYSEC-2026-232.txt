@@ -1,0 +1,18 @@
+PYSEC-2026-232 PyPI/ensmallen — Malicious code in ensmallen (PyPI)
+package: ensmallen
+ecosystem: PyPI
+versions affected:
+  0.8.101
+aliases: MAL-2026-5315
+references:
+  https://inspector.pypi.io/project/ensmallen/0.8.101/packages/53/bf/6210699d6165e632ebad20175808bf71e4a09a48dab3a1e0a4c002d8cc5b/ensmallen-0.8.101-py3-none-any.whl/ensmallen/_index.js
+  https://www.endorlabs.com/learn/shai-hulud-hades-wave-hits-six-pypi-bioinformatics-packages
+  https://www.stepsecurity.io/blog/the-hades-campaign-pypi-packages
+
+Part of the "Hades" wave of the Shai-Hulud supply-chain campaign. On 2026-06-08,
+malicious phantom releases of ensmallen were published to PyPI using stolen
+credentials. The package executes a bundled JavaScript payload (via the Bun
+runtime) on import that harvests and exfiltrates credentials and attempts
+self-propagation. This entry is a summary; behavior may not be fully
+characterized here. See the linked references for detailed analysis and
+indicators of compromise.

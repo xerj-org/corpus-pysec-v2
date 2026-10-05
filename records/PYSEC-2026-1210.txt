@@ -1,0 +1,18 @@
+PYSEC-2026-1210 PyPI/backend-ai — Backend.AI Missing Authorization vulnerability
+package: backend-ai
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 25.3.3 (ECOSYSTEM)
+aliases: CVE-2025-49651, GHSA-h889-475r-wfmm
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-49651
+  https://github.com/lablup/backend.ai/pull/7587
+  https://github.com/lablup/backend.ai
+  https://hiddenlayer.com/sai_security_advisor/2025-05-backendai-49653
+  https://hiddenlayer.com/sai_security_advisor/2025-06-backendai
+  https://pypi.org/project/backend-ai
+  https://github.com/advisories/GHSA-h889-475r-wfmm
+
+Missing Authorization in Lablup's BackendAI allows attackers to takeover all active sessions; Accessing, stealing, or altering any data accessible in the session. This vulnerability exists in all current versions of BackendAI.
+
+NOTE: The maintainers of BackendAI do not consider this report to fit with their threat model and advise users to follow security advice from https://github.com/lablup/backend.ai/pull/7587 in their instances to protect themselves from the conditions that would lead to the situation described in the CVE record.

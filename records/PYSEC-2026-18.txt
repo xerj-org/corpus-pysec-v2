@@ -1,0 +1,12 @@
+PYSEC-2026-18 PyPI/apache-airflow — In case of SQL errors, exception/stack trace of errors was exposed in API even if "api/expose_stack_
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.2.0 (ECOSYSTEM)
+aliases: CVE-2026-30912
+references:
+  http://www.openwall.com/lists/oss-security/2026/04/17/5
+  https://lists.apache.org/thread/tp6kz1hnfb3zsrrtg19myo8x5x80w8r9
+  https://github.com/apache/airflow/pull/63028
+
+In case of SQL errors, exception/stack trace of errors was exposed in API even if "api/expose_stack_traces" was set to false. That could lead to exposing additional information to potential attacker. Users are recommended to upgrade to Apache Airflow 3.2.0, which fixes the issue.

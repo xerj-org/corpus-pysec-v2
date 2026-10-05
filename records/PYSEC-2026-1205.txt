@@ -1,0 +1,36 @@
+PYSEC-2026-1205 PyPI/aws-advanced-python-wrapper — AWS Advanced Python Wrapper: Privilege Escalation in Aurora PostgreSQL instance
+package: aws-advanced-python-wrapper
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.0 (ECOSYSTEM)
+aliases: CVE-2025-12967, GHSA-4jvf-wx3f-2x8q
+references:
+  https://github.com/aws/aws-advanced-go-wrapper/security/advisories/GHSA-7wq2-32h4-9hc9
+  https://github.com/aws/aws-advanced-jdbc-wrapper/security/advisories/GHSA-7xw4-g7mm-r4hh
+  https://github.com/aws/aws-advanced-python-wrapper/security/advisories/GHSA-4jvf-wx3f-2x8q
+  https://github.com/aws/aws-pgsql-odbc/security/advisories/GHSA-q327-fgm8-7mxf
+  https://nvd.nist.gov/vuln/detail/CVE-2025-12967
+  https://github.com/aws/aws-advanced-python-wrapper/pull/1007
+  https://aws.amazon.com/security/security-bulletins/AWS-2025-028
+  https://github.com/aws/aws-advanced-python-wrapper
+  https://github.com/aws/aws-advanced-python-wrapper/releases/tag/1.4.0
+  https://pypi.org/project/aws-advanced-python-wrapper
+  https://github.com/advisories/GHSA-4jvf-wx3f-2x8q
+
+### Description of Vulnerability:
+
+An issue in AWS Wrappers for Amazon Aurora PostgreSQL may allow for privilege escalation to rds_superuser role. A low privilege authenticated user can create a crafted function that could be executed with permissions of other Amazon Relational Database Service (RDS) users.
+
+AWS recommends customers upgrade to the following versions:  AWS Python Wrapper to v1.4.0
+
+
+### Source of Vulnerability Report: 
+Allistair Ishmael Hakim <allistair.hakim@gmail.com>
+
+
+### Affected products & versions: 
+AWS Python Wrapper < 1.4.0
+
+
+### Platforms: 
+MacOS/Windows/Linux

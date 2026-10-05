@@ -1,0 +1,14 @@
+PYSEC-2026-1231 PyPI/calibreweb — Improper Restriction of Excessive Authentication Attempts in calibreweb
+package: calibreweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.6.20 (ECOSYSTEM)
+aliases: CVE-2022-2525, GHSA-jg8w-wgx2-g7q4
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2022-2525
+  https://github.com/janeczku/calibre-web/commit/49e4f540c9b204c7e39b3c27ceadecd83ed60e7e
+  https://huntr.dev/bounties/9ff87820-c14c-4454-9764-406496254ef0
+  https://pypi.org/project/calibreweb
+  https://github.com/advisories/GHSA-jg8w-wgx2-g7q4
+
+Improper Restriction of Excessive Authentication Attempts in GitHub repository janeczku/calibre-web prior to 0.6.20.

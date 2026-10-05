@@ -1,0 +1,15 @@
+PYSEC-2022-43068 PyPI/ansible-runner — A race condition flaw was found in ansible-runner, where an attacker could watch for rapid creation 
+package: ansible-runner
+ecosystem: PyPI
+versions affected:
+  >= 2.0.0, < 2.1.0 (ECOSYSTEM)
+aliases: CVE-2021-3702, GHSA-772j-xvf9-qpf5
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=1977965
+  https://bugzilla.redhat.com/show_bug.cgi?id=1977965
+  https://bugzilla.redhat.com/show_bug.cgi?id=1977965
+  https://access.redhat.com/security/cve/CVE-2021-3702
+  https://github.com/ansible/ansible-runner/pull/742/commits
+  https://github.com/ansible/ansible-runner/pull/742/commits
+
+A race condition flaw was found in ansible-runner, where an attacker could watch for rapid creation and deletion of a temporary directory, substitute their directory at that name, and then have access to ansible-runner's private_data_dir the next time ansible-runner made use of the private_data_dir. The highest Threat out of this flaw is to integrity and confidentiality.

@@ -1,0 +1,11 @@
+PYSEC-2026-214 PyPI/daphne — daphne before 4.2.2 reconstructs a raw HTTP request from Twisted's parsed headers and feeds it to au
+package: daphne
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.2.2 (ECOSYSTEM)
+aliases: CVE-2026-44546, GHSA-xh68-hfp5-5x5m
+references:
+  https://github.com/django/daphne/blob/main/CHANGELOG.txt
+  https://github.com/advisories/GHSA-xh68-hfp5-5x5m
+
+daphne before 4.2.2 reconstructs a raw HTTP request from Twisted's parsed headers and feeds it to autobahn for WebSocket handshake processing. Twisted does not treat \x0b, \x0c, \x1c, \x1d, \x1e, or \x85 as header line separators, but autobahn decodes header values to str and calls splitlines(). An attacker can exploit this parser differential to inject additional headers into the ASGI scope passed to the application. daphne now rejects requests with these bytes in any header value with a 400 response.

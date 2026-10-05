@@ -1,0 +1,13 @@
+PYSEC-2017-39 PyPI/salt — Salt-api in SaltStack Salt before 2015.8.13, 2016.3.x before 2016.3.5, and 2016.11.x before 2016.11.
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2015.8.13, >= 2016.3, < 2016.3.5, >= 2016.11, < 2016.11.2 (ECOSYSTEM)
+aliases: CVE-2017-5200, GHSA-8r7r-x48r-pf8f
+references:
+  https://docs.saltstack.com/en/latest/topics/releases/2016.11.2.html
+  https://docs.saltstack.com/en/2016.3/topics/releases/2016.3.5.html
+  https://docs.saltstack.com/en/2016.3/topics/releases/2015.8.13.html
+  https://github.com/advisories/GHSA-8r7r-x48r-pf8f
+
+Salt-api in SaltStack Salt before 2015.8.13, 2016.3.x before 2016.3.5, and 2016.11.x before 2016.11.2 allows arbitrary command execution on a salt-master via Salt's ssh_client.

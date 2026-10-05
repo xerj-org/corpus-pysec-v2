@@ -1,0 +1,10 @@
+PYSEC-2026-179 PyPI/pyjwt — PyJWT is a JSON Web Token implementation in Python. Prior to 2.13.0, when the verifier is decoding J
+package: pyjwt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.13.0 (ECOSYSTEM)
+aliases: CVE-2026-48526, GHSA-xgmm-8j9v-c9wx
+references:
+  https://github.com/jpadilla/pyjwt/security/advisories/GHSA-xgmm-8j9v-c9wx
+
+PyJWT is a JSON Web Token implementation in Python. Prior to 2.13.0, when the verifier is decoding JSON Web Tokens, while supporting both asymmetric and HMAC algorithms, the library does not validate use of JSON Web Keys in HMAC algorithm, allowing attacker to use the issuer public key as the secret key for HMAC algorithm. This vulnerability is fixed in 2.13.0.

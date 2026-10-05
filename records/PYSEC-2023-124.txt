@@ -1,0 +1,11 @@
+PYSEC-2023-124 PyPI/paddlepaddle — Heap buffer overflow in paddle.trace in PaddlePaddle before 2.5.0. This flaw can lead to a denial of
+package: paddlepaddle
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.5.0 (ECOSYSTEM)
+aliases: CVE-2023-38671, GHSA-hh7p-hvm3-rg88
+references:
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-003.md
+  https://github.com/advisories/GHSA-hh7p-hvm3-rg88
+
+Heap buffer overflow in paddle.trace in PaddlePaddle before 2.5.0. This flaw can lead to a denial of service, information disclosure, or more damage is possible.

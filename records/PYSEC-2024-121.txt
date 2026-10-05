@@ -1,0 +1,14 @@
+PYSEC-2024-121 PyPI/openc3 — OpenC3 COSMOS provides the functionality needed to send commands to and receive data from one or mor
+package: openc3
+ecosystem: PyPI
+versions affected:
+  >= 0, < b5ab34fe7fa54c0c8171c4aa3caf4e03d6f63bd7 (GIT: https://github.com/OpenC3/cosmos)
+  >= 0, < 5.19.0 (ECOSYSTEM)
+aliases: CVE-2024-47529, GHSA-4xqv-47rm-37mm
+references:
+  https://github.com/OpenC3/cosmos/security/advisories/GHSA-4xqv-47rm-37mm
+  https://github.com/OpenC3/cosmos/commit/b5ab34fe7fa54c0c8171c4aa3caf4e03d6f63bd7
+  https://securitylab.github.com/advisories/GHSL-2024-127_GHSL-2024-129_OpenC3_COSMOS
+  https://securitylab.github.com/advisories/GHSL-2024-127_GHSL-2024-129_OpenC3_COSMOS
+
+OpenC3 COSMOS provides the functionality needed to send commands to and receive data from one or more embedded systems. OpenC3 COSMOS stores the password of a user unencrypted in the LocalStorage of a web browser. This makes the user password susceptible to exfiltration via Cross-site scripting (see GHSL-2024-128). This vulnerability is fixed in 5.19.0. This only affects Open Source edition, and not OpenC3 COSMOS Enterprise Edition.

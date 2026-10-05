@@ -1,0 +1,13 @@
+PYSEC-2024-15 PyPI/changedetection-io — changedetection.io is an open source tool designed to monitor websites for content changes. In affec
+package: changedetection-io
+ecosystem: PyPI
+versions affected:
+  >= 0, < 402f1e47e78ecd155b1e90f30cce424ff7763e0f (GIT: https://github.com/dgtlmoon/changedetection.io)
+  >= 0.39.14, < 0.45.13 (ECOSYSTEM)
+aliases: CVE-2024-23329, GHSA-hcvp-2cc7-jrwr
+references:
+  https://github.com/dgtlmoon/changedetection.io/security/advisories/GHSA-hcvp-2cc7-jrwr
+  https://github.com/dgtlmoon/changedetection.io/security/advisories/GHSA-hcvp-2cc7-jrwr
+  https://github.com/dgtlmoon/changedetection.io/commit/402f1e47e78ecd155b1e90f30cce424ff7763e0f
+
+ changedetection.io is an open source tool designed to monitor websites for content changes. In affected versions the API endpoint `/api/v1/watch/<uuid>/history` can be accessed by any unauthorized user. As a result any unauthorized user can check one's watch history. However, because unauthorized party first needs to know a watch UUID, and the watch history endpoint itself returns only paths to the snapshot on the server, an impact on users' data privacy is minimal. This issue has been addressed in version 0.45.13. Users are advised to upgrade. There are no known workarounds for this vulnerability.

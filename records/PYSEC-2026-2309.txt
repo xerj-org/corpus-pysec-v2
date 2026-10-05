@@ -1,0 +1,12 @@
+PYSEC-2026-2309 PyPI/weblate — Weblate is a web based localization tool. Prior to 5.16.0, the SSH management console did not valida
+package: weblate
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.16 (ECOSYSTEM)
+aliases: CVE-2026-24126, GHSA-33fm-6gp7-4p47
+references:
+  https://github.com/WeblateOrg/weblate/pull/17722
+  https://github.com/WeblateOrg/weblate/commit/78773cc141ce0a97900c11341e6cf856451395fd
+  https://github.com/WeblateOrg/weblate/security/advisories/GHSA-33fm-6gp7-4p47
+
+Weblate is a web based localization tool. Prior to 5.16.0, the SSH management console did not validate the passed input while adding the SSH host key, which could lead to an argument injection to `ssh-add`. Version 5.16.0 fixes the issue. As a workaround, properly limit access to the management console.

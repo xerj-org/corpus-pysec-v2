@@ -1,0 +1,14 @@
+PYSEC-2025-44 PyPI/django-helpdesk — django-helpdesk before 1.0.0 allows Sensitive Data Exposure because of os.umask(0) in models.py.
+package: django-helpdesk
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0d91fcca0b6a98a4e7248368bc1dc4f06c682159 (GIT: https://github.com/django-helpdesk/django-helpdesk)
+  >= 0, < 1.0.0 (ECOSYSTEM)
+aliases: CVE-2018-25111, GHSA-m4jx-m5hg-qrxx
+references:
+  https://github.com/django-helpdesk/django-helpdesk/issues/591
+  https://github.com/django-helpdesk/django-helpdesk/pull/1120
+  https://github.com/django-helpdesk/django-helpdesk/releases/tag/v1.0.0
+  https://github.com/advisories/GHSA-m4jx-m5hg-qrxx
+
+django-helpdesk before 1.0.0 allows Sensitive Data Exposure because of os.umask(0) in models.py.

@@ -1,0 +1,11 @@
+PYSEC-2026-2122 PyPI/cairosvg — CairoSVG is an SVG converter based on Cairo, a 2D graphics library. Prior to Kozea/CairoSVG has expo
+package: cairosvg
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.9.0 (ECOSYSTEM)
+aliases: CVE-2026-31899, GHSA-f38f-5xpm-9r7c
+references:
+  https://github.com/Kozea/CairoSVG/commit/6dde8685ed3f19837767bce7a13a5491e3d0e0bf
+  https://github.com/Kozea/CairoSVG/security/advisories/GHSA-f38f-5xpm-9r7c
+
+CairoSVG is an SVG converter based on Cairo, a 2D graphics library. Prior to Kozea/CairoSVG has exponential denial of service via recursive <use> element amplification in cairosvg/defs.py. This causes CPU exhaustion from a small input.

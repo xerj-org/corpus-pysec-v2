@@ -1,0 +1,26 @@
+PYSEC-2026-3005 PyPI/pypdf — pypdf has a possible infinite loop when loading circular /Prev entries in cross-reference streams
+package: pypdf
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.7.2 (ECOSYSTEM)
+aliases: CVE-2026-27628, GHSA-2rw7-x74f-jg35
+references:
+  https://github.com/py-pdf/pypdf/security/advisories/GHSA-2rw7-x74f-jg35
+  https://nvd.nist.gov/vuln/detail/CVE-2026-27628
+  https://github.com/py-pdf/pypdf/issues/3654
+  https://github.com/py-pdf/pypdf/commit/f0a462d36971cf077d74492a348d0d06fd60ea4d
+  https://github.com/py-pdf/pypdf
+  https://pypi.org/project/pypdf
+  https://github.com/advisories/GHSA-2rw7-x74f-jg35
+
+### Impact
+
+An attacker who uses this vulnerability can craft a PDF which leads to an infinite loop. This requires reading the file.
+
+### Patches
+
+This has been fixed in [pypdf==6.7.2](https://github.com/py-pdf/pypdf/releases/tag/6.7.2).
+
+### Workarounds
+
+If users cannot upgrade yet, consider applying the changes from PR [#3655](https://github.com/py-pdf/pypdf/pull/3655).

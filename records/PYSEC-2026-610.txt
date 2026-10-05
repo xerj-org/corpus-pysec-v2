@@ -1,0 +1,18 @@
+PYSEC-2026-610 PyPI/ufish — Malicious code in ufish (PyPI)
+package: ufish
+ecosystem: PyPI
+versions affected:
+  0.1.2, 0.1.3
+aliases: MAL-2026-5285
+references:
+  https://inspector.pypi.io/project/ufish/0.1.3/packages/c9/3d/62d93be789de98b0c3c23c5b3dfcf3f569d21984fed2613057d6dbae0daa/ufish-0.1.3-py3-none-any.whl//ufish-setup.pth
+  https://www.endorlabs.com/learn/shai-hulud-hades-wave-hits-six-pypi-bioinformatics-packages
+  https://www.stepsecurity.io/blog/the-hades-campaign-pypi-packages
+
+Part of the "Hades" wave of the Shai-Hulud supply-chain campaign. On 2026-06-08,
+malicious phantom releases of ufish were published to PyPI using stolen
+credentials. The package executes a bundled JavaScript payload (via the Bun
+runtime) on import that harvests and exfiltrates credentials and attempts
+self-propagation. This entry is a summary; behavior may not be fully
+characterized here. See the linked references for detailed analysis and
+indicators of compromise.

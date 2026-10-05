@@ -1,0 +1,11 @@
+PYSEC-2026-3803 PyPI/openssl-encrypt — openssl_encrypt before 1.4.9 fails to validate KDF cost parameters in encrypted file metadata and ke
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.9 (ECOSYSTEM)
+aliases: CVE-2026-81721, GHSA-7894-5gw8-69hr
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-7894-5gw8-69hr
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-1.4.9-denial-of-service-via-kdf-2
+
+openssl_encrypt before 1.4.9 fails to validate KDF cost parameters in encrypted file metadata and keystore headers, allowing attackers to trigger unbounded memory allocation. Attackers can craft malicious encrypted files declaring arbitrarily large Argon2, scrypt, or balloon KDF parameters to exhaust system memory and crash the process without authentication.

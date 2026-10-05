@@ -1,0 +1,20 @@
+PYSEC-2026-2191 PyPI/kafka-python — kafka-python prior to 2.3.2 contains a denial-of-service vulnerability in SCRAM authentication handl
+package: kafka-python
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.3.2 (ECOSYSTEM)
+aliases: CVE-2026-10143, GHSA-2jcm-hq8r-84wx
+references:
+  https://access.redhat.com/security/cve/CVE-2026-10143
+  https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-10143.json
+  https://access.redhat.com/errata/RHSA-2026:28571
+  https://access.redhat.com/errata/RHSA-2026:30076
+  https://access.redhat.com/errata/RHSA-2026:33683
+  https://bugzilla.redhat.com/show_bug.cgi?id=2487722
+  https://github.com/dpkp/kafka-python/commit/6e4831444f972d169cdd11f5c8d50333cea3f19b
+  https://github.com/dpkp/kafka-python/pull/3019
+  https://github.com/dpkp/kafka-python/pull/3026
+  https://www.vulncheck.com/advisories/kafka-python-prior-to-dos-via-scram-iteration-count-in-scram-py
+  https://github.com/advisories/GHSA-2jcm-hq8r-84wx
+
+kafka-python prior to 2.3.2 contains a denial-of-service vulnerability in SCRAM authentication handling that allows a malicious or machine-in-the-middle broker to freeze the client event loop by supplying an excessively large iteration count. In scram.py, ScramClient.process_server_first_message() passes the broker-controlled SCRAM iteration count directly to hashlib.pbkdf2_hmac() without validation, blocking producer sends, consumer polls, admin operations, and heartbeats, which can cause consumer group eviction and repeated reconnect failures.

@@ -1,0 +1,14 @@
+PYSEC-2023-150 PyPI/exiv2 — Buffer Overflow vulnerability in tEXtToDataBuf function in pngimage.cpp in Exiv2 0.27.1 allows remot
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2020-18831
+references:
+  https://www.exiv2.org/download.html
+  https://github.com/Exiv2/exiv2/issues/828
+  https://github.com/Exiv2/exiv2/issues/828
+  https://github.com/Exiv2/exiv2/issues/828
+  https://github.com/Exiv2/exiv2/issues/828
+
+Buffer Overflow vulnerability in tEXtToDataBuf function in pngimage.cpp in Exiv2 0.27.1 allows remote attackers to cause a denial of service and other unspecified impacts via use of crafted file.

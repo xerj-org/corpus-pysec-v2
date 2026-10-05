@@ -1,0 +1,12 @@
+PYSEC-2023-276 PyPI/mayan-edms — An XSS vulnerability was discovered in the Mayan EDMS DMS. Successful XSS exploitation was observed 
+package: mayan-edms
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.3.6 (ECOSYSTEM)
+aliases: CVE-2022-47419, GHSA-5m6v-2xgf-qhrw
+references:
+  https://www.rapid7.com/blog/post/2023/02/07/multiple-dms-xss-cve-2022-47412-through-cve-20222-47419/
+  https://www.rapid7.com/blog/post/2023/02/07/multiple-dms-xss-cve-2022-47412-through-cve-20222-47419/
+  https://www.mayan-edms.com/news/2023/02/version-4.3.6/
+
+An XSS vulnerability was discovered in the Mayan EDMS DMS. Successful XSS exploitation was observed in the in-product tagging system.

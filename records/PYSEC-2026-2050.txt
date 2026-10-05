@@ -1,0 +1,46 @@
+PYSEC-2026-2050 PyPI/wiremock — Domain restrictions bypass via DNS Rebinding in WireMock and WireMock Studio webhooks, proxy and recorder modes
+package: wiremock
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.6.1 (ECOSYSTEM)
+aliases: CVE-2023-41329, GHSA-pmxq-pj47-j8j4
+references:
+  https://github.com/wiremock/wiremock/security/advisories/GHSA-pmxq-pj47-j8j4
+  https://nvd.nist.gov/vuln/detail/CVE-2023-41329
+  https://github.com/wiremock/wiremock
+  https://wiremock.org/docs/configuration/#preventing-proxying-to-and-recording-from-specific-target-addresses
+  https://pypi.org/project/wiremock
+  https://github.com/advisories/GHSA-pmxq-pj47-j8j4
+
+### Impact
+
+The proxy mode of WireMock, can be protected by the network restrictions configuration, as documented in [Preventing proxying to and recording from specific target addresses](https://wiremock.org/docs/configuration/#preventing-proxying-to-and-recording-from-specific-target-addresses). These restrictions can be configured using the domain names, and in such a case the configuration is vulnerable to the DNS rebinding attacks. A similar patch was applied in WireMock 3.0.0-beta-15 for the WireMock Webhook Extensions.
+
+The root cause of the attack is a defect in the logic which allows for a race condition triggered by a DNS server whose address expires in between the initial validation and the outbound network request that might go to a domain that was supposed to be prohibited. Control over a DNS service is required to exploit this attack, so it has high execution complexity and limited impact.
+
+### Affected versions
+
+- WireMock 3,x until 3.0.3 (security patch), on default settings in environments with access to the network
+- WireMock 2.x until 2.35.1 (security patch), on default settings in environments with access to the network
+- Python WireMock until 2.6.1
+- WireMock Studio - all versions, this proprietary product was discontinued in 2022
+
+
+### Patches
+
+- WireMock 3.0.3 + the 3.0.3-1 Docker image
+- WireMock 2.35.1 + the 2.35.1-1 Docker image - backport to WireMock 2.x
+- Python WireMock 2.6.1
+
+### Workarounds
+
+For WireMock:
+
+- Option 1: Configure WireMock to use IP addresses instead of the domain names in the outbound URLs subject to DNS rebinding
+- Option 2: Use external firewall rules to define the list of permitted destinations
+
+For WireMock Studio: N/A. Switch to another distribution, there will be no fix provided. The vendor of former WireMock Studio recommends migration to [WireMock Cloud](https://www.wiremock.io/product)
+
+### References
+
+- CVE-2023-41327 - Related issue in the WireMock Webhooks Extension

@@ -1,0 +1,11 @@
+PYSEC-2016-25 PyPI/flask-oidc — flask-oidc version 0.1.2 and earlier is vulnerable to an open redirect
+package: flask-oidc
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0.0 (ECOSYSTEM)
+aliases: CVE-2016-1000001, GHSA-f9q6-69fh-4w5w
+references:
+  https://github.com/puiterwijk/flask-oidc/blob/master/flask_oidc/__init__.py#L293
+  https://github.com/advisories/GHSA-f9q6-69fh-4w5w
+
+flask-oidc version 0.1.2 and earlier is vulnerable to an open redirect

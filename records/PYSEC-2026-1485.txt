@@ -1,0 +1,14 @@
+PYSEC-2026-1485 PyPI/kedro — Kedro allows Remote Code Execution by Pulling Micro Packages
+package: kedro
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.19.8 (ECOSYSTEM)
+aliases: CVE-2024-12215, GHSA-rm69-wvpv-r2w7
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-12215
+  https://github.com/kedro-org/kedro
+  https://huntr.com/bounties/fad27503-97a4-4933-91d4-96223b8c54d8
+  https://pypi.org/project/kedro
+  https://github.com/advisories/GHSA-rm69-wvpv-r2w7
+
+In kedro-org/kedro version 0.19.8, the `pull_package()` API function allows users to download and extract micro packages from the Internet. However, the function `project_wheel_metadata()` within the code path can execute the `setup.py` file inside the tar file, leading to remote code execution (RCE) by running arbitrary commands on the victim's machine.

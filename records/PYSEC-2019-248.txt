@@ -1,0 +1,15 @@
+PYSEC-2019-248 PyPI/exiv2 — An issue was discovered in Exiv2 0.27. There is infinite recursion at Exiv2::Image::printTiffStructu
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2019-9143
+references:
+  https://research.loginsoft.com/bugs/uncontrolled-recursion-loop-in-exiv2imageprinttiffstructure-exiv2-0-27/
+  https://research.loginsoft.com/bugs/uncontrolled-recursion-loop-in-exiv2imageprinttiffstructure-exiv2-0-27/
+  https://github.com/Exiv2/exiv2/issues/711
+  https://github.com/Exiv2/exiv2/issues/711
+  http://www.securityfocus.com/bid/107161
+  http://www.securityfocus.com/bid/107161
+
+An issue was discovered in Exiv2 0.27. There is infinite recursion at Exiv2::Image::printTiffStructure in the file image.cpp. This can be triggered by a crafted file. It allows an attacker to cause Denial of Service (Segmentation fault) or possibly have unspecified other impact.

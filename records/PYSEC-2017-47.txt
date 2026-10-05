@@ -1,0 +1,17 @@
+PYSEC-2017-47 PyPI/ipython — Cross-site request forgery in the REST API in IPython 2 and 3.
+package: ipython
+ecosystem: PyPI
+versions affected:
+  >= 0, < a05fe052a18810e92d9be8c1185952c13fe4e5b0, < 1415a9710407e7c14900531813c15ba6165f0816 (GIT: https://github.com/ipython/ipython)
+  >= 0, < 3.2.1 (ECOSYSTEM)
+aliases: CVE-2015-5607, GHSA-7fc2-rm35-2pp7
+references:
+  https://github.com/ipython/ipython/commit/a05fe052a18810e92d9be8c1185952c13fe4e5b0
+  https://github.com/ipython/ipython/commit/1415a9710407e7c14900531813c15ba6165f0816
+  https://bugzilla.redhat.com/show_bug.cgi?id=1243842
+  http://www.openwall.com/lists/oss-security/2015/07/21/3
+  http://lists.fedoraproject.org/pipermail/package-announce/2015-July/162936.html
+  http://lists.fedoraproject.org/pipermail/package-announce/2015-July/162671.html
+  https://github.com/advisories/GHSA-7fc2-rm35-2pp7
+
+Cross-site request forgery in the REST API in IPython 2 and 3.

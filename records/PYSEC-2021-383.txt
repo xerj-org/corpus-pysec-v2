@@ -1,0 +1,11 @@
+PYSEC-2021-383 PyPI/nameko — Nameko through 2.13.0 can be tricked into performing arbitrary code execution when deserializing the
+package: nameko
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.14.0 (ECOSYSTEM)
+aliases: CVE-2021-41078, GHSA-6p52-jr3q-c94g
+references:
+  https://github.com/nameko/nameko/security/advisories/GHSA-6p52-jr3q-c94g
+  https://github.com/nameko/nameko
+
+Nameko through 2.13.0 can be tricked into performing arbitrary code execution when deserializing the config file.

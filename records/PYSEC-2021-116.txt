@@ -1,0 +1,13 @@
+PYSEC-2021-116 PyPI/bikeshed — This affects the package bikeshed before 3.0.0. This can occur when an untrusted source file contain
+package: bikeshed
+ecosystem: PyPI
+versions affected:
+  >= 0, < b2f668fca204260b1cad28d5078e93471cb6b2dd (GIT: https://github.com/tabatkins/bikeshed)
+  >= 0, < 3.0.0 (ECOSYSTEM)
+aliases: CVE-2021-23422, SNYK-PYTHON-BIKESHED-1537646, GHSA-87cj-px37-rc3x
+references:
+  https://snyk.io/vuln/SNYK-PYTHON-BIKESHED-1537646
+  https://github.com/tabatkins/bikeshed/commit/b2f668fca204260b1cad28d5078e93471cb6b2dd
+  https://github.com/advisories/GHSA-87cj-px37-rc3x
+
+This affects the package bikeshed before 3.0.0. This can occur when an untrusted source file containing Inline Tag Command metadata is processed. When an arbitrary OS command is executed, the command output would be included in the HTML output.

@@ -1,0 +1,69 @@
+PYSEC-2026-4086 PyPI/mcp-atlassian — MCP Atlassian: Arbitrary file read via confluence_upload_attachment allows exfiltration of server credentials
+package: mcp-atlassian
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.22.0 (ECOSYSTEM)
+aliases: CVE-2026-77259, GHSA-6cr4-ccf3-x7h4
+references:
+  https://github.com/sooperset/mcp-atlassian/security/advisories/GHSA-6cr4-ccf3-x7h4
+  https://github.com/sooperset/mcp-atlassian/pull/1448
+  https://github.com/sooperset/mcp-atlassian/commit/b041733473f95119dd539542a43c280737a8e460
+  https://github.com/sooperset/mcp-atlassian
+  https://github.com/sooperset/mcp-atlassian/releases/tag/v0.22.0
+  https://pypi.org/project/mcp-atlassian
+  https://github.com/advisories/GHSA-6cr4-ccf3-x7h4
+  https://nvd.nist.gov/vuln/detail/CVE-2026-77259
+
+### Summary
+
+Missing path validation in `confluence_upload_attachment` allows any authenticated MCP client to read arbitrary files from the server filesystem and exfiltrate their contents to Confluence. On Linux deployments, `/proc/self/environ` yields all runtime secrets in a single call.
+
+---
+### Details
+
+`AttachmentsMixin.upload_attachment()` in `src/mcp_atlassian/confluence/attachments.py` opens the caller-supplied `file_path` with no boundary check:
+
+```python
+# line 477
+files = {"file": (filename, open(file_path, "rb"))}
+```
+The download path was correctly hardened in GHSA-xjgw-4wvw-rgm4 via `validate_safe_path()` (lines 223, 272). That fix was not applied to the upload path, leaving it completely unguarded. The MCP tool layer (`servers/confluence.py:1295`) passes `file_path` verbatim with no additional sanitization.
+
+---
+### PoC
+
+```bash
+# 1. Prepare target file (macOS demo; on Linux use /proc/self/environ directly)
+cp ~/.aws/credentials /tmp/diagram.png
+
+# 2. Call the MCP tool
+confluence_upload_attachment(
+    content_id = "<any page attacker can edit>",
+    file_path  = "/tmp/diagram.png"
+)
+
+# 3. Download attachment from Confluence — contains raw credentials
+```
+Tested on mcp-atlassian 0.21.1 against live Confluence Cloud. Attachment confirmed uploaded and retrieved with full credential content intact.
+
+---
+### Impact
+Any MCP client with edit access to one Confluence page can read arbitrary files from the server process. On shared/Docker deployments, `/proc/self/environ` exposes all users' API tokens in a single request. Exfiltrated Atlassian tokens provide persistent API access independent of MCP, surviving server shutdown or patching.
+
+Incomplete fix of GHSA-xjgw-4wvw-rgm4 — arbitrary file read on upload mirrors the arbitrary file write on download fixed in that advisory.
+
+
+---
+### Suggested Fix
+
+```python
+# src/mcp_atlassian/confluence/attachments.py — upload_attachment()
+# Add after abspath conversion, before open():
+
+try:
+    validate_safe_path(file_path)
+except ValueError as e:
+    return {"success": False, "error": str(e)}
+```
+
+Same fix required in `upload_attachments()` and `src/mcp_atlassian/jira/attachments.py`.

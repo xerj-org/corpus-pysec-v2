@@ -1,0 +1,24 @@
+PYSEC-2026-2872 PyPI/pghoard — PGHoard: Password written to debug log
+package: pghoard
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 2.1.0 (ECOSYSTEM)
+aliases: CVE-2026-54711, GHSA-mpx4-jmpr-vm8v
+references:
+  https://github.com/Aiven-Open/pghoard/security/advisories/GHSA-mpx4-jmpr-vm8v
+  https://github.com/Aiven-Open/pghoard
+  https://pypi.org/project/pghoard
+  https://github.com/advisories/GHSA-mpx4-jmpr-vm8v
+  https://nvd.nist.gov/vuln/detail/CVE-2026-54711
+
+### Impact
+When using .pgpass, database connection information including the username and password will be logged at the debug level.
+
+### Patches
+Upgrade to version 2.7.1 or greater.
+
+### Workarounds
+Filter out debug-level logs.
+
+### References
+This issue was discovered by BugCrowd user DRAKOKORIAN.

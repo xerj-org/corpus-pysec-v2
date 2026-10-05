@@ -1,0 +1,26 @@
+PYSEC-2026-1910 PyPI/sentry — Sentry improperly authorizes deletion of user issue alert notifications
+package: sentry
+ecosystem: PyPI
+versions affected:
+  >= 23.9.0, < 24.9.0 (ECOSYSTEM)
+aliases: CVE-2024-45605, GHSA-54m3-95j9-v89j
+references:
+  https://github.com/getsentry/sentry/security/advisories/GHSA-54m3-95j9-v89j
+  https://nvd.nist.gov/vuln/detail/CVE-2024-45605
+  https://github.com/getsentry/sentry/pull/77093
+  https://github.com/getsentry/sentry/commit/590258255bcb3a5fa4c56f21297b6c99131cfb9d
+  https://github.com/getsentry/self-hosted
+  https://github.com/getsentry/sentry
+  https://pypi.org/project/sentry
+  https://github.com/advisories/GHSA-54m3-95j9-v89j
+
+### Impact
+An authenticated user may delete user issue alert notifications for arbitrary users given a known alert ID. 
+
+### Patches
+A patch was issued to ensure authorization checks are properly scoped on requests to delete user alert notifications.
+
+Sentry SaaS users do not need to take any action. [Self-Hosted Sentry](https://github.com/getsentry/self-hosted) users should upgrade to version **24.9.0** or higher.
+
+### References
+- [Prevent muting user alerts](https://github.com/getsentry/sentry/pull/77093/)

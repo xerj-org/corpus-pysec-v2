@@ -1,0 +1,11 @@
+PYSEC-2024-288 PyPI/mindsdb — Cross-site Scripting (XSS) - Stored in mindsdb/mindsdb
+package: mindsdb
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 23.6.3.1 (ECOSYSTEM)
+aliases: CVE-2024-3575, GHSA-93c5-rj2p-w52x
+references:
+  https://huntr.com/bounties/5f720b48-ddeb-4f2a-830f-a3dd15d5daa2
+  https://github.com/advisories/GHSA-93c5-rj2p-w52x
+
+Cross-site Scripting (XSS) - Stored in mindsdb/mindsdb

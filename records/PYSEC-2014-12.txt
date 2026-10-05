@@ -1,0 +1,12 @@
+PYSEC-2014-12 PyPI/python-swiftclient — The OpenStack Python client library for Swift (python-swiftclient) 1.0 through 1.9.0 does not verify
+package: python-swiftclient
+ecosystem: PyPI
+versions affected:
+  >= 1.0, < 2.0 (ECOSYSTEM)
+aliases: CVE-2013-6396, GHSA-p3xv-97g8-4wmj
+references:
+  http://www.openwall.com/lists/oss-security/2014/02/17/7
+  https://bugs.launchpad.net/python-swiftclient/+bug/1199783
+  https://github.com/advisories/GHSA-p3xv-97g8-4wmj
+
+The OpenStack Python client library for Swift (python-swiftclient) 1.0 through 1.9.0 does not verify X.509 certificates from SSL servers, which allows man-in-the-middle attackers to spoof servers and obtain sensitive information via a crafted certificate.

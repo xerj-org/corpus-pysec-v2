@@ -1,0 +1,19 @@
+PYSEC-2019-175 PyPI/djblets — An eval() vulnerability exists in Python Software Foundation Djblets 0.7.21 and Beanbag Review Board
+package: djblets
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.7.21 (ECOSYSTEM)
+aliases: CVE-2013-4409
+references:
+  https://access.redhat.com/security/cve/cve-2013-4409
+  http://lists.fedoraproject.org/pipermail/package-announce/2013-October/119820.html
+  http://lists.fedoraproject.org/pipermail/package-announce/2013-October/119819.html
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2013-4409
+  http://lists.fedoraproject.org/pipermail/package-announce/2013-October/119831.html
+  https://security-tracker.debian.org/tracker/CVE-2013-4409
+  http://lists.fedoraproject.org/pipermail/package-announce/2013-November/120619.html
+  http://lists.fedoraproject.org/pipermail/package-announce/2013-October/119830.html
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/88059
+  http://www.securityfocus.com/bid/63029
+
+An eval() vulnerability exists in Python Software Foundation Djblets 0.7.21 and Beanbag Review Board before 1.7.15 when parsing JSON requests.

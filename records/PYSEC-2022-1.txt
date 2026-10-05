@@ -1,0 +1,13 @@
+PYSEC-2022-1 PyPI/django — An issue was discovered in Django 2.2 before 2.2.26, 3.2 before 3.2.11, and 4.0 before 4.0.1. UserAt
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 2.2, < 2.2.26, >= 3.2, < 3.2.11, >= 4.0, < 4.0.1 (ECOSYSTEM)
+aliases: CVE-2021-45115, GHSA-53qw-q765-4fww
+references:
+  https://docs.djangoproject.com/en/4.0/releases/security/
+  https://groups.google.com/forum/#!forum/django-announce
+  https://www.djangoproject.com/weblog/2022/jan/04/security-releases/
+  https://github.com/advisories/GHSA-53qw-q765-4fww
+
+An issue was discovered in Django 2.2 before 2.2.26, 3.2 before 3.2.11, and 4.0 before 4.0.1. UserAttributeSimilarityValidator incurred significant overhead in evaluating a submitted password that was artificially large in relation to the comparison values. In a situation where access to user registration was unrestricted, this provided a potential vector for a denial-of-service attack.

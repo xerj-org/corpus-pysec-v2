@@ -1,0 +1,20 @@
+PYSEC-2026-266 PyPI/ajenti-plugin-core — ajenti.plugin.core has password bypass when 2FA is activated
+package: ajenti-plugin-core
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.112 (ECOSYSTEM)
+aliases: CVE-2026-40177, GHSA-3mcx-6wxm-qr8v
+references:
+  https://github.com/ajenti/ajenti/security/advisories/GHSA-3mcx-6wxm-qr8v
+  https://nvd.nist.gov/vuln/detail/CVE-2026-40177
+  https://github.com/ajenti/ajenti
+  https://pypi.org/project/ajenti-plugin-core
+  https://github.com/advisories/GHSA-3mcx-6wxm-qr8v
+
+### Impact
+
+If the 2FA was activated, it was possible to bypass the password authentication
+
+### Patches
+
+This is fixed in the version 0.112. Users should upgrade to this version as soon as possible.

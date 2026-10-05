@@ -1,0 +1,11 @@
+PYSEC-2022-255 PyPI/vtk — There is a NULL pointer dereference vulnerability in VTK, and it lies in IO/Infovis/vtkXMLTreeReader
+package: vtk
+ecosystem: PyPI
+versions affected:
+  >= 0, < 9.0.1 (ECOSYSTEM)
+aliases: CVE-2021-42521, GHSA-xfhg-9pjg-xg7g
+references:
+  https://gitlab.kitware.com/vtk/vtk/issues/17818
+  https://github.com/advisories/GHSA-xfhg-9pjg-xg7g
+
+There is a NULL pointer dereference vulnerability in VTK, and it lies in IO/Infovis/vtkXMLTreeReader.cxx. The vendor didn't check the return value of libxml2 API 'xmlDocGetRootElement', and try to dereference it. It is unsafe as the return value can be NULL and that NULL pointer dereference may crash the application.

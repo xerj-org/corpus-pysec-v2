@@ -1,0 +1,19 @@
+PYSEC-2026-1472 PyPI/jinja2 — Jinja has a sandbox breakout through malicious filenames
+package: jinja2
+ecosystem: PyPI
+versions affected:
+  >= 3.0.0, < 3.1.5 (ECOSYSTEM)
+aliases: CVE-2024-56201, GHSA-gmj6-6f8f-6699
+references:
+  https://github.com/pallets/jinja/security/advisories/GHSA-gmj6-6f8f-6699
+  https://nvd.nist.gov/vuln/detail/CVE-2024-56201
+  https://github.com/pallets/jinja/issues/1792
+  https://github.com/pallets/jinja/commit/767b23617628419ae3709ccfb02f9602ae9fe51f
+  https://github.com/pallets/jinja
+  https://github.com/pallets/jinja/releases/tag/3.1.5
+  https://pypi.org/project/jinja2
+  https://github.com/advisories/GHSA-gmj6-6f8f-6699
+
+A bug in the Jinja compiler allows an attacker that controls both the content and filename of a template to execute arbitrary Python code, regardless of if Jinja's sandbox is used.
+
+To exploit the vulnerability, an attacker needs to control both the filename and the contents of a template. Whether that is the case depends on the type of application using Jinja. This vulnerability impacts users of applications which execute untrusted templates where the template author can also choose the template filename.

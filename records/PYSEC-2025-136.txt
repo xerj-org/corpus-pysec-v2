@@ -1,0 +1,12 @@
+PYSEC-2025-136 PyPI/mezzanine — Cross-Site Scripting (XSS) vulnerability exists in Mezzanine CMS 6.0.0 in the "View Entries" feature
+package: mezzanine
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 6.0.0 (ECOSYSTEM)
+aliases: CVE-2025-29573, GHSA-2544-hpcq-6g27
+references:
+  https://github.com/stephenmcd/mezzanine
+  https://www.squadappsec.com/post/cve-2025-29573-persistent-xss-in-mezzanine-cms-6-0-0-via-malicious-filename
+  https://github.com/advisories/GHSA-2544-hpcq-6g27
+
+Cross-Site Scripting (XSS) vulnerability exists in Mezzanine CMS 6.0.0 in the "View Entries" feature within the Forms module.

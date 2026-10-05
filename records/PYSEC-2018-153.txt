@@ -1,0 +1,11 @@
+PYSEC-2018-153 PyPI/opencc-py — Open Chinese Convert (OpenCC) 1.0.5 allows attackers to cause a denial of service (segmentation faul
+package: opencc-py
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2018-16982
+references:
+  https://github.com/BYVoid/OpenCC/issues/303
+  https://github.com/BYVoid/OpenCC/issues/303
+
+Open Chinese Convert (OpenCC) 1.0.5 allows attackers to cause a denial of service (segmentation fault) because BinaryDict::NewFromFile in BinaryDict.cpp may have out-of-bounds keyOffset and valueOffset values via a crafted .ocd file.

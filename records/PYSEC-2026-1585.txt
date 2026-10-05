@@ -1,0 +1,15 @@
+PYSEC-2026-1585 PyPI/lollms — Lord of Large Language Models (LoLLMs) Server path traversal vulnerability in lollms_file_system.py
+package: lollms
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 9.5.1 (ECOSYSTEM)
+aliases: CVE-2024-6971, GHSA-7pgr-32fx-c6x9
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-6971
+  https://github.com/ParisNeo/lollms/commit/aeace796d861e922133b769710019608a6363264
+  https://github.com/ParisNeo/lollms
+  https://huntr.com/bounties/fbfe7cd0-99fb-4305-bd07-8b573364109e
+  https://pypi.org/project/lollms
+  https://github.com/advisories/GHSA-7pgr-32fx-c6x9
+
+A path traversal vulnerability exists in the ParisNeo/lollms repository, specifically in the `lollms_file_system.py` file. The functions `add_rag_database`, `toggle_mount_rag_database`, and `vectorize_folder` do not implement security measures such as `sanitize_path_from_endpoint` or `sanitize_path`. This allows an attacker to perform vectorize operations on `.sqlite` files in any directory on the victim's computer, potentially installing multiple packages and causing a crash.

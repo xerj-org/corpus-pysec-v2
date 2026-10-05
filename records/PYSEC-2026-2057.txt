@@ -1,0 +1,25 @@
+PYSEC-2026-2057 PyPI/xml2rfc — xml2rfc is vulnerable to arbitrary file reads through prepped files
+package: xml2rfc
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.30.2 (ECOSYSTEM)
+aliases: CVE-2025-11059, GHSA-9mv7-3c64-mmqw
+references:
+  https://github.com/ietf-tools/xml2rfc/security/advisories/GHSA-9mv7-3c64-mmqw
+  https://github.com/ietf-tools/xml2rfc/commit/73fb1c91fc62ac540bb6bd24f982f2becf84c1b0
+  https://github.com/ietf-tools/xml2rfc
+  https://github.com/ietf-tools/xml2rfc/releases/tag/v3.30.2
+  https://pypi.org/project/xml2rfc
+  https://github.com/advisories/GHSA-9mv7-3c64-mmqw
+  https://nvd.nist.gov/vuln/detail/CVE-2025-11059
+
+### Impact
+
+When generating PDF files, this vulnerability allows an attacker to read arbitrary files from the filesystem by injecting malicious link element into the prepped RFCXML.
+
+### Workarounds
+
+Test untrusted input with `link` elements with `rel="attachment"` before processing.
+
+### References
+This is related to [GHSA-cfmv-h8fx-85m7](https://github.com/ietf-tools/xml2rfc/security/advisories/GHSA-cfmv-h8fx-85m7).

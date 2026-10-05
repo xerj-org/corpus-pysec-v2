@@ -1,0 +1,10 @@
+PYSEC-2017-128 PyPI/exiv2 — There is an illegal address access in Exiv2::FileIo::path[abi:cxx11]() in basicio.cpp of libexiv2 in
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2017-12956
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=1482296
+
+There is an illegal address access in Exiv2::FileIo::path[abi:cxx11]() in basicio.cpp of libexiv2 in Exiv2 0.26 that will lead to remote denial of service.

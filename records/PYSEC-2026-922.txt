@@ -1,0 +1,17 @@
+PYSEC-2026-922 PyPI/snowflake-connector-python — snowflake-connector-python is vulnerable to Regular Expression Denial of Service (ReDoS)
+package: snowflake-connector-python
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.8.2 (ECOSYSTEM)
+aliases: CVE-2022-42965, GHSA-4r6j-fwcx-94cf
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2022-42965
+  https://github.com/snowflakedb/snowflake-connector-python/pull/1327
+  https://github.com/snowflakedb/snowflake-connector-python/commit/b9d2fc789fae4db865dde3d2a1bd72c8a9eab091
+  https://github.com/snowflakedb/snowflake-connector-python
+  https://github.com/snowflakedb/snowflake-connector-python/releases/tag/v2.8.2
+  https://research.jfrog.com/vulnerabilities/snowflake-connector-python-redos-xray-257185
+  https://pypi.org/project/snowflake-connector-python
+  https://github.com/advisories/GHSA-4r6j-fwcx-94cf
+
+An exponential ReDoS (Regular Expression Denial of Service) can be triggered in the snowflake-connector-python PyPI package, when an attacker is able to supply arbitrary input to the get_file_transfer_type method.

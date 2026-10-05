@@ -1,0 +1,17 @@
+PYSEC-2026-278 PyPI/apache-airflow-providers-mongo — Improper Certificate Validation in apache airflow mongo hook
+package: apache-airflow-providers-mongo
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.0.0 (ECOSYSTEM)
+aliases: CVE-2024-25141, GHSA-x5pm-h33q-cjrw
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-25141
+  https://github.com/apache/airflow/pull/37214
+  https://github.com/apache/airflow
+  https://lists.apache.org/thread/sqgbfqngjmn45ommmrgj7hvs7fgspsgm
+  http://www.openwall.com/lists/oss-security/2024/02/20/5
+  https://pypi.org/project/apache-airflow-providers-mongo
+  https://github.com/advisories/GHSA-x5pm-h33q-cjrw
+
+When ssl was enabled for Mongo Hook, default settings included "allow_insecure" which caused that certificates were not validated. This was unexpected and undocumented.
+ Users are recommended to upgrade to version 4.0.0, which fixes this issue.

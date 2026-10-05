@@ -1,0 +1,20 @@
+PYSEC-2026-3387 PyPI/tornado — Tornado: Authorization header forwarded across cross-origin redirects in SimpleAsyncHTTPClient
+package: tornado
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.5.6 (ECOSYSTEM)
+aliases: CVE-2026-49853, GHSA-3x9g-8vmp-wqvf
+references:
+  https://github.com/tornadoweb/tornado/security/advisories/GHSA-3x9g-8vmp-wqvf
+  https://github.com/tornadoweb/tornado
+  https://pypi.org/project/tornado
+  https://github.com/advisories/GHSA-3x9g-8vmp-wqvf
+  https://nvd.nist.gov/vuln/detail/CVE-2026-49853
+
+## Summary
+
+When SimpleAsyncHTTPClient follows a 3xx redirect, it shallow-copies the original HTTPRequest, rewrites the URL, decrements max_redirects, and removes only the Host header. It does not clear Authorization, auth_username, auth_password, or auth_mode when the redirect target changes origin.
+
+As a result, credentials intended for one origin can be forwarded to a different origin when follow_redirects=True, which is the default.
+
+Beginning in Tornado 6.5.6, `SimpleAsyncHTTPClient` matches the default behavior of `libcurl` (and therefore `CurlAsyncHTTPClient`): When a redirect changes the scheme, host, or port of the url, the `Authorization` and `Cookie` headers will be removed when following the redirect.

@@ -1,0 +1,10 @@
+PYSEC-2017-119 PyPI/exiv2 — There is an invalid free in the Action::TaskFactory::cleanup function of actions.cpp in Exiv2 0.26. 
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2017-11337
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=1470737
+
+There is an invalid free in the Action::TaskFactory::cleanup function of actions.cpp in Exiv2 0.26. A crafted input will lead to a remote denial of service attack.

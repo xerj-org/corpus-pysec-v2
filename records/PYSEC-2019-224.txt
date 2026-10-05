@@ -1,0 +1,10 @@
+PYSEC-2019-224 PyPI/tensorflow-cpu — Google TensorFlow 1.6.x and earlier is affected by: Null Pointer Dereference. The type of exploitati
+package: tensorflow-cpu
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.7.0rc0 (ECOSYSTEM)
+aliases: CVE-2018-7576
+references:
+  https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/advisory/tfsa-2018-002.md
+
+Google TensorFlow 1.6.x and earlier is affected by: Null Pointer Dereference. The type of exploitation is: context-dependent.

@@ -1,0 +1,11 @@
+PYSEC-2026-2206 PyPI/mistune — Mistune is a Python Markdown parser with renderers and plugins. Prior to 3.2.1, the mistune math plu
+package: mistune
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.2.1 (ECOSYSTEM)
+aliases: CVE-2026-44708, GHSA-8g87-j6q8-g93x
+references:
+  https://github.com/lepture/mistune/releases/tag/v3.2.1
+  https://github.com/lepture/mistune/security/advisories/GHSA-8g87-j6q8-g93x
+
+Mistune is a Python Markdown parser with renderers and plugins. Prior to 3.2.1, the mistune math plugin renders inline math ($...$) and block math ($$...$$) by concatenating the raw user-supplied content directly into the HTML output without any HTML escaping. This occurs even when the parser is explicitly created with escape=True, which is supposed to guarantee that all user-controlled text is sanitised before reaching the DOM. This vulnerability is fixed in 3.2.1.

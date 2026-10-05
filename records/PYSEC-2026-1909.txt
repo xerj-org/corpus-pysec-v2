@@ -1,0 +1,15 @@
+PYSEC-2026-1909 PyPI/sentencepiece — Sentencepiece has a a heap overflow issue
+package: sentencepiece
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.2.1 (ECOSYSTEM)
+aliases: CVE-2026-1260, GHSA-38vq-g6vr-w8wf
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-1260
+  https://github.com/google/sentencepiece/commit/d856b67fdb3492e035489abf9b3aaf486144b2c0
+  https://github.com/google/sentencepiece
+  https://github.com/google/sentencepiece/releases/tag/v0.2.1
+  https://pypi.org/project/sentencepiece
+  https://github.com/advisories/GHSA-38vq-g6vr-w8wf
+
+Invalid memory access in Sentencepiece versions less than 0.2.1 when using a vulnerable model file, which is not created in the normal training procedure.

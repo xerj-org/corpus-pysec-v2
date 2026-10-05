@@ -1,0 +1,13 @@
+PYSEC-2023-121 PyPI/zstd — zstd vulnerable to buffer overrun
+package: zstd
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.5.4 (ECOSYSTEM)
+aliases: CVE-2022-4899, GHSA-5c9c-6x87-f9vm
+references:
+  https://github.com/facebook/zstd/issues/3200
+  https://github.com/facebook/zstd/issues/3200
+  https://security.netapp.com/advisory/ntap-20230725-0005/
+  https://github.com/advisories/GHSA-5c9c-6x87-f9vm
+
+A vulnerability was found in zstd v1.4.10, where an attacker can supply empty string as an argument to the command line tool to cause buffer overrun.

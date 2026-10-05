@@ -1,0 +1,14 @@
+PYSEC-2026-1082 PyPI/aim — Aim vulnerable to Cross-Site Request Forgery
+package: aim
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 3.22.0 (ECOSYSTEM)
+aliases: CVE-2024-7760, GHSA-38r9-3j52-h92v
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-7760
+  https://github.com/aimhubio/aim
+  https://huntr.com/bounties/2038df5f-4829-4040-8573-67bf9bb89229
+  https://pypi.org/project/aim
+  https://github.com/advisories/GHSA-38r9-3j52-h92v
+
+aimhubio/aim version 3.22.0 contains a Cross-Site Request Forgery (CSRF) vulnerability in the tracking server. The vulnerability is due to overly permissive CORS settings, allowing cross-origin requests from all origins. This enables CSRF attacks on all endpoints of the tracking server, which can be chained with other existing vulnerabilities such as remote code execution, denial of service, and arbitrary file read/write.

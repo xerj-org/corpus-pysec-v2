@@ -1,0 +1,30 @@
+PYSEC-2026-1379 PyPI/flask-appbuilder — Flask-AppBuilder open redirect vulnerability using HTTP host injection
+package: flask-appbuilder
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.6.2 (ECOSYSTEM)
+aliases: CVE-2025-32962, GHSA-99pm-ch96-ccp2
+references:
+  https://github.com/dpgaspar/Flask-AppBuilder/security/advisories/GHSA-99pm-ch96-ccp2
+  https://nvd.nist.gov/vuln/detail/CVE-2025-32962
+  https://github.com/dpgaspar/Flask-AppBuilder/commit/32eedbbb5cb483a3e782c5f2732de4a6a650d9b6
+  https://github.com/dpgaspar/Flask-AppBuilder
+  https://pypi.org/project/flask-appbuilder
+  https://github.com/advisories/GHSA-99pm-ch96-ccp2
+
+### Impact
+Flask-AppBuilder prior to 4.6.2 would allow for a malicious unauthenticated actor to perform an open redirect by manipulating the Host header in HTTP requests.
+ 
+### Patches
+Flask-AppBuilder 4.6.2 introduced the `FAB_SAFE_REDIRECT_HOSTS` configuration variable, which allows administrators to explicitly define which domains are considered safe for redirection.
+
+Examples:
+```
+FAB_SAFE_REDIRECT_HOSTS = ["yourdomain.com", "sub.yourdomain.com", "*.yourcompany.com"]
+```
+
+### Workarounds
+Use a Reverse Proxy to Enforce Trusted Host Headers
+
+### References
+_Are there any links users can visit to find out more?_

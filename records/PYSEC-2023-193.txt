@@ -1,0 +1,13 @@
+PYSEC-2023-193 PyPI/zope — Zope is an open-source web application server. The title property, available on most Zope objects, c
+package: zope
+ecosystem: PyPI
+versions affected:
+  >= 0, < aeaf2cdc80dff60815e3706af448f086ddc3b98d, < 21dfa78609ffd8b6bd8143805678ebbacae5141a (GIT: https://github.com/zopefoundation/Zope)
+  >= 5.0, < 5.8.6, >= 4.0, < 4.8.11 (ECOSYSTEM)
+aliases: CVE-2023-44389, GHSA-m755-gxxg-r5qh
+references:
+  https://github.com/zopefoundation/Zope/security/advisories/GHSA-m755-gxxg-r5qh
+  https://github.com/zopefoundation/Zope/commit/aeaf2cdc80dff60815e3706af448f086ddc3b98d
+  https://github.com/zopefoundation/Zope/commit/21dfa78609ffd8b6bd8143805678ebbacae5141a
+
+Zope is an open-source web application server. The title property, available on most Zope objects, can be used to store script code that is executed while viewing the affected object in the Zope Management Interface (ZMI). All versions of Zope 4 and Zope 5 are affected. Patches will be released with Zope versions 4.8.11 and 5.8.6

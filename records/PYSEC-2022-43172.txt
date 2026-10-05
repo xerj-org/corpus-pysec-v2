@@ -1,0 +1,13 @@
+PYSEC-2022-43172 PyPI/watertools — The Watertools package in PyPI v0.0.0 was discovered to contain a code execution backdoor via the re
+package: watertools
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-34056
+references:
+  https://github.com/TimHessels/watertools/issues/1
+  https://github.com/TimHessels/watertools/issues/1
+  http://pypi.doubanio.com/simple/request
+  https://pypi.org/project/watertools/
+
+The Watertools package in PyPI v0.0.0 was discovered to contain a code execution backdoor via the request package. This vulnerability allows attackers to access sensitive user information and digital currency keys, as well as escalate privileges.

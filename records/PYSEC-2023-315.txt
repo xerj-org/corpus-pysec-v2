@@ -1,0 +1,13 @@
+PYSEC-2023-315 PyPI/sap-ai-sdk-base — SAP Business Object (Adaptive Job Server) - versions 420, 430, allows remote execution of arbitrary 
+package: sap-ai-sdk-base
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 420, <= 430 (ECOSYSTEM)
+aliases: CVE-2023-25617, GHSA-xxhh-59gh-6ffx
+references:
+  https://www.sap.com/documents/2022/02/fa865ea4-167e-0010-bca6-c68f7e60039b.html
+  https://launchpad.support.sap.com/#/notes/3283438
+  https://github.com/advisories/GHSA-xxhh-59gh-6ffx
+
+SAP Business Object (Adaptive Job Server) - versions 420, 430, allows remote execution of arbitrary commands on Unix, when program objects execution is enabled, to authenticated users with scheduling rights, using the BI Launchpad, Central Management Console or a custom application based on the public java SDK. Programs could impact the confidentiality, integrity and availability of the system.
+

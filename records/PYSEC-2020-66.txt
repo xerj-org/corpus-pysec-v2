@@ -1,0 +1,12 @@
+PYSEC-2020-66 PyPI/misp-maltego — MISP MISP-maltego 1.4.4 incorrectly shares a MISP connection across users in a remote-transform use 
+package: misp-maltego
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3ccde66dab4096ab5663e69f352992cc73e1160b (GIT: https://github.com/MISP/MISP-maltego)
+  >= 0, < 1.4.5 (ECOSYSTEM)
+aliases: CVE-2020-12889, GHSA-fj35-m94r-9h4c
+references:
+  https://github.com/MISP/MISP-maltego/commit/3ccde66dab4096ab5663e69f352992cc73e1160b
+  https://github.com/advisories/GHSA-fj35-m94r-9h4c
+
+MISP MISP-maltego 1.4.4 incorrectly shares a MISP connection across users in a remote-transform use case.

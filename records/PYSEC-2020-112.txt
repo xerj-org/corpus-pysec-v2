@@ -1,0 +1,11 @@
+PYSEC-2020-112 PyPI/tendenci — Tendenci 12.0.10 allows unrestricted deserialization in apps\helpdesk\views\staff.py.
+package: tendenci
+ecosystem: PyPI
+versions affected:
+  >= 0, < 12.0.11 (ECOSYSTEM)
+aliases: CVE-2020-14942, GHSA-jqmc-fxxp-r589
+references:
+  https://github.com/tendenci/tendenci/issues/867
+  https://github.com/advisories/GHSA-jqmc-fxxp-r589
+
+Tendenci 12.0.10 allows unrestricted deserialization in apps\helpdesk\views\staff.py.

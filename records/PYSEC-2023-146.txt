@@ -1,0 +1,15 @@
+PYSEC-2023-146 PyPI/langchain — An issue in Harrison Chase langchain v.0.0.194 and before allows a remote attacker to execute arbitr
+package: langchain
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.0.195 (ECOSYSTEM)
+aliases: CVE-2023-38896, GHSA-92j5-3459-qgp4
+references:
+  https://github.com/hwchase17/langchain/issues/5872
+  https://github.com/hwchase17/langchain/issues/5872
+  https://github.com/hwchase17/langchain/issues/5872
+  https://github.com/hwchase17/langchain/pull/6003
+  https://twitter.com/llm_sec/status/1668711587287375876
+  https://github.com/advisories/GHSA-92j5-3459-qgp4
+
+An issue in Harrison Chase langchain v.0.0.194 and before allows a remote attacker to execute arbitrary code via the from_math_prompt and from_colored_object_prompt functions.

@@ -1,0 +1,31 @@
+PYSEC-2026-4037 PyPI/djust — djust is vulnerable to stored/reflected XSS via javascript: URLs in built-in component template tags
+package: djust
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0.7 (ECOSYSTEM)
+aliases: CVE-2026-61597, GHSA-4mf4-73j6-mvrw
+references:
+  https://github.com/djust-org/djust/security/advisories/GHSA-4mf4-73j6-mvrw
+  https://github.com/djust-org/djust
+  https://github.com/djust-org/djust/releases/tag/v1.0.7
+  https://pypi.org/project/djust
+  https://github.com/advisories/GHSA-4mf4-73j6-mvrw
+  https://nvd.nist.gov/vuln/detail/CVE-2026-61597
+
+### Impact
+Many djust built-in component template tags (`djust.components.templatetags.*`) render a developer/user-supplied URL into an `href` / `action` attribute, HTML-escaping it with `conditional_escape` but **never validating the URL scheme**. HTML escaping prevents attribute breakout but does not neutralize a `javascript:` URI (which needs no escapable characters), so a URL value of `javascript:alert(document.cookie)` lands verbatim in `<a href="javascript:alert(document.cookie)">` and executes in the victim's session on click.
+
+Affected sinks (executing href/action contexts; not exhaustive): breadcrumb (`djust_components.py:1535`; `_advanced.py:1999,2022`), `dj_nav` link/dropdown/brand (`djust_components.py:5632,5779,5807,5830`), citation URL (`:6936`), cookie-consent privacy link (`:8240`), error-page action (`_advanced.py:1728`), form `action` (`_forms.py:1239`). `<img src>` sinks are lower risk (javascript: does not execute via img src). No scheme validation exists anywhere in the component tags; a docstring at `djust_components.py:781` even acknowledges the `javascript:` risk without mitigating it.
+
+**Severity Medium:** XSS in the victim's authenticated session whenever an app renders one of these components with a URL sourced from user-controllable data; for `href` requires a click, worst case is the stored variant (URL persisted from one user, rendered to another). Conditional on developer usage, hence Medium rather than High.
+
+Reproduced: `breadcrumb(items=[{"label":"Home","url":"javascript:alert(document.cookie)"}])` emits `<a ... href="javascript:alert(document.cookie)">Home</a>`; `JaVaScRiPt:` case variant also passes; `https://` URLs are preserved.
+
+### Patches
+Add a `safe_url()` helper that neutralizes non-allowlisted schemes (`javascript:`, `vbscript:`, `data:`) to `#` while preserving http/https/mailto/tel/relative/anchor URLs, and route every href/action/formaction/xlink:href sink through it (then HTML-escape). Add a regression + an audit_ast/system-check rule flagging un-routed URL-attribute interpolation.
+
+### Workarounds
+Do not pass user-controllable URLs to the affected built-in component tags; pre-validate URL schemes in application code before binding them to component arguments.
+
+### References
+Reproducer + finding writeup retained privately by the maintainer.

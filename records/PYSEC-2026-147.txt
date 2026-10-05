@@ -1,0 +1,10 @@
+PYSEC-2026-147 PyPI/wagtail — Wagtail is an open source content management system built on Django. Prior to 7.0.7, 7.3.2, and 7.4,
+package: wagtail
+ecosystem: PyPI
+versions affected:
+  >= 0, < 7.0.7, >= 7.1, < 7.3.2 (ECOSYSTEM)
+aliases: CVE-2026-44198, GHSA-c4mr-889m-vgf6
+references:
+  https://github.com/wagtail/wagtail/security/advisories/GHSA-c4mr-889m-vgf6
+
+Wagtail is an open source content management system built on Django. Prior to 7.0.7, 7.3.2, and 7.4, a CMS user without the ability to edit a page could still access the history report for the page, potentially resulting in disclosure of sensitive information. This vulnerability is fixed in 7.0.7, 7.3.2, and 7.4.

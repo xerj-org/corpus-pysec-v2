@@ -1,0 +1,15 @@
+PYSEC-2026-1159 PyPI/apache-superset — Apache Superset Server Side Request Forgery vulnerability
+package: apache-superset
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.1.1 (ECOSYSTEM)
+aliases: CVE-2023-36388, GHSA-4fg9-5w46-xmrj
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-36388
+  https://github.com/apache/superset
+  https://lists.apache.org/thread/ccmjjz4jp17yc2kcd18qshmdtf7qorfs
+  https://pypi.org/project/apache-superset
+  https://github.com/advisories/GHSA-4fg9-5w46-xmrj
+
+Improper REST API permission in Apache Superset up to and including 2.1.0 allows for an authenticated Gamma users to test network connections, possible SSRF.
+

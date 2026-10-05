@@ -1,0 +1,15 @@
+PYSEC-2024-145 PyPI/paddlepaddle — FPE in paddle.argmin and paddle.argmax in PaddlePaddle before 2.6.0. This flaw can cause a runtime c
+package: paddlepaddle
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.6.0 (ECOSYSTEM)
+aliases: CVE-2023-52313, GHSA-275c-w5mq-v5m2
+references:
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-022.md
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-022.md
+  https://github.com/advisories/GHSA-275c-w5mq-v5m2
+
+FPE in paddle.argmin and paddle.argmax in PaddlePaddle before 2.6.0. This flaw can cause a runtime crash and a denial of service.
+
+
+

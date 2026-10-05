@@ -1,0 +1,29 @@
+PYSEC-2026-1932 PyPI/social-auth-app-django — Python Social Auth - Django has unsafe account association
+package: social-auth-app-django
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.6.0 (ECOSYSTEM)
+aliases: CVE-2025-61783, GHSA-wv4w-6qv2-qqfg
+references:
+  https://github.com/python-social-auth/social-app-django/security/advisories/GHSA-wv4w-6qv2-qqfg
+  https://nvd.nist.gov/vuln/detail/CVE-2025-61783
+  https://github.com/python-social-auth/social-app-django/issues/220
+  https://github.com/python-social-auth/social-app-django/issues/231
+  https://github.com/python-social-auth/social-app-django/issues/634
+  https://github.com/python-social-auth/social-app-django/pull/803
+  https://github.com/python-social-auth/social-app-django/commit/10c80e2ebabeccd4e9c84ad0e16e1db74148ed4c
+  https://github.com/python-social-auth/social-app-django
+  https://pypi.org/project/social-auth-app-django
+  https://github.com/advisories/GHSA-wv4w-6qv2-qqfg
+
+### Impact
+
+Upon authentication, the user could be associated by e-mail even if the `associate_by_email` pipeline was not included. This could lead to account compromise when a third-party authentication service does not validate provided e-mail addresses or doesn't require unique e-mail addresses.
+
+### Patches
+
+* https://github.com/python-social-auth/social-app-django/pull/803
+
+### Workarounds
+
+Review the authentication service policy on e-mail addresses; many will not allow exploiting this vulnerability.

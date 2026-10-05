@@ -1,0 +1,13 @@
+PYSEC-2022-43073 PyPI/cloudlabeling — The cloudlabeling package in PyPI v0.0.1 was discovered to contain a code execution backdoor via the
+package: cloudlabeling
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-32999
+references:
+  https://github.com/SilvioGiancola/CloudLabeling-API/issues/1
+  https://github.com/SilvioGiancola/CloudLabeling-API/issues/1
+  http://pypi.doubanio.com/simple/request
+  https://pypi.org/project/cloudlabeling/
+
+The cloudlabeling package in PyPI v0.0.1 was discovered to contain a code execution backdoor via the request package. This vulnerability allows attackers to access sensitive user information and digital currency keys, as well as escalate privileges.

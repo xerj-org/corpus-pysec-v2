@@ -1,0 +1,18 @@
+PYSEC-2016-10 PyPI/rsa — The verify function in the RSA package for Python (Python-RSA) before 3.3 allows attackers to spoof 
+package: rsa
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.3 (ECOSYSTEM)
+aliases: CVE-2016-1494, GHSA-8rjr-6qq5-pj9p
+references:
+  http://www.openwall.com/lists/oss-security/2016/01/05/3
+  http://www.openwall.com/lists/oss-security/2016/01/05/1
+  https://blog.filippo.io/bleichenbacher-06-signature-forgery-in-python-rsa/
+  https://bitbucket.org/sybren/python-rsa/pull-requests/14/security-fix-bb06-attack-in-verify-by/diff
+  http://lists.fedoraproject.org/pipermail/package-announce/2016-January/175897.html
+  http://lists.fedoraproject.org/pipermail/package-announce/2016-January/175942.html
+  http://lists.opensuse.org/opensuse-updates/2016-01/msg00032.html
+  http://www.securityfocus.com/bid/79829
+  https://github.com/advisories/GHSA-8rjr-6qq5-pj9p
+
+The verify function in the RSA package for Python (Python-RSA) before 3.3 allows attackers to spoof signatures with a small public exponent via crafted signature padding, aka a BERserk attack.

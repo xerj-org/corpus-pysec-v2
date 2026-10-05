@@ -1,0 +1,12 @@
+PYSEC-2021-880 PyPI/bounter — Null pointer reference in CMS_Conservative_increment_obj in RaRe-Technologies bounter version 1.01 a
+package: bounter
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2021-41497, GHSA-74xw-gwfm-7pv7
+references:
+  https://github.com/RaRe-Technologies/bounter/issues/47
+  https://github.com/RaRe-Technologies/bounter/issues/47
+  https://github.com/advisories/GHSA-74xw-gwfm-7pv7
+
+Null pointer reference in CMS_Conservative_increment_obj in RaRe-Technologies bounter version 1.01 and 1.10, allows attackers to conduct Denial of Service attacks by inputting a huge width of hash bucket.

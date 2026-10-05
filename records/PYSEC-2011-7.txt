@@ -1,0 +1,24 @@
+PYSEC-2011-7 PyPI/pywebdav — Multiple SQL injection vulnerabilities in the get_userinfo method in the MySQLAuthHandler class in D
+package: pywebdav
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.9.4.1 (ECOSYSTEM)
+aliases: CVE-2011-0432, GHSA-69vw-jfq7-935g
+references:
+  http://secunia.com/advisories/43571
+  http://secunia.com/advisories/43602
+  http://www.debian.org/security/2011/dsa-2177
+  https://bugzilla.redhat.com/show_bug.cgi?id=677718
+  http://www.vupen.com/english/advisories/2011/0553
+  http://lists.fedoraproject.org/pipermail/package-announce/2011-March/055444.html
+  http://www.vupen.com/english/advisories/2011/0554
+  http://lists.fedoraproject.org/pipermail/package-announce/2011-March/055412.html
+  http://code.google.com/p/pywebdav/updates/list
+  http://secunia.com/advisories/43703
+  http://lists.fedoraproject.org/pipermail/package-announce/2011-March/055413.html
+  http://pywebdav.googlecode.com/files/PyWebDAV-0.9.4.1.tar.gz
+  http://www.vupen.com/english/advisories/2011/0634
+  http://www.securityfocus.com/bid/46655
+  https://github.com/advisories/GHSA-69vw-jfq7-935g
+
+Multiple SQL injection vulnerabilities in the get_userinfo method in the MySQLAuthHandler class in DAVServer/mysqlauth.py in PyWebDAV before 0.9.4.1 allow remote attackers to execute arbitrary SQL commands via the (1) user or (2) pw argument.  NOTE: some of these details are obtained from third party information.

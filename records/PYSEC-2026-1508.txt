@@ -1,0 +1,16 @@
+PYSEC-2026-1508 PyPI/langchain — Langchain Server-Side Request Forgery vulnerability
+package: langchain
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.0.329 (ECOSYSTEM)
+aliases: CVE-2023-32786, GHSA-6h8p-4hx9-w66c
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-32786
+  https://github.com/langchain-ai/langchain/pull/12747
+  https://gist.github.com/rharang/d265f46fc3161b31ac2e81db44d662e1
+  https://github.com/langchain-ai/langchain
+  https://github.com/langchain-ai/langchain/releases/tag/v0.0.329
+  https://pypi.org/project/langchain
+  https://github.com/advisories/GHSA-6h8p-4hx9-w66c
+
+In Langchain before 0.0.329, prompt injection allows an attacker to force the service to retrieve data from an arbitrary URL, essentially providing SSRF and potentially injecting content into downstream tasks.

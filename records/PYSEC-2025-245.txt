@@ -1,0 +1,11 @@
+PYSEC-2025-245 PyPI/llama-index — An SQL injection vulnerability exists in the delete function of DuckDBVectorStore in run-llama/llama
+package: llama-index
+ecosystem: PyPI
+versions affected:
+  >= 0.12.19, < 0.12.21 (ECOSYSTEM)
+aliases: CVE-2025-1750
+references:
+  https://github.com/run-llama/llama_index/commit/369a2942df2efcf6b74461c45d20a0af1fbe4ae2
+  https://huntr.com/bounties/e1302233-9180-4269-9047-1526247d2cd8
+
+An SQL injection vulnerability exists in the delete function of DuckDBVectorStore in run-llama/llama_index version v0.12.19. This vulnerability allows an attacker to manipulate the ref_doc_id parameter, enabling them to read and write arbitrary files on the server, potentially leading to remote code execution (RCE).

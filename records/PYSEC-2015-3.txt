@@ -1,0 +1,15 @@
+PYSEC-2015-3 PyPI/ceph-deploy — The admin command in ceph-deploy before 1.5.25 uses world-readable permissions for /etc/ceph/ceph.cl
+package: ceph-deploy
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.5.23 (ECOSYSTEM)
+aliases: CVE-2015-4053, GHSA-79jf-ccm8-43w7
+references:
+  http://tracker.ceph.com/issues/11694
+  http://www.openwall.com/lists/oss-security/2015/04/09/9
+  http://www.openwall.com/lists/oss-security/2015/05/22/1
+  http://www.securityfocus.com/bid/74775
+  http://rhn.redhat.com/errata/RHSA-2015-1092.html
+  https://github.com/advisories/GHSA-79jf-ccm8-43w7
+
+The admin command in ceph-deploy before 1.5.25 uses world-readable permissions for /etc/ceph/ceph.client.admin.keyring, which allows local users to obtain sensitive information by reading the file.

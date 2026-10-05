@@ -1,0 +1,44 @@
+PYSEC-2026-738 PyPI/pollbot — open redirect in pollbot
+package: pollbot
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.6 (ECOSYSTEM)
+aliases: CVE-2022-0637, GHSA-vg27-hr3v-3cqv
+references:
+  https://github.com/mozilla/PollBot/security/advisories/GHSA-vg27-hr3v-3cqv
+  https://nvd.nist.gov/vuln/detail/CVE-2022-0637
+  https://github.com/mozilla/PollBot/pull/360
+  https://github.com/mozilla/PollBot/commit/e39d8bec2df582ba525bb2e2f33c3ebc584d7ff8
+  https://bugzilla.mozilla.org/show_bug.cgi?id=1753838
+  https://bugzilla.mozilla.org/show_bug.cgi?id=CVE-2022-0637
+  https://github.com/mozilla/PollBot
+  https://pypi.org/project/pollbot
+  https://github.com/advisories/GHSA-vg27-hr3v-3cqv
+
+(From https://bugzilla.mozilla.org/show_bug.cgi?id=1753838)
+
+Summary:
+There was an open redirection vulnerability in the path of:
+
+https://pollbot.services.mozilla.com/ and https://pollbot.stage.mozaws.net/
+
+Description:
+An attacker can redirect anyone to malicious sites.
+
+Steps To Reproduce:
+Type in this URL:
+
+https://pollbot.services.mozilla.com/%0a/evil.com/
+
+It redirects to that website
+
+evil.com
+
+evil.com was used as an example but this could be any website. Note, the /%0a/ and trailing / are required.
+
+Supporting Material/References:
+https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html
+
+Impact
+
+Attackers can serve malicious websites that steal passwords or download ransomware to their victims machine due to a redirect and there are a heap of other attack vectors.

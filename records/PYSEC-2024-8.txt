@@ -1,0 +1,12 @@
+PYSEC-2024-8 PyPI/embedchain — The JSON loader in Embedchain before 0.1.57 allows a ReDoS (regular expression denial of service) vi
+package: embedchain
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.1.57 (ECOSYSTEM)
+aliases: CVE-2024-23732, GHSA-r67w-f99w-mgxj
+references:
+  https://github.com/embedchain/embedchain/pull/1122
+  https://github.com/embedchain/embedchain/compare/0.1.56...0.1.57
+  https://github.com/advisories/GHSA-r67w-f99w-mgxj
+
+The JSON loader in Embedchain before 0.1.57 allows a ReDoS (regular expression denial of service) via a long string to json.py.

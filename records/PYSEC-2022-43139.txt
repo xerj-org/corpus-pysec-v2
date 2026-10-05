@@ -1,0 +1,12 @@
+PYSEC-2022-43139 PyPI/lief — A vulnerability in the LIEF::MachO::SegmentCommand::virtual_address function of LIEF v0.12.1 allows 
+package: lief
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.12.1 (ECOSYSTEM)
+aliases: CVE-2022-40923, GHSA-rm2x-hgr8-w343
+references:
+  https://github.com/lief-project/LIEF/issues/784
+  https://github.com/lief-project/LIEF/issues/784
+  https://github.com/lief-project/LIEF/issues/784
+
+A vulnerability in the LIEF::MachO::SegmentCommand::virtual_address function of LIEF v0.12.1 allows attackers to cause a denial of service (DOS) through a segmentation fault via a crafted MachO file.

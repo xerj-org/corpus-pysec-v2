@@ -1,0 +1,25 @@
+PYSEC-2026-2007 PyPI/vantage6 — vantage6 collaboration admins can extend their influence by expanding the collaboration
+package: vantage6
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.5.0rc3 (ECOSYSTEM)
+aliases: CVE-2024-32969, GHSA-99r4-cjp4-3hmx
+references:
+  https://github.com/vantage6/vantage6/security/advisories/GHSA-99r4-cjp4-3hmx
+  https://nvd.nist.gov/vuln/detail/CVE-2024-32969
+  https://github.com/vantage6/vantage6/commit/27f4ee3fade5f4cbcf3e60899c9a2a91145e0b56
+  https://github.com/vantage6/vantage6
+  https://pypi.org/project/vantage6
+  https://github.com/advisories/GHSA-99r4-cjp4-3hmx
+
+### Impact
+Collaboration administrators can add extra organizations to their collaboration. When doing that, they extend their influence: for instance, for organizations that they include, they can then create new users for which they know the passwords, and use that to read task results of other collaborations that that organization is involved in.
+
+Only relatively trusted users - with access to manage a collaboration - are able to do this, which reduces the impact.
+
+### Patches
+No
+
+### Workarounds
+No
+

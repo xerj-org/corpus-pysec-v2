@@ -1,0 +1,19 @@
+PYSEC-2026-1616 PyPI/mcp — MCP Python SDK vulnerability in the FastMCP Server causes validation error, leading to DoS
+package: mcp
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.9.4 (ECOSYSTEM)
+aliases: CVE-2025-53366, GHSA-3qhf-m339-9g5v
+references:
+  https://github.com/modelcontextprotocol/python-sdk/security/advisories/GHSA-3qhf-m339-9g5v
+  https://nvd.nist.gov/vuln/detail/CVE-2025-53366
+  https://github.com/modelcontextprotocol/python-sdk/pull/822
+  https://github.com/modelcontextprotocol/python-sdk/commit/29c69e6a47d0104d0afcea6ac35e7ab02fde809a
+  https://github.com/modelcontextprotocol/python-sdk
+  https://github.com/modelcontextprotocol/python-sdk/releases/tag/v1.9.4
+  https://pypi.org/project/mcp
+  https://github.com/advisories/GHSA-3qhf-m339-9g5v
+
+A validation error in the MCP SDK can cause an unhandled exception when processing malformed requests, resulting in service unavailability (500 errors) until manually restarted. Impact may vary depending on the deployment conditions, and presence of infrastructure-level resilience measures.
+
+Thank you to Rich Harang for reporting this issue.

@@ -1,0 +1,19 @@
+PYSEC-2026-3695 PyPI/sglang — SGLang is Vulnerable to DoS via the data_hash Function
+package: sglang
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.5.11 (ECOSYSTEM)
+aliases: CVE-2026-10775, GHSA-jrcc-j37m-v8fg
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-10775
+  https://github.com/sgl-project/sglang/issues/25462
+  https://github.com/sgl-project/sglang/pull/22033
+  https://github.com/sgl-project/sglang
+  https://vuldb.com/cve/CVE-2026-10775
+  https://vuldb.com/submit/831438
+  https://vuldb.com/vuln/368138
+  https://vuldb.com/vuln/368138/cti
+  https://pypi.org/project/sglang
+  https://github.com/advisories/GHSA-jrcc-j37m-v8fg
+
+A vulnerability was determined in sgl-project SGLang up to 0.5.11. Affected by this vulnerability is the function data_hash of the component Cache Handler. This manipulation causes denial of service. The attack is restricted to local execution. A high degree of complexity is needed for the attack. The exploitation appears to be difficult. The exploit has been publicly disclosed and may be utilized. The pull request to fix this issue awaits acceptance.

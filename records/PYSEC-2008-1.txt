@@ -1,0 +1,17 @@
+PYSEC-2008-1 PyPI/django — Cross-site scripting (XSS) vulnerability in the login form in the administration application in Djan
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.1 (ECOSYSTEM)
+aliases: CVE-2008-2302, GHSA-54qj-48vx-cr9f
+references:
+  http://www.djangoproject.com/weblog/2008/may/14/security/
+  http://www.securityfocus.com/bid/29209
+  http://securitytracker.com/id?1020028
+  http://secunia.com/advisories/30250
+  http://secunia.com/advisories/30291
+  http://www.vupen.com/english/advisories/2008/1618
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/42396
+  https://github.com/advisories/GHSA-54qj-48vx-cr9f
+
+Cross-site scripting (XSS) vulnerability in the login form in the administration application in Django 0.91 before 0.91.2, 0.95 before 0.95.3, and 0.96 before 0.96.2 allows remote attackers to inject arbitrary web script or HTML via the URI of a certain previous request.

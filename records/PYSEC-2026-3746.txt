@@ -1,0 +1,11 @@
+PYSEC-2026-3746 PyPI/openssl-encrypt — openssl_encrypt versions before 1.4.0 contain a hardcoded default secret key in the standalone telem
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.0 (ECOSYSTEM)
+aliases: CVE-2026-74892, GHSA-p926-6hjp-w9jw
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-p926-6hjp-w9jw
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-hardcoded-secret-key
+
+openssl_encrypt versions before 1.4.0 contain a hardcoded default secret key in the standalone telemetry server configuration that is used for API key hashing. Attackers who know this default value can predict or forge API key hashes to compromise telemetry API authentication.

@@ -1,0 +1,57 @@
+PYSEC-2026-2596 PyPI/linuxfabrik-lib — Linuxfabrik Monitoring Plugins allow insecure creation of SQLite databases
+package: linuxfabrik-lib
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.2.0 (ECOSYSTEM)
+aliases: CVE-2026-53759, GHSA-r35r-fpx2-jgr4
+references:
+  https://github.com/Linuxfabrik/monitoring-plugins/security/advisories/GHSA-r35r-fpx2-jgr4
+  https://github.com/Linuxfabrik/monitoring-plugins
+  https://pypi.org/project/linuxfabrik-lib
+  https://github.com/advisories/GHSA-r35r-fpx2-jgr4
+  https://nvd.nist.gov/vuln/detail/CVE-2026-53759
+
+### Summary
+The SQLite databases are created at predictable (static) paths in `/tmp`. Any user can therefore create a symlink at these paths in /tmp pointing to arbitrary files. The monitoring scripts then follows these symlinks and then creates their database at the symlink target.
+This becomes really dangerous for the scripts which can be executed as root with sudo. With this, an attacker can write to abitrary paths.
+
+### PoC
+The docker-stats check command here as an example. Because writing to /tmp is the default behaviour, the other check commands which use a SQLite database are also very likely affected.
+```
+# Create the symlink as nagios user
+nagios@test-server:/tmp$ ln -s /root/nagios-was-here /tmp/linuxfabrik-monitoring-plugins-docker-stats.db
+# Trigger the execution nagios user
+nagios@test-server:/tmp$ sudo /usr/lib64/nagios/plugins/docker-stats
+```
+Check whether or not file was created.
+```
+root@test-server:/# file /root/nagios-was-here
+/root/nagios-was-here: SQLite 3.x database, last written using SQLite version 3046001, file counter 2, database pages 3, cookie 0x2, schema 4, UTF-8, version-valid-for 2
+```
+
+### Impact
+In it's basic form, this vulnerbility can lead to a denial of service, impacting users who use the provided sudoers file and who didn't take any special precautions like systemd's `PrivateTemp`. It requires that an attacker already compromised the nagios account (which is quite a high barrier to be honest).
+
+If any application on the server relies on a SQLite database, there are scenarios where this vulnerability allows for content in existing SQLite databases to be modified. An attacker could let the symlink point to an existing SQLite database and create in /tmp a specially-crafted SQLite Rollback Journal (`.db-journal`) or Write-Ahead-Log (`.db-wal`), which is then applied to the database.
+
+### Fix
+A proposed fix would be to create a separate directory inside /tmp per user (e.g.,` /tmp/linuxfabrik-monitoring-plugins-{os.geteuid()}`). After creating this directory (or using an already existing one), check the following:
+```
+# Use os.lstat() instead of os.stat() so we don't accidentally follow symlinks
+dir_stat = os.lstat(TMP_DIR_PATH)
+
+# Ensure the directory is a real dir and not a Symlink
+if not stat.S_ISDIR(dir_stat.st_mode):
+  # abort the execution
+  sys.exit(1)
+
+# Verify the owner
+if dir_stat.st_uid != os.getuid():
+  # abort the execution
+  sys.exit(1)
+
+# Verify the permissions
+if (dir_stat.st_mode & 0o077) != 0:
+  # abort the execution
+  sys.exit(1)
+```

@@ -1,0 +1,15 @@
+PYSEC-2023-141 PyPI/pynetbox — A stored cross-site scripting (XSS) vulnerability in Netbox v3.4.7 allows attackers to execute arbit
+package: pynetbox
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2023-37625
+references:
+  https://github.com/benjaminpsinclair/Netbox-CVE-2023-37625
+  https://github.com/benjaminpsinclair/Netbox-CVE-2023-37625
+  https://github.com/benjaminpsinclair/Netbox-CVE
+  https://github.com/benjaminpsinclair/Netbox-CVE
+  https://github.com/netbox-community/netbox/issues/12205
+  https://github.com/netbox-community/netbox/issues/12205
+
+A stored cross-site scripting (XSS) vulnerability in Netbox v3.4.7 allows attackers to execute arbitrary web scripts or HTML via a crafted payload injected into the Custom Link templates.

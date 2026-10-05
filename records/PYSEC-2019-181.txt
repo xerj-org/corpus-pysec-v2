@@ -1,0 +1,15 @@
+PYSEC-2019-181 PyPI/keyring — Python keyring lib before 0.10 created keyring files with world-readable permissions.
+package: keyring
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.10 (ECOSYSTEM)
+aliases: CVE-2012-5577, GHSA-p86x-652p-6385
+references:
+  https://security-tracker.debian.org/tracker/CVE-2012-5577
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2012-5577
+  https://bitbucket.org/kang/python-keyring-lib/issue/67/set-go-rwx-on-keyring_passcfg
+  http://www.openwall.com/lists/oss-security/2012/11/27/3
+  https://bitbucket.org/kang/python-keyring-lib/commits/049cd181470f1ee6c540e1d64acf1def7b1de0c1
+  https://github.com/advisories/GHSA-p86x-652p-6385
+
+Python keyring lib before 0.10 created keyring files with world-readable permissions.

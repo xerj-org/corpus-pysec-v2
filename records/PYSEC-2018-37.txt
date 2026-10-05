@@ -1,0 +1,15 @@
+PYSEC-2018-37 PyPI/ansible — A flaw was found in Ansible before version 2.2.0. The apt_key module does not properly verify key fi
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.2.0.0 (ECOSYSTEM)
+aliases: CVE-2016-8614, GHSA-cmwx-9m2h-x7v4
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2016-8614
+  https://github.com/ansible/ansible-modules-core/pull/5357
+  https://github.com/ansible/ansible-modules-core/pull/5353
+  https://github.com/ansible/ansible-modules-core/issues/5237
+  http://www.securityfocus.com/bid/94108
+  https://github.com/advisories/GHSA-cmwx-9m2h-x7v4
+
+A flaw was found in Ansible before version 2.2.0. The apt_key module does not properly verify key fingerprints, allowing remote adversary to create an OpenPGP key which matches the short key ID and inject this key instead of the correct key.

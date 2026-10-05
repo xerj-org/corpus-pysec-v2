@@ -1,0 +1,13 @@
+PYSEC-2022-43055 PyPI/hyperledger — Hyperledger Fabric 2.3 allows attackers to cause a denial of service (orderer crash) by repeatedly s
+package: hyperledger
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-45196
+references:
+  https://github.com/hyperledger/fabric/pull/2934
+  https://github.com/hyperledger/fabric/pull/2934
+  https://github.com/SmartBFT-Go/fabric/issues/286
+  https://github.com/SmartBFT-Go/fabric/issues/286
+
+Hyperledger Fabric 2.3 allows attackers to cause a denial of service (orderer crash) by repeatedly sending a crafted channel tx with the same Channel name. NOTE: the official Fabric with Raft prevents exploitation via a locking mechanism and a check for names that already exist.

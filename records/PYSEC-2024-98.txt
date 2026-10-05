@@ -1,0 +1,20 @@
+PYSEC-2024-98 PyPI/apache-submarine — ** UNSUPPORTED WHEN ASSIGNED ** Incorrect Authorization vulnerability in Apache Submarine Server Cor
+package: apache-submarine
+ecosystem: PyPI
+versions affected:
+  >= 0.8.0 (ECOSYSTEM)
+aliases: CVE-2024-36265, GHSA-6q97-8v3g-rpxw
+references:
+  https://lists.apache.org/thread/prckhhst19qxof064hsm8cccxtofvflz
+  https://lists.apache.org/thread/prckhhst19qxof064hsm8cccxtofvflz
+  http://www.openwall.com/lists/oss-security/2024/06/12/3
+  https://github.com/advisories/GHSA-6q97-8v3g-rpxw
+
+** UNSUPPORTED WHEN ASSIGNED ** Incorrect Authorization vulnerability in Apache Submarine Server Core.
+
+This issue affects Apache Submarine Server Core: from 0.8.0.
+
+As this project is retired, we do not plan to release a version that fixes this issue. Users are recommended to find an alternative or restrict access to the instance to trusted users.
+
+NOTE: This vulnerability only affects products that are no longer supported by the maintainer.
+

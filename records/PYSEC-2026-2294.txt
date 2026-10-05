@@ -1,0 +1,12 @@
+PYSEC-2026-2294 PyPI/ujson — UltraJSON is a fast JSON encoder and decoder written in pure C with bindings for Python 3.7+. Prior 
+package: ujson
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.13.0 (ECOSYSTEM)
+aliases: CVE-2026-54911, GHSA-3j69-69wj-xqx2
+references:
+  https://github.com/ultrajson/ultrajson/releases/tag/5.13.0
+  https://github.com/ultrajson/ultrajson/commit/169eaf36b1116fece5034ee79a7a0ef3f6deedcf
+  https://github.com/ultrajson/ultrajson/security/advisories/GHSA-3j69-69wj-xqx2
+
+UltraJSON is a fast JSON encoder and decoder written in pure C with bindings for Python 3.7+. Prior to 5.13.0, ujson.dumps() (or ujson.dump() or ujson.encode()) have a reject_bytes=False option. When set, they may accept malformed or truncated UTF-8 byte sequences, silently rewriting them into different Unicode characters instead of rejecting them. This leads to input validation bypass and data integrity issues. This vulnerability is fixed in 5.13.0.

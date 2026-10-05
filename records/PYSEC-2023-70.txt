@@ -1,0 +1,12 @@
+PYSEC-2023-70 PyPI/mlflow — A directory traversal vulnerability in the /get-artifact API method of the mlflow platform up to v2.
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.0.1 (ECOSYSTEM)
+aliases: CVE-2023-30172, GHSA-wc6j-5g83-xfm6
+references:
+  https://github.com/mlflow/mlflow/issues/7166
+  https://github.com/mlflow/mlflow/issues/7166#issuecomment-1541543234
+  https://github.com/advisories/GHSA-wc6j-5g83-xfm6
+
+A directory traversal vulnerability in the /get-artifact API method of the mlflow platform up to v2.0.1 allows attackers to read arbitrary files on the server via the path parameter.

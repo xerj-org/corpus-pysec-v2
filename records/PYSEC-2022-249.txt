@@ -1,0 +1,11 @@
+PYSEC-2022-249 PyPI/nbconvert — The GitHub Security Lab discovered sixteen ways to exploit a cross-site scripting vulnerability in n
+package: nbconvert
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.3.0a0 (ECOSYSTEM)
+aliases: CVE-2021-32862, GHSA-9jmq-rx5f-8jwq, GHSA-h274-fcvj-h2wm
+references:
+  https://github.com/jupyter/nbconvert/security/advisories/GHSA-9jmq-rx5f-8jwq
+  https://github.com/jupyter/nbviewer/security/advisories/GHSA-h274-fcvj-h2wm
+
+The GitHub Security Lab discovered sixteen ways to exploit a cross-site scripting vulnerability in nbconvert. When using nbconvert to generate an HTML version of a user-controllable notebook, it is possible to inject arbitrary HTML which may lead to cross-site scripting (XSS) vulnerabilities if these HTML notebooks are served by a web server (eg: nbviewer).

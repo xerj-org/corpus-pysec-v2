@@ -1,0 +1,11 @@
+PYSEC-2021-13 PyPI/flask-caching — The Flask-Caching extension through 1.10.1 for Flask relies on Pickle for serialization, which may l
+package: flask-caching
+ecosystem: PyPI
+versions affected:
+  >= 1.0.0 (ECOSYSTEM)
+aliases: CVE-2021-33026, GHSA-656c-6cxf-hvcv
+references:
+  https://github.com/sh4nks/flask-caching/pull/209
+  https://github.com/advisories/GHSA-656c-6cxf-hvcv
+
+The Flask-Caching extension through 1.10.1 for Flask relies on Pickle for serialization, which may lead to remote code execution or local privilege escalation. If an attacker gains access to cache storage (e.g., filesystem, Memcached, Redis, etc.), they can construct a crafted payload, poison the cache, and execute Python code.

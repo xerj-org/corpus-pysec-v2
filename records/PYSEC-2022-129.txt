@@ -1,0 +1,12 @@
+PYSEC-2022-129 PyPI/tensorflow-gpu — Tensorflow is an Open Source Machine Learning Framework. An attacker can trigger denial of service v
+package: tensorflow-gpu
+ecosystem: PyPI
+versions affected:
+  >= 0, < c2b31ff2d3151acb230edc3f5b1832d2c713a9e0 (GIT: https://github.com/tensorflow/tensorflow)
+  >= 0, < 2.5.3, >= 2.6.0, < 2.6.3 (ECOSYSTEM)
+aliases: CVE-2022-23565, GHSA-4v5p-v5h9-6xjx
+references:
+  https://github.com/tensorflow/tensorflow/commit/c2b31ff2d3151acb230edc3f5b1832d2c713a9e0
+  https://github.com/tensorflow/tensorflow/security/advisories/GHSA-4v5p-v5h9-6xjx
+
+Tensorflow is an Open Source Machine Learning Framework. An attacker can trigger denial of service via assertion failure by altering a `SavedModel` on disk such that `AttrDef`s of some operation are duplicated. The fix will be included in TensorFlow 2.8.0. We will also cherrypick this commit on TensorFlow 2.7.1, TensorFlow 2.6.3, and TensorFlow 2.5.3, as these are also affected and still in supported range.

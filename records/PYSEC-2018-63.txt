@@ -1,0 +1,13 @@
+PYSEC-2018-63 PyPI/aubio — An issue was discovered in aubio 0.4.6. A buffer over-read can occur in new_aubio_pitchyinfft in pit
+package: aubio
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.4.7 (ECOSYSTEM)
+aliases: CVE-2018-14523, GHSA-3x58-8qmv-wqw5
+references:
+  https://github.com/aubio/aubio/issues/189
+  http://lists.opensuse.org/opensuse-security-announce/2019-03/msg00031.html
+  http://lists.opensuse.org/opensuse-security-announce/2019-04/msg00071.html
+  https://github.com/advisories/GHSA-3x58-8qmv-wqw5
+
+An issue was discovered in aubio 0.4.6. A buffer over-read can occur in new_aubio_pitchyinfft in pitch/pitchyinfft.c, as demonstrated by aubionotes.

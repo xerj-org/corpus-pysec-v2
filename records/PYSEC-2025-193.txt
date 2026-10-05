@@ -1,0 +1,15 @@
+PYSEC-2025-193 PyPI/torch — A vulnerability was found in PyTorch 2.6.0. It has been rated as critical. Affected by this issue is
+package: torch
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 2.6.0-NA (ECOSYSTEM)
+aliases: CVE-2025-2999, GHSA-vgrw-7cvw-pwgx
+references:
+  https://vuldb.com/?id.302048
+  https://vuldb.com/?submit.524198
+  https://github.com/pytorch/pytorch/issues/149622
+  https://github.com/pytorch/pytorch/issues/149622#issue-2935495265
+  https://vuldb.com/?ctiid.302048
+  https://github.com/advisories/GHSA-vgrw-7cvw-pwgx
+
+A vulnerability was found in PyTorch 2.6.0. It has been rated as critical. Affected by this issue is the function torch.nn.utils.rnn.unpack_sequence. The manipulation leads to memory corruption. Attacking locally is a requirement. The exploit has been disclosed to the public and may be used.

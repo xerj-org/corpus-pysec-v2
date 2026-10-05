@@ -1,0 +1,14 @@
+PYSEC-2026-2257 PyPI/pillow — Pillow is a Python imaging library. Prior to 12.3.0, WindowsViewer.get_command() constructed a cmd.e
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 12.3.0 (ECOSYSTEM)
+aliases: CVE-2026-55798, GHSA-4x4j-2g7c-83w6
+references:
+  https://github.com/python-pillow/Pillow/blob/main/docs/releasenotes/12.3.0.rst
+  https://github.com/python-pillow/Pillow/commit/8404ea5fe5df40fc34aa1e51403dd6fce0778b8a
+  https://github.com/python-pillow/Pillow/commit/88194166691b7b603529b8b036ab3ab9cedd2de4
+  https://github.com/python-pillow/Pillow/commit/b0e06caa64c1405aa3da0bb1d2bd9a77ca22de7f
+  https://github.com/python-pillow/Pillow/security/advisories/GHSA-4x4j-2g7c-83w6
+
+Pillow is a Python imaging library. Prior to 12.3.0, WindowsViewer.get_command() constructed a cmd.exe shell command by directly embedding a file path into an f-string without escaping and passed the result to subprocess.Popen(..., shell=True), allowing shell metacharacters in the file path to inject arbitrary cmd.exe commands. This issue is fixed in version 12.3.0.

@@ -1,0 +1,12 @@
+PYSEC-2025-27 PyPI/snowflake-connector-python — The Snowflake Connector for Python provides an interface for developing Python applications that can
+package: snowflake-connector-python
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3769b43822357c3874c40f5e74068458c2dc79af (GIT: https://github.com/snowflakedb/snowflake-connector-python)
+  >= 2.7.12, < 3.13.1 (ECOSYSTEM)
+aliases: CVE-2025-24794, GHSA-m4f6-vcj4-w5mx
+references:
+  https://github.com/snowflakedb/snowflake-connector-python/security/advisories/GHSA-m4f6-vcj4-w5mx
+  https://github.com/snowflakedb/snowflake-connector-python/commit/3769b43822357c3874c40f5e74068458c2dc79af
+
+The Snowflake Connector for Python provides an interface for developing Python applications that can connect to Snowflake and perform all standard operations. Snowflake discovered and remediated a vulnerability in the Snowflake Connector for Python. The OCSP response cache uses pickle as the serialization format, potentially leading to local privilege escalation. This vulnerability affects versions 2.7.12 through 3.13.0. Snowflake fixed the issue in version 3.13.1.

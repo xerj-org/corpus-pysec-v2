@@ -1,0 +1,52 @@
+PYSEC-2026-1269 PyPI/confidant — Prevent XSS from Confidant API call
+package: confidant
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.6.2 (ECOSYSTEM)
+aliases: CVE-2024-45793, GHSA-rxq8-q85f-m866
+references:
+  https://github.com/lyft/confidant/security/advisories/GHSA-rxq8-q85f-m866
+  https://nvd.nist.gov/vuln/detail/CVE-2024-45793
+  https://github.com/lyft/confidant/commit/8876b07abde0c8d2a4974f79b60562b6d0193db9
+  https://hackerone.com/reports/2332004
+  https://hackerone.com/reports/2456673
+  https://hackerone.com/reports/2476542
+  https://github.com/lyft/confidant
+  https://pypi.org/project/confidant
+  https://github.com/advisories/GHSA-rxq8-q85f-m866
+
+### Impact
+_What kind of vulnerability is it? Who is impacted?_
+Potential XSS from API calls below:
+GET <app>/v1/credentials
+GET <app>/v1/credentials/<id>
+GET <app>/v1/archive/credentials/<id>
+GET <app>/v1/archive/credentials
+POST <app>/v1/credentials
+PUT <app>/v1/credentials/<id>
+PUT <app>/v1/credentials/<id>/<to_revision>
+
+GET <app>/v1/services
+GET <app>/v1/services/<id>
+GET <app>/v1/archive/services/<id>
+GET <app>/v1/archive/services
+PUT <app>/v1/services/<id>
+PUT <app>/v1/services/<id>/<to_revision>
+
+Stored XSS that can only be used as a stored HTML injection. The attacker needs to be authenticated and have privileges to create new credentials, but could use this to show information and run scripts to other users into the same Confidant instance.
+
+### Patches
+_Has the problem been patched? What versions should users upgrade to?_
+yes, version 6.6.2
+
+### Workarounds
+_Is there a way for users to fix or remediate the vulnerability without upgrading?_
+NO
+
+### References
+_Are there any links users can visit to find out more?_
+https://hackerone.com/reports/2332004
+https://hackerone.com/reports/2456673
+https://hackerone.com/reports/2476542
+Acknowledgement: 
+Thank you Rein Daelman ([trein](https://hackerone.com/trein)) for reporting and proposing the fix.

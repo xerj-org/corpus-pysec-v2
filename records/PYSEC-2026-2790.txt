@@ -1,0 +1,55 @@
+PYSEC-2026-2790 PyPI/openbabel — Open Babel has out-of-bounds write in ORCA nAtoms parser
+package: openbabel
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.2.0 (ECOSYSTEM)
+aliases: CVE-2022-46289, GHSA-rj4c-r689-cm87
+references:
+  https://github.com/openbabel/openbabel/security/advisories/GHSA-rj4c-r689-cm87
+  https://nvd.nist.gov/vuln/detail/CVE-2022-46289
+  https://github.com/openbabel/openbabel/commit/b239d06eb724bb684eea0040e9d87cf07072b081
+  https://github.com/openbabel/openbabel
+  https://talosintelligence.com/vulnerability_reports/TALOS-2022-1665
+  https://www.talosintelligence.com/vulnerability_reports/TALOS-2022-1665
+  https://pypi.org/project/openbabel
+  https://github.com/advisories/GHSA-rj4c-r689-cm87
+
+### Summary
+
+A memory-safety vulnerability in Open Babel's ORCA parser allowed an
+out-of-bounds write when reading a crafted input file.
+
+### Details
+
+The flaw was in the `nAtoms` handling of the ORCA reader. A malformed
+input caused the parser to write past the end of its destination
+buffer.
+
+### Impact
+
+Open Babel is a C++ library and CLI used to read and write chemistry
+file formats; it is shipped by Linux distributions and embedded in
+services that may parse untrusted input. Triggering this vulnerability
+requires the victim to open a malicious ORCA file with the `obabel`
+tool, the `OBConversion` API, or any of the language bindings (Python,
+Ruby, Java, R, Perl, C#, PHP).
+
+### Affected versions
+
+All releases up to and including 3.1.1.
+
+### Patched version
+
+3.2.0 (released 2026-05-26).
+
+### Patch
+
+Fix commit: https://github.com/openbabel/openbabel/commit/b239d06e
+
+A minimized reproducer for this CVE is checked in under
+`test/files/fuzz_regress/` and is exercised on every CI build under
+ASAN+UBSAN by the `fuzzregresstest` harness.
+
+### Credit
+
+Reported by Cisco TALOS.

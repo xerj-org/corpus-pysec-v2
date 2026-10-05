@@ -1,0 +1,94 @@
+PYSEC-2026-3908 PyPI/prowler-cloud — Prowler: Stored XSS in HTML reports through unescaped cloud resource tags
+package: prowler-cloud
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.37.0 (ECOSYSTEM)
+aliases: CVE-2026-73262, GHSA-c2jg-2778-ggm4
+references:
+  https://github.com/prowler-cloud/prowler/security/advisories/GHSA-c2jg-2778-ggm4
+  https://nvd.nist.gov/vuln/detail/CVE-2026-73262
+  https://github.com/prowler-cloud/prowler/pull/12221
+  https://github.com/prowler-cloud/prowler/commit/6db407ed3c17d4c73a8f619fdb30580c8465027f
+  https://github.com/prowler-cloud/prowler
+  https://github.com/prowler-cloud/prowler/releases/tag/5.37.0
+  https://pypi.org/project/prowler-cloud
+  https://github.com/advisories/GHSA-c2jg-2778-ggm4
+
+## Summary
+
+Prowler's HTML output formatter inserts `finding.resource_tags` into the generated report without HTML escaping. A cloud principal who can create or edit a resource tag in an account that is later scanned can store HTML or JavaScript in that tag. When another user opens the generated Prowler HTML report, the payload executes in the report page.
+
+## Impact
+
+This is stored cross-site scripting in a security report artifact. The attacker needs permission to influence tags on a scanned cloud resource, and the victim must open the generated HTML report. In that context, JavaScript can read and modify the report DOM, alter displayed findings, and interact with any same-origin local or hosted report content available to the browser. This can undermine trust in generated security findings and can expose data contained in the report page.
+
+## Gate checks
+
+The repository has 13,875 GitHub stars, which is above the 10,000 star floor. `SECURITY.md` is present and does not reject GitHub private reporting. The dedicated GitHub private vulnerability reporting endpoint for `prowler-cloud/prowler` returned `true`.
+
+## Affected versions
+
+The vulnerable sink is present in current `master` at commit `329dfdf8e6cb8bc0424fb54b6595408e20969782` and in the latest GitHub release tag `5.28.0`. The package metadata identifies the Python package as `prowler`.
+
+## Technical details
+
+The HTML formatter builds each finding row with an f-string in `prowler/lib/outputs/html/html.py`. Neighboring fields are explicitly escaped:
+
+- `resource_uid` is escaped at line 85 with `.replace("<", "&lt;").replace(">", "&gt;")`.
+- `status_extended` is escaped at line 87 with the same pattern.
+
+The tag column does not apply equivalent escaping:
+
+```python
+<td>{parse_html_string(unroll_dict(finding.resource_tags))}</td>
+```
+
+`unroll_dict` concatenates tag keys and values into a string, and `parse_html_string` only prefixes each item with an HTML bullet. Neither function escapes `<`, `>`, quotes, or event-handler attributes before insertion into the table cell. As a result, a tag value such as this remains active markup in the generated report:
+
+```html
+<img src=x onerror="window.PROWLER_TAG_XSS=1">
+```
+
+## Reproduction
+
+1. Create or identify a cloud resource that Prowler will include in an HTML report.
+2. Add a tag value containing a harmless proof payload, for example:
+
+```html
+<img src=x onerror="window.PROWLER_TAG_XSS=1">
+```
+
+3. Run Prowler against the account and generate HTML output.
+4. Open the generated HTML report in a browser.
+5. The payload executes from the tags column.
+
+A proof HTML fragment using the same formatter structure set `window.PROWLER_TAG_XSS=1` from `resource_tags`, while equivalent payloads in `resource_uid` and `status_extended` stayed text because those fields are escaped.
+
+Local evidence:
+
+- `/home/unkn0wn/security_audit/vulnerability-reports/prowler-html-tag-xss-evidence-2026-05-26.json`
+- `/home/unkn0wn/security_audit/vulnerability-reports/prowler-html-tag-xss-proof-full.html`
+
+## PoC
+
+The minimized generated row below mirrors the vulnerable formatter output. The first and third candidate payloads are escaped controls. The middle payload is the unescaped `resource_tags` value and executes when the report is rendered.
+
+```html
+<tr class="table-danger">
+  <td>&lt;img src=x onerror="window.PROWLER_UID_XSS=1"&gt;</td>
+  <td>
+    &#x2022;Owner=<img src=x onerror="window.PROWLER_TAG_XSS=1;document.body.setAttribute('data-prowler-tag-xss','1')">
+  </td>
+  <td>&lt;img src=x onerror="window.PROWLER_STATUS_XSS=1"&gt;</td>
+</tr>
+```
+
+Browser proof result from the local artifact:
+
+```json
+{"tag": 1, "uid": 0, "status": 0, "attr": "1"}
+```
+
+## Remediation
+
+Escape tag keys and values before inserting them into HTML output. Prefer a single HTML escaping helper for every finding field that can originate from provider data. If bullets or separators are needed, build the list structure after escaping each key and value, rather than escaping the final HTML string after markup has been added.

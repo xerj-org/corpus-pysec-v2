@@ -1,0 +1,12 @@
+PYSEC-2019-198 PyPI/python-saml — OneLogin PythonSAML 2.3.0 and earlier may incorrectly utilize the results of XML DOM traversal and c
+package: python-saml
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.4.0 (ECOSYSTEM)
+aliases: CVE-2017-11427, GHSA-j8j8-348v-wfm3
+references:
+  https://www.kb.cert.org/vuls/id/475445
+  https://duo.com/blog/duo-finds-saml-vulnerabilities-affecting-multiple-implementations
+  https://github.com/advisories/GHSA-j8j8-348v-wfm3
+
+OneLogin PythonSAML 2.3.0 and earlier may incorrectly utilize the results of XML DOM traversal and canonicalization APIs in such a way that an attacker may be able to manipulate the SAML data without invalidating the cryptographic signature, allowing the attack to potentially bypass authentication to SAML service providers.

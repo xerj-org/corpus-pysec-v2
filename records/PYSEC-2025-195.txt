@@ -1,0 +1,15 @@
+PYSEC-2025-195 PyPI/torch — A vulnerability classified as critical was found in PyTorch 2.6.0. This vulnerability affects the fu
+package: torch
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 2.6.0-NA (ECOSYSTEM)
+aliases: CVE-2025-3001, GHSA-qfhq-4f3w-5fph
+references:
+  https://vuldb.com/?id.302050
+  https://vuldb.com/?submit.524212
+  https://github.com/pytorch/pytorch/issues/149626
+  https://github.com/pytorch/pytorch/issues/149626#issue-2935860995
+  https://vuldb.com/?ctiid.302050
+  https://github.com/advisories/GHSA-qfhq-4f3w-5fph
+
+A vulnerability classified as critical was found in PyTorch 2.6.0. This vulnerability affects the function torch.lstm_cell. The manipulation leads to memory corruption. The attack needs to be approached locally. The exploit has been disclosed to the public and may be used.

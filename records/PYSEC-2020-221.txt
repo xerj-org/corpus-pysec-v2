@@ -1,0 +1,11 @@
+PYSEC-2020-221 PyPI/ansible — A flaw was found in Ansible Base when using the aws_ssm connection plugin as there is no namespace s
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2020-25636
+references:
+  https://github.com/ansible-collections/community.aws/issues/221
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2020-25636
+
+A flaw was found in Ansible Base when using the aws_ssm connection plugin as there is no namespace separation for file transfers. Files are written directly to the root bucket, making possible to have collisions when running multiple ansible processes. This issue affects mainly the service availability.

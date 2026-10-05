@@ -1,0 +1,10 @@
+PYSEC-2023-296 PyPI/repox — An XEE vulnerability has been found in Repox, which allows a remote attacker to interfere with the a
+package: repox
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2023-6721
+references:
+  https://www.incibe.es/en/incibe-cert/notices/aviso/multiple-vulnerabilities-repox
+
+An XEE vulnerability has been found in Repox, which allows a remote attacker to interfere with the application's XML data processing in the fileupload function, resulting in interaction between the attacker and the server's file system.

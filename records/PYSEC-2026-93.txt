@@ -1,0 +1,15 @@
+PYSEC-2026-93 PyPI/mlflow — MLflow is vulnerable to Stored Cross-Site Scripting (XSS) caused by unsafe parsing of YAML-based MLm
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.11.0rc0 (ECOSYSTEM)
+aliases: CVE-2026-33865, GHSA-fh64-r2vc-xvhr
+references:
+  https://cert.pl/en/posts/2026/04/CVE-2026-33865/
+  https://github.com/mlflow/mlflow/pull/21435
+  https://afine.com/blogs/attacking-mlflow-how-ml-artifacts-become-attack-vectors
+  https://github.com/advisories/GHSA-fh64-r2vc-xvhr
+
+MLflow is vulnerable to Stored Cross-Site Scripting (XSS) caused by unsafe parsing of YAML-based MLmodel artifacts in its web interface. An authenticated attacker can upload a malicious MLmodel file containing a payload that executes when another user views the artifact in the UI. This allows actions such as session hijacking or performing operations on behalf of the victim. 
+
+This issue affects MLflow version through 3.10.1

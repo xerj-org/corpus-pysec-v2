@@ -1,0 +1,13 @@
+PYSEC-2016-33 PyPI/roundup — schema.py in Roundup before 1.5.1 does not properly limit attributes included in default user permis
+package: roundup
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.5.1 (ECOSYSTEM)
+aliases: CVE-2014-6276, GHSA-j556-q367-2gw6
+references:
+  http://hg.code.sf.net/p/roundup/code/rev/a403c29ffaf9
+  https://sourceforge.net/p/roundup/code/ci/tip/tree/CHANGES.txt
+  http://www.debian.org/security/2016/dsa-3502
+  https://github.com/advisories/GHSA-j556-q367-2gw6
+
+schema.py in Roundup before 1.5.1 does not properly limit attributes included in default user permissions, which might allow remote authenticated users to obtain sensitive user information by viewing user details.

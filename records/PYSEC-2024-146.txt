@@ -1,0 +1,19 @@
+PYSEC-2024-146 PyPI/paddlepaddle — PaddlePaddle before 2.6.0 has a command injection in convert_shape_compare. This resulted in the abi
+package: paddlepaddle
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.6.0 (ECOSYSTEM)
+aliases: CVE-2023-52314, GHSA-3cr5-2446-8pg3
+references:
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-023.md
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-023.md
+  https://github.com/advisories/GHSA-3cr5-2446-8pg3
+
+PaddlePaddle before 2.6.0 has a command injection in convert_shape_compare. This resulted in the ability to execute arbitrary commands on the operating system.
+
+
+
+
+
+
+

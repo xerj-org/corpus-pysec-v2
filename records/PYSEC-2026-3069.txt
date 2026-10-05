@@ -1,0 +1,14 @@
+PYSEC-2026-3069 PyPI/snorkel — Snorkel BaseLabeler.load uses an unsafe pickle.load
+package: snorkel
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.10.0 (ECOSYSTEM)
+aliases: CVE-2026-31223, GHSA-fq92-qc8f-482v
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-31223
+  https://github.com/snorkel-team/snorkel
+  https://www.notion.so/CVE-2026-31223-35d1e1393188811ab1d0e4a8a2e67992
+  https://pypi.org/project/snorkel
+  https://github.com/advisories/GHSA-fq92-qc8f-482v
+
+The snorkel library thru v0.10.0 contains a critical insecure deserialization vulnerability (CWE-502) in the BaseLabeler.load() method of the BaseLabeler class. The method loads serialized labeler models using the unsafe pickle.load() function on user-supplied file paths without any validation or security controls. Python's pickle module is inherently dangerous for deserializing untrusted data, as it can execute arbitrary code during the deserialization process. A remote attacker can exploit this by providing a maliciously crafted pickle file, leading to arbitrary code execution on the victim's system when the file is loaded via the vulnerable method.

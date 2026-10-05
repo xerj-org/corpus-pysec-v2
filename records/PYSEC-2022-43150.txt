@@ -1,0 +1,16 @@
+PYSEC-2022-43150 PyPI/pydoris — Apache Doris, prior to 1.0.0, used a hardcoded key and IV to initialize the cipher used for ldap pas
+package: pydoris
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0.0 (ECOSYSTEM)
+aliases: CVE-2022-23942, GHSA-98j2-hfxp-8h8r
+references:
+  https://lists.apache.org/thread/com2dyzp3bn2rdrotry90q2zzord4tvt
+  https://lists.apache.org/thread/com2dyzp3bn2rdrotry90q2zzord4tvt
+  http://www.openwall.com/lists/oss-security/2022/04/26/2
+  http://www.openwall.com/lists/oss-security/2022/04/26/2
+  http://www.openwall.com/lists/oss-security/2022/04/26/3
+  http://www.openwall.com/lists/oss-security/2022/04/26/3
+  https://github.com/advisories/GHSA-98j2-hfxp-8h8r
+
+Apache Doris, prior to 1.0.0, used a hardcoded key and IV to initialize the cipher used for ldap password, which may lead to information disclosure.

@@ -1,0 +1,18 @@
+PYSEC-2026-2640 PyPI/metagpt — MetaGPT has an Injection issue
+package: metagpt
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.8.1 (ECOSYSTEM)
+aliases: CVE-2026-5970, GHSA-g977-h85w-h2xj
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-5970
+  https://github.com/FoundationAgents/MetaGPT/issues/1942
+  https://github.com/FoundationAgents/MetaGPT/pull/1988
+  https://github.com/FoundationAgents/MetaGPT
+  https://vuldb.com/submit/791693
+  https://vuldb.com/vuln/356524
+  https://vuldb.com/vuln/356524/cti
+  https://pypi.org/project/metagpt
+  https://github.com/advisories/GHSA-g977-h85w-h2xj
+
+A vulnerability was detected in FoundationAgents MetaGPT up to 0.8.1. This affects the function check_solution of the component HumanEvalBenchmark/MBPPBenchmark. Performing a manipulation results in code injection. The attack may be initiated remotely. The exploit is now public and may be used. The project was informed of the problem early through a pull request but has not reacted yet.

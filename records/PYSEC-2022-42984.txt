@@ -1,0 +1,16 @@
+PYSEC-2022-42984 PyPI/apache-airflow — In Apache Airflow versions prior to 2.4.3, there was an open redirect in the webserver's `/login` en
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.4.3 (ECOSYSTEM)
+aliases: CVE-2022-45402, GHSA-rg94-84xj-7gq3
+references:
+  https://github.com/apache/airflow/pull/27576
+  https://github.com/apache/airflow/pull/27576
+  https://lists.apache.org/thread/nf4xrkoo6c81g6fdn4vj8k9x2686o9nh
+  https://lists.apache.org/thread/nf4xrkoo6c81g6fdn4vj8k9x2686o9nh
+  http://www.openwall.com/lists/oss-security/2022/11/15/1
+  http://www.openwall.com/lists/oss-security/2022/11/15/1
+  https://github.com/advisories/GHSA-rg94-84xj-7gq3
+
+In Apache Airflow versions prior to 2.4.3, there was an open redirect in the webserver's `/login` endpoint.

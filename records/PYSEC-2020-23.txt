@@ -1,0 +1,11 @@
+PYSEC-2020-23 PyPI/apache-airflow — An issue was found in Apache Airflow versions 1.10.10 and below. A stored XSS vulnerability was disc
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.10.11rc1 (ECOSYSTEM)
+aliases: CVE-2020-9485, GHSA-j38c-25fj-mr84
+references:
+  https://lists.apache.org/thread.html/r7255cf0be3566f23a768e2a04b40fb09e52fcd1872695428ba9afe91%40%3Cusers.airflow.apache.org%3E
+  https://github.com/advisories/GHSA-j38c-25fj-mr84
+
+An issue was found in Apache Airflow versions 1.10.10 and below. A stored XSS vulnerability was discovered in the Chart pages of the the "classic" UI.

@@ -1,0 +1,12 @@
+PYSEC-2026-2287 PyPI/tornado — In Tornado before 6.5.5, cookie attribute injection could occur because the domain, path, and samesi
+package: tornado
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.5.5 (ECOSYSTEM)
+aliases: CVE-2026-35536, GHSA-78cv-mqj4-43f7, GHSA-fqwm-6jpj-5wxc
+references:
+  https://github.com/tornadoweb/tornado/releases/tag/v6.5.5
+  https://github.com/tornadoweb/tornado/security/advisories/GHSA-78cv-mqj4-43f7
+  https://github.com/advisories/GHSA-fqwm-6jpj-5wxc
+
+In Tornado before 6.5.5, cookie attribute injection could occur because the domain, path, and samesite arguments to .RequestHandler.set_cookie were not checked for crafted characters.

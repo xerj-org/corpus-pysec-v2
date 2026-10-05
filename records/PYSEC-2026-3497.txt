@@ -1,0 +1,28 @@
+PYSEC-2026-3497 PyPI/plone-app-textfield — plone.app.textfield: Stored XSS by spoofing mime type
+package: plone-app-textfield
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.0.2, >= 3.0.0, < 3.0.2, >= 4.0.0, < 4.0.1 (ECOSYSTEM)
+aliases: CVE-2026-54503, GHSA-4r4f-gg25-rmg5
+references:
+  https://github.com/plone/plone.app.textfield/security/advisories/GHSA-4r4f-gg25-rmg5
+  https://github.com/plone/plone.app.textfield
+  https://pypi.org/project/plone-app-textfield
+  https://github.com/advisories/GHSA-4r4f-gg25-rmg5
+  https://nvd.nist.gov/vuln/detail/CVE-2026-54503
+
+### Impact
+
+A stored XSS affecting RichText fields. RichTextValue.output returns the raw, unsanitized stored value whenever the stored mimeType equals the outputMimeType. Because the safe-HTML output type (`text/x-html-safe`) is the type that signifies "already sanitized", any value whose stored mimeType equals it bypasses the safe_html transform entirely on render. The transform itself is sound — it correctly strips `on*` event-handler attributes and `javascript:/data:` URIs; the defect is that it is never invoked for these values. The unsanitized value is then emitted via `tal:content="structure ..."`, which performs no escaping, so the payload executes in the viewer's browser. 
+
+This can be a problem when a RichText field is wrongly defined in code with a `mimeType` and `outputMimeType` that are the same, or when the REST API is used to the same effect.
+
+### Patches
+The problem has been patched:
+
+* For Plone 6.0, upgrade `plone.app.textfield` to 2.0.2.
+* For Plone 6.1, upgrade `plone.app.textfield` to 3.0.2.
+* For Plone 6.2, upgrade `plone.app.textfield` to 4.0.1.
+
+### Workarounds
+There is no known workaround.

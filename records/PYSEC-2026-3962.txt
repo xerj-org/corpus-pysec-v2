@@ -1,0 +1,11 @@
+PYSEC-2026-3962 PyPI/openssl-encrypt — openssl_encrypt before 1.4.9 fails to re-derive and validate fingerprints when loading identities fr
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.9 (ECOSYSTEM)
+aliases: CVE-2026-81702, GHSA-q8p3-7h6h-ghfr
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-q8p3-7h6h-ghfr
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-1.4.9-key-substitution-via-identity-load
+
+openssl_encrypt before 1.4.9 fails to re-derive and validate fingerprints when loading identities from identity.json, allowing attackers to substitute public keys in identity stores. Attackers can replace legitimate public keys with their own while maintaining the claimed fingerprint, enabling silent key substitution where encryption uses attacker keys and signature verification appears valid.

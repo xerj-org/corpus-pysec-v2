@@ -1,0 +1,19 @@
+PYSEC-2018-126 PyPI/exiv2 — In types.cpp in Exiv2 0.26, a large size value may lead to a SIGABRT during an attempt at memory all
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2018-10958
+references:
+  https://github.com/Exiv2/exiv2/issues/302
+  https://github.com/Exiv2/exiv2/issues/302
+  https://lists.debian.org/debian-lts-announce/2018/06/msg00010.html
+  https://lists.debian.org/debian-lts-announce/2018/06/msg00010.html
+  https://www.debian.org/security/2018/dsa-4238
+  https://usn.ubuntu.com/3700-1/
+  https://lists.debian.org/debian-lts-announce/2018/10/msg00012.html
+  https://lists.debian.org/debian-lts-announce/2018/10/msg00012.html
+  https://security.gentoo.org/glsa/201811-14
+  https://access.redhat.com/errata/RHSA-2019:2101
+
+In types.cpp in Exiv2 0.26, a large size value may lead to a SIGABRT during an attempt at memory allocation for an Exiv2::Internal::PngChunk::zlibUncompress call.

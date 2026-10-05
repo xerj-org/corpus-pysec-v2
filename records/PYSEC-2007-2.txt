@@ -1,0 +1,15 @@
+PYSEC-2007-2 PyPI/trac — Cross-site scripting (XSS) vulnerability in the "download wiki page as text" feature in Trac before 
+package: trac
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.10.3.1 (ECOSYSTEM)
+aliases: CVE-2007-1405, GHSA-w7x2-57f7-3p3x
+references:
+  http://trac.edgewall.org/wiki/ChangeLog
+  http://secunia.com/advisories/24470
+  http://www.securityfocus.com/bid/22888
+  http://www.vupen.com/english/advisories/2007/0900
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/32897
+  https://github.com/advisories/GHSA-w7x2-57f7-3p3x
+
+Cross-site scripting (XSS) vulnerability in the "download wiki page as text" feature in Trac before 0.10.3.1, when Microsoft Internet Explorer is used, allows remote attackers to inject arbitrary web script or HTML via unspecified parameters.

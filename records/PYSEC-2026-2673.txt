@@ -1,0 +1,15 @@
+PYSEC-2026-2673 PyPI/nemo-toolkit — NVIDIA NeMo Framework Deserializes Untrusted Data
+package: nemo-toolkit
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.6.1 (ECOSYSTEM)
+aliases: CVE-2025-33253, GHSA-hvjw-vp7g-39h5
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-33253
+  https://github.com/NVIDIA-NeMo/NeMo
+  https://nvidia.custhelp.com/app/answers/detail/a_id/5762
+  https://www.cve.org/CVERecord?id=CVE-2025-33253
+  https://pypi.org/project/nemo-toolkit
+  https://github.com/advisories/GHSA-hvjw-vp7g-39h5
+
+NVIDIA NeMo Framework contains a vulnerability where an attacker could cause remote code execution by convincing a user to load a maliciously crafted file. A successful exploit of this vulnerability might lead to code execution, denial of service, information disclosure, and data tampering.

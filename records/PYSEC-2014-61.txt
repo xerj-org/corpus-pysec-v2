@@ -1,0 +1,14 @@
+PYSEC-2014-61 PyPI/plone — member_portrait.py in Plone 2.1 through 4.1, 4.2.x through 4.2.5, and 4.3.x through 4.3.1 allows rem
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 2.1, < 4.1.1, >= 4.2, < 4.2.6, >= 4.3, < 4.3.2 (ECOSYSTEM)
+aliases: CVE-2013-4197, GHSA-jjvw-3h9j-p7jf
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=978478
+  http://seclists.org/oss-sec/2013/q3/261
+  http://plone.org/products/plone/security/advisories/20130618-announcement
+  http://plone.org/products/plone-hotfix/releases/20130618
+  https://github.com/advisories/GHSA-jjvw-3h9j-p7jf
+
+member_portrait.py in Plone 2.1 through 4.1, 4.2.x through 4.2.5, and 4.3.x through 4.3.1 allows remote authenticated users to modify or delete portraits of other users via unspecified vectors.

@@ -1,0 +1,13 @@
+PYSEC-2017-16 PyPI/kallithea — Cross-site request forgery (CSRF) vulnerability in Kallithea before 0.2.
+package: kallithea
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.2 (ECOSYSTEM)
+aliases: CVE-2015-0276, GHSA-6fgp-29mf-chhc
+references:
+  https://kallithea-scm.org/security/cve-2015-0276.html
+  http://www.securityfocus.com/bid/74052
+  http://www.openwall.com/lists/oss-security/2015/04/10/8
+  https://github.com/advisories/GHSA-6fgp-29mf-chhc
+
+Cross-site request forgery (CSRF) vulnerability in Kallithea before 0.2.

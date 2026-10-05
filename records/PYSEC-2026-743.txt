@@ -1,0 +1,14 @@
+PYSEC-2026-743 PyPI/pyo — Classic Buffer Overflow in pyo
+package: pyo
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0.3 (ECOSYSTEM)
+aliases: CVE-2021-41499, GHSA-5f5c-687x-g5qm
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2021-41499
+  https://github.com/belangeo/pyo/issues/222
+  https://github.com/belangeo/pyo
+  https://pypi.org/project/pyo
+  https://github.com/advisories/GHSA-5f5c-687x-g5qm
+
+Buffer Overflow Vulnerability exists in ajaxsoundstudio.com in Pyo < 1.03 in the Server_debug function, which allows remote attackers to conduct DoS attacks by deliberately passing on an overlong audio file name.

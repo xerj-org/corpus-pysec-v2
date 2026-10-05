@@ -1,0 +1,36 @@
+PYSEC-2026-2626 PyPI/mcp-neo4j-cypher — Neo4j Labs MCP Servers: SSRF and Data Modification via read_only Mode Bypass Through CALL Procedures
+package: mcp-neo4j-cypher
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.6.0 (ECOSYSTEM)
+aliases: CVE-2026-35402, GHSA-x3cv-r3g3-fpg9
+references:
+  https://github.com/neo4j-contrib/mcp-neo4j/security/advisories/GHSA-x3cv-r3g3-fpg9
+  https://nvd.nist.gov/vuln/detail/CVE-2026-35402
+  https://github.com/neo4j-contrib/mcp-neo4j
+  https://github.com/neo4j-contrib/mcp-neo4j/releases/tag/mcp-neo4j-cypher-v0.6.0
+  https://pypi.org/project/mcp-neo4j-cypher
+  https://github.com/advisories/GHSA-x3cv-r3g3-fpg9
+
+### Summary
+The `read_only` mode in `mcp-neo4j-cypher` versions prior to 0.6.0 can be bypassed using `CALL` procedures. 
+### Details
+
+#### Impact
+The enforcing of `read_only` mode in vulnerable versions could be bypassed by certain APOC procedures.
+
+#### Patches
+v0.6.0 release hardened the checks around the mode. The only way to guarantee the server actions is to limit the permissions of the db credentials available to the server.
+
+### Notes
+Impacts for server-side request forgery vulnerabilities may depend on both the configuration of the vulnerable system as well as the presence of other systems in the environment that could be accessed as part of exploitation.
+#### Recommended hardening
+
+- Limit the apoc procedures to what's required
+- [Manage data loading privileges](https://neo4j.com/docs/operations-manual/current/authentication-authorization/load-privileges/ )
+- Don't relax the default settings without compensating controls
+    - `apoc.import.file.enabled` is `false` by default
+    - `apoc.import.file.use_neo4j_config` is `true` by default to restrict file imports to the import folder
+
+### Credits
+We want to publicly recognise the contribution of [Yotam Perkal](https://github.com/yotampe-pluto) from [Pluto Security](https://pluto.security/).

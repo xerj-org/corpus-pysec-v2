@@ -1,0 +1,14 @@
+PYSEC-2026-2447 PyPI/diskcache — DiskCache has unsafe pickle deserialization
+package: diskcache
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 5.6.3 (ECOSYSTEM)
+aliases: CVE-2025-69872, GHSA-w8v5-vhqr-4h9v
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-69872
+  https://github.com/EthanKim88/ethan-cve-disclosures/blob/main/CVE-2025-69872-DiskCache-Pickle-Deserialization.md
+  https://github.com/grantjenks/python-diskcache
+  https://pypi.org/project/diskcache
+  https://github.com/advisories/GHSA-w8v5-vhqr-4h9v
+
+DiskCache (python-diskcache) through 5.6.3 uses Python pickle for serialization by default. An attacker with write access to the cache directory can achieve arbitrary code execution when a victim application reads from the cache.

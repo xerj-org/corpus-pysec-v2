@@ -1,0 +1,11 @@
+PYSEC-2026-3759 PyPI/openssl-encrypt — openssl_encrypt versions before 1.4.0 accept refresh tokens as URL query parameters in keyserver and
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.0 (ECOSYSTEM)
+aliases: CVE-2026-74880, GHSA-4rh7-jwg9-m28m
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-4rh7-jwg9-m28m
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-token-leakage-via-query-parameters
+
+openssl_encrypt versions before 1.4.0 accept refresh tokens as URL query parameters in keyserver and telemetry server routes. Attackers can extract tokens from server logs, proxy logs, browser history, and HTTP Referer headers to gain unauthorized access.

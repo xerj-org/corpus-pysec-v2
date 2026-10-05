@@ -1,0 +1,14 @@
+PYSEC-2025-196 PyPI/torch — A vulnerability classified as problematic has been found in PyTorch 2.6.0. Affected is the function 
+package: torch
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 2.6.0-NA (ECOSYSTEM)
+aliases: CVE-2025-3121
+references:
+  https://vuldb.com/?id.303012
+  https://github.com/pytorch/pytorch/issues/149800
+  https://github.com/pytorch/pytorch/issues/149800#issue-2940240700
+  https://vuldb.com/?ctiid.303012
+  https://vuldb.com/?submit.525049
+
+A vulnerability classified as problematic has been found in PyTorch 2.6.0. Affected is the function torch.jit.jit_module_from_flatbuffer. The manipulation leads to memory corruption. Local access is required to approach this attack. The exploit has been disclosed to the public and may be used.

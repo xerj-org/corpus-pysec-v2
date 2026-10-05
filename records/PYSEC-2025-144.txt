@@ -1,0 +1,10 @@
+PYSEC-2025-144 PyPI/ollama — A divide by zero vulnerability exists in ollama/ollama version v0.3.3. The vulnerability occurs when
+package: ollama
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.3.3 (ECOSYSTEM)
+aliases: CVE-2024-8063
+references:
+  https://huntr.com/bounties/fd8e1ed6-21d2-4c9e-8395-2098f11b7db9
+
+A divide by zero vulnerability exists in ollama/ollama version v0.3.3. The vulnerability occurs when importing GGUF models with a crafted type for `block_count` in the Modelfile. This can lead to a denial of service (DoS) condition when the server processes the model, causing it to crash.

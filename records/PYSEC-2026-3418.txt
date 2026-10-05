@@ -1,0 +1,73 @@
+PYSEC-2026-3418 PyPI/wger — wger: IDOR via user-unscoped cache keys on routine API actions exposes workout data
+package: wger
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 2.1 (ECOSYSTEM)
+aliases: CVE-2026-27838, GHSA-42cr-w2gr-m54q
+references:
+  https://github.com/wger-project/wger/security/advisories/GHSA-42cr-w2gr-m54q
+  https://nvd.nist.gov/vuln/detail/CVE-2026-27838
+  https://github.com/wger-project/wger/commit/e964328784e2ee2830a1991d69fadbce86ac9fbf
+  https://github.com/wger-project/wger
+  https://pypi.org/project/wger
+  https://github.com/advisories/GHSA-42cr-w2gr-m54q
+
+### Summary
+
+Five routine detail action endpoints check a cache before calling `self.get_object()`. Cache keys are scoped only by `pk` — no user ID is included. When a victim has previously accessed their routine via the API, an attacker can retrieve the cached response for the same PK without any ownership check.
+
+### Details
+
+`wger/manager/api/views.py` — five actions follow this pattern (lines 134–201):
+
+```python
+@action(detail=True)
+def date_sequence_display_mode(self, request, pk=None):
+    cache_key = make_routine_api_date_sequence_display_cache_key(pk)
+    cached = cache.get(cache_key)
+    if cached:
+        return Response(cached)   # returned WITHOUT calling self.get_object()
+    # only reaches ownership check on cache miss
+    routine = self.get_object()
+    ...
+```
+
+Cache key construction in `wger/utils/cache.py:89–106`:
+
+```python
+def make_routine_api_date_sequence_display_cache_key(routine_id):
+    return f"routine-api-date-sequence-display-{routine_id}"
+    # No user ID in key
+```
+
+Cache TTL: 1 month (`4 * 604800` seconds, `settings_global.py:461`).
+
+Affected endpoints:
+```
+GET /api/v2/routine/{pk}/date-sequence-display/
+GET /api/v2/routine/{pk}/date-sequence-gym/
+GET /api/v2/routine/{pk}/structure/
+GET /api/v2/routine/{pk}/logs/
+GET /api/v2/routine/{pk}/stats/
+```
+
+### PoC
+
+```
+1. Victim (user A) visits GET /api/v2/routine/5/structure/ → response cached under key "routine-api-structure-5"
+2. Attacker (user B) visits GET /api/v2/routine/5/structure/ → cache hit → returns user A's routine structure without any ownership check
+```
+
+Requires the victim to have previously accessed the endpoint (cache must be populated). Once populated, the cache entry is valid for 1 month.
+
+### Impact
+
+An attacker with a registered account can retrieve another user's routine details — workout day sequences, exercise structure, training logs, and statistics — from cache without ownership verification.
+
+**Fix**: Include the user ID in the cache key:
+```python
+def make_routine_api_date_sequence_display_cache_key(routine_id, user_id):
+    return f"routine-api-date-sequence-display-{user_id}-{routine_id}"
+```
+
+Or move `self.get_object()` before the cache lookup so ownership is always verified first.

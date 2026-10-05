@@ -1,0 +1,11 @@
+PYSEC-2026-3791 PyPI/openssl-encrypt — openssl_encrypt (pip package openssl-encrypt) versions <= 1.4.8 advertise a portable USB workspace a
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.9 (ECOSYSTEM)
+aliases: CVE-2026-81681, GHSA-2jv6-qqfm-m46m
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-2jv6-qqfm-m46m
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-1.4.9-false-encryption-via-cleartext-storage
+
+openssl_encrypt (pip package openssl-encrypt) versions <= 1.4.8 advertise a portable USB workspace as an 'Encrypted USB Workspace' with AES-256-GCM encryption and write a marker declaring the workspace encrypted, but the workspace directory is actually stored in cleartext and the derived encryption key is never applied to it. A user who trusts the branding and places files in the workspace leaves them unencrypted on the removable media, so an attacker with physical access to the media can read the sensitive files. Fixed in 1.4.9, which seals the workspace into an authenticated AES-256-GCM vault.

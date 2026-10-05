@@ -1,0 +1,15 @@
+PYSEC-2026-1076 PyPI/agentscope — AgentScope stored cross-site scripting (XSS) vulnerability
+package: agentscope
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.1.1 (ECOSYSTEM)
+aliases: CVE-2024-8556, GHSA-6mf6-7j75-2m6f
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-8556
+  https://github.com/modelscope/agentscope
+  https://github.com/modelscope/agentscope/blob/21161fe9985ee2a2f617180b00a1424b81302d42/src/agentscope/studio/static/js/dashboard.js#L90
+  https://huntr.com/bounties/8439f16b-5256-4466-bb7d-371572572a4b
+  https://pypi.org/project/agentscope
+  https://github.com/advisories/GHSA-6mf6-7j75-2m6f
+
+A stored cross-site scripting (XSS) vulnerability exists in modelscope/agentscope, as of the latest commit 21161fe on the main branch. The vulnerability occurs in the view for inspecting detailed run information, where a user-controllable string (run ID) is appended and rendered as HTML. This allows an attacker to execute arbitrary JavaScript code in the context of the user's browser.

@@ -1,0 +1,13 @@
+PYSEC-2022-159 PyPI/scrapy — Exposure of Sensitive Information to an Unauthorized Actor in GitHub repository scrapy/scrapy prior 
+package: scrapy
+ecosystem: PyPI
+versions affected:
+  >= 0, < 8ce01b3b76d4634f55067d6cfdf632ec70ba304a (GIT: https://github.com/scrapy/scrapy)
+  >= 0, < 2.6.1 (ECOSYSTEM)
+aliases: CVE-2022-0577, GHSA-cjvr-mfj7-j4j8
+references:
+  https://github.com/scrapy/scrapy/commit/8ce01b3b76d4634f55067d6cfdf632ec70ba304a
+  https://huntr.dev/bounties/3da527b1-2348-4f69-9e88-2e11a96ac585
+  https://github.com/advisories/GHSA-cjvr-mfj7-j4j8
+
+Exposure of Sensitive Information to an Unauthorized Actor in GitHub repository scrapy/scrapy prior to 2.6.1.

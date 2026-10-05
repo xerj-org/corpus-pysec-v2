@@ -1,0 +1,13 @@
+PYSEC-2026-3708 PyPI/apache-airflow — Apache Airflow's Task SDK rebuilt a `Callback` object from serialized data by re-running its constru
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 3.3.0, < 3.3.1 (ECOSYSTEM)
+aliases: CVE-2026-67587
+references:
+  https://www.cve.org/CVERecord?id=CVE-2026-58076
+  https://www.cve.org/CVERecord?id=CVE-2026-67260
+  https://lists.apache.org/thread/o00ww4n69qojvsckb464dtwd2nhzy6t0
+  https://github.com/apache/airflow/pull/70704
+
+Apache Airflow's Task SDK rebuilt a `Callback` object from serialized data by re-running its constructor, which imports the module named by the stored callback path. Because `SyncCallback` is itself an Airflow class it passes the default `allowed_deserialization_classes` allow-list, so tightening that setting does not help. A Dag author — who controls a task instance's `next_kwargs` through the task execution API — can therefore cause an arbitrary module to be imported inside the scheduler process, when the scheduler's `awaiting_input` timeout sweep deserializes that value. No non-default configuration is required; the sweep runs unconditionally. Versions before 3.3.0 are not affected: the class existed, but the scheduler sweep that reaches it did not. This is a separate code path from CVE-2026-58076 and CVE-2026-67260, which cover different gadgets reaching deserialization — applying either of those fixes does not address this one. Users are advised to upgrade to apache-airflow 3.3.1 or later.

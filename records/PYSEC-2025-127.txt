@@ -1,0 +1,10 @@
+PYSEC-2025-127 PyPI/lunasvg — lunasvg v3.0.1 was discovered to contain a segmentation violation via the component gray_find_cell
+package: lunasvg
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 3.0.1 (ECOSYSTEM)
+aliases: CVE-2024-55456
+references:
+  https://github.com/sammycage/lunasvg/issues/199
+
+lunasvg v3.0.1 was discovered to contain a segmentation violation via the component gray_find_cell

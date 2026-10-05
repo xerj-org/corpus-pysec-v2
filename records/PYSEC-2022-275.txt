@@ -1,0 +1,11 @@
+PYSEC-2022-275 PyPI/lief — LIEF commit 5d1d643 was discovered to contain a segmentation violation via the function LIEF::MachO:
+package: lief
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.12.1 (ECOSYSTEM)
+aliases: CVE-2022-38307, GHSA-x2xx-jw5m-5j86
+references:
+  https://github.com/lief-project/LIEF/issues/764
+  https://github.com/advisories/GHSA-x2xx-jw5m-5j86
+
+LIEF commit 5d1d643 was discovered to contain a segmentation violation via the function LIEF::MachO::SegmentCommand::file_offset() at /MachO/SegmentCommand.cpp.

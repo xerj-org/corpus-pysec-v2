@@ -1,0 +1,12 @@
+PYSEC-2021-85 PyPI/plone — Plone through 5.2.4 allows XSS via the inline_diff methods in Products.CMFDiffTool.
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.2.5 (ECOSYSTEM)
+aliases: CVE-2021-33513, GHSA-fj67-w3m4-rfmp
+references:
+  https://plone.org/security/hotfix/20210518/xss-vulnerability-in-cmfdifftool
+  http://www.openwall.com/lists/oss-security/2021/05/22/1
+  https://github.com/advisories/GHSA-fj67-w3m4-rfmp
+
+Plone through 5.2.4 allows XSS via the inline_diff methods in Products.CMFDiffTool.

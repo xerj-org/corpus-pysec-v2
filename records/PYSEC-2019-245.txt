@@ -1,0 +1,13 @@
+PYSEC-2019-245 PyPI/exiv2 — Exiv2::PngImage::readMetadata() in pngimage.cpp in Exiv2 0.27.99.0 allows attackers to cause a denia
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2019-14369
+references:
+  https://github.com/Exiv2/exiv2/issues/953
+  https://github.com/Exiv2/exiv2/issues/953
+  https://lists.debian.org/debian-lts-announce/2023/01/msg00004.html
+  https://lists.debian.org/debian-lts-announce/2023/01/msg00004.html
+
+Exiv2::PngImage::readMetadata() in pngimage.cpp in Exiv2 0.27.99.0 allows attackers to cause a denial of service (heap-based buffer over-read) via a crafted image file.

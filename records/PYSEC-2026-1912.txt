@@ -1,0 +1,27 @@
+PYSEC-2026-1912 PyPI/sentry — Privilege escalation via ApiTokensEndpoint
+package: sentry
+ecosystem: PyPI
+versions affected:
+  >= 22.1.0, < 23.7.2 (ECOSYSTEM)
+aliases: CVE-2023-39349, GHSA-9jcq-jf57-c62c
+references:
+  https://github.com/getsentry/sentry/security/advisories/GHSA-9jcq-jf57-c62c
+  https://nvd.nist.gov/vuln/detail/CVE-2023-39349
+  https://github.com/getsentry/sentry/pull/53850
+  https://github.com/getsentry/sentry/commit/fad12c1150d1135edf9666ea72ca11bc110c1083
+  https://github.com/getsentry/self-hosted/releases/tag/23.7.2
+  https://github.com/getsentry/sentry
+  https://github.com/getsentry/sentry/releases/tag/23.7.2
+  https://pypi.org/project/sentry
+  https://github.com/advisories/GHSA-9jcq-jf57-c62c
+
+### Impact
+An attacker with access to a token with few or no scopes can query `/api/0/api-tokens/` for a list of all tokens created by a user, including tokens with greater scopes, and use those tokens in other requests.
+
+There is no evidence that the issue was exploited on https://sentry.io. For self-hosted users, it is advised to rotate user auth tokens via `https://your-self-hosted-sentry-installation/settings/account/api/auth-tokens/`.
+
+### Patches
+The issue was fixed in https://github.com/getsentry/sentry/pull/53850 and is available in the release 23.7.2 of [sentry](https://github.com/getsentry/sentry/releases/tag/23.7.2) and [self-hosted](https://github.com/getsentry/self-hosted/releases/tag/23.7.2).
+
+### Workarounds
+There are no known workarounds.

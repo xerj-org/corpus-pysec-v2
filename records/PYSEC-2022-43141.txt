@@ -1,0 +1,13 @@
+PYSEC-2022-43141 PyPI/motioneye — MotionEye v0.42.1 and below allows attackers to access sensitive information via a GET request to /c
+package: motioneye
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.43.1b1 (ECOSYSTEM)
+aliases: CVE-2022-25568, GHSA-2c7w-v459-cwgf
+references:
+  https://www.pizzapower.me/2022/02/17/motioneye-config-info-disclosure/
+  https://www.pizzapower.me/2022/02/17/motioneye-config-info-disclosure/
+  https://github.com/ccrisan/motioneye/issues/2292
+  https://github.com/advisories/GHSA-2c7w-v459-cwgf
+
+MotionEye v0.42.1 and below allows attackers to access sensitive information via a GET request to /config/list. To exploit this vulnerability, a regular user password must be unconfigured.

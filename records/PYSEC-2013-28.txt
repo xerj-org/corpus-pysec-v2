@@ -1,0 +1,14 @@
+PYSEC-2013-28 PyPI/tryton — Directory traversal vulnerability in the client in Tryton 3.0.0, as distributed before 20131104 and 
+package: tryton
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.0.1 (ECOSYSTEM)
+aliases: CVE-2013-4510
+references:
+  http://hg.tryton.org/tryton/rev/357d0a4d9cb8
+  http://www.tryton.org/posts/security-release-for-issue3446.html
+  http://www.debian.org/security/2013/dsa-2791
+  http://www.openwall.com/lists/oss-security/2013/11/04/21
+  https://bugs.tryton.org/issue3446
+
+Directory traversal vulnerability in the client in Tryton 3.0.0, as distributed before 20131104 and earlier, allows remote servers to write arbitrary files via path separators in the extension of a report.

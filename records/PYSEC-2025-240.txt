@@ -1,0 +1,12 @@
+PYSEC-2025-240 PyPI/copyparty — Cross Site Scripting vulnerability in copyparty before 1.9.2 allows a local attacker to execute arbi
+package: copyparty
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 1.9.1 (ECOSYSTEM)
+aliases: CVE-2023-41471
+references:
+  https://github.com/9001/copyparty/releases/tag/v1.9.2
+  https://github.com/9001/copyparty
+  https://github.com/Trinity-SYT-SECURITY/XSS_vuln_issue/blob/main/copyparty.md
+
+Cross Site Scripting vulnerability in copyparty before 1.9.2 allows a local attacker to execute arbitrary code via a crafted payload to the WEEKEND-PLANS function. NOTE: this is disputed because WEEKEND-PLANS is accessible only to actors who already have write access to the server, and they can more simply upload HTML files containing JavaScript.

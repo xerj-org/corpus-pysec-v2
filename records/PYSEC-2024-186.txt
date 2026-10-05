@@ -1,0 +1,13 @@
+PYSEC-2024-186 PyPI/restrictedpython — RestrictedPython is a restricted execution environment for Python to run untrusted code. A user can 
+package: restrictedpython
+ecosystem: PyPI
+versions affected:
+  >= 0, < d701cc36cccac36b21fa200f1f2d1945a9a215e6 (GIT: https://github.com/zopefoundation/restrictedpython)
+  >= 0, < 7.3 (ECOSYSTEM)
+aliases: CVE-2024-47532, GHSA-5rfv-66g4-jr8h
+references:
+  https://github.com/zopefoundation/RestrictedPython/security/advisories/GHSA-5rfv-66g4-jr8h
+  https://github.com/zopefoundation/RestrictedPython/security/advisories/GHSA-5rfv-66g4-jr8h
+  https://github.com/zopefoundation/RestrictedPython/commit/d701cc36cccac36b21fa200f1f2d1945a9a215e6
+
+RestrictedPython is a restricted execution environment for Python to run untrusted code. A user can gain access to protected (and potentially sensible) information indirectly via AttributeError.obj and the string module. The problem will be fixed in version 7.3. As a workaround, If the application does not require access to the module string, it can remove it from RestrictedPython.Utilities.utility_builtins or otherwise do not make it available in the restricted execution environment.

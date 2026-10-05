@@ -1,0 +1,13 @@
+PYSEC-2014-113 PyPI/nova — The VMWare driver in OpenStack Compute (Nova) 2013.2 through 2013.2.2 does not properly put VMs into
+package: nova
+ecosystem: PyPI
+versions affected:
+  >= 0, < 12.0.0a0 (ECOSYSTEM)
+aliases: CVE-2014-2573, GHSA-jv34-xvjq-ppch
+references:
+  http://www.openwall.com/lists/oss-security/2014/03/21/1
+  http://www.openwall.com/lists/oss-security/2014/03/21/2
+  https://bugs.launchpad.net/nova/+bug/1269418
+  http://secunia.com/advisories/57498
+
+The VMWare driver in OpenStack Compute (Nova) 2013.2 through 2013.2.2 does not properly put VMs into RESCUE status, which allows remote authenticated users to bypass the quota limit and cause a denial of service (resource consumption) by requesting the VM be put into rescue and then deleting the image.

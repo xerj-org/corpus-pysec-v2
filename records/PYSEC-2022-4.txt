@@ -1,0 +1,11 @@
+PYSEC-2022-4 PyPI/dnslib — The dnslib package through 0.9.16 for Python does not verify that the ID value in a DNS reply matche
+package: dnslib
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.9.17 (ECOSYSTEM)
+aliases: CVE-2022-22846, GHSA-r478-c2pc-m7gx
+references:
+  https://github.com/paulc/dnslib/issues/30
+  https://github.com/advisories/GHSA-r478-c2pc-m7gx
+
+The dnslib package through 0.9.16 for Python does not verify that the ID value in a DNS reply matches an ID value in a query.

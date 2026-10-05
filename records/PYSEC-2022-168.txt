@@ -1,0 +1,12 @@
+PYSEC-2022-168 PyPI/pillow — Pillow before 9.0.1 allows attackers to delete files because spaces in temporary pathnames are misha
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 9.0.1 (ECOSYSTEM)
+aliases: CVE-2022-24303, GHSA-9j59-75qj-795w
+references:
+  https://pillow.readthedocs.io/en/stable/releasenotes/9.0.1.html#security
+  https://github.com/python-pillow/Pillow/pull/3450
+  https://github.com/advisories/GHSA-9j59-75qj-795w
+
+Pillow before 9.0.1 allows attackers to delete files because spaces in temporary pathnames are mishandled.

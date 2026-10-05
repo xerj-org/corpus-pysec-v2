@@ -1,0 +1,12 @@
+PYSEC-2021-80 PyPI/plone — Plone through 5.2.4 allows XSS via a full name that is mishandled during rendering of the ownership 
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.2.5 (ECOSYSTEM)
+aliases: CVE-2021-33508, GHSA-rmpv-rcp6-v8wc
+references:
+  https://plone.org/security/hotfix/20210518/stored-xss-from-user-fullname
+  http://www.openwall.com/lists/oss-security/2021/05/22/1
+  https://github.com/advisories/GHSA-rmpv-rcp6-v8wc
+
+Plone through 5.2.4 allows XSS via a full name that is mishandled during rendering of the ownership tab of a content item.

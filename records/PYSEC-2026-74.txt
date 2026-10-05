@@ -1,0 +1,15 @@
+PYSEC-2026-74 PyPI/keylime — A flaw was found in Keylime. The Keylime registrar, since version 7.12.0, does not enforce client-si
+package: keylime
+ecosystem: PyPI
+versions affected:
+  >= 0, < 7.12.0 (ECOSYSTEM)
+aliases: CVE-2026-1709, GHSA-4jqp-9qjv-57m2
+references:
+  https://access.redhat.com/errata/RHSA-2026:2224
+  https://access.redhat.com/errata/RHSA-2026:2225
+  https://access.redhat.com/errata/RHSA-2026:2298
+  https://access.redhat.com/security/cve/CVE-2026-1709
+  https://bugzilla.redhat.com/show_bug.cgi?id=2435514
+  https://github.com/advisories/GHSA-4jqp-9qjv-57m2
+
+A flaw was found in Keylime. The Keylime registrar, since version 7.12.0, does not enforce client-side Transport Layer Security (TLS) authentication. This authentication bypass vulnerability allows unauthenticated clients with network access to perform administrative operations, including listing agents, retrieving public Trusted Platform Module (TPM) data, and deleting agents, by connecting without presenting a client certificate.

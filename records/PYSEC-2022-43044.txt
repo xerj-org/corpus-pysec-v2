@@ -1,0 +1,13 @@
+PYSEC-2022-43044 PyPI/democritus-hashes — The d8s-networking package for Python, as distributed on PyPI, included a potential code-execution b
+package: democritus-hashes
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-42042
+references:
+  https://pypi.org/project/d8s-networking/
+  https://github.com/dadadadada111/info/issues/3
+  https://github.com/dadadadada111/info/issues/3
+  https://pypi.org/project/democritus-hashes/
+
+The d8s-networking package for Python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. The backdoor is the democritus-hashes package. The affected version is 0.1.0.

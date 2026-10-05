@@ -1,0 +1,16 @@
+PYSEC-2026-94 PyPI/mlflow — MLflow is vulnerable to an authorization bypass affecting the AJAX endpoint used to download saved m
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.11.0rc0 (ECOSYSTEM)
+aliases: CVE-2026-33866, GHSA-46r5-x6jq-v8g6
+references:
+  https://cert.pl/en/posts/2026/04/CVE-2026-33865/
+  https://github.com/mlflow/mlflow/pull/21708
+  https://afine.com/blogs/attacking-mlflow-how-ml-artifacts-become-attack-vectors
+  https://github.com/advisories/GHSA-46r5-x6jq-v8g6
+
+MLflow is vulnerable to an authorization bypass affecting the AJAX endpoint used to download saved model artifacts. Due to missing access‑control validation, a user without permissions to a given experiment can directly query this endpoint and retrieve model artifacts they are not authorized to access.
+
+ 
+This issue affects MLflow version through 3.10.1

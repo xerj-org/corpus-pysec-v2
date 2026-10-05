@@ -1,0 +1,19 @@
+PYSEC-2026-2889 PyPI/plone-restapi — Plone Privilege Escallation
+package: plone-restapi
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.2.1 (ECOSYSTEM)
+aliases: CVE-2020-7938, GHSA-cjg3-q24h-9qwf
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2020-7938
+  https://github.com/plone/plone.restapi/issues/857
+  https://github.com/plone/plone.restapi/pull/859
+  https://github.com/pypa/advisory-database/tree/main/vulns/plone/PYSEC-2020-87.yaml
+  https://plone.org/security/hotfix/20200121
+  https://plone.org/security/hotfix/20200121/privilege-escalation-when-plone-restapi-is-installed
+  https://www.openwall.com/lists/oss-security/2020/01/22/1
+  http://www.openwall.com/lists/oss-security/2020/01/24/1
+  https://pypi.org/project/plone-restapi
+  https://github.com/advisories/GHSA-cjg3-q24h-9qwf
+
+plone.restapi in Plone 5.2.0 through 5.2.1 allows users with a certain privilege level to escalate their privileges up to the highest level.

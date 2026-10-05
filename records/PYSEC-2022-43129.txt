@@ -1,0 +1,12 @@
+PYSEC-2022-43129 PyPI/democritus-uuids — The d8s-strings for python, as distributed on PyPI, included a potential code-execution backdoor ins
+package: democritus-uuids
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-43303
+references:
+  https://pypi.org/project/d8s-strings/
+  https://pypi.org/project/democritus-uuids/
+  https://github.com/dadadadada111/info/issues/8
+
+The d8s-strings for python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. A potential code execution backdoor inserted by third parties is the democritus-uuids package. The affected version of d8s-htm is 0.1.0.

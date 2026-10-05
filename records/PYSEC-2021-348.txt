@@ -1,0 +1,11 @@
+PYSEC-2021-348 PyPI/simiki — Command Injection in Simiki v1.6.2.1 and prior allows remote attackers to execute arbitrary system c
+package: simiki
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.6.2.2 (ECOSYSTEM)
+aliases: CVE-2020-19001, GHSA-w873-xcqq-x922
+references:
+  https://github.com/tankywoo/simiki/issues/123
+  https://github.com/advisories/GHSA-w873-xcqq-x922
+
+Command Injection in Simiki v1.6.2.1 and prior allows remote attackers to execute arbitrary system commands via line 64 of the component 'simiki/blob/master/simiki/config.py'.

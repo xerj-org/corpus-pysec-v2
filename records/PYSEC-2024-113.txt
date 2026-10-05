@@ -1,0 +1,13 @@
+PYSEC-2024-113 PyPI/chuanhuchatgpt — In the latest version (20240628) of gaizhenbiao/chuanhuchatgpt, an issue exists in the /file endpoin
+package: chuanhuchatgpt
+ecosystem: PyPI
+versions affected:
+  >= 0, < ccc7479ace5c9e1a1d9f4daf2e794ffd3865fc2b (GIT: https://github.com/gaizhenbiao/chuanhuchatgpt)
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2024-8143
+references:
+  https://huntr.com/bounties/71c5ea4b-524a-4173-8fd4-2fbabd69502e
+  https://huntr.com/bounties/71c5ea4b-524a-4173-8fd4-2fbabd69502e
+  https://github.com/gaizhenbiao/chuanhuchatgpt/commit/ccc7479ace5c9e1a1d9f4daf2e794ffd3865fc2b
+
+In the latest version (20240628) of gaizhenbiao/chuanhuchatgpt, an issue exists in the /file endpoint that allows authenticated users to access the chat history of other users. When a user logs in, a directory is created in the history folder with the user's name. By manipulating the /file endpoint, an authenticated user can enumerate and access files in other users' directories, leading to unauthorized access to private chat histories. This vulnerability can be exploited to read any user's private chat history.

@@ -1,0 +1,13 @@
+PYSEC-2021-849 PyPI/pybluemonday — The bluemonday sanitizer before 1.0.16 for Go, and before 0.0.8 for Python (in pybluemonday), does n
+package: pybluemonday
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.0.8 (ECOSYSTEM)
+aliases: CVE-2021-42576, GHSA-x95h-979x-cf3j
+references:
+  https://docs.google.com/document/d/11SoX296sMS0XoQiQbpxc5pNxSdbJKDJkm5BDv0zrX50/
+  https://pypi.org/project/pybluemonday
+  https://nvd.nist.gov/vuln/detail/CVE-2021-42576
+  https://github.com/advisories/GHSA-x95h-979x-cf3j
+
+The bluemonday sanitizer before 1.0.16 for Go, and before 0.0.8 for Python (in pybluemonday), does not properly enforce policies associated with the SELECT, STYLE, and OPTION elements.

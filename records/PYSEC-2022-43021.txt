@@ -1,0 +1,13 @@
+PYSEC-2022-43021 PyPI/d8s-asns — The d8s-asns package for Python, as distributed on PyPI, included a potential code-execution backdoo
+package: d8s-asns
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-42037
+references:
+  https://github.com/democritus-project/d8s-asns/issues/9
+  https://github.com/democritus-project/d8s-asns/issues/9
+  https://pypi.org/project/d8s-asns/
+  https://pypi.org/project/democritus-csv/
+
+The d8s-asns package for Python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. The backdoor is the democritus-csv package. The affected version is 0.1.0.

@@ -1,0 +1,9 @@
+PYSEC-2022-15 PyPI/loguru — This CVE has been rejected as it was incorrectly assigned.
+package: loguru
+ecosystem: PyPI
+aliases: CVE-2022-0329, GHSA-cvp7-c586-cmf4
+references:
+  https://huntr.dev/bounties/1-pypi-loguru
+  https://github.com/advisories/GHSA-cvp7-c586-cmf4
+
+This CVE has been rejected as it was incorrectly assigned.

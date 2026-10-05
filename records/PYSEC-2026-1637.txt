@@ -1,0 +1,14 @@
+PYSEC-2026-1637 PyPI/mlflow — MLflow Uncontrolled Resource Consumption vulnerability
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 2.17.2 (ECOSYSTEM)
+aliases: CVE-2025-0453, GHSA-49m6-vrr9-2cqm
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-0453
+  https://github.com/mlflow/mlflow
+  https://huntr.com/bounties/788327ec-714a-4d5c-83aa-8df04dd7612b
+  https://pypi.org/project/mlflow
+  https://github.com/advisories/GHSA-49m6-vrr9-2cqm
+
+In mlflow/mlflow version 2.17.2, the `/graphql` endpoint is vulnerable to a denial of service attack. An attacker can create large batches of queries that repeatedly request all runs from a given experiment. This can tie up all the workers allocated by MLFlow, rendering the application unable to respond to other requests. This vulnerability is due to uncontrolled resource consumption.

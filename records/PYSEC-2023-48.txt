@@ -1,0 +1,14 @@
+PYSEC-2023-48 PyPI/starlette — There MultipartParser usage in Encode's Starlette python framework before versions 0.25.0 allows an 
+package: starlette
+ecosystem: PyPI
+versions affected:
+  >= 0, < 8c74c2c8dba7030154f8af18e016136bea1938fa (GIT: https://github.com/encode/starlette)
+  >= 0, < 0.25.0 (ECOSYSTEM)
+aliases: CVE-2023-30798, GHSA-74m5-2c7w-9w3x
+references:
+  https://vulncheck.com/advisories/starlette-multipartparser-dos
+  https://vulncheck.com/advisories/starlette-multipartparser-dos
+  https://github.com/encode/starlette/security/advisories/GHSA-74m5-2c7w-9w3x
+  https://github.com/encode/starlette/commit/8c74c2c8dba7030154f8af18e016136bea1938fa
+
+There MultipartParser usage in Encode's Starlette python framework before versions 0.25.0 allows an unauthenticated and remote attacker to specify any number of form fields or files which can cause excessive memory usage resulting in denial of service of the HTTP service.

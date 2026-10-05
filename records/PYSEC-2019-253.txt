@@ -1,0 +1,23 @@
+PYSEC-2019-253 PyPI/tahoe-lafs — Tahoe-LAFS 1.9.0 fails to ensure integrity which allows remote attackers to corrupt mutable files or
+package: tahoe-lafs
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2012-0051, GHSA-v62p-cjv8-35xh
+references:
+  http://www.openwall.com/lists/oss-security/2012/01/15/11
+  http://www.openwall.com/lists/oss-security/2012/01/15/11
+  http://www.openwall.com/lists/oss-security/2012/01/15/11
+  http://www.openwall.com/lists/oss-security/2012/01/26/7
+  http://www.openwall.com/lists/oss-security/2012/01/26/7
+  https://tahoe-lafs.org/trac/tahoe-lafs/ticket/1654
+  https://tahoe-lafs.org/trac/tahoe-lafs/ticket/1654
+  https://tahoe-lafs.org/trac/tahoe-lafs/ticket/1654
+  http://www.openwall.com/lists/oss-security/2012/01/26/8
+  http://www.openwall.com/lists/oss-security/2012/01/26/8
+  https://security-tracker.debian.org/tracker/CVE-2012-0051
+  http://www.openwall.com/lists/oss-security/2012/01/26/9
+  http://www.openwall.com/lists/oss-security/2012/01/26/9
+  https://github.com/advisories/GHSA-v62p-cjv8-35xh
+
+Tahoe-LAFS 1.9.0 fails to ensure integrity which allows remote attackers to corrupt mutable files or directories upon retrieval.

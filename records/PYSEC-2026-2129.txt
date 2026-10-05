@@ -1,0 +1,12 @@
+PYSEC-2026-2129 PyPI/changedetection-io — changedetection.io is a free open source web page change detection tool. Prior to version 0.54.4, a 
+package: changedetection-io
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.54.4 (ECOSYSTEM)
+aliases: CVE-2026-29065, GHSA-25g8-2mcf-fcx9
+references:
+  https://github.com/dgtlmoon/changedetection.io/releases/tag/0.54.4
+  https://github.com/dgtlmoon/changedetection.io/commit/1d7d812eb0faab37042246e2fbce04f29bb1b3aa
+  https://github.com/dgtlmoon/changedetection.io/security/advisories/GHSA-25g8-2mcf-fcx9
+
+changedetection.io is a free open source web page change detection tool. Prior to version 0.54.4, a Zip Slip vulnerability in the backup restore functionality allows arbitrary file overwrite via path traversal in uploaded ZIP archives. This issue has been patched in version 0.54.4.

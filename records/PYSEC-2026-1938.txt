@@ -1,0 +1,16 @@
+PYSEC-2026-1938 PyPI/sqlite-vec — Heap-based Buffer Overflow in sqlite-vec
+package: sqlite-vec
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.1.3 (ECOSYSTEM)
+aliases: CVE-2024-46488, GHSA-vrcx-gx3g-j3h8
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-46488
+  https://github.com/VulnSphere/LLMVulnSphere/blob/main/VectorDB/sqlite-vec/OOBR_2.md
+  https://github.com/advisories/GHSA-vrcx-gx3g-j3h8
+  https://github.com/asg017/sqlite-vec
+  https://github.com/asg017/sqlite-vec/releases/tag/v0.1.3
+  https://github.com/rubysec/ruby-advisory-db/blob/master/gems/sqlite-vec/CVE-2024-46488.yml
+  https://pypi.org/project/sqlite-vec
+
+sqlite-vec v0.1.1 was discovered to contain a heap buffer overflow via the npy_token_next function. This vulnerability allows attackers to cause a Denial of Service (DoS) via a crafted file.

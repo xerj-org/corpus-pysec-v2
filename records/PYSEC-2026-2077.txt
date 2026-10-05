@@ -1,0 +1,29 @@
+PYSEC-2026-2077 PyPI/zope — Zope vulnerable to Stored Cross Site Scripting with SVG images
+package: zope
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.8.10, >= 5.8.0, < 5.8.5 (ECOSYSTEM)
+aliases: CVE-2023-42458, GHSA-wm8q-9975-xh5v
+references:
+  https://github.com/zopefoundation/Zope/security/advisories/GHSA-wm8q-9975-xh5v
+  https://nvd.nist.gov/vuln/detail/CVE-2023-42458
+  https://github.com/zopefoundation/Zope/commit/26a55dbc301db417f47cafda6fe0f983b5690088
+  https://github.com/zopefoundation/Zope/commit/603b0a12881c90a072a7a65e32d47ed898ce37cb
+  https://github.com/zopefoundation/Zope
+  http://www.openwall.com/lists/oss-security/2023/09/22/2
+  https://pypi.org/project/zope
+  https://github.com/advisories/GHSA-wm8q-9975-xh5v
+
+### Impact
+There is a stored cross site scripting vulnerability for SVG images.
+
+Note that an image tag with an SVG image as source is never vulnerable, even when the SVG image contains malicious code. To exploit the vulnerability, an attacker would first need to upload an image, and then trick a user into following a specially crafted link.
+
+All versions of Zope are impacted on sites that allow untrusted users to upload images.
+
+
+### Patches
+Patches will be released in Zope 4.8.10 and 5.8.5.
+
+### Workarounds
+Make sure the "Add Documents, Images, and Files" permission is only assigned to trusted roles. By default only the Manager has this permission.

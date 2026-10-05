@@ -1,0 +1,14 @@
+PYSEC-2025-157 PyPI/pyassimp — A weakness has been identified in Open Asset Import Library Assimp 6.0.2. This affects the function 
+package: pyassimp
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 6.0.2 (ECOSYSTEM)
+aliases: CVE-2025-11277
+references:
+  https://vuldb.com/?id.327011
+  https://vuldb.com/?submit.658912
+  https://github.com/assimp/assimp/issues/6358
+  https://vuldb.com/?ctiid.327011
+  https://github.com/user-attachments/files/22422643/poc.zip
+
+A weakness has been identified in Open Asset Import Library Assimp 6.0.2. This affects the function Q3DImporter::InternReadFile of the file assimp/code/AssetLib/Q3D/Q3DLoader.cpp. Executing a manipulation can lead to heap-based buffer overflow. The attack needs to be launched locally. The exploit has been made available to the public and could be used for attacks.

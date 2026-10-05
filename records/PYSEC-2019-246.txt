@@ -1,0 +1,13 @@
+PYSEC-2019-246 PyPI/exiv2 — In Exiv2 0.27.99.0, there is an out-of-bounds read in Exiv2::MrwImage::readMetadata() in mrwimage.cp
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2019-14370
+references:
+  https://github.com/Exiv2/exiv2/issues/954
+  https://github.com/Exiv2/exiv2/issues/954
+  https://lists.debian.org/debian-lts-announce/2023/01/msg00004.html
+  https://lists.debian.org/debian-lts-announce/2023/01/msg00004.html
+
+In Exiv2 0.27.99.0, there is an out-of-bounds read in Exiv2::MrwImage::readMetadata() in mrwimage.cpp. It could result in denial of service.

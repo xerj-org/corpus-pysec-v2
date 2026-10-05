@@ -1,0 +1,21 @@
+PYSEC-2026-2533 PyPI/jupyterhub-ltiauthenticator — LTI JupyterHub Authenticator: Unbounded Memory Growth via Nonce Storage (Denial of Service)
+package: jupyterhub-ltiauthenticator
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.6.3 (ECOSYSTEM)
+aliases: CVE-2026-34052, GHSA-8mxq-7xr7-2fxj
+references:
+  https://github.com/jupyterhub/ltiauthenticator/security/advisories/GHSA-8mxq-7xr7-2fxj
+  https://nvd.nist.gov/vuln/detail/CVE-2026-34052
+  https://github.com/jupyterhub/ltiauthenticator
+  https://github.com/jupyterhub/ltiauthenticator/releases/tag/1.6.3
+  https://pypi.org/project/jupyterhub-ltiauthenticator
+  https://github.com/advisories/GHSA-8mxq-7xr7-2fxj
+
+## Summary
+
+The LTI 1.1 validator stores OAuth nonces in a class-level dictionary that grows without bounds. Nonces are added before signature validation, so an attacker with knowledge of a valid consumer key can send repeated requests with unique nonces to gradually exhaust server memory, causing a denial of service.
+
+## Patches
+
+- upgrade jupyterhub-litauthenticator to 1.6.3

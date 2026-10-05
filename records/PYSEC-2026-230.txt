@@ -1,0 +1,12 @@
+PYSEC-2026-230 PyPI/crawl4ai — Crawl4AI before 0.8.7 contains a stored cross-site scripting vulnerability in the monitor dashboard 
+package: crawl4ai
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.8.7 (ECOSYSTEM)
+aliases: CVE-2026-56263, GHSA-53rg-46cm-4g2v
+references:
+  https://github.com/advisories/GHSA-53rg-46cm-4g2v
+  https://www.vulncheck.com/advisories/crawl4ai-stored-cross-site-scripting-in-monitor-dashboard
+  https://github.com/unclecode/crawl4ai
+
+Crawl4AI before 0.8.7 contains a stored cross-site scripting vulnerability in the monitor dashboard that renders crawl URLs and error messages via innerHTML without escaping. An attacker can submit a crafted crawl request with malicious markup that executes in an operator's browser when viewing the dashboard.

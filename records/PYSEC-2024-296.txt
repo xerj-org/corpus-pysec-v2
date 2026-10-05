@@ -1,0 +1,10 @@
+PYSEC-2024-296 PyPI/pycti — OpenCTI is an open source platform allowing organizations to manage their cyber threat intelligence 
+package: pycti
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.12.32 (ECOSYSTEM)
+aliases: CVE-2024-26139, GHSA-qx4j-f4f2-vjw9
+references:
+  https://github.com/OpenCTI-Platform/opencti/security/advisories/GHSA-qx4j-f4f2-vjw9
+
+OpenCTI is an open source platform allowing organizations to manage their cyber threat intelligence knowledge and observables. Due to lack of certain security controls on the profile edit functionality, an authenticated attacker with low privileges can gain administrative privileges on the web application. 

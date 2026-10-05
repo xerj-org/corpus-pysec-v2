@@ -1,0 +1,11 @@
+PYSEC-2022-43165 PyPI/scoptrial — The Scoptrial package in PyPI version v0.0.5 was discovered to contain a code execution backdoor via
+package: scoptrial
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-34057
+references:
+  https://pypi.org/project/scoptrial/
+  http://pypi.doubanio.com/simple/request
+
+The Scoptrial package in PyPI version v0.0.5 was discovered to contain a code execution backdoor via the request package. This vulnerability allows attackers to access sensitive user information and digital currency keys, as well as escalate privileges.

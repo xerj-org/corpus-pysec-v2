@@ -1,0 +1,16 @@
+PYSEC-2026-2810 PyPI/opencv-python — Out-of-bounds Read in OpenCV
+package: opencv-python
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.4.1.15 (ECOSYSTEM)
+aliases: CVE-2017-18009, GHSA-83rh-hx5x-q9p5
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2017-18009
+  https://github.com/opencv/opencv/issues/10479
+  https://github.com/opencv/opencv/pull/10480/commits/4ca89db22dea962690f31c1781bce5937ee91837
+  https://github.com/opencv/opencv-python
+  http://www.securityfocus.com/bid/106945
+  https://pypi.org/project/opencv-python
+  https://github.com/advisories/GHSA-83rh-hx5x-q9p5
+
+In OpenCV 3.3.1 (corresponding with OpenCV-Python 3.3.1.11), a heap-based buffer over-read exists in the function cv::HdrDecoder::checkSignature in modules/imgcodecs/src/grfmt_hdr.cpp.

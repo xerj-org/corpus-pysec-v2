@@ -1,0 +1,16 @@
+PYSEC-2026-1476 PyPI/js2py — js2py allows remote code execution
+package: js2py
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.74 (ECOSYSTEM)
+aliases: CVE-2024-28397, GHSA-h95x-26f3-88hr
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-28397
+  https://github.com/PiotrDabkowski/Js2Py/pull/323
+  https://github.com/Marven11
+  https://github.com/Marven11/CVE-2024-28397-js2py-Sandbox-Escape
+  https://github.com/PiotrDabkowski/Js2Py
+  https://pypi.org/project/js2py
+  https://github.com/advisories/GHSA-h95x-26f3-88hr
+
+An issue in the component `js2py.disable_pyimport()` of js2py up to v0.74 allows attackers to execute arbitrary code via a crafted API call.

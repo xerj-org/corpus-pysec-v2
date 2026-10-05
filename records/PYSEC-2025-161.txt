@@ -1,0 +1,14 @@
+PYSEC-2025-161 PyPI/pyassimp — A vulnerability, which was classified as critical, was found in Open Asset Import Library Assimp 5.4
+package: pyassimp
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 5.4.3 (ECOSYSTEM)
+aliases: CVE-2025-2750
+references:
+  https://vuldb.com/?id.300855
+  https://vuldb.com/?submit.517783
+  https://github.com/assimp/assimp/issues/6011
+  https://github.com/assimp/assimp/issues/6011#issue-2877369004
+  https://vuldb.com/?ctiid.300855
+
+A vulnerability, which was classified as critical, was found in Open Asset Import Library Assimp 5.4.3. This affects the function Assimp::CSMImporter::InternReadFile of the file code/AssetLib/CSM/CSMLoader.cpp of the component CSM File Handler. The manipulation leads to out-of-bounds write. It is possible to initiate the attack remotely. The exploit has been disclosed to the public and may be used.

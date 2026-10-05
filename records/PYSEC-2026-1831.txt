@@ -1,0 +1,25 @@
+PYSEC-2026-1831 PyPI/pypdf — pypdf can exhaust RAM via manipulated LZWDecode streams
+package: pypdf
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.1.3 (ECOSYSTEM)
+aliases: CVE-2025-62708, GHSA-jfx9-29x2-rv3j
+references:
+  https://github.com/py-pdf/pypdf/security/advisories/GHSA-jfx9-29x2-rv3j
+  https://nvd.nist.gov/vuln/detail/CVE-2025-62708
+  https://github.com/py-pdf/pypdf/pull/3502
+  https://github.com/py-pdf/pypdf/commit/e51d07807ffcdaf18077b9486dadb3dc05b368da
+  https://github.com/py-pdf/pypdf
+  https://github.com/py-pdf/pypdf/releases/tag/6.1.3
+  https://pypi.org/project/pypdf
+  https://github.com/advisories/GHSA-jfx9-29x2-rv3j
+
+### Impact
+
+An attacker who uses this vulnerability can craft a PDF which leads to large memory usage. This requires parsing the content stream of a page using the LZWDecode filter.
+
+### Patches
+This has been fixed in [pypdf==6.1.3](https://github.com/py-pdf/pypdf/releases/tag/6.1.3).
+
+### Workarounds
+If you cannot upgrade yet, consider applying the changes from PR [#3502](https://github.com/py-pdf/pypdf/pull/3502).

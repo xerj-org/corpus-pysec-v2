@@ -1,0 +1,12 @@
+PYSEC-2026-2215 PyPI/mistune — Mistune is a Python Markdown parser with renderers and plugins. Prior to 3.3.0, the Include directiv
+package: mistune
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.3.0 (ECOSYSTEM)
+aliases: CVE-2026-59927, GHSA-8mpj-m6qm-5qr8
+references:
+  https://github.com/lepture/mistune/releases/tag/v3.3.0
+  https://github.com/lepture/mistune/commit/1bef343ade163fc3bb95572b15be720084cdb993
+  https://github.com/lepture/mistune/security/advisories/GHSA-8mpj-m6qm-5qr8
+
+Mistune is a Python Markdown parser with renderers and plugins. Prior to 3.3.0, the Include directive in src/mistune/directives/include.py detects only direct self-includes and not indirect cycles, allowing two markdown files that include each other to trigger unbounded recursion, raise RecursionError, and crash the rendering request. This issue is fixed in version 3.3.0.

@@ -1,0 +1,13 @@
+PYSEC-2026-762 PyPI/zope — Zope DTML implementation Improper Authentication
+package: zope
+ecosystem: PyPI
+versions affected:
+  >= 2.2.0, <= 2.2.4 (ECOSYSTEM)
+aliases: CVE-2000-0062, GHSA-wcwp-r3fj-mm3p
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2000-0062
+  https://web.archive.org/web/20010218085743/http://www.securityfocus.com/bid/922
+  https://pypi.org/project/zope
+  https://github.com/advisories/GHSA-wcwp-r3fj-mm3p
+
+The DTML implementation in the Z Object Publishing Environment (Zope) allows remote attackers to conduct unauthorized activities.

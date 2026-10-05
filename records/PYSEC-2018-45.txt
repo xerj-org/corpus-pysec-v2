@@ -1,0 +1,11 @@
+PYSEC-2018-45 PyPI/apache-airflow — It was noticed an XSS in certain 404 pages that could be exploited to perform an XSS attack. Chrome 
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.9.0 (ECOSYSTEM)
+aliases: CVE-2017-12614, GHSA-rv25-9wgj-xg75
+references:
+  https://lists.apache.org/thread.html/2c72480c76619c5e7793f0d213c34082f0598eaa4d212172f068940f@%3Cdev.airflow.apache.org%3E
+  https://github.com/advisories/GHSA-rv25-9wgj-xg75
+
+It was noticed an XSS in certain 404 pages that could be exploited to perform an XSS attack. Chrome will detect this as a reflected XSS attempt and prevent the page from loading. Firefox and other browsers don't, and are vulnerable to this attack. Mitigation: The fix for this is to upgrade to Apache Airflow 1.9.0 or above.

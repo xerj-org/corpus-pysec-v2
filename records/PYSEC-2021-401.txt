@@ -1,0 +1,12 @@
+PYSEC-2021-401 PyPI/tensorflow — TensorFlow is an open source platform for machine learning. In affected versions the implementations
+package: tensorflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < f2c3931113eaafe9ef558faaddd48e00a6606235 (GIT: https://github.com/tensorflow/tensorflow)
+  >= 0, < 2.4.4, >= 2.5.0, < 2.5.2, >= 2.6.0, < 2.6.1, >= 2.7.0rc0, < 2.7.0 (ECOSYSTEM)
+aliases: CVE-2021-41209, GHSA-6hpv-v2rx-c5g6
+references:
+  https://github.com/tensorflow/tensorflow/commit/f2c3931113eaafe9ef558faaddd48e00a6606235
+  https://github.com/tensorflow/tensorflow/security/advisories/GHSA-6hpv-v2rx-c5g6
+
+TensorFlow is an open source platform for machine learning. In affected versions the implementations for convolution operators trigger a division by 0 if passed empty filter tensor arguments. The fix will be included in TensorFlow 2.7.0. We will also cherrypick this commit on TensorFlow 2.6.1, TensorFlow 2.5.2, and TensorFlow 2.4.4, as these are also affected and still in supported range.

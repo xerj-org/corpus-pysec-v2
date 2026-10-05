@@ -1,0 +1,26 @@
+PYSEC-2026-1323 PyPI/dtale — D-Tale vulnerable to Remote Code Execution through the Query input on Chart Builder
+package: dtale
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.14.1 (ECOSYSTEM)
+aliases: CVE-2024-45595, GHSA-pw44-4h99-wqff
+references:
+  https://github.com/man-group/dtale/security/advisories/GHSA-pw44-4h99-wqff
+  https://nvd.nist.gov/vuln/detail/CVE-2024-45595
+  https://github.com/man-group/dtale/commit/b6e30969390520d1400b55acbb13e5487b8472e8
+  https://github.com/man-group/dtale
+  https://github.com/man-group/dtale#custom-filter
+  https://pypi.org/project/dtale
+  https://github.com/advisories/GHSA-pw44-4h99-wqff
+
+### Impact
+Users hosting D-Tale publicly can be vulnerable to remote code execution allowing attackers to run malicious code on the server.
+
+### Patches
+Users should upgrade to version 3.14.1 where the "Custom Filter" input is turned off by default. You can find out more information on how to turn it back on [here](https://github.com/man-group/dtale#custom-filter)
+
+### Workarounds
+The only workaround for versions earlier than 3.14.1 is to only host D-Tale to trusted users.
+
+### References
+See "Custom Filter" [documentation](https://github.com/man-group/dtale#custom-filter)

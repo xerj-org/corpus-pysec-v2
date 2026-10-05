@@ -1,0 +1,16 @@
+PYSEC-2024-169 PyPI/zenml — An improper authorization vulnerability exists in the zenml-io/zenml repository, specifically within
+package: zenml
+ecosystem: PyPI
+versions affected:
+  >= 0, < b95f083efffa56831cd41d8ed536aeb0b6038fa3, < b95f083efffa56831cd41d8ed536aeb0b6038fa3 (GIT: https://github.com/zenml-io/zenml)
+  >= 0, < 0.56.2 (ECOSYSTEM)
+aliases: CVE-2024-2035, GHSA-9x88-4jg8-4vf7
+references:
+  https://huntr.com/bounties/1cfc6493-082e-4229-9f2f-496801a6557c
+  https://github.com/zenml-io/zenml/commit/b95f083efffa56831cd41d8ed536aeb0b6038fa3
+  https://huntr.com/bounties/1cfc6493-082e-4229-9f2f-496801a6557c
+  https://huntr.com/bounties/1cfc6493-082e-4229-9f2f-496801a6557c
+  https://huntr.com/bounties/1cfc6493-082e-4229-9f2f-496801a6557c
+  https://github.com/advisories/GHSA-9x88-4jg8-4vf7
+
+An improper authorization vulnerability exists in the zenml-io/zenml repository, specifically within the API PUT /api/v1/users/id endpoint. This vulnerability allows any authenticated user to modify the information of other users, including changing the `active` status of user accounts to false, effectively deactivating them. This issue affects version 0.55.3 and was fixed in version 0.56.2. The impact of this vulnerability is significant as it allows for the deactivation of admin accounts, potentially disrupting the functionality and security of the application.

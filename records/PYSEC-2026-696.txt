@@ -1,0 +1,15 @@
+PYSEC-2026-696 PyPI/onionshare-cli — Information disclosure vulnerability in OnionShare
+package: onionshare-cli
+ecosystem: PyPI
+versions affected:
+  >= 2.3, < 2.4 (ECOSYSTEM)
+aliases: CVE-2021-41867, GHSA-6rvj-pw9w-jcvc
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2021-41867
+  https://github.com/onionshare/onionshare
+  https://github.com/onionshare/onionshare/compare/v2.3.3...v2.4
+  https://www.ihteam.net/advisory/onionshare
+  https://pypi.org/project/onionshare-cli
+  https://github.com/advisories/GHSA-6rvj-pw9w-jcvc
+
+An information disclosure vulnerability in OnionShare 2.3 before 2.4 allows remote unauthenticated attackers to retrieve the full list of participants of a non-public OnionShare node via the --chat feature. 

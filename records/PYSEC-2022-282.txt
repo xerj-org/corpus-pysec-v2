@@ -1,0 +1,13 @@
+PYSEC-2022-282 PyPI/octoprint — If an attacker comes into the possession of a victim's OctoPrint session cookie through whatever mea
+package: octoprint
+ecosystem: PyPI
+versions affected:
+  >= 0, < 40e6217ac1a85cc5ed592873ae49db01d3005da4 (GIT: https://github.com/octoprint/octoprint)
+  >= 0, < 1.8.3 (ECOSYSTEM)
+aliases: CVE-2022-2888, GHSA-937f-qh3w-6g87
+references:
+  https://github.com/octoprint/octoprint/commit/40e6217ac1a85cc5ed592873ae49db01d3005da4
+  https://huntr.dev/bounties/d27d232b-2578-4b32-b3b4-74aabdadf629
+  https://github.com/advisories/GHSA-937f-qh3w-6g87
+
+If an attacker comes into the possession of a victim's OctoPrint session cookie through whatever means, the attacker can use this cookie to authenticate as long as the victim's account exists.

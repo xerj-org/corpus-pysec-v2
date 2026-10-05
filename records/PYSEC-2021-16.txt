@@ -1,0 +1,14 @@
+PYSEC-2021-16 PyPI/httplib2 — httplib2 is a comprehensive HTTP client library for Python. In httplib2 before version 0.19.0, a mal
+package: httplib2
+ecosystem: PyPI
+versions affected:
+  >= 0, < bd9ee252c8f099608019709e22c0d705e98d26bc (GIT: https://github.com/httplib2/httplib2)
+  >= 0, < 0.19.0 (ECOSYSTEM)
+aliases: CVE-2021-21240, GHSA-93xj-8mrv-444m
+references:
+  https://github.com/httplib2/httplib2/commit/bd9ee252c8f099608019709e22c0d705e98d26bc
+  https://github.com/httplib2/httplib2/pull/182
+  https://github.com/httplib2/httplib2/security/advisories/GHSA-93xj-8mrv-444m
+  https://pypi.org/project/httplib2
+
+httplib2 is a comprehensive HTTP client library for Python. In httplib2 before version 0.19.0, a malicious server which responds with long series of "\xa0" characters in the "www-authenticate" header may cause Denial of Service (CPU burn while parsing header) of the httplib2 client accessing said server. This is fixed in version 0.19.0 which contains a new implementation of auth headers parsing using the pyparsing library.

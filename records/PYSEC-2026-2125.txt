@@ -1,0 +1,11 @@
+PYSEC-2026-2125 PyPI/changedetection-io — changedetection.io is a free open source web page change detection tool. In versions prior to 0.54.1
+package: changedetection-io
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.54.1 (ECOSYSTEM)
+aliases: CVE-2026-27645, GHSA-mw8m-398g-h89w
+references:
+  https://github.com/dgtlmoon/changedetection.io/commit/a385c89abf44b52fcfa20c7c6a6dd3047c4c1eb5
+  https://github.com/dgtlmoon/changedetection.io/security/advisories/GHSA-mw8m-398g-h89w
+
+changedetection.io is a free open source web page change detection tool. In versions prior to 0.54.1, the RSS single-watch endpoint reflects the UUID path parameter directly in the HTTP response body without HTML escaping. Since Flask returns text/html by default for plain string responses, the browser parses and executes injected JavaScript. Version 0.54.1 contains a fix for the issue.

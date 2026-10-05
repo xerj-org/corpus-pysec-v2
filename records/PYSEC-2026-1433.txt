@@ -1,0 +1,18 @@
+PYSEC-2026-1433 PyPI/gunicorn — Gunicorn HTTP Request/Response Smuggling vulnerability
+package: gunicorn
+ecosystem: PyPI
+versions affected:
+  >= 0, < 22.0.0 (ECOSYSTEM)
+aliases: CVE-2024-6827, GHSA-hc5x-x2vx-497g
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-6827
+  https://github.com/benoitc/gunicorn/issues/3087
+  https://github.com/benoitc/gunicorn/issues/3278
+  https://github.com/benoitc/gunicorn/pull/3113
+  https://github.com/benoitc/gunicorn
+  https://github.com/benoitc/gunicorn/releases/tag/22.0.0
+  https://huntr.com/bounties/1b4f8f38-39da-44b6-9f98-f618639d0dd7
+  https://pypi.org/project/gunicorn
+  https://github.com/advisories/GHSA-hc5x-x2vx-497g
+
+Gunicorn version 21.2.0 does not properly validate the value of the 'Transfer-Encoding' header as specified in the RFC standards, which leads to the default fallback method of 'Content-Length,' making it vulnerable to TE.CL request smuggling. This vulnerability can lead to cache poisoning, data exposure, session manipulation, SSRF, XSS, DoS, data integrity compromise, security bypass, information leakage, and business logic abuse.

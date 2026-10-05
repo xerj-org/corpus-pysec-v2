@@ -1,0 +1,14 @@
+PYSEC-2024-46 PyPI/apache-airflow — Apache Airflow, versions 2.8.0 through 2.8.2, has a vulnerability that allows an authenticated user 
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 2.8.0, < 2.8.3rc1 (ECOSYSTEM)
+aliases: CVE-2024-28746, GHSA-h574-6646-vfxx
+references:
+  https://github.com/apache/airflow/pull/37881
+  https://lists.apache.org/thread/b4pffc7w7do6qgk4jjbyxvdz5odrvny7
+  https://github.com/advisories/GHSA-h574-6646-vfxx
+
+Apache Airflow, versions 2.8.0 through 2.8.2, has a vulnerability that allows an authenticated user with limited permissions to access resources such as variables, connections, etc from the UI which they do not have permission to access. 
+
+Users of Apache Airflow are recommended to upgrade to version 2.8.3 or newer to mitigate the risk associated with this vulnerability

@@ -1,0 +1,16 @@
+PYSEC-2018-17 PyPI/notebook — Jupyter Notebook before 5.7.1 allows XSS via an untrusted notebook because nbconvert responses are c
+package: notebook
+ecosystem: PyPI
+versions affected:
+  >= 0, < 107a89fce5f413fb5728c1c5d2c7788e1fb17491 (GIT: https://github.com/jupyter/notebook)
+  >= 0, < 5.7.1 (ECOSYSTEM)
+aliases: CVE-2018-19351, GHSA-49qr-xh3w-h436
+references:
+  https://pypi.org/project/notebook/#history
+  https://groups.google.com/forum/#!topic/jupyter/hWzu2BSsplY
+  https://github.com/jupyter/notebook/commit/107a89fce5f413fb5728c1c5d2c7788e1fb17491
+  https://github.com/jupyter/notebook/blob/master/docs/source/changelog.rst
+  https://lists.debian.org/debian-lts-announce/2020/11/msg00033.html
+  https://github.com/advisories/GHSA-49qr-xh3w-h436
+
+Jupyter Notebook before 5.7.1 allows XSS via an untrusted notebook because nbconvert responses are considered to have the same origin as the notebook server. In other words, nbconvert endpoints can execute JavaScript with access to the server API. In notebook/nbconvert/handlers.py, NbconvertFileHandler and NbconvertPostHandler do not set a Content Security Policy to prevent this.

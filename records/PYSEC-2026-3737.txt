@@ -1,0 +1,11 @@
+PYSEC-2026-3737 PyPI/nltk — NLTK versions before 3.10.3 contain a path traversal vulnerability in corpus readers that reopen roo
+package: nltk
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.10.3 (ECOSYSTEM)
+aliases: CVE-2026-79676, GHSA-p4rw-rvv2-7xwr
+references:
+  https://www.vulncheck.com/advisories/nltk-before-path-traversal-via-symlink-bypass
+  https://github.com/nltk/nltk/security/advisories/GHSA-p4rw-rvv2-7xwr
+
+NLTK versions before 3.10.3 contain a path traversal vulnerability in corpus readers that reopen root-derived paths using built-in open() instead of nltk.pathsec.open(), allowing symlinks to escape trusted roots. Attackers who stage symlinked corpus files under a trusted data root can disclose outside-root content through normal corpus reader methods like channels(), domains(), and synonyms().

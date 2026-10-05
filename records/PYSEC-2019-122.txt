@@ -1,0 +1,11 @@
+PYSEC-2019-122 PyPI/sqla-yaml-fixtures — Sqla_yaml_fixtures 0.9.1 allows local users to execute arbitrary python code via the fixture_text ar
+package: sqla-yaml-fixtures
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0.0 (ECOSYSTEM)
+aliases: CVE-2019-3575, GHSA-2x54-j4m3-r6wx
+references:
+  https://github.com/schettino72/sqla_yaml_fixtures/issues/20
+  https://github.com/advisories/GHSA-2x54-j4m3-r6wx
+
+Sqla_yaml_fixtures 0.9.1 allows local users to execute arbitrary python code via the fixture_text argument in sqla_yaml_fixtures.load.

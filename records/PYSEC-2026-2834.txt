@@ -1,0 +1,16 @@
+PYSEC-2026-2834 PyPI/opencv-python-headless — NULL Pointer Dereference in OpenCV.
+package: opencv-python-headless
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.1.1.26 (ECOSYSTEM)
+aliases: CVE-2019-14493, GHSA-3448-vrgh-85xr
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2019-14493
+  https://github.com/opencv/opencv/issues/15127
+  https://github.com/opencv/opencv-python
+  https://github.com/opencv/opencv/compare/371bba8...ddbd10c
+  https://lists.debian.org/debian-lts-announce/2021/10/msg00028.html
+  https://pypi.org/project/opencv-python-headless
+  https://github.com/advisories/GHSA-3448-vrgh-85xr
+
+An issue was discovered in OpenCV before 4.1.1 (OpenCV-Python before 4.1.1.26). There is a NULL pointer dereference in the function cv::XMLParser::parse at modules/core/src/persistence.cpp.

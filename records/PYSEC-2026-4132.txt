@@ -1,0 +1,46 @@
+PYSEC-2026-4132 PyPI/picklescan — Picklescan has a missing detection when calling built-in python profile.Profile.runctx
+package: picklescan
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.0.29 (ECOSYSTEM)
+aliases: CVE-2025-71341, GHSA-6vqj-c2q5-j97w
+references:
+  https://github.com/mmaitre314/picklescan/security/advisories/GHSA-6vqj-c2q5-j97w
+  https://nvd.nist.gov/vuln/detail/CVE-2025-71341
+  https://github.com/mmaitre314/picklescan/commit/aecd11be98702caa9ba9b12189d91ad596a36114
+  https://github.com/mmaitre314/picklescan
+  https://www.vulncheck.com/advisories/picklescan-remote-code-execution-via-undetected-profile-profile-runctx
+  https://pypi.org/project/picklescan
+  https://github.com/advisories/GHSA-6vqj-c2q5-j97w
+
+### Summary
+
+Using profile.Profile.runctx, which is a built-in python library function to execute remote pickle file.
+
+### Details
+
+The attack payload executes in the following steps:
+
+First, the attacker craft the payload by calling to profile.Profile.runctx function in reduce method
+Then when the victim after checking whether the pickle file is safe by using Picklescan library and this library doesn't dectect any dangerous functions, decide to pickle.load() this malicious pickle file, thus lead to remote code execution.
+
+### PoC
+
+```
+class EvilProfileRunctx:
+    def __reduce__(self):
+        from profile import Profile
+        payload = "__import__('os').system('whoami')"
+        return Profile.runctx, (Profile(), payload, {}, {})
+```
+
+### Impact
+
+Who is impacted? Any organization or individual relying on picklescan to detect malicious pickle files inside PyTorch models.
+What is the impact? Attackers can embed malicious code in pickle file that remains undetected but executes when the pickle file is loaded.
+Supply Chain Attack: Attackers can distribute infected pickle files across ML models, APIs, or saved Python objects.
+
+### Corresponding
+
+https://github.com/FredericDT
+https://github.com/Qhaoduoyu

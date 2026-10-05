@@ -1,0 +1,12 @@
+PYSEC-2024-64 PyPI/roundup — Roundup before 2.4.0 allows XSS via a SCRIPT element in an HTTP Referer header.
+package: roundup
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.4.0 (ECOSYSTEM)
+aliases: CVE-2024-39125, GHSA-xjgw-ghrx-wfff
+references:
+  https://www.roundup-tracker.org
+  https://www.roundup-tracker.org/docs/security.html#cve-announcements
+  https://github.com/advisories/GHSA-xjgw-ghrx-wfff
+
+Roundup before 2.4.0 allows XSS via a SCRIPT element in an HTTP Referer header.

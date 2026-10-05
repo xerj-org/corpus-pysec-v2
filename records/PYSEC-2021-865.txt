@@ -1,0 +1,14 @@
+PYSEC-2021-865 PyPI/bleach — In Mozilla Bleach before 3.3.0, a mutation XSS affects users calling bleach.clean with math or svg; 
+package: bleach
+ecosystem: PyPI
+versions affected:
+  >= 0, < 79b7a3c5e56a09d1d323a5006afa59b56162eb13 (GIT: https://github.com/mozilla/bleach)
+  >= 0, < 3.3.0 (ECOSYSTEM)
+aliases: CVE-2021-23980, GHSA-vv2x-vrpj-qqpq
+references:
+  https://github.com/mozilla/bleach/security/advisories/GHSA-vv2x-vrpj-qqpq
+  https://advisory.checkmarx.net/advisory/CX-2021-4303
+  ttps://bugzilla.mozilla.org/show_bug.cgi?id=1689399
+  https://github.com/mozilla/bleach/commit/79b7a3c5e56a09d1d323a5006afa59b56162eb13
+
+In Mozilla Bleach before 3.3.0, a mutation XSS affects users calling bleach.clean with math or svg; p or br; and style, title, noscript, script, textarea, noframes, iframe, or xmp tags with strip_comments=False.

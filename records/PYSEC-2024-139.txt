@@ -1,0 +1,15 @@
+PYSEC-2024-139 PyPI/paddlepaddle — Stack overflow in paddle.linalg.lu_unpack in PaddlePaddle before 2.6.0. This flaw can lead to a deni
+package: paddlepaddle
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.6.0 (ECOSYSTEM)
+aliases: CVE-2023-52307, GHSA-g57v-2687-jx33
+references:
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-016.md
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-016.md
+  https://github.com/advisories/GHSA-g57v-2687-jx33
+
+Stack overflow in paddle.linalg.lu_unpack in PaddlePaddle before 2.6.0. This flaw can lead to a denial of service, or even more damage.
+
+
+

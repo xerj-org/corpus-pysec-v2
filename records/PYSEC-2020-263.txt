@@ -1,0 +1,12 @@
+PYSEC-2020-263 PyPI/djangorestframework — A flaw was found in Django REST Framework versions before 3.12.0 and before 3.11.2. When using the b
+package: djangorestframework
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.11.2 (ECOSYSTEM)
+aliases: CVE-2020-25626, GHSA-fx83-3ph3-9j2q
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=1878635
+  https://security.netapp.com/advisory/ntap-20201016-0003/
+  https://github.com/advisories/GHSA-fx83-3ph3-9j2q
+
+A flaw was found in Django REST Framework versions before 3.12.0 and before 3.11.2. When using the browseable API viewer, Django REST Framework fails to properly escape certain strings that can come from user input. This allows a user who can control those strings to inject malicious <script> tags, leading to a cross-site-scripting (XSS) vulnerability.

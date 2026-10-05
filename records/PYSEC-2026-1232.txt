@@ -1,0 +1,15 @@
+PYSEC-2026-1232 PyPI/calibreweb — Generation of Error Message Containing Sensitive Information in janeczku/calibre-web
+package: calibreweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.6.15 (ECOSYSTEM)
+aliases: CVE-2021-3986, GHSA-m982-h4f8-g4hf
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2021-3986
+  https://github.com/janeczku/calibre-web/commit/6f5390ead5df9779ac81fadefffb476e03f93548
+  https://github.com/janeczku/calibre-web
+  https://huntr.com/bounties/394af194-61a7-4e33-b373-877d4c766fca
+  https://pypi.org/project/calibreweb
+  https://github.com/advisories/GHSA-m982-h4f8-g4hf
+
+A vulnerability in janeczku/calibre-web allows unauthorized users to view the names of private shelves belonging to other users. This issue occurs in the file shelf.py at line 221, where the name of the shelf is exposed in an error message when a user attempts to remove a book from a shelf they do not own. This vulnerability discloses private information and affects all versions prior to the fix.

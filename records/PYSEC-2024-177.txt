@@ -1,0 +1,12 @@
+PYSEC-2024-177 PyPI/langflow — Langflow through 0.6.19 allows remote code execution if untrusted users are able to reach the "POST 
+package: langflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0.0a3 (ECOSYSTEM)
+aliases: CVE-2024-37014, GHSA-qg33-x2c5-6p44
+references:
+  https://github.com/langflow-ai/langflow/issues/1973
+  https://github.com/langflow-ai/langflow/issues/1973
+  https://github.com/advisories/GHSA-qg33-x2c5-6p44
+
+Langflow through 0.6.19 allows remote code execution if untrusted users are able to reach the "POST /api/v1/custom_component" endpoint and provide a Python script.

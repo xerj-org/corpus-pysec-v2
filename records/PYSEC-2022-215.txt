@@ -1,0 +1,12 @@
+PYSEC-2022-215 PyPI/ml-scanner — The ML-Scanner package in PyPI v0.1.0 to v0.1.5 was discovered to contain a code execution backdoor 
+package: ml-scanner
+ecosystem: PyPI
+versions affected:
+  >= 0.1.0, < 0.1.7 (ECOSYSTEM)
+aliases: CVE-2022-33000
+references:
+  https://pypi.org/project/ml-scanner/
+  http://pypi.doubanio.com/simple/request
+  https://github.com/bOrionis/mls/issues/1
+
+The ML-Scanner package in PyPI v0.1.0 to v0.1.5 was discovered to contain a code execution backdoor via the request package. This vulnerability allows attackers to access sensitive user information and digital currency keys, as well as escalate privileges.

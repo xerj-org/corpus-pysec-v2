@@ -1,0 +1,12 @@
+PYSEC-2014-112 PyPI/nova — The instance rescue mode in OpenStack Compute (Nova) 2013.2 before 2013.2.3 and Icehouse before 2014
+package: nova
+ecosystem: PyPI
+versions affected:
+  >= 0, < 12.0.0a0 (ECOSYSTEM)
+aliases: CVE-2014-0134, GHSA-w429-xc55-hc48
+references:
+  http://www.openwall.com/lists/oss-security/2014/03/27/6
+  https://bugs.launchpad.net/nova/+bug/1221190
+  http://www.ubuntu.com/usn/USN-2247-1
+
+The instance rescue mode in OpenStack Compute (Nova) 2013.2 before 2013.2.3 and Icehouse before 2014.1, when using libvirt to spawn images and use_cow_images is set to false, allows remote authenticated users to read certain compute host files by overwriting an instance disk with a crafted image.

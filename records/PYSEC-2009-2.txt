@@ -1,0 +1,19 @@
+PYSEC-2009-2 PyPI/buildbot — Multiple cross-site scripting (XSS) vulnerabilities in Buildbot 0.7.6 through 0.7.11p2 allow remote 
+package: buildbot
+ecosystem: PyPI
+versions affected:
+  >= 0.7.6, < 0.7.12 (ECOSYSTEM)
+aliases: CVE-2009-2967, GHSA-mj3x-wprp-mvj9
+references:
+  http://secunia.com/advisories/36352
+  http://secunia.com/advisories/36418
+  http://www.vupen.com/english/advisories/2009/2352
+  http://sourceforge.net/mailarchive/message.php?msg_name=42338fbf0908130837o86b77d6y725233076286226f%40mail.gmail.com
+  https://www.redhat.com/archives/fedora-package-announce/2009-August/msg00978.html
+  http://buildbot.net/trac#SecurityAlert
+  http://www.securityfocus.com/bid/36100
+  https://www.redhat.com/archives/fedora-package-announce/2009-August/msg00985.html
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/52896
+  https://github.com/advisories/GHSA-mj3x-wprp-mvj9
+
+Multiple cross-site scripting (XSS) vulnerabilities in Buildbot 0.7.6 through 0.7.11p2 allow remote attackers to inject arbitrary web script or HTML via unspecified vectors, different vulnerabilities than CVE-2009-2959.

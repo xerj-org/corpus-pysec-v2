@@ -1,0 +1,12 @@
+PYSEC-2021-84 PyPI/plone — Plone through 5.2.4 allows stored XSS attacks (by a Contributor) by uploading an SVG or HTML documen
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.2.5 (ECOSYSTEM)
+aliases: CVE-2021-33512, GHSA-hm2h-f456-6j88
+references:
+  https://plone.org/security/hotfix/20210518/stored-xss-from-file-upload-svg-html
+  http://www.openwall.com/lists/oss-security/2021/05/22/1
+  https://github.com/advisories/GHSA-hm2h-f456-6j88
+
+Plone through 5.2.4 allows stored XSS attacks (by a Contributor) by uploading an SVG or HTML document.

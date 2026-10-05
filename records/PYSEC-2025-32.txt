@@ -1,0 +1,12 @@
+PYSEC-2025-32 PyPI/bentoml — BentoML is a Python library for building online serving systems optimized for AI apps and model infe
+package: bentoml
+ecosystem: PyPI
+versions affected:
+  >= 1.0.0, < 1.4.8 (ECOSYSTEM)
+aliases: CVE-2025-32375, GHSA-7v4r-c989-xh26
+references:
+  https://github.com/bentoml/BentoML/security/advisories/GHSA-7v4r-c989-xh26
+  https://github.com/bentoml/BentoML/security/advisories/GHSA-7v4r-c989-xh26
+  https://github.com/advisories/GHSA-7v4r-c989-xh26
+
+BentoML is a Python library for building online serving systems optimized for AI apps and model inference. Prior to 1.4.8, there was an insecure deserialization in BentoML's runner server. By setting specific headers and parameters in the POST request, it is possible to execute any unauthorized arbitrary code on the server, which will grant the attackers to have the initial access and information disclosure on the server. This vulnerability is fixed in 1.4.8.

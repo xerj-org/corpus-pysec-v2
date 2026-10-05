@@ -1,0 +1,11 @@
+PYSEC-2026-245 PyPI/picklescan — picklescan before 0.0.28 fails to detect malicious pickle files that invoke torch.utils._config_modu
+package: picklescan
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.0.28 (ECOSYSTEM)
+aliases: CVE-2025-71348, GHSA-vv6j-3g6g-2pvj
+references:
+  https://www.vulncheck.com/advisories/picklescan-arbitrary-code-execution-via-torch-utils-config-module-load-config-bypass
+  https://github.com/mmaitre314/picklescan/security/advisories/GHSA-vv6j-3g6g-2pvj
+
+picklescan before 0.0.28 fails to detect malicious pickle files that invoke torch.utils._config_module.load_config function within reduce methods. Attackers can craft pickle files embedding arbitrary code that evades detection but executes during pickle.load, enabling remote code execution in supply chain attacks.

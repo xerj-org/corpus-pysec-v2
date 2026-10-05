@@ -1,0 +1,11 @@
+PYSEC-2026-3995 PyPI/gitpython — GitPython versions before 3.1.54 contain an arbitrary file overwrite vulnerability in the Diffable.d
+package: gitpython
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.1.54 (ECOSYSTEM)
+aliases: CVE-2026-73624, GHSA-fjr4-x663-mwxc
+references:
+  https://www.vulncheck.com/advisories/gitpython-before-arbitrary-file-overwrite-via-diff
+  https://github.com/gitpython-developers/GitPython/security/advisories/GHSA-fjr4-x663-mwxc
+
+GitPython versions before 3.1.54 contain an arbitrary file overwrite vulnerability in the Diffable.diff method that fails to validate git options passed through kwargs. Attackers can supply the --output argument via the other parameter or output kwarg to write patch content to attacker-chosen file paths at process privilege level.

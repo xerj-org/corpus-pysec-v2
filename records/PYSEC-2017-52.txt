@@ -1,0 +1,15 @@
+PYSEC-2017-52 PyPI/plone — Plone 3.3.0 through 3.3.6, 4.0.0 through 4.0.10, 4.1.0 through 4.1.6, 4.2.0 through 4.2.7, 4.3.0 thr
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < e1d981bfa14b664317285f0f36498f4be4a23406 (GIT: https://github.com/zopefoundation/Products.CMFCore)
+  >= 3.3, < 4.0a1, >= 4.0, < 4.1a1, >= 4.1, < 4.2a1, >= 4.2, < 4.3a1, >= 4.3, < 4.3.7, >= 5.0a1, < 5.0rc2 (ECOSYSTEM)
+aliases: CVE-2015-7315, GHSA-984m-rj28-8c6x
+references:
+  https://plone.org/security/hotfix/20150910/anonymous-is-able-to-create-plone-members
+  https://github.com/zopefoundation/Products.CMFCore/commit/e1d981bfa14b664317285f0f36498f4be4a23406
+  https://bugzilla.redhat.com/show_bug.cgi?id=1264791
+  http://www.openwall.com/lists/oss-security/2015/09/22/13
+  https://github.com/advisories/GHSA-984m-rj28-8c6x
+
+Plone 3.3.0 through 3.3.6, 4.0.0 through 4.0.10, 4.1.0 through 4.1.6, 4.2.0 through 4.2.7, 4.3.0 through 4.3.6, and 5.0rc1 allows remote attackers to add a new member to a Plone site with registration enabled, without acknowledgment of site administrator.

@@ -1,0 +1,19 @@
+PYSEC-2014-82 PyPI/jinja2 — FileSystemBytecodeCache in Jinja2 2.7.2 does not properly create temporary directories, which allows
+package: jinja2
+ecosystem: PyPI
+versions affected:
+  >= 0, < acb672b6a179567632e032f547582f30fa2f4aa7 (GIT: https://github.com/mitsuhiko/jinja2)
+  >= 0, < 2.7.3 (ECOSYSTEM)
+aliases: CVE-2014-0012, GHSA-fqh9-2qgg-h84h
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=1051421
+  https://github.com/mitsuhiko/jinja2/pull/292
+  https://github.com/mitsuhiko/jinja2/commit/acb672b6a179567632e032f547582f30fa2f4aa7
+  http://seclists.org/oss-sec/2014/q1/73
+  https://github.com/mitsuhiko/jinja2/pull/296
+  http://secunia.com/advisories/60738
+  http://www.gentoo.org/security/en/glsa/glsa-201408-13.xml
+  http://secunia.com/advisories/56328
+  https://github.com/advisories/GHSA-fqh9-2qgg-h84h
+
+FileSystemBytecodeCache in Jinja2 2.7.2 does not properly create temporary directories, which allows local users to gain privileges by pre-creating a temporary directory with a user's uid.  NOTE: this vulnerability exists because of an incomplete fix for CVE-2014-1402.

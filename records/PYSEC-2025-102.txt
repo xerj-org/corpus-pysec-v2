@@ -1,0 +1,12 @@
+PYSEC-2025-102 PyPI/dagster-ge — Local File Inclusion in dagster._grpc.impl.get_notebook_data in Dagster 1.10.14 allows attackers wit
+package: dagster-ge
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 1.10.14 (ECOSYSTEM)
+aliases: CVE-2025-51481
+references:
+  https://github.com/dagster-io/dagster/pull/30002
+  https://github.com/dagster-io/dagster
+  https://www.gecko.security/blog/cve-2025-51481
+
+Local File Inclusion in dagster._grpc.impl.get_notebook_data in Dagster 1.10.14 allows attackers with access to the gRPC server to read arbitrary files by supplying path traversal sequences in the notebook_path field of ExternalNotebookData requests, bypassing the intended extension-based check.

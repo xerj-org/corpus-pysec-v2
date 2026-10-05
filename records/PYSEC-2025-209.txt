@@ -1,0 +1,12 @@
+PYSEC-2025-209 PyPI/torch — An issue in pytorch v2.7.0 can lead to a Denial of Service (DoS) when a PyTorch model consists of to
+package: torch
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.7.1 (ECOSYSTEM)
+aliases: CVE-2025-55560
+references:
+  https://gist.github.com/shaoyuyoung/0e7d2a586297ae9c8ed14d8706749efc
+  https://github.com/pytorch/pytorch/issues/151522
+  https://github.com/pytorch/pytorch/pull/151897
+
+An issue in pytorch v2.7.0 can lead to a Denial of Service (DoS) when a PyTorch model consists of torch.Tensor.to_sparse() and torch.Tensor.to_dense() and is compiled by Inductor.

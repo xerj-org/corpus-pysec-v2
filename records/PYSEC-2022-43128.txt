@@ -1,0 +1,14 @@
+PYSEC-2022-43128 PyPI/democritus-utility — The d8s-xml for python, as distributed on PyPI, included a potential code-execution backdoor inserte
+package: democritus-utility
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-44054
+references:
+  https://pypi.org/project/democritus-utility/
+  https://pypi.org/project/democritus-utility/
+  https://pypi.org/project/d8s-xml/
+  https://pypi.org/project/d8s-xml/
+  https://github.com/dadadadada111/info/issues/18
+
+The d8s-xml for python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. A potential code execution backdoor inserted by third parties is the democritus-utility package. The affected version of d8s-htm is 0.1.0.

@@ -1,0 +1,17 @@
+PYSEC-2026-161 PyPI/starlette — BadHost: Missing Host header validation poisons request.url.path, bypassing path-based security checks
+package: starlette
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0.1 (ECOSYSTEM)
+aliases: X41-2026-002, CVE-2026-48710, GHSA-86qp-5c8j-p5mr
+references:
+  https://badhost.org
+  https://www.secwest.net/starlette
+  https://ostif.org/disclosing-the-badhost-vulnerability-in-starlette/
+  https://badhost.org
+  https://github.com/Kludex/starlette/security/advisories/GHSA-86qp-5c8j-p5mr
+  https://github.com/Kludex/starlette/security/advisories/GHSA-86qp-5c8j-p5mr
+  https://www.x41-dsec.de/lab/advisories/x41-2026-002-starlette/
+  https://github.com/Kludex/starlette/commit/764dab0dcfb9033d75442d7a359645c9f94648c6
+
+Starlette reconstructs the requested URL based on the HTTP Host request header and requested path, but does not perform any validation of the Host header value. This allows attackers to inject paths into the host part, prepending the actual path. However, routing in Starlette is based on the actual request path. This inconsistent interpretation of HTTP requests may lead to issues such as authentication bypass when the authentication depends on the reconstructed URL’s path.

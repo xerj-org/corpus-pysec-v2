@@ -1,0 +1,15 @@
+PYSEC-2026-895 PyPI/pglast — libpg_query memory leak
+package: pglast
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.28 (ECOSYSTEM)
+aliases: CVE-2018-18482, GHSA-vm3q-58wm-2r2x
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2018-18482
+  https://github.com/lfittl/libpg_query/issues/49
+  https://github.com/lelit/pglast
+  https://github.com/pypa/advisory-database/tree/main/vulns/pg-query/PYSEC-2018-154.yaml
+  https://pypi.org/project/pglast
+  https://github.com/advisories/GHSA-vm3q-58wm-2r2x
+
+An issue was discovered in libpg_query 10-1.0.2. There is a memory leak in pg_query_raw_parse in pg_query_parse.c, which might lead to a denial of service.

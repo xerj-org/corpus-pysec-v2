@@ -1,0 +1,12 @@
+PYSEC-2022-43054 PyPI/freetakserver — An access control issue in the component /ManageRoute/postRoute of FreeTAKServer v1.9.8 allows unaut
+package: freetakserver
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-25508, GHSA-hggv-mcp4-vxc5
+references:
+  https://github.com/FreeTAKTeam/FreeTakServer/issues/291
+  https://github.com/FreeTAKTeam/FreeTakServer/issues/291
+  https://github.com/advisories/GHSA-hggv-mcp4-vxc5
+
+An access control issue in the component /ManageRoute/postRoute of FreeTAKServer v1.9.8 allows unauthenticated attackers to cause a Denial of Service (DoS) via an unusually large amount of created routes, or create unsafe or false routes for legitimate users.

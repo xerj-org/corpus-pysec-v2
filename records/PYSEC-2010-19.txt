@@ -1,0 +1,13 @@
+PYSEC-2010-19 PyPI/plone — Cross-site scripting (XSS) vulnerability in PortalTransforms in Plone 2.1 through 3.3.4 before hotfi
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.3.5 (ECOSYSTEM)
+aliases: CVE-2010-2422, GHSA-qj7x-wm9q-qjx8
+references:
+  http://secunia.com/advisories/40270
+  http://plone.org/products/plone/security/advisories/cve-2010-unassigned-html-injection-in-safe_html
+  http://www.securityfocus.com/bid/40999
+  https://github.com/advisories/GHSA-qj7x-wm9q-qjx8
+
+Cross-site scripting (XSS) vulnerability in PortalTransforms in Plone 2.1 through 3.3.4 before hotfix 20100612 allows remote attackers to inject arbitrary web script or HTML via the safe_html transform.

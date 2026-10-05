@@ -1,0 +1,17 @@
+PYSEC-2025-51 PyPI/apache-airflow-providers-snowflake — Failure to Sanitize Special Elements into a Different Plane (Special Element Injection) vulnerabilit
+package: apache-airflow-providers-snowflake
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.4.0 (ECOSYSTEM)
+aliases: CVE-2025-50213, GHSA-9r64-3wmc-x8m8
+references:
+  https://github.com/apache/airflow/pull/51734
+  https://lists.apache.org/thread/2kqfmyt2pghg5f6797g8hzvq331v8qx3
+  https://github.com/advisories/GHSA-9r64-3wmc-x8m8
+
+Failure to Sanitize Special Elements into a Different Plane (Special Element Injection) vulnerability in Apache Airflow Providers Snowflake.
+
+This issue affects Apache Airflow Providers Snowflake: before 6.4.0.
+
+Sanitation of table and stage parameters were added in CopyFromExternalStageToSnowflakeOperator to prevent SQL injection
+Users are recommended to upgrade to version 6.4.0, which fixes the issue.

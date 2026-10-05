@@ -1,0 +1,16 @@
+PYSEC-2008-15 PyPI/plone — Withdrawn as duplicate of PYSEC-2008-14. Multiple cross-site request forgery (CSRF) vulnerabilities 
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 3.0.5, <= 3.0.6 (ECOSYSTEM)
+aliases: CVE-2008-0164, GHSA-4j3w-g62x-hrcp
+references:
+  http://securityreason.com/securityalert/3754
+  http://www.securityfocus.com/archive/1/489544/100/0/threaded
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/41263
+  http://plone.org/about/security/advisories/cve-2008-0164
+  http://secunia.com/advisories/29361
+  http://www.procheckup.com/Hacking_Plone_CMS.pdf
+  https://github.com/advisories/GHSA-4j3w-g62x-hrcp
+
+Withdrawn as duplicate of PYSEC-2008-14. Multiple cross-site request forgery (CSRF) vulnerabilities in Plone CMS 3.0.5 and 3.0.6 allow remote attackers to (1) add arbitrary accounts via the join_form page and (2) change the privileges of arbitrary groups via the prefs_groups_overview page.

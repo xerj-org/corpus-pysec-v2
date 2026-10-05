@@ -1,0 +1,30 @@
+PYSEC-2026-3623 PyPI/apache-polaris — Apache Polaris did not consistently validate storage locations supplied during table and view regist
+package: apache-polaris
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.7.0 (ECOSYSTEM)
+aliases: CVE-2026-64640
+references:
+  http://www.openwall.com/lists/oss-security/2026/08/06/7
+  https://lists.apache.org/thread/scd8p9wy8b9j3om5wohbotpfycnmmjl4
+
+Apache Polaris did not consistently validate storage locations supplied during table and view registration.
+
+An authenticated principal with permission to register a table or view could, depending on the affected release and registration path, cause Polaris to use the catalog's storage credentials to read a caller-selected Iceberg metadata file before verifying that the file was within the catalog's allowed storage locations.
+
+If the catalog's underlying credentials could read an object outside that boundary, this could disclose limited information from the object.
+
+
+Polaris could also accept registration metadata located within an allowed location that contained references to storage locations outside the allowed boundary.
+
+This second condition did not itself cause Polaris to read the referenced external locations during registration.
+
+
+The demonstrated impact is limited to confidentiality.
+
+No unauthorized data modification or availability impact has been demonstrated.
+
+
+The server-side read requires a deployment using S3 credential vending and an object outside the allowed locations that the catalog's underlying storage credentials can read.
+
+Exploitation requires an authenticated principal with table- or view-registration privileges.

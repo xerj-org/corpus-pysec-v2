@@ -1,0 +1,18 @@
+PYSEC-2022-42991 PyPI/future — An issue discovered in Python Charmers Future 0.18.2 and earlier allows remote attackers to cause a 
+package: future
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.18.3 (ECOSYSTEM)
+aliases: CVE-2022-40899, GHSA-v3c5-jqr6-7qm8
+references:
+  https://pypi.org/project/future/
+  https://github.com/python/cpython/pull/17157
+  https://github.com/python/cpython/pull/17157
+  https://github.com/python/cpython/pull/17157
+  https://github.com/PythonCharmers/python-future/blob/master/src/future/backports/http/cookiejar.py#L215
+  https://pyup.io/posts/pyup-discovers-redos-vulnerabilities-in-top-python-packages/
+  https://pyup.io/posts/pyup-discovers-redos-vulnerabilities-in-top-python-packages/
+  https://github.com/PythonCharmers/python-future/pull/610
+  https://github.com/advisories/GHSA-v3c5-jqr6-7qm8
+
+An issue discovered in Python Charmers Future 0.18.2 and earlier allows remote attackers to cause a denial of service via crafted Set-Cookie header from malicious web server.

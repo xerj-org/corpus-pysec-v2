@@ -1,0 +1,13 @@
+PYSEC-2022-28 PyPI/mlflow — Insecure Temporary File in GitHub repository mlflow/mlflow prior to 1.23.1.
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 61984e6843d2e59235d82a580c529920cd8f3711 (GIT: https://github.com/mlflow/mlflow)
+  >= 0, < 1.23.1 (ECOSYSTEM)
+aliases: CVE-2022-0736, GHSA-vqj2-4v8m-8vrq
+references:
+  https://huntr.dev/bounties/e5384764-c583-4dec-a1d8-4697f4e12f75
+  https://github.com/mlflow/mlflow/commit/61984e6843d2e59235d82a580c529920cd8f3711
+  https://github.com/advisories/GHSA-vqj2-4v8m-8vrq
+
+Insecure Temporary File in GitHub repository mlflow/mlflow prior to 1.23.1.

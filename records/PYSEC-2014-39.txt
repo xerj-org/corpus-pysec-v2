@@ -1,0 +1,15 @@
+PYSEC-2014-39 PyPI/plone — membership_tool.py in Plone before 4.2.3 and 4.3 before beta 1 allows remote attackers to enumerate 
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.2.3, >= 4.3a0, < 4.3b1 (ECOSYSTEM)
+aliases: CVE-2012-5497, GHSA-683w-84m7-p8pw
+references:
+  https://github.com/plone/Products.CMFPlone/blob/4.2.3/docs/CHANGES.txt
+  https://plone.org/products/plone/security/advisories/20121106/13
+  https://plone.org/products/plone-hotfix/releases/20121106
+  http://www.openwall.com/lists/oss-security/2012/11/10/1
+  http://rhn.redhat.com/errata/RHSA-2014-1194.html
+  https://github.com/advisories/GHSA-683w-84m7-p8pw
+
+membership_tool.py in Plone before 4.2.3 and 4.3 before beta 1 allows remote attackers to enumerate user account names via a crafted URL.

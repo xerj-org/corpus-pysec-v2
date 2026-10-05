@@ -1,0 +1,15 @@
+PYSEC-2026-1213 PyPI/barbican — OpenStack Barbican credential leak flaw
+package: barbican
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 16.0.0 (ECOSYSTEM)
+aliases: CVE-2023-1633, GHSA-6qqp-4vm3-359v
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-1633
+  https://access.redhat.com/security/cve/CVE-2023-1633
+  https://bugzilla.redhat.com/show_bug.cgi?id=2181761
+  https://github.com/openstack/barbican
+  https://pypi.org/project/barbican
+  https://github.com/advisories/GHSA-6qqp-4vm3-359v
+
+A credentials leak flaw was found in OpenStack Barbican. This flaw allows a local authenticated attacker to read the configuration file, gaining access to sensitive credentials.

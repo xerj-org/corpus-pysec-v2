@@ -1,0 +1,10 @@
+PYSEC-2023-293 PyPI/repox — An authentication bypass vulnerability has been found in Repox, which allows a remote user to send a
+package: repox
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2023-6718
+references:
+  https://www.incibe.es/en/incibe-cert/notices/aviso/multiple-vulnerabilities-repox
+
+An authentication bypass vulnerability has been found in Repox, which allows a remote user to send a specially crafted POST request, due to the lack of any authentication method, resulting in the alteration or creation of users.

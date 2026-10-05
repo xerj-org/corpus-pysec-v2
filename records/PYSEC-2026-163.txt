@@ -1,0 +1,12 @@
+PYSEC-2026-163 PyPI/semantic-kernel — Semantic Kernel, Microsoft's semantic kernel Python SDK, has a remote code execution vulnerability i
+package: semantic-kernel
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.39.4 (ECOSYSTEM)
+aliases: CVE-2026-26030, GHSA-xjw9-4gw8-4rqx
+references:
+  https://github.com/microsoft/semantic-kernel/releases/tag/python-1.39.4
+  https://github.com/microsoft/semantic-kernel/pull/13505
+  https://github.com/microsoft/semantic-kernel/security/advisories/GHSA-xjw9-4gw8-4rqx
+
+Semantic Kernel, Microsoft's semantic kernel Python SDK, has a remote code execution vulnerability in versions prior to 1.39.4, specifically within the `InMemoryVectorStore` filter functionality. The problem has been fixed in version `python-1.39.4`. Users should upgrade this version or higher. As a workaround, avoid using `InMemoryVectorStore` for production scenarios.

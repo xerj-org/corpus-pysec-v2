@@ -1,0 +1,55 @@
+PYSEC-2026-2516 PyPI/homeassistant — Home Assistant has stored XSS in history-graphs
+package: homeassistant
+ecosystem: PyPI
+versions affected:
+  >= 2025.02, < 2026.01 (ECOSYSTEM)
+aliases: CVE-2026-33045, GHSA-46j8-vpx8-6p72
+references:
+  https://github.com/home-assistant/core/security/advisories/GHSA-46j8-vpx8-6p72
+  https://github.com/home-assistant/core/security/advisories/GHSA-mq77-rv97-285m
+  https://nvd.nist.gov/vuln/detail/CVE-2026-33045
+  https://github.com/home-assistant/core
+  https://pypi.org/project/homeassistant
+  https://github.com/advisories/GHSA-46j8-vpx8-6p72
+
+### Summary
+The "remaining charge time"-sensor for mobile phones (imported/included from Android Auto it appears) is vulnerable to the same issue as CVE-2025-62172.
+<img width="431" height="334" alt="image" src="https://github.com/user-attachments/assets/84e0dfad-b986-4e84-ad0e-674c5da88582" />
+This also indicates that any sensor showing their name in the history-graph, is likely to be vulnerable to this issue.
+
+### Details
+
+Another entity was found which displays the same behavior as in this issue: [CVE-2025-62172](https://github.com/home-assistant/core/security/advisories/GHSA-mq77-rv97-285m)
+
+
+The History-graph card will sometimes display the name of the entity it is displaying, when the graph is shown as a line with values on the x and y axis. This appears to be vulnerable to Cross-Site scripting (_XSS_) as it does not have any output escaping or sanitization.
+
+The PoC in this instance only shows HTML-injection in the form of the `<s>` -tag being rendered as strike through, but the vulnerability also allows for injecting arbitrary tags which execute JavaScript, like the example given in the PoC description below.
+
+
+### PoC
+1. Register a new sensor (or device) or change the name of an existing one, which provides a location
+2. Change the name to something malicious, for example `test <img src=x onerror=alert(document.domain) />`
+    For a new entity, it should work when setting the name. For old entities, go here:
+<img width="1300" height="411" alt="image" src="https://github.com/user-attachments/assets/7dbd9afa-2f4b-4d03-9384-d57c53eaff5c" />
+<img width="1383" height="885" alt="image" src="https://github.com/user-attachments/assets/c4cfba2e-e2d8-4817-92fe-f17ba7877e27" />
+<img width="387" height="436" alt="image" src="https://github.com/user-attachments/assets/c40e986d-20ca-416e-bcdb-ca1d3afa77a4" />
+<br>
+<img width="392" height="515" alt="image" src="https://github.com/user-attachments/assets/623fcf8c-eef1-4b17-853d-0ff5440aecaa" />
+
+**PS: the example pictures show changing the name of the device-tracker entity, which is wrong. Just change the name of the `remaining charge time`-sensor in order to validate this finding**
+
+3. Add a history graph card with the malicious sensor
+<img width="696" height="474" alt="image" src="https://github.com/user-attachments/assets/3cda78e6-3db5-4075-8924-ab9fc5759082" />
+
+5. Hover the graph for payload execution
+<img width="343" height="196" alt="image" src="https://github.com/user-attachments/assets/99e56169-b06a-4c60-9343-510e5d74af12" />
+
+
+### Impact
+
+The impact of this vulnerability is that a user can target other users of the system and perform account takeover through client side exploitation of XSS.
+
+In the context of this system, I believe the vulnerability to be less impactful than the CVSS metric describes. It is not displayed anywhere by default, it is not natural to display this history graph, and it also has no potential for being imported through seemingly innocent integrations. It also appears to rely on having used/using Android Auto. Other devices which has the same sensor can trigger the same vulnerability, and I expect there to exists cloud-based devices that would enable a threat actor to deliver the payload remotely.
+
+Credit: Robin Lunde - [https://robinlunde.com](https://robinlunde.com)

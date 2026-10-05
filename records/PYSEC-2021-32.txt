@@ -1,0 +1,15 @@
+PYSEC-2021-32 PyPI/omero-web — OMERO.web is open source Django-based software for managing microscopy imaging. OMERO.web before ver
+package: omero-web
+ecosystem: PyPI
+versions affected:
+  >= 0, < 952f8e5d28532fbb14fb665982211329d137908c (GIT: https://github.com/ome/omero-web)
+  >= 0, < 5.9.0 (ECOSYSTEM)
+aliases: CVE-2021-21377, GHSA-g4rf-pc26-6hmr
+references:
+  https://github.com/ome/omero-web/blob/master/CHANGELOG.md#590-march-2021
+  https://pypi.org/project/omero-web/
+  https://github.com/ome/omero-web/commit/952f8e5d28532fbb14fb665982211329d137908c
+  https://www.openmicroscopy.org/security/advisories/2021-SV2/
+  https://github.com/ome/omero-web/security/advisories/GHSA-g4rf-pc26-6hmr
+
+OMERO.web is open source Django-based software for managing microscopy imaging. OMERO.web before version 5.9.0 supports redirection to a given URL after performing login or switching the group context. These URLs are not validated, allowing redirection to untrusted sites. OMERO.web 5.9.0 adds URL validation before redirecting. External URLs are not considered valid, unless specified in the omero.web.redirect_allowed_hosts setting.

@@ -1,0 +1,10 @@
+PYSEC-2019-223 PyPI/tensorflow-cpu — Google TensorFlow 1.7.x and earlier is affected by a Buffer Overflow vulnerability. The type of expl
+package: tensorflow-cpu
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.7.1 (ECOSYSTEM)
+aliases: CVE-2018-7575
+references:
+  https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/advisory/tfsa-2018-004.md
+
+Google TensorFlow 1.7.x and earlier is affected by a Buffer Overflow vulnerability. The type of exploitation is context-dependent.

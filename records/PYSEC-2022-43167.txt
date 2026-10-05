@@ -1,0 +1,15 @@
+PYSEC-2022-43167 PyPI/selenium — Selenium Server (Grid) before 4 allows CSRF because it permits non-JSON content types such as applic
+package: selenium
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.0.0 (ECOSYSTEM)
+aliases: CVE-2022-28108
+references:
+  https://www.gabriel.urdhr.fr/2022/02/07/selenium-standalone-server-csrf-dns-rebinding-rce/
+  https://www.gabriel.urdhr.fr/2022/02/07/selenium-standalone-server-csrf-dns-rebinding-rce/
+  https://www.selenium.dev/downloads/
+  https://www.selenium.dev/downloads/
+  https://www.openwall.com/lists/oss-security/2022/02/07/3
+  https://www.openwall.com/lists/oss-security/2022/02/07/3
+
+Selenium Server (Grid) before 4 allows CSRF because it permits non-JSON content types such as application/x-www-form-urlencoded, multipart/form-data, and text/plain.

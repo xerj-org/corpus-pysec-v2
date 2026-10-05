@@ -1,0 +1,11 @@
+PYSEC-2018-13 PyPI/markdown2 — An issue was discovered in markdown2 (aka python-markdown2) through 2.3.5. The safe_mode feature, wh
+package: markdown2
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.3.6 (ECOSYSTEM)
+aliases: CVE-2018-5773, GHSA-p6h9-gw49-rqm4
+references:
+  https://github.com/trentm/python-markdown2/issues/285
+  https://github.com/advisories/GHSA-p6h9-gw49-rqm4
+
+An issue was discovered in markdown2 (aka python-markdown2) through 2.3.5. The safe_mode feature, which is supposed to sanitize user input against XSS, is flawed and does not escape the input properly. With a crafted payload, XSS can be triggered, as demonstrated by omitting the final '>' character from an IMG tag.

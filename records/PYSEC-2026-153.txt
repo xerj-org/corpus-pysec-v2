@@ -1,0 +1,11 @@
+PYSEC-2026-153 PyPI/weblate — Weblate is a web based localization tool. In versions prior to 5.17, the translation memory API expo
+package: weblate
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.17 (ECOSYSTEM)
+aliases: CVE-2026-33220, GHSA-mqph-7h49-hqfm
+references:
+  https://github.com/WeblateOrg/weblate/security/advisories/GHSA-mqph-7h49-hqfm
+  https://github.com/WeblateOrg/weblate/pull/18516
+
+Weblate is a web based localization tool. In versions prior to 5.17, the translation memory API exposed unintended endpoints, which in turn didn't perform proper access control. This issue has been fixed in version 5.17. If developers are unable to update immediately, they can disable this feature as the CDN add-on is not enabled by default.

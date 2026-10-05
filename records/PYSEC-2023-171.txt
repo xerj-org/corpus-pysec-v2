@@ -1,0 +1,15 @@
+PYSEC-2023-171 PyPI/apache-airflow — Apache Airflow, versions before 2.7.1, is affected by a vulnerability that allows authenticated user
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.7.1 (ECOSYSTEM)
+aliases: CVE-2023-40712, GHSA-mjqh-v5f2-g2mw
+references:
+  https://github.com/apache/airflow/pull/33516
+  https://github.com/apache/airflow/pull/33512
+  https://lists.apache.org/thread/jw1yv4lt6hpowqbb0x4o3tdp0jhx2bts
+  https://github.com/advisories/GHSA-mjqh-v5f2-g2mw
+
+Apache Airflow, versions before 2.7.1, is affected by a vulnerability that allows authenticated users who have access to see the task/dag in the UI, to craft a URL, which could lead to unmasking the secret configuration of the task that otherwise would be masked in the UI.
+
+Users are strongly advised to upgrade to version 2.7.1 or later which has removed the vulnerability.

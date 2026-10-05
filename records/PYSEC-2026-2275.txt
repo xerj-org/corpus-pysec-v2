@@ -1,0 +1,12 @@
+PYSEC-2026-2275 PyPI/requests — Requests is a HTTP library. Prior to version 2.33.0, the `requests.utils.extract_zipped_paths()` uti
+package: requests
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.33.0 (ECOSYSTEM)
+aliases: CVE-2026-25645, GHSA-gc5v-m9x4-r6x2
+references:
+  https://github.com/psf/requests/releases/tag/v2.33.0
+  https://github.com/psf/requests/security/advisories/GHSA-gc5v-m9x4-r6x2
+  https://github.com/psf/requests/commit/66d21cb07bd6255b1280291c4fafb71803cdb3b7
+
+Requests is a HTTP library. Prior to version 2.33.0, the `requests.utils.extract_zipped_paths()` utility function uses a predictable filename when extracting files from zip archives into the system temporary directory. If the target file already exists, it is reused without validation. A local attacker with write access to the temp directory could pre-create a malicious file that would be loaded in place of the legitimate one. Standard usage of the Requests library is not affected by this vulnerability. Only applications that call `extract_zipped_paths()` directly are impacted. Starting in version 2.33.0, the library extracts files to a non-deterministic location. If developers are unable to upgrade, they can set `TMPDIR` in their environment to a directory with restricted write access.

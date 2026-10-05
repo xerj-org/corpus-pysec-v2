@@ -1,0 +1,11 @@
+PYSEC-2026-97 PyPI/nltk — A vulnerability in the `filestring()` function of the `nltk.util` module in nltk version 3.9.2 allow
+package: nltk
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 3.9.2 (ECOSYSTEM)
+aliases: CVE-2026-0846, GHSA-h8wq-7xc4-p3qx
+references:
+  https://huntr.com/bounties/007b84f8-418e-4300-99d0-bf504c2f97eb
+  https://github.com/advisories/GHSA-h8wq-7xc4-p3qx
+
+A vulnerability in the `filestring()` function of the `nltk.util` module in nltk version 3.9.2 allows arbitrary file read due to improper validation of input paths. The function directly opens files specified by user input without sanitization, enabling attackers to access sensitive system files by providing absolute paths or traversal paths. This vulnerability can be exploited locally or remotely, particularly in scenarios where the function is used in web APIs or other interfaces that accept user-supplied input.

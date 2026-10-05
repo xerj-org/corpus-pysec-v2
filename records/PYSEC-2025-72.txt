@@ -1,0 +1,13 @@
+PYSEC-2025-72 PyPI/num2words — After a successful phishing attack, new versions of `num2words` were published containing malware.
+package: num2words
+ecosystem: PyPI
+versions affected:
+  0.5.15, 0.5.16
+references:
+  https://nitter.tiekoetter.com/SFLinux/status/1949906299308953827
+  https://www.stepsecurity.io/blog/supply-chain-security-alert-num2words-pypi-package-shows-signs-of-compromise
+
+The `num2words` project was compromised via a phishing attack
+and two new versions were uploaded to PyPI containing malicious code.
+The affected versions have been removed from PyPI,
+and users are advised to remove the affected versions from their environments.

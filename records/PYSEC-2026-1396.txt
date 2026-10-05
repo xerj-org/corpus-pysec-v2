@@ -1,0 +1,14 @@
+PYSEC-2026-1396 PyPI/fschat — FastChat Server-Side Request Forgery vulnerability
+package: fschat
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.2.36 (ECOSYSTEM)
+aliases: CVE-2024-12376, GHSA-g44m-hpf4-vmrp
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-12376
+  https://github.com/lm-sys/FastChat
+  https://huntr.com/bounties/c9cc3f28-ee9f-4d2d-9ee5-8c6455a11892
+  https://pypi.org/project/fschat
+  https://github.com/advisories/GHSA-g44m-hpf4-vmrp
+
+A Server-Side Request Forgery (SSRF) vulnerability was identified in the lm-sys/fastchat web server, specifically in the affected version git 2c68a13. This vulnerability allows an attacker to access internal server resources and data that are otherwise inaccessible, such as AWS metadata credentials.

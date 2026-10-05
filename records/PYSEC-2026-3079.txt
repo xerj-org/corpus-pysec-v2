@@ -1,0 +1,19 @@
+PYSEC-2026-3079 PyPI/sushy-tools — OpenStack Sushy-Tools and VirtualBMC Improper Preservation of Permissions
+package: sushy-tools
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.21.1 (ECOSYSTEM)
+aliases: CVE-2022-44020, GHSA-5pj3-6fqm-8m7m
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2022-44020
+  https://github.com/umago/virtualbmc
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/GAD7QJIUWPCKJIGYP7PPHH5DILOEONFE
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/KEQVJF3OQGSDCSQTQQSC54JEGLMSNB4Q
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/QMSUGS4B6EBRHBJMTRXL5RIKJTZTEMJC
+  https://review.opendev.org/c/openstack/sushy-tools/+/862625
+  https://review.opendev.org/c/openstack/virtualbmc/+/862620
+  https://storyboard.openstack.org/#!/story/2010382
+  https://pypi.org/project/sushy-tools
+  https://github.com/advisories/GHSA-5pj3-6fqm-8m7m
+
+An issue was discovered in OpenStack Sushy-Tools through 0.21.0 and VirtualBMC through 2.2.2. Changing the boot device configuration with these packages removes password protection from the managed libvirt XML domain. NOTE: this only affects an "unsupported, production-like configuration."

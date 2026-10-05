@@ -1,0 +1,12 @@
+PYSEC-2014-66 PyPI/plone — Products/CMFPlone/CatalogTool.py in Plone 3.3 through 4.3.2 allows remote administrators to bypass r
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 3.3, < 4.3.3 (ECOSYSTEM)
+aliases: CVE-2013-7061
+references:
+  https://plone.org/security/20131210/catalogue-exposure
+  http://www.openwall.com/lists/oss-security/2013/12/12/3
+  http://www.openwall.com/lists/oss-security/2013/12/10/15
+
+Products/CMFPlone/CatalogTool.py in Plone 3.3 through 4.3.2 allows remote administrators to bypass restrictions and obtain sensitive information via an unspecified search API.

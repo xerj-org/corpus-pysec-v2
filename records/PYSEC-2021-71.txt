@@ -1,0 +1,13 @@
+PYSEC-2021-71 PyPI/pillow — In Pillow before 8.1.0, SGIRleDecode has a 4-byte buffer over-read when decoding crafted SGI RLE ima
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 4.3.0, < 8.1.0 (ECOSYSTEM)
+aliases: CVE-2020-35655, GHSA-hf64-x4gq-p99h
+references:
+  https://pillow.readthedocs.io/en/stable/releasenotes/index.html
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/BF553AMNNNBW7SH4IM4MNE4M6GNZQ7YD/
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/6BYVI5G44MRIPERKYDQEL3S3YQCZTVHE/
+  https://github.com/advisories/GHSA-hf64-x4gq-p99h
+
+In Pillow before 8.1.0, SGIRleDecode has a 4-byte buffer over-read when decoding crafted SGI RLE image files because offsets and length tables are mishandled.

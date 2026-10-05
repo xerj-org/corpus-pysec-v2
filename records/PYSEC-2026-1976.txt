@@ -1,0 +1,32 @@
+PYSEC-2026-1976 PyPI/tqdm — tqdm CLI arguments injection attack
+package: tqdm
+ecosystem: PyPI
+versions affected:
+  >= 4.4.0, < 4.66.3 (ECOSYSTEM)
+aliases: CVE-2024-34062, GHSA-g7vv-2v7x-gj9p
+references:
+  https://github.com/tqdm/tqdm/security/advisories/GHSA-g7vv-2v7x-gj9p
+  https://nvd.nist.gov/vuln/detail/CVE-2024-34062
+  https://github.com/tqdm/tqdm/commit/4e613f84ed2ae029559f539464df83fa91feb316
+  https://github.com/tqdm/tqdm
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/PA3GIGHPWAHCTT4UF57LTPZGWHAX3GW6
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/QRECVQCCESHBS3UJOWNXQUIX725TKNY6
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/VA337CYUS4SLRFV2P6MX6MZ2LKFURKJC
+  https://pypi.org/project/tqdm
+  https://github.com/advisories/GHSA-g7vv-2v7x-gj9p
+
+### Impact
+Any optional non-boolean CLI arguments (e.g. `--delim`, `--buf-size`, `--manpath`) are passed through python's `eval`, allowing arbitrary code execution. Example:
+
+```sh
+python -m tqdm --manpath="\" + str(exec(\"import os\nos.system('echo hi && killall python3')\")) + \""
+```
+
+### Patches
+https://github.com/tqdm/tqdm/commit/4e613f84ed2ae029559f539464df83fa91feb316 released in `tqdm>=4.66.3`
+
+### Workarounds
+None
+
+### References
+- https://github.com/tqdm/tqdm/releases/tag/v4.66.3

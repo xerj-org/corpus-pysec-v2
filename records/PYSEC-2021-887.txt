@@ -1,0 +1,11 @@
+PYSEC-2021-887 PyPI/gattlib-py — GattLib 0.3-rc1 has a stack-based buffer over-read in get_device_path_from_mac in dbus/gattlib.c.
+package: gattlib-py
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2021-33590
+references:
+  https://github.com/labapart/gattlib/issues/219
+  https://github.com/labapart/gattlib/issues/219
+
+GattLib 0.3-rc1 has a stack-based buffer over-read in get_device_path_from_mac in dbus/gattlib.c.

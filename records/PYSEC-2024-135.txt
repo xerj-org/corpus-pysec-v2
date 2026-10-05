@@ -1,0 +1,15 @@
+PYSEC-2024-135 PyPI/paddlepaddle — Nullptr in paddle.put_along_axis in PaddlePaddle before 2.6.0. This flaw can cause a runtime crash a
+package: paddlepaddle
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.6.0 (ECOSYSTEM)
+aliases: CVE-2023-52303, GHSA-2wcj-qr76-9768
+references:
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-012.md
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-012.md
+  https://github.com/advisories/GHSA-2wcj-qr76-9768
+
+Nullptr in paddle.put_along_axis in PaddlePaddle before 2.6.0. This flaw can cause a runtime crash and a denial of service.
+
+
+

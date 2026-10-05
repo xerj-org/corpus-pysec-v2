@@ -1,0 +1,11 @@
+PYSEC-2026-4021 PyPI/monai — MONAI before 1.5.2 contains a deserialization of untrusted data vulnerability in the algo_from_pickl
+package: monai
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.5.2 (ECOSYSTEM)
+aliases: CVE-2026-100846, GHSA-89gg-p5r5-q6r4
+references:
+  https://www.vulncheck.com/advisories/monai-before-1.5.2-remote-code-execution-via-pickle-deserialization
+  https://github.com/Project-MONAI/MONAI/security/advisories/GHSA-89gg-p5r5-q6r4
+
+MONAI before 1.5.2 contains a deserialization of untrusted data vulnerability in the algo_from_pickle function in monai/auto3dseg/utils.py. The function reads a .pkl file and passes its contents to pickle.loads without validating the data source or content. If an application invokes algo_from_pickle on an attacker-supplied pickle file, an object defining __reduce__ is executed during deserialization, resulting in arbitrary code execution in the context of the application.

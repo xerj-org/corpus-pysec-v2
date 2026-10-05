@@ -1,0 +1,13 @@
+PYSEC-2025-25 PyPI/rembg — Rembg is a tool to remove images background. In Rembg 2.0.57 and earlier, the CORS middleware is set
+package: rembg
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.0.58 (ECOSYSTEM)
+aliases: CVE-2025-25302, GHSA-59qh-fmm7-3g9q
+references:
+  https://securitylab.github.com/advisories/GHSL-2024-161_GHSL-2024-162_rembg/
+  https://securitylab.github.com/advisories/GHSL-2024-161_GHSL-2024-162_rembg/
+  https://github.com/danielgatis/rembg/blob/d1e00734f8a996abf512a3a5c251c7a9a392c90a/rembg/commands/s_command.py#L93
+  https://github.com/advisories/GHSA-59qh-fmm7-3g9q
+
+Rembg is a tool to remove images background. In Rembg 2.0.57 and earlier, the CORS middleware is setup incorrectly. All origins are reflected, which allows any website to send cross site requests to the rembg server and thus query any API. Even if authentication were to be enabled, allow_credentials is set to True, which would allow any website to send authenticated cross site requests.

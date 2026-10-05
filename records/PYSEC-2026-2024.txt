@@ -1,0 +1,18 @@
+PYSEC-2026-2024 PyPI/vllm — vLLM denial of service vulnerability
+package: vllm
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.5.5 (ECOSYSTEM)
+aliases: CVE-2024-8768, GHSA-w2r7-9579-27hf
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-8768
+  https://github.com/vllm-project/vllm/issues/7632
+  https://github.com/vllm-project/vllm/pull/7746
+  https://github.com/vllm-project/vllm/commit/e25fee57c2e69161bd261f5986dc5aeb198bbd42
+  https://access.redhat.com/security/cve/CVE-2024-8768
+  https://bugzilla.redhat.com/show_bug.cgi?id=2311895
+  https://github.com/vllm-project/vllm
+  https://pypi.org/project/vllm
+  https://github.com/advisories/GHSA-w2r7-9579-27hf
+
+A flaw was found in the vLLM library. A completions API request with an empty prompt will crash the vLLM API server, resulting in a denial of service.

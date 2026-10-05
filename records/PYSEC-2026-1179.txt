@@ -1,0 +1,15 @@
+PYSEC-2026-1179 PyPI/apache-superset — Apache Superset Server-Side Request Forgery vulnerability
+package: apache-superset
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.1.0 (ECOSYSTEM)
+aliases: CVE-2023-25504, GHSA-fxjg-28fm-pfxh
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-25504
+  https://github.com/apache/superset
+  https://lists.apache.org/thread/tdnzkocfsqg2sbbornnp9g492fn4zhtx
+  http://www.openwall.com/lists/oss-security/2023/04/18/8
+  https://pypi.org/project/apache-superset
+  https://github.com/advisories/GHSA-fxjg-28fm-pfxh
+
+A malicious actor who has been authenticated and granted specific permissions in Apache Superset may use the import dataset feature in order to conduct Server-Side Request Forgery attacks and query internal resources on behalf of the server where Superset is deployed. This vulnerability exists in Apache Superset versions up to and including 2.0.1.

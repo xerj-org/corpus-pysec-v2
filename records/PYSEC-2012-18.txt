@@ -1,0 +1,21 @@
+PYSEC-2012-18 PyPI/horizon — Open redirect vulnerability in views/auth_forms.py in OpenStack Dashboard (Horizon) Essex (2012.1) a
+package: horizon
+ecosystem: PyPI
+versions affected:
+  >= 0, < 35eada8a27323c0f83c400177797927aba6bc99b (GIT: https://github.com/openstack/horizon)
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2012-3540
+references:
+  https://github.com/openstack/horizon/commit/35eada8a27323c0f83c400177797927aba6bc99b
+  https://github.com/openstack/horizon/commit/35eada8a27323c0f83c400177797927aba6bc99b
+  http://www.securityfocus.com/bid/55329
+  http://www.openwall.com/lists/oss-security/2012/08/30/5
+  http://secunia.com/advisories/50480
+  https://lists.launchpad.net/openstack/msg16278.html
+  https://lists.launchpad.net/openstack/msg16281.html
+  http://www.openwall.com/lists/oss-security/2012/08/30/4
+  https://bugs.launchpad.net/horizon/+bug/1039077
+  http://www.ubuntu.com/usn/USN-1565-1
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/78196
+
+Open redirect vulnerability in views/auth_forms.py in OpenStack Dashboard (Horizon) Essex (2012.1) allows remote attackers to redirect users to arbitrary web sites and conduct phishing attacks via a URL in the next parameter to auth/login/.  NOTE: this issue was originally assigned CVE-2012-3542 by mistake.

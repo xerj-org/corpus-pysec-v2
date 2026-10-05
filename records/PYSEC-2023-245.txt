@@ -1,0 +1,13 @@
+PYSEC-2023-245 PyPI/pypinksign — PyPinkSign v0.5.1 uses a non-random or static IV for Cipher Block Chaining (CBC) mode in AES encrypt
+package: pypinksign
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2023-48056, GHSA-fxff-wxxv-c2jc
+references:
+  http://bandoche.com
+  http://pypinksign.com
+  https://gxx777.github.io/PyPinkSign_v0.5.1_Cryptographic_API_Misuse_Vulnerability.md
+  https://github.com/advisories/GHSA-fxff-wxxv-c2jc
+
+PyPinkSign v0.5.1 uses a non-random or static IV for Cipher Block Chaining (CBC) mode in AES encryption. This vulnerability can lead to the disclosure of information and communications.

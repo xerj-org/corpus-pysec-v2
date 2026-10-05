@@ -1,0 +1,10 @@
+PYSEC-2025-96 PyPI/chuanhuchatgpt — An incorrect authorization vulnerability exists in gaizhenbiao/chuanhuchatgpt version git c91dbfc. T
+package: chuanhuchatgpt
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 2024-12-04 (ECOSYSTEM)
+aliases: CVE-2024-9159
+references:
+  https://huntr.com/bounties/ab0f8fbb-c17a-45a7-8dab-7d4c8b90490a
+
+An incorrect authorization vulnerability exists in gaizhenbiao/chuanhuchatgpt version git c91dbfc. The vulnerability allows any user to restart the server at will, leading to a complete loss of availability. The issue arises because the function responsible for restarting the server is not properly guarded by an admin check.

@@ -1,0 +1,25 @@
+PYSEC-2019-241 PyPI/gdal — GDAL through 3.0.1 has a poolDestroy double free in OGRExpatRealloc in ogr/ogr_expat.cpp when the 10
+package: gdal
+ecosystem: PyPI
+versions affected:
+  >= 0, < 148115fcc40f1651a5d15fa34c9a8c528e7147bb (GIT: https://github.com/OSGeo/gdal)
+  >= 0, < 3.0.2 (ECOSYSTEM)
+aliases: CVE-2019-17545
+references:
+  https://github.com/OSGeo/gdal/commit/148115fcc40f1651a5d15fa34c9a8c528e7147bb
+  https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=16178
+  https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=16178
+  https://lists.debian.org/debian-lts-announce/2019/11/msg00005.html
+  https://lists.debian.org/debian-lts-announce/2019/11/msg00005.html
+  http://lists.opensuse.org/opensuse-security-announce/2019-11/msg00022.html
+  http://lists.opensuse.org/opensuse-security-announce/2019-11/msg00022.html
+  http://lists.opensuse.org/opensuse-security-announce/2019-11/msg00022.html
+  https://www.oracle.com//security-alerts/cpujul2021.html
+  https://lists.debian.org/debian-lts-announce/2022/01/msg00004.html
+  https://lists.debian.org/debian-lts-announce/2022/01/msg00004.html
+  https://lists.debian.org/debian-lts-announce/2022/09/msg00040.html
+  https://lists.debian.org/debian-lts-announce/2022/09/msg00040.html
+  https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/XVRC3EBQBFBVQC26XJE3AI3KQXC2NGTP/
+  https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/CB7RRPCQP253XA5MYUOLHLRPKNGKVZNT/
+
+GDAL through 3.0.1 has a poolDestroy double free in OGRExpatRealloc in ogr/ogr_expat.cpp when the 10MB threshold is exceeded.

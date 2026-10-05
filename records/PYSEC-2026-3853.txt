@@ -1,0 +1,25 @@
+PYSEC-2026-3853 PyPI/jupyterhub — JupyterHub has Unauthenticated Denial of Service via Unbounded Username Logging on Failed Login
+package: jupyterhub
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.5.0 (ECOSYSTEM)
+aliases: CVE-2026-54338, GHSA-p43p-whwx-q52h
+references:
+  https://github.com/jupyterhub/jupyterhub/security/advisories/GHSA-p43p-whwx-q52h
+  https://nvd.nist.gov/vuln/detail/CVE-2026-54338
+  https://github.com/jupyterhub/jupyterhub/commit/d6dc595f84b7509969686da31d87d6d69e7fce0a
+  https://github.com/jupyterhub/jupyterhub
+  https://pypi.org/project/jupyterhub
+  https://github.com/advisories/GHSA-p43p-whwx-q52h
+
+### Impact
+
+Invalid input to login resulted in unbounded logging output. Only form-based Authenticators (the default PAM Authenticator, but not the more widely used OAuthenticator) are affected.
+
+### Patches
+
+Upgrade to 5.5.0.
+
+### Workarounds
+
+Use an Authenticator that doesn't use a login form, such as OAuthenticator.

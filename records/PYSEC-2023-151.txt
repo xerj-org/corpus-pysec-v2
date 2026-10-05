@@ -1,0 +1,15 @@
+PYSEC-2023-151 PyPI/langchain — An issue in langchain v.0.0.171 allows a remote attacker to execute arbitrary code via the via the a
+package: langchain
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.0.171 (ECOSYSTEM)
+aliases: CVE-2023-36281, GHSA-7gfq-f96f-g85j
+references:
+  https://github.com/hwchase17/langchain/issues/4394
+  https://github.com/hwchase17/langchain/issues/4394
+  https://github.com/hwchase17/langchain/issues/4394
+  https://aisec.today/LangChain-2e6244a313dd46139c5ef28cbcab9e55
+  https://aisec.today/LangChain-2e6244a313dd46139c5ef28cbcab9e55
+  https://github.com/advisories/GHSA-7gfq-f96f-g85j
+
+An issue in langchain v.0.0.171 allows a remote attacker to execute arbitrary code via the via the a json file to the load_prompt parameter.

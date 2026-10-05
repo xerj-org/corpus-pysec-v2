@@ -1,0 +1,11 @@
+PYSEC-2020-147 PyPI/tuf — TUF (aka The Update Framework) through 0.12.1 has Improper Verification of a Cryptographic Signature
+package: tuf
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.12.2 (ECOSYSTEM)
+aliases: CVE-2020-6174, GHSA-pwqf-9h7j-7mv8
+references:
+  https://github.com/theupdateframework/tuf/pull/974
+  https://github.com/advisories/GHSA-pwqf-9h7j-7mv8
+
+TUF (aka The Update Framework) through 0.12.1 has Improper Verification of a Cryptographic Signature.

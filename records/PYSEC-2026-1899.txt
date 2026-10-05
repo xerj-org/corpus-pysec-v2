@@ -1,0 +1,15 @@
+PYSEC-2026-1899 PyPI/salt — Salt has minion event bus authorization bypass vulnerability
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 3006.0, < 3006.12, >= 3007.0, < 3007.4 (ECOSYSTEM)
+aliases: CVE-2025-22236, GHSA-jh7c-xh74-h76f
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-22236
+  https://docs.saltproject.io/en/3006/topics/releases/3006.12.html
+  https://docs.saltproject.io/en/3007/topics/releases/3007.4.html
+  https://github.com/saltstack/salt
+  https://pypi.org/project/salt
+  https://github.com/advisories/GHSA-jh7c-xh74-h76f
+
+Minion event bus authorization bypass. An attacker with access to a minion key can craft a message which may be able to execute a job on other minions (>= 3007.0).

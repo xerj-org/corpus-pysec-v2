@@ -1,0 +1,15 @@
+PYSEC-2017-100 PyPI/cherrymusic — Cross-site scripting (XSS) vulnerability in Cherry Music before 0.36.0 allows remote authenticated u
+package: cherrymusic
+ecosystem: PyPI
+versions affected:
+  >= 0, < 62dec34a1ea0741400dd6b6c660d303dcd651e86 (GIT: https://github.com/devsnd/cherrymusic)
+  >= 0, < 0.36.0 (ECOSYSTEM)
+aliases: CVE-2015-8310, GHSA-4wcc-jv3p-prqw
+references:
+  https://github.com/devsnd/cherrymusic/issues/598
+  https://github.com/devsnd/cherrymusic/commit/62dec34a1ea0741400dd6b6c660d303dcd651e86
+  http://www.fomori.org/cherrymusic/Changes.html
+  http://www.securityfocus.com/bid/97148
+  https://github.com/advisories/GHSA-4wcc-jv3p-prqw
+
+Cross-site scripting (XSS) vulnerability in Cherry Music before 0.36.0 allows remote authenticated users to inject arbitrary web script or HTML via the playlistname field when creating a new playlist.

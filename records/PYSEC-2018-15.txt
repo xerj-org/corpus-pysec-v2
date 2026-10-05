@@ -1,0 +1,13 @@
+PYSEC-2018-15 PyPI/mayan-edms — An issue was discovered in Mayan EDMS before 3.0.3. The Tags app has XSS because tag label values ar
+package: mayan-edms
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.0.3 (ECOSYSTEM)
+aliases: CVE-2018-16407, GHSA-5h6m-9mvx-m6c5
+references:
+  https://gitlab.com/mayan-edms/mayan-edms/issues/496
+  https://gitlab.com/mayan-edms/mayan-edms/commit/076468a9225e4630a463c0bbceb8e5b805fe380c
+  https://gitlab.com/mayan-edms/mayan-edms/blob/master/HISTORY.rst
+  https://github.com/advisories/GHSA-5h6m-9mvx-m6c5
+
+An issue was discovered in Mayan EDMS before 3.0.3. The Tags app has XSS because tag label values are mishandled.

@@ -1,0 +1,13 @@
+PYSEC-2021-807 PyPI/tensorflow-gpu — TensorFlow is an open source platform for machine learning. In affected versions if `tf.image.resize
+package: tensorflow-gpu
+ecosystem: PyPI
+versions affected:
+  >= 0, < e5272d4204ff5b46136a1ef1204fc00597e21837 (GIT: https://github.com/tensorflow/tensorflow)
+  >= 0, < 2.4.4, >= 2.5.0, < 2.5.2, >= 2.6.0, < 2.6.1, >= 2.7.0rc0, < 2.7.0 (ECOSYSTEM)
+aliases: CVE-2021-41199, GHSA-5hx2-qx8j-qjqm
+references:
+  https://github.com/tensorflow/tensorflow/security/advisories/GHSA-5hx2-qx8j-qjqm
+  https://github.com/tensorflow/tensorflow/issues/46914
+  https://github.com/tensorflow/tensorflow/commit/e5272d4204ff5b46136a1ef1204fc00597e21837
+
+TensorFlow is an open source platform for machine learning. In affected versions if `tf.image.resize` is called with a large input argument then the TensorFlow process will crash due to a `CHECK`-failure caused by an overflow. The number of elements in the output tensor is too much for the `int64_t` type and the overflow is detected via a `CHECK` statement. This aborts the process. The fix will be included in TensorFlow 2.7.0. We will also cherrypick this commit on TensorFlow 2.6.1, TensorFlow 2.5.2, and TensorFlow 2.4.4, as these are also affected and still in supported range.

@@ -1,0 +1,16 @@
+PYSEC-2023-163 PyPI/numexpr — An issue in LanChain-ai Langchain v.0.0.245 allows a remote attacker to execute arbitrary code via t
+package: numexpr
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.8.5 (ECOSYSTEM)
+aliases: CVE-2023-39631, GHSA-f73w-4m7g-ch9x
+references:
+  https://github.com/pydata/numexpr/issues/442
+  https://github.com/pydata/numexpr/issues/442
+  https://github.com/pydata/numexpr/issues/442
+  https://github.com/langchain-ai/langchain/issues/8363
+  https://github.com/langchain-ai/langchain/issues/8363
+  https://github.com/langchain-ai/langchain/issues/8363
+  https://github.com/advisories/GHSA-f73w-4m7g-ch9x
+
+An issue in LanChain-ai Langchain v.0.0.245 allows a remote attacker to execute arbitrary code via the evaluate function in the numexpr library.

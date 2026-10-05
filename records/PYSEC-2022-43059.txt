@@ -1,0 +1,12 @@
+PYSEC-2022-43059 PyPI/aiohttp — AIOHTTP 3.8.1 can report a "ValueError: Invalid IPv6 URL" outcome, which can lead to a Denial of Ser
+package: aiohttp
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-33124, GHSA-rwqr-c348-m5wr
+references:
+  https://github.com/aio-libs/aiohttp/issues/6772
+  https://github.com/aio-libs/aiohttp/issues/6772
+  https://github.com/advisories/GHSA-rwqr-c348-m5wr
+
+AIOHTTP 3.8.1 can report a "ValueError: Invalid IPv6 URL" outcome, which can lead to a Denial of Service (DoS). NOTE: multiple third parties dispute this issue because there is no example of a context in which denial of service would occur, and many common contexts have exception handing in the calling application

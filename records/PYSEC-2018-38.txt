@@ -1,0 +1,13 @@
+PYSEC-2018-38 PyPI/ansible — Ansible before version 2.2.0 fails to properly sanitize fact variables sent from the Ansible control
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.2.0.0 (ECOSYSTEM)
+aliases: CVE-2016-8628, GHSA-jg4f-jqm5-4mgq
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2016-8628
+  https://access.redhat.com/errata/RHSA-2016:2778
+  http://www.securityfocus.com/bid/94109
+  https://github.com/advisories/GHSA-jg4f-jqm5-4mgq
+
+Ansible before version 2.2.0 fails to properly sanitize fact variables sent from the Ansible controller. An attacker with the ability to create special variables on the controller could execute arbitrary commands on Ansible clients as the user Ansible runs as.

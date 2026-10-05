@@ -1,0 +1,18 @@
+PYSEC-2012-40 PyPI/nova — The Nova scheduler in OpenStack Compute (Nova) Folsom (2012.2) and Essex (2012.1), when DifferentHos
+package: nova
+ecosystem: PyPI
+versions affected:
+  >= 0, < 034762e8060dcf0a11cb039b9d426b0d0bb1801d (GIT: https://github.com/openstack/nova)
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2012-3371, GHSA-xxgm-qpj5-4886
+references:
+  http://www.openwall.com/lists/oss-security/2012/07/11/13
+  https://bugs.launchpad.net/nova/+bug/1017795
+  http://www.ubuntu.com/usn/USN-1501-1
+  https://github.com/openstack/nova/commit/034762e8060dcf0a11cb039b9d426b0d0bb1801d
+  https://github.com/openstack/nova/commit/034762e8060dcf0a11cb039b9d426b0d0bb1801d
+  https://lists.launchpad.net/openstack/msg14452.html
+  http://www.securityfocus.com/bid/54388
+  https://github.com/advisories/GHSA-xxgm-qpj5-4886
+
+The Nova scheduler in OpenStack Compute (Nova) Folsom (2012.2) and Essex (2012.1), when DifferentHostFilter or SameHostFilter is enabled, allows remote authenticated users to cause a denial of service (excessive database lookup calls and server hang) via a request with many repeated IDs in the os:scheduler_hints section.

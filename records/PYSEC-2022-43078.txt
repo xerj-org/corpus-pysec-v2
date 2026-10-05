@@ -1,0 +1,13 @@
+PYSEC-2022-43078 PyPI/d8s-json — The d8s-json for python, as distributed on PyPI, included a potential code-execution backdoor insert
+package: d8s-json
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-38882
+references:
+  https://github.com/democritus-project/d8s-json/issues/9
+  https://github.com/democritus-project/d8s-json/issues/9
+  https://pypi.org/project/democritus-strings/
+  https://pypi.org/project/d8s-json/
+
+The d8s-json for python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. The backdoor is the democritus-strings package. The affected version is 0.1.0.

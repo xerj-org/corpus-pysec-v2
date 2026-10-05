@@ -1,0 +1,12 @@
+PYSEC-2018-83 PyPI/diffoscope — diffoscope before 77 writes to arbitrary locations on disk based on the contents of an untrusted arc
+package: diffoscope
+ecosystem: PyPI
+versions affected:
+  >= 0, < 77 (ECOSYSTEM)
+aliases: CVE-2017-0359, GHSA-8p5c-f328-9fvv
+references:
+  https://security-tracker.debian.org/tracker/CVE-2017-0359
+  https://bugs.debian.org/854723
+  https://github.com/advisories/GHSA-8p5c-f328-9fvv
+
+diffoscope before 77 writes to arbitrary locations on disk based on the contents of an untrusted archive.

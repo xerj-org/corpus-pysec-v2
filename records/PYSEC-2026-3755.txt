@@ -1,0 +1,11 @@
+PYSEC-2026-3755 PyPI/openssl-encrypt — openssl_encrypt versions before 1.4.0 silently skip JSON schema validation when the jsonschema libra
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.0 (ECOSYSTEM)
+aliases: CVE-2026-74875, GHSA-425g-fjhq-5h92
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-425g-fjhq-5h92
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-schema-validation-bypass
+
+openssl_encrypt versions before 1.4.0 silently skip JSON schema validation when the jsonschema library is not installed, allowing malformed metadata to be accepted. Attackers can remove the jsonschema package or supply unknown metadata format versions to bypass all schema checks and process malicious data.

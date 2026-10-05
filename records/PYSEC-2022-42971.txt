@@ -1,0 +1,16 @@
+PYSEC-2022-42971 PyPI/apache-airflow — In Apache Airflow versions prior to 2.4.2, there was an open redirect in the webserver's `/confirm` 
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.4.2 (ECOSYSTEM)
+aliases: CVE-2022-43985, GHSA-f9fq-78ch-4wmj
+references:
+  https://lists.apache.org/thread/m13y9s5kw92fw9l8j4qd85h0txp4kfcq
+  https://lists.apache.org/thread/m13y9s5kw92fw9l8j4qd85h0txp4kfcq
+  https://lists.apache.org/thread/m13y9s5kw92fw9l8j4qd85h0txp4kfcq
+  https://github.com/apache/airflow/pull/27143
+  https://github.com/apache/airflow/pull/27143
+  https://github.com/apache/airflow/pull/27143
+  https://github.com/advisories/GHSA-f9fq-78ch-4wmj
+
+In Apache Airflow versions prior to 2.4.2, there was an open redirect in the webserver's `/confirm` endpoint.

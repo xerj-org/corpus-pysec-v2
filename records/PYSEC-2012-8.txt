@@ -1,0 +1,14 @@
+PYSEC-2012-8 PyPI/keyring — Python Keyring 0.9.1 does not securely initialize the cipher when encrypting passwords for CryptedFi
+package: keyring
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.9.2 (ECOSYSTEM)
+aliases: CVE-2012-4571, GHSA-p3h7-3c45-qj4v
+references:
+  https://bugs.launchpad.net/ubuntu/+source/python-keyring/+bug/1004845
+  http://www.openwall.com/lists/oss-security/2012/10/31/8
+  http://pypi.python.org/pypi/keyring
+  http://www.ubuntu.com/usn/USN-1634-1
+  https://github.com/advisories/GHSA-p3h7-3c45-qj4v
+
+Python Keyring 0.9.1 does not securely initialize the cipher when encrypting passwords for CryptedFileKeyring files, which makes it easier for local users to obtain passwords via a brute-force attack.

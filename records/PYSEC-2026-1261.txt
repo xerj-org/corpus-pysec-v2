@@ -1,0 +1,13 @@
+PYSEC-2026-1261 PyPI/commondatamodel-objectmodel — Microsoft Common Data Model SDK Denial of Service Vulnerability
+package: commondatamodel-objectmodel
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.7.4 (ECOSYSTEM)
+aliases: CVE-2023-36566, GHSA-vm2m-7hpw-fpmq
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-36566
+  https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-36566
+  https://pypi.org/project/commondatamodel-objectmodel
+  https://github.com/advisories/GHSA-vm2m-7hpw-fpmq
+
+Microsoft Common Data Model SDK Denial of Service Vulnerability

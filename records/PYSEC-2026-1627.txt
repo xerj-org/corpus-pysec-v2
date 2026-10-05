@@ -1,0 +1,18 @@
+PYSEC-2026-1627 PyPI/mezzanine — Mezzanine allows attackers to bypass access control mechanisms
+package: mezzanine
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 6.0.0 (ECOSYSTEM)
+aliases: CVE-2024-25169, GHSA-qp56-82vp-xqgv
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-25169
+  https://github.com/shenhav12/CVE-2024-25169-Mezzanine-v6.0.0
+  https://github.com/stephenmcd/mezzanine
+  https://ibb.co/JKh4hmD
+  https://ibb.co/Pt9qd8t
+  https://ibb.co/hLLPTVp
+  https://ibb.co/rfrKj3r
+  https://pypi.org/project/mezzanine
+  https://github.com/advisories/GHSA-qp56-82vp-xqgv
+
+An issue in Mezzanine v6.0.0 allows attackers to bypass access control mechanisms in the admin panel via a crafted request.

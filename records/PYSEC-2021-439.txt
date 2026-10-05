@@ -1,0 +1,14 @@
+PYSEC-2021-439 PyPI/django — In Django 2.2 before 2.2.25, 3.1 before 3.1.14, and 3.2 before 3.2.10, HTTP requests for URLs with t
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 2.2, < 2.2.25, >= 3.1, < 3.1.14, >= 3.2, < 3.2.10 (ECOSYSTEM)
+aliases: CVE-2021-44420, GHSA-v6rh-hp5x-86rv
+references:
+  https://docs.djangoproject.com/en/3.2/releases/security/
+  https://www.openwall.com/lists/oss-security/2021/12/07/1
+  https://www.djangoproject.com/weblog/2021/dec/07/security-releases/
+  https://groups.google.com/forum/#!forum/django-announce
+  https://github.com/advisories/GHSA-v6rh-hp5x-86rv
+
+In Django 2.2 before 2.2.25, 3.1 before 3.1.14, and 3.2 before 3.2.10, HTTP requests for URLs with trailing newlines could bypass upstream access control based on URL paths.

@@ -1,0 +1,12 @@
+PYSEC-2020-93 PyPI/py-mini-racer — A heap overflow in Sqreen PyMiniRacer (aka Python Mini Racer) before 0.3.0 allows remote attackers t
+package: py-mini-racer
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.3.0 (ECOSYSTEM)
+aliases: CVE-2020-25489, GHSA-vwcg-7xqw-qcxw
+references:
+  https://blog.sqreen.com/vulnerability-disclosure-finding-a-vulnerability-in-sqreens-php-agent-and-how-we-fixed-it/
+  https://github.com/sqreen/PyMiniRacer/compare/v0.2.0...v0.3.0
+  https://github.com/advisories/GHSA-vwcg-7xqw-qcxw
+
+A heap overflow in Sqreen PyMiniRacer (aka Python Mini Racer) before 0.3.0 allows remote attackers to potentially exploit heap corruption.

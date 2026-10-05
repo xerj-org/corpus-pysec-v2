@@ -1,0 +1,15 @@
+PYSEC-2026-1900 PyPI/salt — Directory creation by malicious user in saltstack
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3005.5, >= 3006.0, < 3006.6 (ECOSYSTEM)
+aliases: CVE-2024-22231, GHSA-q27c-j6j9-53w3
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-22231
+  https://github.com/saltstack/salt/commit/e0cdb80b55123f4a024759ffcf2b3f0e0788e7ab
+  https://github.com/saltstack/salt
+  https://saltproject.io/security-announcements/2024-01-31-advisory
+  https://pypi.org/project/salt
+  https://github.com/advisories/GHSA-q27c-j6j9-53w3
+
+Syndic cache directory creation is vulnerable to a directory traversal attack in salt project which can lead a malicious attacker to create an arbitrary directory on a Salt master.

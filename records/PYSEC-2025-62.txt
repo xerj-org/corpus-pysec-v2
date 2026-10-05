@@ -1,0 +1,13 @@
+PYSEC-2025-62 PyPI/vllm — vLLM is a high-throughput and memory-efficient inference and serving engine for LLMs. Maliciously co
+package: vllm
+ecosystem: PyPI
+versions affected:
+  >= 0, < 432117cd1f59c76d97da2eaff55a7d758301dbc7 (GIT: https://github.com/python/cpython)
+  >= 0, < 0.7.2 (ECOSYSTEM)
+aliases: CVE-2025-25183, GHSA-rm76-4mrf-v9r8
+references:
+  https://github.com/vllm-project/vllm/security/advisories/GHSA-rm76-4mrf-v9r8
+  https://github.com/python/cpython/commit/432117cd1f59c76d97da2eaff55a7d758301dbc7
+  https://github.com/vllm-project/vllm/pull/12621
+
+vLLM is a high-throughput and memory-efficient inference and serving engine for LLMs. Maliciously constructed statements can lead to hash collisions, resulting in cache reuse, which can interfere with subsequent responses and cause unintended behavior. Prefix caching makes use of Python's built-in hash() function. As of Python 3.12, the behavior of hash(None) has changed to be a predictable constant value. This makes it more feasible that someone could try exploit hash collisions. The impact of a collision would be using cache that was generated using different content. Given knowledge of prompts in use and predictable hashing behavior, someone could intentionally populate the cache using a prompt known to collide with another prompt in use. This issue has been addressed in version 0.7.2 and all users are advised to upgrade. There are no known workarounds for this vulnerability.

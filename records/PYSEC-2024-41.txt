@@ -1,0 +1,13 @@
+PYSEC-2024-41 PyPI/diffoscope — diffoscope before 256 allows directory traversal via an embedded filename in a GPG file. Contents of
+package: diffoscope
+ecosystem: PyPI
+versions affected:
+  >= 0, < 256 (ECOSYSTEM)
+aliases: CVE-2024-25711, GHSA-33w6-hvmq-gh4x
+references:
+  https://salsa.debian.org/reproducible-builds/diffoscope/-/issues/361
+  https://salsa.debian.org/reproducible-builds/diffoscope/-/commit/dfed769904c27d66a14a5903823d9c8c5aae860e
+  https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/OUNBANAWD6TZH2NRRV4YUIAXEHLUJQ47/
+  https://github.com/advisories/GHSA-33w6-hvmq-gh4x
+
+diffoscope before 256 allows directory traversal via an embedded filename in a GPG file. Contents of any file, such as ../.ssh/id_rsa, may be disclosed to an attacker. This occurs because the value of the gpg --use-embedded-filenames option is trusted.

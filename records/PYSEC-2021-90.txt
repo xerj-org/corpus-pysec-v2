@@ -1,0 +1,13 @@
+PYSEC-2021-90 PyPI/flask-appbuilder — Flask-AppBuilder is a development framework, built on top of Flask. User enumeration in database aut
+package: flask-appbuilder
+ecosystem: PyPI
+versions affected:
+  >= 0, < 780bd0e8fbf2d36ada52edb769477e0a4edae580 (GIT: https://github.com/dpgaspar/Flask-AppBuilder)
+  >= 0, < 3.3.0 (ECOSYSTEM)
+aliases: CVE-2021-29621, GHSA-434h-p4gx-jm89
+references:
+  https://github.com/dpgaspar/Flask-AppBuilder/commit/780bd0e8fbf2d36ada52edb769477e0a4edae580
+  https://github.com/dpgaspar/Flask-AppBuilder/security/advisories/GHSA-434h-p4gx-jm89
+  https://pypi.org/project/Flask-AppBuilder/
+
+Flask-AppBuilder is a development framework, built on top of Flask. User enumeration in database authentication in Flask-AppBuilder <= 3.2.3. Allows for a non authenticated user to enumerate existing accounts by timing the response time from the server when you are logging in. Upgrade to version 3.3.0 or higher to resolve.

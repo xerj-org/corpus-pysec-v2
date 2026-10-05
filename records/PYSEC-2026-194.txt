@@ -1,0 +1,10 @@
+PYSEC-2026-194 PyPI/matrix-synapse — Synapse is an open source Matrix homeserver implementation. Prior to 1.152.1, in federated rooms, ma
+package: matrix-synapse
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.152.1 (ECOSYSTEM)
+aliases: CVE-2026-45076, GHSA-6qf2-7x63-mm6v
+references:
+  https://github.com/element-hq/synapse/security/advisories/GHSA-6qf2-7x63-mm6v
+
+Synapse is an open source Matrix homeserver implementation. Prior to 1.152.1, in federated rooms, malicious homeservers can craft room events in such a way that prevents Synapse from providing full history to paginating clients. Clients could therefore fail to display room history. This vulnerability is fixed in 1.152.1.

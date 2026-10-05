@@ -1,0 +1,11 @@
+PYSEC-2018-103 PyPI/ymlref — ymlref allows code injection.
+package: ymlref
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2018-20133, GHSA-8r8j-xvfj-36f9
+references:
+  https://github.com/dexter2206/ymlref/issues/2
+  https://github.com/advisories/GHSA-8r8j-xvfj-36f9
+
+ymlref allows code injection.

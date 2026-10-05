@@ -1,0 +1,16 @@
+PYSEC-2026-1450 PyPI/hnswlib — hnswlib Double Free vulnerability
+package: hnswlib
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.8.0 (ECOSYSTEM)
+aliases: CVE-2023-37365, GHSA-xwc8-rf6m-xr86
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-37365
+  https://github.com/nmslib/hnswlib/issues/467
+  https://github.com/nmslib/hnswlib/pull/484
+  https://github.com/nmslib/hnswlib/commit/f6d170ce0b41f9e75ace473b09df6e7872590757
+  https://github.com/nmslib/hnswlib
+  https://pypi.org/project/hnswlib
+  https://github.com/advisories/GHSA-xwc8-rf6m-xr86
+
+Hnswlib 0.7.0 has a double free in `init_index` when the M argument is a large integer.

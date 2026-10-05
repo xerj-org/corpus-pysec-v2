@@ -1,0 +1,12 @@
+PYSEC-2023-73 PyPI/redis — redis-7.0.10 was discovered to contain a segmentation violation.
+package: redis
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2023-31655
+references:
+  https://github.com/RedisLabs/redisraft/issues/608
+  https://github.com/RedisLabs/redisraft/issues/608
+  https://github.com/RedisLabs/redisraft/issues/608
+
+redis-7.0.10 was discovered to contain a segmentation violation.

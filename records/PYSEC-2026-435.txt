@@ -1,0 +1,92 @@
+PYSEC-2026-435 PyPI/open-webui — Open WebUI has an LDAP Empty Password Authentication Bypass
+package: open-webui
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.9.0 (ECOSYSTEM)
+aliases: CVE-2026-44551, GHSA-2r4p-jpmg-48f4
+references:
+  https://github.com/open-webui/open-webui/security/advisories/GHSA-2r4p-jpmg-48f4
+  https://nvd.nist.gov/vuln/detail/CVE-2026-44551
+  https://github.com/open-webui/open-webui
+  https://pypi.org/project/open-webui
+  https://github.com/advisories/GHSA-2r4p-jpmg-48f4
+
+# LDAP Empty Password Authentication Bypass
+
+## Affected Component
+
+ LDAP authentication endpoint:
+- `backend/open_webui/routers/auths.py` (lines 468-477, user bind with empty password)
+- `backend/open_webui/models/auths.py` (lines 58-60, `LdapForm` model)
+
+## Affected Versions
+
+Current main branch (commit `6fdd19bf1`) and likely all versions with LDAP authentication support.
+
+## Description
+
+ The LDAP authentication endpoint does not validate that the submitted password is non-empty before performing a Simple Bind against the LDAP server. Per RFC 4513 Section 5.1.2, a Simple Bind with a valid DN and an empty password constitutes an "unauthenticated simple authentication" — many LDAP servers (including OpenLDAP in default configuration and some Active Directory setups) return success (resultCode 0) for this operation.
+
+The `LdapForm` Pydantic model accepts `password: str` with no minimum length constraint, so an empty string passes validation. The subsequent `Connection.bind()` call succeeds on vulnerable LDAP servers, and the application issues a full session token for the target user.
+
+```python
+# models/auths.py:58-60 — no min_length on password
+class LdapForm(BaseModel):
+    user: str
+    password: str
+
+# auths.py:469-477 — empty password reaches LDAP bind
+connection_user = Connection(
+    server,
+    user_dn,
+    form_data.password,    # can be ""
+    auto_bind='NONE',
+    authentication='SIMPLE',
+)
+if not await asyncio.to_thread(connection_user.bind):
+    raise HTTPException(400, 'Authentication failed.')
+
+# If bind succeeds (which it does with empty password on many servers),
+# execution continues and a full session token is issued
+```
+
+## CVSS 3.1 Breakdown
+
+| Metric | Value | Rationale |
+|--------|-------|-----------|
+| Attack Vector | Network (N) | Exploited remotely via the LDAP login endpoint |
+| Attack Complexity | Low (L) | Single request with an empty password field |
+| Privileges Required | None (N) | No prior authentication needed |
+| User Interaction | None (N) | No victim interaction required |
+| Scope | Unchanged (U) | Impact within the application's authentication boundary |
+| Confidentiality | High (H) | Full access to victim's account data — chats, files, API keys, settings |
+| Integrity | High (H) | Can modify victim's data, settings, send messages as victim |
+| Availability | None (N) | No direct denial of service |
+
+## Attack Scenario
+
+1. LDAP authentication is enabled on the Open WebUI instance.
+2. The underlying LDAP server accepts unauthenticated simple binds (OpenLDAP default, some AD configs).
+3. Attacker sends:
+   ```
+   POST /api/v1/auths/ldap
+   {"user": "admin_username", "password": ""}
+   ```
+4. The app DN bind succeeds normally (line 366), finds the target user via LDAP search.
+5. The user bind (line 469-477) sends a Simple Bind with the target's DN and an empty password.
+6. The LDAP server returns success for the unauthenticated bind.
+7. `authenticate_user_by_email` (line 507) issues a full session token for the target user.
+8. Attacker has complete access to the victim's account.
+
+## Impact
+
+- Complete authentication bypass — any LDAP user account can be taken over without knowing the password
+- Includes admin accounts if they authenticate via LDAP
+- No rate limiting on the LDAP endpoint (unlike the password signin endpoint)
+- Zero interaction required from the victim
+ 
+## Preconditions
+
+- LDAP must be enabled (`ENABLE_LDAP=True`, disabled by default)
+ - The LDAP server must accept unauthenticated simple binds with empty passwords (OpenLDAP default behavior, configurable on AD)
+- Attacker must know a valid LDAP username

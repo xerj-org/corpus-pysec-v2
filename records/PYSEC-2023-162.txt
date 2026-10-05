@@ -1,0 +1,15 @@
+PYSEC-2023-162 PyPI/langchain — An issue in LanChain-ai Langchain v.0.0.245 allows a remote attacker to execute arbitrary code via t
+package: langchain
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.0.308 (ECOSYSTEM)
+aliases: CVE-2023-39631
+references:
+  https://github.com/pydata/numexpr/issues/442
+  https://github.com/pydata/numexpr/issues/442
+  https://github.com/pydata/numexpr/issues/442
+  https://github.com/langchain-ai/langchain/issues/8363
+  https://github.com/langchain-ai/langchain/issues/8363
+  https://github.com/langchain-ai/langchain/pull/11302
+
+An issue in LanChain-ai Langchain v.0.0.245 allows a remote attacker to execute arbitrary code via the evaluate function in the numexpr library.

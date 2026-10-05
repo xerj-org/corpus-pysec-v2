@@ -1,0 +1,20 @@
+PYSEC-2026-1152 PyPI/apache-airflow-providers-odbc — Apache Airflow ODBC Provider Argument Injection vulnerability
+package: apache-airflow-providers-odbc
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.0.0 (ECOSYSTEM)
+aliases: CVE-2023-34395, GHSA-9766-v29c-4vm7
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-34395
+  https://github.com/apache/airflow/pull/31713
+  https://github.com/apache/airflow/commit/2844dad1c762f5c7dd1271866d3661bf66657300
+  https://github.com/apache/airflow
+  https://lists.apache.org/thread/l26yykftzbhc9tgcph8cso88bc2lqwwd
+  https://pypi.org/project/apache-airflow-providers-odbc
+  https://github.com/advisories/GHSA-9766-v29c-4vm7
+
+Improper Neutralization of Argument Delimiters in a Command ('Argument Injection') vulnerability in Apache Software Foundation Apache Airflow ODBC Provider.
+In OdbcHook, A privilege escalation vulnerability exists in a system due to controllable ODBC driver parameters that allow the loading of arbitrary dynamic-link libraries, resulting in command execution.
+Starting version 4.0.0 driver can be set only from the hook constructor.
+This issue affects Apache Airflow ODBC Provider: before 4.0.0.
+

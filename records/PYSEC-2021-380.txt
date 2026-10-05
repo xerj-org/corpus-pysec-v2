@@ -1,0 +1,11 @@
+PYSEC-2021-380 PyPI/ops-cli — Ops CLI version 2.0.4 (and earlier) is affected by a Deserialization of Untrusted Data vulnerability
+package: ops-cli
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.0.5 (ECOSYSTEM)
+aliases: CVE-2021-40720, GHSA-x23q-4j9j-9cxw
+references:
+  https://helpx.adobe.com/security/products/ops_cli/apsb21-88.html
+  https://github.com/advisories/GHSA-x23q-4j9j-9cxw
+
+Ops CLI version 2.0.4 (and earlier) is affected by a Deserialization of Untrusted Data vulnerability to achieve arbitrary code execution when the checkout_repo function is called on a maliciously crafted file. An attacker can leverage this to execute arbitrary code on the victim machine.

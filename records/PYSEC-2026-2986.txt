@@ -1,0 +1,25 @@
+PYSEC-2026-2986 PyPI/pygeoapi — pygeoapi 0.23.x: Unauthenticated SSRF via OGC API - Processes Subscriber
+package: pygeoapi
+ecosystem: PyPI
+versions affected:
+  >= 0.23.0, < 0.23.3 (ECOSYSTEM)
+aliases: CVE-2026-42352, GHSA-jgvc-94c8-3chc
+references:
+  https://github.com/geopython/pygeoapi/security/advisories/GHSA-jgvc-94c8-3chc
+  https://nvd.nist.gov/vuln/detail/CVE-2026-42352
+  https://github.com/geopython/pygeoapi/commit/3a63f5b0cc6275e3ae0edb47726b13a43cdd90ef
+  https://github.com/geopython/pygeoapi
+  https://github.com/geopython/pygeoapi/releases/tag/0.23.3
+  https://pypi.org/project/pygeoapi
+  https://github.com/advisories/GHSA-jgvc-94c8-3chc
+
+### Impact
+OGC API - Process execution requests can use the `subscriber` object to requests to internal HTTP services.
+
+### Patches
+The issue has been patched in master branch and made available as part of the 0.23.3 release.  The patch disables any HTTP requests made to internal resources by default (unless explicitly defined in configuration by a new `allow_internal_requests` directive.
+
+The commit/fix can be found in [3a63f5b0cc6275e3ae0edb47726b13a43cdd90ef](https://github.com/geopython/pygeoapi/commit/3a63f5b0cc6275e3ae0edb47726b13a43cdd90ef).
+
+### Workarounds
+Users can update existing applications by disabling process based resources in their pygeoapi config, until 0.23.3 can be installed and deployed.

@@ -1,0 +1,12 @@
+PYSEC-2013-34 PyPI/graphite-web — Graphite 0.9.5 through 0.9.10 uses the pickle Python module unsafely, which allows remote attackers 
+package: graphite-web
+ecosystem: PyPI
+versions affected:
+  >= 0.9.5, < 0.9.11 (ECOSYSTEM)
+aliases: CVE-2013-5942, GHSA-ch3j-w953-hfcm
+references:
+  https://github.com/graphite-project/graphite-web/blob/master/docs/releases/0_9_11.rst
+  http://secunia.com/advisories/54556
+  https://github.com/advisories/GHSA-ch3j-w953-hfcm
+
+Graphite 0.9.5 through 0.9.10 uses the pickle Python module unsafely, which allows remote attackers to execute arbitrary code via a crafted serialized object, related to (1) remote_storage.py, (2) storage.py, (3) render/datalib.py, and (4) whitelist/views.py, a different vulnerability than CVE-2013-5093.

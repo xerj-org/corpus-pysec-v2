@@ -1,0 +1,10 @@
+PYSEC-2025-114 PyPI/fprime — A template injection vulnerability in the Dashboard of NASA Fprime v3.4.3 allows attackers to execut
+package: fprime
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 3.4.3 (ECOSYSTEM)
+aliases: CVE-2024-55028
+references:
+  https://visionspace.com/remote-code-execution-and-critical-vulnerabilities-in-nasa-fprime-v3-4-3/
+
+A template injection vulnerability in the Dashboard of NASA Fprime v3.4.3 allows attackers to execute arbitrary code via uploading a crafted Vue file.

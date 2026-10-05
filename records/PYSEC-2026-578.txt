@@ -1,0 +1,18 @@
+PYSEC-2026-578 PyPI/bramin — Malicious code in bramin (PyPI)
+package: bramin
+ecosystem: PyPI
+versions affected:
+  0.0.2, 0.0.3, 0.0.4
+aliases: MAL-2026-5280
+references:
+  https://inspector.pypi.io/project/bramin/0.0.4/packages/99/5c/9aeee04e102fb785bb0933afd1275808b870df51a37e7dbc3f8f4fa8362a/bramin-0.0.4-py3-none-any.whl//bramin-setup.pth
+  https://www.endorlabs.com/learn/shai-hulud-hades-wave-hits-six-pypi-bioinformatics-packages
+  https://www.stepsecurity.io/blog/the-hades-campaign-pypi-packages
+
+Part of the "Hades" wave of the Shai-Hulud supply-chain campaign. On 2026-06-08,
+malicious phantom releases of bramin were published to PyPI using stolen
+credentials. The package executes a bundled JavaScript payload (via the Bun
+runtime) on import that harvests and exfiltrates credentials and attempts
+self-propagation. This entry is a summary; behavior may not be fully
+characterized here. See the linked references for detailed analysis and
+indicators of compromise.

@@ -1,0 +1,11 @@
+PYSEC-2020-174 PyPI/postfix-mta-sts-resolver — In postfix-mta-sts-resolver before 0.5.1, All users can receive incorrect response from daemon under
+package: postfix-mta-sts-resolver
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.5.1 (ECOSYSTEM)
+aliases: CVE-2019-16791, GHSA-h92m-42h4-82f6
+references:
+  https://github.com/Snawoot/postfix-mta-sts-resolver/security/advisories/GHSA-h92m-42h4-82f6
+  https://gist.github.com/Snawoot/b9da85d6b26dea5460673b29df1adc6b
+
+In postfix-mta-sts-resolver before 0.5.1, All users can receive incorrect response from daemon under rare conditions, rendering downgrade of effective STS policy.

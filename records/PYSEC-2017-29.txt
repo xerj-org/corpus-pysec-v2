@@ -1,0 +1,15 @@
+PYSEC-2017-29 PyPI/salt — modules/serverdensity_device.py in SaltStack before 2014.7.4 does not properly handle files in /tmp.
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0, < e11298d7155e9982749483ca5538e46090caef9c (GIT: https://github.com/saltstack/salt)
+  >= 0, < 2014.7.4 (ECOSYSTEM)
+aliases: CVE-2015-1838, GHSA-92pw-mff9-jqgm
+references:
+  https://github.com/saltstack/salt/commit/e11298d7155e9982749483ca5538e46090caef9c
+  https://docs.saltstack.com/en/latest/topics/releases/2014.7.4.html
+  https://bugzilla.redhat.com/show_bug.cgi?id=1212784
+  http://lists.fedoraproject.org/pipermail/package-announce/2016-January/175568.html
+  https://github.com/advisories/GHSA-92pw-mff9-jqgm
+
+modules/serverdensity_device.py in SaltStack before 2014.7.4 does not properly handle files in /tmp.

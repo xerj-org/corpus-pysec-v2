@@ -1,0 +1,11 @@
+PYSEC-2021-39 PyPI/pillow — An issue was discovered in Pillow before 8.1.1. There is an out-of-bounds read in SGIRleDecode.c.
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 8.1.1 (ECOSYSTEM)
+aliases: CVE-2021-25293, GHSA-p43w-g3c5-g5mq
+references:
+  https://pillow.readthedocs.io/en/stable/releasenotes/8.1.1.html
+  https://github.com/advisories/GHSA-p43w-g3c5-g5mq
+
+An issue was discovered in Pillow before 8.1.1. There is an out-of-bounds read in SGIRleDecode.c.

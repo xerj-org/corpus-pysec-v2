@@ -1,0 +1,14 @@
+PYSEC-2020-52 PyPI/jupyterhub-systemdspawner — jupyterhub-systemdspawner enables JupyterHub to spawn single-user notebook servers using systemd. In
+package: jupyterhub-systemdspawner
+ecosystem: PyPI
+versions affected:
+  >= 0, < a4d08fd2ade1cfd0ef2c29dc221e649345f23580 (GIT: https://github.com/jupyterhub/systemdspawner)
+  >= 0, < 0.15.0 (ECOSYSTEM)
+aliases: CVE-2020-26261, GHSA-cg54-gpgr-4rm6
+references:
+  https://github.com/jupyterhub/systemdspawner/security/advisories/GHSA-cg54-gpgr-4rm6
+  https://github.com/jupyterhub/systemdspawner/commit/a4d08fd2ade1cfd0ef2c29dc221e649345f23580
+  https://pypi.org/project/jupyterhub-systemdspawner/
+  https://github.com/jupyterhub/systemdspawner/blob/master/CHANGELOG.md#v015
+
+jupyterhub-systemdspawner enables JupyterHub to spawn single-user notebook servers using systemd. In jupyterhub-systemdspawner before version 0.15 user API tokens issued to single-user servers are specified in the environment of systemd units. These tokens are incorrectly accessible to all users. In particular, the-littlest-jupyterhub is affected, which uses systemdspawner by default. This is patched in jupyterhub-systemdspawner v0.15

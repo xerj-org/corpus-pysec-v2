@@ -1,0 +1,10 @@
+PYSEC-2026-188 PyPI/authlib — Authlib is a Python library which builds OAuth and OpenID Connect servers. Prior to 1.6.12 and 1.7.1
+package: authlib
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.6.12 (ECOSYSTEM)
+aliases: CVE-2026-44681, GHSA-r95x-qfjj-fjj2
+references:
+  https://github.com/authlib/authlib/security/advisories/GHSA-r95x-qfjj-fjj2
+
+Authlib is a Python library which builds OAuth and OpenID Connect servers. Prior to 1.6.12 and 1.7.1, an unauthenticated open redirect in Authlib's OpenIDImplicitGrant and OpenIDHybridGrant authorization endpoint lets a remote attacker cause the authorization server to issue an HTTP 302 to an attacker-chosen URL by submitting an authorization request that omits the openid scope. This vulnerability is fixed in 1.6.12 and 1.7.1.

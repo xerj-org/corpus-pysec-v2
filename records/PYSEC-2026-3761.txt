@@ -1,0 +1,11 @@
+PYSEC-2026-3761 PyPI/openssl-encrypt — openssl_encrypt versions before 1.4.0 contain a path traversal vulnerability in the _is_safe_path me
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.0 (ECOSYSTEM)
+aliases: CVE-2026-74884, GHSA-8jpj-w975-rwv5
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-8jpj-w975-rwv5
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-path-traversal-via-plugin-id
+
+openssl_encrypt versions before 1.4.0 contain a path traversal vulnerability in the _is_safe_path method where the plugin_id parameter is not sanitized before constructing the plugin config directory path. Attackers can declare a malicious plugin_id containing path traversal sequences like '../' to access arbitrary directories outside the intended plugin directory.

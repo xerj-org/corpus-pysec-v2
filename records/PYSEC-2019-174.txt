@@ -1,0 +1,13 @@
+PYSEC-2019-174 PyPI/django-crm — Multiple CSRF issues exist in MicroPyramid Django CRM 0.2.1 via /change-password-by-admin/, /api/set
+package: django-crm
+ecosystem: PyPI
+versions affected:
+  >= 0.2.1 (ECOSYSTEM)
+aliases: CVE-2019-11457, GHSA-pg2f-r7pc-6fxx
+references:
+  https://www.netsparker.com/blog/web-security/
+  http://packetstormsecurity.com/files/154219/Django-CRM-0.2.1-Cross-Site-Request-Forgery.html
+  http://seclists.org/fulldisclosure/2019/Aug/30
+  https://github.com/advisories/GHSA-pg2f-r7pc-6fxx
+
+Multiple CSRF issues exist in MicroPyramid Django CRM 0.2.1 via /change-password-by-admin/, /api/settings/add/, /cases/create/, /change-password-by-admin/, /comment/add/, /documents/1/view/, /documents/create/, /opportunities/create/, and /login/.

@@ -1,0 +1,15 @@
+PYSEC-2019-41 PyPI/psutil — psutil (aka python-psutil) through 5.6.5 can have a double free. This occurs because of refcount mis
+package: psutil
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.6.6 (ECOSYSTEM)
+aliases: CVE-2019-18874, GHSA-qfc5-mcwq-26q8
+references:
+  https://github.com/giampaolo/psutil/pull/1616
+  https://lists.debian.org/debian-lts-announce/2019/11/msg00018.html
+  https://usn.ubuntu.com/4204-1/
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/2P7QI7MOTZTFXQYU23CP3RAWXCERMOAS/
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/OLETTJYZL2SMBUI4Q2NGBMGPDPP54SRG/
+  https://github.com/advisories/GHSA-qfc5-mcwq-26q8
+
+psutil (aka python-psutil) through 5.6.5 can have a double free. This occurs because of refcount mishandling within a while or for loop that converts system data into a Python object.

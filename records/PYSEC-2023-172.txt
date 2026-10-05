@@ -1,0 +1,12 @@
+PYSEC-2023-172 PyPI/hana-ml — The Create Single Payment application of SAP S/4HANA - versions 100, 101, 102, 103, 104, 105, 106, 1
+package: hana-ml
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2023-41369
+references:
+  https://www.sap.com/documents/2022/02/fa865ea4-167e-0010-bca6-c68f7e60039b.html
+  https://me.sap.com/notes/3369680
+
+The Create Single Payment application of SAP S/4HANA - versions 100, 101, 102, 103, 104, 105, 106, 107, 108, allows an attacker to upload the XML file as an attachment. When clicked on the XML file in the attachment section, the file gets opened in the browser to cause the entity loops to slow down the browser.
+

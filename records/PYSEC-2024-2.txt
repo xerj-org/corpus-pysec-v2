@@ -1,0 +1,13 @@
+PYSEC-2024-2 PyPI/appwrite — In Appwrite CLI before 3.0.0, when using the login command, the credentials of the Appwrite user are
+package: appwrite
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.0.0 (ECOSYSTEM)
+aliases: CVE-2023-50974, GHSA-g777-crp9-m27g
+references:
+  https://gist.github.com/SkypLabs/72ee00ecfa7d1a3494e2d69a24279c1d
+  https://gist.github.com/SkypLabs/72ee00ecfa7d1a3494e2d69a24279c1d
+  https://appwrite.io/docs/tooling/command-line/installation
+  https://github.com/advisories/GHSA-g777-crp9-m27g
+
+In Appwrite CLI before 3.0.0, when using the login command, the credentials of the Appwrite user are stored in a ~/.appwrite/prefs.json file with 0644 as UNIX permissions. Any user of the local system can access those credentials.

@@ -1,0 +1,11 @@
+PYSEC-2023-175 PyPI/pillow — Pillow versions before v10.0.1 bundled libwebp binaries in wheels that are vulnerable to CVE-2023-51
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 10.0.1 (ECOSYSTEM)
+references:
+  https://github.com/python-pillow/Pillow/blob/main/CHANGES.rst#1001-2023-09-15
+  https://nvd.nist.gov/vuln/detail/CVE-2023-5129
+  https://nvd.nist.gov/vuln/detail/CVE-2023-4863
+
+Pillow versions before v10.0.1 bundled libwebp binaries in wheels that are vulnerable to CVE-2023-5129 (previously CVE-2023-4863). Pillow v10.0.1 upgrades the bundled libwebp binary to v1.3.2.

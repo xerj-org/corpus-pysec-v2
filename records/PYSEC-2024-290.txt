@@ -1,0 +1,10 @@
+PYSEC-2024-290 PyPI/openslides — OpenSlides 4.0.15 verifies passwords by comparing password hashes using a function with content-depe
+package: openslides
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 4.0.15 (ECOSYSTEM)
+aliases: CVE-2024-22893
+references:
+  https://gist.github.com/mdickopp/10e4a4ba3d7ded8315a1613ee7f2541e
+
+OpenSlides 4.0.15 verifies passwords by comparing password hashes using a function with content-dependent runtime. This can allow attackers to obtain information about the password hash using a timing attack.

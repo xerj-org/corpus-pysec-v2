@@ -1,0 +1,14 @@
+PYSEC-2022-191 PyPI/django — A SQL injection issue was discovered in QuerySet.explain() in Django 2.2 before 2.2.28, 3.2 before 3
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 4.0, < 4.0.4, >= 3.2, < 3.2.13, >= 2.2, < 2.2.28 (ECOSYSTEM)
+aliases: CVE-2022-28347, GHSA-w24h-v9qh-8gxj
+references:
+  http://www.openwall.com/lists/oss-security/2022/04/11/1
+  https://docs.djangoproject.com/en/4.0/releases/security/
+  https://www.djangoproject.com/weblog/2022/apr/11/security-releases/
+  https://groups.google.com/forum/#!forum/django-announce
+  https://github.com/advisories/GHSA-w24h-v9qh-8gxj
+
+A SQL injection issue was discovered in QuerySet.explain() in Django 2.2 before 2.2.28, 3.2 before 3.2.13, and 4.0 before 4.0.4. This occurs by passing a crafted dictionary (with dictionary expansion) as the **options argument, and placing the injection payload in an option name.

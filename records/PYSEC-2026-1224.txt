@@ -1,0 +1,15 @@
+PYSEC-2026-1224 PyPI/boltz — Boltz contains an insecure deserialization vulnerability in its molecule loading functionality
+package: boltz
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 2.0.0 (ECOSYSTEM)
+aliases: CVE-2025-70560, GHSA-fjm6-8xp2-4fwc
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-70560
+  https://github.com/jwohlwend/boltz/issues/600
+  https://github.com/jwohlwend/boltz
+  https://github.com/jwohlwend/boltz/blob/cb04aeccdd480fd4db707f0bbafde538397fa2ac/src/boltz/data/mol.py#L80
+  https://pypi.org/project/boltz
+  https://github.com/advisories/GHSA-fjm6-8xp2-4fwc
+
+Boltz 2.0.0 contains an insecure deserialization vulnerability in its molecule loading functionality. The application uses Python pickle to deserialize molecule data files without validation. An attacker with the ability to place a malicious pickle file in a directory processed by boltz can achieve arbitrary code execution when the file is loaded.

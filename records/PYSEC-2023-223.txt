@@ -1,0 +1,12 @@
+PYSEC-2023-223 PyPI/transmute-core — Unsafe YAML deserialization in yaml.Loader in transmute-core before 1.13.5 allows attackers to execu
+package: transmute-core
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.13.5 (ECOSYSTEM)
+aliases: CVE-2023-47204, GHSA-w9cp-3x79-2p8p
+references:
+  https://github.com/toumorokoshi/transmute-core/pull/58
+  https://github.com/toumorokoshi/transmute-core/releases/tag/v1.13.5
+  https://github.com/advisories/GHSA-w9cp-3x79-2p8p
+
+Unsafe YAML deserialization in yaml.Loader in transmute-core before 1.13.5 allows attackers to execute arbitrary Python code.

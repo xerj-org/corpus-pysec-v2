@@ -1,0 +1,14 @@
+PYSEC-2014-32 PyPI/plone — Cross-site scripting (XSS) vulnerability in kssdevel.py in Plone before 4.2.3 and 4.3 before beta 1 
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.2.3, >= 4.3a0, < 4.3b1 (ECOSYSTEM)
+aliases: CVE-2012-5490, GHSA-q46g-v7r4-9vhr
+references:
+  https://plone.org/products/plone-hotfix/releases/20121106
+  https://github.com/plone/Products.CMFPlone/blob/4.2.3/docs/CHANGES.txt
+  http://www.openwall.com/lists/oss-security/2012/11/10/1
+  https://plone.org/products/plone/security/advisories/20121106/06
+  https://github.com/advisories/GHSA-q46g-v7r4-9vhr
+
+Cross-site scripting (XSS) vulnerability in kssdevel.py in Plone before 4.2.3 and 4.3 before beta 1 allows remote attackers to inject arbitrary web script or HTML via unspecified vectors.

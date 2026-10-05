@@ -1,0 +1,15 @@
+PYSEC-2024-133 PyPI/paddlepaddle — OOB access in paddle.mode in PaddlePaddle before 2.6.0. This flaw can cause a runtime crash and a de
+package: paddlepaddle
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.6.0 (ECOSYSTEM)
+aliases: CVE-2023-38678, GHSA-mr78-v55p-7777
+references:
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-010.md
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-010.md
+  https://github.com/advisories/GHSA-mr78-v55p-7777
+
+OOB access in paddle.mode in PaddlePaddle before 2.6.0. This flaw can cause a runtime crash and a denial of service.
+
+
+

@@ -1,0 +1,15 @@
+PYSEC-2022-43142 PyPI/octoprint — Unverified Password Change in GitHub repository octoprint/octoprint prior to 1.8.3.
+package: octoprint
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1453076ee3e47fcab2dc73664ec2d61d3ef7fc4f (GIT: https://github.com/octoprint/octoprint)
+  >= 0, < 1.8.3 (ECOSYSTEM)
+aliases: CVE-2022-2930, GHSA-39gf-864w-pxw4
+references:
+  https://huntr.dev/bounties/da6745e4-7bcc-4e9a-9e96-0709ec9f2477
+  https://huntr.dev/bounties/da6745e4-7bcc-4e9a-9e96-0709ec9f2477
+  https://huntr.dev/bounties/da6745e4-7bcc-4e9a-9e96-0709ec9f2477
+  https://github.com/octoprint/octoprint/commit/1453076ee3e47fcab2dc73664ec2d61d3ef7fc4f
+  https://github.com/advisories/GHSA-39gf-864w-pxw4
+
+Unverified Password Change in GitHub repository octoprint/octoprint prior to 1.8.3.

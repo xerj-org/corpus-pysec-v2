@@ -1,0 +1,13 @@
+PYSEC-2022-272 PyPI/rdiffweb — Weak Password Requirements in GitHub repository ikus060/rdiffweb prior to 2.4.2.
+package: rdiffweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < 233befc33bdc45d4838c773d5aed4408720504c5 (GIT: https://github.com/ikus060/rdiffweb)
+  >= 0, < 2.4.2 (ECOSYSTEM)
+aliases: CVE-2022-3179, GHSA-mp5p-g2jv-r8qw
+references:
+  https://github.com/ikus060/rdiffweb/commit/233befc33bdc45d4838c773d5aed4408720504c5
+  https://huntr.dev/bounties/58eae29e-3619-449d-9bba-fdcbabcba5fe
+  https://github.com/advisories/GHSA-mp5p-g2jv-r8qw
+
+Weak Password Requirements in GitHub repository ikus060/rdiffweb prior to 2.4.2.

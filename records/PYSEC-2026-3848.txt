@@ -1,0 +1,72 @@
+PYSEC-2026-3848 PyPI/httpx2 — HTTPX2: Multipart part header injection via unvalidated file Content-Type and custom headers
+package: httpx2
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.11.0 (ECOSYSTEM)
+aliases: CVE-2026-84379, GHSA-h4x7-gw46-3wm6
+references:
+  https://github.com/pydantic/httpx2/security/advisories/GHSA-h4x7-gw46-3wm6
+  https://nvd.nist.gov/vuln/detail/CVE-2026-84379
+  https://github.com/pydantic/httpx2/pull/1142
+  https://github.com/pydantic/httpx2/commit/de96d810ee4e309d118982fe7084a46a2bcd600d
+  https://github.com/pydantic/httpx2
+  https://github.com/pydantic/httpx2/releases/tag/v2.11.0
+  https://pypi.org/project/httpx2
+  https://github.com/advisories/GHSA-h4x7-gw46-3wm6
+
+### Summary
+
+HTTPX2 serializes the per-file `Content-Type` and custom headers supplied through the `files=` tuple API directly into the `multipart/form-data` body without validating custom header names or values. An attacker who can influence upload metadata passed to HTTPX2 can use CR or LF characters to terminate a multipart part header and inject additional part headers or end the part header block early.
+
+### Details
+
+The three-element file tuple accepts `(filename, content, content_type)`, and the four-element form accepts `(filename, content, content_type, headers)`. `FileField.render_headers()` interpolates the supplied header names and values between CRLF delimiters without validating them.
+
+For example:
+
+```python
+import httpx2
+
+request = httpx2.Request(
+    "POST",
+    "https://example.com/upload",
+    headers={"Content-Type": "multipart/form-data; boundary=BOUNDARY"},
+    files={
+        "file": (
+            "safe.txt",
+            b"payload",
+            "text/plain\r\nX-Injected: true",
+        )
+    },
+)
+
+print(request.read().decode())
+```
+
+The generated body contains an attacker-injected part header:
+
+```text
+--BOUNDARY
+Content-Disposition: form-data; name="file"; filename="safe.txt"
+Content-Type: text/plain
+X-Injected: true
+
+payload
+--BOUNDARY--
+```
+
+The same issue affects names and values in the custom header mapping from the four-element tuple.
+
+Field names and filenames are serialized through a separate escaping path and do not permit CRLF header injection.
+
+### Impact
+
+Applications are affected when they pass attacker-controlled upload metadata into the per-file `content_type` or custom `headers` arguments. The receiving server interprets injected lines as genuine multipart part headers. Depending on how that server validates and processes uploads, this can alter part semantics or bypass checks based on part headers.
+
+This does not split the outer HTTP request: the injected headers are contained within the multipart body. The concrete security impact therefore depends on the downstream multipart parser and application behavior.
+
+### Mitigation
+
+Upgrade to HTTPX2 `2.11.0` or later. Patched versions reject forbidden control characters in multipart part header names and values and raise `ValueError` before serializing the request.
+
+If upgrading is not immediately possible, applications should validate custom multipart header names as HTTP field-name tokens. They should reject NUL, CR, LF, other C0 controls except horizontal tab, and DEL in per-file content types and custom header values before passing them to HTTPX2.

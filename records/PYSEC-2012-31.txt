@@ -1,0 +1,14 @@
+PYSEC-2012-31 PyPI/golismero — libs/updater.py in GoLismero 0.6.3, and other versions before Git revision 2b3bb43d6867, as used in 
+package: golismero
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2012-0054, GHSA-vwxc-3cfr-37jq
+references:
+  http://www.openwall.com/lists/oss-security/2012/01/17/7
+  http://www.openwall.com/lists/oss-security/2012/01/17/10
+  http://www.osvdb.org/78472
+  http://code.google.com/p/golismero/source/detail?r=2b3bb43d68676efd687361f7de29380189031ab8
+  https://github.com/advisories/GHSA-vwxc-3cfr-37jq
+
+libs/updater.py in GoLismero 0.6.3, and other versions before Git revision 2b3bb43d6867, as used in backtrack and possibly other products, allows local users to overwrite arbitrary files via a symlink attack on GoLismero-controlled files, as demonstrated using Admin/changes.dat.

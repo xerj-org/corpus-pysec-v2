@@ -1,0 +1,18 @@
+PYSEC-2026-585 PyPI/spateo-release — Malicious code in spateo-release (PyPI)
+package: spateo-release
+ecosystem: PyPI
+versions affected:
+  1.1.2
+aliases: MAL-2026-5278
+references:
+  https://inspector.pypi.io/project/spateo-release/1.1.2/packages/02/9f/3798519d4af1c85f17a2e1d50e22a00341f63fe53e314a68f960f35e5b75/spateo_release-1.1.2-py3-none-any.whl//spateo_release-setup.pth
+  https://www.endorlabs.com/learn/shai-hulud-hades-wave-hits-six-pypi-bioinformatics-packages
+  https://www.stepsecurity.io/blog/the-hades-campaign-pypi-packages
+
+Part of the "Hades" wave of the Shai-Hulud supply-chain campaign. On 2026-06-08,
+malicious phantom releases of spateo-release were published to PyPI using stolen
+credentials. The package executes a bundled JavaScript payload (via the Bun
+runtime) on import that harvests and exfiltrates credentials and attempts
+self-propagation. This entry is a summary; behavior may not be fully
+characterized here. See the linked references for detailed analysis and
+indicators of compromise.

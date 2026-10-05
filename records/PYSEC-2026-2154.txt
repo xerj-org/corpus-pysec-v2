@@ -1,0 +1,18 @@
+PYSEC-2026-2154 PyPI/gdal — A vulnerability was identified in OSGeo gdal up to 3.13.0dev-4. This issue affects the function SWne
+package: gdal
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.13.0 (ECOSYSTEM)
+aliases: CVE-2026-8086
+references:
+  https://github.com/OSGeo/gdal/
+  https://github.com/OSGeo/gdal/releases/tag/v3.12.4RC1
+  https://vuldb.com/vuln/361839
+  https://vuldb.com/vuln/361839/cti
+  https://github.com/OSGeo/gdal/commit/9491e794f1757f08063ea2f7a274ad2994afa636
+  https://github.com/OSGeo/gdal/issues/14356
+  https://github.com/OSGeo/gdal/pull/14361
+  https://github.com/biniamf/pocs/tree/main/gdal-swinqdims_bof
+  https://vuldb.com/submit/808038
+
+A vulnerability was identified in OSGeo gdal up to 3.13.0dev-4. This issue affects the function SWnentries of the file frmts/hdf4/hdf-eos/SWapi.c. Such manipulation of the argument DimensionName leads to heap-based buffer overflow. The attack must be carried out locally. The exploit is publicly available and might be used. Upgrading to version 3.12.4RC1 is capable of addressing this issue. The name of the patch is 9491e794f1757f08063ea2f7a274ad2994afa636. It is advisable to upgrade the affected component.

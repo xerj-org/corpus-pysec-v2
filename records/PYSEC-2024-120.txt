@@ -1,0 +1,11 @@
+PYSEC-2024-120 PyPI/pyassimp — An issue in assimp v.5.4.3 allows a local attacker to execute arbitrary code via the CallbackToLogRe
+package: pyassimp
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2024-48423
+references:
+  https://github.com/assimp/assimp/issues/5788
+  https://github.com/assimp/assimp/issues/5788
+
+An issue in assimp v.5.4.3 allows a local attacker to execute arbitrary code via the CallbackToLogRedirector function within the Assimp library.

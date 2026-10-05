@@ -1,0 +1,17 @@
+PYSEC-2020-173 PyPI/pip — The pip package before 19.2 for Python allows Directory Traversal when a URL is given in an install 
+package: pip
+ecosystem: PyPI
+versions affected:
+  >= 0, < a4c735b14a62f9cb864533808ac63936704f2ace (GIT: https://github.com/gzpan123/pip)
+  >= 0, < 19.2 (ECOSYSTEM)
+aliases: CVE-2019-20916, GHSA-gpvv-69j7-gwj8
+references:
+  https://github.com/pypa/pip/issues/6413
+  https://github.com/gzpan123/pip/commit/a4c735b14a62f9cb864533808ac63936704f2ace
+  https://github.com/pypa/pip/compare/19.1.1...19.2
+  https://lists.debian.org/debian-lts-announce/2020/09/msg00010.html
+  http://lists.opensuse.org/opensuse-security-announce/2020-10/msg00005.html
+  http://lists.opensuse.org/opensuse-security-announce/2020-10/msg00010.html
+  https://github.com/advisories/GHSA-gpvv-69j7-gwj8
+
+The pip package before 19.2 for Python allows Directory Traversal when a URL is given in an install command, because a Content-Disposition header can have ../ in a filename, as demonstrated by overwriting the /root/.ssh/authorized_keys file. This occurs in _download_http_url in _internal/download.py.

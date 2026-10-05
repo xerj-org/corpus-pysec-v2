@@ -1,0 +1,11 @@
+PYSEC-2026-3961 PyPI/openssl-encrypt — openssl_encrypt versions before 1.4.9 fail to properly validate key derivation function costs in cra
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.9 (ECOSYSTEM)
+aliases: CVE-2026-81699, GHSA-phmr-p567-q5g6
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-phmr-p567-q5g6
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-1.4.9-denial-of-service-via-unbounded-kdf-cost
+
+openssl_encrypt versions before 1.4.9 fail to properly validate key derivation function costs in crafted files, allowing attackers to trigger unbounded memory and CPU exhaustion during pre-authentication processing. Attackers can supply malicious files with excessive KDF parameters to exhaust system resources and crash or wedge the process before password verification occurs.

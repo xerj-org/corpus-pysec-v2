@@ -1,0 +1,14 @@
+PYSEC-2026-2190 PyPI/kafka-python — kafka-python prior to 2.3.2 contains a denial-of-service vulnerability in the protocol parser that a
+package: kafka-python
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.3.2 (ECOSYSTEM)
+aliases: CVE-2026-10142, GHSA-m3px-q5gj-j9x7
+references:
+  https://github.com/dpkp/kafka-python/commit/6e4831444f972d169cdd11f5c8d50333cea3f19b
+  https://github.com/dpkp/kafka-python/pull/3019
+  https://github.com/dpkp/kafka-python/pull/3026
+  https://www.vulncheck.com/advisories/kafka-python-prior-to-denial-of-service-via-protocol-parser-frame-length
+  https://github.com/advisories/GHSA-m3px-q5gj-j9x7
+
+kafka-python prior to 2.3.2 contains a denial-of-service vulnerability in the protocol parser that allows a malicious broker or machine-in-the-middle attacker to exhaust memory or hang connections by sending a crafted 4-byte frame length value without bounds validation. Attackers can send a specially crafted frame length through the receive_bytes() function to trigger either a multi-gigabyte memory allocation or an uncaught ValueError that leaves the connection in a broken state, causing requests to hang and consumers to stop heartbeating until restart.

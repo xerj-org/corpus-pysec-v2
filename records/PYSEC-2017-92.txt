@@ -1,0 +1,13 @@
+PYSEC-2017-92 PyPI/pillow — Heap-based buffer overflow in the j2k_encode_entry function in Pillow 2.5.0 through 3.1.1 allows rem
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 2.5.0, < 3.1.2 (ECOSYSTEM)
+aliases: CVE-2016-3076, GHSA-v9pc-9mvp-x87g
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=1321929
+  http://pillow.readthedocs.io/en/4.1.x/releasenotes/3.1.2.html
+  http://www.securityfocus.com/bid/98042
+  https://github.com/advisories/GHSA-v9pc-9mvp-x87g
+
+Heap-based buffer overflow in the j2k_encode_entry function in Pillow 2.5.0 through 3.1.1 allows remote attackers to cause a denial of service (memory corruption) via a crafted Jpeg2000 file.

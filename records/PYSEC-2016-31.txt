@@ -1,0 +1,14 @@
+PYSEC-2016-31 PyPI/moin — MoinMoin 1.9.8 allows remote attackers to conduct "JavaScript injection" attacks by using the "page 
+package: moin
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.9.9 (ECOSYSTEM)
+aliases: CVE-2016-7148, GHSA-3x76-j3jj-439j
+references:
+  https://www.curesec.com/blog/article/blog/MoinMoin-198-XSS-175.html
+  http://www.securityfocus.com/bid/94259
+  http://www.ubuntu.com/usn/USN-3137-1
+  http://www.debian.org/security/2016/dsa-3715
+  https://github.com/advisories/GHSA-3x76-j3jj-439j
+
+MoinMoin 1.9.8 allows remote attackers to conduct "JavaScript injection" attacks by using the "page creation" approach, related to a "Cross Site Scripting (XSS)" issue affecting the action=AttachFile (via page name) component.

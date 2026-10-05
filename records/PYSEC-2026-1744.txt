@@ -1,0 +1,15 @@
+PYSEC-2026-1744 PyPI/open-webui — open-webui Insecure Direct Object Reference (IDOR) vulnerability
+package: open-webui
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.6.3 (ECOSYSTEM)
+aliases: CVE-2024-7041, GHSA-xcvc-5hgv-phqg
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-7041
+  https://github.com/open-webui/open-webui
+  https://github.com/open-webui/open-webui/blob/main/backend/apps/webui/routers/memories.py#L71
+  https://huntr.com/bounties/6855227f-1237-47b8-8d37-29aad7ddec3a
+  https://pypi.org/project/open-webui
+  https://github.com/advisories/GHSA-xcvc-5hgv-phqg
+
+An Insecure Direct Object Reference (IDOR) vulnerability exists in open-webui/open-webui version v0.3.8. The vulnerability occurs in the API endpoint `http://0.0.0.0:3000/api/v1/memories/{id}/update`, where the decentralization design is flawed, allowing attackers to edit other users' memories without proper authorization.

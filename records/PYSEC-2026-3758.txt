@@ -1,0 +1,11 @@
+PYSEC-2026-3758 PyPI/openssl-encrypt — openssl_encrypt versions before 1.4.0 contain an information disclosure vulnerability in the /ready 
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.0 (ECOSYSTEM)
+aliases: CVE-2026-74879, GHSA-2vhw-q7vh-7xv2
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-2vhw-q7vh-7xv2
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-information-disclosure-via-ready-endpoint
+
+openssl_encrypt versions before 1.4.0 contain an information disclosure vulnerability in the /ready endpoint that returns full database exception strings to unauthenticated callers. Attackers can trigger database errors to extract sensitive information including hostnames, IP addresses, connection parameters, and potentially credentials from exception messages.

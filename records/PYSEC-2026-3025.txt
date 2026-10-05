@@ -1,0 +1,24 @@
+PYSEC-2026-3025 PyPI/pypdf — pypdf: Manipulated XMP metadata streams can exhaust RAM
+package: pypdf
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.12.1 (ECOSYSTEM)
+aliases: CVE-2026-48735, GHSA-wjqc-6w8f-h24c
+references:
+  https://github.com/py-pdf/pypdf/security/advisories/GHSA-wjqc-6w8f-h24c
+  https://nvd.nist.gov/vuln/detail/CVE-2026-48735
+  https://github.com/py-pdf/pypdf/pull/3796
+  https://github.com/py-pdf/pypdf
+  https://github.com/py-pdf/pypdf/releases/tag/6.12.1
+  https://pypi.org/project/pypdf
+  https://github.com/advisories/GHSA-wjqc-6w8f-h24c
+
+### Impact
+
+An attacker who uses this vulnerability can craft a PDF which leads to large memory usage. This requires parsing large XMP metadata, possibly with lots of unnecessary elements.
+
+### Patches
+This has been fixed in [pypdf==6.12.1](https://github.com/py-pdf/pypdf/releases/tag/6.12.1).
+
+### Workarounds
+If you cannot upgrade yet, consider applying the changes from PR [#3796](https://github.com/py-pdf/pypdf/pull/3796).

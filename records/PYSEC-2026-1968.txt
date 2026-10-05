@@ -1,0 +1,15 @@
+PYSEC-2026-1968 PyPI/tkeasygui — TkEasyGUI Affected by Uncontrolled Search Path Element Issue
+package: tkeasygui
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0.22 (ECOSYSTEM)
+aliases: CVE-2025-55671, GHSA-ph2w-cx28-vhrq
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-55671
+  https://github.com/kujirahand/tkeasygui-python
+  https://github.com/kujirahand/tkeasygui-python/releases/tag/v1.0.22
+  https://jvn.jp/en/jp/JVN48739895
+  https://pypi.org/project/tkeasygui
+  https://github.com/advisories/GHSA-ph2w-cx28-vhrq
+
+Uncontrolled search path element issue exists in TkEasyGUI versions prior to v1.0.22. If this vulnerability is exploited, arbitrary code may be executed with the privilege of running the program.

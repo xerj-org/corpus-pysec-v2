@@ -1,0 +1,21 @@
+PYSEC-2026-2460 PyPI/dtale — D-Tale: Remote Code Execution through redis/shelf storage
+package: dtale
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.22.0 (ECOSYSTEM)
+aliases: CVE-2026-35052, GHSA-436g-fhfc-9g5w
+references:
+  https://github.com/man-group/dtale/security/advisories/GHSA-436g-fhfc-9g5w
+  https://nvd.nist.gov/vuln/detail/CVE-2026-35052
+  https://github.com/man-group/dtale
+  https://pypi.org/project/dtale
+  https://github.com/advisories/GHSA-436g-fhfc-9g5w
+
+### Impact
+Users hosting D-Tale publicly while using a redis or shelf storage layer could be vulnerable to remote code execution allowing attackers to run malicious code on the server.
+
+### Patches
+Users should upgrade to version 3.22.0.
+
+### Workarounds
+There are no workarounds for versions < 3.22.0

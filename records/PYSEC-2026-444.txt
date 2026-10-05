@@ -1,0 +1,14 @@
+PYSEC-2026-444 PyPI/paddlepaddle — Code Injection in paddlepaddle
+package: paddlepaddle
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.6.0 (ECOSYSTEM)
+aliases: CVE-2024-0521, GHSA-chj7-w3f6-cvfj
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-0521
+  https://github.com/PaddlePaddle/Paddle
+  https://huntr.com/bounties/a569c64b-1e2b-4bed-a19f-47fd5a3da453
+  https://pypi.org/project/paddlepaddle
+  https://github.com/advisories/GHSA-chj7-w3f6-cvfj
+
+The vulnerability arises from the way the url parameter is incorporated into the command string without proper validation or sanitization. If the url is constructed from untrusted sources, an attacker could potentially inject malicious commands.

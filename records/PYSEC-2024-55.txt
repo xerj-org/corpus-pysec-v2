@@ -1,0 +1,7 @@
+PYSEC-2024-55 PyPI/cipherbcrypt — Malicious package. Exfiltrated secrets to a target server.
+package: cipherbcrypt
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+
+Malicious package. Exfiltrated secrets to a target server.

@@ -1,0 +1,16 @@
+PYSEC-2014-16 PyPI/roundup — Cross-site scripting (XSS) vulnerability in cgi/client.py in Roundup before 1.4.20 allows remote att
+package: roundup
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.20 (ECOSYSTEM)
+aliases: CVE-2012-6131, GHSA-gw2q-cgvq-9g3v
+references:
+  http://www.openwall.com/lists/oss-security/2013/02/13/8
+  http://issues.roundup-tracker.org/issue2550711
+  http://www.openwall.com/lists/oss-security/2012/11/10/2
+  https://pypi.python.org/pypi/roundup/1.4.20
+  https://bugzilla.redhat.com/show_bug.cgi?id=722672
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/84190
+  https://github.com/advisories/GHSA-gw2q-cgvq-9g3v
+
+Cross-site scripting (XSS) vulnerability in cgi/client.py in Roundup before 1.4.20 allows remote attackers to inject arbitrary web script or HTML via the @action parameter to support/issue1.

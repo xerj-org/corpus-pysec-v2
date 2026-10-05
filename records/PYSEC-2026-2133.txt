@@ -1,0 +1,11 @@
+PYSEC-2026-2133 PyPI/cocoindex — CocoIndex is a data transformation framework for AI. Prior to version 0.3.34, the Doris target conne
+package: cocoindex
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.3.34 (ECOSYSTEM)
+aliases: CVE-2026-28438, GHSA-59g6-v3vg-f7wc
+references:
+  https://github.com/cocoindex-io/cocoindex/security/advisories/GHSA-59g6-v3vg-f7wc
+  https://github.com/cocoindex-io/cocoindex/commit/ba2fc4a89e22d35572c64bd2990737c7913b0729
+
+CocoIndex is a data transformation framework for AI. Prior to version 0.3.34, the Doris target connector didn't verify the configured table name before creating some SQL statements (ALTER TABLE). So, in the application code, if the table name is provided by an untrusted upstream, it expose vulnerability to SQL injection when target schema change. This issue has been patched in version 0.3.34.

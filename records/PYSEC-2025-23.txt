@@ -1,0 +1,15 @@
+PYSEC-2025-23 PyPI/ray — Versions of the package ray before 2.43.0 are vulnerable to Insertion of Sensitive Information into 
+package: ray
+ecosystem: PyPI
+versions affected:
+  >= 0, < 64a2e4010522d60b90c389634f24df77b603d85d (GIT: https://github.com/ray-project/ray)
+  >= 0, < 2.43.0 (ECOSYSTEM)
+aliases: CVE-2025-1979, GHSA-w4rh-fgx7-q63m
+references:
+  https://github.com/ray-project/ray/commit/64a2e4010522d60b90c389634f24df77b603d85d
+  https://github.com/ray-project/ray/issues/50266
+  https://github.com/ray-project/ray/pull/50409
+  https://security.snyk.io/vuln/SNYK-PYTHON-RAY-8745212
+  https://github.com/advisories/GHSA-w4rh-fgx7-q63m
+
+Versions of the package ray before 2.43.0 are vulnerable to Insertion of Sensitive Information into Log File where the redis password is being logged in the standard logging. If the redis password is passed as an argument, it will be logged and could potentially leak the password.This is only exploitable if: 1) Logging is enabled;2) Redis is using password authentication;3) Those logs are accessible to an attacker, who can reach that redis instance.**Note:** It is recommended that anyone who is running in this configuration should update to the latest version of Ray, then rotate their redis password.

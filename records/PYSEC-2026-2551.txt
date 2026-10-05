@@ -1,0 +1,23 @@
+PYSEC-2026-2551 PyPI/kiwitcms — Kiwi TCMS vulnerable to stored XSS via JavaScript: URI in extra_link field (TestPlan & TestCase)
+package: kiwitcms
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 12.4 (ECOSYSTEM)
+aliases: CVE-2026-55630, GHSA-473p-56xx-vg67
+references:
+  https://github.com/kiwitcms/Kiwi/security/advisories/GHSA-473p-56xx-vg67
+  https://github.com/kiwitcms/Kiwi
+  https://github.com/kiwitcms/Kiwi/releases/tag/v16.1
+  https://kiwitcms.org/blog/kiwi-tcms-team/2026/06/24/kiwi-tcms-161
+  https://pypi.org/project/kiwitcms
+  https://github.com/advisories/GHSA-473p-56xx-vg67
+  https://nvd.nist.gov/vuln/detail/CVE-2026-55630
+
+## Summary
+
+In Kiwi TCMS the fields `TestCase.extra_link` and `TestPlan.extra_link` were meant to represent URLs to external resources however in versions prior to 16.1 user input was not being sanitized and values were rendered verbatim which represents an opportunity for cross-site scripting exploitation. In version 16.1 these fields are properly sanitized and existing database records which don't validate will be reset to a null value.
+
+
+## Impact
+
+Deployments which use the official Docker images and/or unmodified Kiwi TCMS middleware send a `Content-Security-Policy` header which makes this vulnerability difficult to exploit in practice because this header blocks the browser from executing inline JavaScript. Customized deployments which modify the default security settings may still be vulnerable.

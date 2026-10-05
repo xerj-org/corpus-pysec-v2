@@ -1,0 +1,14 @@
+PYSEC-2017-34 PyPI/salt — Salt before 2015.8.11 allows deleted minions to read or write to minions with the same id, related t
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2015.8.11 (ECOSYSTEM)
+aliases: CVE-2016-9639, GHSA-hvmj-356c-gpf4
+references:
+  https://docs.saltstack.com/en/2015.8/ref/configuration/master.html#rotate-aes-key
+  http://www.openwall.com/lists/oss-security/2016/11/25/3
+  http://www.openwall.com/lists/oss-security/2016/11/25/2
+  http://www.securityfocus.com/bid/94553
+  https://github.com/advisories/GHSA-hvmj-356c-gpf4
+
+Salt before 2015.8.11 allows deleted minions to read or write to minions with the same id, related to caching.

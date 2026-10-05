@@ -1,0 +1,16 @@
+PYSEC-2026-201 PyPI/django — An issue was discovered in Django 5.2 before 5.2.15 and 6.0 before 6.0.6. `django.middleware.cache.U
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 5.2, < 5.2.15, >= 6.0, < 6.0.6 (ECOSYSTEM)
+aliases: CVE-2026-8404, GHSA-8cjm-8mp7-r2xf
+references:
+  https://groups.google.com/g/django-announce
+  https://docs.djangoproject.com/en/dev/releases/security/
+  https://www.djangoproject.com/weblog/2026/jun/03/security-releases/
+  https://github.com/advisories/GHSA-8cjm-8mp7-r2xf
+
+An issue was discovered in Django 5.2 before 5.2.15 and 6.0 before 6.0.6.
+`django.middleware.cache.UpdateCacheMiddleware` in Django does not match `Cache-Control` response directives case-insensitively, which allows remote attackers to read responses that were incorrectly cached because their `Cache-Control` directives used uppercase or mixed-case values.
+Earlier, unsupported Django series (such as 5.0.x, 4.1.x, and 3.2.x) were not evaluated and may also be affected.
+Django would like to thank Ahmed Badawe for reporting this issue.

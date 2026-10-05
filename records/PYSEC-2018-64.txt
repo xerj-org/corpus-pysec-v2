@@ -1,0 +1,12 @@
+PYSEC-2018-64 PyPI/conference-scheduler-cli — In conference-scheduler-cli, a pickle.load call on imported data allows remote attackers to execute 
+package: conference-scheduler-cli
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2018-14572, GHSA-cf3c-fffp-34qh
+references:
+  https://github.com/PyconUK/ConferenceScheduler-cli/issues/19
+  https://joel-malwarebenchmark.github.io/blog/2020/04/25/cve-2018-14572-conference-scheduler-cli/
+  https://github.com/advisories/GHSA-cf3c-fffp-34qh
+
+In conference-scheduler-cli, a pickle.load call on imported data allows remote attackers to execute arbitrary code via a crafted .pickle file, as demonstrated by Python code that contains an os.system call.

@@ -1,0 +1,10 @@
+PYSEC-2026-141 PyPI/urllib3 — urllib3 is an HTTP client library for Python. From 1.23 to before 2.7.0, cross-origin redirects foll
+package: urllib3
+ecosystem: PyPI
+versions affected:
+  >= 1.23, < 2.7.0 (ECOSYSTEM)
+aliases: CVE-2026-44431, GHSA-qccp-gfcp-xxvc
+references:
+  https://github.com/urllib3/urllib3/security/advisories/GHSA-qccp-gfcp-xxvc
+
+urllib3 is an HTTP client library for Python. From 1.23 to before 2.7.0, cross-origin redirects followed from the low-level API via ProxyManager.connection_from_url().urlopen(..., assert_same_host=False) still forward these sensitive headers. This vulnerability is fixed in 2.7.0.

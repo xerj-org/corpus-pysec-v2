@@ -1,0 +1,14 @@
+PYSEC-2026-264 PyPI/ait-core — NASA AIT-Core vulnerable to remote code execution
+package: ait-core
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 2.5.2 (ECOSYSTEM)
+aliases: CVE-2024-35059, GHSA-jqff-8g2v-642h
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-35059
+  https://github.com/NASA-AMMOS/AIT-Core
+  https://www.linkedin.com/pulse/remote-code-execution-via-man-in-the-middle-more-ujkze
+  https://pypi.org/project/ait-core
+  https://github.com/advisories/GHSA-jqff-8g2v-642h
+
+An issue in the Pickle Python library of NASA AIT-Core v2.5.2 allows attackers to execute arbitrary commands.

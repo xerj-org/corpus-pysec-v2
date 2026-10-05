@@ -1,0 +1,12 @@
+PYSEC-2021-883 PyPI/exiv2 — An invalid memory access in the decode function in iptc.cpp of Exiv2 0.27.99.0 allows attackers to c
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2020-18773
+references:
+  https://github.com/Exiv2/exiv2/issues/760
+  https://github.com/Exiv2/exiv2/issues/760
+  https://security.gentoo.org/glsa/202312-06
+
+An invalid memory access in the decode function in iptc.cpp of Exiv2 0.27.99.0 allows attackers to cause a denial of service (DOS) via a crafted tif file.

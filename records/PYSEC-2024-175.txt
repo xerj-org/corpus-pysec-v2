@@ -1,0 +1,12 @@
+PYSEC-2024-175 PyPI/wordops — WordOps through 3.20.0 has a wo/cli/plugins/stack_pref.py TOCTOU race condition because the conf_pat
+package: wordops
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.21.3 (ECOSYSTEM)
+aliases: CVE-2024-34528, GHSA-23qq-p4gq-gc2g
+references:
+  https://github.com/WordOps/WordOps/issues/611
+  https://github.com/WordOps/WordOps/blob/ecf20192c7853925e2cb3f8c8378cd0d86ca0d62/wo/cli/plugins/stack_pref.py#L77
+  https://github.com/advisories/GHSA-23qq-p4gq-gc2g
+
+WordOps through 3.20.0 has a wo/cli/plugins/stack_pref.py TOCTOU race condition because the conf_path os.open does not use a mode parameter during file creation.

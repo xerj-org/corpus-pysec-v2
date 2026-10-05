@@ -1,0 +1,23 @@
+PYSEC-2026-686 PyPI/neutron — OpenStack Neutron Race Condition vulnerability
+package: neutron
+ecosystem: PyPI
+versions affected:
+  >= 0, < 7.2.0-12.1, >= 8.0.0, < 8.3.0-11.1, >= 9.0.0, < 9.3.1-2.1, >= 10.0.0, < 10.0.2-1.1 (ECOSYSTEM)
+aliases: CVE-2017-7543, GHSA-hvxr-2fvv-c3wq
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2017-7543
+  https://access.redhat.com/errata/RHSA-2017:2447
+  https://access.redhat.com/errata/RHSA-2017:2448
+  https://access.redhat.com/errata/RHSA-2017:2449
+  https://access.redhat.com/errata/RHSA-2017:2450
+  https://access.redhat.com/errata/RHSA-2017:2451
+  https://access.redhat.com/errata/RHSA-2017:2452
+  https://access.redhat.com/security/cve/CVE-2017-7543
+  https://bugzilla.redhat.com/show_bug.cgi?id=1473792
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2017-7543
+  https://opendev.org/openstack/neutron
+  https://web.archive.org/web/20200227153412/https://www.securityfocus.com/bid/100237
+  https://pypi.org/project/neutron
+  https://github.com/advisories/GHSA-hvxr-2fvv-c3wq
+
+A race-condition flaw was discovered in openstack-neutron before 7.2.0-12.1, 8.x before 8.3.0-11.1, 9.x before 9.3.1-2.1, and 10.x before 10.0.2-1.1, where, following a minor overcloud update, neutron security groups were disabled. Specifically, the following were reset to 0: net.bridge.bridge-nf-call-ip6tables and net.bridge.bridge-nf-call-iptables. The race was only triggered by an update, at which point an attacker could access exposed tenant VMs and network resources.

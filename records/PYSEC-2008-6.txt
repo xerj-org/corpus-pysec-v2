@@ -1,0 +1,15 @@
+PYSEC-2008-6 PyPI/trac — Unspecified vulnerability in Trac before 0.11.2 allows attackers to cause a denial of service via un
+package: trac
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.11.2 (ECOSYSTEM)
+aliases: CVE-2008-5646, GHSA-437p-qw95-wqqr
+references:
+  http://trac.edgewall.org/wiki/ChangeLog
+  http://www.securityfocus.com/bid/32226
+  http://secunia.com/advisories/32652
+  http://www.vupen.com/english/advisories/2008/3080
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/46492
+  https://github.com/advisories/GHSA-437p-qw95-wqqr
+
+Unspecified vulnerability in Trac before 0.11.2 allows attackers to cause a denial of service via unknown attack vectors related to "certain wiki markup."

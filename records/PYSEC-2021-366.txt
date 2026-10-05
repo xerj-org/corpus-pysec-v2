@@ -1,0 +1,11 @@
+PYSEC-2021-366 PyPI/vyper — Vyper is a Pythonic Smart Contract Language for the EVM. In affected versions external functions did
+package: vyper
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.3.0 (ECOSYSTEM)
+aliases: CVE-2021-41122, GHSA-c7pr-343r-5c46
+references:
+  https://github.com/vyperlang/vyper/security/advisories/GHSA-c7pr-343r-5c46
+  https://github.com/vyperlang/vyper/pull/2447
+
+Vyper is a Pythonic Smart Contract Language for the EVM. In affected versions external functions did not properly validate the bounds of decimal arguments. The can lead to logic errors. This issue has been resolved in version 0.3.0.

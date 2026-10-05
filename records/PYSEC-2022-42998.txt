@@ -1,0 +1,17 @@
+PYSEC-2022-42998 PyPI/py7zr — A directory traversal vulnerability in the SevenZipFile.extractall() function of the python library 
+package: py7zr
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1bb43f17515c7f69673a1c88ab9cc72a7bbef406 (GIT: https://github.com/miurahr/py7zr)
+  >= 0, < 0.20.1 (ECOSYSTEM)
+aliases: CVE-2022-44900, GHSA-m8xw-9x5x-6vh3
+references:
+  https://github.com/miurahr/py7zr/commit/1bb43f17515c7f69673a1c88ab9cc72a7bbef406
+  http://packetstormsecurity.com/files/170127/py7zr-0.20.0-Directory-Traversal.html
+  http://packetstormsecurity.com/files/170127/py7zr-0.20.0-Directory-Traversal.html
+  http://packetstormsecurity.com/files/170127/py7zr-0.20.0-Directory-Traversal.html
+  https://lessonsec.com/cve/cve-2022-44900/
+  https://lessonsec.com/cve/cve-2022-44900/
+  https://github.com/advisories/GHSA-m8xw-9x5x-6vh3
+
+A directory traversal vulnerability in the SevenZipFile.extractall() function of the python library py7zr v0.20.0 and earlier allows attackers to write arbitrary files via extracting a crafted 7z file.

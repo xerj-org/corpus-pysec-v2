@@ -1,0 +1,14 @@
+PYSEC-2014-18 PyPI/salt — Multiple unspecified vulnerabilities in Salt (aka SaltStack) before 2014.1.10 allow local users to h
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2014.1.10 (ECOSYSTEM)
+aliases: CVE-2014-3563, GHSA-mfr3-9cj8-h2qm
+references:
+  http://seclists.org/oss-sec/2014/q3/428
+  http://docs.saltstack.com/en/latest/topics/releases/2014.1.10.html
+  http://www.securityfocus.com/bid/69319
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/95392
+  https://github.com/advisories/GHSA-mfr3-9cj8-h2qm
+
+Multiple unspecified vulnerabilities in Salt (aka SaltStack) before 2014.1.10 allow local users to have an unspecified impact via vectors related to temporary file creation in (1) seed.py, (2) salt-ssh, or (3) salt-cloud.

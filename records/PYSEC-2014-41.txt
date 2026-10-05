@@ -1,0 +1,15 @@
+PYSEC-2014-41 PyPI/plone — python_scripts.py in Plone before 4.2.3 and 4.3 before beta 1 allows remote attackers to cause a den
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.2.3, >= 4.3a0, < 4.3b1 (ECOSYSTEM)
+aliases: CVE-2012-5499, GHSA-wrf2-2rch-cmr9
+references:
+  http://www.openwall.com/lists/oss-security/2012/11/10/1
+  https://plone.org/products/plone-hotfix/releases/20121106
+  https://plone.org/products/plone/security/advisories/20121106/15
+  https://github.com/plone/Products.CMFPlone/blob/4.2.3/docs/CHANGES.txt
+  http://rhn.redhat.com/errata/RHSA-2014-1194.html
+  https://github.com/advisories/GHSA-wrf2-2rch-cmr9
+
+python_scripts.py in Plone before 4.2.3 and 4.3 before beta 1 allows remote attackers to cause a denial of service (memory consumption) via a large value, related to formatColumns.

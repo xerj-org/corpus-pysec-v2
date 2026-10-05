@@ -1,0 +1,30 @@
+PYSEC-2026-1477 PyPI/jupyter-core — Jupyter Core on Windows Has Uncontrolled Search Path Element Local Privilege Escalation Vulnerability
+package: jupyter-core
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.8.1 (ECOSYSTEM)
+aliases: CVE-2025-30167, GHSA-33p9-3p43-82vq
+references:
+  https://github.com/jupyter/jupyter_core/security/advisories/GHSA-33p9-3p43-82vq
+  https://nvd.nist.gov/vuln/detail/CVE-2025-30167
+  https://github.com/jupyter/jupyter_core/commit/5e8965600adda6b416692ce7e85ecb2bd814bd52
+  https://github.com/jupyter/jupyter_core
+  https://pypi.org/project/jupyter-core
+  https://github.com/advisories/GHSA-33p9-3p43-82vq
+
+## Impact
+
+On Windows, the shared `%PROGRAMDATA%` directory is searched for configuration files (`SYSTEM_CONFIG_PATH` and `SYSTEM_JUPYTER_PATH`), which may allow users to create configuration files affecting other users.
+
+Only shared Windows systems with multiple users and unprotected `%PROGRAMDATA%` are affected.
+
+## Mitigations
+
+- upgrade to `jupyter_core>=5.8.1` (5.8.0 is patched but breaks `jupyter-server`) , or
+- as administrator, modify the permissions on the `%PROGRAMDATA%` directory so it is not writable by unauthorized users, or
+- as administrator, create the `%PROGRAMDATA%\jupyter` directory with appropriately restrictive permissions, or
+- as user or administrator, set the `%PROGRAMDATA%` environment variable to a directory with appropriately restrictive permissions (e.g. controlled by administrators _or_ the current user)
+
+## Credit
+
+Reported via Trend Micro Zero Day Initiative as ZDI-CAN-25932

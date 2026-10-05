@@ -1,0 +1,12 @@
+PYSEC-2025-146 PyPI/ollama — An issue in Ollama v0.1.33 allows attackers to delete arbitrary files via sending a crafted packet t
+package: ollama
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.1.33-NA (ECOSYSTEM)
+aliases: CVE-2025-44779
+references:
+  https://a1batr0ss.top/2025/03/17/Ollama-arbitrary-file-deletion-vulnerability/
+  https://a1batr0ss.top/2025/08/06/CVE-2025-44779-Ollama-arbitrary-file-deletion/
+  https://github.com/ollama/ollama
+
+An issue in Ollama v0.1.33 allows attackers to delete arbitrary files via sending a crafted packet to the endpoint /api/pull.

@@ -1,0 +1,14 @@
+PYSEC-2026-1722 PyPI/open-webui — Open WebUI Stored Cross-Site Scripting Vulnerability
+package: open-webui
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.3.14 (ECOSYSTEM)
+aliases: CVE-2024-6706, GHSA-5jp3-wp5v-5363
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-6706
+  https://github.com/open-webui/open-webui
+  https://korelogic.com/Resources/Advisories/KL-001-2024-005.txt
+  https://pypi.org/project/open-webui
+  https://github.com/advisories/GHSA-5jp3-wp5v-5363
+
+Attackers can craft a malicious prompt that coerces the language model into executing arbitrary JavaScript in the context of the web page.

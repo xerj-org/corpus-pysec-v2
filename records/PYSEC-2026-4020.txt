@@ -1,0 +1,11 @@
+PYSEC-2026-4020 PyPI/monai — MONAI before 1.6.0 contains an unsafe deserialization vulnerability in the NumpyReader class that un
+package: monai
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.6.0 (ECOSYSTEM)
+aliases: CVE-2026-100845, GHSA-wg9g-w2j2-8pgr
+references:
+  https://www.vulncheck.com/advisories/monai-before-1.6.0-remote-code-execution-via-numpyreader
+  https://github.com/Project-MONAI/MONAI/security/advisories/GHSA-wg9g-w2j2-8pgr
+
+MONAI before 1.6.0 contains an unsafe deserialization vulnerability in the NumpyReader class that unconditionally uses numpy.load with allow_pickle=True when loading .npy and .npz files. Attackers can craft malicious .npy files with pickle payloads that execute arbitrary code when loaded through MONAI's standard data pipeline.

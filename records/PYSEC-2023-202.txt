@@ -1,0 +1,15 @@
+PYSEC-2023-202 PyPI/apache-airflow — Apache Airflow, versions prior to 2.7.2, contains a security vulnerability that allows authenticated
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.7.2 (ECOSYSTEM)
+aliases: CVE-2023-42780, GHSA-cgx2-rrmr-jx43
+references:
+  https://github.com/apache/airflow/pull/34355
+  https://lists.apache.org/thread/h5tvsvov8j55wojt5sojdprs05oby34d
+  https://lists.apache.org/thread/h5tvsvov8j55wojt5sojdprs05oby34d
+  https://github.com/advisories/GHSA-cgx2-rrmr-jx43
+
+Apache Airflow, versions prior to 2.7.2, contains a security vulnerability that allows authenticated users of Airflow to list warnings for all DAGs, even if the user had no permission to see those DAGs. It would reveal the dag_ids and the stack-traces of import errors for those DAGs with import errors.
+Users of Apache Airflow are advised to upgrade to version 2.7.2 or newer to mitigate the risk associated with this vulnerability.
+

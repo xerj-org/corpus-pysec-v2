@@ -1,0 +1,12 @@
+PYSEC-2023-235 PyPI/couchbase — An issue was discovered in Couchbase Server 7.2.0. There is a private key leak in debug.log while ad
+package: couchbase
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2023-45875
+references:
+  https://forums.couchbase.com/tags/security
+  https://docs.couchbase.com/server/current/release-notes/relnotes.html
+  https://www.couchbase.com/alerts/
+
+An issue was discovered in Couchbase Server 7.2.0. There is a private key leak in debug.log while adding a pre-7.0 node to a 7.2 cluster.

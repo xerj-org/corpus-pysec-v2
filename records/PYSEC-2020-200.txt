@@ -1,0 +1,12 @@
+PYSEC-2020-200 PyPI/ansible — The vault subsystem in Ansible before 1.5.5 does not set the umask before creation or modification o
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.5.5 (ECOSYSTEM)
+aliases: CVE-2014-4658, GHSA-5g4v-2pc6-4hh4
+references:
+  https://www.securityfocus.com/bid/68233
+  https://github.com/ansible/ansible/blob/release1.5.5/CHANGELOG.md
+  https://github.com/advisories/GHSA-5g4v-2pc6-4hh4
+
+The vault subsystem in Ansible before 1.5.5 does not set the umask before creation or modification of a vault file, which allows local users to obtain sensitive key information by reading a file.

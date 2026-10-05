@@ -1,0 +1,11 @@
+PYSEC-2023-169 PyPI/salt — Git Providers can read from the wrong environment because they get the same cache directory base nam
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 3006.0, < 3006.2, >= 0, < 3005.2 (ECOSYSTEM)
+aliases: CVE-2023-20898, GHSA-qvh6-3j7x-3hq7
+references:
+  https://saltproject.io/security-announcements/2023-08-10-advisory/
+  https://github.com/advisories/GHSA-qvh6-3j7x-3hq7
+
+Git Providers can read from the wrong environment because they get the same cache directory base name in Salt masters prior to 3005.2 or 3006.2. Anything that uses Git Providers with different environments can get garbage data or the wrong data, which can lead to wrongful data disclosure, wrongful executions, data corruption and/or crash.

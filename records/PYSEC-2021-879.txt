@@ -1,0 +1,13 @@
+PYSEC-2021-879 PyPI/exiv2 — An uncontrolled memory allocation in DataBufdata(subBox.length-sizeof(box)) function of Exiv2 0.27 a
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2020-18899
+references:
+  https://github.com/Exiv2/exiv2/issues/742
+  https://github.com/Exiv2/exiv2/issues/742
+  https://cwe.mitre.org/data/definitions/789.html
+  https://security.gentoo.org/glsa/202312-06
+
+An uncontrolled memory allocation in DataBufdata(subBox.length-sizeof(box)) function of Exiv2 0.27 allows attackers to cause a denial of service (DOS) via a crafted input.

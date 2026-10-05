@@ -1,0 +1,32 @@
+PYSEC-2026-1498 PyPI/kiwitcms — Unrestricted file upload in kiwi TCMS
+package: kiwitcms
+ecosystem: PyPI
+versions affected:
+  >= 0, < 12.2 (ECOSYSTEM)
+aliases: CVE-2023-30613, GHSA-fwcf-753v-fgcj
+references:
+  https://github.com/kiwitcms/Kiwi/security/advisories/GHSA-fwcf-753v-fgcj
+  https://nvd.nist.gov/vuln/detail/CVE-2023-30613
+  https://github.com/kiwitcms/Kiwi
+  https://huntr.com/bounties/c30d3503-600d-4d00-9571-98826a51f12c
+  https://huntr.dev/bounties/c30d3503-600d-4d00-9571-98826a51f12c
+  https://kiwitcms.org/blog/kiwi-tcms-team/2023/04/23/kiwi-tcms-122
+  https://pypi.org/project/kiwitcms
+  https://github.com/advisories/GHSA-fwcf-753v-fgcj
+
+### Impact
+Kiwi TCMS allows users to upload attachments to test plans, test cases, etc. In earlier versions there is no control over what kinds of files can be uploaded. Thus a malicious actor may upload an `.exe` file or a file containing embedded JavaScript and trick others into clicking on these files causing vulnerable browsers to execute malicious code on another computer or attempting XSS attacks.
+
+Stored XSS attacks via file uploads have been fixed in earlier versions of Kiwi TCMS, see [GHSA-2wcr-87wf-cf9j](https://github.com/kiwitcms/Kiwi/security/advisories/GHSA-2wcr-87wf-cf9j). This advisory deals with prohibiting users to upload potentially compromised files in the first place.
+
+
+### Patches
+Kiwi TCMS v12.2 comes with functionality that allows administrators to configure additional upload validator functions which give them more control over what file types are accepted for upload. By default `.exe` are denied. Other files containing the `<script>` tag, regardless of their type are also denied b/c they are a path to XSS attacks.
+
+
+
+### Workarounds
+Upgrade to version 12.2 or later.
+
+### References
+Originally reported by [Ahmed Rabeaa Mosaa](https://huntr.dev/bounties/c30d3503-600d-4d00-9571-98826a51f12c).

@@ -1,0 +1,11 @@
+PYSEC-2013-13 PyPI/salt — Salt (aka SaltStack) before 0.17.1 allows remote attackers to execute arbitrary YAML code via unspec
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.17.1 (ECOSYSTEM)
+aliases: CVE-2013-4438
+references:
+  http://docs.saltstack.com/topics/releases/0.17.1.html
+  http://www.openwall.com/lists/oss-security/2013/10/18/3
+
+Salt (aka SaltStack) before 0.17.1 allows remote attackers to execute arbitrary YAML code via unspecified vectors.  NOTE: the vendor states that this might not be a vulnerability because the YAML to be loaded has already been determined to be safe.

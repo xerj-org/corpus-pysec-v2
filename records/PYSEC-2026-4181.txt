@@ -1,0 +1,85 @@
+PYSEC-2026-4181 PyPI/zapros — Zapros has an Unbounded Content-Encoding decompression chain that allows denial of service
+package: zapros
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.14.0 (ECOSYSTEM)
+aliases: CVE-2026-61541, GHSA-5vjj-2r48-q622
+references:
+  https://github.com/kap-sh/zapros/security/advisories/GHSA-5vjj-2r48-q622
+  https://nvd.nist.gov/vuln/detail/CVE-2026-61541
+  https://github.com/kap-sh/zapros/commit/7971fbca9707eb01455ca2d73416ac091f96908b
+  https://github.com/kap-sh/zapros
+  https://github.com/kap-sh/zapros/releases/tag/v0.14.0
+  https://pypi.org/project/zapros
+  https://github.com/advisories/GHSA-5vjj-2r48-q622
+
+### Impact
+
+**Who is impacted**:
+  - Any application using Zapros to make HTTP requests to untrusted servers
+  - Applications that follow redirects to attacker-controlled hosts
+
+**Attack vector**:
+  - A malicious HTTP server returns a response with many chained content encodings. When the client attempts to decode, it creates a deeply nested decompression chain consuming excessive resources.
+
+### Patches
+
+Fixed in version 0.14.0.
+
+  The fix adds a hardcoded limit of **5** `Content-Encoding` layers. Responses exceeding this limit raise `DecodingError`.
+
+### Workarounds
+
+Add middleware that checks for a malicious Content-Encoding header.
+
+```python
+from typing import cast
+
+from zapros import (
+    AsyncBaseHandler,
+    AsyncBaseMiddleware,
+    BaseHandler,
+    BaseMiddleware,
+    Client,
+    DecodingError,
+    Request,
+    Response,
+)
+
+MAX_DECODE_LAYERS = 5
+
+
+class ContentEncodingCheckMiddleware(BaseMiddleware, AsyncBaseMiddleware):
+    def __init__(
+        self,
+        next_handler: BaseHandler | AsyncBaseHandler,
+        *,
+        max_layers: int = MAX_DECODE_LAYERS,
+    ) -> None:
+        self.next = cast(BaseHandler, next_handler)
+        self.async_next = cast(AsyncBaseHandler, next_handler)
+        self._max_layers = max_layers
+
+    def _check(self, response: Response) -> None:
+        encoding_header = response.headers.get("Content-Encoding")
+        if not encoding_header:
+            return
+
+        layers = [enc.strip().lower() for enc in encoding_header.split(",") if enc.strip()]
+        if len(layers) > self._max_layers:
+            raise DecodingError(f"Too many Content-Encoding layers ({len(layers)}), maximum is {self._max_layers}")
+
+    def handle(self, request: Request) -> Response:
+        response = self.next.handle(request)
+        self._check(response)
+        return response
+
+    async def ahandle(self, request: Request) -> Response:
+        response = await self.async_next.ahandle(request)
+        self._check(response)
+        return response
+
+
+with Client().wrap_with_middleware(lambda next: ContentEncodingCheckMiddleware(next)) as client:
+    ...
+```

@@ -1,0 +1,18 @@
+PYSEC-2008-4 PyPI/trac — Open redirect vulnerability in the search script in Trac before 0.10.5 allows remote attackers to re
+package: trac
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.10.5 (ECOSYSTEM)
+aliases: CVE-2008-2951, GHSA-rcmj-xp8f-f6q4
+references:
+  http://holisticinfosec.org/content/view/72/45/
+  http://trac.edgewall.org/wiki/ChangeLog
+  http://www.osvdb.org/46513
+  http://www.securityfocus.com/bid/30402
+  https://www.redhat.com/archives/fedora-package-announce/2008-July/msg01261.html
+  http://secunia.com/advisories/31314
+  https://www.redhat.com/archives/fedora-package-announce/2008-July/msg01270.html
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/44043
+  https://github.com/advisories/GHSA-rcmj-xp8f-f6q4
+
+Open redirect vulnerability in the search script in Trac before 0.10.5 allows remote attackers to redirect users to arbitrary web sites and conduct phishing attacks via a URL in the q parameter, possibly related to the quickjump function.

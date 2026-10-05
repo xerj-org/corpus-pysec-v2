@@ -1,0 +1,12 @@
+PYSEC-2024-289 PyPI/nemo-asr — NVIDIA NeMo framework for Ubuntu contains a vulnerability in tools/asr_webapp where an attacker may 
+package: nemo-asr
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 1.22.0 (ECOSYSTEM)
+aliases: CVE-2024-0081, GHSA-x392-p65g-4rxx
+references:
+  https://github.com/NVIDIA/NeMo/security/advisories/GHSA-x392-p65g-4rxx
+
+
+NVIDIA NeMo framework for Ubuntu contains a vulnerability in tools/asr_webapp where an attacker may cause an allocation of resources without limits or throttling. A successful exploit of this vulnerability may lead to a server-side denial of service.
+

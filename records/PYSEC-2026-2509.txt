@@ -1,0 +1,19 @@
+PYSEC-2026-2509 PyPI/hermes-agent — hermes-agent has an Injection issue
+package: hermes-agent
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.15.0 (ECOSYSTEM)
+aliases: CVE-2026-9353, GHSA-238w-f66p-w349
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-9353
+  https://github.com/NousResearch/hermes-agent/pull/26852
+  https://github.com/NousResearch/hermes-agent/commit/7ebebfbb8d10937cbf2219b4cf5e121b71e67428
+  https://gist.github.com/YLChen-007/82a3539d6358842e69dfaef0a9fcf14a
+  https://github.com/NousResearch/hermes-agent
+  https://vuldb.com/submit/812216
+  https://vuldb.com/vuln/365316
+  https://vuldb.com/vuln/365316/cti
+  https://pypi.org/project/hermes-agent
+  https://github.com/advisories/GHSA-238w-f66p-w349
+
+A security vulnerability has been detected in NousResearch hermes-agent up to 2026.4.23. Impacted is an unknown function of the file agent/skills_guard.py of the component Skills Guard Multi-Word Prompt Handler. The manipulation of the argument THREAT_PATTERNS leads to injection. Remote exploitation of the attack is possible. The exploit has been disclosed publicly and may be used. The vendor was contacted early about this disclosure but did not respond in any way.

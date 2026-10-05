@@ -1,0 +1,10 @@
+PYSEC-2025-182 PyPI/pyd3tn — NULL Pointer Dereference in µD3TN via non-singleton destination Endpoint Identifier allows remote at
+package: pyd3tn
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.14.3 (ECOSYSTEM)
+aliases: CVE-2025-8183
+references:
+  https://gitlab.com/d3tn/ud3tn/-/issues/255
+
+NULL Pointer Dereference in µD3TN via non-singleton destination Endpoint Identifier allows remote attacker to reliably cause DoS

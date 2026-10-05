@@ -1,0 +1,38 @@
+PYSEC-2026-4130 PyPI/opencve — OpenCVE: Server-Side Request Forgery (SSRF) in notifications
+package: opencve
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.0.0 (ECOSYSTEM)
+aliases: CVE-2026-62282, GHSA-ch3g-4xvr-674q
+references:
+  https://github.com/opencve/opencve/security/advisories/GHSA-ch3g-4xvr-674q
+  https://nvd.nist.gov/vuln/detail/CVE-2026-62282
+  https://github.com/opencve/opencve/issues/743
+  https://github.com/opencve/opencve/pull/747
+  https://github.com/opencve/opencve/commit/0af7f894debc95c67fa53e7ba5a6cdecb10c34f0
+  https://github.com/opencve/opencve
+  https://github.com/opencve/opencve/releases/tag/v3.0.0
+  https://pypi.org/project/opencve
+  https://github.com/advisories/GHSA-ch3g-4xvr-674q
+
+### Impact
+
+OpenCVE contains a Server-Side Request Forgery (SSRF) vulnerability in the notification testing functionality for both Webhook and Slack integrations.
+
+An authenticated user with permission to configure notification channels can trigger test requests to arbitrary HTTP(S) endpoints. Insufficient validation of target destinations allows requests to be sent to hosts reachable from the OpenCVE server, including internal network resources, localhost interfaces, and cloud metadata services.
+
+Successful exploitation could allow an attacker to interact with internal services that are not otherwise accessible from the Internet and retrieve information from HTTP-based services reachable by the OpenCVE instance.
+
+### Patches
+
+The vulnerability has been fixed in OpenCVE version 3.0.0,  users should upgrade to version 3.0.0 or later.
+
+The fix introduces additional validation of user-supplied URLs used by the notification testing functionality and prevents requests to localhost, private network ranges, link-local addresses, cloud metadata services, and other non-public destinations.
+
+### Workarounds
+
+Users unable to upgrade should restrict outbound network access from OpenCVE to trusted external destinations using firewall rules, network policies, or egress filtering.
+
+Where possible, access to localhost interfaces, private network ranges, and cloud metadata services should be blocked from the OpenCVE application environment.
+
+Disabling access to the notification testing functionality also mitigates the issue.

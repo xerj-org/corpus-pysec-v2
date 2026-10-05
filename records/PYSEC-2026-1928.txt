@@ -1,0 +1,14 @@
+PYSEC-2026-1928 PyPI/skops — Skops unsafe deserialization
+package: skops
+ecosystem: PyPI
+versions affected:
+  >= 0.6, <= 0.9 (ECOSYSTEM)
+aliases: CVE-2024-37065, GHSA-q49c-6v6g-wgq3
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-37065
+  https://hiddenlayer.com/sai-security-advisory/skops-june2024
+  http://github.com/skops-dev/skops
+  https://pypi.org/project/skops
+  https://github.com/advisories/GHSA-q49c-6v6g-wgq3
+
+Deserialization of untrusted data can occur in versions 0.6 or newer of the skops python library, enabling a maliciously crafted model to run arbitrary code on an end user's system when loaded.

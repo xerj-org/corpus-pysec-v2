@@ -1,0 +1,11 @@
+PYSEC-2021-124 PyPI/ansible — A flaw was found in ansible. Credentials, such as secrets, are being disclosed in console log by def
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.8.19, >= 2.9.0, < 2.9.18, >= 2.10.0, < 2.10.7 (ECOSYSTEM)
+aliases: CVE-2021-20191, GHSA-8f4m-hccc-8qph
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=1916813
+  https://github.com/advisories/GHSA-8f4m-hccc-8qph
+
+A flaw was found in ansible. Credentials, such as secrets, are being disclosed in console log by default and not protected by no_log feature when using those modules. An attacker can take advantage of this information to steal those credentials. The highest threat from this vulnerability is to data confidentiality. Versions before ansible 2.9.18 are affected.

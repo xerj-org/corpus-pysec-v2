@@ -1,0 +1,27 @@
+PYSEC-2026-4160 PyPI/pypdf — pypdf: Possible large memory usage when retrieving alphabetical page labels
+package: pypdf
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.19.0 (ECOSYSTEM)
+aliases: CVE-2026-103000, GHSA-w23x-9jrw-r45c
+references:
+  https://github.com/py-pdf/pypdf/security/advisories/GHSA-w23x-9jrw-r45c
+  https://nvd.nist.gov/vuln/detail/CVE-2026-103000
+  https://github.com/py-pdf/pypdf/pull/4096
+  https://github.com/py-pdf/pypdf/commit/0d8b5a8832cde1ba308b5c27567b879b7b7eed4a
+  https://github.com/py-pdf/pypdf
+  https://github.com/py-pdf/pypdf/releases/tag/6.19.0
+  https://pypi.org/project/pypdf
+  https://github.com/advisories/GHSA-w23x-9jrw-r45c
+
+### Impact
+
+An attacker who uses this vulnerability can craft a PDF which leads to large memory consumption. This requires accessing the page labels of a document with large alphabetical labels.
+
+### Patches
+
+This has been fixed in [pypdf==6.19.0](https://github.com/py-pdf/pypdf/releases/tag/6.19.0).
+
+### Workarounds
+
+If you cannot upgrade yet, consider applying the changes from PR [#4096](https://github.com/py-pdf/pypdf/pull/4096).

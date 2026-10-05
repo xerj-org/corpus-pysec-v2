@@ -1,0 +1,14 @@
+PYSEC-2017-54 PyPI/plone — Plone 3.3.0 through 3.3.6 allows remote attackers to inject headers into HTTP responses.
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 3.3, < 4.0a1 (ECOSYSTEM)
+aliases: CVE-2015-7318, GHSA-fq9r-8jpm-2222
+references:
+  https://plone.org/security/hotfix/20150910/header-injection
+  https://plone.org/security/hotfix/20150910
+  https://bugzilla.redhat.com/show_bug.cgi?id=1264796
+  http://www.openwall.com/lists/oss-security/2015/09/22/16
+  https://github.com/advisories/GHSA-fq9r-8jpm-2222
+
+Plone 3.3.0 through 3.3.6 allows remote attackers to inject headers into HTTP responses.

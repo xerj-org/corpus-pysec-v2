@@ -1,0 +1,13 @@
+PYSEC-2026-1628 PyPI/mindsdb — MindsDB Cross-site Scripting vulnerability
+package: mindsdb
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 24.9.2.1 (ECOSYSTEM)
+aliases: CVE-2024-45856, GHSA-32fj-r8qw-r8w8
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-45856
+  https://hiddenlayer.com/sai-security-advisory/2024-09-mindsdb
+  https://pypi.org/project/mindsdb
+  https://github.com/advisories/GHSA-32fj-r8qw-r8w8
+
+A cross-site scripting (XSS) vulnerability exists in all versions of the MindsDB platform, enabling the execution of a JavaScript payload whenever a user enumerates an ML Engine, database, project, or dataset containing arbitrary JavaScript code within the web UI.

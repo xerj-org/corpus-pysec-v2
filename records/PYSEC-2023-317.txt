@@ -1,0 +1,10 @@
+PYSEC-2023-317 PyPI/wabt — WebAssembly v1.0.29 was discovered to contain a heap overflow via the component component wabt::Node
+package: wabt
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 1.0.29 (ECOSYSTEM)
+aliases: CVE-2023-27117
+references:
+  https://github.com/WebAssembly/wabt/issues/1989
+
+WebAssembly v1.0.29 was discovered to contain a heap overflow via the component component wabt::Node::operator.

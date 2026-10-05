@@ -1,0 +1,17 @@
+PYSEC-2024-89 PyPI/micropython-os — A vulnerability was found in MicroPython 1.23.0. It has been rated as critical. Affected by this iss
+package: micropython-os
+ecosystem: PyPI
+versions affected:
+  >= 0, < 908ab1ceca15ee6fd0ef82ca4cba770a3ec41894 (GIT: https://github.com/micropython/micropython)
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2024-8948, GHSA-vh3x-525m-jp4r
+references:
+  https://vuldb.com/?id.277766
+  https://vuldb.com/?ctiid.277766
+  https://vuldb.com/?submit.409317
+  https://github.com/micropython/micropython/issues/13041
+  https://github.com/micropython/micropython/issues/13041
+  https://github.com/micropython/micropython/commit/908ab1ceca15ee6fd0ef82ca4cba770a3ec41894
+  https://github.com/advisories/GHSA-vh3x-525m-jp4r
+
+A vulnerability was found in MicroPython 1.23.0. It has been rated as critical. Affected by this issue is the function mpz_as_bytes of the file py/objint.c. The manipulation leads to heap-based buffer overflow. The attack may be launched remotely. The exploit has been disclosed to the public and may be used. The patch is identified as 908ab1ceca15ee6fd0ef82ca4cba770a3ec41894. It is recommended to apply a patch to fix this issue. In micropython objint component, converting zero from int to bytes leads to heap buffer-overflow-write at mpz_as_bytes.

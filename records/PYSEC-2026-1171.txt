@@ -1,0 +1,15 @@
+PYSEC-2026-1171 PyPI/apache-superset — Apache Superset vulnerable to Exposure of Sensitive Information
+package: apache-superset
+ecosystem: PyPI
+versions affected:
+  >= 1.3.0, < 2.1.0 (ECOSYSTEM)
+aliases: CVE-2023-30776, GHSA-cmjc-52fg-9f7j
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-30776
+  https://github.com/apache/superset
+  https://lists.apache.org/thread/s9w9w10mt2sngk3solwnmq5k7md53tsz
+  http://www.openwall.com/lists/oss-security/2023/04/24/3
+  https://pypi.org/project/apache-superset
+  https://github.com/advisories/GHSA-cmjc-52fg-9f7j
+
+An authenticated user with specific data permissions could access database connections stored passwords by requesting a specific REST API. This issue affects Apache Superset version 1.3.0 up to 2.0.1.

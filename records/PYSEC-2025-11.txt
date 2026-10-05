@@ -1,0 +1,13 @@
+PYSEC-2025-11 PyPI/llama-index — A vulnerability in the `KnowledgeBaseWebReader` class of the run-llama/llama_index repository, versi
+package: llama-index
+ecosystem: PyPI
+versions affected:
+  >= 0, < 159ce485a1168100bb219dc1b93133f1121579d9 (GIT: https://github.com/run-llama/llama_index)
+  >= 0, < 0.12.9 (ECOSYSTEM)
+aliases: CVE-2024-12910, GHSA-jvpf-xf32-2w4q
+references:
+  https://huntr.com/bounties/27883f22-35ff-49df-aaa5-05031c7d6ad8
+  https://github.com/run-llama/llama_index/commit/159ce485a1168100bb219dc1b93133f1121579d9
+  https://github.com/advisories/GHSA-jvpf-xf32-2w4q
+
+A vulnerability in the `KnowledgeBaseWebReader` class of the run-llama/llama_index repository, version latest, allows an attacker to cause a Denial of Service (DoS) by controlling a URL variable to contain the root URL. This leads to infinite recursive calls to the `get_article_urls` method, exhausting system resources and potentially crashing the application.

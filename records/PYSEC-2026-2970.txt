@@ -1,0 +1,20 @@
+PYSEC-2026-2970 PyPI/py-rattler — Rattler vulnerable to package cache path traversal via conda package build string
+package: py-rattler
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.24.0 (ECOSYSTEM)
+aliases: CVE-2026-53956, GHSA-h672-p7h7-97v9
+references:
+  https://github.com/conda/rattler/security/advisories/GHSA-h672-p7h7-97v9
+  https://github.com/conda/rattler
+  https://pypi.org/project/py-rattler
+  https://github.com/advisories/GHSA-h672-p7h7-97v9
+  https://nvd.nist.gov/vuln/detail/CVE-2026-53956
+
+`rattler_cache` and `py-rattler` were vulnerable to package-cache path traversal when handling package metadata from conda channels.
+
+During cache materialization, the `ratter_cache` code used the package record `build` string as part of a cache key that was joined into a filesystem path. A malicious or untrusted channel could publish repodata with path separators or traversal components in that field, causing package contents to be written outside the configured package cache directory.
+
+The issue requires use of a malicious or otherwise untrusted conda channel. Curated channels that validate package metadata are not expected to allow malformed build strings of this form.
+
+Users should upgrade to a patched version and avoid untrusted conda channels.

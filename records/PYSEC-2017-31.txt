@@ -1,0 +1,14 @@
+PYSEC-2017-31 PyPI/salt — Salt before 2014.7.6 does not verify certificates when connecting via the aliyun, proxmox, and splun
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2014.7.6 (ECOSYSTEM)
+aliases: CVE-2015-4017, GHSA-8j9g-c9rp-jvg4
+references:
+  https://docs.saltstack.com/en/latest/topics/releases/2014.7.6.html
+  https://bugzilla.redhat.com/show_bug.cgi?id=1222960
+  http://www.openwall.com/lists/oss-security/2015/05/19/2
+  https://groups.google.com/forum/#!topic/salt-users/8Kv1bytGD6c
+  https://github.com/advisories/GHSA-8j9g-c9rp-jvg4
+
+Salt before 2014.7.6 does not verify certificates when connecting via the aliyun, proxmox, and splunk modules.

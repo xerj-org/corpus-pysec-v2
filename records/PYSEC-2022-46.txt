@@ -1,0 +1,11 @@
+PYSEC-2022-46 PyPI/onionshare-cli — OnionShare is an open source tool that lets you securely and anonymously share files, host websites,
+package: onionshare-cli
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.5 (ECOSYSTEM)
+aliases: CVE-2022-21695, GHSA-99p8-9p2c-49j4
+references:
+  https://github.com/onionshare/onionshare/releases/tag/v2.5
+  https://github.com/onionshare/onionshare/security/advisories/GHSA-99p8-9p2c-49j4
+
+OnionShare is an open source tool that lets you securely and anonymously share files, host websites, and chat with friends using the Tor network. In affected versions authenticated users (or unauthenticated in public mode) can send messages without being visible in the list of chat participants. This issue has been resolved in version 2.5.

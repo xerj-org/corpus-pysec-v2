@@ -1,0 +1,13 @@
+PYSEC-2021-99 PyPI/django — In Django 2.2 before 2.2.24, 3.x before 3.1.12, and 3.2 before 3.2.4, URLValidator, validate_ipv4_ad
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 2.2, < 2.2.24, >= 3.0, < 3.1.12, >= 3.2, < 3.2.4 (ECOSYSTEM)
+aliases: CVE-2021-33571, GHSA-p99v-5w3c-jqq9
+references:
+  https://groups.google.com/g/django-announce/c/sPyjSKMi8Eo
+  https://docs.djangoproject.com/en/3.2/releases/security/
+  https://www.djangoproject.com/weblog/2021/jun/02/security-releases/
+  https://github.com/advisories/GHSA-p99v-5w3c-jqq9
+
+In Django 2.2 before 2.2.24, 3.x before 3.1.12, and 3.2 before 3.2.4, URLValidator, validate_ipv4_address, and validate_ipv46_address do not prohibit leading zero characters in octal literals. This may allow a bypass of access control that is based on IP addresses. (validate_ipv4_address and validate_ipv46_address are unaffected with Python 3.9.5+..) .

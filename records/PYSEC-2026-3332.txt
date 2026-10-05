@@ -1,0 +1,37 @@
+PYSEC-2026-3332 PyPI/tensorflow-cpu — `MirrorPadGrad` heap out of bounds read
+package: tensorflow-cpu
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.8.4, >= 2.9.0, < 2.9.3, >= 2.10.0, < 2.10.1 (ECOSYSTEM)
+aliases: CVE-2022-41895, GHSA-gq2j-cr96-gvqx
+references:
+  https://github.com/tensorflow/tensorflow/security/advisories/GHSA-gq2j-cr96-gvqx
+  https://nvd.nist.gov/vuln/detail/CVE-2022-41895
+  https://github.com/tensorflow/tensorflow/commit/717ca98d8c3bba348ff62281fdf38dcb5ea1ec92
+  https://github.com/tensorflow/tensorflow
+  https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/kernels/image/mirror_pad_op.cc
+  https://pypi.org/project/tensorflow-cpu
+  https://github.com/advisories/GHSA-gq2j-cr96-gvqx
+
+### Impact
+If [`MirrorPadGrad`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/kernels/image/mirror_pad_op.cc) is given outsize input `paddings`, TensorFlow will give a heap OOB error.
+
+```python
+import tensorflow as tf
+tf.raw_ops.MirrorPadGrad(input=[1],
+             paddings=[[0x77f00000,0xa000000]],
+             mode = 'REFLECT')
+```
+
+### Patches
+We have patched the issue in GitHub commit [717ca98d8c3bba348ff62281fdf38dcb5ea1ec92](https://github.com/tensorflow/tensorflow/commit/717ca98d8c3bba348ff62281fdf38dcb5ea1ec92).
+
+The fix will be included in TensorFlow 2.11. We will also cherrypick this commit on TensorFlow 2.10.1, 2.9.3, and TensorFlow 2.8.4, as these are also affected and still in supported range.
+
+
+### For more information
+Please consult [our security guide](https://github.com/tensorflow/tensorflow/blob/master/SECURITY.md) for more information regarding the security model and how to contact us with issues and questions.
+
+
+### Attribution
+This vulnerability has been reported by Vul AI.

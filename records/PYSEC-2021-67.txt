@@ -1,0 +1,12 @@
+PYSEC-2021-67 PyPI/jupyterhub — JupyterHub 1.1.0 allows CSRF in the admin panel via a request that lacks an _xsrf field, as demonstr
+package: jupyterhub
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.2.0b1 (ECOSYSTEM)
+aliases: CVE-2020-36191, GHSA-7xx3-qp5w-fw96
+references:
+  https://github.com/jupyterhub/jupyterhub/releases
+  https://github.com/jupyterhub/jupyterhub/issues/3304
+  https://github.com/advisories/GHSA-7xx3-qp5w-fw96
+
+JupyterHub 1.1.0 allows CSRF in the admin panel via a request that lacks an _xsrf field, as demonstrated by a /hub/api/user request (to add or remove a user account).

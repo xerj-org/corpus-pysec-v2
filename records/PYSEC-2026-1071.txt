@@ -1,0 +1,18 @@
+PYSEC-2026-1071 PyPI/mem8 — Malicious code in mem8 (PyPI)
+package: mem8
+ecosystem: PyPI
+versions affected:
+  6.0.1
+aliases: MAL-2026-5319
+references:
+  https://inspector.pypi.io/project/mem8/6.0.1/packages/0f/d8/144a73f115189b08391dfc6862828cb5e39ed36c680e0ff292afba54c730/mem8-6.0.1-py3-none-any.whl/mem8-setup.pth
+  https://www.endorlabs.com/learn/shai-hulud-hades-wave-hits-six-pypi-bioinformatics-packages
+  https://www.stepsecurity.io/blog/the-hades-campaign-pypi-packages
+
+Part of the "Hades" wave of the Shai-Hulud supply-chain campaign. On 2026-06-08,
+malicious phantom releases of mem8 were published to PyPI using stolen
+credentials. The package executes a bundled JavaScript payload (via the Bun
+runtime) on import that harvests and exfiltrates credentials and attempts
+self-propagation. This entry is a summary; behavior may not be fully
+characterized here. See the linked references for detailed analysis and
+indicators of compromise.

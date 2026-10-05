@@ -1,0 +1,11 @@
+PYSEC-2022-43138 PyPI/lief — A vulnerability in the LIEF::MachO::BinaryParser::init_and_parse function of LIEF v0.12.1 allows att
+package: lief
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.12.2 (ECOSYSTEM)
+aliases: CVE-2022-40922, GHSA-38hf-c37x-32hv
+references:
+  https://github.com/lief-project/LIEF/issues/781
+  https://github.com/lief-project/LIEF/issues/781
+
+A vulnerability in the LIEF::MachO::BinaryParser::init_and_parse function of LIEF v0.12.1 allows attackers to cause a denial of service (DOS) through a segmentation fault via a crafted MachO file.

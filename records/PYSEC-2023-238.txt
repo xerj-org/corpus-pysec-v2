@@ -1,0 +1,15 @@
+PYSEC-2023-238 PyPI/pyarrow — Deserialization of untrusted data in IPC and Parquet readers in PyArrow versions 0.14.0 to 14.0.0 al
+package: pyarrow
+ecosystem: PyPI
+versions affected:
+  >= 0.14.0, < 14.0.1 (ECOSYSTEM)
+aliases: CVE-2023-47248, GHSA-5wvp-7f3h-6wmm
+references:
+  https://lists.apache.org/thread/yhy7tdfjf9hrl9vfrtzo8p2cyjq87v7n
+  https://www.openwall.com/lists/oss-security/2023/11/08/7
+  https://github.com/advisories/GHSA-5wvp-7f3h-6wmm
+  https://www.cve.org/CVERecord?id=CVE-2023-47248
+  https://github.com/apache/arrow/commit/f14170976372436ec1d03a724d8d3f3925484ecf
+  https://pypi.org/project/pyarrow-hotfix/
+
+Deserialization of untrusted data in IPC and Parquet readers in PyArrow versions 0.14.0 to 14.0.0 allows arbitrary code execution. An application is vulnerable if it reads Arrow IPC, Feather or Parquet data from untrusted sources (for example user-supplied input files).

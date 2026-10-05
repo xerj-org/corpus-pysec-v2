@@ -1,0 +1,23 @@
+PYSEC-2026-1489 PyPI/keylime — Keylime's registrar vulnerable to Denial-of-service attack via a single open connection
+package: keylime
+ecosystem: PyPI
+versions affected:
+  >= 0, < 7.4.0 (ECOSYSTEM)
+aliases: CVE-2023-38200, GHSA-pg75-v6fp-8q59
+references:
+  https://github.com/keylime/keylime/security/advisories/GHSA-pg75-v6fp-8q59
+  https://nvd.nist.gov/vuln/detail/CVE-2023-38200
+  https://github.com/keylime/keylime/pull/1421
+  https://github.com/keylime/keylime/commit/c68d8f0b7ea549c12b6956ab0f3c28ae0360ae17
+  https://access.redhat.com/security/cve/CVE-2023-38200
+  https://bugzilla.redhat.com/show_bug.cgi?id=2222692
+  https://github.com/keylime/keylime
+  https://github.com/keylime/keylime/releases/tag/v7.4.0
+  https://pypi.org/project/keylime
+  https://github.com/advisories/GHSA-pg75-v6fp-8q59
+
+### Impact
+Keylime `registrar` is prone to a simple denial of service attack in which an adversary opens a connection to the TLS port (by default, port `8891`) blocking further, legitimate connections. As long as the connection is open, the `registrar` is blocked and cannot serve any further clients (`agents` and `tenants`), which prevents normal operation. The problem does not affect the `verifier`.
+
+### Patches
+Users should upgrade to release 7.4.0

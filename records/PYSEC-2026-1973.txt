@@ -1,0 +1,14 @@
+PYSEC-2026-1973 PyPI/torchserve — TorchServe script references S3 bucket without ensuring ownership or confirming accessibility
+package: torchserve
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.11.0 (ECOSYSTEM)
+aliases: CVE-2024-6577, GHSA-xx7c-j7h3-vjcq
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-6577
+  https://github.com/pytorch/serve
+  https://huntr.com/bounties/20917570-8328-428f-bd1d-4fcd71fb2359
+  https://pypi.org/project/torchserve
+  https://github.com/advisories/GHSA-xx7c-j7h3-vjcq
+
+In the latest version of pytorch/serve, the script 'upload_results_to_s3.sh' references the S3 bucket 'benchmarkai-metrics-prod' without ensuring its ownership or confirming its accessibility. This could lead to potential security vulnerabilities or unauthorized access to the bucket if it is not properly secured or claimed by the appropriate entity. The issue may result in data breaches, exposure of proprietary information, or unauthorized modifications to stored data.

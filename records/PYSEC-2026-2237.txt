@@ -1,0 +1,17 @@
+PYSEC-2026-2237 PyPI/nltk — NLTK (Natural Language Toolkit) is a suite of open source Python modules, data sets, and tutorials s
+package: nltk
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.9.4 (ECOSYSTEM)
+aliases: CVE-2026-33236, GHSA-469j-vmhf-r6v7
+references:
+  https://access.redhat.com/security/cve/CVE-2026-33236
+  https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-33236.json
+  https://access.redhat.com/errata/RHSA-2026:10184
+  https://access.redhat.com/errata/RHSA-2026:19712
+  https://access.redhat.com/errata/RHSA-2026:37275
+  https://bugzilla.redhat.com/show_bug.cgi?id=2449824
+  https://github.com/nltk/nltk/commit/89fe2ec2c6bae6e2e7a46dad65cc34231976ed8a
+  https://github.com/nltk/nltk/security/advisories/GHSA-469j-vmhf-r6v7
+
+NLTK (Natural Language Toolkit) is a suite of open source Python modules, data sets, and tutorials supporting research and development in Natural Language Processing. In versions 3.9.3 and prior, the NLTK downloader does not validate the `subdir` and `id` attributes when processing remote XML index files. Attackers can control a remote XML index server to provide malicious values containing path traversal sequences (such as `../`), which can lead to arbitrary directory creation, arbitrary file creation, and arbitrary file overwrite. Commit 89fe2ec2c6bae6e2e7a46dad65cc34231976ed8a patches the issue.

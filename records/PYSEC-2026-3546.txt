@@ -1,0 +1,27 @@
+PYSEC-2026-3546 PyPI/aiohttp — AIOHTTP: HTTP request smuggling via WebSocket upgrade
+package: aiohttp
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.14.2 (ECOSYSTEM)
+aliases: CVE-2026-69243, GHSA-mfx4-hv73-q22v
+references:
+  https://github.com/aio-libs/aiohttp/security/advisories/GHSA-mfx4-hv73-q22v
+  https://github.com/aio-libs/aiohttp/pull/13017
+  https://github.com/aio-libs/aiohttp/commit/6ae358f0983c3f4d6f67692b2f8e65dc8e091c98
+  https://github.com/aio-libs/aiohttp
+  https://github.com/aio-libs/aiohttp/releases/tag/v3.14.2
+  https://pypi.org/project/aiohttp
+  https://github.com/advisories/GHSA-mfx4-hv73-q22v
+  https://nvd.nist.gov/vuln/detail/CVE-2026-69243
+
+### Summary
+
+The HTTP parsers were vulnerable to a request smuggling attack relating to WebSocket upgrades.
+
+### Impact
+
+If using the server-side component, it may be possible for an attacker to execute a request smuggling vulnerability using an edge case in the WebSocket upgrade procedure. AIOHTT is unaware of any public exploit code.
+
+---
+
+Patch: https://github.com/aio-libs/aiohttp/commit/6ae358f0983c3f4d6f67692b2f8e65dc8e091c98

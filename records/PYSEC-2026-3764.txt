@@ -1,0 +1,11 @@
+PYSEC-2026-3764 PyPI/openssl-encrypt — openssl_encrypt versions before 1.4.0 use a non-standard PBKDF2 key derivation construction with ite
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.0 (ECOSYSTEM)
+aliases: CVE-2026-74888, GHSA-743f-89fg-x288
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-743f-89fg-x288
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-non-standard-pbkdf2-key-derivation
+
+openssl_encrypt versions before 1.4.0 use a non-standard PBKDF2 key derivation construction with iterations=1 per call in an outer loop, creating a KDF whose security properties have not been formally analyzed. Attackers can exploit this weakened key derivation to more efficiently crack passwords protecting legacy encrypted files compared to standard PBKDF2 implementations.

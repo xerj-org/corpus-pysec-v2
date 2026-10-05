@@ -1,0 +1,25 @@
+PYSEC-2026-2076 PyPI/zope — Access control vulnerable to user data deletion by anonynmous users
+package: zope
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.11.1 (ECOSYSTEM)
+aliases: CVE-2024-51734, GHSA-g5vw-3h65-2q3v
+references:
+  https://github.com/zopefoundation/AccessControl/security/advisories/GHSA-g5vw-3h65-2q3v
+  https://nvd.nist.gov/vuln/detail/CVE-2024-51734
+  https://github.com/zopefoundation/AccessControl/issues/159
+  https://github.com/zopefoundation/AccessControl
+  https://pypi.org/project/zope
+  https://github.com/advisories/GHSA-g5vw-3h65-2q3v
+
+### Impact
+Anonymous users can delete the user data maintained by an `AccessControl.userfolder.UserFolder` which may prevent any privileged access.
+
+### Patches
+The problem is fixed in version 7.2.
+
+### Workarounds
+The problem can be fixed by adding `data__roles__ = ()` to `AccessControl.userfolder.UserFolder`.
+
+### References
+https://github.com/zopefoundation/AccessControl/issues/159

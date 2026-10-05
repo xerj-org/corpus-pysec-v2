@@ -1,0 +1,18 @@
+PYSEC-2009-9 PyPI/zodb3 — Zope Object Database (ZODB) before 3.8.2, when certain Zope Enterprise Objects (ZEO) database sharin
+package: zodb3
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.8.2 (ECOSYSTEM)
+aliases: CVE-2009-0669, GHSA-5432-c996-hvhj
+references:
+  http://secunia.com/advisories/36205
+  http://mail.zope.org/pipermail/zope-announce/2009-August/002220.html
+  http://pypi.python.org/pypi/ZODB3/3.8.2#whats-new-in-zodb-3-8-2
+  http://secunia.com/advisories/36204
+  http://osvdb.org/56826
+  http://www.securityfocus.com/bid/35987
+  http://www.vupen.com/english/advisories/2009/2217
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/52379
+  https://github.com/advisories/GHSA-5432-c996-hvhj
+
+Zope Object Database (ZODB) before 3.8.2, when certain Zope Enterprise Objects (ZEO) database sharing is enabled, allows remote attackers to bypass authentication via vectors involving the ZEO network protocol.

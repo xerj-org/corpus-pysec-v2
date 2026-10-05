@@ -1,0 +1,16 @@
+PYSEC-2019-140 PyPI/werkzeug — Pallets Werkzeug before 0.15.3, when used with Docker, has insufficient debugger PIN randomness beca
+package: werkzeug
+ecosystem: PyPI
+versions affected:
+  >= 0, < 00bc43b1672e662e5e3b8cecd79e67fc968fa246 (GIT: https://github.com/pallets/werkzeug)
+  >= 0, < 0.15.3 (ECOSYSTEM)
+aliases: CVE-2019-14806, GHSA-gq9m-qvpx-68hc
+references:
+  https://github.com/pallets/werkzeug/commit/00bc43b1672e662e5e3b8cecd79e67fc968fa246
+  https://github.com/pallets/werkzeug/blob/7fef41b120327d3912fbe12fb64f1951496fcf3e/src/werkzeug/debug/__init__.py#L168
+  https://palletsprojects.com/blog/werkzeug-0-15-3-released/
+  http://lists.opensuse.org/opensuse-security-announce/2019-09/msg00034.html
+  http://lists.opensuse.org/opensuse-security-announce/2019-09/msg00047.html
+  https://github.com/advisories/GHSA-gq9m-qvpx-68hc
+
+Pallets Werkzeug before 0.15.3, when used with Docker, has insufficient debugger PIN randomness because Docker containers share the same machine id.

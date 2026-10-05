@@ -1,0 +1,11 @@
+PYSEC-2026-2124 PyPI/changedetection-io — changedetection.io is a free open source web page change detection tool. In versions prior to 0.53.2
+package: changedetection-io
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.53.2 (ECOSYSTEM)
+aliases: CVE-2026-25527, GHSA-9jj8-v89v-xjvw
+references:
+  https://github.com/dgtlmoon/changedetection.io/commit/9d38b4517364831889b5b0d7b3465fd060403fd4
+  https://github.com/dgtlmoon/changedetection.io/security/advisories/GHSA-9jj8-v89v-xjvw
+
+changedetection.io is a free open source web page change detection tool. In versions prior to 0.53.2, the `/static/<group>/<filename>` route accepts `group=".."`, which causes `send_from_directory("static/..", filename)` to execute. This moves the base directory up to `/app/changedetectionio`, enabling unauthenticated local file read of application source files (e.g., `flask_app.py`). Version 0.53.2 fixes the issue.

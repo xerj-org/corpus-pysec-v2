@@ -1,0 +1,14 @@
+PYSEC-2022-42994 PyPI/guarddog — GuardDog is a CLI tool to identify malicious PyPI packages. Versions prior to 0.1.5 are vulnerable t
+package: guarddog
+ecosystem: PyPI
+versions affected:
+  >= 0, < a56aff58264cb6b7855d71b00dc10c39a5dbd306 (GIT: https://github.com/DataDog/guarddog)
+  >= 0, < 0.1.5 (ECOSYSTEM)
+aliases: CVE-2022-23531, GHSA-rp2v-v467-q9vq
+references:
+  https://github.com/DataDog/guarddog/releases/tag/v0.1.5
+  https://github.com/DataDog/guarddog/security/advisories/GHSA-rp2v-v467-q9vq
+  https://github.com/DataDog/guarddog/pull/89/commits/a56aff58264cb6b7855d71b00dc10c39a5dbd306
+  https://github.com/DataDog/guarddog/pull/89/commits/a56aff58264cb6b7855d71b00dc10c39a5dbd306
+
+GuardDog is a CLI tool to identify malicious PyPI packages. Versions prior to 0.1.5 are vulnerable to Relative Path Traversal when scanning a specially-crafted local PyPI package. Running GuardDog against a specially-crafted package can allow an attacker to write an arbitrary file on the machine where GuardDog is executed due to a path traversal vulnerability when extracting the .tar.gz file of the package being scanned, which exists by design in the tarfile.TarFile.extractall function. This issue is patched in version 0.1.5.

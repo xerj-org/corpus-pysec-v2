@@ -1,0 +1,12 @@
+PYSEC-2025-26 PyPI/snowflake-connector-python — The Snowflake Connector for Python provides an interface for developing Python applications that can
+package: snowflake-connector-python
+ecosystem: PyPI
+versions affected:
+  >= 0, < f3f9b666518d29c31a49384bbaa9a65889e72056 (GIT: https://github.com/snowflakedb/snowflake-connector-python)
+  >= 2.2.5, < 3.13.1 (ECOSYSTEM)
+aliases: CVE-2025-24793, GHSA-2vpq-fh52-j3wv
+references:
+  https://github.com/snowflakedb/snowflake-connector-python/security/advisories/GHSA-2vpq-fh52-j3wv
+  https://github.com/snowflakedb/snowflake-connector-python/commit/f3f9b666518d29c31a49384bbaa9a65889e72056
+
+The Snowflake Connector for Python provides an interface for developing Python applications that can connect to Snowflake and perform all standard operations. Snowflake discovered and remediated a vulnerability in the Snowflake Connector for Python. A function from the snowflake.connector.pandas_tools module is vulnerable to SQL injection. This vulnerability affects versions 2.2.5 through 3.13.0. Snowflake fixed the issue in version 3.13.1.

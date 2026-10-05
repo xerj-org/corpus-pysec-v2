@@ -1,0 +1,15 @@
+PYSEC-2026-1236 PyPI/calibreweb — Cross-site Scripting (XSS) - DOM in janeczku/calibre-web
+package: calibreweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.6.15 (ECOSYSTEM)
+aliases: CVE-2021-3988, GHSA-r735-9gc6-2hvq
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2021-3988
+  https://github.com/janeczku/calibre-web/commit/7ad419dc8c12180e842a82118f4866ac3d074bc5
+  https://github.com/janeczku/calibre-web
+  https://huntr.com/bounties/fa4c8fd1-7846-4dad-9112-2c07461f0609
+  https://pypi.org/project/calibreweb
+  https://github.com/advisories/GHSA-r735-9gc6-2hvq
+
+A Cross-site Scripting (XSS) vulnerability exists in janeczku/calibre-web, specifically in the file `edit_books.js`. The vulnerability occurs when editing book properties, such as uploading a cover or a format. The affected code directly inserts user input into the DOM without proper sanitization, allowing attackers to execute arbitrary JavaScript code. This can lead to various attacks, including stealing cookies. The issue is present in the code handling the `#btn-upload-cover` change event.

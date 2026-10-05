@@ -1,0 +1,13 @@
+PYSEC-2020-234 PyPI/jupyter-server — Jupyter Server before version 1.0.6 has an Open redirect vulnerability. A maliciously crafted link t
+package: jupyter-server
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3d83e49090289c431da253e2bdb8dc479cbcb157 (GIT: https://github.com/jupyter-server/jupyter_server)
+  >= 0, < 1.0.6 (ECOSYSTEM)
+aliases: CVE-2020-26232, GHSA-grfj-wjv9-4f9v
+references:
+  https://github.com/jupyter/jupyter_server/security/advisories/GHSA-grfj-wjv9-4f9v
+  https://github.com/jupyter-server/jupyter_server/blob/master/CHANGELOG.md#106---2020-11-18
+  https://github.com/jupyter-server/jupyter_server/commit/3d83e49090289c431da253e2bdb8dc479cbcb157
+
+Jupyter Server before version 1.0.6 has an Open redirect vulnerability. A maliciously crafted link to a jupyter server could redirect the browser to a different website. All jupyter servers are technically affected, however, these maliciously crafted links can only be reasonably made for known jupyter server hosts. A link to your jupyter server may appear safe, but ultimately redirect to a spoofed server on the public internet.

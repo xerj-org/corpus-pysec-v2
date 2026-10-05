@@ -1,0 +1,10 @@
+PYSEC-2023-318 PyPI/wabt — WebAssembly v1.0.29 was discovered to contain a segmentation fault via the component wabt::Decompile
+package: wabt
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 1.0.29 (ECOSYSTEM)
+aliases: CVE-2023-27119
+references:
+  https://github.com/WebAssembly/wabt/issues/1990
+
+WebAssembly v1.0.29 was discovered to contain a segmentation fault via the component wabt::Decompiler::WrapChild.

@@ -1,0 +1,14 @@
+PYSEC-2022-245 PyPI/django — An issue was discovered in the HTTP FileResponse class in Django 3.2 before 3.2.15 and 4.0 before 4.
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 3.2, < 3.2.15, >= 4.0, < 4.0.7 (ECOSYSTEM)
+aliases: CVE-2022-36359, GHSA-8x94-hmjh-97hq
+references:
+  https://docs.djangoproject.com/en/4.0/releases/security/
+  https://www.djangoproject.com/weblog/2022/aug/03/security-releases/
+  https://groups.google.com/g/django-announce/c/8cz--gvaJr4
+  http://www.openwall.com/lists/oss-security/2022/08/03/1
+  https://github.com/advisories/GHSA-8x94-hmjh-97hq
+
+An issue was discovered in the HTTP FileResponse class in Django 3.2 before 3.2.15 and 4.0 before 4.0.7. An application is vulnerable to a reflected file download (RFD) attack that sets the Content-Disposition header of a FileResponse when the filename is derived from user-supplied input.

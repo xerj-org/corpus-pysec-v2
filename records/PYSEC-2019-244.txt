@@ -1,0 +1,11 @@
+PYSEC-2019-244 PyPI/exiv2 — Exiv2 0.27.99.0 has a heap-based buffer over-read in Exiv2::RafImage::readMetadata() in rafimage.cpp
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2019-14368
+references:
+  https://github.com/Exiv2/exiv2/issues/952
+  https://github.com/Exiv2/exiv2/issues/952
+
+Exiv2 0.27.99.0 has a heap-based buffer over-read in Exiv2::RafImage::readMetadata() in rafimage.cpp.

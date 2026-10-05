@@ -1,0 +1,18 @@
+PYSEC-2026-4048 PyPI/doris-mcp-server — Apache Doris MCP Server is vulnerable to SQL Injection via metadata query path
+package: doris-mcp-server
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.6.1 (ECOSYSTEM)
+aliases: CVE-2025-66336, GHSA-pqrj-4gwg-h5f7
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-66336
+  https://github.com/apache/doris-mcp-server/pull/68
+  https://github.com/apache/doris-mcp-server
+  https://lists.apache.org/thread/4l4v3m7ofwrgp4s4s98pjb5l03fcrzo2
+  http://www.openwall.com/lists/oss-security/2026/06/22/1
+  https://pypi.org/project/doris-mcp-server
+  https://github.com/advisories/GHSA-pqrj-4gwg-h5f7
+
+Apache Doris MCP Server contains a SQL injection vulnerability in a metadata query path. A user-controlled database name is directly interpolated into a SQL query, and the query is executed without passing the caller's authorization context. This may allow an authenticated attacker, or an anonymous attacker if authentication is disabled, to bypass SQL security validation and access metadata outside the intended database scope.
+
+Affected users are recommended to upgrade to Doris version 0.6.1 or later, which fixes the issue.

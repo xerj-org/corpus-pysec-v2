@@ -1,0 +1,14 @@
+PYSEC-2023-314 PyPI/apache-airflow — Improper Input Validation vulnerability in the Apache Airflow Sqoop Provider. This issue affects Apa
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.1.1 (ECOSYSTEM)
+aliases: CVE-2023-25693
+references:
+  https://lists.apache.org/thread/79qn8g5xbq036f8crb115obvr22l52q4
+  https://github.com/apache/airflow/pull/29500
+
+Improper Input Validation vulnerability in the Apache Airflow Sqoop Provider.
+
+This issue affects Apache Airflow Sqoop Provider versions before 3.1.1.
+

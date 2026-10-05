@@ -1,0 +1,21 @@
+PYSEC-2018-139 PyPI/exiv2 — CiffDirectory::readDirectory() at crwimage_int.cpp in Exiv2 0.26 has excessive stack consumption due
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2018-17581
+references:
+  https://github.com/SegfaultMasters/covering360/blob/master/Exiv2
+  https://github.com/SegfaultMasters/covering360/blob/master/Exiv2
+  https://github.com/SegfaultMasters/covering360/blob/master/Exiv2
+  https://github.com/Exiv2/exiv2/issues/460
+  https://github.com/Exiv2/exiv2/issues/460
+  https://github.com/Exiv2/exiv2/issues/460
+  https://usn.ubuntu.com/3852-1/
+  https://lists.debian.org/debian-lts-announce/2019/02/msg00038.html
+  https://lists.debian.org/debian-lts-announce/2019/02/msg00038.html
+  https://access.redhat.com/errata/RHSA-2019:2101
+  https://lists.debian.org/debian-lts-announce/2023/01/msg00004.html
+  https://lists.debian.org/debian-lts-announce/2023/01/msg00004.html
+
+CiffDirectory::readDirectory() at crwimage_int.cpp in Exiv2 0.26 has excessive stack consumption due to a recursive function, leading to Denial of service.

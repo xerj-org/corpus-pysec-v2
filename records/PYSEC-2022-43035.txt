@@ -1,0 +1,13 @@
+PYSEC-2022-43035 PyPI/democritus-csv — The d8s-urls package for Python, as distributed on PyPI, included a potential code-execution backdoo
+package: democritus-csv
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-42036
+references:
+  https://pypi.org/project/d8s-urls/
+  https://github.com/democritus-project/d8s-urls/issues/12
+  https://github.com/democritus-project/d8s-urls/issues/12
+  https://pypi.org/project/democritus-csv/
+
+The d8s-urls package for Python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. The backdoor is the democritus-csv package. The affected version is 0.1.0.

@@ -1,0 +1,15 @@
+PYSEC-2026-1490 PyPI/keystone — OpenStack Keystone allows /v3/ec2tokens or /v3/s3tokens request with valid AWS Signature to provide Keystone authorization.
+package: keystone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 26.0.1, >= 27.0.0.0rc1, < 27.0.0, >= 28.0.0.0rc1, < 28.0.0 (ECOSYSTEM)
+aliases: CVE-2025-65073, GHSA-hcqg-5g63-7j9h
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-65073
+  https://github.com/openstack/keystone
+  https://www.openwall.com/lists/oss-security/2025/11/04/2
+  http://www.openwall.com/lists/oss-security/2025/11/17/6
+  https://pypi.org/project/keystone
+  https://github.com/advisories/GHSA-hcqg-5g63-7j9h
+
+OpenStack Keystone before 26.0.1, 27.0.0, and 28.0.0 allows a /v3/ec2tokens or /v3/s3tokens request with a valid AWS Signature to provide Keystone authorization.

@@ -1,0 +1,17 @@
+PYSEC-2026-722 PyPI/opencv-contrib-python-headless — Divide By Zero in OpenCV.
+package: opencv-contrib-python-headless
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.1.1.26 (ECOSYSTEM)
+aliases: CVE-2019-15939, GHSA-hxfw-jm98-v4mq
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2019-15939
+  https://github.com/OpenCV/opencv/issues/15287
+  https://github.com/opencv/opencv/pull/15382
+  https://github.com/opencv/opencv-python
+  https://lists.debian.org/debian-lts-announce/2021/10/msg00028.html
+  http://lists.opensuse.org/opensuse-security-announce/2019-12/msg00025.html
+  https://pypi.org/project/opencv-contrib-python-headless
+  https://github.com/advisories/GHSA-hxfw-jm98-v4mq
+
+An issue was discovered in OpenCV 4.1.0 (OpenCV-Python 4.1.0.25). There is a divide-by-zero error in cv::HOGDescriptor::getDescriptorSize in modules/objdetect/src/hog.cpp.

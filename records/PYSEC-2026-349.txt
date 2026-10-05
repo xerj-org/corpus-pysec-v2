@@ -1,0 +1,15 @@
+PYSEC-2026-349 PyPI/h2o — H2O affected by a deserialization vulnerability
+package: h2o
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 3.46.0.7 (ECOSYSTEM)
+aliases: CVE-2025-6544, GHSA-5w3j-gwgh-4rfv
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-6544
+  https://github.com/h2oai/h2o-3/commit/0298ee348f5c73673b7b542158081e79605f5f25
+  https://github.com/h2oai/h2o-3
+  https://huntr.com/bounties/53f35a0f-d644-4f82-93aa-89fe7e0aed40
+  https://pypi.org/project/h2o
+  https://github.com/advisories/GHSA-5w3j-gwgh-4rfv
+
+A deserialization vulnerability exists in h2oai/h2o-3 versions <= 3.46.0.7, allowing attackers to read arbitrary system files and execute arbitrary code. The vulnerability arises from improper handling of JDBC connection parameters, which can be exploited by bypassing regular expression checks and using double URL encoding. This issue impacts all users of the affected versions.

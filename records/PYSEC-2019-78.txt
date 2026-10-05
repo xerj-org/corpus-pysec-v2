@@ -1,0 +1,12 @@
+PYSEC-2019-78 PyPI/ceilometer — A vulnerability was found in ceilometer before version 12.0.0.0rc1. An Information Exposure in ceilo
+package: ceilometer
+ecosystem: PyPI
+versions affected:
+  >= 0, < 12.0.0.0rc1 (ECOSYSTEM)
+aliases: CVE-2019-3830, GHSA-2cvf-r9jm-4qm9
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2019-3830
+  https://access.redhat.com/errata/RHSA-2019:0919
+  https://github.com/advisories/GHSA-2cvf-r9jm-4qm9
+
+A vulnerability was found in ceilometer before version 12.0.0.0rc1. An Information Exposure in ceilometer-agent prints sensitive configuration data to log files without DEBUG logging being activated.

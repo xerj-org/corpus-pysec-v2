@@ -1,0 +1,23 @@
+PYSEC-2026-3388 PyPI/tornado — Tornado has out-of-bounds memory access via C extension
+package: tornado
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.5.6 (ECOSYSTEM)
+aliases: CVE-2026-49854, GHSA-cx3h-4qpv-8hc9
+references:
+  https://github.com/tornadoweb/tornado/security/advisories/GHSA-cx3h-4qpv-8hc9
+  https://github.com/tornadoweb/tornado
+  https://github.com/tornadoweb/tornado/releases/tag/v6.5.6
+  https://pypi.org/project/tornado
+  https://github.com/advisories/GHSA-cx3h-4qpv-8hc9
+  https://nvd.nist.gov/vuln/detail/CVE-2026-49854
+
+### Summary
+
+Tornado's optional native extension `tornado.speedups` implements `websocket_mask` without validating that the `mask` argument is exactly four bytes long. The C function reads four bytes from `mask` unconditionally, even when Python passes a shorter byte string. This can read beyond the provided buffer, exposing up to 3 bytes of uninitialized memory.
+
+The behavior is reachable from Tornado's XSRF token decoder when `xsrf_cookies=True` and the native extension is active. 
+
+### Mitigations
+
+This bug is fixed in Tornado 6.5.6. Prior to upgrading to this version, setting the environment variable TORNADO_EXTENSION=0 will disable the vulnerable code (at the expense of reducing websocket performance).

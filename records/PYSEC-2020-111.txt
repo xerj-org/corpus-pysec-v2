@@ -1,0 +1,11 @@
+PYSEC-2020-111 PyPI/svglib — The svglib package through 0.9.3 for Python allows XXE attacks via an svg2rlg call.
+package: svglib
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.9.4 (ECOSYSTEM)
+aliases: CVE-2020-10799, GHSA-3vcg-8p79-jpcv
+references:
+  https://github.com/deeplook/svglib/issues/229
+  https://github.com/advisories/GHSA-3vcg-8p79-jpcv
+
+The svglib package through 0.9.3 for Python allows XXE attacks via an svg2rlg call.

@@ -1,0 +1,12 @@
+PYSEC-2017-56 PyPI/plone — Plone 3.3 through 5.1a1 allows remote attackers to obtain information about the ID of sensitive cont
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 3.3, < 5.1a2 (ECOSYSTEM)
+aliases: CVE-2016-4042, GHSA-v4vj-49m5-wjhw
+references:
+  https://plone.org/security/hotfix/20160419/unauthorized-disclosure-of-site-content
+  http://www.openwall.com/lists/oss-security/2016/04/20/2
+  https://github.com/advisories/GHSA-v4vj-49m5-wjhw
+
+Plone 3.3 through 5.1a1 allows remote attackers to obtain information about the ID of sensitive content via unspecified vectors.

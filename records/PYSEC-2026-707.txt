@@ -1,0 +1,18 @@
+PYSEC-2026-707 PyPI/opencv-contrib-python — Double Free in OpenCV
+package: opencv-contrib-python
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.3.1.11 (ECOSYSTEM)
+aliases: CVE-2016-1516, GHSA-cvhw-2593-5j2q
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2016-1516
+  https://github.com/opencv/opencv/issues/5956
+  https://github.com/opencv/opencv/pull/9376
+  https://arxiv.org/pdf/1701.04739.pdf
+  https://github.com/opencv/opencv-python
+  https://lists.debian.org/debian-lts-announce/2018/07/msg00030.html
+  https://lists.debian.org/debian-lts-announce/2021/10/msg00028.html
+  https://pypi.org/project/opencv-contrib-python
+  https://github.com/advisories/GHSA-cvhw-2593-5j2q
+
+OpenCV 3.0.0 has a double free issue that allows attackers to execute arbitrary code. This issue was fixed in OpenCV version 3.3.1 (corresponding to OpenCV-Python and and OpenCV-Contrib-Python 3.3.1.11).

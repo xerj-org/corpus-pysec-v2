@@ -1,0 +1,15 @@
+PYSEC-2025-174 PyPI/pyassimp — A vulnerability was found in Open Asset Import Library Assimp 5.4.3. It has been declared as problem
+package: pyassimp
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 5.4.3 (ECOSYSTEM)
+aliases: CVE-2025-5167
+references:
+  https://vuldb.com/?id.310255
+  https://vuldb.com/?submit.578002
+  https://github.com/assimp/assimp/issues/6128
+  https://vuldb.com/?ctiid.310255
+  https://github.com/assimp/assimp/issues/6169
+  https://github.com/user-attachments/files/20208666/reproducer.zip
+
+A vulnerability was found in Open Asset Import Library Assimp 5.4.3. It has been declared as problematic. Affected by this vulnerability is the function LWOImporter::GetS0 in the library assimp/code/AssetLib/LWO/LWOLoader.h. The manipulation of the argument out leads to out-of-bounds read. The attack needs to be approached locally. The exploit has been disclosed to the public and may be used. The project decided to collect all Fuzzer bugs in a main-issue to address them in the future.

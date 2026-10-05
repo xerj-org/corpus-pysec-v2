@@ -1,0 +1,11 @@
+PYSEC-2019-207 PyPI/tensorflow — Memcpy parameter overlap in Google Snappy library 1.1.4, as used in Google TensorFlow before 1.7.1, 
+package: tensorflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.7.1 (ECOSYSTEM)
+aliases: CVE-2018-7577, GHSA-qx2v-j445-g354
+references:
+  https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/advisory/tfsa-2018-005.md
+  https://github.com/advisories/GHSA-qx2v-j445-g354
+
+Memcpy parameter overlap in Google Snappy library 1.1.4, as used in Google TensorFlow before 1.7.1, could result in a crash or read from other parts of process memory.

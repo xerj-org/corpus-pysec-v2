@@ -1,0 +1,50 @@
+PYSEC-2026-4179 PyPI/vllm — vLLM: Unauthenticated audio decompression-bomb DoS in /v1/chat/completions
+package: vllm
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.24.0 (ECOSYSTEM)
+aliases: CVE-2026-57173, GHSA-hcwq-8wjf-3gcr
+references:
+  https://github.com/vllm-project/vllm/security/advisories/GHSA-hcwq-8wjf-3gcr
+  https://nvd.nist.gov/vuln/detail/CVE-2026-57173
+  https://github.com/vllm-project/vllm/pull/45908
+  https://github.com/vllm-project/vllm/commit/3d20275bb4d434f53055c3c0b645fd8bb072965e
+  https://github.com/vllm-project/vllm
+  https://github.com/vllm-project/vllm/releases/tag/v0.24.0
+  https://pypi.org/project/vllm
+  https://github.com/advisories/GHSA-hcwq-8wjf-3gcr
+
+### Summary
+The audio decode-duration guard (`max_duration_s`, env `VLLM_MAX_AUDIO_DECODE_DURATION_S`, default 600s) that protects against audio decompression-bomb DoS is wired into **only** the speech-to-text path (`/v1/audio/transcriptions`). The **chat** audio path (`/v1/chat/completions`, `input_audio` content parts) calls the same decoder with **no** limit, so an **unauthenticated** client can submit a few-KB compressed audio file that expands to multiple GB of float32 PCM at decode time, OOM-killing the worker. This is a distinct sibling of **CVE-2026-5497** (video frame-count bomb, `VideoMediaIO.load_base64`) and **GHSA-pq5c-rjhq-qp7p** (image) in the same media subsystem.
+
+Verified against `main` at HEAD `d78650c` (2026-06-16); applicable to the latest release v0.23.0.
+
+### Details
+The guard rejects long audio *during* decode (before allocation), implemented in `vllm/multimodal/media/audio.py`:
+- `load_audio_pyav` — metadata reject (~82-98) and live sample-count reject (~129-136)
+- `load_audio_soundfile` — frames reject (~165-174)
+
+All are gated on `if max_duration_s is not None`.
+
+It is passed in exactly **one** place — the transcription serving layer:
+```python
+# .../speech_to_text/base/serving.py:~170-174
+load_audio(buf, sr=..., max_duration_s=self.max_audio_decode_duration_s)
+#   self.max_audio_decode_duration_s = envs.VLLM_MAX_AUDIO_DECODE_DURATION_S  (default 600)
+```
+
+The chat path never threads it:
+```python
+# vllm/multimodal/media/audio.py:237-238
+def load_bytes(self, data: bytes) -> tuple[npt.NDArray, float]:
+    return load_audio(BytesIO(data), sr=None)   # no max_duration_s -> every guard above is skipped
+```
+
+Unauthenticated reachability chain (chat):
+`parse_input_audio` (`chat_utils.py`) -> `parse_audio` -> `connector.fetch_audio` -> `AudioMediaIO._load_data_url` -> `load_base64` -> `load_bytes` -> `load_audio(..., sr=None)`. The connector never passes `max_duration_s`, and inline `data:` URLs need no HTTP fetch (so `VLLM_AUDIO_FETCH_TIMEOUT` does not bound them). The OpenAI-compatible server has no auth by default (auth only when `--api-key` / `VLLM_API_KEY` is set).
+
+### Impact
+Unauthenticated remote denial of service (availability) via memory amplification on a default-no-auth endpoint, on any deployment serving an audio-capable model. Same class and impact as the sibling CVE-2026-5497 (video). CWE-770 / CWE-409.
+
+### Fix
+A fix was introduced in this MR: https://github.com/vllm-project/vllm/pull/45908

@@ -1,0 +1,17 @@
+PYSEC-2026-1129 PyPI/apache-airflow — Apache Airflow `/api/v2/dagReports` executes DAG Python in API
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 3.0.0, < 3.1.1 (ECOSYSTEM)
+aliases: CVE-2025-62402, GHSA-273c-4g26-4jpm
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-62402
+  https://github.com/apache/airflow/pull/56609
+  https://github.com/apache/airflow/commit/828aaa0b1d95caf90612a648867c17aec7e87874
+  https://github.com/apache/airflow
+  https://lists.apache.org/thread/vbzxnxn031wb998hsd7vqnvh4z8nx6rs
+  http://www.openwall.com/lists/oss-security/2025/10/29/7
+  https://pypi.org/project/apache-airflow
+  https://github.com/advisories/GHSA-273c-4g26-4jpm
+
+API users via `/api/v2/dagReports` could perform Dag code execution in the context of the api-server if the api-server was deployed in the environment where Dag files were available.

@@ -1,0 +1,24 @@
+PYSEC-2008-10 PyPI/roundup — The xml-rpc server in Roundup 1.4.4 does not check property permissions, which allows attackers to b
+package: roundup
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.5 (ECOSYSTEM)
+aliases: CVE-2008-1475, GHSA-j59j-h3g7-cpmf
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=436546
+  http://sourceforge.net/tracker/index.php?func=detail&aid=1907211&group_id=31577&atid=402788
+  https://www.redhat.com/archives/fedora-package-announce/2008-March/msg00264.html
+  https://www.redhat.com/archives/fedora-package-announce/2008-March/msg00375.html
+  http://www.securityfocus.com/bid/28238
+  http://secunia.com/advisories/29336
+  http://secunia.com/advisories/29375
+  http://secunia.com/advisories/30274
+  http://security.gentoo.org/glsa/glsa-200805-21.xml
+  http://secunia.com/advisories/32805
+  https://www.redhat.com/archives/fedora-package-announce/2008-November/msg00478.html
+  https://www.redhat.com/archives/fedora-package-announce/2008-November/msg00452.html
+  http://www.vupen.com/english/advisories/2008/0891
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/41240
+  https://github.com/advisories/GHSA-j59j-h3g7-cpmf
+
+The xml-rpc server in Roundup 1.4.4 does not check property permissions, which allows attackers to bypass restrictions and edit or read restricted properties via the (1) list, (2) display, and (3) set methods.

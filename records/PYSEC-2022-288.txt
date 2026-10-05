@@ -1,0 +1,15 @@
+PYSEC-2022-288 PyPI/joblib — The package joblib from 0 and before 1.2.0 are vulnerable to Arbitrary Code Execution via the pre_di
+package: joblib
+ecosystem: PyPI
+versions affected:
+  >= 0, < b90f10efeb670a2cc877fb88ebb3f2019189e059 (GIT: https://github.com/joblib/joblib)
+  >= 0, < 1.2.0 (ECOSYSTEM)
+aliases: CVE-2022-21797, GHSA-6hrg-qmvc-2xh8
+references:
+  https://github.com/joblib/joblib/commit/b90f10efeb670a2cc877fb88ebb3f2019189e059
+  https://github.com/joblib/joblib/issues/1128
+  https://github.com/joblib/joblib/pull/1321
+  https://security.snyk.io/vuln/SNYK-PYTHON-JOBLIB-3027033
+  https://github.com/advisories/GHSA-6hrg-qmvc-2xh8
+
+The package joblib from 0 and before 1.2.0 are vulnerable to Arbitrary Code Execution via the pre_dispatch flag in Parallel() class due to the eval() statement.

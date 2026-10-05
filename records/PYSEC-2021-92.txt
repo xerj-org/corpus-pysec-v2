@@ -1,0 +1,13 @@
+PYSEC-2021-92 PyPI/pillow — An issue was discovered in Pillow before 8.2.0. For FLI data, FliDecode did not properly check that 
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 8.2.0 (ECOSYSTEM)
+aliases: CVE-2021-28676, GHSA-7r7m-5h27-29hp
+references:
+  https://pillow.readthedocs.io/en/stable/releasenotes/8.2.0.html#cve-2021-28676-fix-fli-dos
+  https://github.com/python-pillow/Pillow/pull/5377
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/MQHA5HAIBOYI3R6HDWCLAGFTIQP767FL/
+  https://github.com/advisories/GHSA-7r7m-5h27-29hp
+
+An issue was discovered in Pillow before 8.2.0. For FLI data, FliDecode did not properly check that the block advance was non-zero, potentially leading to an infinite loop on load.

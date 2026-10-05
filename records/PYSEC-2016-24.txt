@@ -1,0 +1,15 @@
+PYSEC-2016-24 PyPI/bottle — redirect() in bottle.py in bottle 0.12.10 doesn't filter a "\r\n" sequence, which leads to a CRLF at
+package: bottle
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6d7e13da0f998820800ecb3fe9ccee4189aefb54 (GIT: https://github.com/bottlepy/bottle)
+  >= 0.10.1, < 0.12.11 (ECOSYSTEM)
+aliases: CVE-2016-9964, GHSA-j6f7-hghw-g437
+references:
+  https://github.com/bottlepy/bottle/issues/913
+  https://github.com/bottlepy/bottle/commit/6d7e13da0f998820800ecb3fe9ccee4189aefb54
+  http://www.securityfocus.com/bid/94961
+  http://www.debian.org/security/2016/dsa-3743
+  https://github.com/advisories/GHSA-j6f7-hghw-g437
+
+redirect() in bottle.py in bottle 0.12.10 doesn't filter a "\r\n" sequence, which leads to a CRLF attack, as demonstrated by a redirect("233\r\nSet-Cookie: name=salt") call.

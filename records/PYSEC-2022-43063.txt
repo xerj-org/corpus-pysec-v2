@@ -1,0 +1,13 @@
+PYSEC-2022-43063 PyPI/paddlepaddle — Code injection in paddle.audio.functional.get_window in PaddlePaddle 2.4.0-rc0 allows arbitrary code
+package: paddlepaddle
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.4.0 (ECOSYSTEM)
+aliases: CVE-2022-46742, GHSA-gcjf-29m9-888q
+references:
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2022-002.md
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2022-002.md
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2022-002.md
+  https://github.com/advisories/GHSA-gcjf-29m9-888q
+
+Code injection in paddle.audio.functional.get_window in PaddlePaddle 2.4.0-rc0 allows arbitrary code execution.

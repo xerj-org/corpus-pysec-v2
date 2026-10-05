@@ -1,0 +1,13 @@
+PYSEC-2026-164 PyPI/jupyterlab — JupyterLab is an extensible environment for interactive and reproducible computing, based on the Jup
+package: jupyterlab
+ecosystem: PyPI
+versions affected:
+  >= 4.0.0, < 4.5.7 (ECOSYSTEM)
+aliases: CVE-2026-42266, GHSA-37w4-hwhx-4rc4
+references:
+  https://jupyterhub.readthedocs.io/en/5.2.1/explanation/websecurity.html
+  https://jupyterlab.readthedocs.io/en/latest/user/extensions.html#extension-manager-implementations
+  https://github.com/jupyterlab/jupyterlab/security/advisories/GHSA-37w4-hwhx-4rc4
+  https://github.com/jupyterlab/jupyterlab/releases/tag/v4.5.7
+
+JupyterLab is an extensible environment for interactive and reproducible computing, based on the Jupyter Notebook Architecture. From 4.0.0 to 4.5.6, the allow-list of extensions that can be installed from PyPI Extension Manager (allowed_extensions_uris) is not correctly enforced by JupyterLab. The PyPI Extension Manager was not contained to packages listed on the default PyPI index. This vulnerability is fixed in 4.5.7.

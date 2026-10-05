@@ -1,0 +1,18 @@
+PYSEC-2026-4009 PyPI/local-operator — Path traversal and arbitrary directory deletion/overwrite via agent profile import in local-operator
+package: local-operator
+ecosystem: PyPI
+versions affected:
+  >= 0, < 29fc4c68a3ed1d238b8abf6b6a6136a3361416a5 (GIT: https://github.com/damianvtran/local-operator)
+  >= 0, < 0.47.5 (ECOSYSTEM)
+aliases: GHSA-22mg-8gw7-636x
+references:
+  https://github.com/damianvtran/local-operator/security/advisories/GHSA-22mg-8gw7-636x
+  https://github.com/damianvtran/local-operator/pull/643
+  https://github.com/damianvtran/local-operator/commit/29fc4c68a3ed1d238b8abf6b6a6136a3361416a5
+  https://github.com/damianvtran/local-operator/releases/tag/v0.47.5
+  https://pypi.org/project/local-operator/
+
+The `/v1/agents/import` endpoint and `AgentRegistry.import_agent()` in local-operator versions before 0.47.5 trust the `id` field inside `agent.yml` of an uploaded agent profile archive when constructing the destination directory. A crafted `id` containing directory traversal sequences makes `shutil.rmtree` and `shutil.copy2` operate outside the agent registry, allowing an unauthenticated client with network access to the API to recursively delete arbitrary directories and write files with the privileges of the server process. Even without traversal, an imported archive could overwrite or delete existing local agent profiles.
+
+Version 0.47.5 assigns a fresh server-generated identifier to every imported profile, never derives a filesystem path from archive metadata, creates destination directories exclusively, and binds `lop serve` to 127.0.0.1 by default.
+

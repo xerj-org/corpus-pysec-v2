@@ -1,0 +1,11 @@
+PYSEC-2021-144 PyPI/quokka — XML External Entities (XXE) in Quokka v0.4.0 allows remote attackers to execute arbitrary code via t
+package: quokka
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2020-18703, GHSA-3xg5-6c3j-vp8x
+references:
+  https://github.com/rochacbruno/quokka/issues/676
+  https://github.com/advisories/GHSA-3xg5-6c3j-vp8x
+
+XML External Entities (XXE) in Quokka v0.4.0 allows remote attackers to execute arbitrary code via the component 'quokka/utils/atom.py'.

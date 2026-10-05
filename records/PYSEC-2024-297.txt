@@ -1,0 +1,10 @@
+PYSEC-2024-297 PyPI/pycti — OpenCTI is an open-source cyber threat intelligence platform. In versions below 6.2.18, because the 
+package: pycti
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.2.18 (ECOSYSTEM)
+aliases: CVE-2024-45404, GHSA-hg56-r6hh-56j7
+references:
+  https://github.com/OpenCTI-Platform/opencti/security/advisories/GHSA-hg56-r6hh-56j7
+
+OpenCTI is an open-source cyber threat intelligence platform. In versions below 6.2.18, because the function to limit the rate of OTP does not exist, an attacker with valid credentials or a malicious user who commits internal fraud can break through the two-factor authentication and hijack the account. This is because the otpLogin mutation does not implement One Time Password rate limiting. As of time of publication, it is unknown whether a patch is available.

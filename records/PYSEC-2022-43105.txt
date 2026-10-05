@@ -1,0 +1,12 @@
+PYSEC-2022-43105 PyPI/democritus-hypothesis — The d8s-dates for python, as distributed on PyPI, included a potential code-execution backdoor inser
+package: democritus-hypothesis
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-40808
+references:
+  https://github.com/democritus-project/d8s-dates/issues/26
+  https://github.com/democritus-project/d8s-dates/issues/26
+  https://pypi.org/project/democritus-hypothesis/
+
+The d8s-dates for python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. The backdoor is the democritus-hypothesis package. The affected version is 0.1.0

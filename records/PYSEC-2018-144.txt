@@ -1,0 +1,13 @@
+PYSEC-2018-144 PyPI/exiv2 — The Exiv2::Jp2Image::readMetadata function in jp2image.cpp in Exiv2 0.26 allows remote attackers to 
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2018-4868
+references:
+  https://github.com/Exiv2/exiv2/issues/202
+  https://github.com/Exiv2/exiv2/issues/202
+  http://www.securityfocus.com/bid/102477
+  http://www.securityfocus.com/bid/102477
+
+The Exiv2::Jp2Image::readMetadata function in jp2image.cpp in Exiv2 0.26 allows remote attackers to cause a denial of service (excessive memory allocation) via a crafted file.

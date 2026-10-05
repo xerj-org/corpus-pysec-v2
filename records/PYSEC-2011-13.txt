@@ -1,0 +1,20 @@
+PYSEC-2011-13 PyPI/plone — Unspecified vulnerability in Plone 2.5 through 4.0, as used in Conga, luci, and possibly other produ
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.0.1 (ECOSYSTEM)
+aliases: CVE-2011-0720, GHSA-3v28-9jjp-4g5w
+references:
+  http://secunia.com/advisories/43146
+  http://www.securityfocus.com/bid/46102
+  http://plone.org/products/plone/security/advisories/cve-2011-0720
+  http://osvdb.org/70753
+  http://www.redhat.com/support/errata/RHSA-2011-0394.html
+  http://www.redhat.com/support/errata/RHSA-2011-0393.html
+  http://www.vupen.com/english/advisories/2011/0796
+  http://secunia.com/advisories/43914
+  http://www.securitytracker.com/id?1025258
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/65099
+  https://github.com/advisories/GHSA-3v28-9jjp-4g5w
+
+Unspecified vulnerability in Plone 2.5 through 4.0, as used in Conga, luci, and possibly other products, allows remote attackers to obtain administrative access, read or create arbitrary content, and change the site skin via unknown vectors.

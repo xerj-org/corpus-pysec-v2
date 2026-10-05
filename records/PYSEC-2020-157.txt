@@ -1,0 +1,13 @@
+PYSEC-2020-157 PyPI/werkzeug — Open redirect vulnerability in werkzeug before 0.11.6 via a double slash in the URL.
+package: werkzeug
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.11.6 (ECOSYSTEM)
+aliases: CVE-2020-28724, GHSA-3p3h-qghp-hvh2
+references:
+  https://github.com/pallets/werkzeug/issues/822
+  https://github.com/pallets/werkzeug/pull/890/files
+  https://github.com/pallets/flask/issues/1639
+  https://github.com/advisories/GHSA-3p3h-qghp-hvh2
+
+Open redirect vulnerability in werkzeug before 0.11.6 via a double slash in the URL.

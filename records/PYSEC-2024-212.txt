@@ -1,0 +1,14 @@
+PYSEC-2024-212 PyPI/apache-airflow — Apache Airflow versions before 2.10.1 have a vulnerability that allows DAG authors to add local sett
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.10.1 (ECOSYSTEM)
+aliases: CVE-2024-45034, GHSA-92xg-gmrq-5c3w
+references:
+  https://github.com/apache/airflow/pull/41672
+  https://lists.apache.org/thread/b4fcw33vh60yfg9990n5vmc7sy2dcgjx
+  http://www.openwall.com/lists/oss-security/2024/09/06/3
+  https://github.com/advisories/GHSA-92xg-gmrq-5c3w
+
+Apache Airflow versions before 2.10.1 have a vulnerability that allows DAG authors to add local settings to the DAG folder and get it executed by the scheduler, where the scheduler is not supposed to execute code submitted by the DAG author. 
+Users are advised to upgrade to version 2.10.1 or later, which has fixed the vulnerability.

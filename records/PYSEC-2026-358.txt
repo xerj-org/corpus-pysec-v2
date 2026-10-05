@@ -1,0 +1,15 @@
+PYSEC-2026-358 PyPI/invokeai — InvokeAI Arbitrary File Deletion vulnerability
+package: invokeai
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.3.0rc1 (ECOSYSTEM)
+aliases: CVE-2024-11042, GHSA-227r-w5j2-6243
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-11042
+  https://github.com/invoke-ai/invokeai/commit/5440c037674882b2ab7acd59087e9bb04b49657a
+  https://github.com/invoke-ai/InvokeAI
+  https://huntr.com/bounties/635535a7-c804-4789-ac3a-48d951263987
+  https://pypi.org/project/invokeai
+  https://github.com/advisories/GHSA-227r-w5j2-6243
+
+In invoke-ai/invokeai version v5.0.2, the web API `POST /api/v1/images/delete` is vulnerable to Arbitrary File Deletion. This vulnerability allows unauthorized attackers to delete arbitrary files on the server, potentially including critical or sensitive system files such as SSH keys, SQLite databases, and configuration files. This can impact the integrity and availability of applications relying on these files.

@@ -1,0 +1,15 @@
+PYSEC-2026-324 PyPI/dbgpt — DB-GPT Absolute Path Traversal in knowledge/{space_name}/document/upload
+package: dbgpt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.6.2 (ECOSYSTEM)
+aliases: CVE-2024-10833, GHSA-j9g7-mqhh-9hxf
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-10833
+  https://github.com/eosphoros-ai/DB-GPT/commit/780ce803e325b87f4ddfbe5824451e379aeee56c
+  https://github.com/eosphoros-ai/DB-GPT
+  https://huntr.com/bounties/dc58e981-e325-4c11-b4e1-1095890fd15a
+  https://pypi.org/project/dbgpt
+  https://github.com/advisories/GHSA-j9g7-mqhh-9hxf
+
+eosphoros-ai/db-gpt version 0.6.0 is vulnerable to an arbitrary file write through the knowledge API. The endpoint for uploading files as 'knowledge' is susceptible to absolute path traversal, allowing attackers to write files to arbitrary locations on the target server. This vulnerability arises because the 'doc_file.filename' parameter is user-controllable, enabling the construction of absolute paths.

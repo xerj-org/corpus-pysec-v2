@@ -1,0 +1,13 @@
+PYSEC-2014-85 PyPI/oauth2 — The Server.verify_request function in SimpleGeo python-oauth2 does not check the nonce, which allows
+package: oauth2
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.9rc1 (ECOSYSTEM)
+aliases: CVE-2013-4346, GHSA-4433-4cxq-vv73
+references:
+  http://www.openwall.com/lists/oss-security/2013/09/12/7
+  https://github.com/simplegeo/python-oauth2/issues/129
+  http://www.securityfocus.com/bid/62386
+  https://github.com/advisories/GHSA-4433-4cxq-vv73
+
+The Server.verify_request function in SimpleGeo python-oauth2 does not check the nonce, which allows remote attackers to perform replay attacks via a signed URL.

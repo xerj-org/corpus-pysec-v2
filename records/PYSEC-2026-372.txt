@@ -1,0 +1,15 @@
+PYSEC-2026-372 PyPI/langchain — Langchain SQL Injection vulnerability
+package: langchain
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.0.247 (ECOSYSTEM)
+aliases: CVE-2023-32785, GHSA-8h5w-f6q9-wg35
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-32785
+  https://github.com/langchain-ai/langchain/issues/5923#issuecomment-1696053841
+  https://gist.github.com/rharang/9c58d39db8c01db5b7c888e467c0533f
+  https://github.com/langchain-ai/langchain
+  https://pypi.org/project/langchain
+  https://github.com/advisories/GHSA-8h5w-f6q9-wg35
+
+In Langchain before 0.0.247, prompt injection allows execution of arbitrary code against the SQL service provided by the chain. 

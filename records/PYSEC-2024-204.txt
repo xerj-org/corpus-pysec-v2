@@ -1,0 +1,12 @@
+PYSEC-2024-204 PyPI/torchgeo — TorchGeo Remote Code Execution Vulnerability
+package: torchgeo
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.6.1 (ECOSYSTEM)
+aliases: CVE-2024-49048, GHSA-ghq9-vc6f-8qjf
+references:
+  https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-49048
+  https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-49048
+  https://github.com/advisories/GHSA-ghq9-vc6f-8qjf
+
+TorchGeo Remote Code Execution Vulnerability

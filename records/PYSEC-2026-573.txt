@@ -1,0 +1,15 @@
+PYSEC-2026-573 PyPI/wger — wger vulnerable to brute force attempts
+package: wger
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.2 (ECOSYSTEM)
+aliases: CVE-2022-2650, GHSA-gr58-76rp-mmg4
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2022-2650
+  https://github.com/wger-project/wger/commit/5e3167e3a2dc95836fa2607fe201524c031a2c4c
+  https://github.com/wger-project/wger
+  https://huntr.dev/bounties/f0d85efa-4e78-4b1d-848f-edea115af64b
+  https://pypi.org/project/wger
+  https://github.com/advisories/GHSA-gr58-76rp-mmg4
+
+Improper Restriction of Excessive Authentication Attempts in GitHub repository wger-project/wger prior to 2.2.

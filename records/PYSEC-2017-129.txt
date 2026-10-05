@@ -1,0 +1,10 @@
+PYSEC-2017-129 PyPI/exiv2 — There is a heap-based buffer over-read in libexiv2 in Exiv2 0.26 that is triggered in the Exiv2::Ima
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2017-12957
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=1482423
+
+There is a heap-based buffer over-read in libexiv2 in Exiv2 0.26 that is triggered in the Exiv2::Image::io function in image.cpp. It will lead to remote denial of service.

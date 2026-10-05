@@ -1,0 +1,11 @@
+PYSEC-2019-144 PyPI/arrayfire — An issue was discovered in the arrayfire crate before 3.6.0 for Rust. Addition of the repr() attribu
+package: arrayfire
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.6.0 (ECOSYSTEM)
+aliases: CVE-2018-20998, GHSA-69fv-gw6g-8ccg
+references:
+  https://rustsec.org/advisories/RUSTSEC-2018-0011.html
+  https://github.com/advisories/GHSA-69fv-gw6g-8ccg
+
+An issue was discovered in the arrayfire crate before 3.6.0 for Rust. Addition of the repr() attribute to an enum is mishandled, leading to memory corruption.

@@ -1,0 +1,13 @@
+PYSEC-2022-268 PyPI/rdiffweb — Improper Restriction of Rendered UI Layers or Frames in GitHub repository ikus060/rdiffweb prior to 
+package: rdiffweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < 7294bb7466532762c93d711211e5958940c1b428 (GIT: https://github.com/ikus060/rdiffweb)
+  >= 0, < 2.4.1 (ECOSYSTEM)
+aliases: CVE-2022-3167, GHSA-m379-x4xc-38x9
+references:
+  https://huntr.dev/bounties/e5c2625b-34cc-4805-8223-80f2689e4e5c
+  https://github.com/ikus060/rdiffweb/commit/7294bb7466532762c93d711211e5958940c1b428
+  https://github.com/advisories/GHSA-m379-x4xc-38x9
+
+Improper Restriction of Rendered UI Layers or Frames in GitHub repository ikus060/rdiffweb prior to 2.4.1.

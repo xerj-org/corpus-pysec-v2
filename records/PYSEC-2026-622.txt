@@ -1,0 +1,14 @@
+PYSEC-2026-622 PyPI/cheetah — Cheetah Path Search Order Hijacking
+package: cheetah
+ecosystem: PyPI
+versions affected:
+  >= 0.9.15, <= 0.9.16 (ECOSYSTEM)
+aliases: CVE-2005-1632, GHSA-vxf2-7rc3-pxmx
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2005-1632
+  https://github.com/cheetahtemplate/cheetah
+  https://web.archive.org/web/20050430021153/http://sourceforge.net/mailarchive/forum.php?thread_id=7070332&forum_id=1542
+  https://pypi.org/project/cheetah
+  https://github.com/advisories/GHSA-vxf2-7rc3-pxmx
+
+Cheetah 0.9.15 and 0.9.16 searches the `/tmp` directory for modules before using the paths in the `PYTHONPATH` variable, which allows local users to execute arbitrary code via a malicious module in `/tmp/`.

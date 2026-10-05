@@ -1,0 +1,14 @@
+PYSEC-2025-17 PyPI/mlflow — In mlflow/mlflow version 2.18, an admin is able to create a new user account without setting a passw
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 149c9e18aa219bc47e86b432e130e467a36f4a17 (GIT: https://github.com/mlflow/mlflow)
+  >= 0, < 2.19.0 (ECOSYSTEM)
+aliases: CVE-2025-1474, GHSA-4rj2-9gcx-5qhx
+references:
+  https://huntr.com/bounties/e79f7774-10fe-46b2-b522-e73b748e3b2d
+  https://github.com/mlflow/mlflow/commit/149c9e18aa219bc47e86b432e130e467a36f4a17
+  https://huntr.com/bounties/e79f7774-10fe-46b2-b522-e73b748e3b2d
+  https://github.com/advisories/GHSA-4rj2-9gcx-5qhx
+
+In mlflow/mlflow version 2.18, an admin is able to create a new user account without setting a password. This vulnerability could lead to security risks, as accounts without passwords may be susceptible to unauthorized access. Additionally, this issue violates best practices for secure user account management. The issue is fixed in version 2.19.0.

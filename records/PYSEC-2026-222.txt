@@ -1,0 +1,12 @@
+PYSEC-2026-222 PyPI/langflow — Langflow is a tool for building and deploying AI-powered agents and workflows. Prior to 1.7.0, the l
+package: langflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.7.0 (ECOSYSTEM)
+aliases: CVE-2026-55423, GHSA-7hw8-6q6r-4276
+references:
+  https://github.com/langflow-ai/langflow/pull/10528
+  https://github.com/langflow-ai/langflow/pull/10527
+  https://github.com/langflow-ai/langflow/security/advisories/GHSA-7hw8-6q6r-4276
+
+Langflow is a tool for building and deploying AI-powered agents and workflows. Prior to 1.7.0, the logout button does not clear the session. The previous user stays logged in unless another user explicitly logs in. This vulnerability is fixed in 1.7.0.

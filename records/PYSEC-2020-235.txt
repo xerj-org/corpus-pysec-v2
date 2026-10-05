@@ -1,0 +1,12 @@
+PYSEC-2020-235 PyPI/markdown2 — python-markdown2 before 1.0.1.14 has multiple cross-site scripting (XSS) issues.
+package: markdown2
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0.1.14 (ECOSYSTEM)
+aliases: CVE-2009-3724, SNYK-PYTHON-PYRAD-40000, GHSA-72cx-5ff9-4hhc
+references:
+  https://www.openwall.com/lists/oss-security/2009/10/29/5
+  https://snyk.io/vuln/SNYK-PYTHON-PYRAD-40000
+  https://github.com/advisories/GHSA-72cx-5ff9-4hhc
+
+python-markdown2 before 1.0.1.14 has multiple cross-site scripting (XSS) issues.

@@ -1,0 +1,14 @@
+PYSEC-2020-176 PyPI/pyyaml — PyYAML 5.1 through 5.1.2 has insufficient restrictions on the load and load_all functions because of
+package: pyyaml
+ecosystem: PyPI
+versions affected:
+  >= 5.1, < 5.2b1 (ECOSYSTEM)
+aliases: CVE-2019-20477, GHSA-3pqx-4fqf-j49f
+references:
+  https://www.exploit-db.com/download/47655
+  https://github.com/yaml/pyyaml/blob/master/CHANGES
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/52N5XS73Z5S4ZN7I7R56ICCPCTKCUV4H/
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/33VBUY73AA6CTTYL3LRWHNFDULV7PFPN/
+  https://github.com/advisories/GHSA-3pqx-4fqf-j49f
+
+PyYAML 5.1 through 5.1.2 has insufficient restrictions on the load and load_all functions because of a class deserialization issue, e.g., Popen is a class in the subprocess module. NOTE: this issue exists because of an incomplete fix for CVE-2017-18342.

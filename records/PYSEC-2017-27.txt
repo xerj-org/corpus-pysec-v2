@@ -1,0 +1,13 @@
+PYSEC-2017-27 PyPI/python-fedora — python-fedora 0.8.0 and lower is vulnerable to an open redirect resulting in loss of CSRF protection
+package: python-fedora
+ecosystem: PyPI
+versions affected:
+  >= 0, < b27f38a67573f4c989710c9bfb726dd4c1eeb929.patch, < b27f38a67573f4c989710c9bfb726dd4c1eeb929 (GIT: https://github.com/fedora-infra/python-fedora)
+  >= 0, < 0.9.0 (ECOSYSTEM)
+aliases: CVE-2017-1002150, GHSA-m242-wc86-8768
+references:
+  https://github.com/fedora-infra/python-fedora/commit/b27f38a67573f4c989710c9bfb726dd4c1eeb929.patch
+  https://github.com/fedora-infra/python-fedora/commit/b27f38a67573f4c989710c9bfb726dd4c1eeb929
+  https://github.com/advisories/GHSA-m242-wc86-8768
+
+python-fedora 0.8.0 and lower is vulnerable to an open redirect resulting in loss of CSRF protection

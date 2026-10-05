@@ -1,0 +1,16 @@
+PYSEC-2024-170 PyPI/zenml — A stored Cross-Site Scripting (XSS) vulnerability was identified in the zenml-io/zenml repository, s
+package: zenml
+ecosystem: PyPI
+versions affected:
+  >= 0, < 68bcb3ba60cba9729c9713a49c39502d40fb945e, < 68bcb3ba60cba9729c9713a49c39502d40fb945e (GIT: https://github.com/zenml-io/zenml)
+  >= 0, < 0.56.2 (ECOSYSTEM)
+aliases: CVE-2024-2171, GHSA-vwgf-7f9h-h499
+references:
+  https://huntr.com/bounties/cee06a28-7e3b-460b-b504-69add838ebe8
+  https://github.com/zenml-io/zenml/commit/68bcb3ba60cba9729c9713a49c39502d40fb945e
+  https://huntr.com/bounties/cee06a28-7e3b-460b-b504-69add838ebe8
+  https://huntr.com/bounties/cee06a28-7e3b-460b-b504-69add838ebe8
+  https://huntr.com/bounties/cee06a28-7e3b-460b-b504-69add838ebe8
+  https://github.com/advisories/GHSA-vwgf-7f9h-h499
+
+A stored Cross-Site Scripting (XSS) vulnerability was identified in the zenml-io/zenml repository, specifically within the 'logo_url' field. By injecting malicious payloads into this field, an attacker could send harmful messages to other users, potentially compromising their accounts. The vulnerability affects version 0.55.3 and was fixed in version 0.56.2. The impact of exploiting this vulnerability could lead to user account compromise.

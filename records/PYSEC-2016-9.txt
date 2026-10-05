@@ -1,0 +1,16 @@
+PYSEC-2016-9 PyPI/pillow — Pillow before 3.3.2 allows context-dependent attackers to execute arbitrary code by using the "craft
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.3.2 (ECOSYSTEM)
+aliases: CVE-2016-9190, GHSA-w4vg-rf63-f3j3
+references:
+  http://pillow.readthedocs.io/en/3.4.x/releasenotes/3.3.2.html
+  https://github.com/python-pillow/Pillow/issues/2105
+  https://github.com/python-pillow/Pillow/pull/2146/commits/5d8a0be45aad78c5a22c8d099118ee26ef8144af
+  http://www.securityfocus.com/bid/94234
+  http://www.debian.org/security/2016/dsa-3710
+  https://security.gentoo.org/glsa/201612-52
+  https://github.com/advisories/GHSA-w4vg-rf63-f3j3
+
+Pillow before 3.3.2 allows context-dependent attackers to execute arbitrary code by using the "crafted image file" approach, related to an "Insecure Sign Extension" issue affecting the ImagingNew in Storage.c component.

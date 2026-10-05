@@ -1,0 +1,11 @@
+PYSEC-2026-193 PyPI/gdal — In GDAL 3.1.0 through 3.13.0, scanForGeometryContainers in the netCDF driver allows code execution v
+package: gdal
+ecosystem: PyPI
+versions affected:
+  >= 3.1.0, < 3.13.1 (ECOSYSTEM)
+aliases: CVE-2026-49014, GHSA-wphc-7cm7-8mf7
+references:
+  https://github.com/OSGeo/gdal/issues/14594
+  https://github.com/advisories/GHSA-wphc-7cm7-8mf7
+
+In GDAL 3.1.0 through 3.13.0, scanForGeometryContainers in the netCDF driver allows code execution via a stack-based buffer overflow. It reads a geometry attribute into a fixed-size stack buffer without validating the attribute length. The attacker embeds the exploit as an oversized geometry attribute in a crafted NetCDF file. This achieves arbitrary code execution on the server running GDAL. This is in frmts/netcdf/netcdfsg.cpp.

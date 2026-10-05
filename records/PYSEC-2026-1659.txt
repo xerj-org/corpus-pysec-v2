@@ -1,0 +1,15 @@
+PYSEC-2026-1659 PyPI/mlflow — MLflow Local File Disclosure Vulnerability
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.9.2 (ECOSYSTEM)
+aliases: CVE-2023-6977, GHSA-qg8p-32gr-gh6x
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-6977
+  https://github.com/mlflow/mlflow/commit/4bd7f27c810ba7487d53ed5ef1038fca0f8dc28c
+  https://github.com/mlflow/mlflow
+  https://huntr.com/bounties/fe53bf71-3687-4711-90df-c26172880aaf
+  https://pypi.org/project/mlflow
+  https://github.com/advisories/GHSA-qg8p-32gr-gh6x
+
+This vulnerability enables malicious users to read sensitive files on the server.

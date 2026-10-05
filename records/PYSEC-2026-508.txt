@@ -1,0 +1,84 @@
+PYSEC-2026-508 PyPI/pytorch-lightning — Compromise of PyTorch Lightning PyPi Package Versions
+package: pytorch-lightning
+ecosystem: PyPI
+versions affected:
+  >= 2.6.2, < 2.6.4 (ECOSYSTEM)
+aliases: CVE-2026-44484, GHSA-w37p-236h-pfx3
+references:
+  https://github.com/Lightning-AI/pytorch-lightning/security/advisories/GHSA-w37p-236h-pfx3
+  https://nvd.nist.gov/vuln/detail/CVE-2026-44484
+  https://github.com/Lightning-AI/pytorch-lightning
+  https://pypi.org/project/pytorch-lightning
+  https://github.com/advisories/GHSA-w37p-236h-pfx3
+
+# Security Advisory: Compromise of PyTorch Lightning PyPI Package Versions
+ 
+**Published:** 2026-04-30  
+**Last Updated:** 2026-05-12 
+
+**Github Advisory:** [CVE-2026-44484](https://github.com/advisories/GHSA-w37p-236h-pfx3)
+
+We have identified a security incident affecting certain versions of one of our PyPI packages.
+
+ ## What happened
+
+We have determined that one or more released versions of this package have been compromised and include malicious code.
+
+Our current investigation indicates that the affected versions have introduced functionality consistent with a credential harvesting mechanism. We are still actively analysing the scope and behaviour of the code.
+
+At this stage, the root cause of the compromise is still under investigation.
+
+## What versions are affected
+
+We are currently working to confirm the exact set of impacted versions.
+
+We have determined the following versions as affected and ask that you delete them from your systems:
+
+- `2.6.2`
+ - `2.6.3`
+
+We will update this advisory if the versions impacted by this vulnerability change.
+
+## What you should do immediately
+
+If you have installed or are running any potentially affected versions:
+
+- Assume the environment may be compromised  
+- Immediately rotate all credentials and secrets that may have been exposed, including:  
+  - API keys  
+  - Access tokens  
+  - SSH keys  
+  - Service account credentials  
+- Rebuild affected systems from a known clean state  
+- Pin PyTorch Lightning to version `2.6.1`  
+- Review logs for any suspicious or unauthorised activity  
+
+## Actions we have taken
+
+- Quarantined malicious versions from PyPI  
+- Recommend using version `2.6.1`: https://github.com/Lightning-AI/pytorch-lightning/releases/tag/2.6.1  
+- Revoked and rotated all internal credentials associated with our release process  
+- Initiated a full investigation into the compromise  
+
+## Ongoing investigation
+
+We are actively working to:
+
+- Identify the exact mechanism of compromise  
+- Confirm the full set of affected versions  
+- Determine the behaviour and impact of the malicious code  
+- Assess any downstream impact to users  
+
+ We will provide updates as soon as more information becomes available.
+
+## Commitment to transparency
+
+We take the security of our users and the integrity of our software supply chain extremely seriously.
+
+We will continue to share timely and accurate updates as our investigation progresses.
+
+## Contact
+
+If you have questions or believe you may be impacted, please contact us at:
+
+**security@lightning.ai**

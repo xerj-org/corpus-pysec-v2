@@ -1,0 +1,11 @@
+PYSEC-2023-242 PyPI/httpie — Missing SSL certificate validation in HTTPie v3.2.2 allows attackers to eavesdrop on communications 
+package: httpie
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2023-48052, GHSA-8r96-8889-qg2x
+references:
+  https://gxx777.github.io/HTTPie_3.2.2_Cryptographic_API_Misuse_Vulnerability.md
+  https://github.com/advisories/GHSA-8r96-8889-qg2x
+
+Missing SSL certificate validation in HTTPie v3.2.2 allows attackers to eavesdrop on communications between the host and server via a man-in-the-middle attack.

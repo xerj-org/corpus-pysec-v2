@@ -1,0 +1,13 @@
+PYSEC-2018-107 PyPI/ajenti — ajenticp (aka Ajenti Docker control panel) for Ajenti through v1.2.23.13 has XSS via a filename that
+package: ajenti
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2018-18548, GHSA-5pcv-m8w2-62m9
+references:
+  http://packetstormsecurity.com/files/149898/AjentiCP-1.2.23.13-Cross-Site-Scripting.html
+  https://www.exploit-db.com/exploits/45691/
+  https://numanozdemir.com/ajenti-xss.txt
+  https://github.com/advisories/GHSA-5pcv-m8w2-62m9
+
+ajenticp (aka Ajenti Docker control panel) for Ajenti through v1.2.23.13 has XSS via a filename that is mishandled in File Manager.

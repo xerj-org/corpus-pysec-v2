@@ -1,0 +1,12 @@
+PYSEC-2026-2148 PyPI/eml-parser — eml_parser serves as a python module for parsing eml files and returning various information found i
+package: eml-parser
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.0.1 (ECOSYSTEM)
+aliases: CVE-2026-29780, GHSA-389r-rccm-h3h5
+references:
+  https://github.com/GOVCERT-LU/eml_parser/issues/88
+  https://github.com/GOVCERT-LU/eml_parser/commit/99af03a09a90aaaaadd0ed2ffb5eea46d1ea2cc9
+  https://github.com/GOVCERT-LU/eml_parser/security/advisories/GHSA-389r-rccm-h3h5
+
+eml_parser serves as a python module for parsing eml files and returning various information found in the e-mail as well as computed information. Prior to version 2.0.1, the official example script examples/recursively_extract_attachments.py contains a path traversal vulnerability that allows arbitrary file write outside the intended output directory. Attachment filenames extracted from parsed emails are directly used to construct output file paths without any sanitization, allowing an attacker-controlled filename to escape the target directory. This issue has been patched in version 2.0.1.

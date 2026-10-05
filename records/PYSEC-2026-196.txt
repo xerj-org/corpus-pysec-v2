@@ -1,0 +1,13 @@
+PYSEC-2026-196 PyPI/pip — pip would treat console_scripts and gui_scripts as paths instead of file names without sanitizing th
+package: pip
+ecosystem: PyPI
+versions affected:
+  >= 0, < 26.1.2 (ECOSYSTEM)
+aliases: CVE-2026-8643, GHSA-wf93-45jw-7689
+references:
+  http://www.openwall.com/lists/oss-security/2026/06/01/5
+  https://mail.python.org/archives/list/security-announce@python.org/thread/YV63UET5D3OOJY7O4M5XCVYO2YM4NBYJ/
+  https://github.com/pypa/pip/pull/14000
+  https://github.com/advisories/GHSA-wf93-45jw-7689
+
+pip would treat console_scripts and gui_scripts as paths instead of file names without sanitizing the resolved absolute path to the installation directory, leading to entry points being installed outside the installation directory.

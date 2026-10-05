@@ -1,0 +1,12 @@
+PYSEC-2020-91 PyPI/psd-tools — An issue was discovered in psd-tools before 1.9.4. The Cython implementation of RLE decoding did not
+package: psd-tools
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.9.4 (ECOSYSTEM)
+aliases: CVE-2020-10571, GHSA-22jr-vc7j-g762
+references:
+  https://github.com/psd-tools/psd-tools/releases/tag/v1.9.4
+  https://github.com/psd-tools/psd-tools/pull/198
+  https://github.com/advisories/GHSA-22jr-vc7j-g762
+
+An issue was discovered in psd-tools before 1.9.4. The Cython implementation of RLE decoding did not check for malicious data.

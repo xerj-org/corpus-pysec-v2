@@ -1,0 +1,19 @@
+PYSEC-2024-240 PyPI/mlflow — Insufficient sanitization in MLflow leads to XSS when running an untrusted recipe. This issue leads 
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.10.0 (ECOSYSTEM)
+aliases: CVE-2024-27132, GHSA-6749-m5cp-6cg7
+references:
+  https://research.jfrog.com/vulnerabilities/mlflow-untrusted-recipe-xss-jfsa-2024-000631930/
+  https://github.com/mlflow/mlflow/pull/10873
+  https://github.com/mlflow/mlflow/pull/10873
+  https://research.jfrog.com/vulnerabilities/mlflow-untrusted-recipe-xss-jfsa-2024-000631930/
+  https://github.com/advisories/GHSA-6749-m5cp-6cg7
+
+Insufficient sanitization in MLflow leads to XSS when running an untrusted recipe.
+
+This issue leads to a client-side RCE when running an untrusted recipe in Jupyter Notebook.
+
+The vulnerability stems from lack of sanitization over template variables.
+

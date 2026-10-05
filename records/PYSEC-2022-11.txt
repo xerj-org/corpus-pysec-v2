@@ -1,0 +1,11 @@
+PYSEC-2022-11 PyPI/apache-airflow — In Apache Airflow prior to 2.2.0. This CVE applies to a specific case where a User who has "can_crea
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 1.10.0, < 2.0.0b1, >= 2.0.0, < 2.2.0 (ECOSYSTEM)
+aliases: CVE-2021-45230, GHSA-4jh2-3c85-q67h
+references:
+  https://lists.apache.org/thread/m778ojn0k595rwco4ht9wjql89mjoxnl
+  https://github.com/advisories/GHSA-4jh2-3c85-q67h
+
+In Apache Airflow prior to 2.2.0. This CVE applies to a specific case where a User who has "can_create" permissions on DAG Runs can create Dag Runs for dags that they don't have "edit" permissions for.

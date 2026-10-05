@@ -1,0 +1,11 @@
+PYSEC-2026-2183 PyPI/indico — Indico is an event management system that uses Flask-Multipass, a multi-backend authentication syste
+package: indico
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.3.11 (ECOSYSTEM)
+aliases: CVE-2026-28352, GHSA-rfpp-2hgm-gp5v
+references:
+  https://github.com/indico/indico/releases/tag/v3.3.11
+  https://github.com/indico/indico/security/advisories/GHSA-rfpp-2hgm-gp5v
+
+Indico is an event management system that uses Flask-Multipass, a multi-backend authentication system for Flask. In versions prior to 3.3.11, the API endpoint used to manage event series is missing an access check, allowing unauthenticated/unauthorized access to this endpoint. The impact of this is limited to getting the metadata (title, category chain, start/end date) for events in an existing series, deleting an existing event series, and modifying an existing event series. This vulnerability does NOT allow unauthorized access to events (beyond the basic metadata mentioned above), nor any kind of tampering with user-visible data in events. Version 3.3.11 fixes the issue. As a workaround, use the webserver to restrict access to the series management API endpoint.

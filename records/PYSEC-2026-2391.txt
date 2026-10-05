@@ -1,0 +1,15 @@
+PYSEC-2026-2391 PyPI/bbot — BBOT: Server-Side Request Forgery (SSRF) in docker_pull module via WWW-Authenticate realm parsing
+package: bbot
+ecosystem: PyPI
+versions affected:
+  >= 2.0.0, < 2.8.5 (ECOSYSTEM)
+aliases: CVE-2026-12566, GHSA-3mp7-vp6j-2mxx
+references:
+  https://github.com/blacklanternsecurity/bbot/security/advisories/GHSA-3mp7-vp6j-2mxx
+  https://nvd.nist.gov/vuln/detail/CVE-2026-12566
+  https://github.com/blacklanternsecurity/bbot/commit/c2f4bc0f4
+  https://github.com/blacklanternsecurity/bbot
+  https://pypi.org/project/bbot
+  https://github.com/advisories/GHSA-3mp7-vp6j-2mxx
+
+The `docker_pull` module uses the `realm` parameter from a Docker registry's `WWW-Authenticate` response header as the authentication endpoint without validation. An attacker in a man-in-the-middle position between bbot and a Docker registry could modify this header to redirect the authentication request to an arbitrary endpoint, potentially leaking authentication tokens.

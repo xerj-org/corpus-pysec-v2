@@ -1,0 +1,14 @@
+PYSEC-2024-254 PyPI/zenml — A session fixation vulnerability exists in the zenml-io/zenml application, where JWT tokens used for
+package: zenml
+ecosystem: PyPI
+versions affected:
+  >= 0, < 68bcb3ba60cba9729c9713a49c39502d40fb945e, < 68bcb3ba60cba9729c9713a49c39502d40fb945e (GIT: https://github.com/zenml-io/zenml)
+  >= 0, < 0.56.2 (ECOSYSTEM)
+aliases: CVE-2024-2260, GHSA-g3r5-72hf-p7p2
+references:
+  https://huntr.com/bounties/2d0856ec-ed73-477a-8ea2-d5d4f15cf167
+  https://github.com/zenml-io/zenml/commit/68bcb3ba60cba9729c9713a49c39502d40fb945e
+  https://huntr.com/bounties/2d0856ec-ed73-477a-8ea2-d5d4f15cf167
+  https://github.com/advisories/GHSA-g3r5-72hf-p7p2
+
+A session fixation vulnerability exists in the zenml-io/zenml application, where JWT tokens used for user authentication are not invalidated upon logout. This flaw allows an attacker to bypass authentication mechanisms by reusing a victim's JWT token.

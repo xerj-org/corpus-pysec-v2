@@ -1,0 +1,11 @@
+PYSEC-2026-154 PyPI/weblate — Weblate is a web based localization tool. In versions prior to 5.17, the project backup didn't filte
+package: weblate
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.17 (ECOSYSTEM)
+aliases: CVE-2026-33435, GHSA-558g-h753-6m33
+references:
+  https://github.com/WeblateOrg/weblate/security/advisories/GHSA-558g-h753-6m33
+  https://github.com/WeblateOrg/weblate/pull/18549
+
+Weblate is a web based localization tool. In versions prior to 5.17, the project backup didn't filter Git and Mercurial configuration files which could lead to remote code execution under certain circumstances. This issue has been fixed in version 5.17. If developers are unable to update immediately, they can limit the scope of the vulnerability by restricting access to the project backup, as it is only accessible to users who can create projects.

@@ -1,0 +1,11 @@
+PYSEC-2014-80 PyPI/docker-py — Docker before 1.3.1 and docker-py before 0.5.3 fall back to HTTP when the HTTPS connection to the re
+package: docker-py
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.5.3 (ECOSYSTEM)
+aliases: CVE-2014-5277
+references:
+  http://lists.opensuse.org/opensuse-updates/2014-11/msg00048.html
+  https://groups.google.com/forum/#!topic/docker-user/oYm0i3xShJU
+
+Docker before 1.3.1 and docker-py before 0.5.3 fall back to HTTP when the HTTPS connection to the registry fails, which allows man-in-the-middle attackers to conduct downgrade attacks and obtain authentication and image data by leveraging a network position between the client and the registry to block HTTPS traffic.

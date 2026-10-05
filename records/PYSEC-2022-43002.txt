@@ -1,0 +1,15 @@
+PYSEC-2022-43002 PyPI/rdiffweb — Improper Privilege Management in GitHub repository ikus060/rdiffweb prior to 2.5.2.
+package: rdiffweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < b2df3679564d0daa2856213bb307d3e34bd89a25 (GIT: https://github.com/ikus060/rdiffweb)
+  >= 0, < 2.5.2 (ECOSYSTEM)
+aliases: CVE-2022-4314, GHSA-g594-55mp-f6q8
+references:
+  https://github.com/ikus060/rdiffweb/commit/b2df3679564d0daa2856213bb307d3e34bd89a25
+  https://huntr.dev/bounties/b2dc504d-92ae-4221-a096-12ff223d95a8
+  https://huntr.dev/bounties/b2dc504d-92ae-4221-a096-12ff223d95a8
+  https://huntr.dev/bounties/b2dc504d-92ae-4221-a096-12ff223d95a8
+  https://github.com/advisories/GHSA-g594-55mp-f6q8
+
+Improper Privilege Management in GitHub repository ikus060/rdiffweb prior to 2.5.2.

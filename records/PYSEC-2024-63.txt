@@ -1,0 +1,12 @@
+PYSEC-2024-63 PyPI/roundup — In Roundup before 2.4.0, classhelpers (_generic.help.html) allow XSS.
+package: roundup
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.4.0 (ECOSYSTEM)
+aliases: CVE-2024-39124, GHSA-w8vc-cwv9-wx67
+references:
+  https://www.roundup-tracker.org/
+  https://www.roundup-tracker.org/docs/security.html#cve-announcements
+  https://github.com/advisories/GHSA-w8vc-cwv9-wx67
+
+In Roundup before 2.4.0, classhelpers (_generic.help.html) allow XSS.

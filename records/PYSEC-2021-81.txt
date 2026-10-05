@@ -1,0 +1,12 @@
+PYSEC-2021-81 PyPI/plone — Plone through 5.2.4 allows remote authenticated managers to perform disk I/O via crafted keyword arg
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.2.5 (ECOSYSTEM)
+aliases: CVE-2021-33509, GHSA-hm2p-fhwx-9285
+references:
+  https://plone.org/security/hotfix/20210518/writing-arbitrary-files-via-docutils-and-python-script
+  http://www.openwall.com/lists/oss-security/2021/05/22/1
+  https://github.com/advisories/GHSA-hm2p-fhwx-9285
+
+Plone through 5.2.4 allows remote authenticated managers to perform disk I/O via crafted keyword arguments to the ReStructuredText transform in a Python script.

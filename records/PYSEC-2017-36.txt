@@ -1,0 +1,18 @@
+PYSEC-2017-36 PyPI/salt — Directory traversal vulnerability in minion id validation in SaltStack Salt before 2016.3.8, 2016.11
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 80d90307b07b3703428ecbb7c8bb468e28a9ae6d (GIT: https://github.com/saltstack/salt)
+  >= 0, < 2016.3.8, >= 2016.11, < 2016.11.8, >= 2017.7, < 2017.7.2 (ECOSYSTEM)
+aliases: CVE-2017-14695, GHSA-j6gj-pg62-x8j6
+references:
+  https://github.com/saltstack/salt/commit/80d90307b07b3703428ecbb7c8bb468e28a9ae6d
+  https://docs.saltstack.com/en/latest/topics/releases/2017.7.2.html
+  https://docs.saltstack.com/en/latest/topics/releases/2016.3.8.html
+  https://docs.saltstack.com/en/latest/topics/releases/2016.11.8.html
+  https://bugzilla.redhat.com/show_bug.cgi?id=1500748
+  http://lists.opensuse.org/opensuse-updates/2017-10/msg00075.html
+  http://lists.opensuse.org/opensuse-updates/2017-10/msg00073.html
+  https://github.com/advisories/GHSA-j6gj-pg62-x8j6
+
+Directory traversal vulnerability in minion id validation in SaltStack Salt before 2016.3.8, 2016.11.x before 2016.11.8, and 2017.7.x before 2017.7.2 allows remote minions with incorrect credentials to authenticate to a master via a crafted minion ID.  NOTE: this vulnerability exists because of an incomplete fix for CVE-2017-12791.

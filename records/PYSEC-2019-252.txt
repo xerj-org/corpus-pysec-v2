@@ -1,0 +1,15 @@
+PYSEC-2019-252 PyPI/pyboolector — In parser/btorsmt2.c in Boolector 3.0.0, opening a specially crafted input file leads to a use after
+package: pyboolector
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.1.0 (ECOSYSTEM)
+aliases: CVE-2019-7560, GHSA-g58x-799h-v9h6
+references:
+  https://github.com/Boolector/boolector/issues/29
+  https://github.com/Boolector/boolector/issues/29
+  https://github.com/Boolector/boolector/issues/29
+  https://github.com/Boolector/boolector/issues/28
+  https://github.com/Boolector/boolector/issues/28
+  https://github.com/Boolector/boolector/issues/28
+
+In parser/btorsmt2.c in Boolector 3.0.0, opening a specially crafted input file leads to a use after free in get_failed_assumptions or btor_delete.

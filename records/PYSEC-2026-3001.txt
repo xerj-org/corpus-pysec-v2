@@ -1,0 +1,16 @@
+PYSEC-2026-3001 PyPI/pymupdf — PyMuPDF has a path traversal in _main_.py
+package: pymupdf
+ecosystem: PyPI
+versions affected:
+  >= 1.26.5, < 1.26.7 (ECOSYSTEM)
+aliases: CVE-2026-3029, GHSA-cxqh-p2w9-fmr7
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-3029
+  https://github.com/pymupdf/PyMuPDF
+  https://www.kb.cert.org/vuls/id/504749
+  http://github.com/pymupdf/PyMuPDF
+  http://github.com/pymupdf/PyMuPDF/commit/603cafe38a183b8bab34f16d05043b4185d8d40a
+  https://pypi.org/project/pymupdf
+  https://github.com/advisories/GHSA-cxqh-p2w9-fmr7
+
+A path traversal and arbitrary file write vulnerability exist in the embedded get function in '_main_.py' in PyMuPDF version, 1.26.5.

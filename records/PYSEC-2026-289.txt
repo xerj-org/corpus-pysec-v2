@@ -1,0 +1,14 @@
+PYSEC-2026-289 PyPI/azure-ai-language-conversations-authoring — Azure AI Language Authoring Elevation of Privilege Vulnerability can Lead to RCE
+package: azure-ai-language-conversations-authoring
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0.0b4 (ECOSYSTEM)
+aliases: CVE-2026-21531, GHSA-436v-jg82-p533
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-21531
+  https://github.com/Azure/azure-sdk-for-python
+  https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-21531
+  https://pypi.org/project/azure-ai-language-conversations-authoring
+  https://github.com/advisories/GHSA-436v-jg82-p533
+
+Deserialization of untrusted data in the Azure AI Language Conversations Authoring client library for Python allows an unauthorized attacker to execute code over a network.

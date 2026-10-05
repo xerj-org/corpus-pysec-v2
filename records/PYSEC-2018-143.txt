@@ -1,0 +1,14 @@
+PYSEC-2018-143 PyPI/exiv2 — Exiv2::isoSpeed in easyaccess.cpp in Exiv2 v0.27-RC2 allows remote attackers to cause a denial of se
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2018-19607
+references:
+  https://github.com/Exiv2/exiv2/issues/561
+  https://github.com/Exiv2/exiv2/issues/561
+  https://github.com/Exiv2/exiv2/issues/561
+  https://access.redhat.com/errata/RHSA-2019:2101
+  http://lists.opensuse.org/opensuse-security-announce/2020-04/msg00009.html
+
+Exiv2::isoSpeed in easyaccess.cpp in Exiv2 v0.27-RC2 allows remote attackers to cause a denial of service (NULL pointer dereference and application crash) via a crafted file.

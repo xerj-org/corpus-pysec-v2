@@ -1,0 +1,14 @@
+PYSEC-2014-114 PyPI/ntopng — Cross-site scripting (XSS) vulnerability in lua/host_details.lua in ntopng 1.1 allows remote attacke
+package: ntopng
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2014-4329
+references:
+  https://svn.ntop.org/bugzilla/show_bug.cgi?id=379
+  http://www.securityfocus.com/bid/66456
+  http://www.ntop.org/ndpi/released-ndpi-1-5-1-and-ntopng-1-2-1/
+  http://packetstormsecurity.com/files/127329/Ntop-NG-1.1-Cross-Site-Scripting.html
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/92135
+
+Cross-site scripting (XSS) vulnerability in lua/host_details.lua in ntopng 1.1 allows remote attackers to inject arbitrary web script or HTML via the host parameter.

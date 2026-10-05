@@ -1,0 +1,12 @@
+PYSEC-2018-91 PyPI/mercurial — cext/manifest.c in Mercurial before 4.7.2 has an out-of-bounds read during parsing of a malformed ma
+package: mercurial
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.7.2 (ECOSYSTEM)
+aliases: CVE-2018-17983, GHSA-p575-cf9h-wv42
+references:
+  https://www.mercurial-scm.org/wiki/WhatsNew#Mercurial_4.7.2_.282018-10-01.29
+  https://www.mercurial-scm.org/repo/hg/rev/5405cb1a7901
+  https://github.com/advisories/GHSA-p575-cf9h-wv42
+
+cext/manifest.c in Mercurial before 4.7.2 has an out-of-bounds read during parsing of a malformed manifest entry.

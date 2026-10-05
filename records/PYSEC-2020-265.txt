@@ -1,0 +1,12 @@
+PYSEC-2020-265 PyPI/red-discordbot — In Red Discord Bot before version 3.3.11, a RCE exploit has been discovered in the Trivia module: th
+package: red-discordbot
+ecosystem: PyPI
+versions affected:
+  >= 0, < 9ab536235bafc2b42c3c17d7ce26f1cc64482a81 (GIT: https://github.com/Cog-Creators/Red-DiscordBot)
+  >= 0, < 3.3.11 (ECOSYSTEM)
+aliases: CVE-2020-15140, GHSA-55j9-849x-26h4
+references:
+  https://github.com/Cog-Creators/Red-DiscordBot/pull/4175/commits/9ab536235bafc2b42c3c17d7ce26f1cc64482a81
+  https://github.com/Cog-Creators/Red-DiscordBot/security/advisories/GHSA-55j9-849x-26h4
+
+In Red Discord Bot before version 3.3.11, a RCE exploit has been discovered in the Trivia module: this exploit allows Discord users with specifically crafted usernames to inject code into the Trivia module's leaderboard command. By abusing this exploit, it's possible to perform destructive actions and/or access sensitive information. This critical exploit has been fixed on version 3.3.11.

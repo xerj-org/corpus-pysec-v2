@@ -1,0 +1,14 @@
+PYSEC-2018-88 PyPI/mercurial — The mpatch_apply function in mpatch.c in Mercurial before 4.6.1 incorrectly proceeds in cases where 
+package: mercurial
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.6.1 (ECOSYSTEM)
+aliases: CVE-2018-13346, GHSA-9xv4-r2hf-26gh
+references:
+  https://www.mercurial-scm.org/wiki/WhatsNew#Mercurial_4.6.1_.282018-06-06.29
+  https://www.mercurial-scm.org/repo/hg/rev/faa924469635
+  https://access.redhat.com/errata/RHSA-2019:2276
+  https://lists.debian.org/debian-lts-announce/2020/07/msg00032.html
+  https://github.com/advisories/GHSA-9xv4-r2hf-26gh
+
+The mpatch_apply function in mpatch.c in Mercurial before 4.6.1 incorrectly proceeds in cases where the fragment start is past the end of the original data, aka OVE-20180430-0004.

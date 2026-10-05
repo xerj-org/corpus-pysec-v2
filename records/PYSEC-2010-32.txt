@@ -1,0 +1,19 @@
+PYSEC-2010-32 PyPI/zope — ZServer in Zope 2.10.x before 2.10.12 and 2.11.x before 2.11.7 allows remote attackers to cause a de
+package: zope
+ecosystem: PyPI
+versions affected:
+  >= 2.10.0, < 2.10.12, >= 2.11.0, < 2.11.7 (ECOSYSTEM)
+aliases: CVE-2010-3198, GHSA-qh4q-fwf8-qqrw
+references:
+  https://mail.zope.org/pipermail/zope-announce/2010-September/002247.html
+  https://mail.zope.org/pipermail/zope-announce/2010-September/002247.html
+  http://www.zope.org/Products/Zope/2.10.12/CHANGES.txt
+  http://www.vupen.com/english/advisories/2010/2275
+  http://www.securityfocus.com/bid/42939
+  http://www.zope.org/Products/Zope/2.11.7/CHANGES.txt
+  https://bugs.launchpad.net/zope2/+bug/627988
+  https://bugs.launchpad.net/zope2/+bug/627988
+  https://bugs.launchpad.net/zope2/+bug/627988
+  https://github.com/advisories/GHSA-qh4q-fwf8-qqrw
+
+ZServer in Zope 2.10.x before 2.10.12 and 2.11.x before 2.11.7 allows remote attackers to cause a denial of service (crash of worker threads) via vectors that trigger uncaught exceptions.

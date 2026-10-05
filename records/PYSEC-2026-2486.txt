@@ -1,0 +1,15 @@
+PYSEC-2026-2486 PyPI/galaxy-ng — Galaxy NG: command injection vulnerability
+package: galaxy-ng
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 4.9.2 (ECOSYSTEM)
+aliases: CVE-2026-12398, GHSA-6hw7-j4jw-wpff
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-12398
+  https://access.redhat.com/security/cve/CVE-2026-12398
+  https://bugzilla.redhat.com/show_bug.cgi?id=2489180
+  https://github.com/ansible/galaxy_ng
+  https://pypi.org/project/galaxy-ng
+  https://github.com/advisories/GHSA-6hw7-j4jw-wpff
+
+A command injection vulnerability was found in galaxy_ng. The do_git_checkout() function in the legacy role import API (v1) interpolates unsanitized git ref names (branch/tag names) into shell commands executed via subprocess.run() with shell=True. An authenticated user who controls a git repository can create a branch or tag with shell metacharacters in the name to achieve remote code execution on the pulp worker. The vulnerable endpoint is only reachable when GALAXY_ENABLE_LEGACY_ROLES is set to True, which is not the default configuration.

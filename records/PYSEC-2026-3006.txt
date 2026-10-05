@@ -1,0 +1,25 @@
+PYSEC-2026-3006 PyPI/pypdf — pypdf: Manipulated XMP metadata entity declarations can exhaust RAM
+package: pypdf
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.10.0 (ECOSYSTEM)
+aliases: CVE-2026-40260, GHSA-3crg-w4f6-42mx
+references:
+  https://github.com/py-pdf/pypdf/security/advisories/GHSA-3crg-w4f6-42mx
+  https://nvd.nist.gov/vuln/detail/CVE-2026-40260
+  https://github.com/py-pdf/pypdf/pull/3724
+  https://github.com/py-pdf/pypdf/commit/b15a374e5ca648d4878e57c3b2c0551e7f8cc7f8
+  https://github.com/py-pdf/pypdf
+  https://github.com/py-pdf/pypdf/releases/tag/6.10.0
+  https://pypi.org/project/pypdf
+  https://github.com/advisories/GHSA-3crg-w4f6-42mx
+
+### Impact
+
+An attacker who uses this vulnerability can craft a PDF which leads to large memory usage. This requires parsing the XMP metadata.
+
+### Patches
+This has been fixed in [pypdf==6.10.0](https://github.com/py-pdf/pypdf/releases/tag/6.10.0).
+
+### Workarounds
+If you cannot upgrade yet, consider applying the changes from PR [#3724](https://github.com/py-pdf/pypdf/pull/3724).

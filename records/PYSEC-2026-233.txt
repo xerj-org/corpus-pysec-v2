@@ -1,0 +1,18 @@
+PYSEC-2026-233 PyPI/gpsea — Malicious code in gpsea (PyPI)
+package: gpsea
+ecosystem: PyPI
+versions affected:
+  0.9.14
+aliases: MAL-2026-5316
+references:
+  https://inspector.pypi.io/project/gpsea/0.9.14/packages/82/12/c1d31012b9e97334d5159ccfbef14ffe95d9970add20ba9293bffca182b6/gpsea-0.9.14-py3-none-any.whl/gpsea/_index.js
+  https://www.endorlabs.com/learn/shai-hulud-hades-wave-hits-six-pypi-bioinformatics-packages
+  https://www.stepsecurity.io/blog/the-hades-campaign-pypi-packages
+
+Part of the "Hades" wave of the Shai-Hulud supply-chain campaign. On 2026-06-08,
+malicious phantom releases of gpsea were published to PyPI using stolen
+credentials. The package executes a bundled JavaScript payload (via the Bun
+runtime) on import that harvests and exfiltrates credentials and attempts
+self-propagation. This entry is a summary; behavior may not be fully
+characterized here. See the linked references for detailed analysis and
+indicators of compromise.

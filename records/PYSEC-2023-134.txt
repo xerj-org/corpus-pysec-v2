@@ -1,0 +1,15 @@
+PYSEC-2023-134 PyPI/apache-airflow — Execution with Unnecessary Privileges, : Exposure of Sensitive Information to an Unauthorized Actor 
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.6.0 (ECOSYSTEM)
+aliases: CVE-2023-39508, GHSA-269x-pg5c-5xgm
+references:
+  https://github.com/apache/airflow/pull/29706
+  https://lists.apache.org/thread/j2nkjd0zqvtqk85s6ywpx3c35pvzyx15
+  https://github.com/advisories/GHSA-269x-pg5c-5xgm
+
+Execution with Unnecessary Privileges, : Exposure of Sensitive Information to an Unauthorized Actor vulnerability in Apache Software Foundation Apache Airflow.The "Run Task" feature enables authenticated user to bypass some of the restrictions put in place. It allows to execute code in the webserver context as well as allows to bypas limitation of access the user has to certain DAGs. The "Run Task" feature is considered dangerous and it has been removed entirely in Airflow 2.6.0
+
+This issue affects Apache Airflow: before 2.6.0.
+

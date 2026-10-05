@@ -1,0 +1,30 @@
+PYSEC-2026-2489 PyPI/giskard-checks — Giskard has a Regular Expression Denial of Service (ReDoS) in RegexMatching Check
+package: giskard-checks
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0.2b1 (ECOSYSTEM)
+aliases: CVE-2026-40319, GHSA-rq2q-4r55-9877
+references:
+  https://github.com/Giskard-AI/giskard-oss/security/advisories/GHSA-rq2q-4r55-9877
+  https://nvd.nist.gov/vuln/detail/CVE-2026-40319
+  https://github.com/Giskard-AI/giskard-oss
+  https://github.com/Giskard-AI/giskard-oss/releases/tag/giskard-checks%2Fv1.0.2b1
+  https://pypi.org/project/giskard-checks
+  https://github.com/advisories/GHSA-rq2q-4r55-9877
+
+## Summary
+The RegexMatching check in the `giskard-checks` package passes a user-supplied regular expression pattern directly to Python's re.search() without any timeout, complexity guard, or pattern validation. An attacker who can control the regex pattern or the text being matched can craft inputs that trigger catastrophic backtracking in the regex engine, causing the process to hang indefinitely and denying service to all other operations. 
+
+`giskard-checks` is a local developer testing library. Check definitions, including the pattern parameter, are provided in application code or configuration files and executed locally. Exploitation requires write access to a check definition and subsequent execution of the test suite. The absence of a regex timeout could cause availability issues in automated environments such as CI/CD pipelines.
+
+## Affected component
+ 
+`text_matching.py`, line 457: `re.search(pattern, text)`
+ 
+## Remediation
+ 
+Upgrade to `giskard-checks` >= 1.0.2b1.
+ 
+## Credit
+ 
+Giskard-AI thanks @dhabaleshwar for identifying the missing timeout on regex evaluation.

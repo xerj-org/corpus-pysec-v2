@@ -1,0 +1,12 @@
+PYSEC-2024-250 PyPI/torch — Pytorch before v2.2.0 has an Out-of-bounds Read vulnerability via the component torch/csrc/jit/mobil
+package: torch
+ecosystem: PyPI
+versions affected:
+  >= 0, < 7c35874ad664e74c8e4252d67521f3986eadb0e6, < 7c35874ad664e74c8e4252d67521f3986eadb0e6 (GIT: https://github.com/pytorch/pytorch)
+  >= 0, < 2.2.0 (ECOSYSTEM)
+aliases: CVE-2024-31584
+references:
+  https://github.com/pytorch/pytorch/commit/7c35874ad664e74c8e4252d67521f3986eadb0e6
+  https://github.com/pytorch/pytorch/blob/v2.1.2/torch/csrc/jit/mobile/flatbuffer_loader.cpp#L305
+
+Pytorch before v2.2.0 has an Out-of-bounds Read vulnerability via the component torch/csrc/jit/mobile/flatbuffer_loader.cpp.

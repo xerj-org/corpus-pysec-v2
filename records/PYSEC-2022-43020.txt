@@ -1,0 +1,13 @@
+PYSEC-2022-43020 PyPI/d8s-archives — The d8s-archives package for Python, as distributed on PyPI, included a potential code-execution bac
+package: d8s-archives
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-41383
+references:
+  https://pypi.org/project/d8s-archives/
+  https://pypi.org/project/democritus-file-system/
+  https://github.com/democritus-project/d8s-archives/issues/13
+  https://github.com/democritus-project/d8s-archives/issues/13
+
+The d8s-archives package for Python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. The backdoor is the democritus-file-system package. The affected version is 0.1.0.

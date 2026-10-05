@@ -1,0 +1,14 @@
+PYSEC-2026-1648 PyPI/mlflow — MLFlow unsafe deserialization
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 2.5.0, <= 2.14.1 (ECOSYSTEM)
+aliases: CVE-2024-37058, GHSA-cwgg-w6mp-w9hg
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-37058
+  https://github.com/mlflow/mlflow
+  https://hiddenlayer.com/sai-security-advisory/mlflow-june2024
+  https://pypi.org/project/mlflow
+  https://github.com/advisories/GHSA-cwgg-w6mp-w9hg
+
+Deserialization of untrusted data can occur in versions of the MLflow platform running version 2.5.0 or newer, enabling a maliciously uploaded Langchain AgentExecutor model to run arbitrary code on an end user’s system when interacted with.

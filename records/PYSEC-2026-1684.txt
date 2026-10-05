@@ -1,0 +1,14 @@
+PYSEC-2026-1684 PyPI/mssql-django — Remote Code Execution Vulnerability in Microsoft Django Backend for SQL Server
+package: mssql-django
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.1 (ECOSYSTEM)
+aliases: CVE-2024-26164, GHSA-vmqv-47j8-gwv8
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-26164
+  https://github.com/microsoft/mssql-django
+  https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-26164
+  https://pypi.org/project/mssql-django
+  https://github.com/advisories/GHSA-vmqv-47j8-gwv8
+
+Microsoft Django Backend for SQL Server Remote Code Execution Vulnerability

@@ -1,0 +1,18 @@
+PYSEC-2026-37 PyPI/dash-uploader — An issue in fohrloop dash-uploader v.0.1.0 through v.0.7.0a2 allows a remote attacker to execute arb
+package: dash-uploader
+ecosystem: PyPI
+versions affected:
+  >= 0.1.0, < 0.7.0a1 (ECOSYSTEM)
+aliases: CVE-2026-38361
+references:
+  https://docs.python.org/3/library/functions.html#all
+  https://github.com/fohrloop/dash-uploader/blob/stable/dash_uploader/httprequesthandler.py
+  https://libraries.io/pypi/dash-uploader
+  https://pepy.tech/project/dash-uploader
+  https://pypistats.org/packages/dash-uploader
+  https://github.com/fohrloop/dash-uploader/issues/153
+  https://github.com/fohrloop/dash-uploader
+  https://pypi.org/project/dash-uploader/
+  https://github.com/a1ohadance/CVE-2026-38361
+
+An issue in fohrloop dash-uploader v.0.1.0 through v.0.7.0a2 allows a remote attacker to execute arbitrary code via the dash_uploader/httprequesthandler.py, dash_uploader/upload.py in the Upload function and max_file_size parameter, dash_uploader/configure_upload.py components

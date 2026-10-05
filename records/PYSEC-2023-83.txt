@@ -1,0 +1,13 @@
+PYSEC-2023-83 PyPI/starlette — Directory traversal vulnerability in Starlette versions 0.13.5 and later and prior to 0.27.0 allows 
+package: starlette
+ecosystem: PyPI
+versions affected:
+  >= 0.13.5, < 0.27.0 (ECOSYSTEM)
+aliases: CVE-2023-29159, GHSA-v5gw-mw7f-84px
+references:
+  https://github.com/encode/starlette/releases/tag/0.27.0
+  https://jvn.jp/en/jp/JVN95981715/
+  https://github.com/encode/starlette/security/advisories/GHSA-v5gw-mw7f-84px
+  https://github.com/encode/starlette/security/advisories/GHSA-v5gw-mw7f-84px
+
+Directory traversal vulnerability in Starlette versions 0.13.5 and later and prior to 0.27.0 allows a remote unauthenticated attacker to view files in a web service which was built using Starlette.

@@ -1,0 +1,11 @@
+PYSEC-2019-176 PyPI/docutils — python-docutils allows insecure usage of temporary files
+package: docutils
+ecosystem: PyPI
+versions affected:
+  >= 0.5, < 0.6 (ECOSYSTEM)
+aliases: CVE-2009-5042, GHSA-cg75-6938-wx58
+references:
+  https://security-tracker.debian.org/tracker/CVE-2009-5042
+  https://github.com/advisories/GHSA-cg75-6938-wx58
+
+python-docutils allows insecure usage of temporary files

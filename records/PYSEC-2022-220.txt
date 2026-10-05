@@ -1,0 +1,12 @@
+PYSEC-2022-220 PyPI/pyesasky — ** Reserved ** The pyesasky for python, as distributed on PyPI, included a code-execution backdoor i
+package: pyesasky
+ecosystem: PyPI
+versions affected:
+  >= 1.2.0, < 1.4.3 (ECOSYSTEM)
+aliases: CVE-2022-30885
+references:
+  https://github.com/esdc-esac-esa-int/pyesasky/issues/39
+  http://pypi.doubanio.com/simple/request
+  https://pypi.org/project/pyesasky/
+
+** Reserved ** The pyesasky for python, as distributed on PyPI, included a code-execution backdoor inserted by a third party. The current version, without this backdoor, is 1.2.0-1.4.2.

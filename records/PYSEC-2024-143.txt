@@ -1,0 +1,19 @@
+PYSEC-2024-143 PyPI/paddlepaddle — PaddlePaddle before 2.6.0 has a command injection in _wget_download. This resulted in the ability to
+package: paddlepaddle
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.6.0 (ECOSYSTEM)
+aliases: CVE-2023-52311, GHSA-rf7p-79xq-8xwm
+references:
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-020.md
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-020.md
+  https://github.com/advisories/GHSA-rf7p-79xq-8xwm
+
+PaddlePaddle before 2.6.0 has a command injection in _wget_download. This resulted in the ability to execute arbitrary commands on the operating system.
+
+
+
+
+
+
+

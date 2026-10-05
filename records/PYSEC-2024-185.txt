@@ -1,0 +1,12 @@
+PYSEC-2024-185 PyPI/nebari — Nebari through 2024.4.1 prints the temporary Keycloak root password.
+package: nebari
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2024.6.1rc2 (ECOSYSTEM)
+aliases: CVE-2024-34529, GHSA-vjc4-3vgx-pq9h
+references:
+  https://github.com/nebari-dev/nebari/issues/2282
+  https://github.com/nebari-dev/nebari/blob/5463e8df9e8d53a266a7b9d3d4e27353ec43c40b/src/_nebari/deploy.py#L71
+  https://github.com/advisories/GHSA-vjc4-3vgx-pq9h
+
+Nebari through 2024.4.1 prints the temporary Keycloak root password.

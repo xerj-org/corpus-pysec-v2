@@ -1,0 +1,15 @@
+PYSEC-2018-89 PyPI/mercurial — mpatch.c in Mercurial before 4.6.1 mishandles integer addition and subtraction, aka OVE-20180430-000
+package: mercurial
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.6.1 (ECOSYSTEM)
+aliases: CVE-2018-13347, GHSA-3mjj-mr4f-qxmx
+references:
+  https://www.mercurial-scm.org/wiki/WhatsNew#Mercurial_4.6.1_.282018-06-06.29
+  https://www.mercurial-scm.org/repo/hg-committed/log?rev=modifies%28%22mercurial%2Fmpatch.c%22%29+and+4.5%3A%3A
+  https://www.mercurial-scm.org/repo/hg/rev/1acfc35d478c
+  https://access.redhat.com/errata/RHSA-2019:2276
+  https://lists.debian.org/debian-lts-announce/2020/07/msg00032.html
+  https://github.com/advisories/GHSA-3mjj-mr4f-qxmx
+
+mpatch.c in Mercurial before 4.6.1 mishandles integer addition and subtraction, aka OVE-20180430-0002.

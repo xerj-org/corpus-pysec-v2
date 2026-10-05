@@ -1,0 +1,15 @@
+PYSEC-2018-36 PyPI/ansible — Ansible before 1.2.1 makes it easier for remote attackers to conduct man-in-the-middle attacks by le
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.2.1 (ECOSYSTEM)
+aliases: CVE-2013-2233, GHSA-9x6q-5423-w5v9
+references:
+  https://www.ansible.com/security
+  https://github.com/ansible/ansible/issues/857
+  https://bugzilla.redhat.com/show_bug.cgi?id=980821
+  http://www.openwall.com/lists/oss-security/2013/07/02/6
+  http://www.openwall.com/lists/oss-security/2013/07/01/2
+  https://github.com/advisories/GHSA-9x6q-5423-w5v9
+
+Ansible before 1.2.1 makes it easier for remote attackers to conduct man-in-the-middle attacks by leveraging failure to cache SSH host keys.

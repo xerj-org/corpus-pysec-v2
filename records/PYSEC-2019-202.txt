@@ -1,0 +1,13 @@
+PYSEC-2019-202 PyPI/rply — python-rply before 0.7.4 insecurely creates temporary files.
+package: rply
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.7.4 (ECOSYSTEM)
+aliases: CVE-2014-1938, GHSA-m8qc-mf6p-pfq9
+references:
+  https://security-tracker.debian.org/tracker/CVE-2014-1938
+  http://www.openwall.com/lists/oss-security/2014/02/11/1
+  https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=737627
+  https://github.com/advisories/GHSA-m8qc-mf6p-pfq9
+
+python-rply before 0.7.4 insecurely creates temporary files.

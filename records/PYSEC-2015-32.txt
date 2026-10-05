@@ -1,0 +1,14 @@
+PYSEC-2015-32 PyPI/rhodecode — RhodeCode before 2.2.7 and Kallithea 0.1 allows remote authenticated users to obtain API keys and ot
+package: rhodecode
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.2.7 (ECOSYSTEM)
+aliases: CVE-2015-0260
+references:
+  https://kallithea-scm.org/security/cve-2015-0260.html
+  http://www.securityfocus.com/bid/72573
+  http://seclists.org/oss-sec/2015/q1/505
+  https://rhodecode.com/blog/rhodecode-enterprise-security-release/
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/100888
+
+RhodeCode before 2.2.7 and Kallithea 0.1 allows remote authenticated users to obtain API keys and other sensitive information via the get_repo API method.

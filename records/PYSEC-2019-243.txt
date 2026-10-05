@@ -1,0 +1,15 @@
+PYSEC-2019-243 PyPI/designate — Designate does not enforce the DNS protocol limit concerning record set sizes
+package: designate
+ecosystem: PyPI
+versions affected:
+  2015.1.0b2
+aliases: CVE-2015-5694, GHSA-c33m-22cr-j9x4
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2015-5694
+  https://security-tracker.debian.org/tracker/CVE-2015-5694
+  http://www.openwall.com/lists/oss-security/2015/07/28/11
+  http://www.openwall.com/lists/oss-security/2015/07/28/11
+  http://www.openwall.com/lists/oss-security/2015/07/29/6
+  http://www.openwall.com/lists/oss-security/2015/07/29/6
+
+Designate does not enforce the DNS protocol limit concerning record set sizes

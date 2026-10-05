@@ -1,0 +1,10 @@
+PYSEC-2026-237 PyPI/aiohttp — AIOHTTP is an asynchronous HTTP client/server framework for asyncio and Python. Prior to 3.14.1, the
+package: aiohttp
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.14.1 (ECOSYSTEM)
+aliases: CVE-2026-54275, GHSA-4m7w-qmgq-4wj5
+references:
+  https://github.com/aio-libs/aiohttp/security/advisories/GHSA-4m7w-qmgq-4wj5
+
+AIOHTTP is an asynchronous HTTP client/server framework for asyncio and Python. Prior to 3.14.1, the server_hostname TLS SNI check can be bypassed when an existing connection is reused. If an application makes multiple requests to the same domain, but with different per-request server_hostname parameters, then the later calls may succeed by reusing the existing connection when they should have been rejected due to the TLS SNI check. This vulnerability is fixed in 3.14.1.

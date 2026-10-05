@@ -1,0 +1,26 @@
+PYSEC-2026-2407 PyPI/bugsink — Bugsink: Issue event views can show an event from another project if its UUID is known
+package: bugsink
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.2.0 (ECOSYSTEM)
+aliases: CVE-2026-47715, GHSA-vx2f-6m6h-9frf
+references:
+  https://github.com/bugsink/bugsink/security/advisories/GHSA-vx2f-6m6h-9frf
+  https://nvd.nist.gov/vuln/detail/CVE-2026-47715
+  https://github.com/bugsink/bugsink
+  https://github.com/bugsink/bugsink/releases/tag/2.2.0
+  https://pypi.org/project/bugsink
+  https://github.com/advisories/GHSA-vx2f-6m6h-9frf
+
+### Description
+
+Bugsink issue event pages accept a direct event identifier from the URL and, in affected versions, look up that event without also requiring it to belong to the issue in the URL.
+
+This is a project-boundary authorization issue: a logged-in user with access to one project can view another project’s event data through an issue they are allowed to access. However, the issue is mitigated by two factors. First, the attacker needs to already know a valid target event UUID; there is no event enumeration path here, and guessing UUIDs is not practical. Second, Bugsink is commonly self-hosted within a single trust domain, and Hosted Bugsink gives each tenant a separate Bugsink instance, so cross-project access does not normally imply cross-tenant access.
+
+The affected views include the stacktrace, details, and breadcrumbs pages for an issue event.
+
+This has been fixed by requiring direct event lookups to match both the authorized issue and the project.
+
+### Impact
+Low-severity cross-project event data exposure, requiring authentication and prior knowledge of a valid event UUID.

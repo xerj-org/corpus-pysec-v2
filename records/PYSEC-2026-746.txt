@@ -1,0 +1,15 @@
+PYSEC-2026-746 PyPI/saleor — saleor Missing Authorization vulnerability
+package: saleor
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.1.2 (ECOSYSTEM)
+aliases: CVE-2022-0932, GHSA-mcgw-5fhw-3fq8
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2022-0932
+  https://github.com/saleor/saleor/commit/521dfd6394f3926a77c60d8633c058e16d0f916d
+  https://github.com/saleor/saleor
+  https://huntr.dev/bounties/88ae4cbc-c697-401b-8b04-7dc4e03ad8eb
+  https://pypi.org/project/saleor
+  https://github.com/advisories/GHSA-mcgw-5fhw-3fq8
+
+Missing Authorization in saleor prior to 3.1.2.

@@ -1,0 +1,18 @@
+PYSEC-2026-234 PyPI/phenopacket-store-toolkit — Malicious code in phenopacket-store-toolkit (PyPI)
+package: phenopacket-store-toolkit
+ecosystem: PyPI
+versions affected:
+  0.1.7
+aliases: MAL-2026-5322
+references:
+  https://inspector.pypi.io/project/phenopacket-store-toolkit/0.1.7/packages/93/77/84c5272838151db8cb610858293c2a98192736933ae68fcb50275e04ad5f/phenopacket_store_toolkit-0.1.7-py3-none-any.whl/ppktstore/_index.js
+  https://www.endorlabs.com/learn/shai-hulud-hades-wave-hits-six-pypi-bioinformatics-packages
+  https://www.stepsecurity.io/blog/the-hades-campaign-pypi-packages
+
+Part of the "Hades" wave of the Shai-Hulud supply-chain campaign. On 2026-06-08,
+malicious phantom releases of phenopacket-store-toolkit were published to PyPI using stolen
+credentials. The package executes a bundled JavaScript payload (via the Bun
+runtime) on import that harvests and exfiltrates credentials and attempts
+self-propagation. This entry is a summary; behavior may not be fully
+characterized here. See the linked references for detailed analysis and
+indicators of compromise.

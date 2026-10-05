@@ -1,0 +1,14 @@
+PYSEC-2022-43148 PyPI/pyassimp — Open Asset Import Library (aka assimp) 5.1.0 and 5.1.1 has a heap-based buffer overflow in _m3d_safe
+package: pyassimp
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2021-45948
+references:
+  https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=34416
+  https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=34416
+  https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=34416
+  https://github.com/google/oss-fuzz-vulns/blob/main/vulns/assimp/OSV-2021-775.yaml
+  https://security.gentoo.org/glsa/202210-01
+
+Open Asset Import Library (aka assimp) 5.1.0 and 5.1.1 has a heap-based buffer overflow in _m3d_safestr (called from m3d_load and Assimp::M3DWrapper::M3DWrapper).

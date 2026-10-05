@@ -1,0 +1,22 @@
+PYSEC-2023-189 PyPI/asyncua — Versions of the package asyncua before 0.9.96 are vulnerable to Improper Authentication such that it
+package: asyncua
+ecosystem: PyPI
+versions affected:
+  >= 0, < b4106dfd5037423c9d1810b48a97296b59cde513, < 2be7ce80df05de8d6c6ae1ebce6fa2bb7147844a (GIT: https://github.com/FreeOpcUa/opcua-asyncio)
+  >= 0, < 0.9.96 (ECOSYSTEM)
+aliases: CVE-2023-26150, GHSA-2894-qcqf-g23g
+references:
+  https://github.com/FreeOpcUa/opcua-asyncio/commit/b4106dfd5037423c9d1810b48a97296b59cde513
+  https://github.com/FreeOpcUa/opcua-asyncio/commit/2be7ce80df05de8d6c6ae1ebce6fa2bb7147844a
+  https://github.com/FreeOpcUa/opcua-asyncio/releases/tag/v0.9.96
+  https://security.snyk.io/vuln/SNYK-PYTHON-ASYNCUA-5673435
+  https://security.snyk.io/vuln/SNYK-PYTHON-ASYNCUA-5673435
+  https://security.snyk.io/vuln/SNYK-PYTHON-ASYNCUA-5673435
+  https://gist.github.com/artfire52/84f7279a4119d6f90381ac49d7121121
+  https://gist.github.com/artfire52/84f7279a4119d6f90381ac49d7121121
+  https://github.com/FreeOpcUa/opcua-asyncio/issues/1014
+  https://github.com/FreeOpcUa/opcua-asyncio/issues/1014
+  https://github.com/FreeOpcUa/opcua-asyncio/pull/1015
+  https://github.com/advisories/GHSA-2894-qcqf-g23g
+
+Versions of the package asyncua before 0.9.96 are vulnerable to Improper Authentication such that it is possible to access Address Space without encryption and authentication.**Note:**This issue is a result of missing checks for services that require an active session.

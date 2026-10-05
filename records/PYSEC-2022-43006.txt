@@ -1,0 +1,15 @@
+PYSEC-2022-43006 PyPI/rdiffweb — Open Redirect in GitHub repository ikus060/rdiffweb prior to 2.5.5.
+package: rdiffweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6afaae56a29536f0118b3380d296c416aa6d078d (GIT: https://github.com/ikus060/rdiffweb)
+  >= 0, < 2.5.5 (ECOSYSTEM)
+aliases: CVE-2022-4720, GHSA-h5wp-jrqc-cwwx
+references:
+  https://huntr.dev/bounties/339687af-6e25-4ad8-823d-c097f607ea70
+  https://huntr.dev/bounties/339687af-6e25-4ad8-823d-c097f607ea70
+  https://huntr.dev/bounties/339687af-6e25-4ad8-823d-c097f607ea70
+  https://github.com/ikus060/rdiffweb/commit/6afaae56a29536f0118b3380d296c416aa6d078d
+  https://github.com/advisories/GHSA-h5wp-jrqc-cwwx
+
+Open Redirect in GitHub repository ikus060/rdiffweb prior to 2.5.5.

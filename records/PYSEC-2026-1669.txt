@@ -1,0 +1,41 @@
+PYSEC-2026-1669 PyPI/mobsf — MobSF vulnerable to Open Redirect in Login Redirect
+package: mobsf
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.0.5 (ECOSYSTEM)
+aliases: CVE-2024-41955, GHSA-8m9j-2f32-2vx4
+references:
+  https://github.com/MobSF/Mobile-Security-Framework-MobSF/security/advisories/GHSA-8m9j-2f32-2vx4
+  https://nvd.nist.gov/vuln/detail/CVE-2024-41955
+  https://github.com/MobSF/Mobile-Security-Framework-MobSF/commit/fdaad81314f393d324c1ede79627e9d47986c8c8
+  https://github.com/MobSF/Mobile-Security-Framework-MobSF
+  https://pypi.org/project/mobsf
+  https://github.com/advisories/GHSA-8m9j-2f32-2vx4
+
+### Impact
+_What kind of vulnerability is it? Who is impacted?_
+
+An open redirect vulnerability exist in MobSF authentication view. 
+
+PoC
+1. Go to http://127.0.0.1:8000/login/?next=//afine.com in a web browser.
+2. Enter credentials and press "Sign In".
+3. You will be redirected to [afine.com](http://afine.com/)
+
+Users who are not using authentication are not impacted.
+
+### Patches
+_Has the problem been patched? What versions should users upgrade to?_
+
+Update to MobSF v4.0.5
+
+### Workarounds
+_Is there a way for users to fix or remediate the vulnerability without upgrading?_
+Disable Authentication
+
+### References
+_Are there any links users can visit to find out more?_
+Fix: https://github.com/MobSF/Mobile-Security-Framework-MobSF/commit/fdaad81314f393d324c1ede79627e9d47986c8c8
+
+### Reporter
+Marcin Węgłowski (AFINE Team)

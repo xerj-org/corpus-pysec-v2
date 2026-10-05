@@ -1,0 +1,145 @@
+PYSEC-2026-2939 PyPI/praisonai-platform — praisonai-platform: Issue endpoints accept any issue_id without workspace ownership check, cross-workspace read/update/delete IDOR
+package: praisonai-platform
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.1.4 (ECOSYSTEM)
+aliases: CVE-2026-47415, GHSA-xwq8-frcg-77q8
+references:
+  https://github.com/MervinPraison/PraisonAI/security/advisories/GHSA-xwq8-frcg-77q8
+  https://github.com/MervinPraison/PraisonAI
+  https://pypi.org/project/praisonai-platform
+  https://github.com/advisories/GHSA-xwq8-frcg-77q8
+  https://nvd.nist.gov/vuln/detail/CVE-2026-47415
+
+## Summary
+
+**Type:** Insecure Direct Object Reference. The issue CRUD endpoints (`GET / PATCH / DELETE /workspaces/{workspace_id}/issues/{issue_id}`) gate access on `require_workspace_member(workspace_id)` only, then resolve `issue_id` through `IssueService.get(issue_id)` which is a primary-key lookup with no workspace constraint. A user who is a member of any workspace `W1` can read, modify, or delete issues that belong to a different workspace `W2`.
+**File:** `src/praisonai-platform/praisonai_platform/services/issue_service.py`, lines 72-156; route handlers at `src/praisonai-platform/praisonai_platform/api/routes/issues.py`, lines 82-137.
+**Root cause:** the route extracts `workspace_id` from the URL path, uses it solely for the membership gate, then calls `IssueService.get(issue_id)` / `IssueService.update(issue_id, ...)` / `IssueService.delete(issue_id)` without re-checking which workspace the issue actually belongs to. `IssueService.get` runs a single-key lookup; `update` and `delete` call `self.get(issue_id)` first and then mutate the returned row, inheriting the same gap. The `MemberService` in this same codebase uses a composite `(workspace_id, user_id)` key, proving the author knows the safe pattern; it was simply not applied to the issue, agent, project, comment, or label services.
+
+## Affected Code
+
+**File 1:** `src/praisonai-platform/praisonai_platform/services/issue_service.py`, lines 72-75 and 97-156.
+
+```python
+class IssueService:
+    ...
+
+    async def get(self, issue_id: str) -> Optional[Issue]:
+        """Get issue by ID."""
+        return await self._session.get(Issue, issue_id)             # <-- BUG: no workspace_id predicate
+
+    async def update(
+        self,
+        issue_id: str,
+        title: Optional[str] = None,
+        ...
+    ) -> Optional[Issue]:
+        issue = await self.get(issue_id)                            # <-- inherits the same gap
+        if issue is None:
+            return None
+        ...
+        return issue
+
+    async def delete(self, issue_id: str) -> bool:
+        issue = await self.get(issue_id)                            # <-- inherits the same gap
+        if issue is None:
+            return False
+        await self._session.delete(issue)
+        await self._session.flush()
+        return True
+```
+
+**File 2:** `src/praisonai-platform/praisonai_platform/api/routes/issues.py`, lines 82-137.
+
+```python
+@router.get("/{issue_id}", response_model=IssueResponse)
+async def get_issue(
+    workspace_id: str,
+    issue_id: str,
+    user: AuthIdentity = Depends(require_workspace_member),         # only checks membership in workspace_id
+    session: AsyncSession = Depends(get_db),
+):
+    svc = IssueService(session)
+    issue = await svc.get(issue_id)                                 # <-- workspace_id never threaded through
+    if issue is None:
+        raise HTTPException(status_code=404, detail="Issue not found")
+    return IssueResponse.model_validate(issue)
+
+
+@router.patch("/{issue_id}", response_model=IssueResponse)
+async def update_issue(
+    workspace_id: str,
+    issue_id: str,
+    body: IssueUpdate,
+    user: AuthIdentity = Depends(require_workspace_member),
+    session: AsyncSession = Depends(get_db),
+):
+    svc = IssueService(session)
+    issue = await svc.update(                                       # <-- writes to any issue in the DB
+        issue_id, title=body.title, description=body.description,
+        status=body.status, priority=body.priority,
+        assignee_type=body.assignee_type, assignee_id=body.assignee_id,
+        project_id=body.project_id,
+    )
+    ...
+```
+
+`delete_issue` (lines 127-137) repeats the pattern.
+
+**Why it's wrong:** `workspace_id` from the route is used solely as a membership predicate ("are you in some workspace W?"), never as a resource-ownership predicate ("is the issue you are addressing actually inside W?"). The standard FastAPI/SQLAlchemy fix is to make the resource-lookup query include the workspace constraint and treat absence as 404, so a foreign-workspace issue is indistinguishable from a non-existent one. The `update_issue` handler additionally allows the attacker to overwrite `project_id`, which can re-assign the foreign issue to an unrelated project the attacker also does not own — escalating the scope of the write primitive.
+
+## Exploit Chain
+
+1. Attacker registers a workspace `W_attacker` (where they are a member) and harvests a target issue UUID `I_T` from any side channel: the activity feed (`activity.py:log` records `issue_id=...`), comment threads, error messages, exported issue dumps, issue mentions in agent prompts, or operator screenshots. Issue IDs are uuid4 strings but they are not secret. State: attacker holds `I_T`.
+2. Attacker authenticates and POSTs `Authorization: Bearer <attacker_jwt>` to `GET /workspaces/W_attacker/issues/I_T`. `require_workspace_member(W_attacker, attacker)` passes (attacker is a member of `W_attacker`). State: control flow enters `get_issue` with `workspace_id=W_attacker, issue_id=I_T`.
+3. `IssueService.get(I_T)` runs `session.get(Issue, "I_T")`, which is `SELECT * FROM issues WHERE id = 'I_T' LIMIT 1` with no `workspace_id = 'W_attacker'` filter. The row is returned in full — including `title`, `description` (often confidential bug-report content, customer PII, embedded credentials, or internal roadmap data), `status`, `priority`, `assignee_id`, `created_by`, and `project_id`. State: response body is the JSON-serialised foreign issue.
+4. Attacker repeats with `PATCH /workspaces/W_attacker/issues/I_T` and a body of `{"description": "<reset>", "status": "closed", "project_id": "<arbitrary>"}`. `update_issue` calls `svc.update(I_T, ...)` which loads the target row and mutates the listed fields. State: the foreign workspace's issue is silently re-described, re-statused, and re-projected.
+5. Attacker calls `DELETE /workspaces/W_attacker/issues/I_T` to destroy the target issue. `IssueService.delete` loads the row and calls `session.delete()`. State: target issue is gone from the foreign workspace.
+6. Final state: any attacker with one workspace-member token can enumerate, exfiltrate, rewrite, and delete every issue in the multi-tenant deployment given the issue UUIDs (which leak through the side channels above). The `act_svc.log(workspace_id, "issue.updated", "issue", issue.id, ...)` call at line 118 records the event under `W_attacker` rather than `W_target`, so the foreign workspace's audit trail does not record the tampering — making detection harder.
+
+## Security Impact
+
+**Severity:** sec-high. CVSS 8.1: network attack, low complexity, low privileges (any workspace member), no user interaction, scope unchanged, high confidentiality (full issue body including any embedded secrets), high integrity (arbitrary writes including project re-assignment), low availability (DELETE wipes target issues).
+**Attacker capability:** with one workspace-member token plus a harvested issue UUID, an attacker reads the target issue's `title`, `description`, `status`, `priority`, `assignee_id`, and `project_id`; rewrites any of those fields (silent edit, false closure, malicious re-assignment); re-projects the issue to an unrelated project to confuse triagers; or deletes the issue altogether to destroy evidence of customer reports.
+**Preconditions:** `praisonai-platform` is deployed multi-tenant; the attacker has any membership token; the target issue's UUID is known or guessable (UUIDs leak through activity feeds, comment threads, error messages, exported dumps, and operator screenshots).
+**Differential:** source-inspection-verified end-to-end. The asymmetry between `IssueService.get(issue_id)` (no workspace check) and `MemberService.get(workspace_id, user_id)` (composite key check) in the same codebase confirms the pattern. With the suggested fix below applied, `IssueService.get(workspace_id, issue_id)` returns `None` for foreign-workspace issues, the route handler returns 404, and the foreign data is indistinguishable from a missing record.
+
+## Suggested Fix
+
+Make every single-row resource lookup take the workspace predicate; treat foreign-workspace rows as 404.
+
+```diff
+--- a/src/praisonai-platform/praisonai_platform/services/issue_service.py
++++ b/src/praisonai-platform/praisonai_platform/services/issue_service.py
+@@ -69,9 +69,12 @@ class IssueService:
+         await self._session.flush()
+         return issue
+
+-    async def get(self, issue_id: str) -> Optional[Issue]:
+-        """Get issue by ID."""
+-        return await self._session.get(Issue, issue_id)
++    async def get(self, workspace_id: str, issue_id: str) -> Optional[Issue]:
++        """Get issue by ID, scoped to a workspace."""
++        stmt = select(Issue).where(
++            Issue.id == issue_id, Issue.workspace_id == workspace_id
++        )
++        return (await self._session.execute(stmt)).scalar_one_or_none()
+
+     async def update(
+         self,
++        workspace_id: str,
+         issue_id: str,
+         ...
+     ) -> Optional[Issue]:
+-        issue = await self.get(issue_id)
++        issue = await self.get(workspace_id, issue_id)
+         ...
+
+-    async def delete(self, issue_id: str) -> bool:
++    async def delete(self, workspace_id: str, issue_id: str) -> bool:
+-        issue = await self.get(issue_id)
++        issue = await self.get(workspace_id, issue_id)
+```
+
+Update the route handlers in `routes/issues.py` to thread `workspace_id` through. The same pattern (single-key resource lookup gated only by workspace-member check) exists in `AgentService`, `ProjectService`, `CommentService`, and `LabelService`; each is a separate exploitable IDOR and should be filed as its own advisory so each gets a CVE.

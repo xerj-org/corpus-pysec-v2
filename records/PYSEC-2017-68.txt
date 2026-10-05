@@ -1,0 +1,14 @@
+PYSEC-2017-68 PyPI/recurly — The Recurly Client Python Library before 2.0.5, 2.1.16, 2.2.22, 2.3.1, 2.4.5, 2.5.1, 2.6.2 is vulner
+package: recurly
+ecosystem: PyPI
+versions affected:
+  >= 0, < 049c74699ce93cf126feff06d632ea63fba36742 (GIT: https://github.com/recurly/recurly-client-python)
+  >= 2.0, < 2.0.5, >= 2.1, < 2.1.16, >= 2.2, < 2.2.22, >= 2.3, < 2.3.1, >= 2.4, < 2.4.5, >= 2.5, < 2.5.1, >= 2.6, < 2.6.2 (ECOSYSTEM)
+aliases: CVE-2017-0906, GHSA-38rv-5jqc-m2cv
+references:
+  https://hackerone.com/reports/288635
+  https://github.com/recurly/recurly-client-python/commit/049c74699ce93cf126feff06d632ea63fba36742
+  https://dev.recurly.com/page/python-updates
+  https://github.com/advisories/GHSA-38rv-5jqc-m2cv
+
+The Recurly Client Python Library before 2.0.5, 2.1.16, 2.2.22, 2.3.1, 2.4.5, 2.5.1, 2.6.2 is vulnerable to a Server-Side Request Forgery vulnerability in the "Resource.get" method that could result in compromise of API keys or other critical resources.

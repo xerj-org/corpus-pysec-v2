@@ -1,0 +1,15 @@
+PYSEC-2026-1725 PyPI/open-webui — Open WebUI lacks authentication for the `api/v1/utils/pdf` endpoint
+package: open-webui
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.5.13 (ECOSYSTEM)
+aliases: CVE-2024-8053, GHSA-9vf8-xgwm-97r8
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-8053
+  https://github.com/open-webui/open-webui
+  https://huntr.com/bounties/ebe8c1fa-113b-4df9-be03-a406b9adb9f4
+  https://pypi.org/project/open-webui
+  https://github.com/advisories/GHSA-9vf8-xgwm-97r8
+  https://github.com/open-webui/open-webui/commit/2f75eef499cc5cb48deb639cebebf86c405640bd
+
+In version v0.3.10 of open-webui/open-webui, the `api/v1/utils/pdf` endpoint lacks authentication mechanisms, allowing unauthenticated attackers to access the PDF generation service. This vulnerability can be exploited by sending a POST request with an excessively large payload, potentially leading to server resource exhaustion and denial of service (DoS). Additionally, unauthorized users can misuse the endpoint to generate PDFs without verification, resulting in service misuse and potential operational and financial impacts.

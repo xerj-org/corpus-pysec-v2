@@ -1,0 +1,11 @@
+PYSEC-2026-165 PyPI/pillow — Pillow is a Python imaging library. Prior to version 12.2.0, if a font advances for each glyph by an
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 12.2.0 (ECOSYSTEM)
+aliases: CVE-2026-42308, GHSA-wjx4-4jcj-g98j
+references:
+  https://github.com/python-pillow/Pillow/releases/tag/12.2.0
+  https://github.com/python-pillow/Pillow/security/advisories/GHSA-wjx4-4jcj-g98j
+
+Pillow is a Python imaging library. Prior to version 12.2.0, if a font advances for each glyph by an exceeding large amount, when Pillow keeps track of the current position, it may lead to an integer overflow. This issue has been patched in version 12.2.0.

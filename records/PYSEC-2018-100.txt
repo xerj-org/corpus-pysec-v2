@@ -1,0 +1,12 @@
+PYSEC-2018-100 PyPI/rope — base/oi/doa.py in the Rope library in CPython (aka Python) allows remote attackers to execute arbitr
+package: rope
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.11.0 (ECOSYSTEM)
+aliases: CVE-2014-3539, GHSA-r38r-qp28-2m63
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=1116485
+  http://www.openwall.com/lists/oss-security/2015/02/07/1
+  https://github.com/advisories/GHSA-r38r-qp28-2m63
+
+base/oi/doa.py in the Rope library in CPython (aka Python) allows remote attackers to execute arbitrary code by leveraging an unsafe call to pickle.load.

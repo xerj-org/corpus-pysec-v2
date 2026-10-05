@@ -1,0 +1,13 @@
+PYSEC-2021-72 PyPI/pwntools — This affects the package pwntools before 4.3.1. The shellcraft generator for affected versions of th
+package: pwntools
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.3.1 (ECOSYSTEM)
+aliases: CVE-2020-28468, SNYK-PYTHON-PWNTOOLS-1047345, GHSA-7xc5-ggpp-g249
+references:
+  https://github.com/Gallopsled/pwntools/issues/1427
+  https://snyk.io/vuln/SNYK-PYTHON-PWNTOOLS-1047345
+  https://github.com/Gallopsled/pwntools/pull/1732
+  https://github.com/advisories/GHSA-7xc5-ggpp-g249
+
+This affects the package pwntools before 4.3.1. The shellcraft generator for affected versions of this module are vulnerable to Server-Side Template Injection (SSTI), which can lead to remote code execution.

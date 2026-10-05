@@ -1,0 +1,15 @@
+PYSEC-2022-43131 PyPI/diplib — diplib v3.0.0 is vulnerable to Double Free.
+package: diplib
+ecosystem: PyPI
+versions affected:
+  >= 0, < 8b9a2670ce66ff2fd5addf592f7825e1f5adb5b5 (GIT: https://github.com/DIPlib/diplib)
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2021-39432, GHSA-xf2w-5673-h6ww
+references:
+  https://github.com/DIPlib/diplib/commit/8b9a2670ce66ff2fd5addf592f7825e1f5adb5b5
+  https://github.com/DIPlib/diplib/issues/80
+  https://github.com/DIPlib/diplib/issues/80
+  https://github.com/DIPlib/diplib/issues/80
+  https://github.com/advisories/GHSA-xf2w-5673-h6ww
+
+diplib v3.0.0 is vulnerable to Double Free.

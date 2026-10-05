@@ -1,0 +1,14 @@
+PYSEC-2012-6 PyPI/trytond — model/modelstorage.py in the Tryton application framework (trytond) before 2.4.0 for Python does not
+package: trytond
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.2.4 (ECOSYSTEM)
+aliases: CVE-2012-0215, GHSA-cqg4-rf29-3mv6
+references:
+  http://www.debian.org/security/2012/dsa-2444
+  http://news.tryton.org/2012/03/security-releases-for-all-supported.html
+  https://bugs.tryton.org/issue2476
+  http://hg.tryton.org/trytond/rev/8e64d52ecea4
+  https://github.com/advisories/GHSA-cqg4-rf29-3mv6
+
+model/modelstorage.py in the Tryton application framework (trytond) before 2.4.0 for Python does not properly restrict access to the Many2Many field in the relation model, which allows remote authenticated users to modify the privileges of arbitrary users via a (1) create, (2) write, (3) delete, or (4) copy rpc call.

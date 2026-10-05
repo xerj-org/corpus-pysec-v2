@@ -1,0 +1,16 @@
+PYSEC-2026-796 PyPI/cobbler — Cobbler XSS Vulnerability
+package: cobbler
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 2.6.11 (ECOSYSTEM)
+aliases: CVE-2018-1000225, GHSA-q9g5-98pm-w6q7
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2018-1000225
+  https://github.com/cobbler/cobbler/issues/1917
+  https://github.com/cobbler/cobbler
+  https://github.com/cobbler/cobbler/blob/master/cobbler/remote.py#L2236
+  https://movermeyer.com/2018-08-02-privilege-escalation-exploits-in-cobblers-api
+  https://pypi.org/project/cobbler
+  https://github.com/advisories/GHSA-q9g5-98pm-w6q7
+
+Cobbler version Verified as present in Cobbler versions 2.6.11+, but code inspection suggests at least 2.0.0+ or possibly even older versions may be vulnerable contains a Cross Site Scripting (XSS) vulnerability in cobbler-web that can result in Privilege escalation to admin.. This attack appear to be exploitable via "network connectivity". Sending unauthenticated JavaScript payload to the Cobbler XMLRPC API (/cobbler_api).

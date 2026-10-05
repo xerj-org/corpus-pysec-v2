@@ -1,0 +1,19 @@
+PYSEC-2026-3407 PyPI/vllm — vllm has Improper Resource Shutdown or Release
+package: vllm
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.19.0 (ECOSYSTEM)
+aliases: CVE-2026-9540, GHSA-98f3-hwg4-4rf7
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-9540
+  https://github.com/vllm-project/vllm/issues/37343
+  https://github.com/vllm-project/vllm/pull/37594
+  https://github.com/vllm-project/vllm
+  https://ingero.io/debugging-vllm-latency-minimax-ollama-mcp
+  https://vuldb.com/submit/814645
+  https://vuldb.com/vuln/365601
+  https://vuldb.com/vuln/365601/cti
+  https://pypi.org/project/vllm
+  https://github.com/advisories/GHSA-98f3-hwg4-4rf7
+
+A vulnerability was identified in vllm-project vllm 0.19.0. This issue affects some unknown processing of the component OpenAI-compatible Serving Path. Such manipulation leads to denial of service. It is possible to launch the attack remotely. The exploit is publicly available and might be used. The pull request to fix this issue awaits acceptance.

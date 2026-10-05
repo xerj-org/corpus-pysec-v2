@@ -1,0 +1,15 @@
+PYSEC-2023-312 PyPI/redis — Redis before 6cbea7d allows a replica to cause an assertion failure in a primary server by sending a
+package: redis
+ecosystem: PyPI
+versions affected:
+  >= 0, < 46f4ebbe842620f0976a36741a72482620aa4b48, < 6cbea7d29b5285692843bc1c351abba1a7ef326f, < 46f4ebbe842620f0976a36741a72482620aa4b48, < 6cbea7d29b5285692843bc1c351abba1a7ef326f (GIT: https://github.com/redis/redis)
+  >= 0, < 6.2.0 (ECOSYSTEM)
+aliases: CVE-2021-31294
+references:
+  https://security.netapp.com/advisory/ntap-20230814-0007/
+  https://github.com/redis/redis/issues/8712
+  https://github.com/redis/redis/commit/46f4ebbe842620f0976a36741a72482620aa4b48
+  https://github.com/redis/redis/commit/6cbea7d29b5285692843bc1c351abba1a7ef326f
+  https://github.com/redis/redis/issues/8712
+
+Redis before 6cbea7d allows a replica to cause an assertion failure in a primary server by sending a non-administrative command (specifically, a SET command). NOTE: this was fixed for Redis 6.2.x and 7.x in 2021. Versions before 6.2 were not intended to have safety guarantees related to this.

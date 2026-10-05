@@ -1,0 +1,12 @@
+PYSEC-2026-2164 PyPI/glances — Glances is an open-source system cross-platform monitoring tool. Prior to 4.5.1, the /api/4/config R
+package: glances
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.5.1 (ECOSYSTEM)
+aliases: CVE-2026-30928, GHSA-gh4x-f7cq-wwx6
+references:
+  https://github.com/nicolargo/glances/releases/tag/v4.5.1
+  https://github.com/nicolargo/glances/commit/306a7136154ba5c1531489c99f8306d84eae37da
+  https://github.com/nicolargo/glances/security/advisories/GHSA-gh4x-f7cq-wwx6
+
+Glances is an open-source system cross-platform monitoring tool. Prior to 4.5.1, the /api/4/config REST API endpoint returns the entire parsed Glances configuration file (glances.conf) via self.config.as_dict() with no filtering of sensitive values. The configuration file contains credentials for all configured backend services including database passwords, API tokens, JWT signing keys, and SSL key passwords. This vulnerability is fixed in 4.5.1.

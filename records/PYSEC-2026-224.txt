@@ -1,0 +1,11 @@
+PYSEC-2026-224 PyPI/langflow — Langflow is a tool for building and deploying AI-powered agents and workflows. Prior to 1.9.1, unaut
+package: langflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.9.1 (ECOSYSTEM)
+aliases: CVE-2026-55450, GHSA-x223-p2gf-v735
+references:
+  https://github.com/langflow-ai/langflow/pull/12831
+  https://github.com/langflow-ai/langflow/security/advisories/GHSA-x223-p2gf-v735
+
+Langflow is a tool for building and deploying AI-powered agents and workflows. Prior to 1.9.1, unauthenticated users can upload any amount of data to the server without any limitations. No need for any prior knowledge, only network access to Langflow. This can lead to space exhaustion on the server. In addition, in the response, the absolute path of the uploaded file is reported to the attacker, which is an information leak that can assist in chaining other primitives. This vulnerability is fixed in 1.9.1.

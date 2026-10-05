@@ -1,0 +1,15 @@
+PYSEC-2026-3441 PyPI/apache-gravitino — URL path injection via unencoded user-supplied identifiers vulnerability in Apache Gravitino. This i
+package: apache-gravitino
+ecosystem: PyPI
+versions affected:
+  >= 1.0.0, < 1.2.1 (ECOSYSTEM)
+aliases: CVE-2026-41041
+references:
+  http://www.openwall.com/lists/oss-security/2026/07/13/1
+  https://lists.apache.org/thread/4dnwg1qzb2yns1fkfmq0z45vmwyzytgz
+
+URL path injection via unencoded user-supplied identifiers vulnerability in Apache Gravitino.
+
+This issue affects Apache Gravitino: from 1.0.0 before 1.2.1.
+
+Users are recommended to upgrade to version 1.2.1, which fixes the issue.

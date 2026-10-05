@@ -1,0 +1,13 @@
+PYSEC-2022-283 PyPI/octoprint — Improper Privilege Management in GitHub repository octoprint/octoprint prior to 1.8.3.
+package: octoprint
+ecosystem: PyPI
+versions affected:
+  >= 0, < ef95ef1c101b79394f134e8fce000e6bae046571 (GIT: https://github.com/octoprint/octoprint)
+  >= 0, < 1.8.3 (ECOSYSTEM)
+aliases: CVE-2022-3068, GHSA-2p75-q37p-f852
+references:
+  https://huntr.dev/bounties/f45c24cb-9104-4c6e-a9e1-5c7e75e83884
+  https://github.com/octoprint/octoprint/commit/ef95ef1c101b79394f134e8fce000e6bae046571
+  https://github.com/advisories/GHSA-2p75-q37p-f852
+
+Improper Privilege Management in GitHub repository octoprint/octoprint prior to 1.8.3.

@@ -1,0 +1,13 @@
+PYSEC-2019-119 PyPI/salt — SaltStack Salt 2018.3, 2019.2 is affected by: SQL Injection. The impact is: An attacker could escala
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2018.3.4 (ECOSYSTEM)
+aliases: CVE-2019-1010259, GHSA-h8xp-h3jf-wv4v
+references:
+  https://github.com/saltstack/salt/blob/f22de0887cd7167887f113bf394244b74fb36b6b/salt/modules/mysql.py#L1534
+  https://github.com/ShantonRU/salt/commit/a46c86a987c78e74e87969d8d3b27094e6544b7a
+  https://github.com/saltstack/salt/pull/51462
+  https://github.com/advisories/GHSA-h8xp-h3jf-wv4v
+
+SaltStack Salt 2018.3, 2019.2 is affected by: SQL Injection. The impact is: An attacker could escalate privileges on MySQL server deployed by cloud provider. It leads to RCE. The component is: The mysql.user_chpass function from the MySQL module for Salt. The attack vector is: specially crafted password string. The fixed version is: 2018.3.4.

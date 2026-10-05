@@ -1,0 +1,19 @@
+PYSEC-2026-840 PyPI/loggerhead — Loggerhead XSS via filename
+package: loggerhead
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.18.1 (ECOSYSTEM)
+aliases: CVE-2011-0728, GHSA-qjmg-77xh-7mjw
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2011-0728
+  https://bugs.launchpad.net/loggerhead/+bug/740142
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/66305
+  https://launchpad.net/loggerhead/1.18/1.18.1
+  https://web.archive.org/web/20200228162139/http://www.securityfocus.com/bid/47032
+  http://lists.fedoraproject.org/pipermail/package-announce/2011-April/057413.html
+  http://lists.fedoraproject.org/pipermail/package-announce/2011-April/057479.html
+  http://lists.fedoraproject.org/pipermail/package-announce/2011-April/057502.html
+  https://pypi.org/project/loggerhead
+  https://github.com/advisories/GHSA-qjmg-77xh-7mjw
+
+Cross-site scripting (XSS) vulnerability in `templatefunctions.py` in Loggerhead before 1.18.1 allows remote authenticated users to inject arbitrary web script or HTML via a filename, which is not properly handled in a revision view.

@@ -1,0 +1,12 @@
+PYSEC-2022-43096 PyPI/democritus-dates — The d8s-timer for python, as distributed on PyPI, included a potential code-execution backdoor inser
+package: democritus-dates
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-43306
+references:
+  https://pypi.org/project/democritus-dates/
+  https://github.com/dadadadada111/info/issues/11
+  https://pypi.org/project/d8s-timer/
+
+The d8s-timer for python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. A potential code execution backdoor inserted by third parties is the democritus-dates package. The affected version of d8s-htm is 0.1.0.

@@ -1,0 +1,13 @@
+PYSEC-2023-246 PyPI/aiohttp — aiohttp is an asynchronous HTTP client/server framework for asyncio and Python. The HTTP parser in A
+package: aiohttp
+ecosystem: PyPI
+versions affected:
+  >= 0, < d5c12ba890557a575c313bb3017910d7616fce3d (GIT: https://github.com/aio-libs/aiohttp)
+  >= 0, < 3.8.6 (ECOSYSTEM)
+aliases: CVE-2023-47627, GHSA-gfw2-4jvh-wgfg
+references:
+  https://github.com/aio-libs/aiohttp/security/advisories/GHSA-gfw2-4jvh-wgfg
+  https://github.com/aio-libs/aiohttp/security/advisories/GHSA-gfw2-4jvh-wgfg
+  https://github.com/aio-libs/aiohttp/commit/d5c12ba890557a575c313bb3017910d7616fce3d
+
+aiohttp is an asynchronous HTTP client/server framework for asyncio and Python. The HTTP parser in AIOHTTP has numerous problems with header parsing, which could lead to request smuggling. This parser is only used when AIOHTTP_NO_EXTENSIONS is enabled (or not using a prebuilt wheel). These bugs have been addressed in commit `d5c12ba89` which has been included in release version 3.8.6. Users are advised to upgrade. There are no known workarounds for these issues.

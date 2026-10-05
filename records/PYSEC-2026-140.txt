@@ -1,0 +1,11 @@
+PYSEC-2026-140 PyPI/tornado — Tornado is a Python web framework and asynchronous networking library. In versions of Tornado prior 
+package: tornado
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.5.5 (ECOSYSTEM)
+aliases: CVE-2026-31958, GHSA-qjxf-f2mg-c6mc
+references:
+  https://lists.debian.org/debian-lts-announce/2026/04/msg00000.html
+  https://github.com/tornadoweb/tornado/security/advisories/GHSA-qjxf-f2mg-c6mc
+
+Tornado is a Python web framework and asynchronous networking library. In versions of Tornado prior to 6.5.5, the only limit on the number of parts in multipart/form-data is the max_body_size setting (default 100MB). Since parsing occurs synchronously on the main thread, this creates the possibility of denial-of-service due to the cost of parsing very large multipart bodies with many parts. This vulnerability is fixed in 6.5.5.

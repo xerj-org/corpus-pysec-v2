@@ -1,0 +1,13 @@
+PYSEC-2022-43049 PyPI/democritus-urls — The d8s-utility package for Python, as distributed on PyPI, included a potential code-execution back
+package: democritus-urls
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-41386
+references:
+  https://pypi.org/project/democritus-urls/
+  https://pypi.org/project/d8s-utility/
+  https://github.com/democritus-project/d8s-utility/issues/11
+  https://github.com/democritus-project/d8s-utility/issues/11
+
+The d8s-utility package for Python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. The backdoor is the democritus-urls package. The affected version is 0.1.0.

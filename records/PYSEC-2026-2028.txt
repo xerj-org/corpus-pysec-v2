@@ -1,0 +1,50 @@
+PYSEC-2026-2028 PyPI/vyper — Vyper's `slice()` may elide side-effects when output length is 0
+package: vyper
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.4.2rc1 (ECOSYSTEM)
+aliases: CVE-2025-47774, GHSA-3vcg-j39x-cwfm
+references:
+  https://github.com/vyperlang/vyper/security/advisories/GHSA-3vcg-j39x-cwfm
+  https://nvd.nist.gov/vuln/detail/CVE-2025-47774
+  https://github.com/vyperlang/vyper/pull/4645
+  https://github.com/vyperlang/vyper
+  https://github.com/vyperlang/vyper/blob/68b68c4b30c5ef2f312b4674676170b8a6eaa316/vyper/builtins/functions.py#L315-L319
+  https://github.com/vyperlang/vyper/blob/68b68c4b30c5ef2f312b4674676170b8a6eaa316/vyper/codegen/core.py#L189-L191
+  https://pypi.org/project/vyper
+  https://github.com/advisories/GHSA-3vcg-j39x-cwfm
+
+### Impact
+the `slice()` builtin can elide side effects when the output length is 0, and the source bytestring is a builtin (`msg.data` or `<address>.code`). the reason is that for these source locations, the check that `length >= 1` is skipped:
+https://github.com/vyperlang/vyper/blob/68b68c4b30c5ef2f312b4674676170b8a6eaa316/vyper/builtins/functions.py#L315-L319
+
+the result is that a 0-length bytestring constructed with slice can be passed to `make_byte_array_copier`, which elides evaluation of its source argument when the max length is 0:
+https://github.com/vyperlang/vyper/blob/68b68c4b30c5ef2f312b4674676170b8a6eaa316/vyper/codegen/core.py#L189-L191
+
+the impact is that side effects in the `start` argument may be elided when the `length` argument is 0, e.g. `slice(msg.data, self.do_side_effect(), 0)`.
+
+the following example illustrates how the issue would look in user code
+```vyper
+counter: public(uint256)
+
+@external
+def test() -> Bytes[10]:
+    b: Bytes[10] = slice(msg.data, self.side_effect(), 0)
+    return b
+
+def side_effect() -> uint256:
+    self.counter += 1
+    return 0
+```
+
+the severity assigned is low, since this is not a very useful pattern and unlikely to be found in user code.
+
+### Patches
+
+the fix is tracked in https://github.com/vyperlang/vyper/pull/4645, which disallows any invocation of `slice()` with length 0, including for the ad hoc locations discussed in this advisory.
+
+### Workarounds
+_Is there a way for users to fix or remediate the vulnerability without upgrading?_
+
+### References
+_Are there any links users can visit to find out more?_

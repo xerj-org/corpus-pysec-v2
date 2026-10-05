@@ -1,0 +1,18 @@
+PYSEC-2026-2637 PyPI/metagpt — FoundationAgents MetaGPT: Deserialization through flawed argument mapping via Message.check_instruct_content()
+package: metagpt
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.8.2 (ECOSYSTEM)
+aliases: CVE-2026-10566, GHSA-3c3g-7hwg-9qmr
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-10566
+  https://github.com/FoundationAgents/MetaGPT/issues/2038
+  https://github.com/FoundationAgents/MetaGPT
+  https://vuldb.com/cve/CVE-2026-10566
+  https://vuldb.com/submit/828301
+  https://vuldb.com/vuln/367673
+  https://vuldb.com/vuln/367673/cti
+  https://pypi.org/project/metagpt
+  https://github.com/advisories/GHSA-3c3g-7hwg-9qmr
+
+A weakness has been identified in FoundationAgents MetaGPT up to 0.8.2. This affects the function Message.check_instruct_content of the file metagpt/schema.py. Executing a manipulation of the argument mapping can lead to deserialization. The attack is restricted to local execution. The exploit has been made available to the public and could be used for attacks. The project was informed of the problem early through an issue report but has not responded yet.

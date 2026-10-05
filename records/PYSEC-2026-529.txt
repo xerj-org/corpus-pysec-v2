@@ -1,0 +1,16 @@
+PYSEC-2026-529 PyPI/salt — Salt vulnerable to directory traversal attack in file receiving method
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 3006.0rc1, < 3006.12, >= 3007.0rc1, < 3007.4 (ECOSYSTEM)
+aliases: CVE-2024-38824, GHSA-8pcp-r83j-fc92
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-38824
+  https://github.com/saltstack/salt/commit/c4ad23f0f3132d8d8a88f19fa537dc42cf21b215
+  https://docs.saltproject.io/en/3006/topics/releases/3006.12.html
+  https://docs.saltproject.io/en/3007/topics/releases/3007.4.html
+  https://github.com/saltstack/salt
+  https://pypi.org/project/salt
+  https://github.com/advisories/GHSA-8pcp-r83j-fc92
+
+Directory traversal vulnerability in recv_file method allows arbitrary files to be written to the master cache directory.

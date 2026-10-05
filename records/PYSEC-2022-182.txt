@@ -1,0 +1,11 @@
+PYSEC-2022-182 PyPI/admesh — ADMesh through 0.98.4 has a heap-based buffer over-read in stl_update_connects_remove_1 (called from
+package: admesh
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.98.5 (ECOSYSTEM)
+aliases: CVE-2018-25033, GHSA-5jrq-582v-9767
+references:
+  https://github.com/admesh/admesh/issues/28
+  https://github.com/advisories/GHSA-5jrq-582v-9767
+
+ADMesh through 0.98.4 has a heap-based buffer over-read in stl_update_connects_remove_1 (called from stl_remove_degenerate) in connect.c in libadmesh.a.

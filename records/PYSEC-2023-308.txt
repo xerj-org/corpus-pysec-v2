@@ -1,0 +1,15 @@
+PYSEC-2023-308 PyPI/mlflow — Absolute Path Traversal in GitHub repository mlflow/mlflow prior to 2.5.0.
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6dde93758d42455cb90ef324407919ed67668b9b, < 6dde93758d42455cb90ef324407919ed67668b9b (GIT: https://github.com/mlflow/mlflow)
+  >= 0, < 2.5.0 (ECOSYSTEM)
+aliases: CVE-2023-3765, GHSA-fmxj-6h9g-6vw3
+references:
+  https://huntr.dev/bounties/4be5fd63-8a0a-490d-9ee1-f33dc768ed76
+  https://github.com/mlflow/mlflow/commit/6dde93758d42455cb90ef324407919ed67668b9b
+  https://huntr.dev/bounties/4be5fd63-8a0a-490d-9ee1-f33dc768ed76
+  https://huntr.dev/bounties/4be5fd63-8a0a-490d-9ee1-f33dc768ed76
+  https://github.com/advisories/GHSA-fmxj-6h9g-6vw3
+
+Absolute Path Traversal in GitHub repository mlflow/mlflow prior to 2.5.0.

@@ -1,0 +1,24 @@
+PYSEC-2018-44 PyPI/ansible — Ansible "User" module leaks any data which is passed on as a parameter to ssh-keygen. This could lea
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 2.7, < 2.7.1, >= 2.6, < 2.6.7, >= 0, < 2.5.11 (ECOSYSTEM)
+aliases: CVE-2018-16837, GHSA-hwrm-63v2-42g4
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2018-16837
+  http://www.securityfocus.com/bid/105700
+  https://access.redhat.com/errata/RHSA-2018:3463
+  https://access.redhat.com/errata/RHSA-2018:3462
+  https://access.redhat.com/errata/RHSA-2018:3461
+  https://access.redhat.com/errata/RHSA-2018:3460
+  https://access.redhat.com/errata/RHSA-2018:3505
+  https://lists.debian.org/debian-lts-announce/2018/11/msg00012.html
+  https://access.redhat.com/security/cve/cve-2018-16837
+  https://www.debian.org/security/2019/dsa-4396
+  http://lists.opensuse.org/opensuse-security-announce/2019-04/msg00021.html
+  http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00077.html
+  https://usn.ubuntu.com/4072-1/
+  http://lists.opensuse.org/opensuse-security-announce/2019-08/msg00020.html
+  https://github.com/advisories/GHSA-hwrm-63v2-42g4
+
+Ansible "User" module leaks any data which is passed on as a parameter to ssh-keygen. This could lean in undesirable situations such as passphrases credentials passed as a parameter for the ssh-keygen executable. Showing those credentials in clear text form for every user which have access just to the process list.

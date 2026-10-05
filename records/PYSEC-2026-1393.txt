@@ -1,0 +1,21 @@
+PYSEC-2026-1393 PyPI/frappe — Frappe has Possibility of Remote Code Execution due to improper validation
+package: frappe
+ecosystem: PyPI
+versions affected:
+  >= 0, < 14.91.0, >= 15.0.0, < 15.52.0 (ECOSYSTEM)
+aliases: CVE-2025-30213, GHSA-v342-4xr9-x3q3
+references:
+  https://github.com/frappe/frappe/security/advisories/GHSA-v342-4xr9-x3q3
+  https://nvd.nist.gov/vuln/detail/CVE-2025-30213
+  https://github.com/frappe/frappe
+  https://pypi.org/project/frappe
+  https://github.com/advisories/GHSA-v342-4xr9-x3q3
+
+### Impact
+A system user was able to create certain documents in a specific way that could lead to RCE.
+
+### Workarounds
+There's no workaround, an upgrade is required.
+
+### Credits
+Thanks to Thanh of Calif.io for reporting the issue

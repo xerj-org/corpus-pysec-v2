@@ -1,0 +1,13 @@
+PYSEC-2020-67 PyPI/moin — The cache action in action/cache.py in MoinMoin through 1.9.10 allows directory traversal through a 
+package: moin
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.9.11 (ECOSYSTEM)
+aliases: CVE-2020-25074, GHSA-52q8-877j-gghq
+references:
+  https://www.debian.org/security/2020/dsa-4787
+  https://github.com/moinwiki/moin-1.9/security/advisories/GHSA-52q8-877j-gghq
+  http://moinmo.in/SecurityFixes
+  https://lists.debian.org/debian-lts-announce/2020/11/msg00020.html
+
+The cache action in action/cache.py in MoinMoin through 1.9.10 allows directory traversal through a crafted HTTP request. An attacker who can upload attachments to the wiki can use this to achieve remote code execution.

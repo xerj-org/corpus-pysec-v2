@@ -1,0 +1,12 @@
+PYSEC-2017-33 PyPI/salt — Salt before 2015.5.10 and 2015.8.x before 2015.8.8, when PAM external authentication is enabled, all
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2015.5.10, >= 2015.8, < 2015.8.8 (ECOSYSTEM)
+aliases: CVE-2016-3176, GHSA-v2rp-9cpj-pfw2
+references:
+  https://docs.saltstack.com/en/latest/topics/releases/2015.8.8.html
+  https://docs.saltstack.com/en/latest/topics/releases/2015.5.10.html
+  https://github.com/advisories/GHSA-v2rp-9cpj-pfw2
+
+Salt before 2015.5.10 and 2015.8.x before 2015.8.8, when PAM external authentication is enabled, allows attackers to bypass the configured authentication service by passing an alternate service with a command sent to LocalClient.

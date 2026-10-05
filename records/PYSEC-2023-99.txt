@@ -1,0 +1,16 @@
+PYSEC-2023-99 PyPI/pipreqs — A dependency confusion in pipreqs v0.3.0 to v0.4.11 allows attackers to execute arbitrary code via u
+package: pipreqs
+ecosystem: PyPI
+versions affected:
+  >= 0.3.0, < 0.4.12 (ECOSYSTEM)
+aliases: CVE-2023-31543, GHSA-v4f4-23wc-99mh
+references:
+  https://github.com/bndr/pipreqs/pull/364
+  https://github.com/bndr/pipreqs/pull/364
+  https://github.com/bndr/pipreqs/pull/364
+  https://github.com/bndr/pipreqs/pull/364
+  https://gist.github.com/adeadfed/ccc834440af354a5638f889bee34bafe
+  https://gist.github.com/adeadfed/ccc834440af354a5638f889bee34bafe
+  https://github.com/advisories/GHSA-v4f4-23wc-99mh
+
+A dependency confusion in pipreqs v0.3.0 to v0.4.11 allows attackers to execute arbitrary code via uploading a crafted PyPI package to the chosen repository server.

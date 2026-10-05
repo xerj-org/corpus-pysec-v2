@@ -1,0 +1,15 @@
+PYSEC-2021-882 PyPI/exiv2 — Exiv2 0.27.99.0 has a global buffer over-read in Exiv2::Internal::Nikon1MakerNote::print0x0088 in ni
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2020-18771
+references:
+  https://github.com/Exiv2/exiv2/issues/756
+  https://github.com/Exiv2/exiv2/issues/756
+  https://cwe.mitre.org/data/definitions/126.html
+  https://lists.debian.org/debian-lts-announce/2023/01/msg00004.html
+  https://lists.debian.org/debian-lts-announce/2023/01/msg00004.html
+  https://security.gentoo.org/glsa/202312-06
+
+Exiv2 0.27.99.0 has a global buffer over-read in Exiv2::Internal::Nikon1MakerNote::print0x0088 in nikonmn_int.cpp which can result in an information leak.

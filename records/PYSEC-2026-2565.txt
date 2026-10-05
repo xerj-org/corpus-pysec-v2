@@ -1,0 +1,17 @@
+PYSEC-2026-2565 PyPI/langflow — Langflow has an Information Leak through Incomplete API Key Redaction
+package: langflow
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 1.8.3 (ECOSYSTEM)
+aliases: CVE-2026-6597, GHSA-5jjf-wcvf-923w
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-6597
+  https://gist.github.com/chenhouser2025/b93261c6e651f14800a4f2e4365f357b
+  https://github.com/langflow-ai/langflow
+  https://vuldb.com/submit/791920
+  https://vuldb.com/vuln/358232
+  https://vuldb.com/vuln/358232/cti
+  https://pypi.org/project/langflow
+  https://github.com/advisories/GHSA-5jjf-wcvf-923w
+
+A weakness has been identified in langflow-ai langflow up to 1.8.3. Impacted is the function remove_api_keys/has_api_terms of the file src/backend/base/langflow/api/utils/core.py of the component Flow Using API. This manipulation causes unprotected storage of credentials. The attack can be initiated remotely. The exploit has been made available to the public and could be used for attacks. The vendor was contacted early about this disclosure but did not respond in any way.

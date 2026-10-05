@@ -1,0 +1,12 @@
+PYSEC-2019-221 PyPI/homeassistant — Home Assistant before 0.67.0 was vulnerable to an information disclosure that allowed an unauthentic
+package: homeassistant
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.67.0 (ECOSYSTEM)
+aliases: CVE-2018-21019, GHSA-mh78-8f49-vjg3
+references:
+  https://github.com/home-assistant/home-assistant/pull/13836
+  https://github.com/home-assistant/home-assistant/releases/tag/0.67.0
+  https://github.com/advisories/GHSA-mh78-8f49-vjg3
+
+Home Assistant before 0.67.0 was vulnerable to an information disclosure that allowed an unauthenticated attacker to read the application's error log via components/api.py.

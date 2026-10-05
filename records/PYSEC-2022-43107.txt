@@ -1,0 +1,11 @@
+PYSEC-2022-43107 PyPI/democritus-hypothesis — The d8s-ip-addresses for python, as distributed on PyPI, included a potential code-execution backdoo
+package: democritus-hypothesis
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-40810
+references:
+  https://github.com/democritus-project/d8s-ip-addresses/issues/13
+  https://pypi.org/project/democritus-hypothesis/
+
+The d8s-ip-addresses for python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. The backdoor is the democritus-hypothesis package. The affected version is 0.1.0

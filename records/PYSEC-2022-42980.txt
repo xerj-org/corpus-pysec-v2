@@ -1,0 +1,15 @@
+PYSEC-2022-42980 PyPI/pillow — Pillow before 9.3.0 allows denial of service via SAMPLESPERPIXEL.
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2444cddab2f83f28687c7c20871574acbb6dbcf3 (GIT: https://github.com/python-pillow/Pillow)
+  >= 9.2.0, < 9.3.0 (ECOSYSTEM)
+aliases: CVE-2022-45199, GHSA-q4mp-jvh2-76fj
+references:
+  https://github.com/python-pillow/Pillow/pull/6700
+  https://bugs.gentoo.org/878769
+  https://github.com/python-pillow/Pillow/releases/tag/9.3.0
+  https://github.com/python-pillow/Pillow/commit/2444cddab2f83f28687c7c20871574acbb6dbcf3
+  https://github.com/advisories/GHSA-q4mp-jvh2-76fj
+
+Pillow before 9.3.0 allows denial of service via SAMPLESPERPIXEL.

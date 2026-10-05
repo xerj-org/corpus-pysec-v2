@@ -1,0 +1,15 @@
+PYSEC-2026-333 PyPI/executorch — ExecuTorch heap buffer overflow vulnerability
+package: executorch
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.7.0 (ECOSYSTEM)
+aliases: CVE-2025-54949, GHSA-9m39-3mf3-xwch
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-54949
+  https://github.com/pytorch/executorch/commit/ede82493dae6d2d43f8c424e7be4721abe5242be
+  https://github.com/pytorch/executorch
+  https://www.facebook.com/security/advisories/cve-2025-54949
+  https://pypi.org/project/executorch
+  https://github.com/advisories/GHSA-9m39-3mf3-xwch
+
+A heap buffer overflow vulnerability in the loading of ExecuTorch models can potentially result in code execution or other undesirable effects. This issue affects ExecuTorch prior to commit ede82493dae6d2d43f8c424e7be4721abe5242be

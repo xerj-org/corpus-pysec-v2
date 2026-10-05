@@ -1,0 +1,10 @@
+PYSEC-2024-291 PyPI/pyassimp — Assimp v5.4.3 is vulnerable to Buffer Overflow via the MD5Importer::LoadMD5MeshFile function.
+package: pyassimp
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 5.4.3 (ECOSYSTEM)
+aliases: CVE-2024-46632
+references:
+  https://github.com/assimp/assimp/issues/5771
+
+Assimp v5.4.3 is vulnerable to Buffer Overflow via the MD5Importer::LoadMD5MeshFile function.

@@ -1,0 +1,11 @@
+PYSEC-2021-855 PyPI/numpy — Incomplete string comparison in the numpy.core component in NumPy1.9.x, which allows attackers to fa
+package: numpy
+ecosystem: PyPI
+versions affected:
+  >= 1.9.0, < 1.10.0 (ECOSYSTEM)
+aliases: CVE-2021-34141, GHSA-fpfv-jqm9-f5jm
+references:
+  https://github.com/numpy/numpy/issues/18993
+  https://github.com/advisories/GHSA-fpfv-jqm9-f5jm
+
+Incomplete string comparison in the numpy.core component in NumPy1.9.x, which allows attackers to fail the APIs via constructing specific string objects.

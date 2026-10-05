@@ -1,0 +1,14 @@
+PYSEC-2026-446 PyPI/pandasai — Code execution in pandasai
+package: pandasai
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 1.5.17 (ECOSYSTEM)
+aliases: CVE-2024-23752, GHSA-5g73-69p4-7gvx
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-23752
+  https://github.com/gventuri/pandas-ai/issues/868
+  https://github.com/gventuri/pandas-ai
+  https://pypi.org/project/pandasai
+  https://github.com/advisories/GHSA-5g73-69p4-7gvx
+
+GenerateSDFPipeline in synthetic_dataframe in PandasAI (aka pandas-ai) through 1.5.17 allows attackers to trigger the generation of arbitrary Python code that is executed by SDFCodeExecutor. An attacker can create a dataframe that provides an English language specification of this Python code. NOTE: the vendor previously attempted to restrict code execution in response to a separate issue, CVE-2023-39660.

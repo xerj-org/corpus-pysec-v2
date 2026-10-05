@@ -1,0 +1,12 @@
+PYSEC-2017-55 PyPI/plone — Plone 4.0 through 5.1a1 does not have security declarations for Dexterity content-related WebDAV req
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 4.0, < 5.1a2 (ECOSYSTEM)
+aliases: CVE-2016-4041, GHSA-qqgj-22gr-73vx
+references:
+  https://plone.org/security/hotfix/20160419/privilege-escalation-in-webdav
+  http://www.openwall.com/lists/oss-security/2016/04/20/1
+  https://github.com/advisories/GHSA-qqgj-22gr-73vx
+
+Plone 4.0 through 5.1a1 does not have security declarations for Dexterity content-related WebDAV requests, which allows remote attackers to gain webdav access via unspecified vectors.

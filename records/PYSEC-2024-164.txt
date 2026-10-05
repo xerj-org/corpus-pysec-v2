@@ -1,0 +1,13 @@
+PYSEC-2024-164 PyPI/vyper — Vyper is a pythonic Smart Contract Language for the ethereum virtual machine. If an excessively larg
+package: vyper
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.4.0b1 (ECOSYSTEM)
+aliases: CVE-2024-26149, GHSA-9p8r-4xp4-gw5w
+references:
+  https://github.com/vyperlang/vyper/security/advisories/GHSA-9p8r-4xp4-gw5w
+  https://github.com/vyperlang/vyper/security/advisories/GHSA-9p8r-4xp4-gw5w
+  https://github.com/vyperlang/vyper/security/advisories/GHSA-9p8r-4xp4-gw5w
+  https://github.com/advisories/GHSA-9p8r-4xp4-gw5w
+
+Vyper is a pythonic Smart Contract Language for the ethereum virtual machine. If an excessively large value is specified as the starting index for an array in `_abi_decode`, it can cause the read position to overflow. This results in the decoding of values outside the intended array bounds, potentially leading to exploitations in contracts that use arrays within `_abi_decode`. This vulnerability affects 0.3.10 and earlier versions.

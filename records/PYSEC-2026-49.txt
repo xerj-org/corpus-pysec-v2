@@ -1,0 +1,19 @@
+PYSEC-2026-49 PyPI/django — An issue was discovered in 6.0 before 6.0.4, 5.2 before 5.2.13, and 4.2 before 4.2.30. ASGI requests
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 4.2, < 4.2.30, >= 5.2, < 5.2.13, >= 6.0, < 6.0.4 (ECOSYSTEM)
+aliases: CVE-2026-33034, GHSA-933h-hp56-hf7m
+references:
+  https://groups.google.com/g/django-announce
+  https://docs.djangoproject.com/en/dev/releases/security/
+  https://www.djangoproject.com/weblog/2026/apr/07/security-releases/
+  https://github.com/advisories/GHSA-933h-hp56-hf7m
+
+An issue was discovered in 6.0 before 6.0.4, 5.2 before 5.2.13, and 4.2 before 4.2.30.
+ASGI requests with a missing or understated `Content-Length` header could
+bypass the `DATA_UPLOAD_MAX_MEMORY_SIZE` limit when reading
+`HttpRequest.body`, allowing remote attackers to load an unbounded request body into
+memory.
+Earlier, unsupported Django series (such as 5.0.x, 4.1.x, and 3.2.x) were not evaluated and may also be affected.
+Django would like to thank Superior for reporting this issue.

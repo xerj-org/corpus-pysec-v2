@@ -1,0 +1,13 @@
+PYSEC-2020-10 PyPI/ansible — A flaw was found in Ansible Engine when the module package or service is used and the parameter 'use
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.7.17, >= 2.8.0, < 2.8.9, >= 2.9.0, < 2.9.6 (ECOSYSTEM)
+aliases: CVE-2020-1738, GHSA-f85h-23mf-2fwh
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2020-1738
+  https://github.com/ansible/ansible/issues/67796
+  https://security.gentoo.org/glsa/202006-11
+  https://github.com/advisories/GHSA-f85h-23mf-2fwh
+
+A flaw was found in Ansible Engine when the module package or service is used and the parameter 'use' is not specified. If a previous task is executed with a malicious user, the module sent can be selected by the attacker using the ansible facts file. All versions in 2.7.x, 2.8.x and 2.9.x branches are believed to be vulnerable.

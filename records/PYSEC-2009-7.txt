@@ -1,0 +1,17 @@
+PYSEC-2009-7 PyPI/trac — Multiple unspecified vulnerabilities in Trac before 0.11.6 have unknown impact and attack vectors, p
+package: trac
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.11.6 (ECOSYSTEM)
+aliases: CVE-2009-4405, GHSA-f9qv-j5g6-g5cr
+references:
+  http://trac.edgewall.org/browser/tags/trac-0.11.6/RELEASE
+  https://bugzilla.redhat.com/show_bug.cgi?id=542394
+  http://www.vupen.com/english/advisories/2009/3615
+  http://secunia.com/advisories/37901
+  http://secunia.com/advisories/37807
+  https://www.redhat.com/archives/fedora-package-announce/2009-December/msg01169.html
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/54983
+  https://github.com/advisories/GHSA-f9qv-j5g6-g5cr
+
+Multiple unspecified vulnerabilities in Trac before 0.11.6 have unknown impact and attack vectors, possibly related to (1) "policy checks in report results when using alternate formats" or (2) a "check for the 'raw' role that is missing in docutils < 0.6."

@@ -1,0 +1,11 @@
+PYSEC-2025-110 PyPI/django-allauth — An issue was discovered in allauth-django before 65.13.0. IdP: marking a user as is_active=False aft
+package: django-allauth
+ecosystem: PyPI
+versions affected:
+  >= 0, < 65.13.0 (ECOSYSTEM)
+aliases: CVE-2025-65430, GHSA-qhmc-3mvr-f2j4
+references:
+  https://allauth.org/news/2025/10/django-allauth-65.13.0-released/
+  https://github.com/advisories/GHSA-qhmc-3mvr-f2j4
+
+An issue was discovered in allauth-django before 65.13.0. IdP: marking a user as is_active=False after having handed tokens for that user while the account was still active had no effect. Fixed the access/refresh tokens are now rejected.

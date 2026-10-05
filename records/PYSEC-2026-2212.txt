@@ -1,0 +1,12 @@
+PYSEC-2026-2212 PyPI/mistune — Mistune is a Python Markdown parser with renderers and plugins. Prior to 3.3.0, Include.parse() join
+package: mistune
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.3.0 (ECOSYSTEM)
+aliases: CVE-2026-59924, GHSA-r4rv-85jg-w4mf
+references:
+  https://github.com/lepture/mistune/releases/tag/v3.3.0
+  https://github.com/lepture/mistune/commit/1bef343ade163fc3bb95572b15be720084cdb993
+  https://github.com/lepture/mistune/security/advisories/GHSA-r4rv-85jg-w4mf
+
+Mistune is a Python Markdown parser with renderers and plugins. Prior to 3.3.0, Include.parse() joins and normalizes user-supplied include paths without verifying that the result remains within the intended markdown directory, allowing crafted include paths to access files outside that directory when markdown files are processed using md.read(). This issue is fixed in version 3.3.0.

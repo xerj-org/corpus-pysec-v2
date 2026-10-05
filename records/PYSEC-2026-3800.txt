@@ -1,0 +1,11 @@
+PYSEC-2026-3800 PyPI/openssl-encrypt — openssl_encrypt (pip: openssl-encrypt) versions before 1.4.9 contain a path traversal flaw in Plugin
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.9 (ECOSYSTEM)
+aliases: CVE-2026-81716, GHSA-vr4h-5xqv-xxxf
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-vr4h-5xqv-xxxf
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-1.4.9-plugin-sandbox-path-traversal
+
+openssl_encrypt (pip: openssl-encrypt) versions before 1.4.9 contain a path traversal flaw in PluginSandbox._is_safe_path, which authorized file access using a bare string-prefix match. A sandboxed plugin without the READ_FILES permission could read or write another plugin's directory that merely shares a name prefix (e.g., .../plugins/foobar matching allowed .../plugins/foo), breaking per-plugin isolation within the same user. Fixed by matching each allowed directory exactly or with a trailing path separator.

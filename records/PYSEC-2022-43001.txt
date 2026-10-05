@@ -1,0 +1,14 @@
+PYSEC-2022-43001 PyPI/rdiffweb — Missing Authentication for Critical Function in GitHub repository ikus060/rdiffweb prior to 2.5.0a6.
+package: rdiffweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < f2a32f2a9f3fb8be1a9432ac3d81d3aacdb13095 (GIT: https://github.com/ikus060/rdiffweb)
+  >= 0, < 2.4.11a1 (ECOSYSTEM)
+aliases: CVE-2022-4018, GHSA-4wph-9vrm-6v3w
+references:
+  https://github.com/ikus060/rdiffweb/commit/f2a32f2a9f3fb8be1a9432ac3d81d3aacdb13095
+  https://huntr.dev/bounties/5340c2f6-0252-40f6-8929-cca5d64958a5
+  https://huntr.dev/bounties/5340c2f6-0252-40f6-8929-cca5d64958a5
+  https://github.com/advisories/GHSA-4wph-9vrm-6v3w
+
+Missing Authentication for Critical Function in GitHub repository ikus060/rdiffweb prior to 2.5.0a6.

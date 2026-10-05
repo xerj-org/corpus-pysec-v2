@@ -1,0 +1,11 @@
+PYSEC-2018-65 PyPI/django-crm — MicroPyramid Django-CRM 0.2 allows CSRF for /users/create/, /users/##/edit/, and /accounts/##/delete
+package: django-crm
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2018-16552, GHSA-hq4r-47qc-3jhc
+references:
+  https://github.com/MicroPyramid/Django-CRM/issues/68
+  https://github.com/advisories/GHSA-hq4r-47qc-3jhc
+
+MicroPyramid Django-CRM 0.2 allows CSRF for /users/create/, /users/##/edit/, and /accounts/##/delete/ URIs.

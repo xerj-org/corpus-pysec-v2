@@ -1,0 +1,12 @@
+PYSEC-2025-101 PyPI/couchbase — An issue was discovered in Couchbase Sync Gateway before 3.2.6. In sgcollect_info_options.log and sy
+package: couchbase
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.2.6 (ECOSYSTEM)
+aliases: CVE-2025-52490
+references:
+  https://docs.couchbase.com/server/current/release-notes/relnotes.html
+  https://forums.couchbase.com/tags/security
+  https://www.couchbase.com/alerts/
+
+An issue was discovered in Couchbase Sync Gateway before 3.2.6. In sgcollect_info_options.log and sync_gateway.log, there are cleartext passwords in redacted and unredacted output.

@@ -1,0 +1,14 @@
+PYSEC-2022-296 PyPI/rdiffweb — Use of Cache Containing Sensitive Information in GitHub repository ikus060/rdiffweb prior to 2.4.8.
+package: rdiffweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2406780831618405a13113377a784f3102465f40 (GIT: https://github.com/ikus060/rdiffweb)
+  >= 0, < 2.4.8 (ECOSYSTEM)
+aliases: CVE-2022-3292, GHSA-7fqm-jm52-f9vc
+references:
+  https://huntr.dev/bounties/e9309018-e94f-4e15-b7d1-5d38b6021c5d
+  https://huntr.dev/bounties/e9309018-e94f-4e15-b7d1-5d38b6021c5d
+  https://github.com/ikus060/rdiffweb/commit/2406780831618405a13113377a784f3102465f40
+  https://github.com/advisories/GHSA-7fqm-jm52-f9vc
+
+Use of Cache Containing Sensitive Information in GitHub repository ikus060/rdiffweb prior to 2.4.8.

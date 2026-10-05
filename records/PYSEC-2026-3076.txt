@@ -1,0 +1,17 @@
+PYSEC-2026-3076 PyPI/stata-mcp — stata-mcp has insufficient validation of user-supplied Stata do-file content that can lead to command execution
+package: stata-mcp
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.13.0 (ECOSYSTEM)
+aliases: CVE-2026-31040, GHSA-jpcj-7wfg-mqxv
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-31040
+  https://github.com/SepineTam/stata-mcp/issues/20
+  https://github.com/SepineTam/stata-mcp/pull/21
+  https://github.com/SepineTam/stata-mcp/commit/52413ce
+  https://github.com/SepineTam/stata-mcp/releases/tag/v1.13.0
+  https://github.com/sepinetam/stata-mcp
+  https://pypi.org/project/stata-mcp
+  https://github.com/advisories/GHSA-jpcj-7wfg-mqxv
+
+A vulnerability was identified in stata-mcp prior to v1.13.0 where insufficient validation of user-supplied Stata do-file content can lead to command execution.

@@ -1,0 +1,17 @@
+PYSEC-2026-730 PyPI/plone — Plone Cross-site Scripting vulnerability in the LiveSearch module
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.0.4 (ECOSYSTEM)
+aliases: CVE-2008-4571, GHSA-46f9-f8jm-mw2x
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2008-4571
+  https://github.com/plone/Plone
+  https://web.archive.org/web/20081012113150/http://secunia.com/advisories/28293
+  https://web.archive.org/web/20120705155735/http://www.securityfocus.com/bid/27098
+  http://dev.plone.org/plone/ticket/7439
+  http://plone.org/products/plone/releases/3.0.4
+  https://pypi.org/project/plone
+  https://github.com/advisories/GHSA-46f9-f8jm-mw2x
+
+Cross-site scripting (XSS) vulnerability in the LiveSearch module in Plone before 3.0.4 allows remote attackers to inject arbitrary web script or HTML via the Description field for search results, as demonstrated using the onerror Javascript even in an IMG tag.

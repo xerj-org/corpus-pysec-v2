@@ -1,0 +1,12 @@
+PYSEC-2009-12 PyPI/moin — The password_checker function in config/multiconfig.py in MoinMoin 1.6.1 uses the cracklib and pytho
+package: moin
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.6.1 (ECOSYSTEM)
+aliases: CVE-2008-6549, GHSA-wjjc-m3fc-fcm8
+references:
+  http://hg.moinmo.in/moin/1.6/rev/35ff7a9b1546
+  http://moinmo.in/SecurityFixes
+  http://osvdb.org/48876
+
+The password_checker function in config/multiconfig.py in MoinMoin 1.6.1 uses the cracklib and python-crack features even though they are not thread-safe, which allows remote attackers to cause a denial of service (segmentation fault and crash) via unknown vectors.

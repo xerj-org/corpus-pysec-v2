@@ -1,0 +1,12 @@
+PYSEC-2025-205 PyPI/torch — A syntax error in the component proxy_tensor.py of pytorch v2.7.0 allows attackers to cause a Denial
+package: torch
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.7.1 (ECOSYSTEM)
+aliases: CVE-2025-55553
+references:
+  https://gist.github.com/shaoyuyoung/0e7d2a586297ae9c8ed14d8706749efc
+  https://github.com/pytorch/pytorch/issues/151432
+  https://github.com/pytorch/pytorch/pull/154645
+
+A syntax error in the component proxy_tensor.py of pytorch v2.7.0 allows attackers to cause a Denial of Service (DoS).

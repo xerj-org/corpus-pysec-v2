@@ -1,0 +1,54 @@
+PYSEC-2026-4054 PyPI/jupyter-server — Jupyter Server: 5xx request logging leaks token-bearing Referer header values
+package: jupyter-server
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.21.0 (ECOSYSTEM)
+aliases: CVE-2026-86049, GHSA-c3mw-737p-c7g2
+references:
+  https://github.com/jupyter-server/jupyter_server/security/advisories/GHSA-c3mw-737p-c7g2
+  https://github.com/jupyter-server/jupyter_server/pull/1681
+  https://github.com/jupyter-server/jupyter_server/commit/52513529af7096e622c00911b17627b266294717
+  https://github.com/jupyter-server/jupyter_server
+  https://github.com/jupyter-server/jupyter_server/releases/tag/v2.21.0
+  https://pypi.org/project/jupyter-server
+  https://github.com/advisories/GHSA-c3mw-737p-c7g2
+  https://nvd.nist.gov/vuln/detail/CVE-2026-86049
+
+### Summary
+
+When a request returns a 500, `jupyter_server/log.py` logs a small JSON block of request headers. 
+
+The Referer header was copied into it as-is, so a token in the Referer URL ended up in the logs in plain text.
+
+### Impact
+
+Anyone who can read the server logs can pick tokens out of these 500 entries. Tokens end up in the Referer during normal token-based login and launch flows.
+
+Affected: all versions before 2.21.0.
+
+### PoC
+
+Any malformed request that returns a 500 works:
+
+```bash
+curl -i -X POST \
+  -H 'Content-Type: application/json' \
+  -H 'Referer: http://127.0.0.1:8899/tree?token=REFERTOKEN' \
+  --data '{"name":123}' \
+  'http://127.0.0.1:8899/api/kernels?token=VALIDTOKEN'
+```
+
+The log shows the token twice, once raw and once redacted:
+
+```
+"Referer": "http://127.0.0.1:8899/tree?token=REFERTOKEN",
+[E ... ServerApp] 500 POST /api/kernels?token=[secret] (...) referer=http://127.0.0.1:8899/tree?token=[secret]
+```
+
+### Patches
+
+Fixed in 2.21.0 by 5251352. Header values are now scrubbed before the block is logged. Upgrade to 2.21.0 or later.
+
+### Workarounds
+
+Limit who can read the server logs. If you can, avoid flows that put the token in the URL.

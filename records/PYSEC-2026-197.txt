@@ -1,0 +1,16 @@
+PYSEC-2026-197 PyPI/django — An issue was discovered in Django 5.2 before 5.2.15 and 6.0 before 6.0.6. `django.middleware.cache.U
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 5.2, < 5.2.15, >= 6.0, < 6.0.6 (ECOSYSTEM)
+aliases: CVE-2026-35193, GHSA-qpc8-7fxc-cm4p
+references:
+  https://groups.google.com/g/django-announce
+  https://docs.djangoproject.com/en/dev/releases/security/
+  https://www.djangoproject.com/weblog/2026/jun/03/security-releases/
+  https://github.com/advisories/GHSA-qpc8-7fxc-cm4p
+
+An issue was discovered in Django 5.2 before 5.2.15 and 6.0 before 6.0.6.
+`django.middleware.cache.UpdateCacheMiddleware` in Django does not add `Authorization` to the `Vary` response header for requests bearing that header without `Cache-Control: public`, which allows remote attackers to read private cached responses via unauthenticated requests to the same URL.
+Earlier, unsupported Django series (such as 5.0.x, 4.1.x, and 3.2.x) were not evaluated and may also be affected.
+Django would like to thank Shai Berger for reporting this issue.

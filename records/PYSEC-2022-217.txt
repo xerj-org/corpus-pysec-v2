@@ -1,0 +1,12 @@
+PYSEC-2022-217 PyPI/cryptoasset-data-downloader — The cryptoasset-data-downloader package in PyPI v1.0.0 to v1.0.1 was discovered to contain a code ex
+package: cryptoasset-data-downloader
+ecosystem: PyPI
+versions affected:
+  >= 1.0.0, < 1.0.2 (ECOSYSTEM)
+aliases: CVE-2022-32998
+references:
+  https://pypi.org/project/cryptoasset-data-downloader/
+  https://github.com/serhatci/cryptocurrency-historical-data-downloader/issues/8
+  http://pypi.doubanio.com/simple/request
+
+The cryptoasset-data-downloader package in PyPI v1.0.0 to v1.0.1 was discovered to contain a code execution backdoor via the request package. This vulnerability allows attackers to access sensitive user information and digital currency keys, as well as escalate privileges.

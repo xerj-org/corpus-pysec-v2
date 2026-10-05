@@ -1,0 +1,12 @@
+PYSEC-2020-144 PyPI/tortoise-orm — In Tortoise ORM before versions 0.15.23 and 0.16.6, various forms of SQL injection have been found f
+package: tortoise-orm
+ecosystem: PyPI
+versions affected:
+  >= 0, < 91c364053e0ddf77edc5442914c6f049512678b3 (GIT: https://github.com/tortoise/tortoise-orm)
+  >= 0, < 0.15.23, >= 0.16.0, < 0.16.6 (ECOSYSTEM)
+aliases: CVE-2020-11010, GHSA-9j2c-x8qm-qmjq
+references:
+  https://github.com/tortoise/tortoise-orm/security/advisories/GHSA-9j2c-x8qm-qmjq
+  https://github.com/tortoise/tortoise-orm/commit/91c364053e0ddf77edc5442914c6f049512678b3
+
+In Tortoise ORM before versions 0.15.23 and 0.16.6, various forms of SQL injection have been found for MySQL and when filtering or doing mass-updates on char/text fields. SQLite & PostgreSQL are only affected when filtering with contains, starts_with, or ends_with filters (and their case-insensitive counterparts).

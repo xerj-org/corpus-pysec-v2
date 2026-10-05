@@ -1,0 +1,14 @@
+PYSEC-2018-23 PyPI/pyopenssl — Python Cryptographic Authority pyopenssl version prior to version 17.5.0 contains a CWE-416: Use Aft
+package: pyopenssl
+ecosystem: PyPI
+versions affected:
+  >= 0, < 17.5.0 (ECOSYSTEM)
+aliases: CVE-2018-1000807, GHSA-p28m-34f6-967q
+references:
+  https://github.com/pyca/pyopenssl/pull/723
+  https://usn.ubuntu.com/3813-1/
+  https://access.redhat.com/errata/RHSA-2019:0085
+  http://lists.opensuse.org/opensuse-security-announce/2019-04/msg00014.html
+  https://github.com/advisories/GHSA-p28m-34f6-967q
+
+Python Cryptographic Authority pyopenssl version prior to version 17.5.0 contains a CWE-416: Use After Free vulnerability in X509 object handling that can result in Use after free can lead to possible denial of service or remote code execution.. This attack appear to be exploitable via Depends on the calling application and if it retains a reference to the memory.. This vulnerability appears to have been fixed in 17.5.0.

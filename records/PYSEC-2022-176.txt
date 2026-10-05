@@ -1,0 +1,11 @@
+PYSEC-2022-176 PyPI/apache-dolphinscheduler — Apache DolphinScheduler user registration is vulnerable to Regular express Denial of Service (ReDoS)
+package: apache-dolphinscheduler
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.0.5 (ECOSYSTEM)
+aliases: CVE-2022-25598, GHSA-qg5x-66hp-cw5p
+references:
+  https://lists.apache.org/thread/hwnw7xr969sg5nv84wz75nfr2c76fl93
+  https://github.com/advisories/GHSA-qg5x-66hp-cw5p
+
+Apache DolphinScheduler user registration is vulnerable to Regular express Denial of Service (ReDoS) attacks, Apache DolphinScheduler users should upgrade to version 2.0.5 or higher.

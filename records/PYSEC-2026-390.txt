@@ -1,0 +1,28 @@
+PYSEC-2026-390 PyPI/litellm — LiteLLM: Authentication bypass via OIDC userinfo cache key collision
+package: litellm
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.83.0 (ECOSYSTEM)
+aliases: CVE-2026-35030, GHSA-jjhc-v7c2-5hh6
+references:
+  https://github.com/BerriAI/litellm/security/advisories/GHSA-jjhc-v7c2-5hh6
+  https://nvd.nist.gov/vuln/detail/CVE-2026-35030
+  https://github.com/BerriAI/litellm
+  https://pypi.org/project/litellm
+  https://github.com/advisories/GHSA-jjhc-v7c2-5hh6
+
+###  Impact
+
+When JWT authentication is enabled (`enable_jwt_auth: true`), the OIDC userinfo cache uses `token[:20]` as the cache key. JWT headers produced by the same signing algorithm generate identical first 20 characters.
+
+This configuration option is not enabled by default. **Most instances are not affected.**
+
+An unauthenticated attacker can craft a token whose first 20 characters match a legitimate user's cached token. On cache hit, the attacker inherits the legitimate user's identity and permissions. This affects deployments with JWT/OIDC authentication enabled.
+
+###  Patches
+ 
+Fixed in v1.83.0. The cache key now uses the full hash of the JWT token.
+
+###  Workarounds
+
+Disable OIDC userinfo caching by setting the cache TTL to 0, or disable JWT authentication entirely.

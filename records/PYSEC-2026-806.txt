@@ -1,0 +1,15 @@
+PYSEC-2026-806 PyPI/eth-account — Regular expression denial of service in eth-account
+package: eth-account
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.5.9 (ECOSYSTEM)
+aliases: CVE-2022-1930, GHSA-v65g-f3cj-fjp4
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2022-1930
+  https://github.com/ethereum/eth-account/commit/70f89be700df0d5f08ef696252c88741f8414060
+  https://github.com/ethereum/eth-account
+  https://research.jfrog.com/vulnerabilities/eth-account-redos-xray-248681
+  https://pypi.org/project/eth-account
+  https://github.com/advisories/GHSA-v65g-f3cj-fjp4
+
+An exponential ReDoS (Regular Expression Denial of Service) can be triggered in the eth-account PyPI package, when an attacker is able to supply arbitrary input to the encode_structured_data method

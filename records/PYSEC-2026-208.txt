@@ -1,0 +1,13 @@
+PYSEC-2026-208 PyPI/apache-airflow-providers-samba — The Apache Airflow Samba provider's `GCSToSambaOperator` joined GCS object names to the SMB destinat
+package: apache-airflow-providers-samba
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.12.6 (ECOSYSTEM)
+aliases: CVE-2026-49818, GHSA-f6vj-48fm-hmvx
+references:
+  http://www.openwall.com/lists/oss-security/2026/06/09/8
+  https://lists.apache.org/thread/3vs0m3p51psgf54tts18d6336g24x3sf
+  https://github.com/apache/airflow/pull/67857
+  https://github.com/advisories/GHSA-f6vj-48fm-hmvx
+
+The Apache Airflow Samba provider's `GCSToSambaOperator` joined GCS object names to the SMB destination path without a containment check, so an object named with `../` segments resolved a write path outside the configured `destination_path`. An attacker able to write objects into the source GCS bucket — typically an external data producer distinct from the trusted DAG author — could write files to arbitrary locations on the Samba target when the operator ran. Upgrade apache-airflow-providers-samba to 4.12.6 or later, which validates the resolved destination stays within `destination_path`.

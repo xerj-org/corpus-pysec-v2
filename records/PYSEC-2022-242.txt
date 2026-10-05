@@ -1,0 +1,12 @@
+PYSEC-2022-242 PyPI/pycrowdtangle — The PyCrowdTangle package in PyPI before v0.0.1 included a code execution backdoor inserted by a thi
+package: pycrowdtangle
+ecosystem: PyPI
+versions affected:
+  >= 0.0.1, < 0.0.3 (ECOSYSTEM)
+aliases: CVE-2022-34981
+references:
+  https://github.com/UPB-SS1/PyCrowdTangle/issues/1
+  https://pypi.org/project/PyCrowdTangle/
+  http://pypi.doubanio.com/simple/request
+
+The PyCrowdTangle package in PyPI before v0.0.1 included a code execution backdoor inserted by a third party.

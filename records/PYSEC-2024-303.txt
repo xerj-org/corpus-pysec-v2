@@ -1,0 +1,11 @@
+PYSEC-2024-303 PyPI/pywasm3 — wasm3 139076a is vulnerable to Denial of Service (DoS).
+package: pywasm3
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 139076a (ECOSYSTEM)
+aliases: CVE-2024-27527
+references:
+  https://gist.github.com/haruki3hhh/5d2f3a216457aeef9f40331aca33be6e
+  https://github.com/wasm3/wasm3/issues/464
+
+wasm3 139076a is vulnerable to Denial of Service (DoS).

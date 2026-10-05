@@ -1,0 +1,15 @@
+PYSEC-2019-201 PyPI/roundup — Roundup 1.6 allows XSS via the URI because frontends/roundup.cgi and roundup/cgi/wsgi_handler.py mis
+package: roundup
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.0.0 (ECOSYSTEM)
+aliases: CVE-2019-10904, GHSA-926q-wxr6-3crq
+references:
+  https://www.openwall.com/lists/oss-security/2019/04/05/1
+  https://github.com/python/bugs.python.org/issues/34
+  https://bugs.python.org/issue36391
+  http://www.openwall.com/lists/oss-security/2019/04/07/1
+  https://lists.debian.org/debian-lts-announce/2019/04/msg00009.html
+  https://github.com/advisories/GHSA-926q-wxr6-3crq
+
+Roundup 1.6 allows XSS via the URI because frontends/roundup.cgi and roundup/cgi/wsgi_handler.py mishandle 404 errors.

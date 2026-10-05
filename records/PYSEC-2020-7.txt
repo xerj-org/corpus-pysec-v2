@@ -1,0 +1,16 @@
+PYSEC-2020-7 PyPI/ansible — A flaw was found in the Ansible Engine when the fetch module is used. An attacker could intercept th
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.7.17, >= 2.8.0, < 2.8.9, >= 2.9.0, < 2.9.6 (ECOSYSTEM)
+aliases: CVE-2020-1735, GHSA-gfr2-qpxh-qj9m
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2020-1735
+  https://github.com/ansible/ansible/issues/67793
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/DKPA4KC3OJSUFASUYMG66HKJE7ADNGFW/
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/WQVOQD4VAIXXTVQAJKTN7NUGTJFE2PCB/
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/MRRYUU5ZBLPBXCYG6CFP35D64NP2UB2S/
+  https://security.gentoo.org/glsa/202006-11
+  https://github.com/advisories/GHSA-gfr2-qpxh-qj9m
+
+A flaw was found in the Ansible Engine when the fetch module is used. An attacker could intercept the module, inject a new path, and then choose a new destination path on the controller node. All versions in 2.7.x, 2.8.x and 2.9.x branches are believed to be vulnerable.

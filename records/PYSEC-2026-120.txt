@@ -1,0 +1,11 @@
+PYSEC-2026-120 PyPI/pyjwt — PyJWT is a JSON Web Token implementation in Python. Prior to 2.12.0, PyJWT does not validate the cri
+package: pyjwt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.12.0 (ECOSYSTEM)
+aliases: CVE-2026-32597, GHSA-752w-5fwx-jx9f
+references:
+  https://lists.debian.org/debian-lts-announce/2026/05/msg00008.html
+  https://github.com/jpadilla/pyjwt/security/advisories/GHSA-752w-5fwx-jx9f
+
+PyJWT is a JSON Web Token implementation in Python. Prior to 2.12.0, PyJWT does not validate the crit (Critical) Header Parameter defined in RFC 7515 §4.1.11. When a JWS token contains a crit array listing extensions that PyJWT does not understand, the library accepts the token instead of rejecting it. This violates the MUST requirement in the RFC. This vulnerability is fixed in 2.12.0.

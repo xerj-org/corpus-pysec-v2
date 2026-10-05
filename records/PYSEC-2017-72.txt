@@ -1,0 +1,13 @@
+PYSEC-2017-72 PyPI/sosreport — sosreport 3.2 uses weak permissions for generated sosreport archives, which allows local users with 
+package: sosreport
+ecosystem: PyPI
+versions affected:
+  >= 0, < d7759d3ddae5fe99a340c88a1d370d65cfa73fd6 (GIT: https://github.com/sosreport/sos)
+  >= 3.0 (ECOSYSTEM)
+aliases: CVE-2015-3171, GHSA-gw46-8559-cggp
+references:
+  https://github.com/sosreport/sos/commit/d7759d3ddae5fe99a340c88a1d370d65cfa73fd6
+  https://bugzilla.redhat.com/show_bug.cgi?id=1218658
+  https://github.com/advisories/GHSA-gw46-8559-cggp
+
+sosreport 3.2 uses weak permissions for generated sosreport archives, which allows local users with access to /var/tmp/ to obtain sensitive information by reading the contents of the archive.

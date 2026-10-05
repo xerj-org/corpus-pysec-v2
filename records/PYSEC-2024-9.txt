@@ -1,0 +1,11 @@
+PYSEC-2024-9 PyPI/metagpt — MetaGPT through 0.6.4 allows the QaEngineer role to execute arbitrary code because RunCode.run_scrip
+package: metagpt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.6.5 (ECOSYSTEM)
+aliases: CVE-2024-23750, GHSA-g7ph-8423-pf4j
+references:
+  https://github.com/geekan/MetaGPT/issues/731
+  https://github.com/advisories/GHSA-g7ph-8423-pf4j
+
+MetaGPT through 0.6.4 allows the QaEngineer role to execute arbitrary code because RunCode.run_script() passes shell metacharacters to subprocess.Popen.

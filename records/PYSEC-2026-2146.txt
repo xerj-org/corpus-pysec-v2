@@ -1,0 +1,11 @@
+PYSEC-2026-2146 PyPI/docling — Docling simplifies document processing by parsing diverse formats and providing integrations with th
+package: docling
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.94.0 (ECOSYSTEM)
+aliases: CVE-2026-47214, GHSA-q29v-xc37-wh5m
+references:
+  https://github.com/docling-project/docling/releases/tag/v2.94.0
+  https://github.com/docling-project/docling/security/advisories/GHSA-q29v-xc37-wh5m
+
+Docling simplifies document processing by parsing diverse formats and providing integrations with the generative AI ecosystem. Prior to 2.94.0, the HTML backend has unsafe URI and path handling. This vulnerability is fixed in 2.94.0.

@@ -1,0 +1,17 @@
+PYSEC-2026-809 PyPI/flask-security — Flask-Security vulnerable to Open Redirect
+package: flask-security
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.5.1 (ECOSYSTEM)
+aliases: CVE-2021-23385, GHSA-cg8c-gc2j-2wf7
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2021-23385
+  https://github.com/mattupstate/flask-security
+  https://security.snyk.io/vuln/SNYK-PYTHON-FLASKSECURITY-1293234
+  https://snyk.io/blog/url-confusion-vulnerabilities
+  https://pypi.org/project/flask-security
+  https://github.com/advisories/GHSA-cg8c-gc2j-2wf7
+
+This affects all versions of package Flask-Security. When using the `get_post_logout_redirect` and `get_post_login_redirect` functions, it is possible to bypass URL validation and redirect a user to an arbitrary URL by providing multiple back slashes such as `\\\evil.com/path`. This vulnerability is only exploitable if an alternative WSGI server other than Werkzeug is used, or the default behaviour of Werkzeug is modified using `'autocorrect_location_header=False`.
+
+**Note:** Flask-Security is not maintained anymore.

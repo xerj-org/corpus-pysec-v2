@@ -1,0 +1,22 @@
+PYSEC-2008-8 PyPI/paramiko — common.py in Paramiko 1.7.1 and earlier, when using threads or forked processes, does not properly u
+package: paramiko
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.7.2 (ECOSYSTEM)
+aliases: CVE-2008-0299, GHSA-wqmm-q65g-2hqr
+references:
+  http://people.debian.org/~nion/nmu-diff/paramiko-1.6.4-1_1.6.4-1.1.patch
+  http://www.lag.net/pipermail/paramiko/2008-January/000599.html
+  https://bugzilla.redhat.com/show_bug.cgi?id=428727
+  http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=460706
+  https://www.redhat.com/archives/fedora-package-announce/2008-January/msg00529.html
+  https://www.redhat.com/archives/fedora-package-announce/2008-January/msg00594.html
+  http://www.securityfocus.com/bid/27307
+  http://secunia.com/advisories/28488
+  http://secunia.com/advisories/28510
+  http://security.gentoo.org/glsa/glsa-200803-07.xml
+  http://secunia.com/advisories/29168
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/39749
+  https://github.com/advisories/GHSA-wqmm-q65g-2hqr
+
+common.py in Paramiko 1.7.1 and earlier, when using threads or forked processes, does not properly use RandomPool, which allows one session to obtain sensitive information from another session by predicting the state of the pool.

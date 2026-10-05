@@ -1,0 +1,12 @@
+PYSEC-2022-263 PyPI/apache-airflow — In Apache Airflow versions 2.2.4 through 2.3.3, the `database` webserver session backend was suscept
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 2.2.4, < 2.3.4rc1 (ECOSYSTEM)
+aliases: CVE-2022-38054, GHSA-5ff8-7639-6v6g
+references:
+  https://lists.apache.org/thread/rsd3h89xdp16rg0ltovx3m7q3ypkxsbb
+  http://www.openwall.com/lists/oss-security/2022/09/02/1
+  https://github.com/advisories/GHSA-5ff8-7639-6v6g
+
+In Apache Airflow versions 2.2.4 through 2.3.3, the `database` webserver session backend was susceptible to session fixation.

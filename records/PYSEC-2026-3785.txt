@@ -1,0 +1,11 @@
+PYSEC-2026-3785 PyPI/gitpython — GitPython before 3.1.59 fails to disable merge_includes when parsing .gitmodules, allowing attackers
+package: gitpython
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.1.59 (ECOSYSTEM)
+aliases: CVE-2026-78675, GHSA-7833-fr7j-v32q
+references:
+  https://www.vulncheck.com/advisories/gitpython-before-local-file-content-disclosure-via-gitmodules
+  https://github.com/gitpython-developers/GitPython/security/advisories/GHSA-7833-fr7j-v32q
+
+GitPython before 3.1.59 fails to disable merge_includes when parsing .gitmodules, allowing attackers to disclose local file content by including arbitrary file paths via [include] directives. Attackers can craft a malicious .gitmodules file with include directives pointing to sensitive files; when repo.submodules is accessed, GitConfigParser raises MissingSectionHeaderError embedding the target file's first line verbatim in the exception message.

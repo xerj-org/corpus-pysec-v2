@@ -1,0 +1,11 @@
+PYSEC-2019-180 PyPI/ipycache — A code injection issue was discovered in ipycache through 2016-05-31.
+package: ipycache
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2019-7539, GHSA-gcm4-q2pg-xw89
+references:
+  https://github.com/rossant/ipycache/issues/47
+  https://github.com/advisories/GHSA-gcm4-q2pg-xw89
+
+A code injection issue was discovered in ipycache through 2016-05-31.

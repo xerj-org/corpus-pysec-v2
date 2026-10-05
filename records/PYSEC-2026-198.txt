@@ -1,0 +1,16 @@
+PYSEC-2026-198 PyPI/django — An issue was discovered in Django 5.2 before 5.2.15 and 6.0 before 6.0.6. `django.utils.cache.has_va
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 5.2, < 5.2.15, >= 6.0, < 6.0.6 (ECOSYSTEM)
+aliases: CVE-2026-48587, GHSA-923m-gv2p-w5qp
+references:
+  https://groups.google.com/g/django-announce
+  https://docs.djangoproject.com/en/dev/releases/security/
+  https://www.djangoproject.com/weblog/2026/jun/03/security-releases/
+  https://github.com/advisories/GHSA-923m-gv2p-w5qp
+
+An issue was discovered in Django 5.2 before 5.2.15 and 6.0 before 6.0.6.
+`django.utils.cache.has_vary_header()` in Django does not strip leading or trailing whitespace from `Vary` response header values before comparison, which allows remote attackers to read cached responses via requests to URLs whose responses contain whitespace-padded Vary header values.
+Earlier, unsupported Django series (such as 5.0.x, 4.1.x, and 3.2.x) were not evaluated and may also be affected.
+Django would like to thank Navid Rezazadeh for reporting this issue.

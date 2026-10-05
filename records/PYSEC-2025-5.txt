@@ -1,0 +1,13 @@
+PYSEC-2025-5 PyPI/browsercmdhbt2 — Exfiltrates user cookies to hardcoded server endpoint during normal operations
+package: browsercmdhbt2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+references:
+  https://inspector.pypi.io/project/browsercmdhbt2/0.92/packages/7e/29/415779aabb5f53eee7911e62e564a5ddaaf98d01a404feecb5b733e8b861/browsercmdhbt2-0.92-py3-none-any.whl/browsercmd/main/google.py#line.15
+  https://inspector.pypi.io/project/browsercmdhbt2/0.92/packages/7e/29/415779aabb5f53eee7911e62e564a5ddaaf98d01a404feecb5b733e8b861/browsercmdhbt2-0.92-py3-none-any.whl/browsercmd/main/google.py#line.69
+
+Published in 2020, the autodzee package is a Python library
+that bypasses Deezer API restrictions to download music.
+The package was found to exfiltrate user data to a hardcoded server,
+which could be used for malicious purposes.

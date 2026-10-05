@@ -1,0 +1,11 @@
+PYSEC-2026-3724 PyPI/nltk — NLTK versions before 3.9.4 contain an unbounded recursion vulnerability in JSONTaggedDecoder.decode_
+package: nltk
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.9.4 (ECOSYSTEM)
+aliases: CVE-2026-66393, GHSA-rf74-v2fm-23pw
+references:
+  https://www.vulncheck.com/advisories/nltk-before-denial-of-service-via-jsontaggeddecoder
+  https://github.com/nltk/nltk/security/advisories/GHSA-rf74-v2fm-23pw
+
+NLTK versions before 3.9.4 contain an unbounded recursion vulnerability in JSONTaggedDecoder.decode_obj() that allows attackers to cause denial of service by supplying deeply nested JSON structures. Attackers can craft JSON payloads exceeding the recursion limit to trigger an unhandled RecursionError that crashes the Python process.

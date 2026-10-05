@@ -1,0 +1,15 @@
+PYSEC-2023-138 PyPI/langchain — An issue in Harrison Chase langchain v.0.0.194 allows an attacker to execute arbitrary code via the 
+package: langchain
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.0.236 (ECOSYSTEM)
+aliases: CVE-2023-36095, GHSA-gwqq-6vq7-5j86
+references:
+  https://github.com/hwchase17/langchain
+  http://langchain.com
+  https://github.com/langchain-ai/langchain/issues/5872
+  https://github.com/langchain-ai/langchain/issues/5872
+  https://github.com/langchain-ai/langchain/issues/5872
+  https://github.com/advisories/GHSA-gwqq-6vq7-5j86
+
+An issue in Harrison Chase langchain v.0.0.194 allows an attacker to execute arbitrary code via the python exec calls in the PALChain, affected functions include from_math_prompt and from_colored_object_prompt.

@@ -1,0 +1,13 @@
+PYSEC-2023-39 PyPI/openzeppelin-cairo-contracts — OpenZeppelin Contracts for Cairo is a library for secure smart contract development written in Cairo
+package: openzeppelin-cairo-contracts
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6d4cb750478fca2fd916f73297632f899aca9299 (GIT: https://github.com/OpenZeppelin/cairo-contracts)
+  >= 0.2.0, < 0.6.1 (ECOSYSTEM)
+aliases: CVE-2023-23940, GHSA-626q-v9j4-mcp4
+references:
+  https://github.com/OpenZeppelin/cairo-contracts/pull/542/commits/6d4cb750478fca2fd916f73297632f899aca9299
+  https://github.com/OpenZeppelin/cairo-contracts/pull/542/commits/6d4cb750478fca2fd916f73297632f899aca9299
+  https://github.com/OpenZeppelin/cairo-contracts/security/advisories/GHSA-626q-v9j4-mcp4
+
+OpenZeppelin Contracts for Cairo is a library for secure smart contract development written in Cairo for StarkNet, a decentralized ZK Rollup. `is_valid_eth_signature` is missing a call to `finalize_keccak` after calling `verify_eth_signature`. As a result, any contract using `is_valid_eth_signature` from the account library (such as the `EthAccount` preset) is vulnerable to a malicious sequencer. Specifically, the malicious sequencer would be able to bypass signature validation to impersonate an instance of these accounts. The issue has been patched in 0.6.1.

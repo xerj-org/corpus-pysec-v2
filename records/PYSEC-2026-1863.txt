@@ -1,0 +1,15 @@
+PYSEC-2026-1863 PyPI/rdiffweb — RDiffWeb vulnerable to Allocation of Resources Without Limits or Throttling
+package: rdiffweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.8.1 (ECOSYSTEM)
+aliases: CVE-2023-4138, GHSA-wwrg-2w5j-grvx
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-4138
+  https://github.com/ikus060/rdiffweb/commit/feef0d7b11d86aed29bf98c21526088117964d85
+  https://github.com/ikus060/rdiffweb
+  https://huntr.dev/bounties/1b1fa915-d588-4bb1-9e82-6a6be79befed
+  https://pypi.org/project/rdiffweb
+  https://github.com/advisories/GHSA-wwrg-2w5j-grvx
+
+Allocation of Resources Without Limits or Throttling in GitHub repository ikus060/rdiffweb prior to 2.8.0.

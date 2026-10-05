@@ -1,0 +1,21 @@
+PYSEC-2010-11 PyPI/pyftpdlib — Race condition in the FTPHandler class in ftpserver.py in pyftpdlib before 0.5.2 allows remote attac
+package: pyftpdlib
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.5.2 (ECOSYSTEM)
+aliases: CVE-2010-3494, GHSA-hw4g-fhcp-x5mq
+references:
+  http://code.google.com/p/pyftpdlib/source/diff?spec=svn556&r=556&format=side&path=/trunk/pyftpdlib/ftpserver.py
+  http://code.google.com/p/pyftpdlib/issues/detail?id=105
+  http://code.google.com/p/pyftpdlib/source/detail?r=556
+  http://www.openwall.com/lists/oss-security/2010/09/24/3
+  https://bugs.launchpad.net/zodb/+bug/135108
+  http://bugs.python.org/issue6706
+  http://www.openwall.com/lists/oss-security/2010/09/22/3
+  http://www.openwall.com/lists/oss-security/2010/09/11/2
+  http://www.openwall.com/lists/oss-security/2010/09/09/6
+  http://code.google.com/p/pyftpdlib/source/browse/trunk/HISTORY
+  http://code.google.com/p/pyftpdlib/issues/detail?id=104
+  https://github.com/advisories/GHSA-hw4g-fhcp-x5mq
+
+Race condition in the FTPHandler class in ftpserver.py in pyftpdlib before 0.5.2 allows remote attackers to cause a denial of service (daemon outage) by establishing and then immediately closing a TCP connection, leading to the accept function having an unexpected value of None for the address, or an ECONNABORTED, EAGAIN, or EWOULDBLOCK error, a related issue to CVE-2010-3492.

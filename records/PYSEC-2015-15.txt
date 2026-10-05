@@ -1,0 +1,12 @@
+PYSEC-2015-15 PyPI/pillow — The Jpeg2KImagePlugin plugin in Pillow before 2.5.3 allows remote attackers to cause a denial of ser
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.5.3 (ECOSYSTEM)
+aliases: CVE-2014-3598, GHSA-j6f7-g425-4gmx
+references:
+  https://pypi.python.org/pypi/Pillow/2.5.3
+  http://lists.opensuse.org/opensuse-updates/2015-04/msg00056.html
+  https://github.com/advisories/GHSA-j6f7-g425-4gmx
+
+The Jpeg2KImagePlugin plugin in Pillow before 2.5.3 allows remote attackers to cause a denial of service via a crafted image.

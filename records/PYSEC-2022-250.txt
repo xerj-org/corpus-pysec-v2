@@ -1,0 +1,9 @@
+PYSEC-2022-250 PyPI/exotel — The exotel project on PyPI was taken over via user account compromise via a phishing attack and a ne
+package: exotel
+ecosystem: PyPI
+versions affected:
+  >= 0.1.6 (ECOSYSTEM)
+references:
+  https://twitter.com/pypi/status/1562442207079976966
+
+The exotel project on PyPI was taken over via user account compromise via a phishing attack and a new malicious release made which contained code which some environment variables and downloaded and ran malware at install time

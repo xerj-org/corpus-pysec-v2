@@ -1,0 +1,15 @@
+PYSEC-2022-43015 PyPI/torch — In PyTorch before trunk/89695, torch.jit.annotations.parse_type_line can cause arbitrary code execut
+package: torch
+ecosystem: PyPI
+versions affected:
+  >= 0, < 767f6aa49fe20a2766b9843d01e3b7f7793df6a3 (GIT: https://github.com/pytorch/pytorch)
+  >= 0, < 1.13.1 (ECOSYSTEM)
+aliases: CVE-2022-45907, GHSA-47fc-vmwq-366v
+references:
+  https://github.com/pytorch/pytorch/commit/767f6aa49fe20a2766b9843d01e3b7f7793df6a3
+  https://github.com/pytorch/pytorch/issues/88868
+  https://github.com/pytorch/pytorch/issues/88868
+  https://github.com/pytorch/pytorch/issues/88868
+  https://github.com/advisories/GHSA-47fc-vmwq-366v
+
+In PyTorch before trunk/89695, torch.jit.annotations.parse_type_line can cause arbitrary code execution because eval is used unsafely.

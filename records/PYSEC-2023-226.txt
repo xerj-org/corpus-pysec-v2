@@ -1,0 +1,13 @@
+PYSEC-2023-226 PyPI/django — In Django 3.2 before 3.2.22, 4.1 before 4.1.12, and 4.2 before 4.2.6, the django.utils.text.Truncato
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 3.2, < 3.2.22, >= 4.1, < 4.1.12, >= 4.2, < 4.2.6 (ECOSYSTEM)
+aliases: CVE-2023-43665, GHSA-h8gc-pgj2-vjm3
+references:
+  https://www.djangoproject.com/weblog/2023/oct/04/security-releases/
+  https://docs.djangoproject.com/en/4.2/releases/security/
+  https://groups.google.com/forum/#!forum/django-announce
+  https://github.com/advisories/GHSA-h8gc-pgj2-vjm3
+
+In Django 3.2 before 3.2.22, 4.1 before 4.1.12, and 4.2 before 4.2.6, the django.utils.text.Truncator chars() and words() methods (when used with html=True) are subject to a potential DoS (denial of service) attack via certain inputs with very long, potentially malformed HTML text. The chars() and words() methods are used to implement the truncatechars_html and truncatewords_html template filters, which are thus also vulnerable. NOTE: this issue exists because of an incomplete fix for CVE-2019-14232.

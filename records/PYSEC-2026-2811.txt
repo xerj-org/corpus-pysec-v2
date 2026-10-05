@@ -1,0 +1,18 @@
+PYSEC-2026-2811 PyPI/opencv-python — Out-of-bounds Write in OpenCV
+package: opencv-python
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 4.1.1.26 (ECOSYSTEM)
+aliases: CVE-2019-9423, GHSA-8849-5h85-98qw
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2019-9423
+  https://github.com/opencv/opencv-python
+  https://source.android.com/security/bulletin/android-10
+  http://www.openwall.com/lists/oss-security/2019/10/25/17
+  http://www.openwall.com/lists/oss-security/2019/10/27/1
+  http://www.openwall.com/lists/oss-security/2019/11/07/1
+  http://www.openwall.com/lists/oss-security/2020/12/05/1
+  https://pypi.org/project/opencv-python
+  https://github.com/advisories/GHSA-8849-5h85-98qw
+
+In opencv calls that use libpng, there is a possible out of bounds write due to a missing bounds check. This could lead to local escalation of privilege with no additional execution privileges required. User interaction is not required for exploitation. Product: AndroidVersions: Android-10Android ID: A-110986616

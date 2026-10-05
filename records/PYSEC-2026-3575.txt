@@ -1,0 +1,19 @@
+PYSEC-2026-3575 PyPI/hermes-agent — hermes-agent has an Injection issue
+package: hermes-agent
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.15.0 (ECOSYSTEM)
+aliases: CVE-2026-10223, GHSA-33qv-c5qm-799v
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-10223
+  https://github.com/NousResearch/hermes-agent/commit/0dee92df22bdc0cfbcad90ca954aa14916f018de
+  https://gist.github.com/YLChen-007/a1fb77ad2488c545a35d0f66356ea7b4
+  https://github.com/NousResearch/hermes-agent
+  https://vuldb.com/cve/CVE-2026-10223
+  https://vuldb.com/submit/822021
+  https://vuldb.com/vuln/367502
+  https://vuldb.com/vuln/367502/cti
+  https://pypi.org/project/hermes-agent
+  https://github.com/advisories/GHSA-33qv-c5qm-799v
+
+A weakness has been identified in NousResearch hermes-agent up to 2026.4.30. This affects the function _scan_memory_content of the file tools/memory_tool.py. This manipulation causes injection. The attack can be initiated remotely. The exploit has been made available to the public and could be used for attacks. The vendor was contacted early about this disclosure but did not respond in any way.

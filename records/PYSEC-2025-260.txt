@@ -1,0 +1,16 @@
+PYSEC-2025-260 PyPI/pyassimp — A vulnerability, which was classified as critical, has been found in Open Asset Import Library Assim
+package: pyassimp
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 5.4.3 (ECOSYSTEM)
+aliases: CVE-2025-2592
+references:
+  https://vuldb.com/?id.300575
+  https://vuldb.com/?submit.517782
+  https://github.com/assimp/assimp/issues/6010
+  https://github.com/assimp/assimp/issues/6010#issue-2877368110
+  https://vuldb.com/?ctiid.300575
+  https://github.com/assimp/assimp/commit/2690e354da0c681db000cfd892a55226788f2743
+  https://github.com/assimp/assimp/pull/6052
+
+A vulnerability, which was classified as critical, has been found in Open Asset Import Library Assimp 5.4.3. This issue affects the function CSMImporter::InternReadFile of the file code/AssetLib/CSM/CSMLoader.cpp. The manipulation leads to heap-based buffer overflow. The attack may be initiated remotely. The exploit has been disclosed to the public and may be used. The patch is named 2690e354da0c681db000cfd892a55226788f2743. It is recommended to apply a patch to fix this issue.

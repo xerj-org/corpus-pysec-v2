@@ -1,0 +1,11 @@
+PYSEC-2025-250 PyPI/llama-index — An XML Entity Expansion vulnerability, also known as a 'billion laughs' attack, exists in the sitema
+package: llama-index
+ecosystem: PyPI
+versions affected:
+  >= 0.12.21, < 0.12.29 (ECOSYSTEM)
+aliases: CVE-2025-3225
+references:
+  https://github.com/run-llama/llama_index/commit/4f6ee062b19212106a2632af9c9521fc7f0a3584
+  https://huntr.com/bounties/e33c0699-e9a2-49aa-837b-5363205637a2
+
+An XML Entity Expansion vulnerability, also known as a 'billion laughs' attack, exists in the sitemap parser of the run-llama/llama_index repository, specifically affecting version v0.12.21. This vulnerability allows an attacker to supply a malicious Sitemap XML, leading to a Denial of Service (DoS) by exhausting system memory and potentially causing a system crash. The issue is resolved in version v0.12.29.

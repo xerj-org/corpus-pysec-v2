@@ -1,0 +1,11 @@
+PYSEC-2026-2251 PyPI/pillow — Pillow is a Python imaging library. From version 11.2.1 to before version 12.2.0, passing nested lis
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 11.2.1, < 12.2.0 (ECOSYSTEM)
+aliases: CVE-2026-42309, GHSA-5xmw-vc9v-4wf2
+references:
+  https://github.com/python-pillow/Pillow/releases/tag/12.2.0
+  https://github.com/python-pillow/Pillow/security/advisories/GHSA-5xmw-vc9v-4wf2
+
+Pillow is a Python imaging library. From version 11.2.1 to before version 12.2.0, passing nested lists as coordinates to APIs that accept coordinates such as ImagePath.Path, ImageDraw.ImageDraw.polygon and ImageDraw.ImageDraw.line could cause a heap buffer overflow, as nested lists were recursively unpacked beyond the allocated buffer. Coordinate lists are now validated to contain exactly two numeric coordinates. This issue has been patched in version 12.2.0.

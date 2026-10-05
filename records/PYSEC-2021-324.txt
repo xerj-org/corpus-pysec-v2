@@ -1,0 +1,11 @@
+PYSEC-2021-324 PyPI/lief — An issue was discovered in LIEF through 0.11.4. A heap-buffer-overflow exists in the function main l
+package: lief
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.11.5 (ECOSYSTEM)
+aliases: CVE-2021-32297, GHSA-22x7-vwh9-5w4g
+references:
+  https://github.com/lief-project/LIEF/issues/449
+  https://github.com/advisories/GHSA-22x7-vwh9-5w4g
+
+An issue was discovered in LIEF through 0.11.4. A heap-buffer-overflow exists in the function main located in pe_reader.c. It allows an attacker to cause code Execution.

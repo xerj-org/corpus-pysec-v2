@@ -1,0 +1,11 @@
+PYSEC-2026-4015 PyPI/monai — MONAI through 1.6.0 contains a remote code execution vulnerability in the bundle configuration engin
+package: monai
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.6.1rc0 (ECOSYSTEM)
+aliases: CVE-2026-100840, GHSA-873f-pvrv-4x83
+references:
+  https://www.vulncheck.com/advisories/monai-through-1.6.0-remote-code-execution-via-bundle-configuration
+  https://github.com/Project-MONAI/MONAI/security/advisories/GHSA-873f-pvrv-4x83
+
+MONAI through 1.6.0 contains a remote code execution vulnerability in the bundle configuration engine that resolves _target_ values to arbitrary importable callables without an allow list and passes $ expressions to Python eval(). Attackers can publish a malicious bundle with crafted configuration containing arbitrary code that executes when a victim loads the bundle using monai.bundle.load() or monai.bundle.run().

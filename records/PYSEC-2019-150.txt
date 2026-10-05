@@ -1,0 +1,11 @@
+PYSEC-2019-150 PyPI/bodhi — Bodhi 2.9.0 and lower is vulnerable to cross-site scripting resulting in code injection caused by in
+package: bodhi
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.3.0 (ECOSYSTEM)
+aliases: CVE-2017-1002152, GHSA-h896-6hcp-gj6c
+references:
+  https://github.com/fedora-infra/bodhi/issues/1740
+  https://github.com/advisories/GHSA-h896-6hcp-gj6c
+
+Bodhi 2.9.0 and lower is vulnerable to cross-site scripting resulting in code injection caused by incorrect validation of bug titles.

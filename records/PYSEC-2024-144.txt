@@ -1,0 +1,15 @@
+PYSEC-2024-144 PyPI/paddlepaddle — Nullptr dereference in paddle.crop in PaddlePaddle before 2.6.0. This flaw can cause a runtime crash
+package: paddlepaddle
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.6.1 (ECOSYSTEM)
+aliases: CVE-2023-52312, GHSA-qppw-c37g-xwcc
+references:
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-021.md
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-021.md
+  https://github.com/advisories/GHSA-qppw-c37g-xwcc
+
+Nullptr dereference in paddle.crop in PaddlePaddle before 2.6.0. This flaw can cause a runtime crash and a denial of service.
+
+
+

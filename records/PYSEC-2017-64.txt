@@ -1,0 +1,14 @@
+PYSEC-2017-64 PyPI/plone — Cross-site scripting (XSS) vulnerability in the manage_findResult component in the search feature in
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.3.12, >= 5.0, < 5.0.7 (ECOSYSTEM)
+aliases: CVE-2016-7147, GHSA-84jm-cpc5-c7g7
+references:
+  https://www.curesec.com/blog/article/blog/Plone-XSS-186.html
+  https://plone.org/security/hotfix/20170117/non-persistent-xss-in-zope2
+  https://plone.org/security/hotfix/20170117
+  http://www.securityfocus.com/bid/96117
+  https://github.com/advisories/GHSA-84jm-cpc5-c7g7
+
+Cross-site scripting (XSS) vulnerability in the manage_findResult component in the search feature in Zope ZMI in Plone before 4.3.12 and 5.x before 5.0.7 allows remote attackers to inject arbitrary web script or HTML via vectors involving double quotes, as demonstrated by the obj_ids:tokens parameter. NOTE: this vulnerability exists because of an incomplete fix for CVE-2016-7140.

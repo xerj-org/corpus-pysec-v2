@@ -1,0 +1,10 @@
+PYSEC-2025-95 PyPI/chuanhuchatgpt — A stored cross-site scripting (XSS) vulnerability exists in the gaizhenbiao/chuanhuchatgpt repositor
+package: chuanhuchatgpt
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 2024-09-19 (ECOSYSTEM)
+aliases: CVE-2024-9107
+references:
+  https://huntr.com/bounties/a2972c51-4780-4f60-afbf-a7a8ee4066ea
+
+A stored cross-site scripting (XSS) vulnerability exists in the gaizhenbiao/chuanhuchatgpt repository, affecting version git 20b2e02. The vulnerability arises from improper sanitization of HTML tags in chat history uploads. Specifically, the sanitization logic fails to handle HTML tags within code blocks correctly, allowing an attacker to inject malicious scripts. This can lead to the execution of arbitrary JavaScript code in the context of the user's browser, potentially leading to identity theft or other malicious actions.

@@ -1,0 +1,42 @@
+PYSEC-2026-527 PyPI/rucio — Rucio has SQL Injection in FilterEngine PostgreSQL Query Builder via DID Search API
+package: rucio
+ecosystem: PyPI
+versions affected:
+  >= 1.30.0, < 35.8.5, >= 36.0.0, < 38.5.5, >= 39.0.0, < 39.4.2, >= 40.0.0, < 40.1.1 (ECOSYSTEM)
+aliases: CVE-2026-29090, GHSA-6j7p-qjhg-9947
+references:
+  https://github.com/rucio/rucio/security/advisories/GHSA-6j7p-qjhg-9947
+  https://nvd.nist.gov/vuln/detail/CVE-2026-29090
+  https://github.com/rucio/rucio
+  https://pypi.org/project/rucio
+  https://github.com/advisories/GHSA-6j7p-qjhg-9947
+
+### Summary
+
+A SQL injection vulnerability in `FilterEngine.create_postgres_query` allows any authenticated Rucio user to execute arbitrary SQL against the configured PostgreSQL metadata database through the DID search endpoint (`GET /dids/<scope>/dids/search`). When the external metadata plugin `postgres_meta` is configured, attacker-controlled filter keys and values are interpolated directly into raw SQL statements via Python `str.format`. This enables full database compromise including data exfiltration, data modification, and potential remote code execution via `COPY ... FROM PROGRAM`.
+ 
+### Details
+
+*Will follow in two weeks (2025-05-19).*
+
+### Impact
+
+**Vulnerability type:** SQL Injection (CWE-89)
+
+**Who is impacted:**
+
+- Rucio deployments that have explicitly configured the `postgres_meta` metadata plugin.
+
+**What an attacker can do:**
+
+- **Data modification:** PostgreSQL stacked queries enable arbitrary `INSERT`/`UPDATE`/`DELETE` operations.
+- **Remote code execution:** Via PostgreSQL's `COPY ... FROM PROGRAM` if the database user has superuser or `pg_execute_server_program` privileges.
+- **File system access:** Via `COPY ... TO/FROM '/path'` if filesystem permissions allow.
+
+**Further elevation when the same postgres database and access is used for metadata and for Rucio itself**
+
+- **Full database read access:** Extract any table including `identities` (password hashes and salts), `tokens` (active authentication sessions), `accounts` (user enumeration), `rse_settings` (storage endpoint credentials), and `rules` (data management policies) could be extracted.
+ - **Password hash extraction:** Combined with Rucio's use of single-iteration SHA-256 for password hashing (no KDF), extracted hashes can be cracked at GPU speed.
+- **Authentication token theft:** Active bearer tokens can be extracted and used for immediate session hijacking.
+
+**Required attacker privileges:** Any authenticated Rucio user. Authentication tokens can be obtained via any supported method (userpass, x509, OIDC, SAML, SSH, GSS). No special roles or administrative permissions are required. The `GET /dids/<scope>/dids/search` endpoint is available to all authenticated users.

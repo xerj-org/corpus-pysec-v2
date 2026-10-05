@@ -1,0 +1,10 @@
+PYSEC-2023-237 PyPI/asyncssh — An issue in AsyncSSH v2.14.0 and earlier allows attackers to control the extension info message (RFC
+package: asyncssh
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.14.1 (ECOSYSTEM)
+aliases: CVE-2023-46445, GHSA-cfc2-wr2v-gxm5
+references:
+  https://github.com/ronf/asyncssh/security/advisories/GHSA-cfc2-wr2v-gxm5
+
+An issue in AsyncSSH v2.14.0 and earlier allows attackers to control the extension info message (RFC 8308) via a man-in-the-middle attack.

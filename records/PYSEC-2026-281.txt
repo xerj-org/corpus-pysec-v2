@@ -1,0 +1,29 @@
+PYSEC-2026-281 PyPI/apkleaks — Improper Neutralization of Argument Delimiters in a Decompiling Package Process in APKLeaks
+package: apkleaks
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.0.4 (ECOSYSTEM)
+aliases: CVE-2021-21386, GHSA-8434-v7xw-8m9x
+references:
+  https://github.com/dwisiswant0/apkleaks/security/advisories/GHSA-8434-v7xw-8m9x
+  https://nvd.nist.gov/vuln/detail/CVE-2021-21386
+  https://github.com/dwisiswant0/apkleaks/commit/a966e781499ff6fd4eea66876d7532301b13a382
+  https://github.com/dwisiswant0/apkleaks
+  https://pypi.org/project/apkleaks
+  https://github.com/advisories/GHSA-8434-v7xw-8m9x
+
+APKLeaks prior to v2.0.4 allows remote authenticated attackers to execute arbitrary OS commands via package name inside the application manifest.
+
+### Impact
+ 
+An authenticated attacker could include arguments that allow unintended commands or code to be executed, allow sensitive data to be read or modified, or could cause other unintended behavior through malicious package names.
+
+
+### References
+ 
+- a966e781499ff6fd4eea66876d7532301b13a382
+
+### For more information
+
+If you have any questions or comments about this advisory:
+* Email me at [me@dw1.io](mailto:me@dw1.io)

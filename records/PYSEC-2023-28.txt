@@ -1,0 +1,14 @@
+PYSEC-2023-28 PyPI/mlflow — Absolute Path Traversal in GitHub repository mlflow/mlflow prior to 2.2.2.
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 63ef72aa4334a6473ce7f889573c92fcae0b3c0d (GIT: https://github.com/mlflow/mlflow)
+  >= 0, < 2.2.2 (ECOSYSTEM)
+aliases: CVE-2023-1176, GHSA-wp72-7hj9-5265
+references:
+  https://huntr.dev/bounties/ae92f814-6a08-435c-8445-eec0ef4f1085
+  https://huntr.dev/bounties/ae92f814-6a08-435c-8445-eec0ef4f1085
+  https://github.com/mlflow/mlflow/commit/63ef72aa4334a6473ce7f889573c92fcae0b3c0d
+  https://github.com/advisories/GHSA-wp72-7hj9-5265
+
+Absolute Path Traversal in GitHub repository mlflow/mlflow prior to 2.2.2.

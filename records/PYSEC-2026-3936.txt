@@ -1,0 +1,149 @@
+PYSEC-2026-3936 PyPI/vllm — vLLM: Derender endpoints decode caller-supplied GenerateResponse token IDs without output bounds
+package: vllm
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.26.0 (ECOSYSTEM)
+aliases: CVE-2026-71486, GHSA-8737-qx52-hjff
+references:
+  https://github.com/vllm-project/vllm/security/advisories/GHSA-8737-qx52-hjff
+  https://nvd.nist.gov/vuln/detail/CVE-2026-71486
+  https://github.com/vllm-project/vllm/pull/47260
+  https://github.com/vllm-project/vllm/commit/8e61b646e2d157f9b93451fa048f9c8530c8a67b
+  https://github.com/vllm-project/vllm
+  https://github.com/vllm-project/vllm/releases/tag/v0.26.0
+  https://pypi.org/project/vllm
+  https://github.com/advisories/GHSA-8737-qx52-hjff
+
+## Summary
+
+The `/v1/completions/derender` and `/v1/chat/completions/derender` endpoints accept caller-supplied `GenerateResponse` objects and postprocess every nested `choices[*].token_ids` list directly. Unlike the normal render/generate path, derender does not enforce model context length, resolved `max_tokens`, `max_num_seqs`, choice-count, or response-size bounds before detokenizing and returning the supplied token IDs. An authenticated API client can therefore make the CPU-only render frontend, or any server exposing these `/v1` derender routes, spend CPU and memory proportional to attacker-chosen generated-output-shaped JSON rather than to a bounded generation result.
+
+## Technical Details
+
+The render router registers `/v1/chat/completions/derender` and `/v1/completions/derender` in `vllm/entrypoints/serve/render/api_router.py`, and the OpenAI API server attaches this router whenever `"generate"` or `"render"` is in `supported_tasks` (`vllm/entrypoints/openai/api_server.py`). The routes are under `/v1`, so they are part of the OpenAI-compatible HTTP API surface and are protected by the API-key middleware when `--api-key` is configured.
+
+The request types trust generated-output-shaped data from the client. In `vllm/entrypoints/serve/disagg/protocol.py`, `GenerateResponseChoice` accepts `token_ids: list[int] | None = None`, `GenerateResponse` accepts `choices: list[GenerateResponseChoice]`, and `DerenderCompletionRequest` accepts `generate_responses: list[GenerateResponse]`. These fields have no max length, max item count, or relationship to a prior `GenerateRequest`.
+
+The sink is `OnlineDerenderer`. `derender_completion()` iterates every supplied `generate_responses` entry and every nested choice, calls `tokenizer.decode(choice.token_ids, skip_special_tokens=True)`, appends the decoded text to the response choices, and increments `total_completion_tokens` from the same supplied list length. `derender_chat()` has the same shape for a single supplied `generate_response`, and can also feed the decoded text into tool/reasoning parsers when a parser and `chat_request` are present. `ServingRender.derender_completion_response()` calls `online_derenderer.derender_completion(request.generate_responses, request.prompt_tokens)` before applying any completion-level validation beyond the model check.
+
+Normal render and generation paths derive output limits from `max_model_len`, the rendered prompt length, request `max_tokens` / `max_completion_tokens`, and scheduler limits. Derender bypasses that invariant because it accepts the already-generated output shape directly from the HTTP caller. The missing invariant is: derender should only postprocess bounded generated output, and client-supplied derender payloads must be rejected if their nested generated token/logprob structures exceed the same limits that generation would have enforced.
+
+## PoV
+
+The following bounded PoV can be run from a current vLLM checkout containing PR `#43606`. It asserts the current source facts for the derender routes, unchecked request fields, and decode sink, then simulates the same derender loop with a counting tokenizer. The negative control is a one-choice, 32-token response. The amplified payload keeps the test bounded but demonstrates that all decoded work and returned text scale directly with caller-supplied `GenerateResponse` contents.
+
+```python
+#!/usr/bin/env python3
+import subprocess
+from dataclasses import dataclass
+from pathlib import Path
+
+SOURCE = Path(".")
+
+def require_source_fact(path: str, needles: list[str]) -> None:
+    text = (SOURCE / path).read_text()
+    missing = [needle for needle in needles if needle not in text]
+    if missing:
+        raise AssertionError(f"{path} missing expected facts: {missing}")
+
+def source_head() -> str:
+    return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=SOURCE, text=True).strip()
+
+@dataclass
+class Choice:
+    index: int
+    token_ids: list[int]
+
+@dataclass
+class GenerateResponse:
+    request_id: str
+    choices: list[Choice]
+
+class CountingTokenizer:
+    def __init__(self) -> None:
+        self.decode_calls = 0
+        self.decoded_ids = 0
+    def decode(self, token_ids: list[int], *, skip_special_tokens: bool = True) -> str:
+        self.decode_calls += 1
+        self.decoded_ids += len(token_ids)
+        return "x" * len(token_ids)
+
+def derender_completion_like_current_head(generate_responses: list[GenerateResponse], tokenizer: CountingTokenizer) -> tuple[int, int, int]:
+    output_chars = 0
+    choices = 0
+    total_completion_tokens = 0
+    for gen in generate_responses:
+        for choice in gen.choices:
+            if not choice.token_ids:
+                raise ValueError("choice has empty or null token_ids")
+            decoded_text = tokenizer.decode(choice.token_ids, skip_special_tokens=True)
+            output_chars += len(decoded_text)
+            total_completion_tokens += len(choice.token_ids)
+            choices += 1
+    return choices, total_completion_tokens, output_chars
+
+def make_payload(responses: int, choices_per_response: int, tokens_per_choice: int) -> list[GenerateResponse]:
+    token_ids = [42] * tokens_per_choice
+    return [GenerateResponse(request_id=f"gen-{r}", choices=[Choice(index=c, token_ids=list(token_ids)) for c in range(choices_per_response)]) for r in range(responses)]
+
+def run_case(name: str, payload: list[GenerateResponse]) -> None:
+    tokenizer = CountingTokenizer()
+    choices, completion_tokens, output_chars = derender_completion_like_current_head(payload, tokenizer)
+    print(f"{name}: responses={len(payload)} choices={choices} decode_calls={tokenizer.decode_calls} decoded_token_ids={tokenizer.decoded_ids} completion_tokens={completion_tokens} output_chars={output_chars}")
+
+require_source_fact("vllm/entrypoints/serve/render/api_router.py", ['"/v1/completions/derender"', '"/v1/chat/completions/derender"', "app.include_router(router)"])
+require_source_fact("vllm/entrypoints/serve/disagg/protocol.py", ["class GenerateResponseChoice(BaseModel):", "token_ids: list[int] | None = None", "class GenerateResponse(BaseModel):", "choices: list[GenerateResponseChoice]", "class DerenderCompletionRequest(BaseModel):", "generate_responses: list[GenerateResponse]"])
+require_source_fact("vllm/renderers/online_derenderer.py", ["async def derender_completion(", "for gen, pt in zip(generate_responses, prompt_tokens_list):", "for choice in gen.choices:", "decoded_text = tokenizer.decode(", "total_completion_tokens += len(choice.token_ids)"])
+print("source_checks=ok")
+print(f"source_head={source_head()}")
+run_case("negative_control", make_payload(responses=1, choices_per_response=1, tokens_per_choice=32))
+run_case("amplified_payload", make_payload(responses=16, choices_per_response=4, tokens_per_choice=8192))
+print("observation=derender decodes every caller-supplied token id before any max_model_len, max_tokens, max_num_seqs, or response-size check")
+```
+
+
+## Impact
+
+An attacker with access to the `/v1` API can send derender requests that consume CPU and memory in the frontend/postprocessing process and can cause large responses unrelated to any bounded generation. In disaggregated deployments, this affects the CPU-only render frontend; in servers where the render router is attached alongside generation, it affects the same OpenAI-compatible server process that handles normal client traffic. This can degrade availability for other clients sharing the process.
+
+Likely CWE: CWE-400 (Uncontrolled Resource Consumption) / CWE-770 (Allocation of Resources Without Limits or Throttling). Conservative CVSS v3.1: `CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L` (4.3). This is not Low severity because a regular network API client can induce availability impact in a shared service without local access, invalid model artifacts, or special runtime privileges. If the server is deployed without API-key enforcement for `/v1`, the privileges component becomes `PR:N`.
+
+## Suggested Fix
+
+Validate derender payloads before any detokenization or parser invocation. Apply bounded limits to `generate_response(s)`, `choices`, `token_ids`, `prompt_logprobs`, `logprobs.content`, `top_logprobs`, and `routed_experts` that are at least as strict as the corresponding generation-side limits. For completions, reject `generate_responses` counts above the number of prompts that `/v1/completions/render` would have produced, and reject total nested choice counts above `max_num_seqs` / `n` limits. For each choice, reject `token_ids` longer than the resolved output-token budget, or require derender callers to submit the original bounded `GenerateRequest` / sampling metadata and validate the `GenerateResponse` against it before decoding.
+
+Add regression tests for both derender endpoints. The tests should show that a normal bounded derender payload succeeds, while oversized `generate_responses`, oversized `choices`, oversized `token_ids`, and oversized logprob/top-logprob structures are rejected before `tokenizer.decode()` or parser execution.
+
+## Affected Package/Versions
+
+Confirmed affected: current main at `ddd3855a28a561a5bb54d380c6e6b8b1e883cc4a` and downstream/nightly builds that include the derender endpoints introduced by PR `#43606`. The derender router, request models, decode sink, render serving bridge, and OpenAI API router attachment have no relevant diff from `00e045b7c7b82599f626779e111233abd4d0a64e` to `ddd3855a28a561a5bb54d380c6e6b8b1e883cc4a`.
+
+Latest release checked: `v0.23.0`, published on `2026-06-15`. Its `vllm/entrypoints/serve/render/api_router.py` does not expose `/v1/completions/derender` or `/v1/chat/completions/derender`, so `v0.23.0` was not confirmed affected.
+
+## Advisory History
+
+PR `#43606` ("[Render] Add `/derender` endpoints for disaggregated postprocessing") introduced the derender endpoints on main. PR `#44285` later refactored the render serving code, and current head still contains the unchecked derender flow.
+
+Public issue search for `derender GenerateResponse token_ids` returned no reports. Public search for `"/v1/completions/derender"` returned the derender feature RFC `#42729` and unrelated bugs, but no size-bound, DoS, or generated-output postprocessing issue.
+
+Related public request-fanout and resource-bound advisories are distinct:
+
+- `GHSA-3mwp-wvh9-7528` covers an unbounded `n` parameter on the normal OpenAI completion/chat generation routes. Its root cause is missing upper-bound validation for generated sequence count, its sink is request fanout and request-object copying into the async engine path before scheduling, its precondition is a caller-controlled `n`, and its fix surface is a cap on generated sequence count. This report reaches `/v1/completions/derender` and `/v1/chat/completions/derender`, not the normal generate routes; its root cause is unchecked caller-supplied `GenerateResponse` / `choices` / `token_ids` structures, its sink is `OnlineDerenderer` detokenization and response construction after generation, its precondition is access to the derender API with generated-output-shaped JSON, and its fix surface is derender payload validation before decode.
+- PR `#45390` includes the `GHSA-83mh-6mwq-3hg9` batch-message fanout fix class: it bounds the outer `BatchChatCompletionRequest.messages` conversation list to prevent one request from creating many conversation/request objects before normal generation. This report has no batch conversation list and does not rely on `n`; one derender request can instead supply oversized nested `GenerateResponse` choices and token IDs that are detokenized and returned directly. A batch-message `max_length` limit would not bound derender `generate_response(s)` or per-choice token/logprob structures.
+
+The completed local report titled "Explicit truncation_side disables tokenizer-level prompt truncation" is also distinct. That report used `/v1/completions` and `/v1/chat/completions` with ordinary prompt text plus `truncate_prompt_tokens` and explicit `truncation_side`; its root cause was the renderer omitting tokenizer-level `max_length` and the pre-tokenization character guard before post-token slicing; its sink was prompt tokenization; and its fix surface was preserving tokenizer-level truncation or rejecting over-budget prompts before tokenization. This derender report uses `/v1` derender routes, has no prompt text tokenization or truncation-side control, starts from caller-supplied generated-output token IDs, and needs aggregate bounds on derender `generate_response(s)`, choices, token IDs, logprobs, parser inputs, and response construction before detokenization.
+
+Other adjacent vLLM advisories for Rust/gRPC token-id and logprob bounds, structured-output grammar amplification, repetition-detection windows, and pooling/rerank batch fanout are distinct. Those issues affect Rust/gRPC request conversion, grammar compilation, scheduler loops, or engine fanout. This issue affects `/v1` derender postprocessing of caller-supplied generated-output objects and requires derender-specific request validation before detokenization.
+
+## Resources
+
+- `vllm/entrypoints/serve/render/api_router.py`
+- `vllm/entrypoints/serve/disagg/protocol.py`
+- `vllm/renderers/online_derenderer.py`
+- `vllm/entrypoints/serve/render/serving.py`
+- `vllm/entrypoints/openai/api_server.py`
+- PR `#43606`: `https://github.com/vllm-project/vllm/pull/43606`
+- PR `#44285`: `https://github.com/vllm-project/vllm/pull/44285`
+- `GHSA-3mwp-wvh9-7528`: `https://github.com/vllm-project/vllm/security/advisories/GHSA-3mwp-wvh9-7528`
+- PR `#45390`: `https://github.com/vllm-project/vllm/pull/45390`
+- Release `v0.23.0`: `https://github.com/vllm-project/vllm/releases/tag/v0.23.0`

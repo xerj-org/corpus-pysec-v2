@@ -1,0 +1,11 @@
+PYSEC-2026-3776 PyPI/openssl-encrypt — openssl_encrypt versions before 1.4.9 contain a shell injection vulnerability in the info command's 
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.9 (ECOSYSTEM)
+aliases: CVE-2026-81698, GHSA-gw2m-mj6q-59hc
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-gw2m-mj6q-59hc
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-1.4.9-shell-injection-via-info-command
+
+openssl_encrypt versions before 1.4.9 contain a shell injection vulnerability in the info command's reconstructed CLI block that interpolates untrusted metadata fields without quoting. Attackers can craft metadata values like pepper_name containing shell commands that execute when users copy the printed CLI block into a shell.

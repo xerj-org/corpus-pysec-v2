@@ -1,0 +1,16 @@
+PYSEC-2018-2 PyPI/django — django.middleware.common.CommonMiddleware in Django 1.11.x before 1.11.15 and 2.0.x before 2.0.8 has
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 2.0, < 2.0.8, >= 1.11, < 1.11.15 (ECOSYSTEM)
+aliases: CVE-2018-14574, GHSA-5hg3-6c2f-f3wr
+references:
+  https://www.djangoproject.com/weblog/2018/aug/01/security-releases/
+  https://usn.ubuntu.com/3726-1/
+  http://www.securitytracker.com/id/1041403
+  https://www.debian.org/security/2018/dsa-4264
+  http://www.securityfocus.com/bid/104970
+  https://access.redhat.com/errata/RHSA-2019:0265
+  https://github.com/advisories/GHSA-5hg3-6c2f-f3wr
+
+django.middleware.common.CommonMiddleware in Django 1.11.x before 1.11.15 and 2.0.x before 2.0.8 has an Open Redirect.

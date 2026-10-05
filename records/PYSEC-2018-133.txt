@@ -1,0 +1,12 @@
+PYSEC-2018-133 PyPI/exiv2 — Exiv2 0.26 has a heap-based buffer over-read in WebPImage::decodeChunks in webpimage.cpp.
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2018-14046
+references:
+  https://github.com/Exiv2/exiv2/issues/378
+  https://github.com/Exiv2/exiv2/issues/378
+  https://access.redhat.com/errata/RHSA-2019:2101
+
+Exiv2 0.26 has a heap-based buffer over-read in WebPImage::decodeChunks in webpimage.cpp.

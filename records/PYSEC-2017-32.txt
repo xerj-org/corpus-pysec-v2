@@ -1,0 +1,12 @@
+PYSEC-2017-32 PyPI/salt — The state.sls function in Salt before 2015.8.3 uses weak permissions on the cache data, which allows
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2015.8.3 (ECOSYSTEM)
+aliases: CVE-2015-8034, GHSA-6prw-8xhm-h247
+references:
+  https://docs.saltstack.com/en/latest/topics/releases/2015.8.3.html
+  http://www.securityfocus.com/bid/96390
+  https://github.com/advisories/GHSA-6prw-8xhm-h247
+
+The state.sls function in Salt before 2015.8.3 uses weak permissions on the cache data, which allows local users to obtain sensitive information by reading the file.

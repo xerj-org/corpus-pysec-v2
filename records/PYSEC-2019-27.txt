@@ -1,0 +1,10 @@
+PYSEC-2019-27 PyPI/invenio-records — invenio-records before 1.2.2 allows XSS.
+package: invenio-records
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0.2 (ECOSYSTEM)
+aliases: CVE-2019-1020003, GHSA-vxh3-mvv7-265j
+references:
+  https://github.com/inveniosoftware/invenio-records/security/advisories/GHSA-vxh3-mvv7-265j
+
+invenio-records before 1.2.2 allows XSS.

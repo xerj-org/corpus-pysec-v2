@@ -1,0 +1,13 @@
+PYSEC-2020-250 PyPI/rtslib-fb — Open-iSCSI rtslib-fb through 2.1.72 has weak permissions for /etc/target/saveconfig.json because shu
+package: rtslib-fb
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.1.73 (ECOSYSTEM)
+aliases: CVE-2020-14019, GHSA-cpcw-p965-wpqx
+references:
+  https://github.com/open-iscsi/rtslib-fb/pull/162
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/TNMCV2DJJTX345YYBXAMJBXNNVUZQ5UH/
+  http://lists.opensuse.org/opensuse-security-announce/2020-08/msg00012.html
+  https://github.com/advisories/GHSA-cpcw-p965-wpqx
+
+Open-iSCSI rtslib-fb through 2.1.72 has weak permissions for /etc/target/saveconfig.json because shutil.copyfile (instead of shutil.copy) is used, and thus permissions are not preserved.

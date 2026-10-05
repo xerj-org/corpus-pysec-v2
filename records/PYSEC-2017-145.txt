@@ -1,0 +1,21 @@
+PYSEC-2017-145 PyPI/nova — OpenStack Compute (nova) Icehouse, Juno and Havana when live migration fails allows local users to a
+package: nova
+ecosystem: PyPI
+versions affected:
+  >= 0, < 15.0.0.0b1 (ECOSYSTEM)
+aliases: CVE-2015-2687, GHSA-97fv-22hc-mrgj
+references:
+  https://review.openstack.org/#/c/338929/
+  https://bugzilla.redhat.com/show_bug.cgi?id=1205313
+  https://bugzilla.redhat.com/show_bug.cgi?id=1205313
+  https://bugs.launchpad.net/nova/+bug/1419577
+  https://bugs.launchpad.net/nova/+bug/1419577
+  https://bugs.launchpad.net/nova/+bug/1419577
+  http://www.securityfocus.com/bid/77505
+  http://www.securityfocus.com/bid/77505
+  http://www.openwall.com/lists/oss-security/2015/03/25/3
+  http://www.openwall.com/lists/oss-security/2015/03/25/3
+  http://www.openwall.com/lists/oss-security/2015/03/24/10
+  http://www.openwall.com/lists/oss-security/2015/03/24/10
+
+OpenStack Compute (nova) Icehouse, Juno and Havana when live migration fails allows local users to access VM volumes that they would normally not have permissions for.

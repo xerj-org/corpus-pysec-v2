@@ -1,0 +1,18 @@
+PYSEC-2020-80 PyPI/pillow — In libImaging/SgiRleDecode.c in Pillow through 7.0.0, a number of out-of-bounds reads exist in the p
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 7.1.0 (ECOSYSTEM)
+aliases: CVE-2020-11538, GHSA-43fq-w8qq-v88h
+references:
+  https://pillow.readthedocs.io/en/stable/releasenotes/7.1.0.html
+  https://pillow.readthedocs.io/en/stable/releasenotes/index.html
+  https://github.com/python-pillow/Pillow/pull/4538
+  https://github.com/python-pillow/Pillow/pull/4504
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/HOKHNWV2VS5GESY7IBD237E7C6T3I427/
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/BEBCPE4F2VHTIT6EZA2YZQZLPVDEBJGD/
+  https://usn.ubuntu.com/4430-1/
+  https://usn.ubuntu.com/4430-2/
+  https://github.com/advisories/GHSA-43fq-w8qq-v88h
+
+In libImaging/SgiRleDecode.c in Pillow through 7.0.0, a number of out-of-bounds reads exist in the parsing of SGI image files, a different issue than CVE-2020-5311.

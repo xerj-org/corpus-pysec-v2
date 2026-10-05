@@ -1,0 +1,14 @@
+PYSEC-2016-21 PyPI/python-docx — python-docx before 0.8.6 allows context-dependent attackers to conduct XML External Entity (XXE) att
+package: python-docx
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.8.6 (ECOSYSTEM)
+aliases: CVE-2016-5851, GHSA-34wj-p5jm-2p96
+references:
+  https://github.com/python-openxml/python-docx/blob/v0.8.6/HISTORY.rst
+  http://www.securityfocus.com/bid/91485
+  http://www.openwall.com/lists/oss-security/2016/06/28/8
+  http://www.openwall.com/lists/oss-security/2016/06/28/7
+  https://github.com/advisories/GHSA-34wj-p5jm-2p96
+
+python-docx before 0.8.6 allows context-dependent attackers to conduct XML External Entity (XXE) attacks via a crafted document.

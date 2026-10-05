@@ -1,0 +1,14 @@
+PYSEC-2026-1596 PyPI/mad-proxy — HTTP/HTTPS Traffic Interception Bypass in mad-proxy
+package: mad-proxy
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.3 (ECOSYSTEM)
+aliases: CVE-2025-67485, GHSA-wx63-35hw-2482
+references:
+  https://github.com/machphy/mad-proxy/security/advisories/GHSA-wx63-35hw-2482
+  https://nvd.nist.gov/vuln/detail/CVE-2025-67485
+  https://github.com/machphy/mad-proxy
+  https://pypi.org/project/mad-proxy
+  https://github.com/advisories/GHSA-wx63-35hw-2482
+
+A vulnerability in mad-proxy versions <= 0.3 allows attackers to bypass HTTP/HTTPS traffic interception rules, potentially exposing sensitive traffic.

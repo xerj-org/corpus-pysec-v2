@@ -1,0 +1,11 @@
+PYSEC-2026-3960 PyPI/openssl-encrypt — openssl-encrypt (pip package, versions <= 1.4.8) fails to sanitize filenames read from untrusted dri
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.9 (ECOSYSTEM)
+aliases: CVE-2026-81694, GHSA-c793-rj9w-r3wg
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-c793-rj9w-r3wg
+  https://www.vulncheck.com/advisories/verify-usb-before-1.4.9-output-injection-via-unsanitized-filenames
+
+openssl-encrypt (pip package, versions <= 1.4.8) fails to sanitize filenames read from untrusted drive data (outside the AES-GCM authenticated manifest) before printing them in the verify-usb command's output. An attacker can plant filenames containing terminal cursor-movement and erase-line control bytes that repaint a forged PASSED verdict on screen, masking actual tamper detection. Fixed in 1.4.9 by routing drive-derived names through sanitize_for_display().

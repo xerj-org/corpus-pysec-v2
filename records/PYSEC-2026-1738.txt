@@ -1,0 +1,15 @@
+PYSEC-2026-1738 PyPI/open-webui — open-webui allows enumeration of file names and traversal of directories by observing the error messages
+package: open-webui
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.3.8 (ECOSYSTEM)
+aliases: CVE-2024-7038, GHSA-mq92-jr35-ffpc
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-7038
+  https://github.com/open-webui/open-webui
+  https://github.com/open-webui/open-webui/blob/eff736acd2e0bbbdd0eeca4cc209b216a1f23b6a/backend/apps/rag/main.py#L199
+  https://huntr.com/bounties/f42cf72a-8015-44a6-81a9-c6332ef05afc
+  https://pypi.org/project/open-webui
+  https://github.com/advisories/GHSA-mq92-jr35-ffpc
+
+An information disclosure vulnerability exists in open-webui version 0.3.8. The vulnerability is related to the embedding model update feature under admin settings. When a user updates the model path, the system checks if the file exists and provides different error messages based on the existence and configuration of the file. This behavior allows an attacker to enumerate file names and traverse directories by observing the error messages, leading to potential exposure of sensitive information.

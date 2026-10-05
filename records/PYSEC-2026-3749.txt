@@ -1,0 +1,11 @@
+PYSEC-2026-3749 PyPI/nltk — NLTK before 3.10.3 fails to validate JVM options passed through the per-call options parameter in th
+package: nltk
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.10.3 (ECOSYSTEM)
+aliases: CVE-2026-79675, GHSA-m4rf-3fr8-xwx3
+references:
+  https://www.vulncheck.com/advisories/nltk-before-jvm-argument-injection-via-per-call-options
+  https://github.com/nltk/nltk/security/advisories/GHSA-m4rf-3fr8-xwx3
+
+NLTK before 3.10.3 fails to validate JVM options passed through the per-call options parameter in the java() function, allowing attackers to inject dangerous JVM flags. Attackers can supply malicious options like -agentpath, -javaagent, or @argfile to Stanford wrapper classes to achieve arbitrary code execution.

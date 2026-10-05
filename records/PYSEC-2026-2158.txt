@@ -1,0 +1,12 @@
+PYSEC-2026-2158 PyPI/gdown — gdown is a Google Drive public file/folder downloader. Versions prior to 5.2.2 are vulnerable to a P
+package: gdown
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.2.2 (ECOSYSTEM)
+aliases: CVE-2026-40491, GHSA-76hw-p97h-883f
+references:
+  https://github.com/wkentaro/gdown/releases/tag/v5.2.2
+  https://github.com/wkentaro/gdown/commit/af569fc6ed300b7974dee66dc51e9f01b57b4dff
+  https://github.com/wkentaro/gdown/security/advisories/GHSA-76hw-p97h-883f
+
+gdown is a Google Drive public file/folder downloader. Versions prior to 5.2.2 are vulnerable to a Path Traversal attack within the extractall functionality. When extracting a maliciously crafted ZIP or TAR archive, the library fails to sanitize or validate the filenames of the archive members. This allow files to be written outside the intended destination directory, potentially leading to arbitrary file overwrite and Remote Code Execution (RCE). Version 5.2.2 contains a fix.

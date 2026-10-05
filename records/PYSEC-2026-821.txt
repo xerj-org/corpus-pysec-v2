@@ -1,0 +1,20 @@
+PYSEC-2026-821 PyPI/horizon — OpenStack Horizon Cross-site Scripting (XSS)
+package: horizon
+ecosystem: PyPI
+versions affected:
+  >= 9.0, < 9.1.2, >= 10.0, < 10.0.3, >= 11.0.0, < 11.0.1 (ECOSYSTEM)
+aliases: CVE-2017-7400, GHSA-47vp-44v9-rhgq
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2017-7400
+  https://access.redhat.com/errata/RHSA-2017:1598
+  https://access.redhat.com/errata/RHSA-2017:1739
+  https://launchpad.net/bugs/1667086
+  https://opendev.org/openstack/horizon/commit/1407cfe53144146b29679de21f28c952282043ae
+  https://opendev.org/openstack/horizon/commit/511b325b45b6bd7a88bb6df1a4639b80d0121277
+  https://opendev.org/openstack/horizon/commit/a835dbfbaa2c70329c08d4b8429d49315dc6d651
+  https://opendev.org/openstack/horizon/commit/ce80bb6fec3cb0262728e7ae8b9d695cf832e5bf
+  http://www.securityfocus.com/bid/97324
+  https://pypi.org/project/horizon
+  https://github.com/advisories/GHSA-47vp-44v9-rhgq
+
+OpenStack Horizon 9.x through 9.1.1, 10.x through 10.0.2, and 11.0.0 allows remote authenticated administrators to conduct XSS attacks via a crafted federation mapping.

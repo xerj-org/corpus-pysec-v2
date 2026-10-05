@@ -1,0 +1,18 @@
+PYSEC-2019-5 PyPI/ansible — Ansible fetch module before versions 2.5.15, 2.6.14, 2.7.8 has a path traversal vulnerability which 
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 2.5.0, < 2.5.15, >= 2.6.0, < 2.6.14, >= 2.7.0, < 2.7.8 (ECOSYSTEM)
+aliases: CVE-2019-3828, GHSA-74vq-h4q8-x6jv
+references:
+  https://github.com/ansible/ansible/pull/52133
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2019-3828
+  http://lists.opensuse.org/opensuse-security-announce/2019-04/msg00021.html
+  http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00077.html
+  https://usn.ubuntu.com/4072-1/
+  http://lists.opensuse.org/opensuse-security-announce/2019-08/msg00020.html
+  https://access.redhat.com/errata/RHSA-2019:3744
+  https://access.redhat.com/errata/RHSA-2019:3789
+  https://github.com/advisories/GHSA-74vq-h4q8-x6jv
+
+Ansible fetch module before versions 2.5.15, 2.6.14, 2.7.8 has a path traversal vulnerability which allows copying and overwriting files outside of the specified destination in the local ansible controller host, by not restricting an absolute path.

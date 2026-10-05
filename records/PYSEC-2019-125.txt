@@ -1,0 +1,14 @@
+PYSEC-2019-125 PyPI/steam — Valve Steam Client before 2019-09-12 allows placing or appending partially controlled filesystem con
+package: steam
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2019-09-12 (ECOSYSTEM)
+aliases: CVE-2019-17180
+references:
+  https://habr.com/ru/company/pm/blog/469507/
+  https://amonitoring.ru/article/steam_vuln_3/
+  https://hackerone.com/reports/682774
+  https://store.steampowered.com/news/54236/
+  https://hackerone.com/reports/583184
+
+Valve Steam Client before 2019-09-12 allows placing or appending partially controlled filesystem content, as demonstrated by file modifications on Windows in the context of NT AUTHORITY\SYSTEM. This could lead to denial of service, elevation of privilege, or unspecified other impact.

@@ -1,0 +1,15 @@
+PYSEC-2020-249 PyPI/py-bcrypt — The py-bcrypt module before 0.3 for Python does not properly handle concurrent memory access, which 
+package: py-bcrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.3 (ECOSYSTEM)
+aliases: CVE-2013-1895, GHSA-r838-q6jp-58xx
+references:
+  http://lists.fedoraproject.org/pipermail/package-announce/2013-April/101382.html
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/83039
+  http://lists.fedoraproject.org/pipermail/package-announce/2013-April/101387.html
+  http://www.openwall.com/lists/oss-security/2013/03/26/2
+  http://www.securityfocus.com/bid/58702
+  https://github.com/advisories/GHSA-r838-q6jp-58xx
+
+The py-bcrypt module before 0.3 for Python does not properly handle concurrent memory access, which allows attackers to bypass authentication via multiple authentication requests, which trigger the password hash to be overwritten.

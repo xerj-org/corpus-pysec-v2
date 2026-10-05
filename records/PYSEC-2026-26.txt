@@ -1,0 +1,15 @@
+PYSEC-2026-26 PyPI/avro — Improper Control of Generation of Code ('Code Injection') vulnerability in Apache Avro Java SDK when
+package: avro
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.11.5 (ECOSYSTEM)
+aliases: CVE-2025-33042
+references:
+  http://www.openwall.com/lists/oss-security/2026/02/12/2
+  https://lists.apache.org/thread/fy88wmgf1lj9479vrpt12cv8x73lroj1
+
+Improper Control of Generation of Code ('Code Injection') vulnerability in Apache Avro Java SDK when generating specific records from untrusted Avro schemas.
+
+This issue affects Apache Avro Java SDK: all versions through 1.11.4 and version 1.12.0.
+
+Users are recommended to upgrade to version 1.12.1 or 1.11.5, which fix the issue.

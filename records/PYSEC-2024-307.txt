@@ -1,0 +1,10 @@
+PYSEC-2024-307 PyPI/pywasm3 — wasm3 v0.5.0 was discovered to contain an out-of-bound memory read which leads to segmentation fault
+package: pywasm3
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.5.0 (ECOSYSTEM)
+aliases: CVE-2024-34246
+references:
+  https://github.com/wasm3/wasm3/issues/484
+
+wasm3 v0.5.0 was discovered to contain an out-of-bound memory read which leads to segmentation fault via the function "main" in wasm3/platforms/app/main.c.

@@ -1,0 +1,73 @@
+PYSEC-2026-1825 PyPI/pymdown-extensions — PyMdown Extensions has a ReDOS bug in its Figure Capture extension
+package: pymdown-extensions
+ecosystem: PyPI
+versions affected:
+  >= 0, < 10.16.1 (ECOSYSTEM)
+aliases: CVE-2025-68142, GHSA-r6h4-mm7h-8pmq
+references:
+  https://github.com/facelessuser/pymdown-extensions/security/advisories/GHSA-r6h4-mm7h-8pmq
+  https://nvd.nist.gov/vuln/detail/CVE-2025-68142
+  https://github.com/facelessuser/pymdown-extensions/commit/b50d15a56850ed1408a284bba81cc019c6bd72e8
+  https://github.com/facelessuser/pymdown-extensions
+  https://pypi.org/project/pymdown-extensions/10.16.1
+  https://pypi.org/project/pymdown-extensions
+  https://github.com/advisories/GHSA-r6h4-mm7h-8pmq
+
+### Impact
+
+This issue describes a ReDOS bug found within the figure caption extension (`pymdownx.blocks.caption` ).
+
+In systems that take unchecked user content, this could cause long hangs when processing the data if a malicious payload was crafted.
+
+### Patches
+
+This issue is patched in Release [10.16.1](https://pypi.org/project/pymdown-extensions/10.16.1/).
+
+### Workarounds
+
+Some possible workarounds
+
+If users are concerned about this vulnerability and process unknown user content without timeouts or other safeguards in place to prevent really large, malicious content being aimed at systems, the use of `pymdownx.blocks.caption` could be avoided until the library is updated to 10.16.1+.
+
+### References
+
+The original issue https://github.com/facelessuser/pymdown-extensions/issues/2716.
+
+### Description
+
+The original issue came through PyMdown Extensions' normal issue tracker instead of the typical security flow: https://github.com/facelessuser/pymdown-extensions/issues/2716. Because this came through the normal issue flow, it was handled as a normal issue. In the future, PyMdown Extensions will ensure such issues, even if prematurely made public through the normal issue flow, are redirected through the typical security process.
+
+The regular expression pattern in question is as follows:
+
+```py
+RE_FIG_NUM = re.compile(r'^(\^)?([1-9][0-9]*(?:.[1-9][0-9]*)*)(?= |$)')
+```
+
+The POC was provided by @ShangzhiXu
+
+```py
+import re
+import time
+
+regex_pattern = re.compile(r'^(\^)?([1-9][0-9]*(?:.[1-9][0-9]*)*)(?= |$)')
+
+for i in range(50, 500, 50):
+    long_string = '1' * i + 'a'
+    start_time = time.time()
+    match = re.match(regex_pattern, long_string)
+    end_time = time.time()
+    print(f"long_string execution time: {end_time - start_time:.6f} s")
+```
+
+The issue with the above pattern is that `.` was used, which accepts any character when we meant to use `\.`. The fix was to update the pattern to:
+
+```py
+RE_FIG_NUM = re.compile(r'^(\^)?([1-9][0-9]*(?:\.[1-9][0-9]*)*)(?= |$)')
+```
+
+Relevant PR with fix: https://github.com/facelessuser/pymdown-extensions/pull/2717
+
+### Version(s) & System Info
+
+- Operating System: Any
+- Python Version: Any

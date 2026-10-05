@@ -1,0 +1,13 @@
+PYSEC-2014-72 PyPI/transifex-client — Transifex command-line client before 0.10 does not validate X.509 certificates for data transfer con
+package: transifex-client
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.11.0 (ECOSYSTEM)
+aliases: CVE-2013-7110, GHSA-jf99-2rj4-jxrm
+references:
+  http://www.openwall.com/lists/oss-security/2013/12/15/3
+  http://www.openwall.com/lists/oss-security/2013/12/13/5
+  https://github.com/transifex/transifex-client/issues/42
+  https://github.com/advisories/GHSA-jf99-2rj4-jxrm
+
+Transifex command-line client before 0.10 does not validate X.509 certificates for data transfer connections, which allows man-in-the-middle attackers to spoof a Transifex server via an arbitrary certificate.  NOTE: this vulnerability exists because of an incomplete fix for CVE-2013-2073.

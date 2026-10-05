@@ -1,0 +1,12 @@
+PYSEC-2023-278 PyPI/mindsdb — MindsDB connects artificial intelligence models to real time data. Versions prior to 23.11.4.1 conta
+package: mindsdb
+ecosystem: PyPI
+versions affected:
+  >= 0, < 8d13c9c28ebcf3b36509eb679378004d4648d8fe (GIT: https://github.com/mindsdb/mindsdb)
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2023-49796, GHSA-crhp-7c74-cg4c
+references:
+  https://github.com/mindsdb/mindsdb/security/advisories/GHSA-crhp-7c74-cg4c
+  https://github.com/mindsdb/mindsdb/commit/8d13c9c28ebcf3b36509eb679378004d4648d8fe
+
+MindsDB connects artificial intelligence models to real time data. Versions prior to 23.11.4.1 contain a limited file write vulnerability in `file.py` Users should use MindsDB's `staging` branch or v23.11.4.1, which contain a fix for the issue.

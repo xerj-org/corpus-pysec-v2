@@ -1,0 +1,15 @@
+PYSEC-2022-190 PyPI/django — An issue was discovered in Django 2.2 before 2.2.28, 3.2 before 3.2.13, and 4.0 before 4.0.4. QueryS
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 4.0, < 4.0.4, >= 3.2, < 3.2.13, >= 2.2, < 2.2.28 (ECOSYSTEM)
+aliases: CVE-2022-28346, GHSA-2gwj-7jmv-h26r
+references:
+  http://www.openwall.com/lists/oss-security/2022/04/11/1
+  https://docs.djangoproject.com/en/4.0/releases/security/
+  https://www.djangoproject.com/weblog/2022/apr/11/security-releases/
+  https://groups.google.com/forum/#!forum/django-announce
+  https://lists.debian.org/debian-lts-announce/2022/04/msg00013.html
+  https://github.com/advisories/GHSA-2gwj-7jmv-h26r
+
+An issue was discovered in Django 2.2 before 2.2.28, 3.2 before 3.2.13, and 4.0 before 4.0.4. QuerySet.annotate(), aggregate(), and extra() methods are subject to SQL injection in column aliases via a crafted dictionary (with dictionary expansion) as the passed **kwargs.

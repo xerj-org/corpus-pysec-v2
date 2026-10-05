@@ -1,0 +1,15 @@
+PYSEC-2024-159 PyPI/luigi — Versions of the package luigi before 3.6.0 are vulnerable to Arbitrary File Write via Archive Extrac
+package: luigi
+ecosystem: PyPI
+versions affected:
+  >= 0, < b5d1b965ead7d9f777a3216369b5baf23ec08999 (GIT: https://github.com/spotify/luigi)
+  >= 0, < 3.6.0 (ECOSYSTEM)
+aliases: CVE-2024-21542, GHSA-8qch-vj6m-2694
+references:
+  https://github.com/spotify/luigi/commit/b5d1b965ead7d9f777a3216369b5baf23ec08999
+  https://github.com/spotify/luigi/issues/3301
+  https://github.com/spotify/luigi/releases/tag/v3.6.0
+  https://security.snyk.io/vuln/SNYK-PYTHON-LUIGI-7830489
+  https://github.com/advisories/GHSA-8qch-vj6m-2694
+
+Versions of the package luigi before 3.6.0 are vulnerable to Arbitrary File Write via Archive Extraction (Zip Slip) due to improper destination file path validation in the _extract_packages_archive function.

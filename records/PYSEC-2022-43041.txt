@@ -1,0 +1,13 @@
+PYSEC-2022-43041 PyPI/democritus-file-system — The d8s-json package for Python, as distributed on PyPI, included a potential code-execution backdoo
+package: democritus-file-system
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-41382
+references:
+  https://pypi.org/project/democritus-file-system/
+  https://pypi.org/project/d8s-json/
+  https://github.com/democritus-project/d8s-json/issues/10
+  https://github.com/democritus-project/d8s-json/issues/10
+
+The d8s-json package for Python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. The backdoor is the democritus-file-system package. The affected version is 0.1.0.

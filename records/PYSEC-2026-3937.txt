@@ -1,0 +1,62 @@
+PYSEC-2026-3937 PyPI/vllm — vLLM: Unauthenticated Internal Path and Username Disclosure via Validation Error Messages
+package: vllm
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.26.0 (ECOSYSTEM)
+aliases: CVE-2026-73555, GHSA-hwrm-c4cx-rf4j
+references:
+  https://github.com/vllm-project/vllm/security/advisories/GHSA-hwrm-c4cx-rf4j
+  https://nvd.nist.gov/vuln/detail/CVE-2026-73555
+  https://github.com/vllm-project/vllm/pull/46415
+  https://github.com/vllm-project/vllm/commit/e87521626febe2763f997691d1599de4175f4324
+  https://github.com/vllm-project/vllm
+  https://github.com/vllm-project/vllm/releases/tag/v0.26.0
+  https://pypi.org/project/vllm
+  https://github.com/advisories/GHSA-hwrm-c4cx-rf4j
+
+## Summary
+
+When the vLLM API receives a malformed request (e.g., invalid JSON or missing required fields), FastAPI raises a Pydantic `RequestValidationError`. The `validation_exception_handler` in `vllm/entrypoints/openai/server_utils.py` converts this exception to a string via `str(exc)`, which includes the internal file path and line number of the handler function. The existing `sanitize_message()` function in `vllm/entrypoints/utils.py` strips memory addresses (e.g., `0x7f...`) but does not strip `File "...", line X` patterns. The result is a user-facing HTTP response that leaks internal system information.
+
+## Impact
+
+An unauthenticated attacker can extract the following with a single malformed request:
+
+- **OS username** running the vLLM process (e.g., `ubuntu`)
+- **Home directory path** (e.g., `/home/ubuntu/`)
+- **Virtual environment path** (e.g., `vllm-env/`)
+- **Python version** (e.g., `3.12`)
+- **Internal package structure and line numbers** (e.g., `vllm/entrypoints/openai/chat_completion/api_router.py`)
+- **Handler function names per endpoint**, enabling precise version fingerprinting
+
+This information aids attackers in constructing targeted exploits: environment paths narrow the attack surface, and handler function names + line numbers enable exact version identification even when the `/version` endpoint is disabled.
+
+All POST endpoints that accept JSON bodies are affected, including `/v1/chat/completions`, `/v1/completions`, `/tokenize`, and `/detokenize`.
+
+## Workarounds
+
+Deploying vLLM behind a reverse proxy that rewrites error response bodies to strip file paths would mitigate this, though it is fragile.
+
+## Remediation Recommendation
+
+Two possible fixes (either suffices):
+
+**Option A — Fix `validation_exception_handler`:** Construct the error message from `exc.errors()` (the structured Pydantic error list) rather than `str(exc)`. This avoids the traceback-style string entirely.
+
+**Option B — Fix `sanitize_message`:** Add a regex to strip `File "...", line \d+` patterns, similar to how memory addresses are already stripped:
+
+```python
+import re
+msg = re.sub(r'File ".*?", line \d+, in \w+', '[internal]', msg)
+```
+
+Option A is preferred as it addresses the root cause rather than filtering symptoms.
+
+## Environment Tested
+
+- vLLM 0.20.1 (pip install, latest stable as of May 2026)
+- Python 3.12
+- Ubuntu 22.04
+- Model: Qwen/Qwen2-0.5B (text-only; bug is model-independent)
+
+This was fixed here: https://github.com/vllm-project/vllm/commit/e87521626f

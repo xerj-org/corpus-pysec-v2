@@ -1,0 +1,23 @@
+PYSEC-2010-18 PyPI/moin — Multiple cross-site scripting (XSS) vulnerabilities in MoinMoin 1.9.x before 1.9.3 allow remote atta
+package: moin
+ecosystem: PyPI
+versions affected:
+  >= 1.9, < 1.9.3 (ECOSYSTEM)
+aliases: CVE-2010-2970, GHSA-gxh5-r8gp-pjc3
+references:
+  http://marc.info/?l=oss-security&m=127809682420259&w=2
+  http://www.vupen.com/english/advisories/2010/1981
+  http://secunia.com/advisories/40836
+  http://www.securityfocus.com/bid/40549
+  http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=584809
+  http://moinmo.in/SecurityFixes
+  http://hg.moinmo.in/moin/1.9/rev/e50b087c4572
+  http://moinmo.in/MoinMoinRelease1.9
+  http://moinmo.in/MoinMoinBugs/1.9.2UnescapedInputForThemeAddMsg
+  http://hg.moinmo.in/moin/1.9/rev/4fe9951788cb
+  http://marc.info/?l=oss-security&m=127799369406968&w=2
+  http://www.debian.org/security/2010/dsa-2083
+  http://hg.moinmo.in/moin/1.9/raw-file/1.9.3/docs/CHANGES
+  https://github.com/advisories/GHSA-gxh5-r8gp-pjc3
+
+Multiple cross-site scripting (XSS) vulnerabilities in MoinMoin 1.9.x before 1.9.3 allow remote attackers to inject arbitrary web script or HTML via crafted content, related to (1) action/SlideShow.py, (2) action/anywikidraw.py, and (3) action/language_setup.py, a similar issue to CVE-2010-2487.

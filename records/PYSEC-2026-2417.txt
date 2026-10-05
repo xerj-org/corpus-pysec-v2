@@ -1,0 +1,34 @@
+PYSEC-2026-2417 PyPI/ckan — CKAN has Unauthenticated SQL Injection and Authorization Bypass in `datastore_search_sql`
+package: ckan
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.10.10, >= 2.11.0, < 2.11.5 (ECOSYSTEM)
+aliases: CVE-2026-42031, GHSA-h7j7-3rx6-xvcg
+references:
+  https://github.com/ckan/ckan/security/advisories/GHSA-h7j7-3rx6-xvcg
+  https://nvd.nist.gov/vuln/detail/CVE-2026-42031
+  https://docs.ckan.org/en/2.10/changelog.html#v-2-10-10-2026-04-29
+  https://docs.ckan.org/en/2.11/changelog.html#v-2-11-5-2026-04-29
+  https://docs.ckan.org/en/2.11/extensions/plugin-interfaces.html#ckan.plugins.interfaces.IAuthFunctions
+  https://docs.ckan.org/en/2.11/maintaining/configuration.html#ckan-datastore-sqlsearch-enabled
+  https://github.com/ckan/ckan
+  https://pypi.org/project/ckan
+  https://github.com/advisories/GHSA-h7j7-3rx6-xvcg
+
+### Impact
+
+A vulnerability in `datastore_search_sql` allowed attackers to inject SQL in order to gain access to private resources and PostgreSQL system information.
+
+### Patches
+The issue has been patched in CKAN 2.10.10 and CKAN 2.11.5
+
+### Workarounds
+Disable the DataStore SQL search (`ckan.datastore.sqlsearch.enabled = false`). Note that the SQL search is disabled by default.
+
+### More information
+
+As stated in the [documentation](https://docs.ckan.org/en/2.11/maintaining/configuration.html#ckan-datastore-sqlsearch-enabled), this action function has protections that offer some safety but are not designed to prevent all types of abuse. Depending on the sensitivity of private data in a project's DataStore and the likelihood of abuse of a consuming site, a developer may choose to disable this action function or restrict its use with a [`IAuthFunctions`](https://docs.ckan.org/en/2.11/extensions/plugin-interfaces.html#ckan.plugins.interfaces.IAuthFunctions) plugin.
+
+### Credits
+
+* Reported by Arvin Shivram of Brutecat Security

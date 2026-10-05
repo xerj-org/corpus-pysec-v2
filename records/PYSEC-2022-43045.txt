@@ -1,0 +1,13 @@
+PYSEC-2022-43045 PyPI/democritus-html — The d8s-xml package for Python, as distributed on PyPI, included a potential code-execution backdoor
+package: democritus-html
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-42043
+references:
+  https://github.com/dadadadada111/info/issues/5
+  https://github.com/dadadadada111/info/issues/5
+  https://pypi.org/project/democritus-html/
+  https://pypi.org/project/d8s-xml/
+
+The d8s-xml package for Python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. The backdoor is the democritus-html package. The affected version is 0.1.0.

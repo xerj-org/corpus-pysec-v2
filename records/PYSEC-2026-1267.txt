@@ -1,0 +1,14 @@
+PYSEC-2026-1267 PyPI/composio-core — composio Server-Side Request Forgery (SSRF) vulnerability
+package: composio-core
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.4.2 (ECOSYSTEM)
+aliases: CVE-2024-8952, GHSA-qvg9-vp87-h3hr
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-8952
+  https://github.com/ComposioHQ/composio
+  https://huntr.com/bounties/d1acdd38-10d7-45df-9df0-9fc71f0e1c2a
+  https://pypi.org/project/composio-core
+  https://github.com/advisories/GHSA-qvg9-vp87-h3hr
+
+A Server-Side Request Forgery (SSRF) vulnerability exists in composiohq/composio version v0.4.2, specifically in the /api/actions/execute/WEBTOOL_SCRAPE_WEBSITE_CONTENT endpoint. This vulnerability allows an attacker to read files, access AWS metadata, and interact with local services on the system.

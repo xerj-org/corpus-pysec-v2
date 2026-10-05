@@ -1,0 +1,12 @@
+PYSEC-2019-213 PyPI/unoconv — The unoconv package before 0.9 mishandles untrusted pathnames, leading to SSRF and local file inclus
+package: unoconv
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.9.0 (ECOSYSTEM)
+aliases: CVE-2019-17400, GHSA-27p5-7cw6-m45h
+references:
+  https://github.com/unoconv/unoconv/pull/510
+  https://buer.haus/2019/10/18/a-tale-of-exploitation-in-spreadsheet-file-conversions/
+  https://github.com/advisories/GHSA-27p5-7cw6-m45h
+
+The unoconv package before 0.9 mishandles untrusted pathnames, leading to SSRF and local file inclusion.

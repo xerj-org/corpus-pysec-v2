@@ -1,0 +1,16 @@
+PYSEC-2026-2861 PyPI/pdm — PDM wheel installation leads to Path Traversal via overridden write_to_fs
+package: pdm
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.27.0 (ECOSYSTEM)
+aliases: CVE-2026-47764, GHSA-78v8-vpjp-cjqh
+references:
+  https://github.com/pdm-project/pdm/security/advisories/GHSA-78v8-vpjp-cjqh
+  https://github.com/pdm-project/pdm/pull/3787
+  https://github.com/pdm-project/pdm
+  https://github.com/pdm-project/pdm/releases/tag/2.27.0
+  https://pypi.org/project/pdm
+  https://github.com/advisories/GHSA-78v8-vpjp-cjqh
+  https://nvd.nist.gov/vuln/detail/CVE-2026-47764
+
+InstallDestination.write_to_fs() in src/pdm/installers/installers.py overrides the base class to add symlink/hardlink support but replaces the safe _path_with_destdir() (which validates via Path.resolve() + is_relative_to()) with a bare os.path.join() that performs no path validation. A malicious wheel with traversal entries can write arbitrary files. Same class as Poetry CVE-2026-34591. Fix ready at: https://github.com/pdm-project/pdm/pull/3787.

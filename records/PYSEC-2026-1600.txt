@@ -1,0 +1,14 @@
+PYSEC-2026-1600 PyPI/mage-ai — Mage AI incorrectly gives privileges to users with deleted accounts
+package: mage-ai
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.9.73 (ECOSYSTEM)
+aliases: CVE-2024-45187, GHSA-jg95-r9xh-xw9c
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-45187
+  https://github.com/mage-ai/mage-ai
+  https://research.jfrog.com/vulnerabilities/mage-ai-deleted-users-rce-jfsa-2024-001039602
+  https://pypi.org/project/mage-ai
+  https://github.com/advisories/GHSA-jg95-r9xh-xw9c
+
+Guest users in the Mage AI framework that remain logged in after their accounts are deleted, are mistakenly given high privileges and specifically given access to remotely execute arbitrary code through the Mage AI terminal server.

@@ -1,0 +1,12 @@
+PYSEC-2021-330 PyPI/parlai — Due to use of unsafe YAML deserialization logic, an attacker with the ability to modify local YAML c
+package: parlai
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.1.0 (ECOSYSTEM)
+aliases: CVE-2021-24040, GHSA-mwgj-7x7j-6966
+references:
+  https://github.com/facebookresearch/ParlAI/releases/tag/v1.1.0
+  http://packetstormsecurity.com/files/164136/Facebook-ParlAI-1.0.0-Code-Execution-Deserialization.html
+  https://github.com/advisories/GHSA-mwgj-7x7j-6966
+
+Due to use of unsafe YAML deserialization logic, an attacker with the ability to modify local YAML configuration files could provide malicious input, resulting in remote code execution or similar risks. This issue affects ParlAI prior to v1.1.0.

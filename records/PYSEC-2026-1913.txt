@@ -1,0 +1,87 @@
+PYSEC-2026-1913 PyPI/sentry — Slack integration leaks sensitive information in logs
+package: sentry
+ecosystem: PyPI
+versions affected:
+  >= 24.3.0, < 24.5.0 (ECOSYSTEM)
+aliases: CVE-2024-35196, GHSA-c2g2-gx4j-rj3j
+references:
+  https://github.com/getsentry/sentry/security/advisories/GHSA-c2g2-gx4j-rj3j
+  https://nvd.nist.gov/vuln/detail/CVE-2024-35196
+  https://github.com/getsentry/sentry/pull/70508
+  https://api.slack.com/authentication/verifying-requests-from-slack#app-management-updates
+  https://api.slack.com/authentication/verifying-requests-from-slack#deprecation
+  https://api.slack.com/authentication/verifying-requests-from-slack#regenerating
+  https://develop.sentry.dev/integrations/slack
+  https://github.com/getsentry/sentry
+  https://github.com/getsentry/sentry/blob/17d2b87e39ccd57e11da4deed62971ff306253d1/src/sentry/conf/server.py#L1307
+  https://pypi.org/project/sentry
+  https://github.com/advisories/GHSA-c2g2-gx4j-rj3j
+
+### Impact
+Sentry's Slack integration incorrectly records the incoming request body in logs. This request data can contain sensitive information, including the [deprecated Slack verification token](https://api.slack.com/authentication/verifying-requests-from-slack#deprecation). With this verification token, it is possible under specific configurations, an attacker can forge requests and act as the Slack integration.
+
+The request body is leaked in log entries matching `event == "slack.*" && name == "sentry.integrations.slack" && request_data == *`. The deprecated slack verification token, will be found in the `request_data.token` key.
+
+Example event:
+
+```json
+{
+    "name": "sentry.integrations.slack",
+    "level": "info",
+    "event": "slack.event.message",  # This could be any of the `slack.*` events
+    "request_data": {
+      # Other keys are omitted for brevity
+      "token": "<MyDeprecatedSlackVerificationToken>",
+    }
+}
+``` 
+
+### Patches
+- **SaaS users** do not need to take any action.
+- **Self-hosted users** should upgrade to version 24.5.0 or higher, [rotate their Slack verification token](https://api.slack.com/authentication/verifying-requests-from-slack#regenerating), and [use the Slack Signing Secret instead of the verification token](https://develop.sentry.dev/integrations/slack/).
+  - If you are only using the `slack.signing-secret` in your self-hosted configuration, then the legacy verification token is not used to verify the webhook payload. It is ignored. 
+ 
+> ⚠️ Sentry's support for validating Slack requests via the legacy verification token will be deprecated in version 24.7.0.
+
+
+### Workarounds
+
+#### Option 1
+
+Set the `slack.signing-secret` instead of `slack.verification-token`. The [signing secret](https://api.slack.com/authentication/verifying-requests-from-slack#app-management-updates) is Slack's recommended way of authenticating webhooks.
+
+By having `slack.singing-secret` set, Sentry self-hosted will no longer use the verification token for authentication of the webhooks, regardless of whether `slack.verification-token` is set or not.
+
+#### Option 2
+
+The deprecated Slack verification token is leaked in log levels of `INFO` and `ERROR` in the Slack integration. If the self-hosted instance is unable to be upgraded or re-configured to use the `slack.signing-secret`, the logging configuration can be adjusted to not generate logs from the integration. The [default logging configuration can be found in `src/sentry/conf/server.py`](https://github.com/getsentry/sentry/blob/17d2b87e39ccd57e11da4deed62971ff306253d1/src/sentry/conf/server.py#L1307). **Services should be restarted once the configuration change is saved.**
+
+Below you'll find an example of the configuration adjustments necessary to remove the Slack integration logs:
+ 
+```python
+# src/sentry/conf/server.py
+
+...
+ 
+LOGGING: LoggingConfig = {
+    ...
+    handlers: {
+        # the line below already exists in the default configuration
+        "null": {"class": "logging.NullHandler"},
+        ...
+    },
+    "loggers": {
+        "sentry.integrations.slack": {
+            "handlers": ["null"],  # route logs to null handler
+            "level": "CRITICAL",  # prevent generation of logs a lower levels (ex. ERROR and INFO)
+        },
+        ...
+    },
+}
+```
+
+### References
+- https://github.com/getsentry/sentry/pull/70508
+- [Sentry Slack Integration Documentation for Self-Hosted users](https://develop.sentry.dev/integrations/slack/)
+- [Documentation on Slack Signing Secrets](https://api.slack.com/authentication/verifying-requests-from-slack#app-management-updates)
+- [Slack Deprecation for Verification Tokens](https://api.slack.com/authentication/verifying-requests-from-slack#deprecation)

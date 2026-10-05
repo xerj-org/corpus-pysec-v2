@@ -1,0 +1,11 @@
+PYSEC-2020-20 PyPI/apache-airflow — In Apache Airflow versions prior to 1.10.13, the Charts and Query View of the old (Flask-admin based
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.10.13 (ECOSYSTEM)
+aliases: CVE-2020-17513, GHSA-6r3p-fcvm-xh7c
+references:
+  https://lists.apache.org/thread.html/rb3647269f07cc2775ca6568cbfd4994d862c842a58120d2aba9c658a%40%3Cusers.airflow.apache.org%3E
+  https://github.com/advisories/GHSA-6r3p-fcvm-xh7c
+
+In Apache Airflow versions prior to 1.10.13, the Charts and Query View of the old (Flask-admin based) UI were vulnerable for SSRF attack.

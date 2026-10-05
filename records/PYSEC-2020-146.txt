@@ -1,0 +1,12 @@
+PYSEC-2020-146 PyPI/tuf — TUF (aka The Update Framework) 0.7.2 through 0.12.1 allows Uncontrolled Resource Consumption.
+package: tuf
+ecosystem: PyPI
+versions affected:
+  >= 0.7.5, < 0.12.2 (ECOSYSTEM)
+aliases: CVE-2020-6173, GHSA-2828-9vh6-9m6j
+references:
+  https://github.com/theupdateframework/tuf/issues/973
+  https://github.com/theupdateframework/tuf/commits/develop
+  https://github.com/advisories/GHSA-2828-9vh6-9m6j
+
+TUF (aka The Update Framework) 0.7.2 through 0.12.1 allows Uncontrolled Resource Consumption.

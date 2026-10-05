@@ -1,0 +1,43 @@
+PYSEC-2026-1302 PyPI/django-tinymce — TinyMCE Cross-Site Scripting (XSS) vulnerability using noscript elements
+package: django-tinymce
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.1.0 (ECOSYSTEM)
+aliases: CVE-2024-38357, GHSA-w9jx-4g6g-rp7x
+references:
+  https://github.com/tinymce/tinymce/security/advisories/GHSA-w9jx-4g6g-rp7x
+  https://nvd.nist.gov/vuln/detail/CVE-2024-38357
+  https://github.com/tinymce/tinymce/commit/5acb741665a98e83d62b91713c800abbff43b00d
+  https://github.com/tinymce/tinymce/commit/a9fb858509f86dacfa8b01cfd34653b408983ac0
+  https://github.com/tinymce/tinymce
+  https://owasp.org/www-community/attacks/xss
+  https://www.tiny.cloud/docs/tinymce/6/6.8.4-release-notes/#overview
+  https://www.tiny.cloud/docs/tinymce/7/7.2-release-notes/#overview
+  https://pypi.org/project/django-tinymce
+  https://github.com/advisories/GHSA-w9jx-4g6g-rp7x
+
+### Impact
+A [cross-site scripting (XSS)](https://owasp.org/www-community/attacks/xss/) vulnerability was discovered in TinyMCE’s content parsing code. This allowed specially crafted noscript elements containing malicious code to be executed when that content was loaded into the editor.
+
+### Patches
+This vulnerability has been patched in TinyMCE 7.2.0, TinyMCE 6.8.4 and TinyMCE 5.11.0 LTS by ensuring that content within noscript elements are properly parsed.
+
+### Fix
+To avoid this vulnerability:
+
+* Upgrade to TinyMCE 7.2.0 or higher.
+* Upgrade to TinyMCE 6.8.4 or higher for TinyMCE 6.x.
+* Upgrade to TinyMCE 5.11.0 LTS or higher for TinyMCE 5.x (only available as part of commercial [long-term support](https://www.tiny.cloud/long-term-support/) contract).
+
+### Acknowledgements
+Tiny thanks [Malav Khatri](https://malavkhatri.com/) and another reporter for their help identifying this vulnerability.
+
+### References
+* [TinyMCE 6.8.4](https://www.tiny.cloud/docs/tinymce/6/6.8.4-release-notes/#overview)
+* [TinyMCE 7.2.0](https://www.tiny.cloud/docs/tinymce/7/7.2-release-notes/#overview)
+
+### For more information
+If you have any questions or comments about this advisory:
+
+* Email us at [infosec@tiny.cloud](mailto:infosec@tiny.cloud)
+* Open an issue in the [TinyMCE repo](https://github.com/tinymce/tinymce/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)

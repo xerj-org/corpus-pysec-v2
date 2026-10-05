@@ -1,0 +1,17 @@
+PYSEC-2021-877 PyPI/exiv2 — An integer overflow in CrwMap::encode0x1810 of Exiv2 0.27.3 allows attackers to trigger a heap-based
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2021-31292
+references:
+  https://github.com/Exiv2/exiv2/issues/1530
+  https://github.com/Exiv2/exiv2/issues/1530
+  https://github.com/Exiv2/exiv2/issues/1530
+  https://www.debian.org/security/2021/dsa-4958
+  https://lists.debian.org/debian-lts-announce/2021/08/msg00028.html
+  https://lists.debian.org/debian-lts-announce/2021/08/msg00028.html
+  https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/FMDT4PJB7P43WSOM3TRQIY3J33BAFVVE/
+  https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/UYGDELIFFJWKUU7SO3QATCIXCZJERGAC/
+
+An integer overflow in CrwMap::encode0x1810 of Exiv2 0.27.3 allows attackers to trigger a heap-based buffer overflow and cause a denial of service (DOS) via crafted metadata.

@@ -1,0 +1,16 @@
+PYSEC-2026-1533 PyPI/letta — Letta (previously MemGPT) incorrect access control vulnerability
+package: letta
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.3.17 (ECOSYSTEM)
+aliases: CVE-2024-39025, GHSA-7p2g-2vxc-5g55
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-39025
+  https://github.com/letta-ai/letta
+  https://github.com/letta-ai/letta/blob/0.3.17/memgpt/server/rest_api/admin/users.py#L55-L68
+  https://github.com/letta-ai/letta/releases/tag/0.3.17
+  https://medium.com/@cnetsec/a-vulnerability-cve-2024-39025-has-been-identified-in-lettaai-memgpt-v0-3-17-146cb38bb6db
+  https://pypi.org/project/letta
+  https://github.com/advisories/GHSA-7p2g-2vxc-5g55
+
+Incorrect access control in the /users endpoint of Cpacker MemGPT v0.3.17 allows attackers to access sensitive data.

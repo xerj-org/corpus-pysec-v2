@@ -1,0 +1,12 @@
+PYSEC-2022-43100 PyPI/democritus-grammars — The d8s-python for python, as distributed on PyPI, included a potential code-execution backdoor inse
+package: democritus-grammars
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-44049
+references:
+  https://github.com/dadadadada111/info/issues/13
+  https://pypi.org/project/d8s-python/
+  https://pypi.org/project/democritus-grammars/
+
+The d8s-python for python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. A potential code execution backdoor inserted by third parties is the democritus-grammars package. The affected version of d8s-htm is 0.1.0.

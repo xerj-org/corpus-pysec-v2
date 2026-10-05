@@ -1,0 +1,13 @@
+PYSEC-2024-252 PyPI/torch — PyTorch before v2.2.0 was discovered to contain a heap buffer overflow vulnerability in the componen
+package: torch
+ecosystem: PyPI
+versions affected:
+  >= 0, < b5c3a17c2c207ebefcb85043f0cf94be9b2fef81, < b5c3a17c2c207ebefcb85043f0cf94be9b2fef81 (GIT: https://github.com/pytorch/pytorch)
+  >= 0, < 2.2.0 (ECOSYSTEM)
+aliases: CVE-2024-31580, GHSA-5pcm-hx3q-hm94
+references:
+  https://github.com/pytorch/pytorch/commit/b5c3a17c2c207ebefcb85043f0cf94be9b2fef81
+  https://gist.github.com/1047524396/038c78f2f007345e6f497698ace2aa3d
+  https://github.com/advisories/GHSA-5pcm-hx3q-hm94
+
+PyTorch before v2.2.0 was discovered to contain a heap buffer overflow vulnerability in the component /runtime/vararg_functions.cpp. This vulnerability allows attackers to cause a Denial of Service (DoS) via a crafted input.

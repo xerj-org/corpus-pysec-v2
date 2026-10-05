@@ -1,0 +1,18 @@
+PYSEC-2026-581 PyPI/dynamo-release — Malicious code in dynamo-release (PyPI)
+package: dynamo-release
+ecosystem: PyPI
+versions affected:
+  1.5.4
+aliases: MAL-2026-5274
+references:
+  https://inspector.pypi.io/project/dynamo-release/1.5.4/packages/4a/52/8b85585fc5392a1342d3e62296a9b79c3e1c48737cf6fd4b1ef47e1cf264/dynamo_release-1.5.4-py3-none-any.whl//dynamo_release-setup.pth
+  https://www.endorlabs.com/learn/shai-hulud-hades-wave-hits-six-pypi-bioinformatics-packages
+  https://www.stepsecurity.io/blog/the-hades-campaign-pypi-packages
+
+Part of the "Hades" wave of the Shai-Hulud supply-chain campaign. On 2026-06-08,
+malicious phantom releases of dynamo-release were published to PyPI using stolen
+credentials. The package executes a bundled JavaScript payload (via the Bun
+runtime) on import that harvests and exfiltrates credentials and attempts
+self-propagation. This entry is a summary; behavior may not be fully
+characterized here. See the linked references for detailed analysis and
+indicators of compromise.

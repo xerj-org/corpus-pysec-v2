@@ -1,0 +1,15 @@
+PYSEC-2026-1561 PyPI/llama-index-core — LlamaIndex affected by a Denial of Service (DOS) in JSONReader
+package: llama-index-core
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.12.38 (ECOSYSTEM)
+aliases: CVE-2025-5302, GHSA-7753-xrfw-ch36
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-5302
+  https://github.com/run-llama/llama_index/commit/c032843a02ce38fd8f284b2aa5a37fd1c17ae635
+  https://github.com/run-llama/llama_index
+  https://huntr.com/bounties/70041b81-de9e-4046-8c0e-6ccd557048a6
+  https://pypi.org/project/llama-index-core
+  https://github.com/advisories/GHSA-7753-xrfw-ch36
+
+A denial of service vulnerability exists in the JSONReader component of the run-llama/llama_index repository, specifically in version v0.12.37. The vulnerability is caused by uncontrolled recursion when parsing deeply nested JSON files, which can lead to Python hitting its maximum recursion depth limit. This results in high resource consumption and potential crashes of the Python process. The issue is resolved in version 0.12.38.

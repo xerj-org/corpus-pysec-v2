@@ -1,0 +1,12 @@
+PYSEC-2019-178 PyPI/elastic-apm — When the Elastic APM agent for Python versions before 5.1.0 is run as a CGI script, there is a varia
+package: elastic-apm
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.1.0 (ECOSYSTEM)
+aliases: CVE-2019-7617, GHSA-22jh-6gx8-f944
+references:
+  https://www.elastic.co/community/security/
+  https://discuss.elastic.co/t/elastic-apm-agent-for-python-5-1-0-security-update/196145
+  https://github.com/advisories/GHSA-22jh-6gx8-f944
+
+When the Elastic APM agent for Python versions before 5.1.0 is run as a CGI script, there is a variable name clash flaw if a remote attacker can control the proxy header. This could result in an attacker redirecting collected APM data to a proxy of their choosing.

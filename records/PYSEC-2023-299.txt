@@ -1,0 +1,15 @@
+PYSEC-2023-299 PyPI/transformers — Insecure Temporary File in GitHub repository huggingface/transformers prior to 4.30.0.
+package: transformers
+ecosystem: PyPI
+versions affected:
+  >= 0, < 80ca92470938bbcc348e2d9cf4734c7c25cb1c43 (GIT: https://github.com/huggingface/transformers)
+  >= 0, < 4.30.0 (ECOSYSTEM)
+aliases: CVE-2023-2800, GHSA-282v-666c-3fvg
+references:
+  https://github.com/huggingface/transformers/commit/80ca92470938bbcc348e2d9cf4734c7c25cb1c43
+  https://huntr.dev/bounties/a3867b4e-6701-4418-8c20-3c6e7084a44a
+  https://huntr.dev/bounties/a3867b4e-6701-4418-8c20-3c6e7084a44a
+  https://huntr.dev/bounties/a3867b4e-6701-4418-8c20-3c6e7084a44a
+  https://github.com/advisories/GHSA-282v-666c-3fvg
+
+Insecure Temporary File in GitHub repository huggingface/transformers prior to 4.30.0.

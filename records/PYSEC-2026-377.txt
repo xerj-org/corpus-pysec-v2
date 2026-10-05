@@ -1,0 +1,40 @@
+PYSEC-2026-377 PyPI/langflow — Langflow Knowledge Bases API is Vulnerable to Path Traversal
+package: langflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.9.0 (ECOSYSTEM)
+aliases: CVE-2026-42048, GHSA-9whx-c884-c68q
+references:
+  https://github.com/langflow-ai/langflow/security/advisories/GHSA-9whx-c884-c68q
+  https://nvd.nist.gov/vuln/detail/CVE-2026-42048
+  https://github.com/langflow-ai/langflow
+  https://pypi.org/project/langflow
+  https://github.com/advisories/GHSA-9whx-c884-c68q
+
+## Summary
+Langflow is vulnerable to Path Traversal in the Knowledge Bases API (`DELETE /api/v1/knowledge_bases`). This occurs because user-supplied knowledge base names are concatenated directly into file paths without proper sanitization or boundary validation. An authenticated attacker can exploit this flaw to delete arbitrary directories anywhere on the server's filesystem, leading to data loss and potential service disruption.
+
+## Details
+The vulnerability exists in the `delete_knowledge_bases_bulk` function within `src/backend/base/langflow/api/v1/knowledge_bases.py`. 
+
+This function constructs file paths directly from the user-supplied `kb_names` parameter. While other knowledge base endpoints safely route through standard path resolution (e.g., `_resolve_kb_path()`), the bulk delete handler bypasses this entirely. It builds the path manually and passes it directly to `shutil.rmtree()` without validating if the resulting path resolves outside the intended user directory.
+ 
+## PoC (Proof of Concept)
+For the **Bulk Delete** endpoint, an authenticated attacker can supply a traversal sequence in the `kb_names` parameter:
+`../victim_user/kb_name`
+ 
+Because the path is passed directly to `shutil.rmtree()` without containment checks, this payload deletes directories outside the intended scope.
+
+## Impact
+Any Langflow instance exposing this endpoint to authenticated users is vulnerable. This exposes the server to:
+* **Cross-user data compromise:** Deletion of directories within another tenant's knowledge base space.
+* **Arbitrary filesystem manipulation:** Directory deletion at any path on the server where the application has write permissions.
+ * **Service disruption & Data Loss:** Deletion of critical application files or unrecoverable data loss if backups are co-located on the same filesystem.
+
+## Fixes
+The issue was addressed in **PR #12243**, which applies `Path.resolve()` to normalize the supplied path and validates that it starts with the authenticated user's directory before deletion. Subsequent updates (backported from PR #12337) introduced robust containment checks using `Path.is_relative_to()` to prevent prefix-ambiguity bugs.
+
+## Acknowledgements
+Thanks to the security researchers who responsibly disclosed this vulnerability:
+* @ddlxstudio
+* @nekros1xx

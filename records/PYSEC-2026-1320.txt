@@ -1,0 +1,26 @@
+PYSEC-2026-1320 PyPI/dtale — D-Tale allows Remote Code Execution through the Custom Filter Input
+package: dtale
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.16.1 (ECOSYSTEM)
+aliases: CVE-2024-55890, GHSA-832w-fhmw-w4f4
+references:
+  https://github.com/man-group/dtale/security/advisories/GHSA-832w-fhmw-w4f4
+  https://nvd.nist.gov/vuln/detail/CVE-2024-55890
+  https://github.com/man-group/dtale/commit/1e26ed3ca12fe83812b90f12a2b3e5fb0b740f7a
+  https://github.com/man-group/dtale
+  https://github.com/man-group/dtale#custom-filter
+  https://pypi.org/project/dtale
+  https://github.com/advisories/GHSA-832w-fhmw-w4f4
+
+### Impact
+Users hosting D-Tale publicly can be vulnerable to remote code execution allowing attackers to run malicious code on the server.
+
+### Patches
+Users should upgrade to version 3.16.1 where the `update-settings` endpoint blocks the ability for users to update the `enable_custom_filters` flag. You can find out more information on how to turn that flag on [here](https://github.com/man-group/dtale#custom-filter)
+
+### Workarounds
+The only workaround for versions earlier than 3.16.1 is to only host D-Tale to trusted users.
+
+### References
+See "Custom Filter" [documentation](https://github.com/man-group/dtale#custom-filter)

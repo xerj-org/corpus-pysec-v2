@@ -1,0 +1,11 @@
+PYSEC-2026-221 PyPI/langflow — Langflow is a tool for building and deploying AI-powered agents and workflows. Prior to 1.9.2, an In
+package: langflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.9.2 (ECOSYSTEM)
+aliases: CVE-2026-55255, GHSA-qrpv-q767-xqq2
+references:
+  https://github.com/langflow-ai/langflow/pull/12832
+  https://github.com/langflow-ai/langflow/security/advisories/GHSA-qrpv-q767-xqq2
+
+Langflow is a tool for building and deploying AI-powered agents and workflows. Prior to 1.9.2, an Insecure Direct Object Reference (IDOR) vulnerability in /api/v1/responses endpoint allows an authenticated attacker to execute any flow belonging to another user by specifying the victim's flow ID in the request. This vulnerability is fixed in 1.9.2.

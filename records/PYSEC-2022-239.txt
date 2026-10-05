@@ -1,0 +1,13 @@
+PYSEC-2022-239 PyPI/fava — The time and filter parameters in Fava prior to v1.22 are vulnerable to reflected XSS due to the lac
+package: fava
+ecosystem: PyPI
+versions affected:
+  >= 0, < ca9e3882c7b5fbf5273ba52340b9fea6a99f3711 (GIT: https://github.com/beancount/fava)
+  >= 0, < 1.22 (ECOSYSTEM)
+aliases: CVE-2022-2514, GHSA-xrf4-39fm-j5f2
+references:
+  https://huntr.dev/bounties/dbf77139-4384-4dc5-9994-45a5e0747429
+  https://github.com/beancount/fava/commit/ca9e3882c7b5fbf5273ba52340b9fea6a99f3711
+  https://github.com/advisories/GHSA-xrf4-39fm-j5f2
+
+The time and filter parameters in Fava prior to v1.22 are vulnerable to reflected XSS due to the lack of escaping of error messages which contained the parameters in verbatim.

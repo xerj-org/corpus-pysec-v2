@@ -1,0 +1,14 @@
+PYSEC-2026-309 PyPI/chainerrl-visualizer — ChainerRL Visualizer 0.1.1 vulnerable to Path Traversal via unsafe use of send_file function
+package: chainerrl-visualizer
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.1.1 (ECOSYSTEM)
+aliases: CVE-2022-31573, GHSA-687h-86vc-5x59
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2022-31573
+  https://github.com/github/securitylab/issues/669#issuecomment-1117265726
+  https://github.com/chainer/chainerrl-visualizer
+  https://pypi.org/project/chainerrl-visualizer
+  https://github.com/advisories/GHSA-687h-86vc-5x59
+
+The chainer/chainerrl-visualizer repository through 0.1.1 on GitHub allows absolute path traversal because the Flask send_file function is used unsafely.

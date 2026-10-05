@@ -1,0 +1,12 @@
+PYSEC-2013-12 PyPI/salt — Salt (aka SaltStack) 0.15.0 through 0.17.0 allows remote authenticated users who are using external 
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0.15.0, < 0.17.1 (ECOSYSTEM)
+aliases: CVE-2013-4435, GHSA-v89f-4mc4-h6w9
+references:
+  http://docs.saltstack.com/topics/releases/0.17.1.html
+  http://www.openwall.com/lists/oss-security/2013/10/18/3
+  https://github.com/advisories/GHSA-v89f-4mc4-h6w9
+
+Salt (aka SaltStack) 0.15.0 through 0.17.0 allows remote authenticated users who are using external authentication or client ACL to execute restricted routines by embedding the routine in another routine.

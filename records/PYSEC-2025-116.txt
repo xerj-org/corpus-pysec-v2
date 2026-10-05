@@ -1,0 +1,10 @@
+PYSEC-2025-116 PyPI/fprime — A command injection vulnerability in the Command Dispatcher Service of NASA Fprime v3.4.3 allows att
+package: fprime
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 3.4.3 (ECOSYSTEM)
+aliases: CVE-2024-55030
+references:
+  https://visionspace.com/remote-code-execution-and-critical-vulnerabilities-in-nasa-fprime-v3-4-3/
+
+A command injection vulnerability in the Command Dispatcher Service of NASA Fprime v3.4.3 allows attackers to execute arbitrary commands.

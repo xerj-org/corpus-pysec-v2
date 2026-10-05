@@ -1,0 +1,37 @@
+PYSEC-2026-632 PyPI/django-tinymce — Cross-site scripting vulnerability in TinyMCE plugins
+package: django-tinymce
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.4.0 (ECOSYSTEM)
+aliases: CVE-2024-21910, GHSA-r8hm-w5f7-wj39
+references:
+  https://github.com/tinymce/tinymce/security/advisories/GHSA-r8hm-w5f7-wj39
+  https://github.com/jazzband/django-tinymce/issues/366
+  https://github.com/jazzband/django-tinymce/releases/tag/3.4.0
+  https://github.com/tinymce/tinymce
+  https://pypi.org/project/django-tinymce/3.4.0
+  https://pypi.org/project/django-tinymce
+  https://github.com/advisories/GHSA-r8hm-w5f7-wj39
+  https://nvd.nist.gov/vuln/detail/CVE-2024-21910
+
+### Impact
+A cross-site scripting (XSS) vulnerability was discovered in the URL processing logic of the `image` and `link` plugins. The vulnerability allowed arbitrary JavaScript execution when updating an image or link using a specially crafted URL. This issue only impacted users while editing and the dangerous URLs were stripped in any content extracted from the editor. This impacts all users who are using TinyMCE 5.9.2 or lower.
+
+### Patches
+This vulnerability has been patched in TinyMCE 5.10.0 by improved sanitization logic when updating URLs in the relevant plugins.
+
+### Workarounds
+To work around this vulnerability, either:
+- Upgrade to TinyMCE 5.10.0 or higher
+- Disable the `image` and `link` plugins
+
+### Acknowledgements
+Tiny Technologies would like to thank Yakir6 for discovering this vulnerability.
+
+### References
+https://www.tiny.cloud/docs/release-notes/release-notes510/#securityfixes
+
+### For more information
+If you have any questions or comments about this advisory:
+* Email us at [infosec@tiny.cloud](mailto:infosec@tiny.cloud)
+* Open an issue in the [TinyMCE repo](https://github.com/tinymce/tinymce/issues)

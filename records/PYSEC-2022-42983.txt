@@ -1,0 +1,16 @@
+PYSEC-2022-42983 PyPI/apache-airflow — In Apache Airflow, prior to version 2.4.1, deactivating a user wouldn't prevent an already authentic
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.4.2rc1 (ECOSYSTEM)
+aliases: CVE-2022-41672, GHSA-3q8r-f3pj-3gc4
+references:
+  https://github.com/apache/airflow/pull/26635
+  https://github.com/apache/airflow/pull/26635
+  https://github.com/apache/airflow/pull/26635
+  https://lists.apache.org/thread/ohf3pvd3dftb8zb01yngbn1jtkq5m08y
+  https://lists.apache.org/thread/ohf3pvd3dftb8zb01yngbn1jtkq5m08y
+  https://lists.apache.org/thread/ohf3pvd3dftb8zb01yngbn1jtkq5m08y
+  https://github.com/advisories/GHSA-3q8r-f3pj-3gc4
+
+In Apache Airflow, prior to version 2.4.1, deactivating a user wouldn't prevent an already authenticated user from being able to continue using the UI or API.

@@ -1,0 +1,19 @@
+PYSEC-2026-3567 PyPI/deepsearcher — zilliztech deep-searcher has an Incorrect Privilege Assignment issue
+package: deepsearcher
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.0.2 (ECOSYSTEM)
+aliases: CVE-2026-11466, GHSA-43px-gpwc-q84v
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-11466
+  https://github.com/zilliztech/deep-searcher/issues/267
+  https://github.com/zilliztech/deep-searcher/pull/268
+  https://github.com/zilliztech/deep-searcher
+  https://vuldb.com/cve/CVE-2026-11466
+  https://vuldb.com/submit/833652
+  https://vuldb.com/vuln/369086
+  https://vuldb.com/vuln/369086/cti
+  https://pypi.org/project/deepsearcher
+  https://github.com/advisories/GHSA-43px-gpwc-q84v
+
+A weakness has been identified in zilliztech deep-searcher up to 0.0.2. This affects the function CollectionRouter.invoke of the file deepsearcher/agent/collection_router.py. This manipulation of the argument kwargs causes improper access controls. Remote exploitation of the attack is possible. The exploit has been made available to the public and could be used for attacks. The pull request to fix this issue awaits acceptance.

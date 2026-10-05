@@ -1,0 +1,15 @@
+PYSEC-2026-2159 PyPI/geonode — GeoNode versions 4.0 before 4.4.5 and 5.0 before 5.0.2 contain a server-side request forgery vulnera
+package: geonode
+ecosystem: PyPI
+versions affected:
+  >= 4.0.0, < 4.4.5, >= 5.0.0, < 5.0.2 (ECOSYSTEM)
+aliases: CVE-2026-39921
+references:
+  https://github.com/GeoNode/geonode/releases/tag/4.4.5
+  https://github.com/GeoNode/geonode/releases/tag/5.0.2
+  https://www.vulncheck.com/advisories/geonode-ssrf-via-document-upload
+  https://github.com/GeoNode/geonode/commit/4a852cfc1da732b10779b5bf5f087c8f02985571
+  https://github.com/GeoNode/geonode/commit/9856cb5ab27e33c0adba9274f4cccf6d1f534bd1
+  https://github.com/GeoNode/geonode/pull/14058
+
+GeoNode versions 4.0 before 4.4.5 and 5.0 before 5.0.2 contain a server-side request forgery vulnerability that allows authenticated users with document upload permissions to trigger arbitrary outbound HTTP requests by providing a malicious URL via the doc_url parameter during document upload. Attackers can supply URLs pointing to internal network targets, loopback addresses, RFC1918 addresses, or cloud metadata services to cause the server to make requests to internal resources without SSRF mitigations such as private IP filtering or redirect validation.

@@ -1,0 +1,11 @@
+PYSEC-2026-2109 PyPI/aiohttp — AIOHTTP is an asynchronous HTTP client/server framework for asyncio and Python. Prior to 3.14.1, Dig
+package: aiohttp
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.14.1 (ECOSYSTEM)
+aliases: CVE-2026-54276, GHSA-hpj7-wq8m-9hgp
+references:
+  https://github.com/aio-libs/aiohttp/security/advisories/GHSA-hpj7-wq8m-9hgp
+  https://github.com/aio-libs/aiohttp/commit/38d16060037e1bfcd6d677abababa3c2a4bb58fa
+
+AIOHTTP is an asynchronous HTTP client/server framework for asyncio and Python. Prior to 3.14.1, DigestAuthMiddleware can send an authentication response after following a cross-origin redirect. This likely requires an open redirect vulnerability or similar on the target domain for an attacker to be able to execute. Further, the attacker is only receiving the digest, so should only be able to extract the user's credentials if the cryptography is weak or there is some kind of password reuse. This vulnerability is fixed in 3.14.1.

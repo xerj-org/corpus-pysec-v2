@@ -1,0 +1,60 @@
+PYSEC-2026-1348 PyPI/ethyca-fides — Fides' Admin UI User Password Change Does Not Invalidate Current Session
+package: ethyca-fides
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.69.1 (ECOSYSTEM)
+aliases: CVE-2025-57766, GHSA-rpw8-82v9-3q87
+references:
+  https://github.com/ethyca/fides/security/advisories/GHSA-rpw8-82v9-3q87
+  https://nvd.nist.gov/vuln/detail/CVE-2025-57766
+  https://github.com/ethyca/fides/commit/8daec4f5ad3daf0f0bdab4814f6757eb0965104b
+  https://github.com/ethyca/fides
+  https://github.com/ethyca/fides/releases/tag/2.69.1
+  https://pypi.org/project/ethyca-fides
+  https://github.com/advisories/GHSA-rpw8-82v9-3q87
+
+### Summary
+
+Admin UI user password changes in Fides do not invalidate active user sessions, creating a vulnerability chaining opportunity where attackers who have obtained session tokens through other attack vectors (such as XSS) can maintain access even after password reset. This issue is not directly exploitable on its own and requires a prerequisite vulnerability to obtain valid session tokens in the first place.
+
+### Details
+
+Fides uses encrypted authentication tokens with extended expiration periods. When a password is changed via password reset endpoints, the system updates the password hash in the database but does not invalidate existing client sessions or tokens. The authentication system validates tokens based on their cryptographic integrity and expiration time, not against the current password state.
+
+The frontend application stores authentication state in browser local storage, which persists across browser sessions until explicit logout or natural token expiration.
+
+This behavior alone does not constitute a directly exploitable vulnerability. The security issue only becomes exploitable when chained with other vulnerabilities or conditions that allow attackers to obtain valid session tokens, such as:
+
+- Cross-Site Scripting (XSS) attacks that can access browser storage where tokens are stored
+- Session hijacking through network interception
+- Malware on the user's device that can read browser storage
+- Physical device access where attackers can access browser storage directly
+
+### Impact
+
+This vulnerability serves as a persistence mechanism in attack chains rather than a primary attack vector. When chained with token theft vulnerabilities, it allows attackers to:
+
+- Maintain access beyond the remediation window when users change passwords in response to suspected compromise
+- Extend the impact timeframe of client-side attacks from minutes/hours to potentially an extended period
+- Defeat common incident response procedures that rely on password changes to secure compromised accounts
+
+Stored tokens persist across browser sessions until explicit logout or natural expiration.
+
+### Patches
+
+The vulnerability has been patched in Fides version `2.69.1`. Users are advised to upgrade to this version or later to secure their systems against this threat.
+
+### Workarounds
+
+There are no workarounds.
+
+### Severity
+
+This vulnerability has been assigned a severity of **LOW** because:
+
+- No direct exploitability - requires chaining with other vulnerabilities
+- High attack complexity - multiple successful exploits needed
+- Limited standalone impact - only extends existing compromises
+- Aligns with industry standard classifications of LOW severity for session invalidation failures
+
+This is fundamentally a defense-in-depth issue rather than a primary security vulnerability.

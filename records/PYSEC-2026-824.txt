@@ -1,0 +1,15 @@
+PYSEC-2026-824 PyPI/inventree — CSV Injection in inventree
+package: inventree
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.7.2 (ECOSYSTEM)
+aliases: CVE-2022-2112, GHSA-9hx5-jmxv-x44q
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2022-2112
+  https://github.com/inventree/inventree/commit/26bf51c20a1c9b3130ac5dd2e17649bece5ff84f
+  https://github.com/inventree/InvenTree
+  https://huntr.dev/bounties/e57c36e7-fa39-435f-944a-3a52ee066f73
+  https://pypi.org/project/inventree
+  https://github.com/advisories/GHSA-9hx5-jmxv-x44q
+
+Improper Neutralization of Formula Elements in a CSV File in GitHub repository inventree/inventree prior to 0.7.2.

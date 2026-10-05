@@ -1,0 +1,10 @@
+PYSEC-2026-128 PyPI/pyload-ng — pyLoad is a free and open-source download manager written in Python. Prior to 0.5.0b3.dev100, packag
+package: pyload-ng
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.5.0b3.dev100 (ECOSYSTEM)
+aliases: CVE-2026-42314, GHSA-97r3-5w84-r4q8
+references:
+  https://github.com/pyload/pyload/security/advisories/GHSA-97r3-5w84-r4q8
+
+pyLoad is a free and open-source download manager written in Python. Prior to 0.5.0b3.dev100, package folder names are sanitized using insufficient string replacement. The pattern ....// becomes .._ after replacement (partial removal), leaving .. which can be exploited when the path is later resolved by the OS. This vulnerability is fixed in 0.5.0b3.dev100.

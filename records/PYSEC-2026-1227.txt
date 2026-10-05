@@ -1,0 +1,29 @@
+PYSEC-2026-1227 PyPI/bugsink — Bugsink is vulnerable to unauthenticated remote DoS via crafted Brotli input (via CPU)
+package: bugsink
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.0.6 (ECOSYSTEM)
+aliases: CVE-2025-64509, GHSA-rrx3-2x4g-mq2h
+references:
+  https://github.com/bugsink/bugsink/security/advisories/GHSA-rrx3-2x4g-mq2h
+  https://nvd.nist.gov/vuln/detail/CVE-2025-64509
+  https://github.com/bugsink/bugsink/commit/1201f754e39265d2aac58edf49dc380bac334388
+  https://github.com/bugsink/bugsink
+  https://pypi.org/project/bugsink
+  https://github.com/advisories/GHSA-rrx3-2x4g-mq2h
+
+### Impact
+
+In affected versions, a specially crafted Brotli-compressed envelope can cause Bugsink to spend excessive CPU time in decompression, leading to denial of service.
+
+This can be done if the DSN is known, which it is in many common setups (JavaScript, Mobile Apps).
+
+### Patches
+
+Patched in Bugsink 2.0.6
+
+### References
+
+The vulnerability in this security advisory is similar to, but distinct from, another brotli-related problem in Bugsink:
+
+https://github.com/bugsink/bugsink/security/advisories/GHSA-fc2v-vcwj-269v

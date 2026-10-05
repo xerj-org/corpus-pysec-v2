@@ -1,0 +1,18 @@
+PYSEC-2026-1238 PyPI/chainlit — Chainlit contains an authorization bypass vulnerability
+package: chainlit
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.8.5 (ECOSYSTEM)
+aliases: CVE-2025-68492, GHSA-v492-6xx2-p57g
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-68492
+  https://github.com/Chainlit/chainlit/pull/2637
+  https://github.com/Chainlit/chainlit/commit/8f1153db439eca58ae5c50c8276ba6fdd311448e
+  https://github.com/Chainlit/chainlit
+  https://github.com/Chainlit/chainlit/releases
+  https://github.com/Chainlit/chainlit/releases/tag/2.8.5
+  https://jvn.jp/en/jp/JVN34964581
+  https://pypi.org/project/chainlit
+  https://github.com/advisories/GHSA-v492-6xx2-p57g
+
+Chainlit versions prior to 2.8.5 contain an authorization bypass through user-controlled key vulnerability. If this vulnerability is exploited, threads may be viewed or thread ownership may be obtained by an attacker who can log in to the product.

@@ -1,0 +1,14 @@
+PYSEC-2014-45 PyPI/plone — ftp.py in Plone before 4.2.3 and 4.3 before beta 1 allows remote attackers to read hidden folder con
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.2.3, >= 4.3a0, < 4.3b1 (ECOSYSTEM)
+aliases: CVE-2012-5503, GHSA-prr5-pfr8-q9f3
+references:
+  https://github.com/plone/Products.CMFPlone/blob/4.2.3/docs/CHANGES.txt
+  https://plone.org/products/plone/security/advisories/20121106/19
+  https://plone.org/products/plone-hotfix/releases/20121106
+  http://www.openwall.com/lists/oss-security/2012/11/10/1
+  https://github.com/advisories/GHSA-prr5-pfr8-q9f3
+
+ftp.py in Plone before 4.2.3 and 4.3 before beta 1 allows remote attackers to read hidden folder contents via unspecified vectors.

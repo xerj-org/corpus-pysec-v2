@@ -1,0 +1,17 @@
+PYSEC-2014-10 PyPI/pillow — PIL/IcnsImagePlugin.py in Python Imaging Library (PIL) and Pillow before 2.3.2 and 2.5.x before 2.5.
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 205e056f8f9b06ed7b925cf8aa0874bc4aaf8a7d (GIT: https://github.com/python-pillow/Pillow)
+  >= 0, < 2.3.2, >= 2.5, < 2.5.2 (ECOSYSTEM)
+aliases: CVE-2014-3589, GHSA-cfmr-38g9-f2h7
+references:
+  https://pypi.python.org/pypi/Pillow/2.5.2
+  https://pypi.python.org/pypi/Pillow/2.3.2
+  http://www.debian.org/security/2014/dsa-3009
+  https://github.com/python-pillow/Pillow/commit/205e056f8f9b06ed7b925cf8aa0874bc4aaf8a7d
+  http://lists.opensuse.org/opensuse-updates/2015-04/msg00056.html
+  http://secunia.com/advisories/59825
+  https://github.com/advisories/GHSA-cfmr-38g9-f2h7
+
+PIL/IcnsImagePlugin.py in Python Imaging Library (PIL) and Pillow before 2.3.2 and 2.5.x before 2.5.2 allows remote attackers to cause a denial of service via a crafted block size.

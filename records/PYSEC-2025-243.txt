@@ -1,0 +1,12 @@
+PYSEC-2025-243 PyPI/langflow — Langflow is a tool for building and deploying AI-powered agents and workflows. A privilege escalatio
+package: langflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.5.0 (ECOSYSTEM)
+aliases: CVE-2025-57760, GHSA-4gv9-mp8m-592r
+references:
+  https://github.com/langflow-ai/langflow/security/advisories/GHSA-4gv9-mp8m-592r
+  http://github.com/langflow-ai/langflow/pull/9152
+  https://github.com/langflow-ai/langflow/commit/c188ec113c9ca46154ad01d0eded1754cc6bef97
+
+Langflow is a tool for building and deploying AI-powered agents and workflows. A privilege escalation vulnerability exists in Langflow containers where an authenticated user with RCE access can invoke the internal CLI command langflow superuser to create a new administrative user. This results in full superuser access, even if the user initially registered through the UI as a regular (non-admin) account. A patched version has not been made public at this time.

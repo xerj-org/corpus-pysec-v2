@@ -1,0 +1,15 @@
+PYSEC-2026-660 PyPI/mailman — Cross Site Request Forgery in mailman
+package: mailman
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.1.38 (ECOSYSTEM)
+aliases: CVE-2021-44227, GHSA-xq58-69h2-765m
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2021-44227
+  https://bugs.launchpad.net/mailman/+bug/1952384
+  https://gitlab.com/mailman/mailman
+  https://lists.debian.org/debian-lts-announce/2022/06/msg00011.html
+  https://pypi.org/project/mailman
+  https://github.com/advisories/GHSA-xq58-69h2-765m
+
+In GNU Mailman before 2.1.38, a list member or moderator can get a CSRF token and craft an admin request (using that token) to set a new admin password or make other changes.

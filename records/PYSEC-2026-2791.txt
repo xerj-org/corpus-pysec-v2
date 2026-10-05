@@ -1,0 +1,60 @@
+PYSEC-2026-2791 PyPI/openbabel — Open Babel has a NULL pointer dereference in CDXML OBAtom::GetExplicitValence
+package: openbabel
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.2.0 (ECOSYSTEM)
+aliases: CVE-2026-3408, GHSA-rxpr-wq63-jr7p
+references:
+  https://github.com/openbabel/openbabel/security/advisories/GHSA-rxpr-wq63-jr7p
+  https://nvd.nist.gov/vuln/detail/CVE-2026-3408
+  https://github.com/openbabel/openbabel/issues/2848
+  https://github.com/openbabel/openbabel/pull/2862
+  https://github.com/VedantMadane/openbabel/commit/e23a224b8fd9d7c2a7cde9ef4ec6afb4c05aa08a
+  https://github.com/oneafter/0128/blob/main/ob3/repro.cdxml
+  https://github.com/openbabel/openbabel
+  https://vuldb.com/?ctiid.348303
+  https://vuldb.com/?id.348303
+  https://vuldb.com/?submit.763756
+  https://pypi.org/project/openbabel
+  https://github.com/advisories/GHSA-rxpr-wq63-jr7p
+
+### Summary
+
+A memory-safety vulnerability in Open Babel's CDXML file format parser
+caused a NULL pointer dereference when reading a crafted input file.
+
+### Details
+
+The flaw was in `OBAtom::GetExplicitValence` as called from the CDXML
+parser. A malformed fragment caused the parser to invoke the method
+on a NULL atom pointer.
+
+### Impact
+
+Open Babel is a C++ library and CLI used to read and write chemistry
+file formats; it is shipped by Linux distributions and embedded in
+services that may parse untrusted input. Triggering this vulnerability
+requires the victim to open a malicious CDXML file with the `obabel`
+tool, the `OBConversion` API, or any of the language bindings (Python,
+Ruby, Java, R, Perl, C#, PHP).
+
+### Affected versions
+
+All releases up to and including 3.1.1.
+
+### Patched version
+
+3.2.0 (released 2026-05-26).
+
+### Patch
+
+Fix commit: https://github.com/openbabel/openbabel/commit/e23a224b
+Tracked in #2862.
+
+A minimized reproducer for this CVE is checked in under
+`test/files/fuzz_regress/` and is exercised on every CI build under
+ASAN+UBSAN by the `fuzzregresstest` harness.
+
+### Credit
+
+Reported by Vedant Madane (@VedantMadane) via VulDB.

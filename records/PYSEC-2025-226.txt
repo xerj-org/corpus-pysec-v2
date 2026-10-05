@@ -1,0 +1,10 @@
+PYSEC-2025-226 PyPI/vtk — Kitware VTK (Visualization Toolkit) through 9.5.0 contains a heap use-after-free vulnerability in vt
+package: vtk
+ecosystem: PyPI
+versions affected:
+  >= 0, < 9.5.1 (ECOSYSTEM)
+aliases: CVE-2025-57108
+references:
+  https://gitlab.kitware.com/vtk/vtk/-/issues/19736
+
+Kitware VTK (Visualization Toolkit) through 9.5.0 contains a heap use-after-free vulnerability in vtkGLTFDocumentLoader. The vulnerability manifests during mesh object copy operations where vector members are accessed after the underlying memory has been freed, specifically when handling GLTF files with corrupted or invalid mesh reference structures.

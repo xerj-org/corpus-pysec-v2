@@ -1,0 +1,13 @@
+PYSEC-2022-43161 PyPI/rdiffweb — Origin Validation Error in GitHub repository ikus060/rdiffweb prior to 2.5.0a5.
+package: rdiffweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < afc1bdfab5161c74012ff2590a6ec49cc0d8fde0 (GIT: https://github.com/ikus060/rdiffweb)
+  >= 0, < 2.5.0 (ECOSYSTEM)
+aliases: CVE-2022-3457, GHSA-824x-jcxf-hpfg
+references:
+  https://github.com/ikus060/rdiffweb/commit/afc1bdfab5161c74012ff2590a6ec49cc0d8fde0
+  https://huntr.dev/bounties/cfcab02e-d6ad-4dcf-b1b0-da90434bc55b
+  https://github.com/advisories/GHSA-824x-jcxf-hpfg
+
+Origin Validation Error in GitHub repository ikus060/rdiffweb prior to 2.5.0a5.

@@ -1,0 +1,15 @@
+PYSEC-2026-1065 PyPI/werkzeug — Pallets Werkzeug vulnerable to Path Traversal
+package: werkzeug
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.15.5 (ECOSYSTEM)
+aliases: CVE-2019-14322, GHSA-j544-7q9p-6xp8
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2019-14322
+  https://github.com/pallets/werkzeug
+  https://palletsprojects.com/blog/werkzeug-0-15-5-released
+  http://packetstormsecurity.com/files/163398/Pallets-Werkzeug-0.15.4-Path-Traversal.html
+  https://pypi.org/project/werkzeug
+  https://github.com/advisories/GHSA-j544-7q9p-6xp8
+
+In Pallets Werkzeug before 0.15.5, SharedDataMiddleware mishandles drive names (such as C:) in Windows pathnames.

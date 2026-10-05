@@ -1,0 +1,27 @@
+PYSEC-2026-1679 PyPI/moonraker — Moonraker affected by LDAP search filter injection
+package: moonraker
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.10.0 (ECOSYSTEM)
+aliases: CVE-2026-24130, GHSA-3jqf-v4mv-747g
+references:
+  https://github.com/Arksine/moonraker/security/advisories/GHSA-3jqf-v4mv-747g
+  https://nvd.nist.gov/vuln/detail/CVE-2026-24130
+  https://github.com/Arksine/moonraker/commit/74c5d8e44c4a4abbfbb06fb991e7ebb9ac947f42
+  https://github.com/Arksine/moonraker
+  https://pypi.org/project/moonraker
+  https://github.com/advisories/GHSA-3jqf-v4mv-747g
+
+### Impact
+
+Instances of Moonraker configured with the `ldap` component enabled are vulnerable to LDAP search filter injection techniques via the login endpoint.   The 401 error response message can be used to determine whether or not a search was successful, allowing for brute force methods to discover LDAP entries on the server such as user IDs and user attributes.
+
+### Patches
+
+Users should upgrade to Moonraker 0.10.0 which patches this vulnerability.
+
+### Workarounds
+
+Admins can set the `max_login_attempts` option in the `[authorization]` section to a reasonable value.    Any IP attempting to exploit this vulnerability will be locked out after it has reached the specified number of consecutive failed login attempts.  This condition is cleared after a Moonraker restart.   Note that if an attacker knows a valid user password they can bypass this protection by successfully logging in.
+
+The most secure workaround for users unable to upgrade is to remove the `ldap` section from `moonraker.conf` and rely on the built in user authentication.

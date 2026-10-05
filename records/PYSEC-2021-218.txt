@@ -1,0 +1,12 @@
+PYSEC-2021-218 PyPI/tensorflow — TensorFlow is an end-to-end open source platform for machine learning. Due to lack of validation in 
+package: tensorflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < b1b323042264740c398140da32e93fb9c2c9f33e (GIT: https://github.com/tensorflow/tensorflow)
+  >= 0, < 2.1.4, >= 2.2.0, < 2.2.3, >= 2.3.0, < 2.3.3, >= 2.4.0, < 2.4.2 (ECOSYSTEM)
+aliases: CVE-2021-29581, GHSA-vq2r-5xvm-3hc3
+references:
+  https://github.com/tensorflow/tensorflow/security/advisories/GHSA-vq2r-5xvm-3hc3
+  https://github.com/tensorflow/tensorflow/commit/b1b323042264740c398140da32e93fb9c2c9f33e
+
+TensorFlow is an end-to-end open source platform for machine learning. Due to lack of validation in `tf.raw_ops.CTCBeamSearchDecoder`, an attacker can trigger denial of service via segmentation faults. The implementation(https://github.com/tensorflow/tensorflow/blob/a74768f8e4efbda4def9f16ee7e13cf3922ac5f7/tensorflow/core/kernels/ctc_decoder_ops.cc#L68-L79) fails to detect cases when the input tensor is empty and proceeds to read data from a null buffer. The fix will be included in TensorFlow 2.5.0. We will also cherrypick this commit on TensorFlow 2.4.2, TensorFlow 2.3.3, TensorFlow 2.2.3 and TensorFlow 2.1.4, as these are also affected and still in supported range.

@@ -1,0 +1,15 @@
+PYSEC-2025-55 PyPI/vllm — vLLM is an inference and serving engine for large language models (LLMs). Version 0.8.0 up to but ex
+package: vllm
+ecosystem: PyPI
+versions affected:
+  >= 0, < 08bf7840780980c7568c573c70a6a8db94fd45ff (GIT: https://github.com/vllm-project/vllm)
+  >= 0.8.0, < 0.9.0 (ECOSYSTEM)
+aliases: CVE-2025-48943, GHSA-9hcf-v7m4-6m2j
+references:
+  https://github.com/vllm-project/vllm/security/advisories/GHSA-9hcf-v7m4-6m2j
+  https://github.com/vllm-project/vllm/commit/08bf7840780980c7568c573c70a6a8db94fd45ff
+  https://github.com/vllm-project/vllm/pull/17623
+  https://github.com/vllm-project/vllm/issues/17313
+  https://github.com/vllm-project/vllm/pull/17623
+
+vLLM is an inference and serving engine for large language models (LLMs). Version 0.8.0 up to but excluding 0.9.0 have a Denial of Service (ReDoS) that causes the vLLM server to crash if an invalid regex was provided while using structured output. This vulnerability is similar to GHSA-6qc9-v4r8-22xg/CVE-2025-48942, but for regex instead of a JSON schema. Version 0.9.0 fixes the issue.

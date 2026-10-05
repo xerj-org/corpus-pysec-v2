@@ -1,0 +1,12 @@
+PYSEC-2026-3443 PyPI/crawl4ai — Crawl4AI before 0.8.7 contains a server-side request forgery (SSRF) vulnerability in the Docker API 
+package: crawl4ai
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.8.7 (ECOSYSTEM)
+aliases: CVE-2026-56261, GHSA-f23g-2f38-gg94
+references:
+  https://www.vulncheck.com/advisories/crawl4ai-server-side-request-forgery-via-webhook-urls
+  https://github.com/unclecode/crawl4ai
+  https://github.com/advisories/GHSA-f23g-2f38-gg94
+
+Crawl4AI before 0.8.7 contains a server-side request forgery (SSRF) vulnerability in the Docker API server's /crawl/job and /llm/job endpoints, which accept webhook URLs without destination validation. An attacker can supply webhook URLs pointing to private or internal IP ranges, Docker networks, or cloud metadata endpoints (e.g. 169.254.169.254), causing the server to make requests to internal services and potentially expose cloud metadata.

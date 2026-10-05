@@ -1,0 +1,14 @@
+PYSEC-2026-253 PyPI/agentscope — AgentScope Deserialization Vulnerability
+package: agentscope
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.0.6a3 (ECOSYSTEM)
+aliases: CVE-2024-8502, GHSA-9w5h-67gf-xvv8
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-8502
+  https://github.com/modelscope/agentscope
+  https://huntr.com/bounties/7a42da2a-2ae5-442d-aff9-c9a3b47870eb
+  https://pypi.org/project/agentscope
+  https://github.com/advisories/GHSA-9w5h-67gf-xvv8
+
+A vulnerability in the RpcAgentServerLauncher class of modelscope/agentscope v0.0.6a3 allows for remote code execution (RCE) via deserialization of untrusted data using the dill library. The issue occurs in the AgentServerServicer.create_agent method, where serialized input is deserialized using dill.loads, enabling an attacker to execute arbitrary commands on the server.

@@ -1,0 +1,18 @@
+PYSEC-2026-892 PyPI/oslo-utils — OpenStack Oslo utility sensitive information exposure via log files
+package: oslo-utils
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.2.0 (ECOSYSTEM)
+aliases: CVE-2014-7231, GHSA-v933-vx5p-j7w2
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2014-7231
+  https://bugs.launchpad.net/oslo.utils/+bug/1345233
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/96726
+  https://github.com/openstack/oslo.utils
+  http://rhn.redhat.com/errata/RHSA-2014-1939.html
+  http://seclists.org/oss-sec/2014/q3/853
+  http://www.securityfocus.com/bid/70184
+  https://pypi.org/project/oslo-utils
+  https://github.com/advisories/GHSA-v933-vx5p-j7w2
+
+The strutils.mask_password function in the OpenStack Oslo utility library, Cinder, Nova, and Trove before 2013.2.4 and 2014.1 before 2014.1.3 does not properly mask passwords when logging commands, which allows local users to obtain passwords by reading the log.

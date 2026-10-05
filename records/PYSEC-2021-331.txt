@@ -1,0 +1,15 @@
+PYSEC-2021-331 PyPI/pillow — Pillow through 8.2.0 and PIL (aka Python Imaging Library) through 1.1.7 allow an attacker to pass co
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 8.3.0 (ECOSYSTEM)
+aliases: CVE-2021-34552, GHSA-7534-mm45-c74v
+references:
+  https://pillow.readthedocs.io/en/stable/releasenotes/index.html
+  https://pillow.readthedocs.io/en/stable/releasenotes/8.3.0.html#buffer-overflow
+  https://lists.debian.org/debian-lts-announce/2021/07/msg00018.html
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/7V6LCG525ARIX6LX5QRYNAWVDD2MD2SV/
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/VUGBBT63VL7G4JNOEIPDJIOC34ZFBKNJ/
+  https://github.com/advisories/GHSA-7534-mm45-c74v
+
+Pillow through 8.2.0 and PIL (aka Python Imaging Library) through 1.1.7 allow an attacker to pass controlled parameters directly into a convert function to trigger a buffer overflow in Convert.c.

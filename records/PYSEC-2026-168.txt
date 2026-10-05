@@ -1,0 +1,10 @@
+PYSEC-2026-168 PyPI/mistune — Mistune is a Python Markdown parser with renderers and plugins. In 3.2.0 and realier, in src/mistune
+package: mistune
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.2.1 (ECOSYSTEM)
+aliases: CVE-2026-44896, GHSA-58cw-g322-p94v
+references:
+  https://github.com/lepture/mistune/security/advisories/GHSA-58cw-g322-p94v
+
+Mistune is a Python Markdown parser with renderers and plugins. In 3.2.0 and realier, in src/mistune/directives/image.py, the render_figure() function concatenates figclass and figwidth options directly into HTML attributes without escaping. This allows attribute injection and XSS even when HTMLRenderer(escape=True) is used, because these values bypass the inline renderer.

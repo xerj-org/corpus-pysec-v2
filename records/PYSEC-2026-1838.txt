@@ -1,0 +1,14 @@
+PYSEC-2026-1838 PyPI/pypxe — PyPXE Buffer Overflow vulnerability
+package: pypxe
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 1.8.4 (ECOSYSTEM)
+aliases: CVE-2023-46960, GHSA-82wx-rxf8-fxch
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-46960
+  https://github.com/pypxe/PyPXE/issues/206
+  https://github.com/pypxe/PyPXE
+  https://pypi.org/project/pypxe
+  https://github.com/advisories/GHSA-82wx-rxf8-fxch
+
+Buffer Overflow vulnerability in PyPXE v.1.8.4 allows a remote attacker to cause a denial of service via the handle function in the tftp module.

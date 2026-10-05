@@ -1,0 +1,14 @@
+PYSEC-2017-140 PyPI/exiv2 — There is a heap-based buffer over-read in the Exiv2::Internal::PngChunk::keyTXTChunk function of png
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2017-17669
+references:
+  https://github.com/Exiv2/exiv2/issues/187
+  https://github.com/Exiv2/exiv2/issues/187
+  https://usn.ubuntu.com/3852-1/
+  https://lists.debian.org/debian-lts-announce/2023/01/msg00004.html
+  https://lists.debian.org/debian-lts-announce/2023/01/msg00004.html
+
+There is a heap-based buffer over-read in the Exiv2::Internal::PngChunk::keyTXTChunk function of pngchunk_int.cpp in Exiv2 0.26. A crafted PNG file will lead to a remote denial of service attack.

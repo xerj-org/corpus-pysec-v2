@@ -1,0 +1,12 @@
+PYSEC-2024-109 PyPI/deepspeed — DeepSpeed Remote Code Execution Vulnerability
+package: deepspeed
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.15.1 (ECOSYSTEM)
+aliases: CVE-2024-43497, GHSA-8cp5-3rf8-8gfh
+references:
+  https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-43497
+  https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-43497
+  https://github.com/advisories/GHSA-8cp5-3rf8-8gfh
+
+DeepSpeed Remote Code Execution Vulnerability

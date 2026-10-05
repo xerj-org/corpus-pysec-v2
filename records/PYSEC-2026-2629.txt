@@ -1,0 +1,23 @@
+PYSEC-2026-2629 PyPI/mcp-salesforce-connector — MCP-Salesforce's arbitrary attribute access leads to disclosure of Salesforce auth token
+package: mcp-salesforce-connector
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.1.10 (ECOSYSTEM)
+aliases: CVE-2026-25650, GHSA-vf6j-c56p-cq58
+references:
+  https://github.com/smn2gnt/MCP-Salesforce/security/advisories/GHSA-vf6j-c56p-cq58
+  https://nvd.nist.gov/vuln/detail/CVE-2026-25650
+  https://github.com/smn2gnt/MCP-Salesforce/commit/a1e3a5a786f48508d066b6d40b58201ebf9b7fd6
+  https://github.com/smn2gnt/MCP-Salesforce
+  https://github.com/smn2gnt/MCP-Salesforce/releases/tag/v0.1.10
+  https://pypi.org/project/mcp-salesforce-connector
+  https://github.com/advisories/GHSA-vf6j-c56p-cq58
+
+### Impact
+_Disclosure of Salesforce OAuth bearer tokens used by the MCP._
+
+### Patches
+_fix applied in 0.1.10_
+
+### Workarounds
+_Rotate any Salesforce tokens/credentials used by MCP-Salesforce._

@@ -1,0 +1,14 @@
+PYSEC-2018-101 PyPI/sickrage — SickRage before v2018.03.09-1 includes cleartext credentials in HTTP responses.
+package: sickrage
+ecosystem: PyPI
+versions affected:
+  >= 0, < 8156a74a68aea930d1e1047baba8b115c3abfc44 (GIT: https://github.com/SickRage/SickRage)
+  >= 0, < 9.3.2 (ECOSYSTEM)
+aliases: CVE-2018-9160, GHSA-jrcv-3c5h-rh3q
+references:
+  https://github.com/SickRage/SickRage/commit/8156a74a68aea930d1e1047baba8b115c3abfc44
+  https://github.com/SickRage/sickrage.github.io/blob/master/sickrage-news/CHANGES.md
+  https://www.exploit-db.com/exploits/44545/
+  https://github.com/advisories/GHSA-jrcv-3c5h-rh3q
+
+SickRage before v2018.03.09-1 includes cleartext credentials in HTTP responses.

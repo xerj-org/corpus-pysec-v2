@@ -1,0 +1,13 @@
+PYSEC-2022-43121 PyPI/democritus-strings — The d8s-math for python, as distributed on PyPI, included a potential code-execution backdoor insert
+package: democritus-strings
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-38883
+references:
+  https://pypi.org/project/democritus-strings/
+  https://pypi.org/project/d8s-math/
+  https://github.com/democritus-project/d8s-math/issues/11
+  https://github.com/democritus-project/d8s-math/issues/11
+
+The d8s-math for python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. The backdoor is the democritus-strings package. The affected version is 0.1.0.

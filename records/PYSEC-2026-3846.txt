@@ -1,0 +1,33 @@
+PYSEC-2026-3846 PyPI/httpx2 — HTTPX2: Streaming response decompression does not bound peak memory (decompression amplification)
+package: httpx2
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.12.0 (ECOSYSTEM)
+aliases: CVE-2026-84382, GHSA-8xx6-hgc6-gc2m
+references:
+  https://github.com/pydantic/httpx2/security/advisories/GHSA-8xx6-hgc6-gc2m
+  https://nvd.nist.gov/vuln/detail/CVE-2026-84382
+  https://github.com/pydantic/httpx2/pull/1126
+  https://github.com/pydantic/httpx2/commit/4fd0c70a3f207c618b145934792f791bccfb39f8
+  https://github.com/pydantic/httpx2
+  https://github.com/pydantic/httpx2/releases/tag/v2.12.0
+  https://pypi.org/project/httpx2
+  https://github.com/advisories/GHSA-8xx6-hgc6-gc2m
+
+### Summary
+
+When decoding a compressed response body (`gzip`, `deflate`, `br`, or `zstd`), HTTPX2 fully decompressed each network read before yielding content to the application. A small compressed input could therefore cause a large intermediate memory allocation, even when the application streamed the response to keep memory usage bounded.
+
+### Details
+
+HTTPX2's default transport reads the socket in pieces of up to 64 KiB. Before `2.12.0`, each piece was inflated completely into one intermediate allocation before any decompressed bytes were yielded.
+
+At DEFLATE's maximum compression ratio of roughly 1032:1, a 64 KiB compressed chunk can expand to about 64 MiB in one allocation. Brotli and Zstandard responses can cause similarly large amplification. Streaming the response did not prevent these transient allocations.
+
+### Impact
+
+Applications that fetch resources from untrusted or attacker-influenced servers - such as webhook receivers, link unfurlers, crawlers, SSRF-reachable fetchers, and redirect followers - can experience memory pressure or out-of-memory termination when processing a malicious compressed response. No authentication or user interaction is required beyond issuing a request to the server.
+
+### Mitigation
+
+Upgrade to HTTPX2 `2.12.0` or later. Patched versions decompress responses incrementally with bounded intermediate buffers, including responses with multiple content encodings.

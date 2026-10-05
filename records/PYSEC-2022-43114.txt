@@ -1,0 +1,12 @@
+PYSEC-2022-43114 PyPI/democritus-networking — The d8s-mpeg for python, as distributed on PyPI, included a potential code-execution backdoor insert
+package: democritus-networking
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-40428
+references:
+  https://pypi.org/project/democritus-networking/
+  https://github.com/democritus-project/d8s-mpeg/issues/5
+  https://github.com/democritus-project/d8s-mpeg/issues/5
+
+The d8s-mpeg for python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. The backdoor is the democritus-networking package. The affected version is 0.1.0.

@@ -1,0 +1,25 @@
+PYSEC-2026-3922 PyPI/sqladmin — SQLAdmin: Unvalidated sortBy parameter in `ModelView` bypasses `column_sortable_list`
+package: sqladmin
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.27.1 (ECOSYSTEM)
+aliases: CVE-2026-54529, GHSA-ccg5-9c8w-xh6v
+references:
+  https://github.com/smithyhq/sqladmin/security/advisories/GHSA-ccg5-9c8w-xh6v
+  https://github.com/smithyhq/sqladmin
+  https://github.com/smithyhq/sqladmin/releases/tag/0.27.1
+  https://pypi.org/project/sqladmin
+  https://github.com/advisories/GHSA-ccg5-9c8w-xh6v
+  https://nvd.nist.gov/vuln/detail/CVE-2026-54529
+
+## Summary
+
+`ModelView.sort_query()` uses the attacker-controlled `sortBy` list-view query parameter without checking it against the configured `column_sortable_list` allow-list. The value is resolved with `getattr(model, ...)` and fed into relationship joins and `order_by()`, so a request can sort by **any** column of the model — including ones hidden from `column_list` — and, via a dotted path, by columns of related models. Because row order then reflects the value of an unexposed column, this is an information-exposure **ordering oracle**.
+
+## Root cause
+
+`column_sortable_list` is consulted only in the list template to decide which header links to render; the server never enforces it, so removing a column from the UI does not prevent sorting by it.
+
+## Exploitation
+
+A single request leaks the relative ordering of an unexposed column; the `asc`↔`desc` reversal confirms rows are ordered by the secret's actual value. Pairing `sortBy` with searchable/filterable columns and pagination can narrow the oracle toward specific values, though value recovery is conditional on having a filterable target column.

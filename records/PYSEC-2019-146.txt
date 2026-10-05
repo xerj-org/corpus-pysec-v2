@@ -1,0 +1,14 @@
+PYSEC-2019-146 PyPI/ansible — ansible before versions 2.8.6, 2.7.14, 2.6.20 is vulnerable to a None
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 2.6.0, < 2.6.20, >= 2.7.0, < 2.7.14, >= 2.8.0, < 2.8.6 (ECOSYSTEM)
+aliases: CVE-2019-14856, GHSA-6fq2-x65v-v9h7
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2019-14856
+  https://access.redhat.com/errata/RHSA-2020:0756
+  http://lists.opensuse.org/opensuse-security-announce/2020-04/msg00021.html
+  http://lists.opensuse.org/opensuse-security-announce/2020-04/msg00026.html
+  https://github.com/advisories/GHSA-6fq2-x65v-v9h7
+
+ansible before versions 2.8.6, 2.7.14, 2.6.20 is vulnerable to a None

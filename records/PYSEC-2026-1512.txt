@@ -1,0 +1,17 @@
+PYSEC-2026-1512 PyPI/langchain-chatchat — Langchain-Chatchat vulnerable to path traversal
+package: langchain-chatchat
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.3.1 (ECOSYSTEM)
+aliases: CVE-2025-6855, GHSA-f823-phmg-x5fr
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-6855
+  https://github.com/chatchat-space/Langchain-Chatchat/issues/5354
+  https://github.com/chatchat-space/Langchain-Chatchat
+  https://vuldb.com/?ctiid.314327
+  https://vuldb.com/?id.314327
+  https://vuldb.com/?submit.601162
+  https://pypi.org/project/langchain-chatchat
+  https://github.com/advisories/GHSA-f823-phmg-x5fr
+
+A vulnerability, which was classified as critical, has been found in chatchat-space Langchain-Chatchat up to 0.3.1. This issue affects some unknown processing of the file /v1/file. The manipulation of the argument flag leads to path traversal. The exploit has been disclosed to the public and may be used.

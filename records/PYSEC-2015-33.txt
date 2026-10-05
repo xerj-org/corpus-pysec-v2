@@ -1,0 +1,10 @@
+PYSEC-2015-33 PyPI/rhodecode — RhodeCode before 2.2.7 allows remote authenticated users to obtain API keys and other sensitive info
+package: rhodecode
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.2.7 (ECOSYSTEM)
+aliases: CVE-2015-1613
+references:
+  https://rhodecode.com/blog/rhodecode-enterprise-security-release/
+
+RhodeCode before 2.2.7 allows remote authenticated users to obtain API keys and other sensitive information via the (1) update_repo, (2) get_locks, or (3) get_user_groups API method.

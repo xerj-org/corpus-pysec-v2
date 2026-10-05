@@ -1,0 +1,10 @@
+PYSEC-2026-133 PyPI/strawberry-graphql — Strawberry GraphQL is a library for creating GraphQL APIs. Strawberry up until version 0.312.3 is vu
+package: strawberry-graphql
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.312.3 (ECOSYSTEM)
+aliases: CVE-2026-35523, GHSA-vpwc-v33q-mq89
+references:
+  https://github.com/strawberry-graphql/strawberry/security/advisories/GHSA-vpwc-v33q-mq89
+
+Strawberry GraphQL is a library for creating GraphQL APIs. Strawberry up until version 0.312.3 is vulnerable to an authentication bypass on WebSocket subscription endpoints. The legacy graphql-ws subprotocol handler does not verify that a connection_init handshake has been completed before processing start (subscription) messages. This allows a remote attacker to skip the on_ws_connect authentication hook entirely by connecting with the graphql-ws subprotocol and sending a start message directly, without ever sending connection_init.  This vulnerability is fixed in 0.312.3.

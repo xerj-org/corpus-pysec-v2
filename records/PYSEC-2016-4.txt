@@ -1,0 +1,16 @@
+PYSEC-2016-4 PyPI/jwcrypto — The _Rsa15 class in the RSA 1.5 algorithm implementation in jwa.py in jwcrypto before 0.3.2 lacks th
+package: jwcrypto
+ecosystem: PyPI
+versions affected:
+  >= 0, < eb5be5bd94c8cae1d7f3ba9801377084d8e5a7ba (GIT: https://github.com/latchset/jwcrypto)
+  >= 0, < 0.4.0 (ECOSYSTEM)
+aliases: CVE-2016-6298, GHSA-wg33-x934-3ghh
+references:
+  https://github.com/latchset/jwcrypto/commit/eb5be5bd94c8cae1d7f3ba9801377084d8e5a7ba
+  https://github.com/latchset/jwcrypto/issues/65
+  https://github.com/latchset/jwcrypto/pull/66
+  https://github.com/latchset/jwcrypto/releases/tag/v0.3.2
+  http://www.securityfocus.com/bid/92729
+  https://github.com/advisories/GHSA-wg33-x934-3ghh
+
+The _Rsa15 class in the RSA 1.5 algorithm implementation in jwa.py in jwcrypto before 0.3.2 lacks the Random Filling protection mechanism, which makes it easier for remote attackers to obtain cleartext data via a Million Message Attack (MMA).

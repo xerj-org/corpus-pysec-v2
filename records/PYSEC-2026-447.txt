@@ -1,0 +1,14 @@
+PYSEC-2026-447 PyPI/pandasai — PandasAI vulnerable to arbitrary code execution
+package: pandasai
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.8.1 (ECOSYSTEM)
+aliases: CVE-2023-39661, GHSA-8fp9-43pw-56vw
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-39661
+  https://github.com/gventuri/pandas-ai/issues/410
+  https://github.com/gventuri/pandas-ai
+  https://pypi.org/project/pandasai
+  https://github.com/advisories/GHSA-8fp9-43pw-56vw
+
+An issue in pandas-ai v.0.8.1 and before allows a remote attacker to execute arbitrary code via the `_is_jailbreak` function.

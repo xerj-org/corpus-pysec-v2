@@ -1,0 +1,10 @@
+PYSEC-2025-140 PyPI/monai — MONAI (Medical Open Network for AI) is an AI toolkit for health care imaging. The extractall functio
+package: monai
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.5.1rc1 (ECOSYSTEM)
+aliases: CVE-2025-58755, GHSA-x6ww-pf9m-m73m
+references:
+  https://github.com/Project-MONAI/MONAI/security/advisories/GHSA-x6ww-pf9m-m73m
+
+MONAI (Medical Open Network for AI) is an AI toolkit for health care imaging. The extractall function `zip_file.extractall(output_dir)` is used directly to process compressed files. It is used in many places in the project. In versions up to and including 1.5.0, when the Zip file containing malicious content is decompressed, it overwrites the system files. In addition, the project allows the download of the zip content through the link, which increases the scope of exploitation of this vulnerability. As of time of publication, no known fixed versions are available.

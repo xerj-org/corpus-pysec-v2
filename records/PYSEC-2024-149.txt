@@ -1,0 +1,14 @@
+PYSEC-2024-149 PyPI/vyper — Vyper is a pythonic Smart Contract Language for the ethereum virtual machine. In versions 0.3.10 and
+package: vyper
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.4.0b1 (ECOSYSTEM)
+aliases: CVE-2024-24561, GHSA-9x7f-gwxq-6f2c
+references:
+  https://github.com/vyperlang/vyper/security/advisories/GHSA-9x7f-gwxq-6f2c
+  https://github.com/vyperlang/vyper/security/advisories/GHSA-9x7f-gwxq-6f2c
+  https://github.com/vyperlang/vyper/issues/3756
+  https://github.com/vyperlang/vyper/blob/b01cd686aa567b32498fefd76bd96b0597c6f099/vyper/builtins/functions.py#L404-L457
+
+Vyper is a pythonic Smart Contract Language for the ethereum virtual machine. In versions 0.3.10 and earlier, the bounds check for slices does not account for the ability for start + length to overflow when the values aren't literals. If a slice() function uses a non-literal argument for the start or length variable, this creates the ability for an attacker to overflow the bounds check. This issue can be used to do OOB access to storage, memory or calldata addresses. It can also be used to corrupt the length slot of the respective array.
+

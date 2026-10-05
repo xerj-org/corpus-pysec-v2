@@ -1,0 +1,17 @@
+PYSEC-2011-16 PyPI/plone — plone.app.users in Plone 4.0 and 4.1 allows remote authenticated users to modify the properties of a
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.1.1 (ECOSYSTEM)
+aliases: CVE-2011-1950, GHSA-2qx8-589j-gcpx
+references:
+  http://www.securityfocus.com/bid/48005
+  http://secunia.com/advisories/44775
+  http://plone.org/products/plone/security/advisories/CVE-2011-1950
+  http://osvdb.org/72729
+  http://securityreason.com/securityalert/8269
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/67695
+  http://www.securityfocus.com/archive/1/518155/100/0/threaded
+  https://github.com/advisories/GHSA-2qx8-589j-gcpx
+
+plone.app.users in Plone 4.0 and 4.1 allows remote authenticated users to modify the properties of arbitrary accounts via unspecified vectors, as exploited in the wild in June 2011.

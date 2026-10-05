@@ -1,0 +1,11 @@
+PYSEC-2020-14 PyPI/apache-airflow — An issue was found in Apache Airflow versions 1.10.10 and below. A remote code/command injection vul
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.10.11rc1 (ECOSYSTEM)
+aliases: CVE-2020-11978, GHSA-rvmq-4x66-q7j3
+references:
+  https://lists.apache.org/thread.html/r7255cf0be3566f23a768e2a04b40fb09e52fcd1872695428ba9afe91%40%3Cusers.airflow.apache.org%3E
+  https://github.com/advisories/GHSA-rvmq-4x66-q7j3
+
+An issue was found in Apache Airflow versions 1.10.10 and below. A remote code/command injection vulnerability was discovered in one of the example DAGs shipped with Airflow which would allow any authenticated user to run arbitrary commands as the user running airflow worker/scheduler (depending on the executor in use). If you already have examples disabled by setting load_examples=False in the config then you are not vulnerable.

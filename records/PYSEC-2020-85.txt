@@ -1,0 +1,14 @@
+PYSEC-2020-85 PyPI/plone — An open redirect on the login form (and possibly other places) in Plone 4.0 through 5.2.1 allows an 
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 4.0, < 5.2.2 (ECOSYSTEM)
+aliases: CVE-2020-7936, GHSA-82j9-wfcf-9v2h
+references:
+  https://plone.org/security/hotfix/20200121
+  https://plone.org/security/hotfix/20200121/an-open-redirection-on-the-login-form-and-possibly-other-places
+  https://www.openwall.com/lists/oss-security/2020/01/22/1
+  http://www.openwall.com/lists/oss-security/2020/01/24/1
+  https://github.com/advisories/GHSA-82j9-wfcf-9v2h
+
+An open redirect on the login form (and possibly other places) in Plone 4.0 through 5.2.1 allows an attacker to craft a link to a Plone Site that, when followed, and possibly after login, will redirect to an attacker's site.

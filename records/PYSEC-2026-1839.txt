@@ -1,0 +1,25 @@
+PYSEC-2026-1839 PyPI/pyrage — pyrage vulnerable to malicious plugin names, recipients, or identities causing arbitrary binary execution
+package: pyrage
+ecosystem: PyPI
+versions affected:
+  >= 1.2.0, < 1.2.3 (ECOSYSTEM)
+aliases: CVE-2024-56327, GHSA-47h8-jmp3-9f28
+references:
+  https://github.com/FiloSottile/age/security/advisories/GHSA-32gq-x56h-299c
+  https://github.com/str4d/rage/security/advisories/GHSA-4fg7-vxc8-qx5w
+  https://github.com/woodruffw/pyrage/security/advisories/GHSA-47h8-jmp3-9f28
+  https://nvd.nist.gov/vuln/detail/CVE-2024-56327
+  https://github.com/advisories/GHSA-4fg7-vxc8-qx5w
+  https://github.com/woodruffw/pyrage
+  https://pypi.org/project/pyrage
+  https://github.com/advisories/GHSA-47h8-jmp3-9f28
+
+`pyrage` uses the Rust `age` crate for its underlying operations, and `age` is vulnerable to GHSA-4fg7-vxc8-qx5w.
+
+All details of GHSA-4fg7-vxc8-qx5w are relevant to `pyrage` for the versions specified in this advisory. See GHSA-4fg7-vxc8-qx5w for full details.
+
+Versions of `pyrage` before 1.2.0 lack plugin support and are therefore **not affected**.
+
+An equivalent issue was fixed in [the reference Go implementation of age](https://github.com/FiloSottile/age), see advisory [GHSA-32gq-x56h-299c](https://github.com/FiloSottile/age/security/advisories/GHSA-32gq-x56h-299c).
+
+Thanks to ⬡-49016 for reporting this issue.

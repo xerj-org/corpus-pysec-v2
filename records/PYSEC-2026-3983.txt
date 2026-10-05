@@ -1,0 +1,12 @@
+PYSEC-2026-3983 PyPI/gitpython — GitPython 3.1.59 fails to restrict the --no-index option in the high-level diff API, allowing attack
+package: gitpython
+ecosystem: PyPI
+versions affected:
+  >= 3.1.59, < 3.1.60 (ECOSYSTEM)
+aliases: CVE-2026-87818, GHSA-whh4-5q6c-9v3x, GHSA-rw58-wc66-99g4
+references:
+  https://www.vulncheck.com/advisories/gitpython-3.1.59-local-file-content-oracle-via-no-index
+  https://github.com/gitpython-developers/GitPython/security/advisories/GHSA-whh4-5q6c-9v3x
+  https://github.com/advisories/GHSA-rw58-wc66-99g4
+
+GitPython 3.1.59 fails to restrict the --no-index option in the high-level diff API, allowing attackers to read arbitrary filesystem paths as repository operands. Attackers can combine --no-index with -I/--ignore-matching-lines to create a content-dependent Boolean oracle, repeatedly querying local files to recover single-line secrets through distinguishable success or error responses.

@@ -1,0 +1,17 @@
+PYSEC-2026-2306 PyPI/vllm — A vulnerability was found in vllm up to 0.19.0. The affected element is the function has_mamba_layer
+package: vllm
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.19.1 (ECOSYSTEM)
+aliases: CVE-2026-7141, GHSA-x368-4g9h-fvv4
+references:
+  https://vuldb.com/submit/801297
+  https://vuldb.com/vuln/359740
+  https://github.com/vllm-project/vllm/issues/39146
+  https://github.com/vllm-project/vllm/issues/39146#issue-4215090365
+  https://vuldb.com/vuln/359740/cti
+  https://github.com/AjAnubolu/vllm/commit/1ad67864c0c20f167929e64c875f5c28e1aad9fd
+  https://github.com/vllm-project/vllm/pull/39283
+  https://github.com/advisories/GHSA-x368-4g9h-fvv4
+
+A vulnerability was found in vllm up to 0.19.0. The affected element is the function has_mamba_layers of the file vllm/v1/kv_cache_interface.py of the component KV Block Handler. Performing a manipulation results in uninitialized resource. It is possible to initiate the attack remotely. The attack is considered to have high complexity. The exploitability is described as difficult. The exploit has been made public and could be used. The patch is named 1ad67864c0c20f167929e64c875f5c28e1aad9fd. To fix this issue, it is recommended to deploy a patch.

@@ -1,0 +1,15 @@
+PYSEC-2023-309 PyPI/mlflow — Path Traversal in GitHub repository mlflow/mlflow prior to 2.9.2.
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1c6309f884798fbf56017a3cc808016869ee8de4, < 1c6309f884798fbf56017a3cc808016869ee8de4 (GIT: https://github.com/mlflow/mlflow)
+  >= 0, < 2.9.2 (ECOSYSTEM)
+aliases: CVE-2023-6753, GHSA-v945-r3rc-6fjm
+references:
+  https://huntr.com/bounties/b397b83a-527a-47e7-b912-a12a17a6cfb4
+  https://github.com/mlflow/mlflow/commit/1c6309f884798fbf56017a3cc808016869ee8de4
+  https://huntr.com/bounties/b397b83a-527a-47e7-b912-a12a17a6cfb4
+  https://huntr.com/bounties/b397b83a-527a-47e7-b912-a12a17a6cfb4
+  https://github.com/advisories/GHSA-v945-r3rc-6fjm
+
+Path Traversal in GitHub repository mlflow/mlflow prior to 2.9.2.

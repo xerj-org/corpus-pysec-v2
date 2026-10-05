@@ -1,0 +1,12 @@
+PYSEC-2022-42972 PyPI/apache-iotdb — Apache IoTDB version 0.12.2 to 0.12.6, 0.13.0 to 0.13.2 are vulnerable to a Denial of Service attack
+package: apache-iotdb
+ecosystem: PyPI
+versions affected:
+  >= 0.12.2, < 0.13.3 (ECOSYSTEM)
+aliases: CVE-2022-43766, GHSA-g6hg-4v3c-6jq7
+references:
+  https://lists.apache.org/thread/9pgpb82p5brooy41n8l5q0y9h33db2zn
+  https://lists.apache.org/thread/9pgpb82p5brooy41n8l5q0y9h33db2zn
+  https://github.com/advisories/GHSA-g6hg-4v3c-6jq7
+
+Apache IoTDB version 0.12.2 to 0.12.6, 0.13.0 to 0.13.2 are vulnerable to a Denial of Service attack when accepting untrusted patterns for REGEXP queries with Java 8. Users should upgrade to 0.13.3 which addresses this issue or use a later version of Java to avoid it.

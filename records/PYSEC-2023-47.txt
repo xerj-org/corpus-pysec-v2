@@ -1,0 +1,11 @@
+PYSEC-2023-47 PyPI/salt — Buffer Overflow vulnerability in Saltstack v.3003 and before allows attacker to execute arbitrary co
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3003.1 (ECOSYSTEM)
+aliases: CVE-2021-33226
+references:
+  https://github.com/saltstack/salt/blob/master/salt/modules/status.py
+  https://github.com/saltstack/salt/blob/master/salt/modules/status.py
+
+Buffer Overflow vulnerability in Saltstack v.3003 and before allows attacker to execute arbitrary code via the func variable in salt/salt/modules/status.py file.

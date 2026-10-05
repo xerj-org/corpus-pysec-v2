@@ -1,0 +1,15 @@
+PYSEC-2024-130 PyPI/paddlepaddle — FPE in paddle.linalg.matrix_rank in PaddlePaddle before 2.6.0. This flaw can cause a runtime crash a
+package: paddlepaddle
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.6.0 (ECOSYSTEM)
+aliases: CVE-2023-38675, GHSA-jm68-fpmr-8j2g
+references:
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-007.md
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-007.md
+  https://github.com/advisories/GHSA-jm68-fpmr-8j2g
+
+FPE in paddle.linalg.matrix_rank in PaddlePaddle before 2.6.0. This flaw can cause a runtime crash and a denial of service.
+
+
+

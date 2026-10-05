@@ -1,0 +1,11 @@
+PYSEC-2026-152 PyPI/weblate — Weblate is a web based localization tool. In versions prior to 5.17, the translation memory API expo
+package: weblate
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.17 (ECOSYSTEM)
+aliases: CVE-2026-33214, GHSA-mpf5-3vph-q75r
+references:
+  https://github.com/WeblateOrg/weblate/pull/18513
+  https://github.com/WeblateOrg/weblate/security/advisories/GHSA-mpf5-3vph-q75r
+
+Weblate is a web based localization tool. In versions prior to 5.17, the translation memory API exposed unintended endpoints, which in turn didn't enforce proper access control. This issue has been fixed in version 5.17. If users are unable to update immediately, they can work around this issue by blocking access to /api/memory/ in the HTTP server, which removes access to this feature.

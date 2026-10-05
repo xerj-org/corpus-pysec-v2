@@ -1,0 +1,11 @@
+PYSEC-2026-3756 PyPI/openssl-encrypt — openssl_encrypt versions before 1.4.0 contain a vulnerability in PublicKeyBundle.from_dict() that cr
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.0 (ECOSYSTEM)
+aliases: CVE-2026-74876, GHSA-8h88-gxp3-j7pg
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-8h88-gxp3-j7pg
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-unverified-key-bundle-encryption
+
+openssl_encrypt versions before 1.4.0 contain a vulnerability in PublicKeyBundle.from_dict() that creates key bundles from untrusted data without verifying signatures. Attackers can call from_dict() followed by to_identity() without signature verification to encrypt data using attacker-controlled public keys, leaking secrets.

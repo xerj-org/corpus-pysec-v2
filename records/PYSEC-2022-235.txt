@@ -1,0 +1,15 @@
+PYSEC-2022-235 PyPI/octobot — WebInterface in OctoBot before 0.4.4 allows remote code execution because Tentacles upload is mishan
+package: octobot
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.4.4 (ECOSYSTEM)
+aliases: CVE-2021-36711, GHSA-fr75-x856-q6j8
+references:
+  https://packetstormsecurity.com/files/167721/Sashimi-Evil-OctoBot-Tentacle.html
+  https://github.com/Nwqda/Sashimi-Evil-OctoBot-Tentacle
+  https://github.com/Drakkar-Software/OctoBot/blob/master/CHANGELOG.md
+  https://github.com/Drakkar-Software/OctoBot/issues/1966
+  https://www.octobot.online/
+  https://github.com/advisories/GHSA-fr75-x856-q6j8
+
+WebInterface in OctoBot before 0.4.4 allows remote code execution because Tentacles upload is mishandled.

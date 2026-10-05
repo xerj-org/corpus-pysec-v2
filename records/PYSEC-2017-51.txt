@@ -1,0 +1,14 @@
+PYSEC-2017-51 PyPI/plone — Multiple cross-site request forgery (CSRF) vulnerabilities in Zope Management Interface 4.3.7 and ea
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.0a1 (ECOSYSTEM)
+aliases: CVE-2015-7293, GHSA-p3qm-44cf-f8qx
+references:
+  https://www.exploit-db.com/exploits/38411/
+  https://pypi.python.org/pypi/plone4.csrffixes
+  https://plone.org/security/hotfix/20151006
+  http://packetstormsecurity.com/files/133889/Zope-Management-Interface-4.3.7-Cross-Site-Request-Forgery.html
+  https://github.com/advisories/GHSA-p3qm-44cf-f8qx
+
+Multiple cross-site request forgery (CSRF) vulnerabilities in Zope Management Interface 4.3.7 and earlier, and Plone before 5.x.

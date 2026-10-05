@@ -1,0 +1,11 @@
+PYSEC-2013-4 PyPI/graphite-web — Multiple cross-site scripting (XSS) vulnerabilities in Graphite before 0.9.11 allow remote attackers
+package: graphite-web
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.9.11 (ECOSYSTEM)
+aliases: CVE-2013-5943
+references:
+  https://github.com/graphite-project/graphite-web/blob/master/docs/releases/0_9_11.rst
+  http://secunia.com/advisories/54556
+
+Multiple cross-site scripting (XSS) vulnerabilities in Graphite before 0.9.11 allow remote attackers to inject arbitrary web script or HTML via unspecified vectors.

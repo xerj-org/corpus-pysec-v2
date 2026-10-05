@@ -1,0 +1,13 @@
+PYSEC-2020-74 PyPI/papermerge — Multiple cross-site scripting (XSS) vulnerabilities in Papermerge before 1.5.2 allow remote attacker
+package: papermerge
+ecosystem: PyPI
+versions affected:
+  >= 1.2.0, < 1.5.2 (ECOSYSTEM)
+aliases: CVE-2020-29456, GHSA-9w49-m7xh-5r39
+references:
+  https://github.com/ciur/papermerge/issues/228
+  https://www.papermerge.com/
+  https://github.com/ciur/papermerge/releases/tag/v1.5.2
+  https://github.com/advisories/GHSA-9w49-m7xh-5r39
+
+Multiple cross-site scripting (XSS) vulnerabilities in Papermerge before 1.5.2 allow remote attackers to inject arbitrary web script or HTML via the rename, tag, upload, or create folder function. The payload can be in a folder, a tag, or a document's filename. If email consumption is configured in Papermerge, a malicious document can be sent by email and is automatically uploaded into the Papermerge web application. Therefore, no authentication is required to exploit XSS if email consumption is configured. Otherwise authentication is required.

@@ -1,0 +1,15 @@
+PYSEC-2026-449 PyPI/pgadmin4 — pgAdmin 4 Vulnerable to Cross-Site Scripting (XSS) via Query Result Rendering
+package: pgadmin4
+ecosystem: PyPI
+versions affected:
+  >= 0, < 9.2 (ECOSYSTEM)
+aliases: CVE-2025-2946, GHSA-2rrx-pphc-qfv9
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-2946
+  https://github.com/pgadmin-org/pgadmin4/issues/8602
+  https://github.com/pgadmin-org/pgadmin4/commit/1305d9910beefd0d6b4c7eb4f111f86edb1d356b
+  https://github.com/pgadmin-org/pgadmin4
+  https://pypi.org/project/pgadmin4
+  https://github.com/advisories/GHSA-2rrx-pphc-qfv9
+
+pgAdmin <= 9.1 is affected by a security vulnerability with Cross-Site Scripting(XSS). If attackers execute any arbitrary HTML/JavaScript in a user's browser through query result rendering, then HTML/JavaScript runs on the browser.

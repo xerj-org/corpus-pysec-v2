@@ -1,0 +1,17 @@
+PYSEC-2026-1921 PyPI/signxml — SignXML's signature verification with HMAC is vulnerable to an algorithm confusion attack
+package: signxml
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.0.4 (ECOSYSTEM)
+aliases: CVE-2025-48994, GHSA-6vx8-pcwv-xhf4
+references:
+  https://github.com/XML-Security/signxml/security/advisories/GHSA-6vx8-pcwv-xhf4
+  https://nvd.nist.gov/vuln/detail/CVE-2025-48994
+  https://github.com/XML-Security/signxml/commit/e3c0c2b82a3329a65d917830657649c98b8c7600
+  https://github.com/XML-Security/signxml
+  https://pypi.org/project/signxml
+  https://github.com/advisories/GHSA-6vx8-pcwv-xhf4
+
+When verifying signatures with X509 certificate validation turned off and HMAC shared secret set (`signxml.XMLVerifier.verify(require_x509=False, hmac_key=...`), prior versions of SignXML are vulnerable to a potential algorithm confusion attack. Unless the user explicitly limits the expected signature algorithms using the `signxml.XMLVerifier.verify(expect_config=...)` setting, an attacker may supply a signature unexpectedly signed with a key other than the provided HMAC key, using a different (asymmetric key) signature algorithm.
+
+Starting with signxml 4.0.4, specifying `hmac_key` causes the set of accepted signature algorithms to be restricted to HMAC only, if not already restricted by the user.

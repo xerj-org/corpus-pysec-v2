@@ -1,0 +1,19 @@
+PYSEC-2026-731 PyPI/plone — Plone Improper Session Management
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.0 (ECOSYSTEM)
+aliases: CVE-2008-1393, GHSA-593c-j348-f3gv
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2008-1393
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/41427
+  https://github.com/plone/Plone
+  http://plone.org/documentation/how-to/secure-login-without-plain-text-passwords
+  http://plone.org/products/plone/roadmap/48?
+  http://securityreason.com/securityalert/3754
+  http://www.procheckup.com/Hacking_Plone_CMS.pdf
+  http://www.securityfocus.com/archive/1/489544/100/0/threaded
+  https://pypi.org/project/plone
+  https://github.com/advisories/GHSA-593c-j348-f3gv
+
+Plone CMS before 3, places a base64 encoded form of the username and password in the `__ac` cookie for the admin account, which makes it easier for remote attackers to obtain administrative privileges by sniffing the network.

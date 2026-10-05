@@ -1,0 +1,11 @@
+PYSEC-2026-3777 PyPI/openssl-encrypt — openssl_encrypt versions before 1.4.9 contain a signature verification vulnerability in gpg_runner.v
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.9 (ECOSYSTEM)
+aliases: CVE-2026-81700, GHSA-x38r-8wf3-q9hq
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-x38r-8wf3-q9hq
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-1.4.9-gpg-signature-verification-bypass
+
+openssl_encrypt versions before 1.4.9 contain a signature verification vulnerability in gpg_runner.verify_detached that accepts revoked and expired keys by only checking VALIDSIG status without inspecting REVKEYSIG, EXPKEYSIG, or gpg exit codes. Attackers holding compromised-then-revoked signing keys or expired project keys can bypass signature verification to execute malicious plugins in the host process.

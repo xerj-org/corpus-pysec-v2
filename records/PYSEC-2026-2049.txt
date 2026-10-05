@@ -1,0 +1,28 @@
+PYSEC-2026-2049 PyPI/wiki — Denial of service via regular expression
+package: wiki
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.10.1 (ECOSYSTEM)
+aliases: CVE-2024-28865, GHSA-wj85-w4f4-xh8h
+references:
+  https://github.com/django-wiki/django-wiki/security/advisories/GHSA-wj85-w4f4-xh8h
+  https://nvd.nist.gov/vuln/detail/CVE-2024-28865
+  https://github.com/django-wiki/django-wiki/commit/8e280fd6c0bd27ce847c67b2d216c6cbf920f88c
+  https://github.com/django-wiki/django-wiki
+  https://pypi.org/project/wiki
+  https://github.com/advisories/GHSA-wj85-w4f4-xh8h
+
+### Impact
+
+All historical installations of django-wiki are vulnerable to maliciously crafted article content, that can cause severe use of server CPU through a regular expression loop.
+
+### Patches
+
+
+
+### Workarounds
+
+Close off access to create and edit articles by anonymous users.
+
+### References
+_Are there any links users can visit to find out more?_

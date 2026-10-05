@@ -1,0 +1,19 @@
+PYSEC-2026-2828 PyPI/opencv-python — Out-of-bounds Write in OpenCV
+package: opencv-python
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.2.0.32 (ECOSYSTEM)
+aliases: CVE-2019-5064, GHSA-q799-q27x-vp7w
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2019-5064
+  https://github.com/opencv/opencv/issues/15857
+  https://github.com/opencv/opencv-python
+  https://github.com/opencv/opencv-python/releases/tag/32
+  https://github.com/opencv/opencv/releases/tag/4.2.0
+  https://talosintelligence.com/vulnerability_reports/TALOS-2019-0853
+  https://www.oracle.com//security-alerts/cpujul2021.html
+  https://www.oracle.com/security-alerts/cpuApr2021.html
+  https://pypi.org/project/opencv-python
+  https://github.com/advisories/GHSA-q799-q27x-vp7w
+
+An exploitable heap buffer overflow vulnerability exists in the data structure persistence functionality of OpenCV, version 4.1.0 (corresponds with OpenCV-Python version 4.1.2.30). A specially crafted JSON file can cause a buffer overflow, resulting in multiple heap corruptions and potentially code execution. An attacker can provide a specially crafted file to trigger this vulnerability.

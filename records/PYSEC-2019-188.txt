@@ -1,0 +1,15 @@
+PYSEC-2019-188 PyPI/mercurial — A flaw was found in Mercurial before 4.9. It was possible to use symlinks and subrepositories to def
+package: mercurial
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.9 (ECOSYSTEM)
+aliases: CVE-2019-3902, GHSA-mq66-vcfc-8246
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2019-3902
+  https://lists.debian.org/debian-lts-announce/2019/04/msg00024.html
+  https://www.mercurial-scm.org/wiki/WhatsNew#Mercurial_4.9_.282019-02-01.29
+  https://usn.ubuntu.com/4086-1/
+  https://lists.debian.org/debian-lts-announce/2020/07/msg00032.html
+  https://github.com/advisories/GHSA-mq66-vcfc-8246
+
+A flaw was found in Mercurial before 4.9. It was possible to use symlinks and subrepositories to defeat Mercurial's path-checking logic and write files outside a repository.

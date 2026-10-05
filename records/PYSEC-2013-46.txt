@@ -1,0 +1,21 @@
+PYSEC-2013-46 PyPI/glance — The v1 API in OpenStack Glance Essex (2012.1), Folsom (2012.2), and Grizzly, when using the single-t
+package: glance
+ecosystem: PyPI
+versions affected:
+  >= 0, <= v1 (ECOSYSTEM)
+aliases: CVE-2013-1840, GHSA-c8w9-83vg-r8vv
+references:
+  http://osvdb.org/91304
+  http://www.openwall.com/lists/oss-security/2013/03/14/15
+  http://www.securityfocus.com/bid/58490
+  https://bugs.launchpad.net/glance/+bug/1135541
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/82878
+  https://review.openstack.org/#/c/24437/
+  https://review.openstack.org/#/c/24438/
+  https://review.openstack.org/#/c/24439/
+  http://rhn.redhat.com/errata/RHSA-2013-0707.html
+  http://secunia.com/advisories/52565
+  http://www.ubuntu.com/usn/USN-1764-1
+  https://github.com/advisories/GHSA-c8w9-83vg-r8vv
+
+The v1 API in OpenStack Glance Essex (2012.1), Folsom (2012.2), and Grizzly, when using the single-tenant Swift or S3 store, reports the location field, which allows remote authenticated users to obtain the operator's backend credentials via a request for a cached image.

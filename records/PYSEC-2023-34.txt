@@ -1,0 +1,14 @@
+PYSEC-2023-34 PyPI/modoboa — Weak Password Requirements in GitHub repository modoboa/modoboa prior to 2.1.0.
+package: modoboa
+ecosystem: PyPI
+versions affected:
+  >= 0, < 130257c96a2392ada795785a91178e656e27015c (GIT: https://github.com/modoboa/modoboa)
+  >= 0, < 2.1.0 (ECOSYSTEM)
+aliases: CVE-2023-2160, GHSA-9gxx-32p7-ff7m
+references:
+  https://huntr.dev/bounties/54fb6d6a-6b39-45b6-b62a-930260ba484b
+  https://huntr.dev/bounties/54fb6d6a-6b39-45b6-b62a-930260ba484b
+  https://github.com/modoboa/modoboa/commit/130257c96a2392ada795785a91178e656e27015c
+  https://github.com/advisories/GHSA-9gxx-32p7-ff7m
+
+Weak Password Requirements in GitHub repository modoboa/modoboa prior to 2.1.0.

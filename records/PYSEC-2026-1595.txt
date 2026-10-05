@@ -1,0 +1,16 @@
+PYSEC-2026-1595 PyPI/m2crypto — m2crypto Bleichenbacher timing attack - incomplete fix for CVE-2020-25657
+package: m2crypto
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.40.1 (ECOSYSTEM)
+aliases: CVE-2023-50781, GHSA-944j-8ch6-rf6x
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-50781
+  https://access.redhat.com/security/cve/CVE-2023-50781
+  https://bugzilla.redhat.com/show_bug.cgi?id=2254426
+  https://gitlab.com/m2crypto/m2crypto
+  https://gitlab.com/m2crypto/m2crypto/-/issues/342
+  https://pypi.org/project/m2crypto
+  https://github.com/advisories/GHSA-944j-8ch6-rf6x
+
+A flaw was found in m2crypto. This issue may allow a remote attacker to decrypt captured messages in TLS servers that use RSA key exchanges, which may lead to exposure of confidential or sensitive data.

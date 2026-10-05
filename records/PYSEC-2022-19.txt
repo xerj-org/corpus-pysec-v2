@@ -1,0 +1,13 @@
+PYSEC-2022-19 PyPI/django — The {% debug %} template tag in Django 2.2 before 2.2.27, 3.2 before 3.2.12, and 4.0 before 4.0.2 do
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 2.2, < 2.2.27, >= 3.2, < 3.2.12, >= 4.0, < 4.0.2 (ECOSYSTEM)
+aliases: CVE-2022-22818, GHSA-95rw-fx8r-36v6
+references:
+  https://docs.djangoproject.com/en/4.0/releases/security/
+  https://www.djangoproject.com/weblog/2022/feb/01/security-releases/
+  https://groups.google.com/forum/#!forum/django-announce
+  https://github.com/advisories/GHSA-95rw-fx8r-36v6
+
+The {% debug %} template tag in Django 2.2 before 2.2.27, 3.2 before 3.2.12, and 4.0 before 4.0.2 does not properly encode the current context. This may lead to XSS.

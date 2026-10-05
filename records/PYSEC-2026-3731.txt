@@ -1,0 +1,11 @@
+PYSEC-2026-3731 PyPI/nltk — NLTK versions before 3.10.0 contain a logic bug in FileSystemPathPointer.open() where the sandbox va
+package: nltk
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.10.0 (ECOSYSTEM)
+aliases: CVE-2026-65915, GHSA-72r2-7mfr-5xr9
+references:
+  https://www.vulncheck.com/advisories/nltk-before-arbitrary-file-read-via-filesystempathpointer
+  https://github.com/nltk/nltk/security/advisories/GHSA-72r2-7mfr-5xr9
+
+NLTK versions before 3.10.0 contain a logic bug in FileSystemPathPointer.open() where the sandbox validation check compares a normalized path against itself, making the security check permanently inert. Attackers can pass file:// URLs to nltk.data.load() to read arbitrary files accessible to the process user, including credentials and configuration files.

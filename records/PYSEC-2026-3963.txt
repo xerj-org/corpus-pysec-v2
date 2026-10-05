@@ -1,0 +1,11 @@
+PYSEC-2026-3963 PyPI/openssl-encrypt — openssl_encrypt versions before 1.4.9 contain a weak key derivation vulnerability in the D-Bus Crypt
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.9 (ECOSYSTEM)
+aliases: CVE-2026-81704, GHSA-v9r6-grch-fxw7
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-v9r6-grch-fxw7
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-1.4.9-weak-key-derivation-via-d-bus
+
+openssl_encrypt versions before 1.4.9 contain a weak key derivation vulnerability in the D-Bus CryptoService.EncryptFile handler that uses unstretched SHA-256 instead of Argon2id. Attackers can perform offline password guessing against encrypted files roughly six to seven orders of magnitude faster than documented protection by exploiting the missing key stretching and hash rounds.

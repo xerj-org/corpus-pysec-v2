@@ -1,0 +1,24 @@
+PYSEC-2019-141 PyPI/ansible — ansible before versions 2.5.14, 2.6.11, 2.7.5 is vulnerable to a information disclosure flaw in vvv+
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 2.5.0, < 2.5.14, >= 2.6.0, < 2.6.11, >= 2.7.0, < 2.7.5 (ECOSYSTEM)
+aliases: CVE-2018-16876, GHSA-j569-fghw-f9rx
+references:
+  https://github.com/ansible/ansible/pull/49569
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2018-16876
+  https://access.redhat.com/errata/RHSA-2018:3838
+  https://access.redhat.com/errata/RHSA-2018:3837
+  https://access.redhat.com/errata/RHSA-2018:3836
+  https://access.redhat.com/errata/RHSA-2018:3835
+  http://www.securityfocus.com/bid/106225
+  https://www.debian.org/security/2019/dsa-4396
+  https://access.redhat.com/errata/RHSA-2019:0564
+  https://access.redhat.com/errata/RHSA-2019:0590
+  http://lists.opensuse.org/opensuse-security-announce/2019-04/msg00021.html
+  http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00077.html
+  https://usn.ubuntu.com/4072-1/
+  http://lists.opensuse.org/opensuse-security-announce/2019-08/msg00020.html
+  https://github.com/advisories/GHSA-j569-fghw-f9rx
+
+ansible before versions 2.5.14, 2.6.11, 2.7.5 is vulnerable to a information disclosure flaw in vvv+ mode with no_log on that can lead to leakage of sensible data.

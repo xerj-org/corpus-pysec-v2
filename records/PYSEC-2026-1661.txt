@@ -1,0 +1,15 @@
+PYSEC-2026-1661 PyPI/mlflow — Information exposure in MLflow
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.9.0 (ECOSYSTEM)
+aliases: CVE-2023-43472, GHSA-wqxf-447m-6f5f
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-43472
+  https://github.com/mlflow/mlflow
+  https://mlflow.org/news/2023/12/06/2.9.0-release/index.html
+  https://www.contrastsecurity.com/security-influencers/discovering-mlflow-framework-zero-day-vulnerability-machine-language-model-security-contrast-security
+  https://pypi.org/project/mlflow
+  https://github.com/advisories/GHSA-wqxf-447m-6f5f
+
+An issue in MLFlow versions 2.8.1 and before allows a remote attacker to obtain sensitive information via a crafted request to REST API.

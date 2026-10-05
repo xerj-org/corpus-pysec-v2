@@ -1,0 +1,14 @@
+PYSEC-2019-212 PyPI/twisted — Python Twisted 14.0 trustRoot is not respected in HTTP client
+package: twisted
+ecosystem: PyPI
+versions affected:
+  >= 0, < 14.0.1 (ECOSYSTEM)
+aliases: CVE-2014-7143, GHSA-3c45-wgjp-7v9r
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-7143
+  http://www.openwall.com/lists/oss-security/2014/09/22/2
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/96135
+  https://security-tracker.debian.org/tracker/CVE-2014-7143
+  https://github.com/advisories/GHSA-3c45-wgjp-7v9r
+
+Python Twisted 14.0 trustRoot is not respected in HTTP client

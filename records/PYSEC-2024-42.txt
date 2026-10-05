@@ -1,0 +1,14 @@
+PYSEC-2024-42 PyPI/apache-airflow — Apache Airflow, versions before 2.8.2, has a vulnerability that allows authenticated Ops and Viewers
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.8.2 (ECOSYSTEM)
+aliases: CVE-2024-26280, GHSA-6xwf-xvf3-v459
+references:
+  https://github.com/apache/airflow/pull/37501
+  https://lists.apache.org/thread/knskxxxml95091rsnpxkpo1jjp8rj0fh
+  https://github.com/advisories/GHSA-6xwf-xvf3-v459
+
+Apache Airflow, versions before 2.8.2, has a vulnerability that allows authenticated Ops and Viewers users to view all information on audit logs, including dag names and usernames they were not permitted to view. With 2.8.2 and newer, Ops and Viewer users do not have audit log permission by default, they need to be explicitly granted permissions to see the logs. Only admin users have audit log permission by default.
+
+Users of Apache Airflow are recommended to upgrade to version 2.8.2 or newer to mitigate the risk associated with this vulnerability

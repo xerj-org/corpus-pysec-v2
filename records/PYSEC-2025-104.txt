@@ -1,0 +1,16 @@
+PYSEC-2025-104 PyPI/django — An issue was discovered in 5.2 before 5.2.9, 5.1 before 5.1.15, and 4.2 before 4.2.27. `FilteredRela
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 4.2, < 4.2.27, >= 5.1, < 5.1.15, >= 5.2, < 5.2.9 (ECOSYSTEM)
+aliases: CVE-2025-13372, GHSA-rqw2-ghq9-44m7
+references:
+  https://groups.google.com/g/django-announce
+  https://docs.djangoproject.com/en/dev/releases/security/
+  https://www.djangoproject.com/weblog/2025/dec/02/security-releases/
+  https://github.com/advisories/GHSA-rqw2-ghq9-44m7
+
+An issue was discovered in 5.2 before 5.2.9, 5.1 before 5.1.15, and 4.2 before 4.2.27.
+`FilteredRelation` is subject to SQL injection in column aliases, using a suitably crafted dictionary, with dictionary expansion, as the `**kwargs` passed to `QuerySet.annotate()` or `QuerySet.alias()` on PostgreSQL.
+Earlier, unsupported Django series (such as 5.0.x, 4.1.x, and 3.2.x) were not evaluated and may also be affected.
+Django would like to thank Stackered for reporting this issue.

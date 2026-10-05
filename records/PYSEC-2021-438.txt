@@ -1,0 +1,13 @@
+PYSEC-2021-438 PyPI/django-helpdesk — django-helpdesk is vulnerable to Improper Neutralization of Input During Web Page Generation ('Cross
+package: django-helpdesk
+ecosystem: PyPI
+versions affected:
+  >= 0, < a22eb0673fe0b7784f99c6b5fd343b64a6700f06 (GIT: https://github.com/django-helpdesk/django-helpdesk)
+  >= 0, < 0.3.2 (ECOSYSTEM)
+aliases: CVE-2021-3994, GHSA-2v5j-q74q-r53f
+references:
+  https://github.com/django-helpdesk/django-helpdesk/commit/a22eb0673fe0b7784f99c6b5fd343b64a6700f06
+  https://huntr.dev/bounties/be7f211d-4bfd-44fd-91e8-682329906fbd
+  https://github.com/advisories/GHSA-2v5j-q74q-r53f
+
+django-helpdesk is vulnerable to Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')

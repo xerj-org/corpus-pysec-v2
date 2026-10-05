@@ -1,0 +1,12 @@
+PYSEC-2020-245 PyPI/ovirt-engine-sdk-python — ovirt-engine-sdk-python before 3.4.0.7 and 3.5.0.4 does not verify that the hostname of the remote e
+package: ovirt-engine-sdk-python
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.4.0.7, >= 3.5.0.0, < 3.5.0.4 (ECOSYSTEM)
+aliases: CVE-2014-0161, GHSA-wf9j-m9fv-92gq
+references:
+  https://access.redhat.com/security/cve/cve-2014-0161
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-0161
+  https://github.com/advisories/GHSA-wf9j-m9fv-92gq
+
+ovirt-engine-sdk-python before 3.4.0.7 and 3.5.0.4 does not verify that the hostname of the remote endpoint matches the Common Name (CN) or subjectAltName as specified by its x.509 certificate in a TLS/SSL session. This could allow man-in-the-middle attackers to spoof remote endpoints via an arbitrary valid certificate.

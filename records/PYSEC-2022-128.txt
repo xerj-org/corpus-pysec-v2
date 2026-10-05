@@ -1,0 +1,12 @@
+PYSEC-2022-128 PyPI/tensorflow-gpu — Tensorflow is an Open Source Machine Learning Framework. When decoding a resource handle tensor from
+package: tensorflow-gpu
+ecosystem: PyPI
+versions affected:
+  >= 0, < 14fea662350e7c26eb5fe1be2ac31704e5682ee6 (GIT: https://github.com/tensorflow/tensorflow)
+  >= 0, < 2.5.3, >= 2.6.0, < 2.6.3 (ECOSYSTEM)
+aliases: CVE-2022-23564, GHSA-8rcj-c8pj-v3m3
+references:
+  https://github.com/tensorflow/tensorflow/commit/14fea662350e7c26eb5fe1be2ac31704e5682ee6
+  https://github.com/tensorflow/tensorflow/security/advisories/GHSA-8rcj-c8pj-v3m3
+
+Tensorflow is an Open Source Machine Learning Framework. When decoding a resource handle tensor from protobuf, a TensorFlow process can encounter cases where a `CHECK` assertion is invalidated based on user controlled arguments. This allows attackers to cause denial of services in TensorFlow processes. The fix will be included in TensorFlow 2.8.0. We will also cherrypick this commit on TensorFlow 2.7.1, TensorFlow 2.6.3, and TensorFlow 2.5.3, as these are also affected and still in supported range.

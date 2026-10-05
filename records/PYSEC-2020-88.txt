@@ -1,0 +1,14 @@
+PYSEC-2020-88 PyPI/plone — SQL Injection in DTML or in connection objects in Plone 4.0 through 5.2.1 allows users to perform un
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 4.0, < 5.2.2 (ECOSYSTEM)
+aliases: CVE-2020-7939, GHSA-hhmf-7rgg-gcw5
+references:
+  https://plone.org/security/hotfix/20200121
+  https://plone.org/security/hotfix/20200121/sql-injection-in-dtml-or-in-connection-objects
+  https://www.openwall.com/lists/oss-security/2020/01/22/1
+  http://www.openwall.com/lists/oss-security/2020/01/24/1
+  https://github.com/advisories/GHSA-hhmf-7rgg-gcw5
+
+SQL Injection in DTML or in connection objects in Plone 4.0 through 5.2.1 allows users to perform unwanted SQL queries. (This is a problem in Zope.)

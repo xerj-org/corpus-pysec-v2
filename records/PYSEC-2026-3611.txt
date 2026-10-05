@@ -1,0 +1,27 @@
+PYSEC-2026-3611 PyPI/pypdf — pypdf: Possible large memory usage for wrong image dimensions
+package: pypdf
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.14.0 (ECOSYSTEM)
+aliases: CVE-2026-59938, GHSA-5qjq-93h5-hrgp
+references:
+  https://github.com/py-pdf/pypdf/security/advisories/GHSA-5qjq-93h5-hrgp
+  https://nvd.nist.gov/vuln/detail/CVE-2026-59938
+  https://github.com/py-pdf/pypdf/pull/3888
+  https://github.com/py-pdf/pypdf/commit/c64583be16b8e8763d8777075f8ecbf382014b7a
+  https://github.com/py-pdf/pypdf
+  https://github.com/py-pdf/pypdf/releases/tag/6.14.0
+  https://pypi.org/project/pypdf
+  https://github.com/advisories/GHSA-5qjq-93h5-hrgp
+
+### Impact
+
+An attacker who uses this vulnerability can craft a PDF which leads to large memory usage. This requires loading images where the declared size values are much too large compared to the actual data.
+
+### Patches
+
+This has been fixed in [pypdf==6.14.0](https://github.com/py-pdf/pypdf/releases/tag/6.14.0).
+
+### Workarounds
+
+If you cannot upgrade yet, consider applying the changes from PR [#3888](https://github.com/py-pdf/pypdf/pull/3888).

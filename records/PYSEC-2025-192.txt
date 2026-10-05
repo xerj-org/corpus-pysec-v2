@@ -1,0 +1,15 @@
+PYSEC-2025-192 PyPI/torch — A vulnerability was found in PyTorch 2.6.0. It has been declared as critical. Affected by this vulne
+package: torch
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 2.6.0-NA (ECOSYSTEM)
+aliases: CVE-2025-2998, GHSA-f4hp-rmr7-r7v8
+references:
+  https://vuldb.com/?id.302047
+  https://vuldb.com/?submit.524151
+  https://github.com/pytorch/pytorch/issues/149622
+  https://github.com/pytorch/pytorch/issues/149622#issue-2935495265
+  https://vuldb.com/?ctiid.302047
+  https://github.com/advisories/GHSA-f4hp-rmr7-r7v8
+
+A vulnerability was found in PyTorch 2.6.0. It has been declared as critical. Affected by this vulnerability is the function torch.nn.utils.rnn.pad_packed_sequence. The manipulation leads to memory corruption. Local access is required to approach this attack. The exploit has been disclosed to the public and may be used.

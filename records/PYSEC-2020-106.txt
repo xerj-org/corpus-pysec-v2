@@ -1,0 +1,18 @@
+PYSEC-2020-106 PyPI/salt — In SaltStack Salt through 3002, salt-netapi improperly validates eauth credentials and tokens. A use
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2015.8.10, >= 2015.8.11, < 2015.8.13, >= 2016.3.0, < 2016.3.4, >= 2016.3.5, < 2016.3.6, >= 2016.3.7, < 2016.3.8, >= 2016.11.0, < 2016.11.3, >= 2016.11.4, < 2016.11.6, >= 2016.11.7, < 2016.11.10, >= 2017.7.0, < 2017.7.4, >= 2017.7.5, < 2017.7.8, >= 2018.3.0rc1, < 2018.3.5, >= 2019.2.0, < 2019.2.5, >= 3000, < 3000.3 (ECOSYSTEM)
+aliases: CVE-2020-25592, GHSA-29j3-2446-5j4w
+references:
+  https://docs.saltstack.com/en/latest/topics/releases/index.html
+  https://www.saltstack.com/blog/on-november-3-2020-saltstack-publicly-disclosed-three-new-cves/
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/TPOGB2F6XUAIGFDTOCQDNB2VIXFXHWMA/
+  http://lists.opensuse.org/opensuse-security-announce/2020-11/msg00029.html
+  https://security.gentoo.org/glsa/202011-13
+  http://packetstormsecurity.com/files/160039/SaltStack-Salt-REST-API-Arbitrary-Command-Execution.html
+  https://lists.debian.org/debian-lts-announce/2020/12/msg00007.html
+  https://www.debian.org/security/2021/dsa-4837
+  https://github.com/advisories/GHSA-29j3-2446-5j4w
+
+In SaltStack Salt through 3002, salt-netapi improperly validates eauth credentials and tokens. A user can bypass authentication and invoke Salt SSH.

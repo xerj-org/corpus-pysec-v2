@@ -1,0 +1,15 @@
+PYSEC-2026-536 PyPI/sglang — SGLanG: Multimodal scheduler deserializes untrusted pickle data on 0.0.0.0 ROUTER socket
+package: sglang
+ecosystem: PyPI
+versions affected:
+  >= 0.5.5, <= 0.5.12 (ECOSYSTEM)
+aliases: CVE-2026-7301, GHSA-gwv6-pq6m-p3rq
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-7301
+  https://antiproof.ai/blog/three-rces-in-sglang
+  https://github.com/sgl-project/sglang
+  https://github.com/sgl-project/sglang/tree/main/python/sglang
+  https://pypi.org/project/sglang
+  https://github.com/advisories/GHSA-gwv6-pq6m-p3rq
+
+SGLang's multimodal generation runtime scheduler's ROUTER socket binds to 0.0.0.0 by default and contains a sink that calls pickle.loads() on incoming messages, enabling RCE when exposed to the internet.

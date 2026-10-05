@@ -1,0 +1,16 @@
+PYSEC-2013-23 PyPI/moin — Cross-site scripting (XSS) vulnerability in the rsslink function in theme/__init__.py in MoinMoin 1.
+package: moin
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.9.6 (ECOSYSTEM)
+aliases: CVE-2012-6082, GHSA-452h-rx28-49w9
+references:
+  http://www.securityfocus.com/bid/57089
+  http://www.openwall.com/lists/oss-security/2012/12/29/7
+  http://hg.moinmo.in/moin/1.9/rev/c98ec456e493
+  http://secunia.com/advisories/51663
+  http://www.openwall.com/lists/oss-security/2012/12/30/5
+  http://moinmo.in/SecurityFixes
+  https://github.com/advisories/GHSA-452h-rx28-49w9
+
+Cross-site scripting (XSS) vulnerability in the rsslink function in theme/__init__.py in MoinMoin 1.9.5 allows remote attackers to inject arbitrary web script or HTML via the page name in a rss link.

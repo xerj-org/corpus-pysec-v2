@@ -1,0 +1,22 @@
+PYSEC-2026-4046 PyPI/djust — djust: WebSocket/runtime reconstructed request omits the client Host, causing host/subdomain TenantResolvers to misresolve the tenant on the live path
+package: djust
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0.7 (ECOSYSTEM)
+aliases: CVE-2026-61589, GHSA-v9rj-xjfv-xj9r
+references:
+  https://github.com/djust-org/djust/security/advisories/GHSA-v9rj-xjfv-xj9r
+  https://github.com/djust-org/djust
+  https://github.com/djust-org/djust/releases/tag/v1.0.7
+  https://pypi.org/project/djust
+  https://github.com/advisories/GHSA-v9rj-xjfv-xj9r
+  https://nvd.nist.gov/vuln/detail/CVE-2026-61589
+
+### Impact
+The WebSocket `handle_mount` and `ViewRuntime._build_request` rebuild an `HttpRequest` via `RequestFactory().get(...)` with no `HTTP_HOST`, so `request.get_host()` defaulted to `"testserver"` on the live path. Host/subdomain/domain `TenantResolver`s then misresolved the tenant — `None` on the live path while the HTTP path resolved correctly. With `STRICT_MODE=False` the tenant-scoped managers returned unscoped rows (**cross-tenant disclosure**); with the default they returned an empty queryset (broken tenancy).
+
+### Patches
+Fixed in **djust 1.0.7**. The handshake Host is extracted from the ASGI scope, validated against `ALLOWED_HOSTS` (the same logic as the CSWSH Origin gate, parsed with Django's `split_domain_port` so malformed Hosts are rejected at the boundary), and propagated — with the TLS scheme — into the reconstructed request, so live-path tenant resolution matches HTTP exactly.
+
+### Workarounds
+No workaround on the live path short of upgrading. Most exposed when combined with `STRICT_MODE=False`.

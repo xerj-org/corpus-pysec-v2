@@ -1,0 +1,16 @@
+PYSEC-2023-281 PyPI/mlflow — Improper Neutralization of Special Elements Used in a Template Engine in GitHub repository mlflow/ml
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 432b8ccf27fd3a76df4ba79bb1bec62118a85625 (GIT: https://github.com/mlflow/mlflow)
+  >= 0, < 2.9.2 (ECOSYSTEM)
+aliases: CVE-2023-6709, GHSA-cxfr-5q3r-2rc2
+references:
+  https://huntr.com/bounties/9e4cc07b-6fff-421b-89bd-9445ef61d34d
+  https://huntr.com/bounties/9e4cc07b-6fff-421b-89bd-9445ef61d34d
+  https://huntr.com/bounties/9e4cc07b-6fff-421b-89bd-9445ef61d34d
+  https://huntr.com/bounties/9e4cc07b-6fff-421b-89bd-9445ef61d34d
+  https://github.com/mlflow/mlflow/commit/432b8ccf27fd3a76df4ba79bb1bec62118a85625
+  https://github.com/advisories/GHSA-cxfr-5q3r-2rc2
+
+Improper Neutralization of Special Elements Used in a Template Engine in GitHub repository mlflow/mlflow prior to 2.9.2.

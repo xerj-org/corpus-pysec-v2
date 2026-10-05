@@ -1,0 +1,17 @@
+PYSEC-2018-47 PyPI/moin — Cross-site scripting (XSS) vulnerability in the link dialogue in GUI editor in MoinMoin before 1.9.1
+package: moin
+ecosystem: PyPI
+versions affected:
+  >= 0, < 70955a8eae091cc88fd9a6e510177e70289ec024 (GIT: https://github.com/moinwiki/moin-1.9)
+  >= 0, < 1.9.10 (ECOSYSTEM)
+aliases: CVE-2017-5934, GHSA-42fp-4hm3-j8r7
+references:
+  https://github.com/moinwiki/moin-1.9/commit/70955a8eae091cc88fd9a6e510177e70289ec024
+  http://moinmo.in/SecurityFixes
+  http://lists.opensuse.org/opensuse-security-announce/2018-10/msg00024.html
+  https://www.debian.org/security/2018/dsa-4318
+  https://lists.debian.org/debian-lts-announce/2018/10/msg00007.html
+  https://usn.ubuntu.com/3794-1/
+  https://github.com/advisories/GHSA-42fp-4hm3-j8r7
+
+Cross-site scripting (XSS) vulnerability in the link dialogue in GUI editor in MoinMoin before 1.9.10 allows remote attackers to inject arbitrary web script or HTML via unspecified vectors.

@@ -1,0 +1,10 @@
+PYSEC-2026-587 PyPI/crawl4ai — Crawl4AI is an open-source LLM friendly web crawler & scraper. Prior to 0.8.8, the Docker API server
+package: crawl4ai
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.8.8 (ECOSYSTEM)
+aliases: CVE-2026-53754, GHSA-4qqr-vv2q-cmr5
+references:
+  https://github.com/unclecode/crawl4ai/security/advisories/GHSA-4qqr-vv2q-cmr5
+
+Crawl4AI is an open-source LLM friendly web crawler & scraper. Prior to 0.8.8, the Docker API server's SSRF protection (validate_webhook_url / validate_url_destination in deploy/docker/utils.py) used an explicit IPv4/IPv6 CIDR blocklist that missed several address families. An attacker could reach internal services and cloud metadata endpoints (e.g. 169.254.169.254) despite the filter by encoding an internal IPv4 address inside an IPv6 transition form, or by using the IPv6 unspecified address. Because the Docker API is unauthenticated by default (jwt_enabled: false), no credentials are required. This vulnerability is fixed in 0.8.8.

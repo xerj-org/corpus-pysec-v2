@@ -1,0 +1,26 @@
+PYSEC-2026-929 PyPI/swift — OpenStack Object Storage (Swift) allows remote attackers to cause a denial of service
+package: swift
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.4.0 (ECOSYSTEM)
+aliases: CVE-2016-0737, GHSA-972c-cfv8-2hq8
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2016-0737
+  https://access.redhat.com/errata/RHSA-2016:0126
+  https://access.redhat.com/errata/RHSA-2016:0127
+  https://access.redhat.com/errata/RHSA-2016:0128
+  https://access.redhat.com/errata/RHSA-2016:0155
+  https://access.redhat.com/errata/RHSA-2016:0328
+  https://access.redhat.com/errata/RHSA-2016:0329
+  https://access.redhat.com/security/cve/CVE-2016-0737
+  https://bugs.launchpad.net/swift/+bug/1466549
+  https://bugzilla.redhat.com/show_bug.cgi?id=1298924
+  https://launchpad.net/swift/+milestone/2.4.0
+  https://opendev.org/openstack/swift
+  https://review.openstack.org/#/c/217750
+  https://security.openstack.org/ossa/OSSA-2016-004.html
+  https://web.archive.org/web/20200228001102/http://www.securityfocus.com/bid/81432
+  https://pypi.org/project/swift
+  https://github.com/advisories/GHSA-972c-cfv8-2hq8
+
+OpenStack Object Storage (Swift) before 2.4.0 does not properly close client connections, which allows remote attackers to cause a denial of service (proxy-server resource consumption) via a series of interrupted requests to a Large Object URL.

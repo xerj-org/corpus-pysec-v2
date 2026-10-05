@@ -1,0 +1,19 @@
+PYSEC-2018-39 PyPI/ansible — Ansible before versions 2.1.4, 2.2.1 is vulnerable to an improper input validation in Ansible's hand
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.1.4.0, >= 2.2.0.0, < 2.2.1.0 (ECOSYSTEM)
+aliases: CVE-2016-9587, GHSA-m956-frf4-m2wr
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2016-9587
+  https://www.exploit-db.com/exploits/41013/
+  https://security.gentoo.org/glsa/201701-77
+  https://access.redhat.com/errata/RHSA-2017:1685
+  https://access.redhat.com/errata/RHSA-2017:0515
+  https://access.redhat.com/errata/RHSA-2017:0448
+  http://www.securityfocus.com/bid/95352
+  http://rhn.redhat.com/errata/RHSA-2017-0260.html
+  http://rhn.redhat.com/errata/RHSA-2017-0195.html
+  https://github.com/advisories/GHSA-m956-frf4-m2wr
+
+Ansible before versions 2.1.4, 2.2.1 is vulnerable to an improper input validation in Ansible's handling of data sent from client systems. An attacker with control over a client system being managed by Ansible and the ability to send facts back to the Ansible server could use this flaw to execute arbitrary code on the Ansible server using the Ansible server privileges.

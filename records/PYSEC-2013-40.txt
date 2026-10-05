@@ -1,0 +1,20 @@
+PYSEC-2013-40 PyPI/keystone — OpenStack Identity (Keystone) Grizzly 2013.1.1, when DEBUG mode logging is enabled, logs the (1) adm
+package: keystone
+ecosystem: PyPI
+versions affected:
+  >= 0, < c5037dd6b82909efaaa8720e8cfa8bdb8b4a0edd (GIT: https://github.com/openstack/keystone)
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2013-2006, GHSA-rxrm-xvp4-jqvh
+references:
+  https://bugs.launchpad.net/ossn/+bug/1168252
+  http://rhn.redhat.com/errata/RHSA-2013-0806.html
+  http://www.openwall.com/lists/oss-security/2013/04/24/1
+  https://bugs.launchpad.net/keystone/+bug/1172195
+  http://www.securityfocus.com/bid/59411
+  http://www.openwall.com/lists/oss-security/2013/04/24/2
+  https://github.com/openstack/keystone/commit/c5037dd6b82909efaaa8720e8cfa8bdb8b4a0edd
+  http://lists.fedoraproject.org/pipermail/package-announce/2013-May/106220.html
+  http://lists.fedoraproject.org/pipermail/package-announce/2013-May/105916.html
+  https://github.com/advisories/GHSA-rxrm-xvp4-jqvh
+
+OpenStack Identity (Keystone) Grizzly 2013.1.1, when DEBUG mode logging is enabled, logs the (1) admin_token and (2) LDAP password in plaintext, which allows local users to obtain sensitive by reading the log file.

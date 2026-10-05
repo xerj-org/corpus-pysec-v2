@@ -1,0 +1,40 @@
+PYSEC-2026-1764 PyPI/pdoc — pdoc embeds link to malicious CDN if math mode is enabled
+package: pdoc
+ecosystem: PyPI
+versions affected:
+  >= 0, < 14.5.1 (ECOSYSTEM)
+aliases: CVE-2024-38526, GHSA-5vgj-ggm4-fg62
+references:
+  https://github.com/mitmproxy/pdoc/security/advisories/GHSA-5vgj-ggm4-fg62
+  https://nvd.nist.gov/vuln/detail/CVE-2024-38526
+  https://github.com/mitmproxy/pdoc/pull/703
+  https://github.com/mitmproxy/pdoc/commit/726b8f2e365fe8afeb3604a7c73d19b460395d58
+  https://github.com/mitmproxy/pdoc
+  https://sansec.io/research/polyfill-supply-chain-attack
+  https://www.vicarius.io/vsociety/posts/polyfillio-in-pdoc-cve-2024-38526
+  https://pypi.org/project/pdoc
+  https://github.com/advisories/GHSA-5vgj-ggm4-fg62
+
+### Impact
+
+Documentation generated with `pdoc --math` linked to JavaScript files from polyfill.io.
+The polyfill.io CDN has been sold and now serves malicious code.
+
+Users who produce documentation with math mode should update immediately. All other users are unaffected.
+
+### Patches
+
+This issue has been fixed in pdoc 14.5.1.
+
+### References
+
+https://github.com/mitmproxy/pdoc/pull/703
+https://sansec.io/research/polyfill-supply-chain-attack
+
+### Timeline
+
+- **[2024-06-25]** https://sansec.io/research/polyfill-supply-chain-attack is published.
+- **[2024-06-25 20:54 UTC]** Issue reported to the pdoc project by @adhintz.
+- **[2024-06-25 21:33 UTC]** Patched version released.
+- **[2024-06-25 21:37 UTC]** Security advisory published.
+- **[2024-06-25 23:49 UTC]** CVE-2024-38526 assigned by GitHub.

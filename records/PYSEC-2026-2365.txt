@@ -1,0 +1,16 @@
+PYSEC-2026-2365 PyPI/apache-airflow-providers-cncf-kubernetes — Apache Airflow CNCF Kubernetes provider: JWT Token Exposure in KubernetesExecutor Command-Line Arguments
+package: apache-airflow-providers-cncf-kubernetes
+ecosystem: PyPI
+versions affected:
+  >= 0, < 10.17.0 (ECOSYSTEM)
+aliases: CVE-2026-27173, GHSA-524w-vq63-2xhf
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-27173
+  https://github.com/apache/airflow/pull/60108
+  https://github.com/apache/airflow
+  https://lists.apache.org/thread/pk3m2z4s2rkmc0v6gh9hnch9spc6stqw
+  http://www.openwall.com/lists/oss-security/2026/05/19/35
+  https://pypi.org/project/apache-airflow-providers-cncf-kubernetes
+  https://github.com/advisories/GHSA-524w-vq63-2xhf
+
+JWT tokens that were used by workers in Kubernetes Executors have been exposed to users who had read only access to Kuberentes Pods. This could allow users with just read-only access to perform actions that were only available to running tasks via Task SDK and potentially allow to modify state of Airflow Database for tasks.

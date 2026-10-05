@@ -1,0 +1,12 @@
+PYSEC-2020-2 PyPI/ansible — An archive traversal flaw was found in all ansible-engine versions 2.9.x prior to 2.9.7, when runnin
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 2.9.0, < 2.9.7 (ECOSYSTEM)
+aliases: CVE-2020-10691, GHSA-3c67-gc48-983w
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2020-10691
+  https://github.com/ansible/ansible/pull/68596
+  https://github.com/advisories/GHSA-3c67-gc48-983w
+
+An archive traversal flaw was found in all ansible-engine versions 2.9.x prior to 2.9.7, when running ansible-galaxy collection install. When extracting a collection .tar.gz file, the directory is created without sanitizing the filename. An attacker could take advantage to overwrite any file within the system.

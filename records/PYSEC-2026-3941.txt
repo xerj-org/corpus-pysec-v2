@@ -1,0 +1,24 @@
+PYSEC-2026-3941 PyPI/weblate — Private Weblate projects vulnerable to observable object existence disclosure via globally scoped object lookups
+package: weblate
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2026.7 (ECOSYSTEM)
+aliases: CVE-2026-55227, GHSA-2p9g-x3cv-5hh4
+references:
+  https://github.com/WeblateOrg/weblate/security/advisories/GHSA-2p9g-x3cv-5hh4
+  https://nvd.nist.gov/vuln/detail/CVE-2026-55227
+  https://github.com/WeblateOrg/weblate/pull/19971
+  https://github.com/WeblateOrg/weblate/commit/836bc082803d49d02f2831ec8339268eb66bcdae
+  https://github.com/WeblateOrg/weblate
+  https://github.com/WeblateOrg/weblate/releases/tag/weblate-2026.7
+  https://pypi.org/project/weblate
+  https://github.com/advisories/GHSA-2p9g-x3cv-5hh4
+
+### Impact
+The several endpoints could leak object existence information to users who had no access to it by HTTP status code 403 instead of 404.
+
+### Patches
+* https://github.com/WeblateOrg/weblate/pull/19971
+
+### References
+Thanks to Yaohui Wang for reporting this via GitHub.

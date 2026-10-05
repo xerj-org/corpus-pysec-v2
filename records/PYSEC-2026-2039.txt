@@ -1,0 +1,28 @@
+PYSEC-2026-2039 PyPI/weblate — Weblate lacks rate limiting when verifying second factor
+package: weblate
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.12 (ECOSYSTEM)
+aliases: CVE-2025-47951, GHSA-57jg-m997-cx3q
+references:
+  https://github.com/WeblateOrg/weblate/security/advisories/GHSA-57jg-m997-cx3q
+  https://nvd.nist.gov/vuln/detail/CVE-2025-47951
+  https://github.com/WeblateOrg/weblate/pull/14918
+  https://github.com/WeblateOrg/weblate/commit/f806293451248c5d95e45b3b507e9d158bc4f384
+  https://hackerone.com/reports/3150564
+  https://github.com/WeblateOrg/weblate
+  https://github.com/WeblateOrg/weblate/releases/tag/weblate-5.12.1
+  https://pypi.org/project/weblate
+  https://github.com/advisories/GHSA-57jg-m997-cx3q
+
+### Impact
+
+The verification of the second factor was not subject to rate limiting. The absence of rate limiting on the second factor endpoint allows an attacker with valid credentials to automate OTP guessing. 
+
+### Patches
+
+This issue has been addressed in Weblate 5.12 via https://github.com/WeblateOrg/weblate/pull/14918.
+
+### References
+
+Thanks to [obscuredeer](https://hackerone.com/obscuredeer) for reporting this [issue at HackerOne](https://hackerone.com/reports/3150564).

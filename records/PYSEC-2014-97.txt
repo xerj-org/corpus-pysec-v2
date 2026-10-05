@@ -1,0 +1,16 @@
+PYSEC-2014-97 PyPI/apache-libcloud — Libcloud 0.12.3 through 0.13.2 does not set the scrub_data parameter for the destroy DigitalOcean AP
+package: apache-libcloud
+ecosystem: PyPI
+versions affected:
+  >= 0.12.3, < 0.13.3 (ECOSYSTEM)
+aliases: CVE-2013-6480, GHSA-g892-9h8m-r69r
+references:
+  https://digitalocean.com/blog_posts/transparency-regarding-data-security
+  http://libcloud.apache.org/security.html
+  https://github.com/fog/fog/issues/2525
+  http://www.securityfocus.com/bid/64617
+  http://lists.opensuse.org/opensuse-updates/2014-02/msg00015.html
+  http://www.securityfocus.com/archive/1/530624/100/0/threaded
+  https://github.com/advisories/GHSA-g892-9h8m-r69r
+
+Libcloud 0.12.3 through 0.13.2 does not set the scrub_data parameter for the destroy DigitalOcean API, which allows local users to obtain sensitive information by leveraging a new VM.

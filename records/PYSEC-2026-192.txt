@@ -1,0 +1,10 @@
+PYSEC-2026-192 PyPI/python-liquid — Python Liquid is a Python engine for the Liquid template language. Prior to 2.2.0, the built-in File
+package: python-liquid
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.2.0 (ECOSYSTEM)
+aliases: CVE-2026-45017, GHSA-8p4x-wr7x-3788
+references:
+  https://github.com/jg-rp/liquid/security/advisories/GHSA-8p4x-wr7x-3788
+
+Python Liquid is a Python engine for the Liquid template language. Prior to 2.2.0, the built-in FileSystemLoader and CachingFileSystemLoader do not guard against reading files outside their search paths when given an absolute path to resolve. This allows malicious template authors to load and render arbitrary files via the {% include %} and {% render %} tags. Targeted files would need to contain valid Liquid markup and be readable by the application process. This vulnerability is fixed in 2.2.0.

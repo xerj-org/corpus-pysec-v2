@@ -1,0 +1,126 @@
+PYSEC-2026-4026 PyPI/asyncssh — AsyncSSH: asyncio event-loop freeze via SSH maximum packet size = 0 in SSH_MSG_CHANNEL_OPEN / OPEN_CONFIRMATION
+package: asyncssh
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.24.0 (ECOSYSTEM)
+aliases: CVE-2026-62949, GHSA-rw4j-r22c-9gc3
+references:
+  https://github.com/ronf/asyncssh/security/advisories/GHSA-rw4j-r22c-9gc3
+  https://nvd.nist.gov/vuln/detail/CVE-2026-62949
+  https://github.com/ronf/asyncssh/commit/756cbae5350789ce9735f15f704bae9b5a3608b8
+  https://github.com/ronf/asyncssh/commit/9c354270c009285525e126721e8ed5fbed1f8a67
+  https://github.com/ronf/asyncssh
+  https://github.com/ronf/asyncssh/releases/tag/v2.24.0
+  https://pypi.org/project/asyncssh
+  https://github.com/advisories/GHSA-rw4j-r22c-9gc3
+
+## Summary
+
+A malicious SSH server can wedge an AsyncSSH **client**, and an authenticated
+client can wedge an AsyncSSH **server**, by sending a channel `maximum packet
+size` of `0` in `SSH_MSG_CHANNEL_OPEN_CONFIRMATION` (server→client) or
+`SSH_MSG_CHANNEL_OPEN` (client→server). AsyncSSH stores the peer-supplied value
+verbatim with no lower-bound check; the first time channel data is written,
+`SSHChannel._flush_send_buf` enters a **synchronous infinite loop** that cannot
+be interrupted by `asyncio.wait_for` or any timeout. The loop body has no
+`await`, so it blocks the entire asyncio event loop — for a server, one
+malicious authenticated channel freezes **all** current and future connections.
+
+RFC 4254 §5.1 leaves receiver behavior for a peer-reported "maximum packet
+size = 0" undefined, so the value must be rejected rather than stored.
+
+## Root cause
+
+`asyncssh/channel.py`:
+
+```python
+# process_open (server side)        -- line 465
+self._send_pktsize = send_pktsize    # peer value, no >= 1 check
+
+# process_open_confirmation (client) -- line 528
+self._send_pktsize = send_pktsize    # peer value, no >= 1 check
+
+# _flush_send_buf                    -- lines 305-320
+while self._send_buf and self._send_window:
+    pktsize = min(self._send_window, self._send_pktsize)  # 0 when peer sends 0
+    buf, datatype = self._send_buf[0]
+    if len(buf) > pktsize:          # True for any buffered data
+        data = buf[:pktsize]        # empty (b'')
+        del buf[:pktsize]           # no-op
+    ...
+    self._send_window -= len(data)  # -= 0, unchanged
+```
+
+With `_send_pktsize == 0`, `pktsize` is `0`, so `buf[:0]` is empty,
+`del buf[:0]` is a no-op, and `_send_window` is never decremented — the
+`while` condition is permanently true, and with no `await` in the body the
+event loop is blocked.
+
+## Impact
+
+- **Client vector (primary):** a malicious SSH server replies to the client's
+  channel open with `maximum packet size = 0`; the client wedges on its first
+  channel write. The attacker is the server, so it needs no valid credentials.
+- **Server vector:** an authenticated client opens a channel with
+  `maximum packet size = 0`; any server-side channel write wedges the AsyncSSH
+  server's event loop, freezing **every** current and future connection. A
+  single low-privilege account can take the whole server down.
+
+Both vectors are a single SSH message, deterministic, and cause total
+availability loss for the affected process.
+
+## Affected versions
+
+<= 2.23.1 (latest release, 2026-06-06); also present on `master`
+(channel.py:465/528 unguarded). Verified end-to-end on 2.23.1.
+
+## Verification
+
+The maintainer's proposed fix (reject `send_pktsize == 0` in `connection.py`
+`_process_channel_open` / `_process_channel_open_confirmation`) was applied to
+2.23.1 and re-tested end-to-end over TCP:
+
+- **Unpatched:** malicious server (paramiko forcing `max_packet_size=0` in
+  OPEN_CONFIRMATION) + real asyncssh client → client event loop wedges.
+- **Patched:** the guard fires inside `_process_channel_open_confirmation`, the
+  malicious value is rejected, the connection closes cleanly
+  (`ChannelOpenError: SSH connection closed`), and the client does **not** wedge.
+
+The maintainer (Ron Frederick) independently confirmed the freeze and noted that
+**even shutting the server down does not break clients out of the loop**.
+
+Reproducers available: a focused harness driving the real
+`SSHChannel._flush_send_buf` with `_send_pktsize=0`, and an end-to-end
+`malicious_server.py` (paramiko) + `client.py` (real asyncssh) pair. The
+end-to-end client repro uses `asyncio.new_event_loop()` (not `get_event_loop()`)
+for Python 3.14 compatibility.
+
+## Suggested fix (maintainer's approach)
+
+In `connection.py`, after each `send_pktsize = packet.get_uint32()` in
+`_process_channel_open` and `_process_channel_open_confirmation`:
+
+```python
+if send_pktsize == 0:
+    raise ProtocolError('Invalid maximum packet size')
+```
+
+## CVSS
+
+`CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H` (6.5 Medium). An earlier draft
+quoted 7.5 High ("100% CPU"); the synchronous loop burns ~100% of one core's
+worth of CPU but, being single-threaded, the OS scheduler spreads it across
+cores, so the real impact is event-loop / connection freeze, not machine-wide
+CPU exhaustion.
+
+## References
+
+- RFC 4254 §5.1 (channel "maximum packet size"; behavior for 0 is undefined).
+- The same `maximum packet size = 0` send-loop wedge was confirmed in several
+  other independent SSH implementations (different languages/runtimes) and
+  reported to each maintainer separately.
+
+## Credits
+
+Reported by zhangph (afldl), 2026-06-20.
+```

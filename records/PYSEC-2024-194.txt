@@ -1,0 +1,16 @@
+PYSEC-2024-194 PyPI/zenml — A clickjacking vulnerability exists in zenml-io/zenml versions up to and including 0.55.5 due to the
+package: zenml
+ecosystem: PyPI
+versions affected:
+  >= 0, < f863fde1269bc355951f8cfc826c0244d88ad5e9, < f863fde1269bc355951f8cfc826c0244d88ad5e9 (GIT: https://github.com/zenml-io/zenml)
+  >= 0, < 0.56.3 (ECOSYSTEM)
+aliases: CVE-2024-2383, GHSA-mq73-g4qr-fgcq
+references:
+  https://huntr.com/bounties/22d26f5a-c0ae-4344-aa7d-08ff5ada3963
+  https://github.com/zenml-io/zenml/commit/f863fde1269bc355951f8cfc826c0244d88ad5e9
+  https://huntr.com/bounties/22d26f5a-c0ae-4344-aa7d-08ff5ada3963
+  https://huntr.com/bounties/22d26f5a-c0ae-4344-aa7d-08ff5ada3963
+  https://huntr.com/bounties/22d26f5a-c0ae-4344-aa7d-08ff5ada3963
+  https://github.com/advisories/GHSA-mq73-g4qr-fgcq
+
+A clickjacking vulnerability exists in zenml-io/zenml versions up to and including 0.55.5 due to the application's failure to set appropriate X-Frame-Options or Content-Security-Policy HTTP headers. This vulnerability allows an attacker to embed the application UI within an iframe on a malicious page, potentially leading to unauthorized actions by tricking users into interacting with the interface under the attacker's control. The issue was addressed in version 0.56.3.

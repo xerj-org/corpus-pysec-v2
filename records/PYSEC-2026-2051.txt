@@ -1,0 +1,26 @@
+PYSEC-2026-2051 PyPI/wlc — Weblate command-line client susceptible to SSL verification skip
+package: wlc
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.17.0 (ECOSYSTEM)
+aliases: CVE-2026-22250, GHSA-2mmv-7rrp-g8xh
+references:
+  https://github.com/WeblateOrg/wlc/security/advisories/GHSA-2mmv-7rrp-g8xh
+  https://nvd.nist.gov/vuln/detail/CVE-2026-22250
+  https://github.com/WeblateOrg/wlc/pull/1097
+  https://github.com/WeblateOrg/wlc/commit/a513864ec4daad00146e6d6e039559726e256fa3
+  https://github.com/WeblateOrg/wlc
+  https://pypi.org/project/wlc
+  https://github.com/advisories/GHSA-2mmv-7rrp-g8xh
+
+### Impact
+The SSL verification would be skipped for some crafted URLs.
+
+### Patches
+* https://github.com/WeblateOrg/wlc/pull/1097
+
+### Workarounds
+Avoid using untrusted wlc configurations, as that might cause insecure connections.
+
+### References
+This issue was reported to us by [wh1zee](https://hackerone.com/wh1zee) via HackerOne.

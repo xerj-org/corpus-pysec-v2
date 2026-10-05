@@ -1,0 +1,15 @@
+PYSEC-2025-86 PyPI/apache-airflow — A vulnerability in Apache Airflow allowed authenticated UI users to view secret values in rendered t
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 3.1.0, < 3.1.4 (ECOSYSTEM)
+aliases: CVE-2025-66388, GHSA-fv47-pqh6-wxgq
+references:
+  http://www.openwall.com/lists/oss-security/2025/12/12/1
+  https://lists.apache.org/thread/mv9hzsx8grjf7gdlkxwppnpbtogtls2g
+  https://github.com/apache/airflow/pull/58772
+  https://github.com/advisories/GHSA-fv47-pqh6-wxgq
+
+A vulnerability in Apache Airflow allowed authenticated UI users to view secret values in rendered templates due to secrets not being properly redacted, potentially exposing secrets to users without the appropriate authorization.
+
+Users are recommended to upgrade to version 3.1.4, which fixes this issue.

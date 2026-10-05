@@ -1,0 +1,16 @@
+PYSEC-2014-14 PyPI/requests — Requests (aka python-requests) before 2.3.0 allows remote servers to obtain sensitive information by
+package: requests
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.3.0 (ECOSYSTEM)
+aliases: CVE-2014-1830, GHSA-652x-xj99-gmcc
+references:
+  https://github.com/kennethreitz/requests/issues/1885
+  https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=733108
+  http://www.debian.org/security/2015/dsa-3146
+  http://www.mandriva.com/security/advisories?name=MDVSA-2015:133
+  http://advisories.mageia.org/MGASA-2014-0409.html
+  http://lists.opensuse.org/opensuse-updates/2016-01/msg00095.html
+  https://github.com/advisories/GHSA-652x-xj99-gmcc
+
+Requests (aka python-requests) before 2.3.0 allows remote servers to obtain sensitive information by reading the Proxy-Authorization header in a redirected request.

@@ -1,0 +1,19 @@
+PYSEC-2014-21 PyPI/ipython — IPython Notebook 0.12 through 1.x before 1.2 does not validate the origin of websocket requests, whi
+package: ipython
+ecosystem: PyPI
+versions affected:
+  >= 0.12, < 1.2.0 (ECOSYSTEM)
+aliases: CVE-2014-3429, GHSA-75cw-5cgv-g853
+references:
+  http://lambdaops.com/cross-origin-websocket-hijacking-of-ipython
+  http://permalink.gmane.org/gmane.comp.python.ipython.devel/13198
+  http://seclists.org/oss-sec/2014/q3/152
+  https://bugzilla.redhat.com/show_bug.cgi?id=1119890
+  https://github.com/ipython/ipython/pull/4845
+  http://lists.opensuse.org/opensuse-updates/2014-08/msg00039.html
+  http://www.mandriva.com/security/advisories?name=MDVSA-2015:160
+  http://advisories.mageia.org/MGASA-2014-0320.html
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/94497
+  https://github.com/advisories/GHSA-75cw-5cgv-g853
+
+IPython Notebook 0.12 through 1.x before 1.2 does not validate the origin of websocket requests, which allows remote attackers to execute arbitrary code by leveraging knowledge of the kernel id and a crafted page.

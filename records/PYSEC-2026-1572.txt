@@ -1,0 +1,15 @@
+PYSEC-2026-1572 PyPI/llama-stack — Llama Stack exposes secret in initialization log
+package: llama-stack
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.4.4 (ECOSYSTEM)
+aliases: CVE-2026-25211, GHSA-xmfj-7pp5-fxr6
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-25211
+  https://github.com/llamastack/llama-stack/commit/b709bd77b6c1fad68a30a4888baa6f2337eaef6f
+  https://github.com/llamastack/llama-stack
+  https://github.com/llamastack/llama-stack/compare/v0.4.0rc2...v0.4.0rc3
+  https://pypi.org/project/llama-stack
+  https://github.com/advisories/GHSA-xmfj-7pp5-fxr6
+
+Llama Stack (aka llama-stack) before 0.4.0rc3 does not censor the pgvector password in the initialization log.

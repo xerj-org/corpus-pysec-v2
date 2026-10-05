@@ -1,0 +1,17 @@
+PYSEC-2015-14 PyPI/mercurial — The _validaterepo function in sshpeer in Mercurial before 3.2.4 allows remote attackers to execute a
+package: mercurial
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.2.4 (ECOSYSTEM)
+aliases: CVE-2014-9462, GHSA-3pmw-h7j4-rf54
+references:
+  http://chargen.matasano.com/chargen/2015/3/17/this-new-vulnerability-mercurial-command-injection-cve-2014-9462.html
+  http://mercurial.selenic.com/wiki/WhatsNew
+  http://lists.opensuse.org/opensuse-updates/2015-03/msg00085.html
+  http://www.osvdb.org/119816
+  http://www.oracle.com/technetwork/topics/security/bulletinjul2015-2511963.html
+  http://www.debian.org/security/2015/dsa-3257
+  https://security.gentoo.org/glsa/201612-19
+  https://github.com/advisories/GHSA-3pmw-h7j4-rf54
+
+The _validaterepo function in sshpeer in Mercurial before 3.2.4 allows remote attackers to execute arbitrary commands via a crafted repository name in a clone command.

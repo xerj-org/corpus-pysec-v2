@@ -1,0 +1,11 @@
+PYSEC-2023-4 PyPI/apache-dolphinscheduler — Improper validation of script alert plugin parameters in Apache DolphinScheduler to avoid remote com
+package: apache-dolphinscheduler
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.0.2 (ECOSYSTEM)
+aliases: CVE-2022-45875
+references:
+  https://lists.apache.org/thread/r0wqzkjsoq17j6ww381kmpx3jjp9hb6r
+  https://lists.apache.org/thread/r0wqzkjsoq17j6ww381kmpx3jjp9hb6r
+
+Improper validation of script alert plugin parameters in Apache DolphinScheduler to avoid remote command execution vulnerability. This issue affects Apache DolphinScheduler version 3.0.1 and prior versions; version 3.1.0 and prior versions.

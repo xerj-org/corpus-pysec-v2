@@ -1,0 +1,13 @@
+PYSEC-2023-11 PyPI/cryptography — cryptography is a package designed to expose cryptographic primitives and recipes to Python develope
+package: cryptography
+ecosystem: PyPI
+versions affected:
+  >= 0, < 94a50a9731f35405f0357fa5f3b177d46a726ab3 (GIT: https://github.com/pyca/cryptography)
+  >= 1.8, < 39.0.1 (ECOSYSTEM)
+aliases: CVE-2023-23931, GHSA-w7pp-m8wf-vj6r
+references:
+  https://github.com/pyca/cryptography/security/advisories/GHSA-w7pp-m8wf-vj6r
+  https://github.com/pyca/cryptography/security/advisories/GHSA-w7pp-m8wf-vj6r
+  https://github.com/pyca/cryptography/pull/8230/commits/94a50a9731f35405f0357fa5f3b177d46a726ab3
+
+cryptography is a package designed to expose cryptographic primitives and recipes to Python developers. In affected versions `Cipher.update_into` would accept Python objects which implement the buffer protocol, but provide only immutable buffers. This would allow immutable objects (such as `bytes`) to be mutated, thus violating fundamental rules of Python and resulting in corrupted output. This now correctly raises an exception. This issue has been present since `update_into` was originally introduced in cryptography 1.8.

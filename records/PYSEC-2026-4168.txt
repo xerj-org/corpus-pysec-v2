@@ -1,0 +1,55 @@
+PYSEC-2026-4168 PyPI/social-auth-core — social-auth-core has a Session Fixation issue
+package: social-auth-core
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.0.0 (ECOSYSTEM)
+aliases: CVE-2026-57179, GHSA-vqg6-3fw6-j9jg
+references:
+  https://github.com/python-social-auth/social-core/security/advisories/GHSA-vqg6-3fw6-j9jg
+  https://nvd.nist.gov/vuln/detail/CVE-2026-57179
+  https://github.com/python-social-auth/social-core/pull/1816
+  https://github.com/python-social-auth/social-core/commit/0418782454ac7bbc6a9230ea21f7f5066fe89686
+  https://github.com/python-social-auth/social-core
+  https://github.com/python-social-auth/social-core/releases/tag/5.0.0
+  https://pypi.org/project/social-auth-core
+  https://github.com/advisories/GHSA-vqg6-3fw6-j9jg
+
+### Impact
+
+The partial-pipeline resume mechanism accepted `partial_token` as a bearer credential without binding it to the browser session that created it.
+
+Applications using resumable partial pipeline steps could allow an attacker to start an authentication flow, obtain a valid partial token and verification data, and cause a victim's browser to resume that attacker-controlled flow. This could authenticate the victim's browser as the attacker's account.
+
+The issue affects applications using partial pipeline steps such as `mail_validation` or custom steps decorated with `@partial`.
+
+### Patches
+
+The issue has been fixed by binding partial pipeline resumes to the originating browser session.
+
+Users should upgrade to a patched version.
+
+Fix:
+
+* https://github.com/python-social-auth/social-core/pull/1816
+* https://github.com/python-social-auth/social-docs/pull/444
+* https://github.com/python-social-auth/social-app-django/pull/1009
+
+### Workarounds
+
+Applications that cannot upgrade immediately should disable resumable partial pipeline steps, including `mail_validation` and custom steps decorated with `@partial`.
+
+If those flows are required, applications should avoid accepting partial resume links from untrusted contexts until a patched version can be deployed.
+
+There is no complete workaround while continuing to use the vulnerable partial-pipeline resume mechanism.
+
+### Credits
+
+Reported through GitHub private vulnerability reporting by Liyi Zhou, Ziyue Wang, Strick, Maurice, and Chenchen Yu from the University of Sydney security research team.
+
+Reporter references:
+
+* https://lzhou1110.github.io/
+* https://zyy0530.github.io/
+* https://str1ckl4nd.github.io/
+* https://maurice.busystar.org/
+* https://7thparkk.github.io/

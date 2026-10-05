@@ -1,0 +1,11 @@
+PYSEC-2021-24 PyPI/matrix-sydent — ### Impact Missing input validation of some parameters on the endpoints used to confirm third-party 
+package: matrix-sydent
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.3.0 (ECOSYSTEM)
+aliases: CVE-2021-29433, GHSA-pw4v-gr34-2553
+references:
+  https://github.com/matrix-org/sydent/security/advisories/GHSA-pw4v-gr34-2553
+  https://pypi.org/project/matrix-sydent/
+
+### Impact Missing input validation of some parameters on the endpoints used to confirm third-party identifiers could cause excessive use of disk space and memory leading to resource exhaustion. ### Patches Fixed by 3175fd3. ### Workarounds There are no known workarounds. ### References n/a ### For more information If you have any questions or comments about this advisory, email us at security@matrix.org.

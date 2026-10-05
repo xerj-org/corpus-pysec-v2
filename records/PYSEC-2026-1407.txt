@@ -1,0 +1,15 @@
+PYSEC-2026-1407 PyPI/gradio — Gradio's Component Server does not properly consider` _is_server_fn` for functions
+package: gradio
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.13.0 (ECOSYSTEM)
+aliases: CVE-2024-34511, GHSA-34rf-p3r3-58x2
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-34511
+  https://github.com/gradio-app/gradio/commit/24a583688046867ca8b8b02959c441818bdb34a2
+  https://github.com/gradio-app/gradio
+  https://www.gradio.app/changelog#4-13-0
+  https://pypi.org/project/gradio
+  https://github.com/advisories/GHSA-34rf-p3r3-58x2
+
+Component Server in Gradio before 4.13 does not properly consider` _is_server_fn` for functions.

@@ -1,0 +1,21 @@
+PYSEC-2016-3 PyPI/django — The cookie parsing code in Django before 1.8.15 and 1.9.x before 1.9.10, when used on a site with Go
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.8.15, >= 1.9, < 1.9.10 (ECOSYSTEM)
+aliases: CVE-2016-7401, GHSA-crhm-qpjc-cm64
+references:
+  http://www.securitytracker.com/id/1036899
+  https://www.djangoproject.com/weblog/2016/sep/26/security-releases/
+  http://www.debian.org/security/2016/dsa-3678
+  http://www.securityfocus.com/bid/93182
+  http://www.ubuntu.com/usn/USN-3089-1
+  http://rhn.redhat.com/errata/RHSA-2016-2043.html
+  http://rhn.redhat.com/errata/RHSA-2016-2042.html
+  http://rhn.redhat.com/errata/RHSA-2016-2041.html
+  http://rhn.redhat.com/errata/RHSA-2016-2040.html
+  http://rhn.redhat.com/errata/RHSA-2016-2039.html
+  http://rhn.redhat.com/errata/RHSA-2016-2038.html
+  https://github.com/advisories/GHSA-crhm-qpjc-cm64
+
+The cookie parsing code in Django before 1.8.15 and 1.9.x before 1.9.10, when used on a site with Google Analytics, allows remote attackers to bypass an intended CSRF protection mechanism by setting arbitrary cookies.

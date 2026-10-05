@@ -1,0 +1,11 @@
+PYSEC-2021-388 PyPI/easy-xml — The parseXML function in Easy-XML 0.5.0 was discovered to have a XML External Entity (XXE) vulnerabi
+package: easy-xml
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2020-26705, GHSA-v899-28g4-qmh8
+references:
+  https://github.com/darkfoxprime/python-easy_xml/issues/1
+  https://github.com/advisories/GHSA-v899-28g4-qmh8
+
+The parseXML function in Easy-XML 0.5.0 was discovered to have a XML External Entity (XXE) vulnerability which allows for an attacker to expose sensitive data or perform a denial of service (DOS) via a crafted external entity entered into the XML content as input.

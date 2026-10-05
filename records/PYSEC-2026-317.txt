@@ -1,0 +1,32 @@
+PYSEC-2026-317 PyPI/codechecker — Codechecker has an authentication bypass for certain API calls
+package: codechecker
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 6.27.3 (ECOSYSTEM)
+aliases: CVE-2026-25660, GHSA-4v9x-cqc5-j645
+references:
+  https://github.com/Ericsson/codechecker/security/advisories/GHSA-4v9x-cqc5-j645
+  https://nvd.nist.gov/vuln/detail/CVE-2026-25660
+  https://github.com/Ericsson/codechecker
+  https://pypi.org/project/codechecker
+  https://github.com/advisories/GHSA-4v9x-cqc5-j645
+
+### Summary
+Authentication bypass occurs when the URL ends with Authentication with certain function calls. This bypass allows assigning arbitrary permissions to any existing user in CodeChecker.
+
+### Details
+
+The following functions are affected under the Authentication endpoint: `getAuthorisedNames`, `getPermissionsForUser`, `hasPermission`, `addPermission`, and `removePermission`.
+
+The vulnerability allows unauthenticated users to execute these function calls with arbitrary arguments.
+ In the logs, the exploit shows as follows:
+```
+[INFO 2026-04-23 21:23] - 127.0.0.1:42654 -- [Anonymous] POST /v6.67/Authentication@getAuthorisedNames
+[INFO 2026-04-23 21:23] - 127.0.0.1:42654 -- [Anonymous] POST /v6.67/Authentication@addPermission
+```
+ 
+### Impact
+An attacker with a CodeChecker user can effectively acquire superuser permissions by calling these endpoints.
+
+### Patch
+A patch is available at https://github.com/Ericsson/codechecker/releases/tag/v6.27.4.

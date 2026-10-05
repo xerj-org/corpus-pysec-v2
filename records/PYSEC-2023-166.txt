@@ -1,0 +1,11 @@
+PYSEC-2023-166 PyPI/salt — Salt masters prior to 3005.2 or 3006.2 contain a DOS in minion return. After receiving several bad p
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 3006.0, < 3006.2, >= 0, < 3005.2 (ECOSYSTEM)
+aliases: CVE-2023-20897, GHSA-vpjg-wmf8-29h9
+references:
+  https://saltproject.io/security-announcements/2023-08-10-advisory/
+  https://github.com/advisories/GHSA-vpjg-wmf8-29h9
+
+Salt masters prior to 3005.2 or 3006.2 contain a DOS in minion return. After receiving several bad packets on the request server equal to the number of worker threads, the master will become unresponsive to return requests until restarted.

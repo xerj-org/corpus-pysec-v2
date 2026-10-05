@@ -1,0 +1,12 @@
+PYSEC-2020-239 PyPI/meinheld — meinheld prior to 1.0.2 is vulnerable to HTTP Request Smuggling. HTTP pipelining issues and request 
+package: meinheld
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0.2 (ECOSYSTEM)
+aliases: CVE-2020-7658, SNYK-PYTHON-MEINHELD-569140, GHSA-63h2-9cc8-fc7m
+references:
+  https://github.com/mopemope/meinheld/blob/master/CHANGES.rst,
+  https://snyk.io/vuln/SNYK-PYTHON-MEINHELD-569140
+  https://github.com/advisories/GHSA-63h2-9cc8-fc7m
+
+meinheld prior to 1.0.2 is vulnerable to HTTP Request Smuggling. HTTP pipelining issues and request smuggling attacks might be possible due to incorrect Content-Length and Transfer encoding header parsing.

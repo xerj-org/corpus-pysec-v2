@@ -1,0 +1,17 @@
+PYSEC-2023-228 PyPI/pip — When installing a package from a Mercurial VCS URL (ie "pip install hg+...") with pip prior to v23.3
+package: pip
+ecosystem: PyPI
+versions affected:
+  >= 0, < 23.3 (ECOSYSTEM)
+aliases: CVE-2023-5752, GHSA-mq26-g339-26xf
+references:
+  https://mail.python.org/archives/list/security-announce@python.org/thread/F4PL35U6X4VVHZ5ILJU3PWUWN7H7LZXL/
+  https://github.com/pypa/pip/pull/12306
+  https://github.com/advisories/GHSA-mq26-g339-26xf
+
+When installing a package from a Mercurial VCS URL  (ie "pip install 
+hg+...") with pip prior to v23.3, the specified Mercurial revision could
+ be used to inject arbitrary configuration options to the "hg clone" 
+call (ie "--config"). Controlling the Mercurial configuration can modify
+ how and which repository is installed. This vulnerability does not 
+affect users who aren't installing from Mercurial.

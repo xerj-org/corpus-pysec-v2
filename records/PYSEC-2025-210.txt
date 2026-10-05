@@ -1,0 +1,13 @@
+PYSEC-2025-210 PyPI/torch — An issue was discovered in PyTorch v2.5 and v2.7.1. Omission of profiler.stop() can cause torch.prof
+package: torch
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 2.5.0-NA, <= 2.7.1-NA (ECOSYSTEM)
+aliases: CVE-2025-63396
+references:
+  http://pytorch.com
+  https://github.com/Daisy2ang
+  https://github.com/pytorch/pytorch/issues/156563
+  https://github.com/pytorch/pytorch
+
+An issue was discovered in PyTorch v2.5 and v2.7.1. Omission of profiler.stop() can cause torch.profiler.profile (PythonTracer) to crash or hang during finalization, leading to a Denial of Service (DoS).

@@ -1,0 +1,19 @@
+PYSEC-2006-3 PyPI/trac — Cross-site request forgery (CSRF) vulnerability in Edgewall Trac 0.10 and earlier allows remote atta
+package: trac
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.11 (ECOSYSTEM)
+aliases: CVE-2006-5878, GHSA-2q26-r8c4-jfx5
+references:
+  http://trac.edgewall.org/wiki/ChangeLog
+  http://www.debian.org/security/2006/dsa-1209
+  http://secunia.com/advisories/22789
+  http://secunia.com/advisories/22868
+  http://trac.edgewall.org/ticket/4049
+  http://security.gentoo.org/glsa/glsa-200612-14.xml
+  http://secunia.com/advisories/23357
+  http://www.vupen.com/english/advisories/2006/4422
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/30146
+  https://github.com/advisories/GHSA-2q26-r8c4-jfx5
+
+Cross-site request forgery (CSRF) vulnerability in Edgewall Trac 0.10 and earlier allows remote attackers to perform unauthorized actions as other users via unknown vectors.

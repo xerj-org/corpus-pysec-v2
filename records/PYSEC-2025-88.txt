@@ -1,0 +1,16 @@
+PYSEC-2025-88 PyPI/apache-iotdb — Deserialization of Untrusted Data vulnerability in Apache IoTDB. This issue affects Apache IoTDB: fr
+package: apache-iotdb
+ecosystem: PyPI
+versions affected:
+  >= 1.0.0, < 2.0.5 (ECOSYSTEM)
+aliases: CVE-2025-48459, GHSA-776q-jw43-fhjx
+references:
+  http://www.openwall.com/lists/oss-security/2025/09/24/8
+  https://lists.apache.org/thread/mr84n19nv8d0bmcrfsj3mm5ff5qn4q2f
+  https://github.com/advisories/GHSA-776q-jw43-fhjx
+
+Deserialization of Untrusted Data vulnerability in Apache IoTDB.
+
+This issue affects Apache IoTDB: from 1.0.0 before 2.0.5.
+
+Users are recommended to upgrade to version 2.0.5, which fixes the issue.

@@ -1,0 +1,12 @@
+PYSEC-2022-43113 PyPI/democritus-networking — The d8s-domains for python, as distributed on PyPI, included a potential code-execution backdoor ins
+package: democritus-networking
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-40427
+references:
+  https://pypi.org/project/democritus-networking/
+  https://github.com/democritus-project/d8s-domains/issues/7
+  https://github.com/democritus-project/d8s-domains/issues/7
+
+The d8s-domains for python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. The backdoor is the democritus-networking package. The affected version is 0.1.0

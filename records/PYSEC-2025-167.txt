@@ -1,0 +1,14 @@
+PYSEC-2025-167 PyPI/pyassimp — A vulnerability classified as critical has been found in Open Asset Import Library Assimp 5.4.3. Thi
+package: pyassimp
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 5.4.3 (ECOSYSTEM)
+aliases: CVE-2025-2756
+references:
+  https://vuldb.com/?id.300861
+  https://vuldb.com/?submit.517790
+  https://github.com/assimp/assimp/issues/6018
+  https://github.com/assimp/assimp/issues/6018#issue-2877375815
+  https://vuldb.com/?ctiid.300861
+
+A vulnerability classified as critical has been found in Open Asset Import Library Assimp 5.4.3. This affects the function Assimp::AC3DImporter::ConvertObjectSection of the file code/AssetLib/AC/ACLoader.cpp of the component AC3D File Handler. The manipulation of the argument tmp leads to heap-based buffer overflow. It is possible to initiate the attack remotely. The exploit has been disclosed to the public and may be used.

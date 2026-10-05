@@ -1,0 +1,15 @@
+PYSEC-2022-304 PyPI/django — In Django 3.2 before 3.2.16, 4.0 before 4.0.8, and 4.1 before 4.1.2, internationalized URLs were sub
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5b6b257fa7ec37ff27965358800c67e2dd11c924 (GIT: https://github.com/django/django)
+  >= 3.2, < 3.2.16, >= 4.0, < 4.0.8, >= 4.1, < 4.1.2 (ECOSYSTEM)
+aliases: CVE-2022-41323, GHSA-qrw5-5h28-6cmg
+references:
+  https://docs.djangoproject.com/en/4.0/releases/security/
+  https://github.com/django/django/commit/5b6b257fa7ec37ff27965358800c67e2dd11c924
+  https://www.djangoproject.com/weblog/2022/oct/04/security-releases/
+  https://groups.google.com/forum/#!forum/django-announce
+  https://github.com/advisories/GHSA-qrw5-5h28-6cmg
+
+In Django 3.2 before 3.2.16, 4.0 before 4.0.8, and 4.1 before 4.1.2, internationalized URLs were subject to a potential denial of service attack via the locale parameter, which is treated as a regular expression.

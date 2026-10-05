@@ -1,0 +1,11 @@
+PYSEC-2024-279 PyPI/langflow — langflow v1.0.12 was discovered to contain a remote code execution (RCE) vulnerability via the Pytho
+package: langflow
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 1.0.12 (ECOSYSTEM)
+aliases: CVE-2024-42835, GHSA-56m6-4mhw-h3g5
+references:
+  https://github.com/langflow-ai/langflow/issues/2908
+  https://github.com/advisories/GHSA-56m6-4mhw-h3g5
+
+langflow v1.0.12 was discovered to contain a remote code execution (RCE) vulnerability via the PythonCodeTool component.

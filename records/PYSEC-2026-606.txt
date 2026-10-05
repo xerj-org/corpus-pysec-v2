@@ -1,0 +1,18 @@
+PYSEC-2026-606 PyPI/okite — Malicious code in okite (PyPI)
+package: okite
+ecosystem: PyPI
+versions affected:
+  0.0.7, 0.0.8
+aliases: MAL-2026-5283
+references:
+  https://inspector.pypi.io/project/okite/0.0.8/packages/52/e6/087ea1e307e5ae10b6288e68daee52b02abec66f8cc7a411741798188bf5/okite-0.0.8-py3-none-any.whl//okite-setup.pth
+  https://www.endorlabs.com/learn/shai-hulud-hades-wave-hits-six-pypi-bioinformatics-packages
+  https://www.stepsecurity.io/blog/the-hades-campaign-pypi-packages
+
+Part of the "Hades" wave of the Shai-Hulud supply-chain campaign. On 2026-06-08,
+malicious phantom releases of okite were published to PyPI using stolen
+credentials. The package executes a bundled JavaScript payload (via the Bun
+runtime) on import that harvests and exfiltrates credentials and attempts
+self-propagation. This entry is a summary; behavior may not be fully
+characterized here. See the linked references for detailed analysis and
+indicators of compromise.

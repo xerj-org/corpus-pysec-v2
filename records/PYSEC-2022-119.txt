@@ -1,0 +1,14 @@
+PYSEC-2022-119 PyPI/tensorflow-gpu — Tensorflow is an Open Source Machine Learning Framework. The implementation of `SparseCountSparseOut
+package: tensorflow-gpu
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2b7100d6cdff36aa21010a82269bc05a6d1cc74a, < adbbabdb0d3abb3cdeac69e38a96de1d678b24b3 (GIT: https://github.com/tensorflow/tensorflow)
+  >= 0, < 2.5.3, >= 2.6.0, < 2.6.3 (ECOSYSTEM)
+aliases: CVE-2022-21740, GHSA-44qp-9wwf-734r
+references:
+  https://github.com/tensorflow/tensorflow/commit/2b7100d6cdff36aa21010a82269bc05a6d1cc74a
+  https://github.com/tensorflow/tensorflow/blob/5100e359aef5c8021f2e71c7b986420b85ce7b3d/tensorflow/core/kernels/count_ops.cc#L168-L273
+  https://github.com/tensorflow/tensorflow/commit/adbbabdb0d3abb3cdeac69e38a96de1d678b24b3
+  https://github.com/tensorflow/tensorflow/security/advisories/GHSA-44qp-9wwf-734r
+
+Tensorflow is an Open Source Machine Learning Framework. The implementation of `SparseCountSparseOutput` is vulnerable to a heap overflow. The fix will be included in TensorFlow 2.8.0. We will also cherrypick this commit on TensorFlow 2.7.1, TensorFlow 2.6.3, and TensorFlow 2.5.3, as these are also affected and still in supported range.

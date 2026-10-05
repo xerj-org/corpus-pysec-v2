@@ -1,0 +1,12 @@
+PYSEC-2023-23 PyPI/markdown-it-py — Denial of service could be caused to the command line interface of markdown-it-py, before v2.2.0, if
+package: markdown-it-py
+ecosystem: PyPI
+versions affected:
+  >= 0, < 53ca3e9c2b9e9b295f6abf7f4ad2730a9b70f68c (GIT: https://github.com/executablebooks/markdown-it-py)
+  >= 0, < 2.2.0 (ECOSYSTEM)
+aliases: CVE-2023-26302, GHSA-jrwr-5x3p-hvc3
+references:
+  https://github.com/executablebooks/markdown-it-py/commit/53ca3e9c2b9e9b295f6abf7f4ad2730a9b70f68c
+  https://github.com/advisories/GHSA-jrwr-5x3p-hvc3
+
+Denial of service could be caused to the command line interface of markdown-it-py, before v2.2.0, if an attacker was allowed to use invalid UTF-8 characters as input.

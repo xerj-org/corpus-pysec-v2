@@ -1,0 +1,14 @@
+PYSEC-2022-43056 PyPI/keep — The keep for python, as distributed on PyPI, included a code-execution backdoor inserted by a third 
+package: keep
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-30877
+references:
+  https://github.com/OrkoHunter/keep/issues/85
+  https://github.com/OrkoHunter/keep/issues/85
+  https://pypi.org/project/keep
+  https://pypi.org/project/keep
+  http://pypi.doubanio.com/simple/request
+
+The keep for python, as distributed on PyPI, included a code-execution backdoor inserted by a third party. The current version, without this backdoor, is 1.2.

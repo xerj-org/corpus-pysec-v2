@@ -1,0 +1,11 @@
+PYSEC-2026-101 PyPI/ollama — An issue in ollama v.0.12.10 allows a remote attacker to cause a denial of service via the GGUF deco
+package: ollama
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.12.10-NA (ECOSYSTEM)
+aliases: CVE-2025-66959
+references:
+  https://github.com/ollama/ollama/issues/9820
+  https://zero.shotlearni.ng/blog/cve-2025-66959panic-dos-via-unchecked-length-in-gguf-decoder-copy/
+
+An issue in ollama v.0.12.10 allows a remote attacker to cause a denial of service via the GGUF decoder

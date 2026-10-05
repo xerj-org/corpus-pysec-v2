@@ -1,0 +1,10 @@
+PYSEC-2025-15 PyPI/flask-appbuilder — Flask-AppBuilder is an application development framework. Prior to 4.5.3, Flask-AppBuilder allows un
+package: flask-appbuilder
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.5.3 (ECOSYSTEM)
+aliases: CVE-2025-24023, GHSA-p8q5-cvwx-wvwp
+references:
+  https://github.com/dpgaspar/Flask-AppBuilder/security/advisories/GHSA-p8q5-cvwx-wvwp
+
+Flask-AppBuilder is an application development framework. Prior to 4.5.3, Flask-AppBuilder allows unauthenticated users to enumerate existing usernames by timing the response time from the server when brute forcing requests to login. This vulnerability is fixed in 4.5.3.

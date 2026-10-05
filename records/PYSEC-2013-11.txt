@@ -1,0 +1,17 @@
+PYSEC-2013-11 PyPI/python-glanceclient — The Python client library for Glance (python-glanceclient) before 0.10.0 does not properly check the
+package: python-glanceclient
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.10.0 (ECOSYSTEM)
+aliases: CVE-2013-4111, GHSA-qgfg-gvff-523v
+references:
+  http://secunia.com/advisories/54525
+  https://github.com/openstack/python-glanceclient/blob/master/doc/source/index.rst
+  http://secunia.com/advisories/54313
+  https://bugs.launchpad.net/ossa/+bug/1192229
+  http://lists.opensuse.org/opensuse-updates/2013-08/msg00019.html
+  http://rhn.redhat.com/errata/RHSA-2013-1200.html
+  http://www.ubuntu.com/usn/USN-2004-1
+  https://github.com/advisories/GHSA-qgfg-gvff-523v
+
+The Python client library for Glance (python-glanceclient) before 0.10.0 does not properly check the preverify_ok value, which prevents the server hostname from being verified with a domain name in the subject's Common Name (CN) or subjectAltName field of the X.509 certificate and allows man-in-the-middle attackers to spoof SSL servers via an arbitrary valid certificate.

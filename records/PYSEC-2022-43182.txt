@@ -1,0 +1,9 @@
+PYSEC-2022-43182 PyPI/fava — Withdrawn as duplicate of PYSEC-2022-239. The time and filter parameters in Fava prior to v1.22 are 
+package: fava
+ecosystem: PyPI
+aliases: CVE-2022-2514
+references:
+  https://github.com/beancount/fava/commit/ca9e3882c7b5fbf5273ba52340b9fea6a99f3711
+  https://huntr.dev/bounties/dbf77139-4384-4dc5-9994-45a5e0747429
+
+Withdrawn as duplicate of PYSEC-2022-239. The time and filter parameters in Fava prior to v1.22 are vulnerable to reflected XSS due to the lack of escaping of error messages which contained the parameters in verbatim.

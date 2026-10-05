@@ -1,0 +1,12 @@
+PYSEC-2023-145 PyPI/langchain — An issue in LangChain v.0.0.231 allows a remote attacker to execute arbitrary code via the prompt pa
+package: langchain
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.0.247 (ECOSYSTEM)
+aliases: CVE-2023-38860, GHSA-fj32-q626-pjjc
+references:
+  https://github.com/langchain-ai/langchain/issues/7641
+  https://github.com/langchain-ai/langchain/issues/7641
+  https://github.com/advisories/GHSA-fj32-q626-pjjc
+
+An issue in LangChain v.0.0.231 allows a remote attacker to execute arbitrary code via the prompt parameter.

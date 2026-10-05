@@ -1,0 +1,18 @@
+PYSEC-2026-2514 PyPI/hermes-agent — hermes-agent has an Injection issue
+package: hermes-agent
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.15.0 (ECOSYSTEM)
+aliases: CVE-2026-9366, GHSA-pgp4-xr4j-h5cg
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-9366
+  https://github.com/NousResearch/hermes-agent/commit/0dee92df22bdc0cfbcad90ca954aa14916f018de
+  https://gist.github.com/YLChen-007/581fd92de5548fbaacb2092e848a75cc
+  https://github.com/NousResearch/hermes-agent
+  https://vuldb.com/submit/812227
+  https://vuldb.com/vuln/365329
+  https://vuldb.com/vuln/365329/cti
+  https://pypi.org/project/hermes-agent
+  https://github.com/advisories/GHSA-pgp4-xr4j-h5cg
+
+A vulnerability was found in NousResearch hermes-agent 2026.4.23. The impacted element is the function _scan_context_content of the file agent/prompt_builder.py. The manipulation results in injection. The attack may be performed from remote. The exploit has been made public and could be used. The vendor was contacted early about this disclosure but did not respond in any way.

@@ -1,0 +1,15 @@
+PYSEC-2026-621 PyPI/calibreweb — calibre-web is vulnerable to Cross-Site Request Forgery (CSRF)
+package: calibreweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.6.15 (ECOSYSTEM)
+aliases: CVE-2021-4164, GHSA-wxr6-29pv-ch68
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2021-4164
+  https://github.com/janeczku/calibre-web/commit/785726deee13b4d56f6c3503dd57c1e3eb7d6f30
+  https://github.com/janeczku/calibre-web
+  https://huntr.dev/bounties/2debace1-a0f3-45c1-95fa-9d0512680758
+  https://pypi.org/project/calibreweb
+  https://github.com/advisories/GHSA-wxr6-29pv-ch68
+
+calibre-web is vulnerable to Cross-Site Request Forgery (CSRF)

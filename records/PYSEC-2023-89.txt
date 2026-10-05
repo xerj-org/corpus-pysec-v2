@@ -1,0 +1,20 @@
+PYSEC-2023-89 PyPI/apache-airflow — In Apache Airflow, some potentially sensitive values were being shown to the user in certain situati
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 2.5.0, < 2.6.2 (ECOSYSTEM)
+aliases: CVE-2023-35005, GHSA-mjff-wv85-hmcj
+references:
+  https://lists.apache.org/thread/o4f2cxh0054m9tlxpb81c1yhylor5gjd
+  https://github.com/apache/airflow/pull/31788
+  https://github.com/apache/airflow/pull/31820
+  https://github.com/advisories/GHSA-mjff-wv85-hmcj
+
+In Apache Airflow, some potentially sensitive values were being shown to the user in certain situations.
+
+This vulnerability is mitigated by the fact configuration is not shown in the UI by default (only if `[webserver] expose_config` is set to `non-sensitive-only`), and not all uncensored values are actually sentitive.
+
+
+This issue affects Apache Airflow: from 2.5.0 before 2.6.2. Users are recommended to update to version 2.6.2 or later.
+
+

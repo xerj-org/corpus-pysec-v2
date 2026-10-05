@@ -1,0 +1,16 @@
+PYSEC-2020-218 PyPI/plone — Multiple cross-site scripting (XSS) vulnerabilities in Zope, as used in Plone 3.3.x through 3.3.6, 4
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 3.3, < 4.0a1, >= 4.0, < 4.0.10, >= 4.1, < 4.2a1, >= 4.2, < 4.3a1, >= 4.3, < 4.3.3 (ECOSYSTEM)
+aliases: CVE-2013-7062, GHSA-4793-w44w-m7xm
+references:
+  https://plone.org/security/20131210/zope-xss-in-browseridmanager
+  http://seclists.org/oss-sec/2013/q4/467
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/89623
+  http://seclists.org/oss-sec/2013/q4/485
+  https://plone.org/security/20131210/zope-xss-in-OFS
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/89627
+  https://github.com/advisories/GHSA-4793-w44w-m7xm
+
+Multiple cross-site scripting (XSS) vulnerabilities in Zope, as used in Plone 3.3.x through 3.3.6, 4.0.x through 4.0.9, 4.1.x through 4.1.6, 4.2.x through 4.2.7, and 4.3 through 4.3.2, allow remote attackers to inject arbitrary web script or HTML via unspecified input in the (1) browser_id_manager or (2) OFS.Image method.

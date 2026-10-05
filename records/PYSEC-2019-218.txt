@@ -1,0 +1,11 @@
+PYSEC-2019-218 PyPI/python-libnmap — libnmap < v0.6.3 is affected by: XML Injection. The impact is: Denial of service (DoS) by consuming 
+package: python-libnmap
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.6.3 (ECOSYSTEM)
+aliases: CVE-2019-1010017, GHSA-9ccv-p7fg-m73x
+references:
+  https://github.com/savon-noir/python-libnmap/issues/87
+  https://github.com/advisories/GHSA-9ccv-p7fg-m73x
+
+libnmap < v0.6.3 is affected by: XML Injection. The impact is: Denial of service (DoS) by consuming resources. The component is: XML Parsing. The attack vector is: Specially crafted XML payload.

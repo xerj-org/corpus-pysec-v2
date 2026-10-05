@@ -1,0 +1,11 @@
+PYSEC-2025-188 PyPI/taguette — Taguette is an open source qualitative research tool. An issue has been discovered in Taguette versi
+package: taguette
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.5.0 (ECOSYSTEM)
+aliases: CVE-2025-62528, GHSA-g9qw-g6rv-3889
+references:
+  https://github.com/remram44/taguette/security/advisories/GHSA-g9qw-g6rv-3889
+  https://gitlab.com/remram44/taguette/-/issues/330
+
+Taguette is an open source qualitative research tool. An issue has been discovered in Taguette versions prior to 1.5.0. It was possible for a project member to put JavaScript in name or description fields which would run on project load. This issue has been patched in version 1.5.0.

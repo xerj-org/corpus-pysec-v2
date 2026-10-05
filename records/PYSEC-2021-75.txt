@@ -1,0 +1,15 @@
+PYSEC-2021-75 PyPI/salt — In SaltStack Salt before 3002.5, when authenticating to services using certain modules, the SSL cert
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2015.8.10, >= 2015.8.11, < 2015.8.13, >= 2016.3.0, < 2016.3.4, >= 2016.3.5, < 2016.3.6, >= 2016.3.7, < 2016.3.8, >= 2016.11.0, < 2016.11.3, >= 2016.11.4, < 2016.11.5, >= 2016.11.7, < 2016.11.10, >= 2017.7.0, < 2017.7.8, >= 2018.3.0rc1, < 2019.2.0rc1, >= 2019.2.0, < 2019.2.5, >= 2019.2.6, < 2019.2.8, >= 3000, < 3000.6, >= 3001, < 3001.4, >= 3002, < 3002.5 (ECOSYSTEM)
+aliases: CVE-2020-35662, GHSA-qx72-q6w3-qgc7
+references:
+  https://saltproject.io/security_announcements/active-saltstack-cve-release-2021-feb-25/
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/YOGNT2XWPOYV7YT75DN7PS4GIYWFKOK5/
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/7GRVZ5WAEI3XFN2BDTL6DDXFS5HYSDVB/
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/FUGLOJ6NXLCIFRD2JTXBYQEMAEF2B6XH/
+  https://security.gentoo.org/glsa/202103-01
+  https://github.com/advisories/GHSA-qx72-q6w3-qgc7
+
+In SaltStack Salt before 3002.5, when authenticating to services using certain modules, the SSL certificate is not always validated.

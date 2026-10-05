@@ -1,0 +1,12 @@
+PYSEC-2020-199 PyPI/ansible — The safe_eval function in Ansible before 1.5.4 does not properly restrict the code subset, which all
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.5.4 (ECOSYSTEM)
+aliases: CVE-2014-4657, GHSA-qg47-5px9-32g7
+references:
+  https://www.securityfocus.com/bid/68232
+  https://github.com/ansible/ansible/blob/release1.5.5/CHANGELOG.md
+  https://github.com/advisories/GHSA-qg47-5px9-32g7
+
+The safe_eval function in Ansible before 1.5.4 does not properly restrict the code subset, which allows remote attackers to execute arbitrary code via crafted instructions.

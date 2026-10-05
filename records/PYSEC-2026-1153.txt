@@ -1,0 +1,17 @@
+PYSEC-2026-1153 PyPI/apache-superset — Apache Superset Incorrect Authorization vulnerability
+package: apache-superset
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.1.2 (ECOSYSTEM)
+aliases: CVE-2024-28148, GHSA-299q-3p96-5898
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-28148
+  https://github.com/apache/superset
+  https://lists.apache.org/thread/n27wlbd05oc6bgjh28d5pxzsrrph8dgo
+  https://pypi.org/project/apache-superset
+  https://github.com/advisories/GHSA-299q-3p96-5898
+
+An authenticated user could potentially access metadata for a datasource they are not authorized to view by submitting a targeted REST API request. This issue affects Apache Superset before 3.1.2.
+
+Users are recommended to upgrade to version 3.1.2 or above, which fixes the issue.
+

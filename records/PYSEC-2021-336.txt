@@ -1,0 +1,11 @@
+PYSEC-2021-336 PyPI/django-widgy — Unrestricted Upload of File with Dangerous Type in Django-Widgy v0.8.4 allows remote attackers to ex
+package: django-widgy
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.9.0 (ECOSYSTEM)
+aliases: CVE-2020-18704, GHSA-98hv-qff3-8793
+references:
+  https://github.com/fusionbox/django-widgy/issues/387
+  https://github.com/advisories/GHSA-98hv-qff3-8793
+
+Unrestricted Upload of File with Dangerous Type in Django-Widgy v0.8.4 allows remote attackers to execute arbitrary code via the 'image' widget in the component 'Change Widgy Page'.

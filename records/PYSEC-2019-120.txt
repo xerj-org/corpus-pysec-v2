@@ -1,0 +1,16 @@
+PYSEC-2019-120 PyPI/scapy — scapy 2.4.0 is affected by: Denial of Service. The impact is: infinite loop, resource consumption an
+package: scapy
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.4.1 (ECOSYSTEM)
+aliases: CVE-2019-1010142, GHSA-mpf2-q34c-fc6j
+references:
+  https://github.com/secdev/scapy/pull/1409/files#diff-441eff981e466959968111fc6314fe93L1058
+  https://github.com/secdev/scapy/pull/1409
+  https://www.imperva.com/blog/scapy-sploit-python-network-tool-is-vulnerable-to-denial-of-service-dos-attack-cve-pending/
+  http://www.securityfocus.com/bid/106674
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/T46XW4S5BCA3VV3JT3C5Q6LBEXSIACLN/
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/42NRPMC3NS2QVFNIXYP6WV2T3LMLLY7E/
+  https://github.com/advisories/GHSA-mpf2-q34c-fc6j
+
+scapy 2.4.0 is affected by: Denial of Service. The impact is: infinite loop, resource consumption and program unresponsive. The component is: _RADIUSAttrPacketListField.getfield(self..). The attack vector is: over the network or in a pcap. both work.

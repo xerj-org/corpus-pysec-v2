@@ -1,0 +1,11 @@
+PYSEC-2022-274 PyPI/lief — LIEF commit 5d1d643 was discovered to contain a heap-buffer overflow in the component /core/CorePrPs
+package: lief
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.12.1 (ECOSYSTEM)
+aliases: CVE-2022-38306, GHSA-52xx-r3g2-p8jm
+references:
+  https://github.com/lief-project/LIEF/issues/763
+  https://github.com/advisories/GHSA-52xx-r3g2-p8jm
+
+LIEF commit 5d1d643 was discovered to contain a heap-buffer overflow in the component /core/CorePrPsInfo.tcc.

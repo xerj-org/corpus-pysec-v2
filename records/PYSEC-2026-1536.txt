@@ -1,0 +1,17 @@
+PYSEC-2026-1536 PyPI/libp2p — py-libp2p is vulnerable to DoS attacks through use of large RSA keys
+package: libp2p
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.2.3 (ECOSYSTEM)
+aliases: CVE-2025-29606, GHSA-x8c6-gj59-6rx8
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-29606
+  https://github.com/libp2p/py-libp2p/issues/526
+  https://github.com/libp2p/py-libp2p/pull/531/files
+  https://github.com/libp2p/py-libp2p/commit/e150d3153af30530ce61d751bc166e099f1ead7a
+  https://github.com/libp2p/py-libp2p
+  https://github.com/libp2p/py-libp2p/compare/v0.2.2...v0.2.3
+  https://pypi.org/project/libp2p
+  https://github.com/advisories/GHSA-x8c6-gj59-6rx8
+
+py-libp2p before 0.2.3 allows a peer to cause a denial of service (resource consumption) via a large RSA key.

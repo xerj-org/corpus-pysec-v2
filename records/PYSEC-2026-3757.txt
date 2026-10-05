@@ -1,0 +1,11 @@
+PYSEC-2026-3757 PyPI/openssl-encrypt — openssl_encrypt versions before 1.4.0 use an in-memory rate limiter for TOTP brute-force protection 
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.0 (ECOSYSTEM)
+aliases: CVE-2026-74878, GHSA-h45m-mgcp-q388
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-h45m-mgcp-q388
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-totp-rate-limiter-bypass
+
+openssl_encrypt versions before 1.4.0 use an in-memory rate limiter for TOTP brute-force protection that is not shared across workers and is lost on server restart. Attackers can distribute authentication attempts across multiple server instances or retry immediately after a restart to bypass rate limiting protections.

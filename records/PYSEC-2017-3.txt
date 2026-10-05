@@ -1,0 +1,16 @@
+PYSEC-2017-3 PyPI/ansible — The chroot, jail, and zone connection plugins in ansible before 1.9.2 allow local users to escape a 
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 0, < ca2f2c4ebd7b5e097eab0a710f79c1f63badf95b, < 952166f48eb0f5797b75b160fd156bbe1e8fc647 (GIT: https://github.com/ansible/ansible)
+  >= 0, < 1.9.2 (ECOSYSTEM)
+aliases: CVE-2015-6240, GHSA-wwwh-47wp-m522
+references:
+  https://github.com/ansible/ansible/commit/ca2f2c4ebd7b5e097eab0a710f79c1f63badf95b
+  https://github.com/ansible/ansible/commit/952166f48eb0f5797b75b160fd156bbe1e8fc647
+  https://bugzilla.redhat.com/show_bug.cgi?id=1243468
+  http://www.openwall.com/lists/oss-security/2015/08/17/10
+  https://lists.debian.org/debian-lts-announce/2019/09/msg00016.html
+  https://github.com/advisories/GHSA-wwwh-47wp-m522
+
+The chroot, jail, and zone connection plugins in ansible before 1.9.2 allow local users to escape a restricted environment via a symlink attack.

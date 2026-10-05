@@ -1,0 +1,14 @@
+PYSEC-2015-8 PyPI/django — Cross-site scripting (XSS) vulnerability in the contents function in admin/helpers.py in Django befo
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.7.6, >= 1.8a1, < 1.8b2 (ECOSYSTEM)
+aliases: CVE-2015-2241, GHSA-6565-fg86-6jcx
+references:
+  https://code.djangoproject.com/ticket/24461
+  https://www.djangoproject.com/weblog/2015/mar/09/security-releases/
+  http://www.mandriva.com/security/advisories?name=MDVSA-2015:109
+  http://www.securityfocus.com/bid/73095
+  https://github.com/advisories/GHSA-6565-fg86-6jcx
+
+Cross-site scripting (XSS) vulnerability in the contents function in admin/helpers.py in Django before 1.7.6 and 1.8 before 1.8b2 allows remote attackers to inject arbitrary web script or HTML via a model attribute in ModelAdmin.readonly_fields, as demonstrated by a @property.

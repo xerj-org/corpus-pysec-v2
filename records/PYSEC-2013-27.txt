@@ -1,0 +1,12 @@
+PYSEC-2013-27 PyPI/salt — Unspecified vulnerability in salt-ssh in Salt (aka SaltStack) 0.17.0 has unspecified impact and vect
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0.17.0, < 0.17.1 (ECOSYSTEM)
+aliases: CVE-2013-4437, GHSA-qr3x-v97p-42xw
+references:
+  http://docs.saltstack.com/topics/releases/0.17.1.html
+  http://www.openwall.com/lists/oss-security/2013/10/18/3
+  https://github.com/advisories/GHSA-qr3x-v97p-42xw
+
+Unspecified vulnerability in salt-ssh in Salt (aka SaltStack) 0.17.0 has unspecified impact and vectors related to "insecure Usage of /tmp."

@@ -1,0 +1,14 @@
+PYSEC-2026-1543 PyPI/litellm — LiteLLM Has a Leakage of Langfuse API Keys
+package: litellm
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 1.52.1 (ECOSYSTEM)
+aliases: CVE-2025-0330, GHSA-879v-fggm-vxw2
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-0330
+  https://github.com/BerriAI/litellm
+  https://huntr.com/bounties/661b388a-44d8-4ad5-862b-4dc5b80be30a
+  https://pypi.org/project/litellm
+  https://github.com/advisories/GHSA-879v-fggm-vxw2
+
+In berriai/litellm version v1.52.1, an issue in proxy_server.py causes the leakage of Langfuse API keys when an error occurs while parsing team settings. This vulnerability exposes sensitive information, including langfuse_secret and langfuse_public_key, which can provide full access to the Langfuse project storing all requests.

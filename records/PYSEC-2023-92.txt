@@ -1,0 +1,12 @@
+PYSEC-2023-92 PyPI/langchain — Langchain 0.0.171 is vulnerable to Arbitrary code execution in load_prompt.
+package: langchain
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.0.247 (ECOSYSTEM)
+aliases: CVE-2023-34541, GHSA-6643-h7h5-x9wh
+references:
+  https://github.com/langchain-ai/langchain/issues/4849
+  https://github.com/langchain-ai/langchain/issues/4849
+  https://github.com/advisories/GHSA-6643-h7h5-x9wh
+
+Langchain 0.0.171 is vulnerable to Arbitrary code execution in load_prompt.

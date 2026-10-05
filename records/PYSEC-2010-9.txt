@@ -1,0 +1,14 @@
+PYSEC-2010-9 PyPI/pyftpdlib — ftpserver.py in pyftpdlib before 0.5.2 does not require the l permission for the MLST command, which
+package: pyftpdlib
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.5.2 (ECOSYSTEM)
+aliases: CVE-2009-5012, GHSA-h4g7-8m7r-87r9
+references:
+  http://code.google.com/p/pyftpdlib/source/diff?spec=svn596&r=596&format=side&path=/trunk/pyftpdlib/ftpserver.py
+  http://code.google.com/p/pyftpdlib/source/browse/trunk/HISTORY
+  http://code.google.com/p/pyftpdlib/source/detail?r=596
+  http://code.google.com/p/pyftpdlib/issues/detail?id=114
+  https://github.com/advisories/GHSA-h4g7-8m7r-87r9
+
+ftpserver.py in pyftpdlib before 0.5.2 does not require the l permission for the MLST command, which allows remote authenticated users to bypass intended access restrictions and list the root directory via an FTP session.

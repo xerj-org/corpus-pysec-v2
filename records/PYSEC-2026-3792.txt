@@ -1,0 +1,11 @@
+PYSEC-2026-3792 PyPI/openssl-encrypt — openssl_encrypt (pip package openssl-encrypt) versions 1.4.8 and earlier store an mTLS client privat
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.9 (ECOSYSTEM)
+aliases: CVE-2026-81683, GHSA-r8gw-6hfj-98jw
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-r8gw-6hfj-98jw
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-1.4.9-plaintext-private-key-storage
+
+openssl_encrypt (pip package openssl-encrypt) versions 1.4.8 and earlier store an mTLS client private key in cleartext within a world-readable (0644) SharedPreferences file via the desktop GUI's Settings screen 'combined certificate and private key' PEM field. A local attacker with file system access can read the exposed private key. Version 1.4.9 writes the PEM to a dedicated 0600 file, keeps only its path in SharedPreferences, and migrates/scrubs existing cleartext values.

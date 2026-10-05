@@ -1,0 +1,12 @@
+PYSEC-2026-107 PyPI/orjson — The orjson.dumps function in orjson thru 3.11.4 does not limit recursion for deeply nested JSON docu
+package: orjson
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.11.5 (ECOSYSTEM)
+aliases: CVE-2025-67221, GHSA-hx9q-6w63-j58v
+references:
+  https://github.com/ijl/orjson
+  https://github.com/kpatsakis/orjson_vulnerability
+  https://github.com/advisories/GHSA-hx9q-6w63-j58v
+
+The orjson.dumps function in orjson thru 3.11.4 does not limit recursion for deeply nested JSON documents.

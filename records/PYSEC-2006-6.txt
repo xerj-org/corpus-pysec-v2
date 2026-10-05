@@ -1,0 +1,17 @@
+PYSEC-2006-6 PyPI/plone — Unspecified vulnerability in PlonePAS in Plone 2.5 and 2.5.1, when anonymous member registration is 
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 2.5, < 2.5.2 (ECOSYSTEM)
+aliases: CVE-2006-4249, GHSA-r7j4-82xw-8m9p
+references:
+  http://plone.org/about/security/advisories/cve-2006-4249/
+  http://plone.org/about/security/advisories/cve-2006-4249/
+  http://www.securityfocus.com/bid/21460
+  http://secunia.com/advisories/23240
+  http://secunia.com/advisories/23240
+  http://www.vupen.com/english/advisories/2006/4878
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/30762
+  https://github.com/advisories/GHSA-r7j4-82xw-8m9p
+
+Unspecified vulnerability in PlonePAS in Plone 2.5 and 2.5.1, when anonymous member registration is enabled, allows an attacker to "masquerade as a group."

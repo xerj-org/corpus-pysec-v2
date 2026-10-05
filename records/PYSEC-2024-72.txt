@@ -1,0 +1,13 @@
+PYSEC-2024-72 PyPI/ekuiper — LF Edge eKuiper is a lightweight IoT data analytics and stream processing engine running on resource
+package: ekuiper
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1a9c745649438feaac357d282959687012b65503 (GIT: https://github.com/lf-edge/ekuiper)
+  >= 0, < 1.14.2 (ECOSYSTEM)
+aliases: CVE-2024-43406, GHSA-r5ph-4jxm-6j9p
+references:
+  https://github.com/lf-edge/ekuiper/security/advisories/GHSA-r5ph-4jxm-6j9p
+  https://github.com/lf-edge/ekuiper/security/advisories/GHSA-r5ph-4jxm-6j9p
+  https://github.com/lf-edge/ekuiper/commit/1a9c745649438feaac357d282959687012b65503
+
+LF Edge eKuiper is a lightweight IoT data analytics and stream processing engine running on resource-constraint edge devices. A user could utilize and exploit SQL Injection to allow the execution of malicious SQL query via Get method in sqlKvStore. This vulnerability is fixed in 1.14.2.

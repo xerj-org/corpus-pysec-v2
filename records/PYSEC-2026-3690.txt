@@ -1,0 +1,104 @@
+PYSEC-2026-3690 PyPI/mobsf — MobSF has SSRF port restriction bypass in assetlinks_check
+package: mobsf
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.5.1 (ECOSYSTEM)
+aliases: CVE-2026-68927, GHSA-95px-34x5-p37h
+references:
+  https://github.com/MobSF/Mobile-Security-Framework-MobSF/security/advisories/GHSA-95px-34x5-p37h
+  https://github.com/MobSF/Mobile-Security-Framework-MobSF/pull/2627
+  https://github.com/MobSF/Mobile-Security-Framework-MobSF/commit/62563ca429a75b3e5d47a13b958e1d2e7d5e2bbf
+  https://github.com/MobSF/Mobile-Security-Framework-MobSF
+  https://github.com/MobSF/Mobile-Security-Framework-MobSF/releases/tag/v4.5.1
+  https://pypi.org/project/mobsf
+  https://github.com/advisories/GHSA-95px-34x5-p37h
+  https://nvd.nist.gov/vuln/detail/CVE-2026-68927
+
+## Summary
+
+MobSF's Android App Link assetlinks checker validates only the manifest `android:host` value with `valid_host()`, but then appends the separate `android:port` value into the URL used for the server-side request. This bypasses the current port restriction in `valid_host()` and lets a crafted APK cause MobSF to fetch `http://host:<attacker-port>/.well-known/assetlinks.json` or `https://host:<attacker-port>/.well-known/assetlinks.json`.
+
+## Impact
+
+An authenticated user who can upload or trigger analysis of a crafted APK can cause the MobSF server to make an outbound request to an attacker-selected port during Android manifest analysis. When the host is controlled by the attacker and uses DNS rebinding, the validation lookup can resolve to a public IP while the later HTTP client lookup resolves to an internal address, allowing SSRF to internal services on non-80/443 ports.
+
+This is not arbitrary URL SSRF. The path remains fixed to `/.well-known/assetlinks.json`, and redirects are disabled. The bypass is that the final fetched URL is assembled after the host-only validation, so the current port guard is not applied to the actual URL.
+
+## Root cause
+
+`valid_host()` rejects ports other than 80 and 443 when a port is included in the string being validated:
+
+```python
+port = parsed.port
+...
+if port and port not in (80, 443):
+    return False
+```
+
+In `get_browsable_activities()`, only the host attribute is passed to `valid_host()`:
+
+```python
+host = data.getAttribute(f'{ns}:host')
+port = data.getAttribute(f'{ns}:port')
+...
+if not valid_host(host):
+    logger.warning('Invalid Host: %s', host)
+    continue
+shost = f'{scheme}://{host}'
+if port and is_number(port):
+    c_url = f'{shost}:{port}{WELL_KNOWN_PATH}'
+else:
+    c_url = f'{shost}{WELL_KNOWN_PATH}'
+well_known[c_url] = shost
+```
+
+`_check_url()` then fetches the assembled URL after checking only path, query, and params:
+
+```python
+purl = urlparse(url)
+if (purl.path != WELL_KNOWN_PATH
+    or len(purl.query) > 0
+        or len(purl.params) > 0):
+    logger.warning('Invalid Assetlinks URL: %s', url)
+    continue
+r = requests.get(url,
+                 timeout=5,
+                 allow_redirects=False,
+                 proxies=proxies,
+                 verify=verify)
+```
+
+## Reproduction
+
+Use an Android manifest with a browsable App Link data tag that has a benign-looking host and a restricted port:
+
+```xml
+<activity android:name=".DeepLink" android:exported="true">
+  <intent-filter>
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.BROWSABLE" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:scheme="http" android:host="rebind.example" android:port="22" />
+  </intent-filter>
+</activity>
+```
+
+A safe local proof with DNS and HTTP monkeypatching shows that MobSF validates only `rebind.example`, then fetches a URL that preserves the unchecked port:
+
+```text
+well_known map: {'http://rebind.example:22/.well-known/assetlinks.json': 'http://rebind.example'}
+requests.get calls: [('http://rebind.example:22/.well-known/assetlinks.json', {'timeout': 5, 'allow_redirects': False, 'proxies': None, 'verify': True})]
+findings: [{'url': 'http://rebind.example:22/.well-known/assetlinks.json', 'host': 'http://rebind.example', 'status_code': 200, 'status': True}]
+VULNERABLE: valid_host validated only rebind.example, but assetlinks_check fetched unchecked port 22 via http://rebind.example:22/.well-known/assetlinks.json
+```
+
+The same code pattern is present in latest release `v4.4.6` and current main.
+
+## Remediation
+
+Validate the final URL after all manifest components have been applied. In particular:
+
+1. Build `c_url`, then run validation on the full URL, including scheme, hostname, port, path, query, and params.
+2. Reject `android:port` values other than 80 and 443 before appending them to the URL.
+3. Prevent DNS rebinding by pinning the validated DNS result to the outbound connection or otherwise ensuring the actual HTTP request cannot resolve to a different address than the validation step.
+4. Keep `allow_redirects=False` for the existing redirect mitigation.

@@ -1,0 +1,17 @@
+PYSEC-2025-77 PyPI/keylime — A vulnerability has been identified in keylime where an attacker can exploit this flaw by registerin
+package: keylime
+ecosystem: PyPI
+aliases: CVE-2025-13609, GHSA-xh5w-g8gq-r3v9
+references:
+  https://access.redhat.com/security/cve/CVE-2025-13609
+  https://access.redhat.com/errata/RHSA-2025:23201
+  https://access.redhat.com/errata/RHSA-2025:23210
+  https://access.redhat.com/errata/RHSA-2025:23628
+  https://access.redhat.com/errata/RHSA-2025:23735
+  https://access.redhat.com/errata/RHSA-2025:23852
+  https://access.redhat.com/errata/RHSA-2026:0429
+  https://bugzilla.redhat.com/show_bug.cgi?id=2416761
+  https://github.com/keylime/keylime/issues/1820
+  https://github.com/advisories/GHSA-xh5w-g8gq-r3v9
+
+A vulnerability has been identified in keylime where an attacker can exploit this flaw by registering a new agent using a different Trusted Platform Module (TPM) device but claiming an existing agent's unique identifier (UUID). This action overwrites the legitimate agent's identity, enabling the attacker to impersonate the compromised agent and potentially bypass security controls.

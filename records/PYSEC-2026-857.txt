@@ -1,0 +1,19 @@
+PYSEC-2026-857 PyPI/nova — OpenStack Nova can leak consoleauth token into log files
+package: nova
+ecosystem: PyPI
+versions affected:
+  >= 0, < 18.2.4, >= 19.0.0, < 19.1.0, >= 20.0.0, < 20.1.0 (ECOSYSTEM)
+aliases: CVE-2015-9543, GHSA-22jm-4hxw-35jf
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2015-9543
+  https://github.com/openstack/nova/commit/08f1f914cc219cf526adfb08c46b8f40b4e78232
+  https://github.com/openstack/nova/commit/26d4047e17eba9bc271f8868f1d0ffeec97b555e
+  https://github.com/openstack/nova/commit/d8fbf04f325f593836f8d44b6bbf42b85bde94e3
+  https://launchpad.net/bugs/1492140
+  https://review.opendev.org/220622
+  https://security.openstack.org/ossa/OSSA-2020-001.html
+  http://www.openwall.com/lists/oss-security/2020/02/19/2
+  https://pypi.org/project/nova
+  https://github.com/advisories/GHSA-22jm-4hxw-35jf
+
+An issue was discovered in OpenStack Nova before 18.2.4, 19.x before 19.1.0, and 20.x before 20.1.0. It can leak consoleauth tokens into log files. An attacker with read access to the service's logs may obtain tokens used for console access. All Nova setups using novncproxy are affected. This is related to `NovaProxyRequestHandlerBase.new_websocket_client` in `console/websocketproxy.py`.

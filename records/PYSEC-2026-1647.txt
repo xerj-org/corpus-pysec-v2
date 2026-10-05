@@ -1,0 +1,14 @@
+PYSEC-2026-1647 PyPI/mlflow — MLFlow unsafe deserialization
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 1.27.0, <= 2.14.1 (ECOSYSTEM)
+aliases: CVE-2024-37060, GHSA-cv6c-7963-wxcg
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-37060
+  https://github.com/mlflow/mlflow
+  https://hiddenlayer.com/sai-security-advisory/mlflow-june2024
+  https://pypi.org/project/mlflow
+  https://github.com/advisories/GHSA-cv6c-7963-wxcg
+
+Deserialization of untrusted data can occur in versions of the MLflow platform running version 1.27.0 or newer, enabling a maliciously crafted Recipe to execute arbitrary code on an end user’s system when run.

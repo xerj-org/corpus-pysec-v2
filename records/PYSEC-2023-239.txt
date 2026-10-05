@@ -1,0 +1,10 @@
+PYSEC-2023-239 PyPI/asyncssh — An issue in AsyncSSH v2.14.0 and earlier allows attackers to control the remote end of an SSH client
+package: asyncssh
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.14.1 (ECOSYSTEM)
+aliases: CVE-2023-46446, GHSA-c35q-ffpf-5qpm
+references:
+  https://github.com/ronf/asyncssh/security/advisories/GHSA-c35q-ffpf-5qpm
+
+An issue in AsyncSSH v2.14.0 and earlier allows attackers to control the remote end of an SSH client session via packet injection/removal and shell emulation.

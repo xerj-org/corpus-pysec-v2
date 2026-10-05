@@ -1,0 +1,14 @@
+PYSEC-2026-1598 PyPI/mage-ai — Mage AI allows remote unauthenticated attackers to leak the terminal server command history of arbitrary users
+package: mage-ai
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.9.73 (ECOSYSTEM)
+aliases: CVE-2024-8072, GHSA-cgrq-wvfj-v28j
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-8072
+  https://github.com/mage-ai/mage-ai
+  https://research.jfrog.com/vulnerabilities/mage-ai-terminal-server-infoleak-jfsa-2024-001039574
+  https://pypi.org/project/mage-ai
+  https://github.com/advisories/GHSA-cgrq-wvfj-v28j
+
+Mage AI allows remote unauthenticated attackers to leak the terminal server command history of arbitrary users.

@@ -1,0 +1,20 @@
+PYSEC-2026-2008 PyPI/vantage6-server — vantage6 vulnerable to username timing attack
+package: vantage6-server
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.2.0 (ECOSYSTEM)
+aliases: CVE-2024-21671, GHSA-45gq-q4xh-cp53
+references:
+  https://github.com/vantage6/vantage6/security/advisories/GHSA-45gq-q4xh-cp53
+  https://nvd.nist.gov/vuln/detail/CVE-2024-21671
+  https://github.com/vantage6/vantage6/commit/389f416c445da4f2438c72f34c3b1084485c4e30
+  https://github.com/pypa/advisory-database/tree/main/vulns/vantage6/PYSEC-2024-31.yaml
+  https://github.com/vantage6/vantage6
+  https://pypi.org/project/vantage6-server
+  https://github.com/advisories/GHSA-45gq-q4xh-cp53
+
+### Impact
+It is possible to find out usernames from the response time of login requests. This could aid attackers in credential attacks
+
+### Workarounds
+No

@@ -1,0 +1,16 @@
+PYSEC-2026-844 PyPI/matrix-synapse — Matrix Synapse Authorization Error
+package: matrix-synapse
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.31.2 (ECOSYSTEM)
+aliases: CVE-2018-12423, GHSA-ch5v-fhg8-7gv9
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2018-12423
+  https://github.com/matrix-org/matrix-doc/issues/1304
+  https://bugs.debian.org/901549
+  https://github.com/matrix-org/synapse
+  https://matrix.org/blog/2018/06/14/security-update-synapse-0-31-2
+  https://pypi.org/project/matrix-synapse
+  https://github.com/advisories/GHSA-ch5v-fhg8-7gv9
+
+In Synapse before 0.31.2, unauthorised users can hijack rooms when there is no `m.room.power_levels` event in force.

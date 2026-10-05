@@ -1,0 +1,16 @@
+PYSEC-2026-2349 PyPI/apache-airflow — Apache Airflow has an Improper Authorization issue
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 3.0.0, < 3.2.2 (ECOSYSTEM)
+aliases: CVE-2026-40963, GHSA-gprj-xvq8-w53q
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-40963
+  https://github.com/apache/airflow/pull/65342
+  https://github.com/apache/airflow
+  https://lists.apache.org/thread/s907bhsksc37m59f0loqjcp1ryobrr60
+  http://www.openwall.com/lists/oss-security/2026/05/31/3
+  https://pypi.org/project/apache-airflow
+  https://github.com/advisories/GHSA-gprj-xvq8-w53q
+
+The structure_data endpoint in the Airflow UI returned external dependency graph nodes for linked Dags without checking whether the caller had read permission on those linked Dags. An authenticated UI/API user authorized for one Dag could enumerate linked Dag IDs and dependency metadata for other Dags they were not authorized to read. Affects deployments that rely on per-Dag read scoping to keep Dag dependency topology private across teams. Users are advised to upgrade to `apache-airflow` 3.2.2 or later.

@@ -1,0 +1,14 @@
+PYSEC-2026-1172 PyPI/apache-superset — Apache Superset may expose internal traces on REST API endpoints
+package: apache-superset
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.1.1 (ECOSYSTEM)
+aliases: CVE-2023-39264, GHSA-cpvx-2365-466c
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-39264
+  https://github.com/apache/superset
+  https://lists.apache.org/thread/y65t1of7hb445n86o1vdzjct7rfwlx75
+  https://pypi.org/project/apache-superset
+  https://github.com/advisories/GHSA-cpvx-2365-466c
+
+By default, stack traces for errors were enabled, which resulted in the exposure of internal traces on REST API endpoints to users. This vulnerability exists in Apache Superset versions up to and including 2.1.0.

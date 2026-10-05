@@ -1,0 +1,17 @@
+PYSEC-2026-3580 PyPI/nanobot-ai — Nanobot contains a server-side request forgery vulnerability in the web_fetch tool
+package: nanobot-ai
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.2.1 (ECOSYSTEM)
+aliases: CVE-2026-49138, GHSA-434r-7c99-hwf3
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-49138
+  https://github.com/HKUDS/nanobot/pull/3928
+  https://github.com/HKUDS/nanobot/commit/545294c62c0947da40eb5b65288aaf02b5fdf632
+  https://github.com/HKUDS/nanobot
+  https://github.com/HKUDS/nanobot/releases/tag/v0.2.1
+  https://www.vulncheck.com/advisories/nanobot-ssrf-via-web-fetch-tool-redirect-following
+  https://pypi.org/project/nanobot-ai
+  https://github.com/advisories/GHSA-434r-7c99-hwf3
+
+Nanobot prior to version 0.2.1 contains a server-side request forgery vulnerability in the web_fetch tool that allows remote attackers to reach internal or private network hosts by supplying a URL that redirects to a loopback or private address via a 3xx Location header. Attackers can exploit the automatic HTTP redirect following behavior in the httpx library to bypass initial URL validation and cause the runtime to send outbound requests to internal hosts before final resolved URL validation is applied.

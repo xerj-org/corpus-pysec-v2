@@ -1,0 +1,19 @@
+PYSEC-2026-1618 PyPI/mcp — MCP Python SDK has Unhandled Exception in Streamable HTTP Transport, Leading to Denial of Service
+package: mcp
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.10.0 (ECOSYSTEM)
+aliases: CVE-2025-53365, GHSA-j975-95f5-7wqh
+references:
+  https://github.com/modelcontextprotocol/python-sdk/security/advisories/GHSA-j975-95f5-7wqh
+  https://nvd.nist.gov/vuln/detail/CVE-2025-53365
+  https://github.com/modelcontextprotocol/python-sdk/pull/967
+  https://github.com/modelcontextprotocol/python-sdk/commit/7b420656de48cfdb90b39eb582e60b6d55c2f891
+  https://github.com/modelcontextprotocol/python-sdk
+  https://github.com/modelcontextprotocol/python-sdk/releases/tag/v1.10.0
+  https://pypi.org/project/mcp
+  https://github.com/advisories/GHSA-j975-95f5-7wqh
+
+If a client deliberately triggers an exception after establishing a streamable HTTP session, this can lead to an uncaught ClosedResourceError on the server side, causing the server to crash and requiring a restart to restore service. Impact may vary depending on the deployment conditions, and presence of infrastructure-level resilience measures.
+
+Thank you to Rich Harang for reporting this issue.

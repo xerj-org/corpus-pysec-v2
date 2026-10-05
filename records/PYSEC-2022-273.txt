@@ -1,0 +1,13 @@
+PYSEC-2022-273 PyPI/rdiffweb — Missing Custom Error Page in GitHub repository ikus060/rdiffweb prior to 2.4.2.
+package: rdiffweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < 233befc33bdc45d4838c773d5aed4408720504c5 (GIT: https://github.com/ikus060/rdiffweb)
+  >= 0, < 2.4.2 (ECOSYSTEM)
+aliases: CVE-2022-3175, GHSA-ch4c-278q-5654
+references:
+  https://github.com/ikus060/rdiffweb/commit/233befc33bdc45d4838c773d5aed4408720504c5
+  https://huntr.dev/bounties/c40badc3-c9e7-4b69-9e2e-2b9f05865159
+  https://github.com/advisories/GHSA-ch4c-278q-5654
+
+Missing Custom Error Page in GitHub repository ikus060/rdiffweb prior to 2.4.2.

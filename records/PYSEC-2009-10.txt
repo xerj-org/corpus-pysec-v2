@@ -1,0 +1,14 @@
+PYSEC-2009-10 PyPI/zodb3 — Unspecified vulnerability in the Zope Enterprise Objects (ZEO) storage-server functionality in Zope 
+package: zodb3
+ecosystem: PyPI
+versions affected:
+  >= 3.8, < 3.8.3, >= 3.9a0, < 3.9.0c2 (ECOSYSTEM)
+aliases: CVE-2009-2701, GHSA-m52m-2qpx-9j4j
+references:
+  https://mail.zope.org/pipermail/zope-announce/2009-September/002221.html
+  http://pypi.python.org/pypi/ZODB3/3.9.0c2
+  http://pypi.python.org/pypi/ZODB3/3.8.3
+  http://www.vupen.com/english/advisories/2009/2534
+  https://github.com/advisories/GHSA-m52m-2qpx-9j4j
+
+Unspecified vulnerability in the Zope Enterprise Objects (ZEO) storage-server functionality in Zope Object Database (ZODB) 3.8 before 3.8.3 and 3.9.x before 3.9.0c2, when certain ZEO database sharing and blob support are enabled, allows remote authenticated users to read or delete arbitrary files via unknown vectors.

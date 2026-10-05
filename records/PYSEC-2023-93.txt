@@ -1,0 +1,10 @@
+PYSEC-2023-93 PyPI/pacparser — pacparser_find_proxy in Pacparser before 1.4.2 allows JavaScript injection, and possibly privilege e
+package: pacparser
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.2 (ECOSYSTEM)
+aliases: CVE-2023-37360, GHSA-62q6-v997-f7v9
+references:
+  https://github.com/manugarg/pacparser/security/advisories/GHSA-62q6-v997-f7v9
+
+pacparser_find_proxy in Pacparser before 1.4.2 allows JavaScript injection, and possibly privilege escalation, when the attacker controls the URL (which may be realistic within enterprise security products).

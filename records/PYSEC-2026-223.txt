@@ -1,0 +1,11 @@
+PYSEC-2026-223 PyPI/langflow — Langflow is a tool for building and deploying AI-powered agents and workflows. Prior to 1.0.19, an a
+package: langflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0.19 (ECOSYSTEM)
+aliases: CVE-2026-55446, GHSA-qwqc-p3q8-wcg9
+references:
+  https://github.com/langflow-ai/langflow/pull/3923
+  https://github.com/langflow-ai/langflow/security/advisories/GHSA-qwqc-p3q8-wcg9
+
+Langflow is a tool for building and deploying AI-powered agents and workflows. Prior to 1.0.19, an attacker can send a /api/v1/files/upload/ request without any authentication token/cookies and abuse a very long multipart form boundary to make the langflow app unusable for all users for an indefinite amount of time. This vulnerability is fixed in 1.0.19.

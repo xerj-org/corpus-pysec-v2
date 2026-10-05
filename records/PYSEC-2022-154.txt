@@ -1,0 +1,13 @@
+PYSEC-2022-154 PyPI/tensorflow-gpu — Tensorflow is an Open Source Machine Learning Framework. A `GraphDef` from a TensorFlow `SavedModel`
+package: tensorflow-gpu
+ecosystem: PyPI
+versions affected:
+  >= 0, < 955059813cc325dc1db5e2daa6221271406d4439 (GIT: https://github.com/tensorflow/tensorflow)
+  >= 0, < 2.7.1 (ECOSYSTEM)
+aliases: CVE-2022-23590, GHSA-pqrv-8r2f-7278
+references:
+  https://github.com/tensorflow/tensorflow/security/advisories/GHSA-pqrv-8r2f-7278
+  https://github.com/tensorflow/tensorflow/blob/274df9b02330b790aa8de1cee164b70f72b9b244/tensorflow/core/graph/graph.cc#L560-L567
+  https://github.com/tensorflow/tensorflow/commit/955059813cc325dc1db5e2daa6221271406d4439
+
+Tensorflow is an Open Source Machine Learning Framework. A `GraphDef` from a TensorFlow `SavedModel` can be maliciously altered to cause a TensorFlow process to crash due to encountering a `StatusOr` value that is an error and forcibly extracting the value from it. We have patched the issue in multiple GitHub commits and these will be included in TensorFlow 2.8.0 and TensorFlow 2.7.1, as both are affected.

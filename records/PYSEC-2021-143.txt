@@ -1,0 +1,11 @@
+PYSEC-2021-143 PyPI/quokka — Cross Site Scripting (XSS) in Quokka v0.4.0 allows remote attackers to execute arbitrary code via th
+package: quokka
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2020-18702, GHSA-5m69-3chg-6f8m
+references:
+  https://github.com/rochacbruno/quokka/issues/675
+  https://github.com/advisories/GHSA-5m69-3chg-6f8m
+
+Cross Site Scripting (XSS) in Quokka v0.4.0 allows remote attackers to execute arbitrary code via the 'Username' parameter in the component 'quokka/admin/actions.py'.

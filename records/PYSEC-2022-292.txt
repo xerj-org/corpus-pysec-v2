@@ -1,0 +1,13 @@
+PYSEC-2022-292 PyPI/rdiffweb — Improper Handling of Length Parameter Inconsistency in GitHub repository ikus060/rdiffweb prior to 2
+package: rdiffweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < 667657c6fe2b336c90be37f37fb92f65df4feee3 (GIT: https://github.com/ikus060/rdiffweb)
+  >= 0, < 2.4.8 (ECOSYSTEM)
+aliases: CVE-2022-3290, GHSA-5v95-j4rr-6f3c
+references:
+  https://huntr.dev/bounties/d8b8519d-96a5-484c-8141-624c54290bf5
+  https://github.com/ikus060/rdiffweb/commit/667657c6fe2b336c90be37f37fb92f65df4feee3
+  https://github.com/advisories/GHSA-5v95-j4rr-6f3c
+
+Improper Handling of Length Parameter Inconsistency in GitHub repository ikus060/rdiffweb prior to 2.4.8.

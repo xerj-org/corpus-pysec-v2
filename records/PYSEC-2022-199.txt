@@ -1,0 +1,10 @@
+PYSEC-2022-199 PyPI/ctx — The ctx hosted project on PyPI was taken over via user account compromise and replaced with a malici
+package: ctx
+ecosystem: PyPI
+versions affected:
+  >= 0.1.2-1 (ECOSYSTEM)
+aliases: GSD-2022-1002521
+references:
+  https://python-security.readthedocs.io/pypi-vuln/index-2022-05-24-ctx-domain-takeover.html
+
+The ctx hosted project on PyPI was taken over via user account compromise and replaced with a malicious project which contained runtime code which collected the content of os.environ.items() when instantiating Ctx objects.

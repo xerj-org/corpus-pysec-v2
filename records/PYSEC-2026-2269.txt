@@ -1,0 +1,32 @@
+PYSEC-2026-2269 PyPI/pyopenssl — pyOpenSSL is a Python wrapper around the OpenSSL library. Starting in version 22.0.0 and prior to ve
+package: pyopenssl
+ecosystem: PyPI
+versions affected:
+  >= 22.0.0, < 26.0.0 (ECOSYSTEM)
+aliases: CVE-2026-27459, GHSA-5pwr-322w-8jr4
+references:
+  https://access.redhat.com/security/cve/CVE-2026-27459
+  https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-27459.json
+  https://access.redhat.com/errata/RHSA-2026:10754
+  https://access.redhat.com/errata/RHSA-2026:11856
+  https://access.redhat.com/errata/RHSA-2026:11916
+  https://access.redhat.com/errata/RHSA-2026:11996
+  https://access.redhat.com/errata/RHSA-2026:13508
+  https://access.redhat.com/errata/RHSA-2026:13512
+  https://access.redhat.com/errata/RHSA-2026:13545
+  https://access.redhat.com/errata/RHSA-2026:13553
+  https://access.redhat.com/errata/RHSA-2026:14835
+  https://access.redhat.com/errata/RHSA-2026:14873
+  https://access.redhat.com/errata/RHSA-2026:14874
+  https://access.redhat.com/errata/RHSA-2026:19375
+  https://access.redhat.com/errata/RHSA-2026:21017
+  https://access.redhat.com/errata/RHSA-2026:22465
+  https://access.redhat.com/errata/RHSA-2026:24853
+  https://access.redhat.com/errata/RHSA-2026:7224
+  https://access.redhat.com/errata/RHSA-2026:8437
+  https://github.com/pyca/pyopenssl/blob/358cbf29c4e364c59930e53a270116249581eaa3/CHANGELOG.rst
+  https://github.com/pyca/pyopenssl/security/advisories/GHSA-5pwr-322w-8jr4
+  https://bugzilla.redhat.com/show_bug.cgi?id=2448503
+  https://github.com/pyca/pyopenssl/commit/57f09bb4bb051d3bc2a1abd36e9525313d5cd408
+
+pyOpenSSL is a Python wrapper around the OpenSSL library. Starting in version 22.0.0 and prior to version 26.0.0, if a user provided callback to `set_cookie_generate_callback` returned a cookie value greater than 256 bytes, pyOpenSSL would overflow an OpenSSL provided buffer. Starting in version 26.0.0, cookie values that are too long are now rejected.

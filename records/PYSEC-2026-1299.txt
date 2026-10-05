@@ -1,0 +1,14 @@
+PYSEC-2026-1299 PyPI/django-markdownx — Django MarkdownX Cross-Site Scripting (XSS) vulnerability
+package: django-markdownx
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 4.0.2 (ECOSYSTEM)
+aliases: CVE-2024-2319, GHSA-fvx8-79hx-x82f
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-2319
+  https://github.com/neutronX/django-markdownx
+  https://www.incibe.es/en/incibe-cert/notices/aviso/cross-site-scripting-vulnerability-django-markdownx
+  https://pypi.org/project/django-markdownx
+  https://github.com/advisories/GHSA-fvx8-79hx-x82f
+
+Cross-Site Scripting (XSS) vulnerability in the Django MarkdownX project, affecting version 4.0.2. An attacker could store a specially crafted JavaScript payload in the upload functionality due to lack of proper sanitisation of JavaScript elements.

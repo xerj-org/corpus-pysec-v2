@@ -1,0 +1,21 @@
+PYSEC-2025-100 PyPI/codechecker — CodeChecker is an analyzer tooling, defect database and viewer extension for the Clang Static Analyz
+package: codechecker
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.26.2 (ECOSYSTEM)
+aliases: CVE-2025-40843, GHSA-5xf2-f6ch-6p8r
+references:
+  https://github.com/Ericsson/codechecker/security/advisories/GHSA-5xf2-f6ch-6p8r
+
+CodeChecker is an analyzer tooling, defect database and viewer extension for the Clang Static Analyzer and Clang Tidy. 
+
+
+
+
+CodeChecker versions up to 6.26.1 contain a buffer overflow vulnerability in the internal ldlogger library, which is executed by the CodeChecker log command.
+
+
+
+
+
+This issue affects CodeChecker: through 6.26.1.

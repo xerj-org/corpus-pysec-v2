@@ -1,0 +1,12 @@
+PYSEC-2022-43178 PyPI/cleo — An exponential ReDoS (Regular Expression Denial of Service) can be triggered in the cleo PyPI packag
+package: cleo
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.0.0 (ECOSYSTEM)
+aliases: CVE-2022-42966, GHSA-2p9h-ccw7-33gf
+references:
+  https://research.jfrog.com/vulnerabilities/cleo-redos-xray-257186/
+  https://research.jfrog.com/vulnerabilities/cleo-redos-xray-257186/
+  https://github.com/advisories/GHSA-2p9h-ccw7-33gf
+
+An exponential ReDoS (Regular Expression Denial of Service) can be triggered in the cleo PyPI package, when an attacker is able to supply arbitrary input to the Table.set_rows method

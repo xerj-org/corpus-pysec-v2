@@ -1,0 +1,14 @@
+PYSEC-2026-2056 PyPI/xhtml2pdf — xhtml2pdf Denial of Service via crafted string
+package: xhtml2pdf
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.2.16 (ECOSYSTEM)
+aliases: CVE-2024-25885, GHSA-jj5c-hhrg-vv5h
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-25885
+  https://gist.github.com/salvatore-abello/c88dd0027496774023ef36c7b576d206
+  https://github.com/xhtml2pdf/xhtml2pdf
+  https://pypi.org/project/xhtml2pdf
+  https://github.com/advisories/GHSA-jj5c-hhrg-vv5h
+
+An issue in the getcolor function in utils.py of xhtml2pdf v0.2.13 allows attackers to cause a Regular expression Denial of Service (ReDOS) via supplying a crafted string.

@@ -1,0 +1,17 @@
+PYSEC-2026-1571 PyPI/llama-stack — Llama Stack could potentially allow for remote code execution
+package: llama-stack
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.2.20 (ECOSYSTEM)
+aliases: CVE-2025-55178, GHSA-x75h-m6jj-6cj2
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-55178
+  https://github.com/llamastack/llama-stack/pull/3281
+  https://github.com/llamastack/llama-stack/commit/efdb5558b8dcab4d141678bfed0a405e2f312b6f
+  https://github.com/llamastack/llama-stack
+  https://github.com/llamastack/llama-stack/releases/tag/v0.2.20
+  https://www.facebook.com/security/advisories/cve-2025-55178
+  https://pypi.org/project/llama-stack
+  https://github.com/advisories/GHSA-x75h-m6jj-6cj2
+
+Llama Stack prior to version v0.2.20 accepted unverified parameters in the resolve_ast_by_type function which could potentially allow for remote code execution.

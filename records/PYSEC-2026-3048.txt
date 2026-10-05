@@ -1,0 +1,14 @@
+PYSEC-2026-3048 PyPI/rdiffweb — IKUS Rdiffweb allows an attacker with any valid or stolen access token to act as other users
+package: rdiffweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.10.6 (ECOSYSTEM)
+aliases: CVE-2025-67796, GHSA-v4gp-hf5j-4566
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-67796
+  https://gitlab.com/ikus-soft/rdiffweb
+  https://gitlab.com/ikus-soft/rdiffweb#2106-2025-10-02
+  https://pypi.org/project/rdiffweb
+  https://github.com/advisories/GHSA-v4gp-hf5j-4566
+
+IKUS Rdiffweb version 2.10.5 and below have an improper authorization flaw that allows an attacker with any valid or stolen access token to act as other users. The API does not enforce binding between the authenticated subject and the targeted user/tenant, so crafted requests can read or modify other users data and, in some cases, perform privileged actions. This issue may enable cross-tenant access. Fixed in version 2.10.6.

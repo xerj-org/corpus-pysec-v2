@@ -1,0 +1,10 @@
+PYSEC-2021-12 PyPI/eventlet — Eventlet is a concurrent networking library for Python. A websocket peer may exhaust memory on Event
+package: eventlet
+ecosystem: PyPI
+versions affected:
+  >= 0.10.0, < 0.31.0 (ECOSYSTEM)
+aliases: CVE-2021-21419, GHSA-9p9m-jm8w-94p2
+references:
+  https://github.com/eventlet/eventlet/security/advisories/GHSA-9p9m-jm8w-94p2
+
+Eventlet is a concurrent networking library for Python. A websocket peer may exhaust memory on Eventlet side by sending very large websocket frames. Malicious peer may exhaust memory on Eventlet side by sending highly compressed data frame. A patch in version 0.31.0 restricts websocket frame to reasonable limits. As a workaround, restricting memory usage via OS limits would help against overall machine exhaustion, but there is no workaround to protect Eventlet process.

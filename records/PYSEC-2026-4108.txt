@@ -1,0 +1,23 @@
+PYSEC-2026-4108 PyPI/mpxj — MPXJ: Potential Path Traversal Vulnerability in Primavera P3 PRX and SureTrak STX readers
+package: mpxj
+ecosystem: PyPI
+versions affected:
+  >= 7.3.0, < 16.5.0 (ECOSYSTEM)
+aliases: CVE-2026-65829, GHSA-7952-gx68-cjqr
+references:
+  https://github.com/joniles/mpxj/security/advisories/GHSA-7952-gx68-cjqr
+  https://github.com/joniles/mpxj/commit/4347315afab1ef5a2907978a754fbc5b0ff58e6f
+  https://github.com/joniles/mpxj
+  https://github.com/joniles/mpxj/releases/tag/v16.5.0
+  https://pypi.org/project/mpxj
+  https://github.com/advisories/GHSA-7952-gx68-cjqr
+  https://nvd.nist.gov/vuln/detail/CVE-2026-65829
+
+### Impact
+When reading a suitably crafted PRX or STX file, MPXJ can be made to write files to arbitrary locations in the file system.
+
+### Patches
+This issue is addressed in MPXJ version 16.5.0.
+
+### Workarounds
+Do not read PRX or STX files from untrusted sources.

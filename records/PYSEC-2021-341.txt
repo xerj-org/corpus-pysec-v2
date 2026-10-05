@@ -1,0 +1,10 @@
+PYSEC-2021-341 PyPI/lin-cms — Incorrect Access Control in Lin-CMS-Flask v0.1.1 allows remote attackers to obtain sensitive informa
+package: lin-cms
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2020-18701
+references:
+  https://github.com/TaleLin/lin-cms-flask/issues/30
+
+Incorrect Access Control in Lin-CMS-Flask v0.1.1 allows remote attackers to obtain sensitive information and/or gain privileges due to the application not invalidating a user's authentication token upon logout, which allows for replaying packets.

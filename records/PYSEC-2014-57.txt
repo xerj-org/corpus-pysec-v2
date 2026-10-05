@@ -1,0 +1,14 @@
+PYSEC-2014-57 PyPI/plone — typeswidget.py in Plone 2.1 through 4.1, 4.2.x through 4.2.5, and 4.3.x through 4.3.1 does not prope
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 2.1, < 4.1.1, >= 4.2, < 4.2.6, >= 4.3, < 4.3.2 (ECOSYSTEM)
+aliases: CVE-2013-4193, GHSA-6fgf-x7wg-hp8r
+references:
+  http://plone.org/products/plone-hotfix/releases/20130618
+  http://plone.org/products/plone/security/advisories/20130618-announcement
+  http://seclists.org/oss-sec/2013/q3/261
+  https://bugzilla.redhat.com/show_bug.cgi?id=978469
+  https://github.com/advisories/GHSA-6fgf-x7wg-hp8r
+
+typeswidget.py in Plone 2.1 through 4.1, 4.2.x through 4.2.5, and 4.3.x through 4.3.1 does not properly enforce the immutable setting on unspecified content edit forms, which allows remote attackers to hide fields on the forms via a crafted URL.

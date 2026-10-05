@@ -1,0 +1,13 @@
+PYSEC-2018-85 PyPI/kdcproxy — python-kdcproxy before 0.3.2 allows remote attackers to cause a denial of service via a large POST r
+package: kdcproxy
+ecosystem: PyPI
+versions affected:
+  >= 0, < f274aa6787cb8b3ec1cc12c440a56665b7231882 (GIT: https://github.com/latchset/kdcproxy)
+  >= 0, < 0.3.2 (ECOSYSTEM)
+aliases: CVE-2015-5159, GHSA-j7c4-2xj8-wm7r
+references:
+  https://github.com/latchset/kdcproxy/commit/f274aa6787cb8b3ec1cc12c440a56665b7231882
+  https://bugzilla.redhat.com/show_bug.cgi?id=1245200
+  https://github.com/advisories/GHSA-j7c4-2xj8-wm7r
+
+python-kdcproxy before 0.3.2 allows remote attackers to cause a denial of service via a large POST request.

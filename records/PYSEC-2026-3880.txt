@@ -1,0 +1,16 @@
+PYSEC-2026-3880 PyPI/openharness-ai — OpenHarness remote project-context commands allow persistent prompt poisoning
+package: openharness-ai
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.1.9 (ECOSYSTEM)
+aliases: CVE-2026-56696, GHSA-24cw-228q-3rx9
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-56696
+  https://github.com/HKUDS/OpenHarness/pull/272
+  https://github.com/HKUDS/OpenHarness/commit/27bb93b810e9ea8fa4832eab7152eeb3b4a6bffb
+  https://github.com/HKUDS/OpenHarness
+  https://www.vulncheck.com/advisories/openharness-prompt-injection-via-issue-and-pr-comments-slash-commands
+  https://pypi.org/project/openharness-ai
+  https://github.com/advisories/GHSA-24cw-228q-3rx9
+
+OpenHarness /issue and /pr_comments slash commands lack remote_invocable=False protection, allowing remote channel senders to write attacker-controlled Markdown into project context files. Admitted remote attackers can inject malicious content into .openharness/issue.md and .openharness/pr_comments.md files, which are subsequently injected into runtime system prompts, persistently influencing local agent behavior.

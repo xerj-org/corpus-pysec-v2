@@ -1,0 +1,30 @@
+PYSEC-2026-3541 PyPI/tensorzero — TensorZero Gateway: Arbitrary file read and SSRF in internal object storage endpoint
+package: tensorzero
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2026.6.0 (ECOSYSTEM)
+aliases: CVE-2026-54457, GHSA-824w-x939-6cmc
+references:
+  https://github.com/tensorzero/tensorzero/security/advisories/GHSA-824w-x939-6cmc
+  https://github.com/tensorzero/tensorzero/commit/0abbc838bae3394fe7491dad7009670d4e3b6cf8
+  https://github.com/tensorzero/tensorzero
+  https://github.com/tensorzero/tensorzero/releases/tag/2026.6.0
+  https://pypi.org/project/tensorzero
+  https://github.com/advisories/GHSA-824w-x939-6cmc
+  https://nvd.nist.gov/vuln/detail/CVE-2026-54457
+
+### Impact
+
+The `/internal/object_storage` endpoint accepts a caller-supplied JSON `storage_path` parameter that dynamically overrides the TensorZero `[object_storage]` configuration.
+
+By abusing the `filesystem` storage type, a caller can read arbitrary files from the gateway filesystem, including files that may contain sensitive credentials. Similarly, by abusing the `s3_compatible` storage type, the caller can coerce the gateway into making outbound object storage requests to attacker-chosen internal/cloud-metadata endpoints.
+
+This vulnerability only applies when the gateway can be accessed by untrusted callers. If a developer's TensorZero deployment has authentication enabled, only authenticated callers can exploit this vulnerability. If a developer's deployment has authentication disabled, any caller can exploit this vulnerability.
+
+### Remediation
+
+The vulnerability has been patched in version `2026.6.0`. See PR #7527.
+
+### Workarounds
+
+If developers are unable to upgrade a gateway that is exposed to untrusted callers, please block external access to the `/internal/object_storage` endpoint.

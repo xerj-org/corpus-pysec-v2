@@ -1,0 +1,12 @@
+PYSEC-2015-12 PyPI/django-markupfield — django-markupfield before 1.3.2 uses the default docutils RESTRUCTUREDTEXT_FILTER_SETTINGS settings,
+package: django-markupfield
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.3.2 (ECOSYSTEM)
+aliases: CVE-2015-0846, GHSA-wxmr-7xjv-8xqw
+references:
+  http://www.debian.org/security/2015/dsa-3230
+  https://github.com/jamesturk/django-markupfield/blob/master/CHANGELOG
+  https://github.com/advisories/GHSA-wxmr-7xjv-8xqw
+
+django-markupfield before 1.3.2 uses the default docutils RESTRUCTUREDTEXT_FILTER_SETTINGS settings, which allows remote attackers to include and read arbitrary files via unspecified vectors.

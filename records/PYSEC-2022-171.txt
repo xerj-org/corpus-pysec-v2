@@ -1,0 +1,13 @@
+PYSEC-2022-171 PyPI/salt — An issue was discovered in SaltStack Salt in versions before 3002.8, 3003.4, 3004.1. Salt Masters do
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3002.8 (ECOSYSTEM)
+aliases: CVE-2022-22934, GHSA-2q4g-wfm6-5fpm
+references:
+  https://github.com/saltstack/salt/releases,
+  https://repo.saltproject.io/
+  https://saltproject.io/security_announcements/salt-security-advisory-release/,
+  https://github.com/advisories/GHSA-2q4g-wfm6-5fpm
+
+An issue was discovered in SaltStack Salt in versions before 3002.8, 3003.4, 3004.1. Salt Masters do not sign pillar data with the minion’s public key, which can result in attackers substituting arbitrary pillar data.

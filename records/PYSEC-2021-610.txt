@@ -1,0 +1,13 @@
+PYSEC-2021-610 PyPI/tensorflow-cpu — TensorFlow is an open source platform for machine learning. In affected versions if `tf.summary.crea
+package: tensorflow-cpu
+ecosystem: PyPI
+versions affected:
+  >= 0, < 874bda09e6702cd50bac90b453b50bcc65b2769e (GIT: https://github.com/tensorflow/tensorflow)
+  >= 0, < 2.4.4, >= 2.5.0, < 2.5.2, >= 2.6.0, < 2.6.1, >= 2.7.0rc0, < 2.7.0 (ECOSYSTEM)
+aliases: CVE-2021-41200, GHSA-gh8h-7j2j-qv4f
+references:
+  https://github.com/tensorflow/tensorflow/issues/46909
+  https://github.com/tensorflow/tensorflow/security/advisories/GHSA-gh8h-7j2j-qv4f
+  https://github.com/tensorflow/tensorflow/commit/874bda09e6702cd50bac90b453b50bcc65b2769e
+
+TensorFlow is an open source platform for machine learning. In affected versions if `tf.summary.create_file_writer` is called with non-scalar arguments code crashes due to a `CHECK`-fail. The fix will be included in TensorFlow 2.7.0. We will also cherrypick this commit on TensorFlow 2.6.1, TensorFlow 2.5.2, and TensorFlow 2.4.4, as these are also affected and still in supported range.

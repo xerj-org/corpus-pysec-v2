@@ -1,0 +1,16 @@
+PYSEC-2024-49 PyPI/lektor — Lektor before 3.3.11 does not sanitize DB path traversal. Thus, shell commands might be executed via
+package: lektor
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.3.11 (ECOSYSTEM)
+aliases: CVE-2024-28335, GHSA-wv28-7fpw-fj49
+references:
+  https://github.com/lektor/lektor/pull/1179/commits/8f38b9713d152622b69ff5e3b1e6a0d7bb7fa800
+  https://github.com/lektor/lektor/releases/tag/v3.3.11
+  https://cxsecurity.com/issue/WLB-2024030043
+  https://packetstormsecurity.com/files/177708/Lektor-Static-CMS-3.3.10-Arbitrary-File-Upload-Remote-Code-Execution.html
+  https://getlektor.com/docs/quickstart
+  https://brave.com/privacy-updates/27-localhost-permission/
+  https://github.com/advisories/GHSA-wv28-7fpw-fj49
+
+Lektor before 3.3.11 does not sanitize DB path traversal. Thus, shell commands might be executed via a file that is added to the templates directory, if the victim's web browser accesses an untrusted website that uses JavaScript to send requests to localhost port 5000, and the web browser is running on the same machine as the "lektor server" command.

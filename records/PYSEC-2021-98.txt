@@ -1,0 +1,13 @@
+PYSEC-2021-98 PyPI/django — Django before 2.2.24, 3.x before 3.1.12, and 3.2.x before 3.2.4 has a potential directory traversal 
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.2.24, >= 3.0, < 3.1.12, >= 3.2, < 3.2.4 (ECOSYSTEM)
+aliases: CVE-2021-33203, GHSA-68w8-qjq3-2gfm
+references:
+  https://docs.djangoproject.com/en/3.2/releases/security/
+  https://www.djangoproject.com/weblog/2021/jun/02/security-releases/
+  https://groups.google.com/forum/#!forum/django-announce
+  https://github.com/advisories/GHSA-68w8-qjq3-2gfm
+
+Django before 2.2.24, 3.x before 3.1.12, and 3.2.x before 3.2.4 has a potential directory traversal via django.contrib.admindocs. Staff members could use the TemplateDetailView view to check the existence of arbitrary files. Additionally, if (and only if) the default admindocs templates have been customized by application developers to also show file contents, then not only the existence but also the file contents would have been exposed. In other words, there is directory traversal outside of the template root directories.

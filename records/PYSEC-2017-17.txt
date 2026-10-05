@@ -1,0 +1,14 @@
+PYSEC-2017-17 PyPI/kallithea — Multiple cross-site scripting (XSS) vulnerabilities in the administration pages in Kallithea before 
+package: kallithea
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.2.1 (ECOSYSTEM)
+aliases: CVE-2015-1864, GHSA-fh5c-7gmg-xmp6
+references:
+  https://kallithea-scm.org/security/cve-2015-1864.html
+  https://kallithea-scm.org/repos/kallithea/changeset/a8f2986afc18c9221bf99f88b06e60ab83c86c55
+  http://www.securityfocus.com/bid/74184
+  http://www.openwall.com/lists/oss-security/2015/04/14/12
+  https://github.com/advisories/GHSA-fh5c-7gmg-xmp6
+
+Multiple cross-site scripting (XSS) vulnerabilities in the administration pages in Kallithea before 0.2.1 allow remote attackers to inject arbitrary web script or HTML via the (1) first name or (2) last name user details, or the (3) repository, (4) repository group, or (5) user group description.

@@ -1,0 +1,14 @@
+PYSEC-2010-33 PyPI/zope — Withdrawn as duplicate of PYSEC-2010-32 ZServer in Zope 2.10.x before 2.10.12 and 2.11.x before 2.11
+package: zope
+ecosystem: PyPI
+aliases: CVE-2010-3198, GHSA-qh4q-fwf8-qqrw
+references:
+  http://www.securityfocus.com/bid/42939
+  http://www.zope.org/Products/Zope/2.10.12/CHANGES.txt
+  http://www.zope.org/Products/Zope/2.11.7/CHANGES.txt
+  http://www.vupen.com/english/advisories/2010/2275
+  https://bugs.launchpad.net/zope2/+bug/627988
+  https://mail.zope.org/pipermail/zope-announce/2010-September/002247.html
+  https://github.com/advisories/GHSA-qh4q-fwf8-qqrw
+
+Withdrawn as duplicate of PYSEC-2010-32 ZServer in Zope 2.10.x before 2.10.12 and 2.11.x before 2.11.7 allows remote attackers to cause a denial of service (crash of worker threads) via vectors that trigger uncaught exceptions.

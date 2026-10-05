@@ -1,0 +1,11 @@
+PYSEC-2010-22 PyPI/pyftpdlib — pyftpdlib before 0.1.1 does not choose a random value for the port associated with the PASV command,
+package: pyftpdlib
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.1.1 (ECOSYSTEM)
+aliases: CVE-2007-6738, GHSA-gh7c-cg3x-pmcr
+references:
+  http://code.google.com/p/pyftpdlib/source/browse/trunk/HISTORY
+  https://github.com/advisories/GHSA-gh7c-cg3x-pmcr
+
+pyftpdlib before 0.1.1 does not choose a random value for the port associated with the PASV command, which makes it easier for remote attackers to obtain potentially sensitive information about the number of in-progress data connections by reading the response to this command.

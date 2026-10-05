@@ -1,0 +1,20 @@
+PYSEC-2012-9 PyPI/sqlalchemy — Multiple SQL injection vulnerabilities in SQLAlchemy before 0.7.0b4, as used in Keystone, allow remo
+package: sqlalchemy
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.7.0 (ECOSYSTEM)
+aliases: CVE-2012-0805, GHSA-hfg2-wf6j-x53p
+references:
+  https://bugs.launchpad.net/keystone/+bug/918608
+  http://rhn.redhat.com/errata/RHSA-2012-0369.html
+  http://www.sqlalchemy.org/trac/changeset/852b6a1a87e7/
+  http://secunia.com/advisories/48771
+  http://www.sqlalchemy.org/changelog/CHANGES_0_7_0
+  http://secunia.com/advisories/48328
+  http://secunia.com/advisories/48327
+  http://www.debian.org/security/2012/dsa-2449
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/73756
+  http://www.mandriva.com/security/advisories?name=MDVSA-2012:059
+  https://github.com/advisories/GHSA-hfg2-wf6j-x53p
+
+Multiple SQL injection vulnerabilities in SQLAlchemy before 0.7.0b4, as used in Keystone, allow remote attackers to execute arbitrary SQL commands via the (1) limit or (2) offset keyword to the select function, or unspecified vectors to the (3) select.limit or (4) select.offset function.

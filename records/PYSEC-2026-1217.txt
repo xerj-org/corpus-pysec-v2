@@ -1,0 +1,23 @@
+PYSEC-2026-1217 PyPI/bbot — BBOT's gitlab.py exposes globally configured "gitlab" API key
+package: bbot
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.7.2 (ECOSYSTEM)
+aliases: CVE-2025-10282, GHSA-p3v4-c93g-cmhw
+references:
+  https://github.com/blacklanternsecurity/bbot/security/advisories/GHSA-p3v4-c93g-cmhw
+  https://nvd.nist.gov/vuln/detail/CVE-2025-10282
+  https://blog.blacklanternsecurity.com/p/bbot-security-advisory-gitdumper
+  https://github.com/blacklanternsecurity/bbot
+  https://pypi.org/project/bbot
+  https://github.com/advisories/GHSA-p3v4-c93g-cmhw
+
+### Summary
+
+bbot's `gitlab.py` sends the user's "gitlab" API key to on-premise GitLab instances.
+
+If a user has configured a gitlab.com API key using this mechanism, it may be leaked to an attacker-controlled server.
+
+### Impact
+
+A user with a "gitlab" API key configured who uses bbot to scan a malicious webserver may leak their gitlab.com API key to an untrustworthy server.

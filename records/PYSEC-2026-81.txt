@@ -1,0 +1,10 @@
+PYSEC-2026-81 PyPI/langflow — Langflow is a tool for building and deploying AI-powered agents and workflows. Prior to version 1.7.
+package: langflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.7.1 (ECOSYSTEM)
+aliases: CVE-2026-33497, GHSA-ph9w-r52h-28p7
+references:
+  https://github.com/langflow-ai/langflow/security/advisories/GHSA-ph9w-r52h-28p7
+
+Langflow is a tool for building and deploying AI-powered agents and workflows. Prior to version 1.7.1, in the download_profile_picture function of the /profile_pictures/{folder_name}/{file_name} endpoint, the folder_name and file_name parameters are not strictly filtered, which allows the secret_key to be read across directories. Version 1.7.1 contains a patch.

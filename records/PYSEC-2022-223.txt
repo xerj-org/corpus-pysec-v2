@@ -1,0 +1,13 @@
+PYSEC-2022-223 PyPI/mat2 — mat2 (aka metadata anonymisation toolkit) before 0.13.0 allows ../ directory traversal during the ZI
+package: mat2
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.13.0 (ECOSYSTEM)
+aliases: CVE-2022-35410, GHSA-f33p-9287-h552
+references:
+  https://0xacab.org/jvoisin/mat2/-/commit/beebca4bf1cd3b935824c966ce077e7bcf610385
+  https://dustri.org/b/mat2-0130.html
+  https://0xacab.org/jvoisin/mat2/-/issues/174
+  https://github.com/advisories/GHSA-f33p-9287-h552
+
+mat2 (aka metadata anonymisation toolkit) before 0.13.0 allows ../ directory traversal during the ZIP archive cleaning process. This primarily affects mat2 web instances, in which clients could obtain sensitive information via a crafted archive.

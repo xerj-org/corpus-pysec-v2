@@ -1,0 +1,17 @@
+PYSEC-2026-2236 PyPI/nltk — NLTK (Natural Language Toolkit) is a suite of open source Python modules, data sets, and tutorials s
+package: nltk
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.9.4 (ECOSYSTEM)
+aliases: CVE-2026-33231, GHSA-jm6w-m3j8-898g
+references:
+  https://access.redhat.com/security/cve/CVE-2026-33231
+  https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-33231.json
+  https://access.redhat.com/errata/RHSA-2026:19712
+  https://access.redhat.com/errata/RHSA-2026:24977
+  https://access.redhat.com/errata/RHSA-2026:37275
+  https://bugzilla.redhat.com/show_bug.cgi?id=2449836
+  https://github.com/nltk/nltk/commit/bbaae83db86a0f49e00f5b0db44a7254c268de9b
+  https://github.com/nltk/nltk/security/advisories/GHSA-jm6w-m3j8-898g
+
+NLTK (Natural Language Toolkit) is a suite of open source Python modules, data sets, and tutorials supporting research and development in Natural Language Processing. In versions 3.9.3 and prior, `nltk.app.wordnet_app` allows unauthenticated remote shutdown of the local WordNet Browser HTTP server when it is started in its default mode. A simple `GET /SHUTDOWN%20THE%20SERVER` request causes the process to terminate immediately via `os._exit(0)`, resulting in a denial of service. Commit bbaae83db86a0f49e00f5b0db44a7254c268de9b patches the issue.

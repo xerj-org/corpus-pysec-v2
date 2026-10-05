@@ -1,0 +1,13 @@
+PYSEC-2020-246 PyPI/plone — Plone before 5.2.3 allows XXE attacks via a feature that is explicitly only available to the Manager
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.2.3 (ECOSYSTEM)
+aliases: CVE-2020-28734, GHSA-wq6x-g685-w5f2
+references:
+  https://dist.plone.org/release/5.2.3/RELEASE-NOTES.txt
+  https://github.com/plone/Products.CMFPlone/issues/3209
+  https://www.misakikata.com/codes/plone/python-en.html
+  https://github.com/advisories/GHSA-wq6x-g685-w5f2
+
+Plone before 5.2.3 allows XXE attacks via a feature that is explicitly only available to the Manager role.

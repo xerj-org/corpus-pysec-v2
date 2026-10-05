@@ -1,0 +1,16 @@
+PYSEC-2014-13 PyPI/requests — Requests (aka python-requests) before 2.3.0 allows remote servers to obtain a netrc password by read
+package: requests
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.3.0 (ECOSYSTEM)
+aliases: CVE-2014-1829, GHSA-cfj3-7x9c-4p3h
+references:
+  https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=733108
+  https://github.com/kennethreitz/requests/issues/1885
+  http://www.ubuntu.com/usn/USN-2382-1
+  http://www.debian.org/security/2015/dsa-3146
+  http://www.mandriva.com/security/advisories?name=MDVSA-2015:133
+  http://advisories.mageia.org/MGASA-2014-0409.html
+  https://github.com/advisories/GHSA-cfj3-7x9c-4p3h
+
+Requests (aka python-requests) before 2.3.0 allows remote servers to obtain a netrc password by reading the Authorization header in a redirected request.

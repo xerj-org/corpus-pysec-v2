@@ -1,0 +1,15 @@
+PYSEC-2021-325 PyPI/flask-restx — Flask-RESTX (pypi package flask-restx) is a community driven fork of Flask-RESTPlus. Flask-RESTX bef
+package: flask-restx
+ecosystem: PyPI
+versions affected:
+  >= 0, < bab31e085f355dd73858fd3715f7ed71849656da (GIT: https://github.com/python-restx/flask-restx)
+  >= 0, < 0.5.1 (ECOSYSTEM)
+aliases: CVE-2021-32838, GHSA-3q6g-vf58-7m4g
+references:
+  https://github.com/python-restx/flask-restx/issues/372
+  https://pypi.org/project/flask-restx/
+  https://github.com/python-restx/flask-restx/commit/bab31e085f355dd73858fd3715f7ed71849656da
+  https://github.com/advisories/GHSA-3q6g-vf58-7m4g
+  https://github.com/python-restx/flask-restx/blob/fd99fe11a88531f5f3441a278f7020589f9d2cc0/flask_restx/inputs.py#L51
+
+Flask-RESTX (pypi package flask-restx) is a community driven fork of Flask-RESTPlus. Flask-RESTX before version 0.5.1 is vulnerable to ReDoS (Regular Expression Denial of Service) in email_regex. This is fixed in version 0.5.1.

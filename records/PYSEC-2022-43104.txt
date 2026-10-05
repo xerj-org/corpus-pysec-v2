@@ -1,0 +1,12 @@
+PYSEC-2022-43104 PyPI/democritus-hypothesis — The d8s-domains for python, as distributed on PyPI, included a potential code-execution backdoor ins
+package: democritus-hypothesis
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-40807
+references:
+  https://pypi.org/project/democritus-hypothesis/
+  https://github.com/democritus-project/d8s-domains/issues/8
+  https://github.com/democritus-project/d8s-domains/issues/8
+
+The d8s-domains for python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. The backdoor is the democritus-hypothesis package. The affected version is 0.1.0

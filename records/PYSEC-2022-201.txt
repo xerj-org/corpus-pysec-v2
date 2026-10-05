@@ -1,0 +1,13 @@
+PYSEC-2022-201 PyPI/octoprint — Cross-site Scripting (XSS) - Generic in GitHub repository octoprint/octoprint prior to 1.8.0.
+package: octoprint
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6d259d7e6f5b0de9a1c762831537a386e53978d3 (GIT: https://github.com/octoprint/octoprint)
+  >= 0, < 1.8.0 (ECOSYSTEM)
+aliases: CVE-2022-1432, GHSA-h8pc-j334-jjhm
+references:
+  https://huntr.dev/bounties/cb545c63-a3c1-4d57-8f06-e4593ab389bf
+  https://github.com/octoprint/octoprint/commit/6d259d7e6f5b0de9a1c762831537a386e53978d3
+  https://github.com/advisories/GHSA-h8pc-j334-jjhm
+
+Cross-site Scripting (XSS) - Generic in GitHub repository octoprint/octoprint prior to 1.8.0.

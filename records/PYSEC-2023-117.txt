@@ -1,0 +1,13 @@
+PYSEC-2023-117 PyPI/pygments — A ReDoS issue was discovered in pygments/lexers/smithy.py in pygments through 2.15.0 via SmithyLexer
+package: pygments
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.15.1 (ECOSYSTEM)
+aliases: CVE-2022-40896, GHSA-mrwq-x4v8-fh7p
+references:
+  https://pypi.org/project/Pygments/
+  https://pyup.io/posts/pyup-discovers-redos-vulnerabilities-in-top-python-packages-part-2/
+  https://github.com/pygments/pygments/blob/master/pygments/lexers/smithy.py#L61
+  https://github.com/advisories/GHSA-mrwq-x4v8-fh7p
+
+A ReDoS issue was discovered in pygments/lexers/smithy.py in pygments through 2.15.0 via SmithyLexer.

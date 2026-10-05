@@ -1,0 +1,13 @@
+PYSEC-2022-286 PyPI/octoprint — Unrestricted Upload of File with Dangerous Type in GitHub repository octoprint/octoprint prior to 1.
+package: octoprint
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3e3c11811e216fb371a33e28412df83f9701e5b0 (GIT: https://github.com/octoprint/octoprint)
+  >= 0, < 1.8.3 (ECOSYSTEM)
+aliases: CVE-2022-2872, GHSA-49wm-4fp6-h59c
+references:
+  https://github.com/octoprint/octoprint/commit/3e3c11811e216fb371a33e28412df83f9701e5b0
+  https://huntr.dev/bounties/b966c74d-6f3f-49fe-b40a-eaf25e362c56
+  https://github.com/advisories/GHSA-49wm-4fp6-h59c
+
+Unrestricted Upload of File with Dangerous Type in GitHub repository octoprint/octoprint prior to 1.8.3.

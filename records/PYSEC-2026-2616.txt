@@ -1,0 +1,25 @@
+PYSEC-2026-2616 PyPI/magic-wormhole — Magic Wormhole: receive, with --output pointing at an existing directory can be path-traversed
+package: magic-wormhole
+ecosystem: PyPI
+versions affected:
+  >= 0.23.0, < 0.24.0 (ECOSYSTEM)
+aliases: CVE-2026-42448, GHSA-cf92-gfcw-6v53
+references:
+  https://github.com/magic-wormhole/magic-wormhole/security/advisories/GHSA-cf92-gfcw-6v53
+  https://nvd.nist.gov/vuln/detail/CVE-2026-42448
+  https://github.com/magic-wormhole/magic-wormhole
+  https://pypi.org/project/magic-wormhole
+  https://github.com/advisories/GHSA-cf92-gfcw-6v53
+
+### Impact
+A receiver who specifies "--output <dir>" where that output directory currently exists (as a directory).
+
+### Patches
+0.24.0 will contain the patch
+
+### Workarounds
+Ensure local target directories specified by "--output" do not already exist
+
+### Resources
+Private email and Signal communications from a user.
+Magic Wormhole thanks  @marduc812

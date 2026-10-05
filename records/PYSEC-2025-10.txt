@@ -1,0 +1,12 @@
+PYSEC-2025-10 PyPI/onnx — A vulnerability in the `download_model` function of the onnx/onnx framework, before and including ve
+package: onnx
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.16.2 (ECOSYSTEM)
+aliases: CVE-2024-7776, GHSA-h36j-8vv3-cj52
+references:
+  https://huntr.com/bounties/a7a46cf6-1fa0-454b-988c-62d222e83f63
+  https://huntr.com/bounties/a7a46cf6-1fa0-454b-988c-62d222e83f63
+  https://github.com/advisories/GHSA-h36j-8vv3-cj52
+
+A vulnerability in the `download_model` function of the onnx/onnx framework, before and including version 1.16.1, allows for arbitrary file overwrite due to inadequate prevention of path traversal attacks in malicious tar files. This vulnerability can be exploited by an attacker to overwrite files in the user's directory, potentially leading to remote command execution.

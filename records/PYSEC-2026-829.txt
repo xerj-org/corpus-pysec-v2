@@ -1,0 +1,15 @@
+PYSEC-2026-829 PyPI/keycloak-httpd-client-install — keycloak-httpd-client-install symlink attack vulnerability
+package: keycloak-httpd-client-install
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.8 (ECOSYSTEM)
+aliases: CVE-2017-15111, GHSA-vqf9-v3hc-wr54
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2017-15111
+  https://github.com/jdennis/keycloak-httpd-client-install/commit/07f26e213196936fb328ea0c1d5a66a09d8b5440
+  https://access.redhat.com/errata/RHSA-2019:2137
+  https://github.com/jdennis/keycloak-httpd-client-install
+  https://pypi.org/project/keycloak-httpd-client-install
+  https://github.com/advisories/GHSA-vqf9-v3hc-wr54
+
+keycloak-httpd-client-install versions before 0.8 insecurely creates temporary file allowing local attackers to overwrite other files via symbolic link.

@@ -1,0 +1,23 @@
+PYSEC-2026-1100 PyPI/aiohttp — AIOHTTP vulnerable to denial of service through large payloads
+package: aiohttp
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.13.3 (ECOSYSTEM)
+aliases: CVE-2025-69228, GHSA-6jhg-hg63-jvvf
+references:
+  https://github.com/aio-libs/aiohttp/security/advisories/GHSA-6jhg-hg63-jvvf
+  https://nvd.nist.gov/vuln/detail/CVE-2025-69228
+  https://github.com/aio-libs/aiohttp/commit/b7dbd35375aedbcd712cbae8ad513d56d11cce60
+  https://github.com/aio-libs/aiohttp
+  https://pypi.org/project/aiohttp
+  https://github.com/advisories/GHSA-6jhg-hg63-jvvf
+
+### Summary
+A request can be crafted in such a way that an aiohttp server's memory fills up uncontrollably during processing.
+
+### Impact
+If an application includes a handler that uses the `Request.post()` method, an attacker may be able to freeze the server by exhausting the memory.
+
+-----
+
+Patch: https://github.com/aio-libs/aiohttp/commit/b7dbd35375aedbcd712cbae8ad513d56d11cce60

@@ -1,0 +1,12 @@
+PYSEC-2016-23 PyPI/salt — Salt 2015.8.x before 2015.8.4 does not properly handle clear messages on the minion, which allows ma
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 2015.8, < 2015.8.4 (ECOSYSTEM)
+aliases: CVE-2016-1866, GHSA-vqh4-crjf-jjxx
+references:
+  http://lists.opensuse.org/opensuse-updates/2016-03/msg00034.html
+  https://docs.saltstack.com/en/latest/topics/releases/2015.8.4.html
+  https://github.com/advisories/GHSA-vqh4-crjf-jjxx
+
+Salt 2015.8.x before 2015.8.4 does not properly handle clear messages on the minion, which allows man-in-the-middle attackers to execute arbitrary code by inserting packets into the minion-master data stream.

@@ -1,0 +1,14 @@
+PYSEC-2022-225 PyPI/ganga — The ganga-devs/ganga repository before 8.5.10 on GitHub allows absolute path traversal because the F
+package: ganga
+ecosystem: PyPI
+versions affected:
+  >= 0, < 730e7aba192407d35eb37dd7938d49071124be8c (GIT: https://github.com/ganga-devs/ganga)
+  >= 0, < 8.5.10 (ECOSYSTEM)
+aliases: CVE-2022-31507, GHSA-7488-6x3r-23w5
+references:
+  https://github.com/ganga-devs/ganga/commit/730e7aba192407d35eb37dd7938d49071124be8c
+  https://github.com/ganga-devs/ganga/releases/tag/8.5.10
+  https://github.com/github/securitylab/issues/669#issuecomment-1117265726
+  https://github.com/advisories/GHSA-7488-6x3r-23w5
+
+The ganga-devs/ganga repository before 8.5.10 on GitHub allows absolute path traversal because the Flask send_file function is used unsafely.

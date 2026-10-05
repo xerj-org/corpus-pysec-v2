@@ -1,0 +1,13 @@
+PYSEC-2020-63 PyPI/manila — OpenStack Manila <7.4.1, >=8.0.0 <8.1.1, and >=9.0.0 <9.1.1 allows attackers to view, update, delete
+package: manila
+ecosystem: PyPI
+versions affected:
+  >= 0, < 7.4.1, >= 8.0.0, < 8.1.1, >= 9.0.0, < 9.1.1 (ECOSYSTEM)
+aliases: CVE-2020-9543, GHSA-jx7v-gmqc-6xrj
+references:
+  https://bugs.launchpad.net/manila/+bug/1861485
+  http://www.openwall.com/lists/oss-security/2020/03/12/1
+  https://security.openstack.org/ossa/OSSA-2020-002.html
+  https://github.com/advisories/GHSA-jx7v-gmqc-6xrj
+
+OpenStack Manila <7.4.1, >=8.0.0 <8.1.1, and >=9.0.0 <9.1.1 allows attackers to view, update, delete, or share resources that do not belong to them, because of a context-free lookup of a UUID. Attackers may also create resources, such as shared file systems and groups of shares on such share networks.

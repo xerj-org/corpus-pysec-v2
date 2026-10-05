@@ -1,0 +1,16 @@
+PYSEC-2026-1895 PyPI/salt — Salt's file contents overwrite the VirtKey class
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 3007.0rc1, < 3007.4, >= 3006.0rc1, < 3006.12 (ECOSYSTEM)
+aliases: CVE-2025-22241, GHSA-7f3f-x5f5-79gw
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-22241
+  https://github.com/saltstack/salt/commit/9445f496fed61b15dc4364818007e5b765b0746f
+  https://docs.saltproject.io/en/3006/topics/releases/3006.12.html
+  https://docs.saltproject.io/en/3007/topics/releases/3007.4.html
+  https://github.com/saltstack/salt
+  https://pypi.org/project/salt
+  https://github.com/advisories/GHSA-7f3f-x5f5-79gw
+
+File contents overwrite the VirtKey class is called when “on-demand pillar” data is requested and uses un-validated input to create paths to the “pki directory”. The functionality is used to auto-accept Minion authentication keys based on a pre-placed “authorization file” at a specific location and is present in the default configuration.

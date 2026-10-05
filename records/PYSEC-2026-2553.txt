@@ -1,0 +1,37 @@
+PYSEC-2026-2553 PyPI/kiwitcms — Kiwi TCMS's /init-db/ page renders and responds to requests after first use
+package: kiwitcms
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 12.4 (ECOSYSTEM)
+aliases: CVE-2026-49292, GHSA-v8rp-6xcv-fwgh
+references:
+  https://github.com/kiwitcms/Kiwi/security/advisories/GHSA-v8rp-6xcv-fwgh
+  https://github.com/kiwitcms/Kiwi
+  https://pypi.org/project/kiwitcms
+  https://github.com/advisories/GHSA-v8rp-6xcv-fwgh
+  https://nvd.nist.gov/vuln/detail/CVE-2026-49292
+
+Kiwi TCMS provides the /init-db/ page as part of its setup mechanism for administrators who prefer a browser instead of the command line. In previous versions of Kiwi TCMS this page still renders and responds to requests even after first use.
+
+### Impact
+
+The /init-db/ page does not require any user authentication because it is the first setup operation that needs to be executed in order for Kiwi TCMS to function. Database initialization happens before there are any user accounts available!
+
+While that looks serious at first the /init-db/ page is merely a proxy behind the `/Kiwi/manage.py migrate` command, which itself is designed to be reentrant. In the case of repeated access to the /init-db/ page after first use the output is:
+```
+Running migrations:
+  No migrations to apply.
+```
+as shown on the screenshots below:
+
+<img width="1911" height="992" alt="2222" src="https://github.com/user-attachments/assets/9f661c71-b305-4380-aadf-0732321b3666" />
+
+<img width="1913" height="1020" alt="3333" src="https://github.com/user-attachments/assets/10f8553e-675d-42be-9adc-cd5613df015c" />
+
+- There is no data loss because migrations result in a no-op if they are already applied!
+- No application state is altered because all state changes have already been applied! 
+- No confidential information revealed because database migrations only report status on migrations which are clearly visible in source code!
+
+### Remediation
+
+The /init-db/ page has been modified to short-circuit itself if migrations have already been applied, resulting in a no-op on the webUI layer as well.

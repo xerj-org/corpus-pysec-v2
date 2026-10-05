@@ -1,0 +1,13 @@
+PYSEC-2024-111 PyPI/langchain — A path traversal vulnerability exists in the `getFullPath` method of langchain-ai/langchainjs versio
+package: langchain
+ecosystem: PyPI
+versions affected:
+  >= 0, < a0fad77d6b569e5872bd4a9d33be0c0785e538a9 (GIT: https://github.com/langchain-ai/langchainjs)
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2024-7774
+references:
+  https://huntr.com/bounties/8fe40685-b714-4191-af7a-3de5e5628cee
+  https://huntr.com/bounties/8fe40685-b714-4191-af7a-3de5e5628cee
+  https://github.com/langchain-ai/langchainjs/commit/a0fad77d6b569e5872bd4a9d33be0c0785e538a9
+
+A path traversal vulnerability exists in the `getFullPath` method of langchain-ai/langchainjs version 0.2.5. This vulnerability allows attackers to save files anywhere in the filesystem, overwrite existing text files, read `.txt` files, and delete files. The vulnerability is exploited through the `setFileContent`, `getParsedFile`, and `mdelete` methods, which do not properly sanitize user input.

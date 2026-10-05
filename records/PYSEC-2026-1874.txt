@@ -1,0 +1,28 @@
+PYSEC-2026-1874 PyPI/restrictedpython — try/except* clauses could allow bypass RestrictedPython via type confusion bug in the CPython interpreter
+package: restrictedpython
+ecosystem: PyPI
+versions affected:
+  >= 6.0, < 8.0 (ECOSYSTEM)
+aliases: CVE-2025-22153, GHSA-gmj9-h825-chq2
+references:
+  https://github.com/zopefoundation/RestrictedPython/security/advisories/GHSA-gmj9-h825-chq2
+  https://nvd.nist.gov/vuln/detail/CVE-2025-22153
+  https://github.com/zopefoundation/RestrictedPython/commit/48a92c5bb617a647cffd0dadd4d5cfe626bcdb2f
+  https://github.com/zopefoundation/RestrictedPython
+  https://pypi.org/project/restrictedpython
+  https://github.com/advisories/GHSA-gmj9-h825-chq2
+
+### Impact
+Via a type confusion bug in the CPython interpreter when using `try/except*` RestrictedPython could be bypassed.
+
+We believe this should be fixed upstream in Python itself until that we remove support for `try/except*` from RestrictedPython.
+(It has been fixed for some Python versions.)
+
+### Patches
+Patched in version 8.0 by removing support for `try/except*` clauses
+
+### Workarounds
+There is no workaround.
+
+### References
+none

@@ -1,0 +1,72 @@
+PYSEC-2026-4095 PyPI/mcp-atlassian — MCP Atlassian: Path traversal in upload_attachment allows arbitrary file read (incomplete fix for CVE-2026-27825)
+package: mcp-atlassian
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.22.0 (ECOSYSTEM)
+aliases: CVE-2026-77269, GHSA-h7wj-5v37-59r2
+references:
+  https://github.com/sooperset/mcp-atlassian/security/advisories/GHSA-h7wj-5v37-59r2
+  https://github.com/sooperset/mcp-atlassian/pull/1448
+  https://github.com/sooperset/mcp-atlassian/commit/b041733473f95119dd539542a43c280737a8e460
+  https://github.com/sooperset/mcp-atlassian
+  https://github.com/sooperset/mcp-atlassian/releases/tag/v0.22.0
+  https://pypi.org/project/mcp-atlassian
+  https://github.com/advisories/GHSA-h7wj-5v37-59r2
+  https://nvd.nist.gov/vuln/detail/CVE-2026-77269
+
+### Summary
+
+The `confluence_upload_attachment` and `confluence_upload_attachments` MCP tools accept a `file_path` parameter and do not validate that the path is confined to an allowed directory before opening the file. An attacker who can call these tools can read any file accessible to the MCP server process (SSH keys, .env files, API credentials) and exfiltrate it by uploading it to Confluence.
+
+Note: The Jira `upload_attachment` mixin method in `jira/attachments.py` has the same missing validation, but it is NOT registered as an MCP tool in `servers/jira.py` and is therefore not currently reachable via MCP. It should still be patched to prevent future exposure if Jira upload tools are added.
+
+This is an incomplete fix for CVE-2026-27825. That CVE was patched by adding `validate_safe_path()` to download operations (v0.17.0). The same protection was not applied to upload operations.
+
+### Details
+
+`validate_safe_path()` is imported in both `confluence/attachments.py` and `jira/attachments.py` and is correctly called in all download functions. It is absent from the Confluence upload functions (which are exposed as MCP tools) and from the Jira upload mixin methods (which are not currently registered as MCP tools but should still be patched).
+
+**Download (protected — correctly patched):**
+```python
+# confluence/attachments.py:222-223
+validate_safe_path(target_path)  # resolves symlinks + checks is_relative_to(cwd)
+```
+
+**Upload (vulnerable — not patched):**
+```python
+# confluence/attachments.py:64-79 — NO validate_safe_path() call
+if not os.path.isabs(file_path):
+    file_path = os.path.abspath(file_path)  # normalizes but does NOT restrict
+# ...
+files = {"file": (filename, open(file_path, "rb"))}  # opens arbitrary file
+```
+
+Same pattern in `jira/attachments.py:386`.
+
+### Proof of Concept
+
+```python
+# Call via MCP client
+await session.call_tool("confluence_upload_attachment", {
+    "content_id": "12345",
+    "file_path": "/home/user/.ssh/id_rsa"  # absolute path — no traversal needed
+})
+# SSH private key is now a Confluence attachment
+# Retrieve via: confluence_download_attachment or Confluence UI
+```
+
+### Impact
+
+Arbitrary file read from the server filesystem. High-value targets: SSH private keys, `.env` files, AWS/GCP credentials, database configuration, source code.
+
+### Fix
+
+Add `validate_safe_path(file_path)` call in `confluence/attachments.py:upload_attachment()` (reachable via MCP) and `jira/attachments.py:upload_attachment()` (not currently reachable via MCP, but should be patched preventively), consistent with the existing download protection. No changes to `validate_safe_path()` itself are needed.
+
+```python
+# Add after os.path.abspath() call:
+try:
+    validate_safe_path(file_path)
+except ValueError as e:
+    return {"success": False, "error": str(e)}
+```

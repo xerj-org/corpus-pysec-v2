@@ -1,0 +1,13 @@
+PYSEC-2017-113 PyPI/capstone — Integer overflow in the cs_winkernel_malloc function in winkernel_mm.c in Capstone 3.0.4 and earlier
+package: capstone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6fe86eef621b9849f51a5e1e5d73258a93440403 (GIT: https://github.com/capstone-engine/capstone)
+  >= 0, < 3.0.5rc2 (ECOSYSTEM)
+aliases: CVE-2017-6952, GHSA-3v99-hpv7-9hh9
+references:
+  https://github.com/aquynh/capstone/commit/6fe86eef621b9849f51a5e1e5d73258a93440403
+  http://www.securityfocus.com/bid/97323
+  https://github.com/advisories/GHSA-3v99-hpv7-9hh9
+
+Integer overflow in the cs_winkernel_malloc function in winkernel_mm.c in Capstone 3.0.4 and earlier allows attackers to cause a denial of service (heap-based buffer overflow in a kernel driver) or possibly have unspecified other impact via a large value.

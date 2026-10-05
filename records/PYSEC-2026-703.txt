@@ -1,0 +1,19 @@
+PYSEC-2026-703 PyPI/opencv-contrib-python — Reachable Assertion in OpenCV.
+package: opencv-contrib-python
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.4.1.15 (ECOSYSTEM)
+aliases: CVE-2018-5269, GHSA-89rj-5ggj-3p9p
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2018-5269
+  https://github.com/opencv/opencv/issues/10540
+  https://github.com/opencv/opencv/pull/10563
+  https://github.com/opencv/opencv-python
+  https://lists.debian.org/debian-lts-announce/2018/04/msg00019.html
+  https://lists.debian.org/debian-lts-announce/2018/07/msg00030.html
+  https://lists.debian.org/debian-lts-announce/2021/10/msg00028.html
+  http://www.securityfocus.com/bid/106945
+  https://pypi.org/project/opencv-contrib-python
+  https://github.com/advisories/GHSA-89rj-5ggj-3p9p
+
+In OpenCV 3.3.1 (corresponds with OpenCV-Python 3.3.1.11), an assertion failure happens in cv::RBaseStream::setPos in modules/imgcodecs/src/bitstrm.cpp because of an incorrect integer cast.

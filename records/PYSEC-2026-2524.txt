@@ -1,0 +1,16 @@
+PYSEC-2026-2524 PyPI/ironic — OpenStack Ironic: Pre-Validation Checksum Calculation allows Denial of Service (DoS) via Infinite Block Devices
+package: ironic
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 36.0.0 (ECOSYSTEM)
+aliases: CVE-2026-44919, GHSA-4g73-w726-53h3
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-44919
+  https://bugs.launchpad.net/ironic/+bug/2150332
+  https://opendev.org/openstack/ironic
+  https://opendev.org/openstack/ironic/commit/a3f6d735ac3642ab95b49142c7305f072ae748d0
+  https://security.openstack.org/ossa/OSSA-2026-013.html
+  https://pypi.org/project/ironic
+  https://github.com/advisories/GHSA-4g73-w726-53h3
+
+In OpenStack Ironic through 35.x before a3f6d73, during image handling, an infinite loop in checksum calculations can occur via the file:///dev/zero URL.

@@ -1,0 +1,12 @@
+PYSEC-2021-332 PyPI/sqlite-web — This affects all versions of package sqlite-web. The SQL dashboard area allows sensitive actions to 
+package: sqlite-web
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2021-23404, SNYK-PYTHON-SQLITEWEB-1316324, GHSA-2j58-pwwv-x666
+references:
+  https://github.com/coleifer/sqlite-web/blob/2e7c85da3d37f80074ed3ae39b5851069b4f301c/sqlite_web/__main__.py%23L1
+  https://snyk.io/vuln/SNYK-PYTHON-SQLITEWEB-1316324
+  https://github.com/advisories/GHSA-2j58-pwwv-x666
+
+This affects all versions of package sqlite-web. The SQL dashboard area allows sensitive actions to be performed without validating that the request originated from the application. This could enable an attacker to trick a user into performing these actions unknowingly through a Cross Site Request Forgery (CSRF) attack.

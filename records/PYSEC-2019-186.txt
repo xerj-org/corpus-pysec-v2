@@ -1,0 +1,12 @@
+PYSEC-2019-186 PyPI/matrix-synapse — Matrix Synapse before 1.5.0 mishandles signature checking on some federation APIs. Events sent over 
+package: matrix-synapse
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.5.0 (ECOSYSTEM)
+aliases: CVE-2019-18835, GHSA-cppw-2mf8-qpm5
+references:
+  https://github.com/matrix-org/synapse/releases/tag/v1.5.0
+  https://github.com/matrix-org/synapse/pull/6262
+  https://github.com/advisories/GHSA-cppw-2mf8-qpm5
+
+Matrix Synapse before 1.5.0 mishandles signature checking on some federation APIs. Events sent over /send_join, /send_leave, and /invite may not be correctly signed, or may not come from the expected servers.

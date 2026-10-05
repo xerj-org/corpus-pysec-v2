@@ -1,0 +1,17 @@
+PYSEC-2026-2663 PyPI/modelscope — ModelScope is vulnerable to arbitrary code injection via a crafted module
+package: modelscope
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.27.0 (ECOSYSTEM)
+aliases: CVE-2025-51427, GHSA-fhhq-h4hg-549x
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-51427
+  https://github.com/modelscope/modelscope/issues/1331
+  https://github.com/modelscope/modelscope/pull/1333
+  https://github.com/modelscope/modelscope/commit/75d54927e112261d39598ca08c15b66a7ff3f735
+  https://github.com/JIRUWOZHI/vulnerability-disclosure/blob/main/CVE-2025-51427/CVE_2025_51427.md
+  https://github.com/modelscope/modelscope
+  https://pypi.org/project/modelscope
+  https://github.com/advisories/GHSA-fhhq-h4hg-549x
+
+An issue was discovered in ModelScope 1.25.0 allowing attackers to execute arbitrary code via crafted module listed in the configuration file (dey_mini.yaml) under the key ['nnet']['module'].

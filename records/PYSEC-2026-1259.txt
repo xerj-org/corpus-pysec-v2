@@ -1,0 +1,28 @@
+PYSEC-2026-1259 PyPI/codechecker — CodeChecker open redirect when URL contains multiple slashes after the product name
+package: codechecker
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.24.6 (ECOSYSTEM)
+aliases: CVE-2025-1300, GHSA-g839-x3p3-g5fm
+references:
+  https://github.com/Ericsson/codechecker/security/advisories/GHSA-g839-x3p3-g5fm
+  https://nvd.nist.gov/vuln/detail/CVE-2025-1300
+  https://github.com/Ericsson/codechecker
+  https://pypi.org/project/codechecker
+  https://github.com/advisories/GHSA-g839-x3p3-g5fm
+
+Summary
+---
+
+CodeChecker versions up to 6.24.5 contain an open redirect vulnerability due to missing protections against multiple slashes after the product name in the URL's path segment.  This results in bypassing protections against CVE-2021-28861, leading to the same open redirect pathway.
+
+Details
+---
+
+CodeChecker processes GET requests by first rewriting the path segment of the URL, and then passing the rewritten URL to the webserver framework.
+When trimming the product name from the URL, no sanitization was performed on the remaining URL, which reintroduced the same issue as CVE-2021-28861, leading to the same open redirect pathway using URLs such as `/Default//attacker.com/%2f..`.
+
+Impact
+---
+
+The vulnerability allows an attacker to create a hyperlink that looks like a legitimate CodeChecker URL, but redirects to an attacker-supplied website when clicked.

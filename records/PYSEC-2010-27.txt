@@ -1,0 +1,19 @@
+PYSEC-2010-27 PyPI/zodb3 — Race condition in ZEO/StorageServer.py in Zope Object Database (ZODB) before 3.10.0 allows remote at
+package: zodb3
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.10.0a1 (ECOSYSTEM)
+aliases: CVE-2010-3495, GHSA-j6m4-frxh-p4x8
+references:
+  http://www.openwall.com/lists/oss-security/2010/09/11/2
+  http://secunia.com/advisories/41755
+  http://pypi.python.org/pypi/ZODB3/3.10.0#id1
+  http://www.openwall.com/lists/oss-security/2010/09/22/3
+  http://www.openwall.com/lists/oss-security/2010/09/24/3
+  http://bugs.python.org/issue6706
+  http://www.openwall.com/lists/oss-security/2010/09/09/6
+  https://bugs.launchpad.net/zodb/+bug/135108
+  http://lists.opensuse.org/opensuse-security-announce/2010-12/msg00006.html
+  https://github.com/advisories/GHSA-j6m4-frxh-p4x8
+
+Race condition in ZEO/StorageServer.py in Zope Object Database (ZODB) before 3.10.0 allows remote attackers to cause a denial of service (daemon outage) by establishing and then immediately closing a TCP connection, leading to the accept function having an unexpected return value of None, an unexpected value of None for the address, or an ECONNABORTED, EAGAIN, or EWOULDBLOCK error, a related issue to CVE-2010-3492.

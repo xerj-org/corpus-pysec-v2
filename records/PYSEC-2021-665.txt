@@ -1,0 +1,12 @@
+PYSEC-2021-665 PyPI/tensorflow-gpu — TensorFlow is an end-to-end open source platform for machine learning. Calling `tf.raw_ops.Immutable
+package: tensorflow-gpu
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4f663d4b8f0bec1b48da6fa091a7d29609980fa4 (GIT: https://github.com/tensorflow/tensorflow)
+  >= 0, < 2.2.0rc0, >= 2.2.0, < 2.3.0rc0, >= 2.3.0, < 2.3.4, >= 2.4.0, < 2.4.3 (ECOSYSTEM)
+aliases: CVE-2021-29539, GHSA-g4h2-gqm3-c9wq
+references:
+  https://github.com/tensorflow/tensorflow/security/advisories/GHSA-g4h2-gqm3-c9wq
+  https://github.com/tensorflow/tensorflow/commit/4f663d4b8f0bec1b48da6fa091a7d29609980fa4
+
+TensorFlow is an end-to-end open source platform for machine learning. Calling `tf.raw_ops.ImmutableConst`(https://www.tensorflow.org/api_docs/python/tf/raw_ops/ImmutableConst) with a `dtype` of `tf.resource` or `tf.variant` results in a segfault in the implementation as code assumes that the tensor contents are pure scalars. We have patched the issue in 4f663d4b8f0bec1b48da6fa091a7d29609980fa4 and will release TensorFlow 2.5.0 containing the patch. TensorFlow nightly packages after this commit will also have the issue resolved. If using `tf.raw_ops.ImmutableConst` in code, you can prevent the segfault by inserting a filter for the `dtype` argument.

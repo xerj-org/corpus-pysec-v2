@@ -1,0 +1,11 @@
+PYSEC-2023-125 PyPI/paddlepaddle — FPE in paddle.trace in PaddlePaddle before 2.5.0. This flaw can cause a runtime crash and a denial o
+package: paddlepaddle
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.5.0 (ECOSYSTEM)
+aliases: CVE-2023-38672, GHSA-cv2j-922j-hr56
+references:
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-004.md
+  https://github.com/advisories/GHSA-cv2j-922j-hr56
+
+FPE in paddle.trace in PaddlePaddle before 2.5.0. This flaw can cause a runtime crash and a denial of service.

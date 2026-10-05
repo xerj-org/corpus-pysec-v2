@@ -1,0 +1,16 @@
+PYSEC-2022-42979 PyPI/pillow — Pillow before 9.2.0 performs Improper Handling of Highly Compressed GIF Data (Data Amplification).
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 11918eac0628ec8ac0812670d9838361ead2d6a4 (GIT: https://github.com/python-pillow/Pillow)
+  >= 0, < 9.2.0 (ECOSYSTEM)
+aliases: CVE-2022-45198, GHSA-m2vv-5vj5-2hm7
+references:
+  https://bugs.gentoo.org/855683
+  https://github.com/python-pillow/Pillow/commit/11918eac0628ec8ac0812670d9838361ead2d6a4
+  https://github.com/python-pillow/Pillow/pull/6402
+  https://github.com/python-pillow/Pillow/releases/tag/9.2.0
+  https://cwe.mitre.org/data/definitions/409.html
+  https://github.com/advisories/GHSA-m2vv-5vj5-2hm7
+
+Pillow before 9.2.0 performs Improper Handling of Highly Compressed GIF Data (Data Amplification).

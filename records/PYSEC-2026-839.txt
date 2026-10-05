@@ -1,0 +1,15 @@
+PYSEC-2026-839 PyPI/lin-cms — Lin CMS vulnerable to Improper Authentication
+package: lin-cms
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.2.1 (ECOSYSTEM)
+aliases: CVE-2022-44244, GHSA-4vrc-q7m6-vq7w
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2022-44244
+  https://gist.github.com/cai-niao98/58c97899695488bd73a73d56adf44c4c
+  https://github.com/TaleLin/lin-cms-flask
+  https://github.com/cai-niao98/lin-cms
+  https://pypi.org/project/lin-cms
+  https://github.com/advisories/GHSA-4vrc-q7m6-vq7w
+
+An authentication bypass in Lin-CMS v0.2.1 allows attackers to escalate privileges to Super Administrator.

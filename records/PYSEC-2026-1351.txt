@@ -1,0 +1,15 @@
+PYSEC-2026-1351 PyPI/executorch — ExecuTorch integer overflow vulnerability leads to code execution
+package: executorch
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.6.0 (ECOSYSTEM)
+aliases: CVE-2025-54952, GHSA-33r8-vrx9-rmcv
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-54952
+  https://github.com/pytorch/executorch/commit/8f062d3f661e20bb19b24b767b9a9a46e8359f2b
+  https://github.com/pytorch/executorch
+  https://www.facebook.com/security/advisories/cve-2025-54952
+  https://pypi.org/project/executorch
+  https://github.com/advisories/GHSA-33r8-vrx9-rmcv
+
+An integer overflow vulnerability in the loading of ExecuTorch models can cause smaller-than-expected memory regions to be allocated, potentially resulting in code execution or other undesirable effects. This issue affects ExecuTorch prior to commit 8f062d3f661e20bb19b24b767b9a9a46e8359f2b.

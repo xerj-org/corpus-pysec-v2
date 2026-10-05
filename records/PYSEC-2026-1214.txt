@@ -1,0 +1,15 @@
+PYSEC-2026-1214 PyPI/barbican — OpenStack Barbican information disclosure vulnerability
+package: barbican
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 16.0.0 (ECOSYSTEM)
+aliases: CVE-2023-1636, GHSA-6rx9-c2rh-3qv4
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-1636
+  https://access.redhat.com/security/cve/CVE-2023-1636
+  https://bugzilla.redhat.com/show_bug.cgi?id=2181765
+  https://github.com/openstack/barbican
+  https://pypi.org/project/barbican
+  https://github.com/advisories/GHSA-6rx9-c2rh-3qv4
+
+A vulnerability was found in OpenStack Barbican containers. This vulnerability is only applicable to deployments that utilize an all-in-one configuration. Barbican containers share the same CGROUP, USER, and NET namespace with the host system and other OpenStack services. If any service is compromised, it could gain access to the data transmitted to and from Barbican.

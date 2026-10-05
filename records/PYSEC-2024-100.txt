@@ -1,0 +1,12 @@
+PYSEC-2024-100 PyPI/openc3 — OpenC3 COSMOS provides the functionality needed to send commands to and receive data from one or mor
+package: openc3
+ecosystem: PyPI
+versions affected:
+  >= 0, < 762d7e0e93bdc2f340b1e42acccedc78994a576e (GIT: https://github.com/OpenC3/cosmos)
+  >= 0, < 5.19.0 (ECOSYSTEM)
+aliases: CVE-2024-43795, GHSA-vfj8-5pj7-2f9g
+references:
+  https://github.com/OpenC3/cosmos/security/advisories/GHSA-vfj8-5pj7-2f9g
+  https://github.com/OpenC3/cosmos/commit/762d7e0e93bdc2f340b1e42acccedc78994a576e
+
+OpenC3 COSMOS provides the functionality needed to send commands to and receive data from one or more embedded systems. The login functionality contains a reflected cross-site scripting (XSS) vulnerability. This vulnerability is fixed in 5.19.0. Note: This CVE only affects Open Source Edition, and not OpenC3 COSMOS Enterprise Edition.

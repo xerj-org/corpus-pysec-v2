@@ -1,0 +1,20 @@
+PYSEC-2012-19 PyPI/keystone — OpenStack Keystone, as used in OpenStack Folsom before folsom-rc1 and OpenStack Essex (2012.1), allo
+package: keystone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5438d3b5a219d7c8fa67e66e538d325a61617155, < c13d0ba606f7b2bdc609a7f388334e5efec3f3aa (GIT: https://github.com/openstack/keystone)
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2012-3542, GHSA-gf2q-j2qq-pjf2
+references:
+  http://secunia.com/advisories/50467
+  https://github.com/openstack/keystone/commit/5438d3b5a219d7c8fa67e66e538d325a61617155
+  https://bugs.launchpad.net/keystone/+bug/1040626
+  http://www.securityfocus.com/bid/55326
+  https://github.com/openstack/keystone/commit/c13d0ba606f7b2bdc609a7f388334e5efec3f3aa
+  http://www.openwall.com/lists/oss-security/2012/08/30/6
+  http://www.ubuntu.com/usn/USN-1552-1
+  http://secunia.com/advisories/50494
+  https://lists.launchpad.net/openstack/msg16282.html
+  https://github.com/advisories/GHSA-gf2q-j2qq-pjf2
+
+OpenStack Keystone, as used in OpenStack Folsom before folsom-rc1 and OpenStack Essex (2012.1), allows remote attackers to add an arbitrary user to an arbitrary tenant via a request to update the user's default tenant to the administrative API.  NOTE: this identifier was originally incorrectly assigned to an open redirect issue, but the correct identifier for that issue is CVE-2012-3540.

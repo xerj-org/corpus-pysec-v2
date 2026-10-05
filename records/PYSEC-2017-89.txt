@@ -1,0 +1,15 @@
+PYSEC-2017-89 PyPI/mercurial — Mercurial prior to 4.3 did not adequately sanitize hostnames passed to ssh, leading to possible shel
+package: mercurial
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.3 (ECOSYSTEM)
+aliases: CVE-2017-1000116, GHSA-3qmg-c9vc-r47j
+references:
+  https://www.mercurial-scm.org/wiki/WhatsNew#Mercurial_4.3_.2F_4.3.1_.282017-08-10.29
+  https://security.gentoo.org/glsa/201709-18
+  http://www.securityfocus.com/bid/100290
+  http://www.debian.org/security/2017/dsa-3963
+  https://access.redhat.com/errata/RHSA-2017:2489
+  https://github.com/advisories/GHSA-3qmg-c9vc-r47j
+
+Mercurial prior to 4.3 did not adequately sanitize hostnames passed to ssh, leading to possible shell-injection attacks.

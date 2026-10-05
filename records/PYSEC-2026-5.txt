@@ -1,0 +1,16 @@
+PYSEC-2026-5 PyPI/admesh — A security flaw has been discovered in admesh up to 0.98.5. This issue affects the function stl_chec
+package: admesh
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.98.6 (ECOSYSTEM)
+aliases: CVE-2026-2653
+references:
+  https://github.com/admesh/admesh/
+  https://vuldb.com/?id.346450
+  https://vuldb.com/?submit.752596
+  https://github.com/admesh/admesh/issues/65
+  https://github.com/admesh/admesh/issues/65#issuecomment-3804571402
+  https://vuldb.com/?ctiid.346450
+  https://github.com/user-attachments/files/24878279/id.000035.sig.06.src.000550.time.910126.execs.241742.op.havoc.rep.5.zip
+
+A security flaw has been discovered in admesh up to 0.98.5. This issue affects the function stl_check_normal_vector of the file src/normals.c. Performing a manipulation results in heap-based buffer overflow. The attack must be initiated from a local position. The exploit has been released to the public and may be used for attacks. It looks like this product is not really maintained anymore.

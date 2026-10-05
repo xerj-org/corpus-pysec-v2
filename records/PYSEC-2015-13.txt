@@ -1,0 +1,14 @@
+PYSEC-2015-13 PyPI/kallithea — CRLF injection vulnerability in Kallithea before 0.3 allows remote attackers to inject arbitrary HTT
+package: kallithea
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.3 (ECOSYSTEM)
+aliases: CVE-2015-5285, GHSA-vfg9-phjp-9frw
+references:
+  http://packetstormsecurity.com/files/133897/Kallithea-0.2.9-HTTP-Response-Splitting.html
+  http://www.zeroscience.mk/en/vulnerabilities/ZSL-2015-5267.php
+  https://www.exploit-db.com/exploits/38424/
+  https://kallithea-scm.org/security/cve-2015-5285.html
+  https://github.com/advisories/GHSA-vfg9-phjp-9frw
+
+CRLF injection vulnerability in Kallithea before 0.3 allows remote attackers to inject arbitrary HTTP headers and conduct HTTP response splitting attacks via the came_from parameter to _admin/login.

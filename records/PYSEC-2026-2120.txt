@@ -1,0 +1,11 @@
+PYSEC-2026-2120 PyPI/black — Black is the uncompromising Python code formatter. Black provides a GitHub action for formatting cod
+package: black
+ecosystem: PyPI
+versions affected:
+  >= 0, < 26.3.0 (ECOSYSTEM)
+aliases: CVE-2026-31900, GHSA-v53h-f6m7-xcgm
+references:
+  https://github.com/psf/black/security/advisories/GHSA-v53h-f6m7-xcgm
+  https://github.com/psf/black/commit/0a2560b981364dde4c8cf8ce9d164c40669a8611
+
+Black is the uncompromising Python code formatter. Black provides a GitHub action for formatting code. This action supports an option, use_pyproject: true, for reading the version of Black to use from the repository pyproject.toml. A malicious pull request could edit pyproject.toml to use a direct URL reference to a malicious repository. This could lead to arbitrary code execution in the context of the GitHub Action. Attackers could then gain access to secrets or permissions available in the context of the action. Version 26.3.0 fixes this vulnerability.

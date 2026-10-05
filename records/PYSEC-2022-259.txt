@@ -1,0 +1,11 @@
+PYSEC-2022-259 PyPI/python-jwt — An attacker who obtains a JWT can arbitrarily forge its contents without knowing the secret key. Dep
+package: python-jwt
+ecosystem: PyPI
+versions affected:
+  >= f6d1451012c6a04c2fb1940f0bbd93bb6cf2b025, < 88ad9e67c53aa5f7c43ec4aa52ed34b7930068c9 (GIT: https://github.com/davedoesdev/python-jwt)
+  >= 3.0.0, < 3.3.4 (ECOSYSTEM)
+aliases: CVE-2022-39227, GHSA-5p8v-58qm-c7fp
+references:
+  https://github.com/davedoesdev/python-jwt/commit/88ad9e67c53aa5f7c43ec4aa52ed34b7930068c9
+
+An attacker who obtains a JWT can arbitrarily forge its contents without knowing the secret key. Depending on the application, this may for example enable the attacker to spoof other user's identities, hijack their sessions, or bypass authentication.

@@ -1,0 +1,11 @@
+PYSEC-2026-3739 PyPI/nltk — NLTK before 3.10.3 contains an uncontrolled recursion vulnerability in nltk.featstruct.FeatStructRea
+package: nltk
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.10.3 (ECOSYSTEM)
+aliases: CVE-2026-81724, GHSA-cw6x-m8jw-qmrh
+references:
+  https://www.vulncheck.com/advisories/nltk-before-3.10.3-denial-of-service-via-uncontrolled-recursion
+  https://github.com/nltk/nltk/security/advisories/GHSA-cw6x-m8jw-qmrh
+
+NLTK before 3.10.3 contains an uncontrolled recursion vulnerability in nltk.featstruct.FeatStructReader that allows unauthenticated attackers to cause a denial of service by supplying deeply nested feature-structure input. Attackers can craft trivial payloads with nested brackets that exceed Python's recursion limit and raise an unhandled RecursionError, crashing applications that parse user-supplied feature structures or feature grammars.

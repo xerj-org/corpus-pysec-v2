@@ -1,0 +1,14 @@
+PYSEC-2021-421 PyPI/babel — Babel.Locale in Babel before 2.9.1 allows attackers to load arbitrary locale .dat files (containing 
+package: babel
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.9.1 (ECOSYSTEM)
+aliases: CVE-2021-42771, GHSA-h4m5-qpfp-3mpv
+references:
+  https://www.tenable.com/security/research/tra-2021-14
+  https://lists.debian.org/debian-lts/2021/10/msg00040.html
+  https://github.com/python-babel/babel/pull/782
+  https://lists.debian.org/debian-lts-announce/2021/10/msg00018.html
+  https://github.com/advisories/GHSA-h4m5-qpfp-3mpv
+
+Babel.Locale in Babel before 2.9.1 allows attackers to load arbitrary locale .dat files (containing serialized Python objects) via directory traversal, leading to code execution.

@@ -1,0 +1,15 @@
+PYSEC-2026-1215 PyPI/basicsr — XPixelGroup BasicSR Command Injection
+package: basicsr
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 1.4.2 (ECOSYSTEM)
+aliases: CVE-2024-27763, GHSA-86w8-vhw6-q9qq
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-27763
+  https://gist.github.com/aydinnyunus/40e1d8a3b529261ae654ff4891f1e192
+  https://github.com/XPixelGroup/BasicSR
+  https://github.com/XPixelGroup/BasicSR/blob/master/basicsr/utils/dist_util.py#L44
+  https://pypi.org/project/basicsr
+  https://github.com/advisories/GHSA-86w8-vhw6-q9qq
+
+XPixelGroup BasicSR through 1.4.2 might locally allow code execution in contrived situations where "scontrol show hostname" is executed in the presence of a crafted SLURM_NODELIST environment variable.

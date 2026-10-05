@@ -1,0 +1,37 @@
+PYSEC-2026-1889 PyPI/sagemaker — sagemaker-python-sdk vulnerable to Deserialization of Untrusted Data
+package: sagemaker
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.218.0 (ECOSYSTEM)
+aliases: CVE-2024-34072, GHSA-wjvx-jhpj-r54r
+references:
+  https://github.com/aws/sagemaker-python-sdk/security/advisories/GHSA-wjvx-jhpj-r54r
+  https://nvd.nist.gov/vuln/detail/CVE-2024-34072
+  https://github.com/aws/sagemaker-python-sdk/pull/4557
+  https://github.com/aws/sagemaker-python-sdk/commit/72e0c9712aec6fbb82fb40fda091dfc2a42c70a0
+  https://github.com/aws/sagemaker-python-sdk
+  https://pypi.org/project/sagemaker
+  https://github.com/advisories/GHSA-wjvx-jhpj-r54r
+
+### Impact
+
+sagemaker.base_deserializers.NumpyDeserializer module before v2.218.0 allows potentially unsafe deserialization when untrusted data is passed as pickled object arrays. This consequently may allow an unprivileged third party to cause remote code execution, denial of service, affecting both confidentiality and integrity.
+
+Impacted versions: <2.218.0.
+
+### Credit 
+
+We would like to thank HiddenLayer for collaborating on this issue through the coordinated vulnerability disclosure process.
+
+
+### Workarounds
+
+Do not pass pickled numpy object arrays which originated from an untrusted source, or that could have been tampered with. Only pass pickled numpy object arrays from sources you trust.
+
+
+### References
+
+If you have any questions or comments about this advisory we ask that you contact AWS/Amazon Security via our vulnerability reporting page [1] or directly via email to [aws-security@amazon.com](mailto:aws-security@amazon.com). Please do not create a public GitHub issue.
+[1] Vulnerability reporting page: https://aws.amazon.com/security/vulnerability-reporting
+
+Fixed by: [https://github.com/aws/sagemaker-python-sdk/pull/4557](https://github.com/aws/sagemaker-python-sdk/pull/4557)

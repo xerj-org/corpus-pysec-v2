@@ -1,0 +1,14 @@
+PYSEC-2019-242 PyPI/capstone — Capstone 3.0.4 has an out-of-bounds vulnerability (SEGV caused by a read memory access) in X86_insn_
+package: capstone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 87a25bb543c8e4c09b48d4b4a6c7db31ce58df06 (GIT: https://github.com/capstone-engine/capstone)
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2016-7151, GHSA-xx4j-rvcc-2vhr
+references:
+  https://github.com/aquynh/capstone/pull/725
+  https://github.com/aquynh/capstone/pull/725
+  https://github.com/aquynh/capstone/commit/87a25bb543c8e4c09b48d4b4a6c7db31ce58df06
+  https://github.com/advisories/GHSA-xx4j-rvcc-2vhr
+
+Capstone 3.0.4 has an out-of-bounds vulnerability (SEGV caused by a read memory access) in X86_insn_reg_intel in arch/X86/X86Mapping.c.

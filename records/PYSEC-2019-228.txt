@@ -1,0 +1,10 @@
+PYSEC-2019-228 PyPI/tensorflow-cpu — NULL pointer dereference in Google TensorFlow before 1.12.2 could cause a denial of service via an i
+package: tensorflow-cpu
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.12.2 (ECOSYSTEM)
+aliases: CVE-2019-9635
+references:
+  https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/advisory/tfsa-2019-001.md
+
+NULL pointer dereference in Google TensorFlow before 1.12.2 could cause a denial of service via an invalid GIF file.

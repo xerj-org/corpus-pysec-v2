@@ -1,0 +1,12 @@
+PYSEC-2022-43057 PyPI/pywasm3 — WASM3 v0.5.0 was discovered to contain a segmentation fault via the component Compile_Memory_CopyFil
+package: pywasm3
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-34529, GHSA-gq4p-4hxv-5rg9
+references:
+  https://github.com/wasm3/wasm3/issues/337
+  https://github.com/wasm3/wasm3/issues/337
+  https://github.com/advisories/GHSA-gq4p-4hxv-5rg9
+
+WASM3 v0.5.0 was discovered to contain a segmentation fault via the component Compile_Memory_CopyFill.

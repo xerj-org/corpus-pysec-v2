@@ -1,0 +1,16 @@
+PYSEC-2014-98 PyPI/ajenti — Cross-site scripting (XSS) vulnerability in plugins/main/content/js/ajenti.coffee in Eugene Pankov A
+package: ajenti
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3270fd1d78391bb847b4c9ce37cf921f485b1310 (GIT: https://github.com/Eugeny/ajenti)
+  >= 0, < 1.2.14 (ECOSYSTEM)
+aliases: CVE-2014-2260, GHSA-9crx-p357-5vw8
+references:
+  http://www.securityfocus.com/bid/64982
+  https://github.com/Eugeny/ajenti/commit/3270fd1d78391bb847b4c9ce37cf921f485b1310
+  http://www.osvdb.org/102174
+  http://packetstormsecurity.com/files/124804/Ajenti-1.2.13-Cross-Site-Scripting.html
+  https://github.com/Eugeny/ajenti/issues/233
+  https://github.com/advisories/GHSA-9crx-p357-5vw8
+
+Cross-site scripting (XSS) vulnerability in plugins/main/content/js/ajenti.coffee in Eugene Pankov Ajenti 1.2.13 allows remote authenticated users to inject arbitrary web script or HTML via the command field in the Cron functionality.

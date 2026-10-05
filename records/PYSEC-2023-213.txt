@@ -1,0 +1,12 @@
+PYSEC-2023-213 PyPI/mycli — Inadequate encryption strength in mycli 1.27.0 allows attackers to view sensitive information via /m
+package: mycli
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2023-44690, GHSA-v9vj-9pxv-mr2w
+references:
+  https://github.com/dbcli/mycli/issues/1131
+  https://github.com/dbcli/mycli/issues/1131
+  https://github.com/advisories/GHSA-v9vj-9pxv-mr2w
+
+Inadequate encryption strength in mycli 1.27.0 allows attackers to view sensitive information via /mycli/config.py

@@ -1,0 +1,18 @@
+PYSEC-2022-43175 PyPI/xblock-drag-and-drop-v2 — Drag and Drop XBlock v2 implements a drag-and-drop style problem, where a learner has to drag items 
+package: xblock-drag-and-drop-v2
+ecosystem: PyPI
+versions affected:
+  >= 0, < 68887d1b4a44325d2de7573d450e41129ba98b1a (GIT: https://github.com/openedx/xblock-drag-and-drop-v2)
+  >= 0, < 3.0.0 (ECOSYSTEM)
+aliases: CVE-2022-46147, GHSA-qv6c-367r-3w6q
+references:
+  https://github.com/openedx/xblock-drag-and-drop-v2/security/advisories/GHSA-qv6c-367r-3w6q
+  https://github.com/openedx/xblock-drag-and-drop-v2/security/advisories/GHSA-qv6c-367r-3w6q
+  https://github.com/openedx/xblock-drag-and-drop-v2/pull/295#issuecomment-1277693864
+  https://github.com/openedx/xblock-drag-and-drop-v2/pull/295#issuecomment-1277693864
+  https://github.com/openedx/xblock-drag-and-drop-v2/pull/295#issuecomment-1277693864
+  https://github.com/openedx/xblock-drag-and-drop-v2/releases/tag/v3.0.0
+  https://github.com/openedx/xblock-drag-and-drop-v2/releases/tag/v3.0.0
+  https://github.com/openedx/xblock-drag-and-drop-v2/commit/68887d1b4a44325d2de7573d450e41129ba98b1a
+
+Drag and Drop XBlock v2 implements a drag-and-drop style problem, where a learner has to drag items to zones on a target image. Versions prior to 3.0.0 are vulnerable to cross-site scripting in multiple XBlock Fields. Any platform that has deployed the XBlock may be impacted. Version 3.0.0 contains a patch for this issue. There are no known workarounds.

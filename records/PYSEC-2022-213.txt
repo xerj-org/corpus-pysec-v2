@@ -1,0 +1,13 @@
+PYSEC-2022-213 PyPI/django — An issue was discovered in Django 3.2 before 3.2.14 and 4.0 before 4.0.6. The Trunc() and Extract() 
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 3.2, < 3.2.14, >= 4.0, < 4.0.6 (ECOSYSTEM)
+aliases: CVE-2022-34265, GHSA-p64x-8rxx-wf6q
+references:
+  https://www.djangoproject.com/weblog/2022/jul/04/security-releases/
+  https://docs.djangoproject.com/en/4.0/releases/security/
+  https://groups.google.com/forum/#!forum/django-announce
+  https://github.com/advisories/GHSA-p64x-8rxx-wf6q
+
+An issue was discovered in Django 3.2 before 3.2.14 and 4.0 before 4.0.6. The Trunc() and Extract() database functions are subject to SQL injection if untrusted data is used as a kind/lookup_name value. Applications that constrain the lookup name and kind choice to a known safe list are unaffected.

@@ -1,0 +1,11 @@
+PYSEC-2023-101 PyPI/selenium — A cross-site scripting (XSS) vulnerability in Selenium Grid v3.141.59 allows attackers to execute ar
+package: selenium
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2020-23452
+references:
+  https://github.com/SeleniumHQ/selenium/issues/8259
+  https://github.com/SeleniumHQ/selenium/issues/8259
+
+A cross-site scripting (XSS) vulnerability in Selenium Grid v3.141.59 allows attackers to execute arbitrary web scripts or HTML via a crafted payload injected into the hub parameter under the /grid/console page.

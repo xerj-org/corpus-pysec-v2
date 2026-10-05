@@ -1,0 +1,17 @@
+PYSEC-2014-89 PyPI/python-gnupg — python-gnupg before 0.3.5 allows context-dependent attackers to execute arbitrary commands via shell
+package: python-gnupg
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.3.5 (ECOSYSTEM)
+aliases: CVE-2013-7323, GHSA-c2fx-8r76-gh36
+references:
+  http://seclists.org/oss-sec/2014/q1/244
+  https://code.google.com/p/python-gnupg/
+  http://seclists.org/oss-sec/2014/q1/294
+  http://seclists.org/oss-sec/2014/q1/243
+  http://secunia.com/advisories/56616
+  http://www.debian.org/security/2014/dsa-2946
+  http://secunia.com/advisories/59031
+  https://github.com/advisories/GHSA-c2fx-8r76-gh36
+
+python-gnupg before 0.3.5 allows context-dependent attackers to execute arbitrary commands via shell metacharacters in unspecified vectors.

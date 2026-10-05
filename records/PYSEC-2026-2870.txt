@@ -1,0 +1,21 @@
+PYSEC-2026-2870 PyPI/pgadmin4 — pgAdmin 4: OS command injection vulnerability in Import/Export query export
+package: pgadmin4
+ecosystem: PyPI
+versions affected:
+  >= 0, < 9.15 (ECOSYSTEM)
+aliases: CVE-2026-7816, GHSA-j74f-g7vx-fh4x
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-7816
+  https://github.com/pgadmin-org/pgadmin4/issues/9899
+  https://github.com/pgadmin-org/pgadmin4/commit/13badc62c
+  https://github.com/pgadmin-org/pgadmin4
+  https://pypi.org/project/pgadmin4
+  https://github.com/advisories/GHSA-j74f-g7vx-fh4x
+
+OS command injection (CWE-78) vulnerability in pgAdmin 4 Import/Export query export.
+
+User-supplied input was interpolated directly into a psql \copy metacommand template without sanitization. An authenticated user could inject ") TO PROGRAM 'cmd'" to break out of the \copy (...) context and achieve arbitrary command execution on the pgAdmin server, or ") TO '/path'" for arbitrary file write. Additional fields (format, on_error, log_verbosity) were also raw-interpolated and exploitable.
+
+Fix adds a parens-balance parser modeled on psql's strtokx tokenizer, allow-lists format/on_error/log_verbosity, rejects null bytes in the query, and tightens type and gating checks.
+
+This issue affects pgAdmin 4: before 9.15.

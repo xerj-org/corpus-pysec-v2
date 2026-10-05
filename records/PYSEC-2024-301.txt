@@ -1,0 +1,16 @@
+PYSEC-2024-301 PyPI/pyhtml2pdf — Pyhtml2pdf version 0.0.6 allows an external attacker to remotely obtain arbitrary local files. This 
+package: pyhtml2pdf
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.0.6 (ECOSYSTEM)
+aliases: CVE-2024-1647, GHSA-p3rv-qj56-2fqx
+references:
+  https://pypi.org/project/pyhtml2pdf/
+  https://fluidattacks.com/advisories/oliver/
+  https://github.com/advisories/GHSA-p3rv-qj56-2fqx
+
+Pyhtml2pdf version 0.0.6 allows an external attacker to remotely obtain
+
+arbitrary local files. This is possible because the application does not
+
+validate the HTML content entered by the user.

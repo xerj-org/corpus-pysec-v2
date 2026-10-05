@@ -1,0 +1,14 @@
+PYSEC-2025-57 PyPI/zenml — A Denial of Service (DoS) vulnerability in zenml-io/zenml version 0.66.0 allows unauthenticated atta
+package: zenml
+ecosystem: PyPI
+versions affected:
+  >= 0, < cba152eb9ca3071c8372b0b91c02d9d3351de48d (GIT: https://github.com/zenml-io/zenml)
+  >= 0, < 0.68.0 (ECOSYSTEM)
+aliases: CVE-2024-9340, GHSA-6gmf-2369-c76c
+references:
+  https://huntr.com/bounties/c9200654-7dc0-4c1d-8573-ab79a87fb4f6
+  https://github.com/zenml-io/zenml/commit/cba152eb9ca3071c8372b0b91c02d9d3351de48d
+  https://huntr.com/bounties/c9200654-7dc0-4c1d-8573-ab79a87fb4f6
+  https://github.com/advisories/GHSA-6gmf-2369-c76c
+
+A Denial of Service (DoS) vulnerability in zenml-io/zenml version 0.66.0 allows unauthenticated attackers to cause excessive resource consumption by sending malformed multipart requests with arbitrary characters appended to the end of multipart boundaries. This flaw in the multipart request boundary processing mechanism leads to an infinite loop, resulting in a complete denial of service for all users. Affected endpoints include `/api/v1/login` and `/api/v1/device_authorization`.

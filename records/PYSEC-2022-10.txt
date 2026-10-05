@@ -1,0 +1,12 @@
+PYSEC-2022-10 PyPI/pillow — PIL.ImageMath.eval in Pillow before 9.0.0 allows evaluation of arbitrary expressions, such as ones t
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 9.0.0 (ECOSYSTEM)
+aliases: CVE-2022-22817, GHSA-8vj2-vxx3-667w
+references:
+  https://pillow.readthedocs.io/en/stable/releasenotes/9.0.0.html#restrict-builtins-available-to-imagemath-eval
+  https://lists.debian.org/debian-lts-announce/2022/01/msg00018.html
+  https://github.com/advisories/GHSA-8vj2-vxx3-667w
+
+PIL.ImageMath.eval in Pillow before 9.0.0 allows evaluation of arbitrary expressions, such as ones that use the Python exec method.

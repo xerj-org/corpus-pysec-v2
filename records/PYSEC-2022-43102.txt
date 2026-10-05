@@ -1,0 +1,12 @@
+PYSEC-2022-43102 PyPI/democritus-hypothesis — The d8s-urls for python 0.1.0, as distributed on PyPI, included a potential code-execution backdoor 
+package: democritus-hypothesis
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-40805
+references:
+  https://pypi.org/project/democritus-hypothesis/
+  https://github.com/democritus-project/d8s-urls/issues/10
+  https://github.com/democritus-project/d8s-urls/issues/10
+
+The d8s-urls for python 0.1.0, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. A potential code execution backdoor inserted by third parties is the democritus-hypothesis package.

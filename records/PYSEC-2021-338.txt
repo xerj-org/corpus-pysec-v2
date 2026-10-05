@@ -1,0 +1,11 @@
+PYSEC-2021-338 PyPI/leo — Leo Editor v6.2.1 was discovered to contain a regular expression denial of service (ReDoS) vulnerabi
+package: leo
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.3 (ECOSYSTEM)
+aliases: CVE-2020-23478, GHSA-x38q-xg2h-rxgx
+references:
+  https://github.com/leo-editor/leo-editor/issues/1597
+  https://github.com/advisories/GHSA-x38q-xg2h-rxgx
+
+Leo Editor v6.2.1 was discovered to contain a regular expression denial of service (ReDoS) vulnerability in the component plugins/importers/dart.py.

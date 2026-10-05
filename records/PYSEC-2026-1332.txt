@@ -1,0 +1,25 @@
+PYSEC-2026-1332 PyPI/ethyca-fides — Fides Webserver Vulnerable to SVG Bomb File Uploads
+package: ethyca-fides
+ecosystem: PyPI
+versions affected:
+  >= 2.11.0, < 2.16.0 (ECOSYSTEM)
+aliases: CVE-2023-37481, GHSA-3rw2-wfc8-wmj5
+references:
+  https://github.com/ethyca/fides/security/advisories/GHSA-3rw2-wfc8-wmj5
+  https://nvd.nist.gov/vuln/detail/CVE-2023-37481
+  https://github.com/ethyca/fides/commit/8beaace082b325e693dc7682029a3cb7e6c2b69d
+  https://github.com/ethyca/fides
+  https://github.com/ethyca/fides/releases/tag/2.16.0
+  https://pypi.org/project/ethyca-fides
+  https://github.com/advisories/GHSA-3rw2-wfc8-wmj5
+
+### Impact
+The Fides webserver is vulnerable to a type of Denial of Service (DoS) attack. Attackers can exploit this vulnerability to upload zip files containing malicious SVG bombs (similar to a billion laughs attack), causing resource exhaustion in Admin UI browser tabs and creating a persistent denial of service of the 'new connector' page (`datastore-connection/new`).
+
+This vulnerability affects Fides versions `2.11.0` through `2.15.1`. Exploitation is limited to users with elevated privileges with the `CONNECTOR_TEMPLATE_REGISTER` scope, which includes root users and users with the owner role.
+
+### Patches
+The vulnerability has been patched in Fides version `2.16.0`. Users are advised to upgrade to this version or later to secure their systems against this threat.
+
+### Workarounds
+There is no known workaround to remediate this vulnerability without upgrading.

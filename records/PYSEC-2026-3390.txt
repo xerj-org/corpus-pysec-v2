@@ -1,0 +1,18 @@
+PYSEC-2026-3390 PyPI/tryton — Tryton vulnerable to arbitrary command execution
+package: tryton
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.4.15, >= 2.6.0, < 2.6.14, >= 2.8.0, < 2.8.11, >= 3.2.0, < 3.2.3 (ECOSYSTEM)
+aliases: CVE-2014-6633, GHSA-m9jj-5qvj-5fhx
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2014-6633
+  https://github.com/tryton/trytond/commit/19fc2a01357b7638041953326e404f51d96fad06
+  https://github.com/tryton/trytond/commit/3e4c2b7e8c7b3358597a0d484fa98f45483ee92a
+  https://bugs.tryton.org/issue4155
+  https://github.com/pypa/advisory-database/tree/main/vulns/trytond/PYSEC-2018-59.yaml
+  https://github.com/tryton/trytond
+  http://www.tryton.org/posts/security-release-for-issue4155.html
+  https://pypi.org/project/tryton
+  https://github.com/advisories/GHSA-m9jj-5qvj-5fhx
+
+The `safe_eval` function in trytond in Tryton before 2.4.15, 2.6.x before 2.6.14, 2.8.x before 2.8.11, 3.0.x before 3.0.7, and 3.2.x before 3.2.3 allows remote authenticated users to execute arbitrary commands via shell metacharacters in (1) the `collection.domain` in the webdav module or (2) the formula field in the `price_list` module.

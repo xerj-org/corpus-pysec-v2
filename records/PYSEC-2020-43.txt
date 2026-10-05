@@ -1,0 +1,16 @@
+PYSEC-2020-43 PyPI/flask-cors — An issue was discovered in Flask-CORS (aka CORS Middleware for Flask) before 3.0.9. It allows ../ di
+package: flask-cors
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.0.9 (ECOSYSTEM)
+aliases: CVE-2020-25032, GHSA-xc3p-ff3m-f46v
+references:
+  https://github.com/corydolphin/flask-cors/releases/tag/3.0.9
+  http://lists.opensuse.org/opensuse-security-announce/2020-09/msg00028.html
+  http://lists.opensuse.org/opensuse-security-announce/2020-09/msg00032.html
+  http://lists.opensuse.org/opensuse-security-announce/2020-09/msg00039.html
+  http://lists.opensuse.org/opensuse-security-announce/2020-09/msg00048.html
+  https://www.debian.org/security/2020/dsa-4775
+  https://github.com/advisories/GHSA-xc3p-ff3m-f46v
+
+An issue was discovered in Flask-CORS (aka CORS Middleware for Flask) before 3.0.9. It allows ../ directory traversal to access private resources because resource matching does not ensure that pathnames are in a canonical format.

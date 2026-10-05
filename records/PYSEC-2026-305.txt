@@ -1,0 +1,15 @@
+PYSEC-2026-305 PyPI/calibreweb — SQL injection in calibreweb
+package: calibreweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.6.18 (ECOSYSTEM)
+aliases: CVE-2022-30765, GHSA-8ppf-x4gr-2x7g
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2022-30765
+  https://github.com/janeczku/calibre-web
+  https://github.com/janeczku/calibre-web/blob/master/SECURITY.md
+  https://github.com/janeczku/calibre-web/releases/tag/0.6.18
+  https://pypi.org/project/calibreweb
+  https://github.com/advisories/GHSA-8ppf-x4gr-2x7g
+
+Calibre-Web before 0.6.18 allows user table SQL Injection.

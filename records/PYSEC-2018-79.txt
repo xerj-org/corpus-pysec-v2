@@ -1,0 +1,11 @@
+PYSEC-2018-79 PyPI/websockets — aaugustin websockets version 4 contains a CWE-409: Improper Handling of Highly Compressed Data (Data
+package: websockets
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.0 (ECOSYSTEM)
+aliases: CVE-2018-1000518, GHSA-6g87-ff9q-v847
+references:
+  https://github.com/aaugustin/websockets/pull/407
+  https://github.com/advisories/GHSA-6g87-ff9q-v847
+
+aaugustin websockets version 4 contains a CWE-409: Improper Handling of Highly Compressed Data (Data Amplification) vulnerability in Servers and clients, unless configured with compression=None that can result in Denial of Service by memory exhaustion. This attack appear to be exploitable via Sending a specially crafted frame on an established connection. This vulnerability appears to have been fixed in 5.

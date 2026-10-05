@@ -1,0 +1,14 @@
+PYSEC-2026-1657 PyPI/mlflow — MLFlow improper input validation
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 1.11.0, <= 2.13.1 (ECOSYSTEM)
+aliases: CVE-2024-37061, GHSA-pqcv-qw2r-r859
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-37061
+  https://github.com/mlflow/mlflow
+  https://hiddenlayer.com/sai-security-advisory/mlflow-june2024
+  https://pypi.org/project/mlflow
+  https://github.com/advisories/GHSA-pqcv-qw2r-r859
+
+Remote Code Execution can occur in versions of the MLflow platform running version 1.11.0 or newer, enabling a maliciously crafted MLproject to execute arbitrary code on an end user’s system when run due to unfiltered input.

@@ -1,0 +1,14 @@
+PYSEC-2026-2295 PyPI/uv — A flaw was found in uv. This vulnerability allows an attacker to execute malicious code during packa
+package: uv
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.9.6 (ECOSYSTEM)
+aliases: CVE-2025-13327, GHSA-pqhf-p39g-3x64
+references:
+  https://access.redhat.com/security/cve/CVE-2025-13327
+  https://github.com/astral-sh/uv/security/advisories/GHSA-pqhf-p39g-3x64
+  https://bugzilla.redhat.com/show_bug.cgi?id=2407263
+  https://github.com/astral-sh/uv/commit/da659fee4898a73dbc75070f3e82d49f745e4628
+  https://github.com/astral-sh/uv
+
+A flaw was found in uv. This vulnerability allows an attacker to execute malicious code during package resolution or installation via specially crafted ZIP (Zipped Information Package) archives that exploit parsing differentials, requiring user interaction to install an attacker-controlled package.

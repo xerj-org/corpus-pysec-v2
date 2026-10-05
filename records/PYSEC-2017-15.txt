@@ -1,0 +1,18 @@
+PYSEC-2017-15 PyPI/html5lib — The serializer in html5lib before 0.99999999 might allow remote attackers to conduct cross-site scri
+package: html5lib
+ecosystem: PyPI
+versions affected:
+  >= 0, < 9b8d8eb5afbc066b7fac9390f5ec75e5e8a7cab7 (GIT: https://github.com/html5lib/html5lib-python)
+  >= 0, < 0.999999999 (ECOSYSTEM)
+aliases: CVE-2016-9910, GHSA-8f6m-gfq9-g33v
+references:
+  https://html5lib.readthedocs.io/en/latest/changes.html#b9
+  https://github.com/html5lib/html5lib-python/issues/12
+  https://github.com/html5lib/html5lib-python/issues/11
+  https://github.com/html5lib/html5lib-python/commit/9b8d8eb5afbc066b7fac9390f5ec75e5e8a7cab7
+  http://www.securityfocus.com/bid/95132
+  http://www.openwall.com/lists/oss-security/2016/12/08/8
+  http://www.openwall.com/lists/oss-security/2016/12/06/5
+  https://github.com/advisories/GHSA-8f6m-gfq9-g33v
+
+The serializer in html5lib before 0.99999999 might allow remote attackers to conduct cross-site scripting (XSS) attacks by leveraging mishandling of special characters in attribute values, a different vulnerability than CVE-2016-9909.

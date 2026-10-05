@@ -1,0 +1,16 @@
+PYSEC-2025-109 PyPI/django — An issue was discovered in 5.2 before 5.2.9, 5.1 before 5.1.15, and 4.2 before 4.2.27. Algorithmic c
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 4.2, < 4.2.27, >= 5.1, < 5.1.15, >= 5.2, < 5.2.9 (ECOSYSTEM)
+aliases: CVE-2025-64460, GHSA-vrcr-9hj9-jcg6
+references:
+  https://groups.google.com/g/django-announce
+  https://docs.djangoproject.com/en/dev/releases/security/
+  https://www.djangoproject.com/weblog/2025/dec/02/security-releases/
+  https://github.com/advisories/GHSA-vrcr-9hj9-jcg6
+
+An issue was discovered in 5.2 before 5.2.9, 5.1 before 5.1.15, and 4.2 before 4.2.27.
+Algorithmic complexity in `django.core.serializers.xml_serializer.getInnerText()` allows a remote attacker to cause a potential denial-of-service attack triggering CPU and memory exhaustion via specially crafted XML input processed by the XML `Deserializer`.
+Earlier, unsupported Django series (such as 5.0.x, 4.1.x, and 3.2.x) were not evaluated and may also be affected.
+Django would like to thank Seokchan Yoon for reporting this issue.

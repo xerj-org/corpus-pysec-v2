@@ -1,0 +1,16 @@
+PYSEC-2023-255 PyPI/gradio — Command Injection in GitHub repository gradio-app/gradio prior to main.
+package: gradio
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5b5af1899dd98d63e1f9b48a93601c2db1f56520 (GIT: https://github.com/gradio-app/gradio)
+  >= 0, < 4.14.0 (ECOSYSTEM)
+aliases: CVE-2023-6572, GHSA-gqvf-3hgp-5hxv
+references:
+  https://huntr.com/bounties/21d2ff0c-d43a-4afd-bb4d-049ee8da5b5c
+  https://huntr.com/bounties/21d2ff0c-d43a-4afd-bb4d-049ee8da5b5c
+  https://huntr.com/bounties/21d2ff0c-d43a-4afd-bb4d-049ee8da5b5c
+  https://huntr.com/bounties/21d2ff0c-d43a-4afd-bb4d-049ee8da5b5c
+  https://github.com/gradio-app/gradio/commit/5b5af1899dd98d63e1f9b48a93601c2db1f56520
+  https://github.com/advisories/GHSA-gqvf-3hgp-5hxv
+
+Command Injection in GitHub repository gradio-app/gradio prior to main.

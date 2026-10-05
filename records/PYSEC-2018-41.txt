@@ -1,0 +1,22 @@
+PYSEC-2018-41 PyPI/ansible — Ansible before versions 2.3.1.0 and 2.4.0.0 fails to properly mark lookup-plugin results as unsafe. 
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 0, < ed56f51f185a1ffd7ea57130d260098686fcc7c2 (GIT: https://github.com/ansible/ansible)
+  >= 0, < 2.3.1.0, >= 2.3.2.0, < 2.4.0.0 (ECOSYSTEM)
+aliases: CVE-2017-7481, GHSA-w578-j992-554x
+references:
+  https://github.com/ansible/ansible/commit/ed56f51f185a1ffd7ea57130d260098686fcc7c2
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2017-7481
+  https://access.redhat.com/errata/RHSA-2017:2524
+  https://access.redhat.com/errata/RHSA-2017:1599
+  https://access.redhat.com/errata/RHSA-2017:1499
+  https://access.redhat.com/errata/RHSA-2017:1476
+  https://access.redhat.com/errata/RHSA-2017:1334
+  https://access.redhat.com/errata/RHSA-2017:1244
+  http://www.securityfocus.com/bid/98492
+  https://usn.ubuntu.com/4072-1/
+  https://lists.debian.org/debian-lts-announce/2021/01/msg00023.html
+  https://github.com/advisories/GHSA-w578-j992-554x
+
+Ansible before versions 2.3.1.0 and 2.4.0.0 fails to properly mark lookup-plugin results as unsafe. If an attacker could control the results of lookup() calls, they could inject Unicode strings to be parsed by the jinja2 templating system, resulting in code execution. By default, the jinja2 templating language is now marked as 'unsafe' and is not evaluated.

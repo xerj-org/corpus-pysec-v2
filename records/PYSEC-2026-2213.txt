@@ -1,0 +1,12 @@
+PYSEC-2026-2213 PyPI/mistune — Mistune is a Python Markdown parser with renderers and plugins. Prior to 3.3.0, long sequences of we
+package: mistune
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.3.0 (ECOSYSTEM)
+aliases: CVE-2026-59925, GHSA-4j32-57v6-6g45
+references:
+  https://github.com/lepture/mistune/releases/tag/v3.3.0
+  https://github.com/lepture/mistune/commit/5de41fb8e527004dbc363e047a3c380c9288c74f
+  https://github.com/lepture/mistune/security/advisories/GHSA-4j32-57v6-6g45
+
+Mistune is a Python Markdown parser with renderers and plugins. Prior to 3.3.0, long sequences of well-formed double-asterisk or triple-asterisk emphasis pairs around a character cause quadratic work in src/mistune/inline_parser.py because the parser scans forward for matching close markers from every potential opening run, allowing denial of service in default Mistune parsing. This issue is fixed in version 3.3.0.

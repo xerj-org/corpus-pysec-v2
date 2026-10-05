@@ -1,0 +1,67 @@
+PYSEC-2026-3411 PyPI/vllm — vLLM has SSRF Protection Bypass
+package: vllm
+ecosystem: PyPI
+versions affected:
+  >= 0.15.1, < 0.17.0 (ECOSYSTEM)
+aliases: CVE-2026-25960, GHSA-v359-jj2v-j536
+references:
+  https://github.com/vllm-project/vllm/security/advisories/GHSA-qh4c-xf7m-gxfc
+  https://github.com/vllm-project/vllm/security/advisories/GHSA-v359-jj2v-j536
+  https://nvd.nist.gov/vuln/detail/CVE-2026-25960
+  https://github.com/vllm-project/vllm/pull/34743
+  https://github.com/vllm-project/vllm/commit/6f3b2047abd4a748e3db4a68543f8221358002c0
+  https://github.com/vllm-project/vllm
+  https://pypi.org/project/vllm
+  https://github.com/advisories/GHSA-v359-jj2v-j536
+
+## Summary
+
+The SSRF protection fix for https://github.com/vllm-project/vllm/security/advisories/GHSA-qh4c-xf7m-gxfc can be bypassed in the `load_from_url_async` method due to inconsistent URL parsing behavior between the validation layer and the actual HTTP client.
+
+## Affected Component
+
+- **File**: `vllm/connections.py`
+- **Function**: `load_from_url_async`
+
+## Vulnerability Details
+
+### Root Cause
+
+The SSRF [fix](https://github.com/vllm-project/vllm/pull/32746) uses `urllib3.util.parse_url()` to validate and extract the hostname from user-provided URLs. However, `load_from_url_async` uses `aiohttp` for making the actual HTTP requests, and `aiohttp` internally uses the `yarl` library for URL parsing.
+
+These two URL parsers handle backslash characters (`\`) differently:
+
+| Parser | Input URL | Parsed Host | Parsed Path | Behavior |
+|--------|-----------|-------------|-------------|----------|
+| `urllib3.parse_url()` | `https://httpbin.org\@evil.com/` | `httpbin.org` | `/%5C@evil.com/` | URL-encodes `\` as `%5C`, treats `\@evil.com/` as part of the path |
+| `yarl` (via aiohttp) | `https://httpbin.org\@evil.com/` | `evil.com` | `/` | Treats `\` as part of userinfo (`user: httpbin.org\`), the `@` acts as the userinfo/host separator |
+
+### Attack Scenario
+
+```python
+# Attacker provides this URL
+malicious_url = "https://httpbin.org\\@evil.com/"
+
+# 1. Validation layer (urllib3.parse_url)
+parsed = urllib3.util.parse_url(malicious_url)
+# parsed.host == "httpbin.org"  ✅ Passes validation
+
+# 2. Actual request (aiohttp with yarl)
+async with aiohttp.ClientSession() as session:
+    async with session.get(malicious_url) as response:
+        # Request actually goes to evil.com!  ❌ Bypass!
+```
+
+### Why This Happens
+
+1. **yarl**: Interprets `httpbin.org\` as the userinfo component, and `@` as the userinfo/host separator, so the URL is parsed as `user=httpbin.org\`, `host=evil.com`, `path=/`
+2. **urllib3**: URL-encodes the backslash as `%5C`, so `\@evil.com/` becomes `/%5C@evil.com/` which is treated as part of the path, leaving `host=httpbin.org`
+
+This inconsistency allows an attacker to:
+- Bypass the hostname allowlist check
+- Access arbitrary internal/external services
+- Perform full SSRF attacks
+
+## Fixes
+
+- https://github.com/vllm-project/vllm/pull/34743

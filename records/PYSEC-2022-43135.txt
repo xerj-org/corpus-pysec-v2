@@ -1,0 +1,11 @@
+PYSEC-2022-43135 PyPI/freetakserver — FreeTAKServer 1.9.8 contains a hardcoded Flask secret key which allows attackers to create crafted c
+package: freetakserver
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.9.8.5 (ECOSYSTEM)
+aliases: CVE-2022-25510, GHSA-f897-875p-23x7
+references:
+  https://github.com/FreeTAKTeam/FreeTakServer/issues/292
+  https://github.com/FreeTAKTeam/FreeTakServer/issues/292
+
+FreeTAKServer 1.9.8 contains a hardcoded Flask secret key which allows attackers to create crafted cookies to bypass authentication or escalate privileges.

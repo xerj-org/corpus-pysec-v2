@@ -1,0 +1,12 @@
+PYSEC-2026-2204 PyPI/mesop — Mesop is a Python-based UI framework that allows users to build web applications. From version 1.2.3
+package: mesop
+ecosystem: PyPI
+versions affected:
+  >= 1.2.3, < 1.2.5 (ECOSYSTEM)
+aliases: CVE-2026-34824, GHSA-3jr7-6hqp-x679
+references:
+  https://github.com/mesop-dev/mesop/releases/tag/v1.2.5
+  https://github.com/mesop-dev/mesop/commit/760a2079b5c609038c826d24dfbcf9b0be98d987
+  https://github.com/mesop-dev/mesop/security/advisories/GHSA-3jr7-6hqp-x679
+
+Mesop is a Python-based UI framework that allows users to build web applications. From version 1.2.3 to before version 1.2.5, an uncontrolled resource consumption vulnerability exists in the WebSocket implementation of the Mesop framework. An unauthenticated attacker can send a rapid succession of WebSocket messages, forcing the server to spawn an unbounded number of operating system threads. This leads to thread exhaustion and Out of Memory (OOM) errors, causing a complete Denial of Service (DoS) for any application built on the framework. This issue has been patched in version 1.2.5.

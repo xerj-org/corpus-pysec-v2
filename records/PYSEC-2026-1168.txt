@@ -1,0 +1,15 @@
+PYSEC-2026-1168 PyPI/apache-superset — Apache Superset has improper default REST API permission for Gamma users
+package: apache-superset
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 2.1.0 (ECOSYSTEM)
+aliases: CVE-2023-36387, GHSA-9832-mgg4-3gr6
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-36387
+  https://github.com/apache/superset/pull/24185
+  https://github.com/apache/superset
+  https://lists.apache.org/thread/tt6s6hm8nv6s11z8bfsk3r3d9ov0ogw3
+  https://pypi.org/project/apache-superset
+  https://github.com/advisories/GHSA-9832-mgg4-3gr6
+
+An improper default REST API permission for Gamma users in Apache Superset up to and including 2.1.0 allows for an authenticated Gamma user to test database connections.

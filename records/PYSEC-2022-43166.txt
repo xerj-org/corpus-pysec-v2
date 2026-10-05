@@ -1,0 +1,13 @@
+PYSEC-2022-43166 PyPI/scu-captcha — The scu-captcha package in PyPI v0.0.1 to v0.0.4 included a code execution backdoor inserted by a th
+package: scu-captcha
+ecosystem: PyPI
+versions affected:
+  >= 0.0.1, < 0.0.5 (ECOSYSTEM)
+aliases: CVE-2022-34983
+references:
+  https://pypi.org/project/scu-captcha/
+  https://github.com/SunnyHaze/SCU-Captcha/issues/1
+  https://github.com/SunnyHaze/SCU-Captcha/issues/1
+  http://pypi.doubanio.com/simple/request
+
+The scu-captcha package in PyPI v0.0.1 to v0.0.4 included a code execution backdoor inserted by a third party.

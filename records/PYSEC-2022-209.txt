@@ -1,0 +1,13 @@
+PYSEC-2022-209 PyPI/nuitka — Command Injection in GitHub repository nuitka/nuitka prior to 0.9.
+package: nuitka
+ecosystem: PyPI
+versions affected:
+  >= 0, < 09647745d7cbb6ff32f9fa948f19d5558b32bcad (GIT: https://github.com/nuitka/nuitka)
+  >= 0, < 0.9 (ECOSYSTEM)
+aliases: CVE-2022-2054, GHSA-4v3r-hqr9-69jf
+references:
+  https://huntr.dev/bounties/ea4a842c-c48c-4aae-a599-3305125c63a7
+  https://github.com/nuitka/nuitka/commit/09647745d7cbb6ff32f9fa948f19d5558b32bcad
+  https://github.com/advisories/GHSA-4v3r-hqr9-69jf
+
+Command Injection in GitHub repository nuitka/nuitka prior to 0.9.

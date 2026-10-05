@@ -1,0 +1,11 @@
+PYSEC-2021-347 PyPI/simiki — Cross Site Scripting (XSS) in Simiki v1.6.2.1 and prior allows remote attackers to execute arbitrary
+package: simiki
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2020-19000, GHSA-fqr5-qphf-vfr8
+references:
+  https://github.com/tankywoo/simiki/issues/123
+  https://github.com/advisories/GHSA-fqr5-qphf-vfr8
+
+Cross Site Scripting (XSS) in Simiki v1.6.2.1 and prior allows remote attackers to execute arbitrary code via line 54 of the component 'simiki/blob/master/simiki/generators.py'.

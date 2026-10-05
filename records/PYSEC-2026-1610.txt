@@ -1,0 +1,30 @@
+PYSEC-2026-1610 PyPI/matrix-synapse — Synapse Matrix has a partial room state leak via Sliding Sync
+package: matrix-synapse
+ecosystem: PyPI
+versions affected:
+  >= 1.113.0rc1, < 1.120.1 (ECOSYSTEM)
+aliases: CVE-2024-53867, GHSA-56w4-5538-8v8h
+references:
+  https://github.com/element-hq/synapse/security/advisories/GHSA-56w4-5538-8v8h
+  https://nvd.nist.gov/vuln/detail/CVE-2024-53867
+  https://github.com/matrix-org/matrix-spec-proposals/pull/4186
+  https://github.com/element-hq/synapse
+  https://pypi.org/project/matrix-synapse
+  https://github.com/advisories/GHSA-56w4-5538-8v8h
+
+### Impact
+The Sliding Sync feature on Synapse versions between 1.113.0rc1 and 1.120.0 can leak partial room state changes to users no longer in a room. Non-state events, like messages, are unaffected.
+
+### Patches
+Synapse version 1.120.1 fixes the problem.
+
+### Workarounds
+Disable Sliding Sync.
+
+### References
+https://github.com/matrix-org/matrix-spec-proposals/pull/4186
+https://github.com/element-hq/synapse/blob/d80cd57c54427687afcb48740d99219c88a0fff1/synapse/config/experimental.py#L341-L344
+
+### For more information
+
+If you have any questions or comments about this advisory, please email us at [security at element.io](mailto:security@element.io).

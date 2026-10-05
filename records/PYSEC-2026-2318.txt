@@ -1,0 +1,13 @@
+PYSEC-2026-2318 PyPI/weblate — Weblate is a web based localization tool. Prior to version 5.17.1, the screenshots, tasks, and compo
+package: weblate
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.17.1 (ECOSYSTEM)
+aliases: CVE-2026-44263, GHSA-gcg5-86jr-f7jg
+references:
+  https://github.com/WeblateOrg/weblate/releases/tag/weblate-5.17.1
+  https://github.com/WeblateOrg/weblate/commit/6cf892c7bd50b667a65a99d716a90694f7d9f203
+  https://github.com/WeblateOrg/weblate/pull/19258
+  https://github.com/WeblateOrg/weblate/security/advisories/GHSA-gcg5-86jr-f7jg
+
+Weblate is a web based localization tool. Prior to version 5.17.1, the screenshots, tasks, and component link API allowed for the enumeration of translations in a project inaccessible to the user. This issue has been patched in version 5.17.1.

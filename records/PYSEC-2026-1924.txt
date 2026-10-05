@@ -1,0 +1,28 @@
+PYSEC-2026-1924 PyPI/sigstore — sigstore CSRF possibility in OIDC authentication during signing
+package: sigstore
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.2.0 (ECOSYSTEM)
+aliases: CVE-2026-24408, GHSA-hm8f-75xx-w2vr
+references:
+  https://github.com/sigstore/sigstore-python/security/advisories/GHSA-hm8f-75xx-w2vr
+  https://nvd.nist.gov/vuln/detail/CVE-2026-24408
+  https://github.com/sigstore/sigstore-python/commit/5e77497fe8f0b202bdd118949074ec2f20da69aa
+  https://github.com/sigstore/sigstore-python
+  https://github.com/sigstore/sigstore-python/releases/tag/v4.2.0
+  https://pypi.org/project/sigstore
+  https://github.com/advisories/GHSA-hm8f-75xx-w2vr
+
+### Summary
+
+The sigstore-python OAuth authentication flow is susceptible to Cross-Site Request Forgery.
+
+### Details
+
+`_OAuthSession` creates a unique "state" and sends it as a parameter in the authentication request but the "state" in the server response seems not not be cross-checked with this value. 
+
+Fix should be fairly trivial.
+
+### Impact
+
+This should be low impact: A man-in-the middle attacker could trick a sigstore-python user into signing something with an identity controlled by the attacker (by returning the response to an authentication request they created). This would be quite confusing but not dangerous.

@@ -1,0 +1,44 @@
+PYSEC-2026-1033 PyPI/tensorflow-gpu — TensorFlow vulnerable to integer overflow in math ops
+package: tensorflow-gpu
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.7.2, >= 2.8.0, < 2.8.1, >= 2.9.0, < 2.9.1 (ECOSYSTEM)
+aliases: CVE-2022-36015, GHSA-rh87-q4vg-m45j
+references:
+  https://github.com/tensorflow/tensorflow/security/advisories/GHSA-rh87-q4vg-m45j
+  https://nvd.nist.gov/vuln/detail/CVE-2022-36015
+  https://github.com/tensorflow/tensorflow/commit/37e64539cd29fcfb814c4451152a60f5d107b0f0
+  https://github.com/tensorflow/tensorflow
+  https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/ops/math_ops.cc
+  https://github.com/tensorflow/tensorflow/releases/tag/v2.10.0
+  https://pypi.org/project/tensorflow-gpu
+  https://github.com/advisories/GHSA-rh87-q4vg-m45j
+
+### Impact
+When [`RangeSize`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/ops/math_ops.cc) receives values that do not fit into an `int64_t`, it crashes.
+```cpp
+  auto size = (std::is_integral<T>::value
+                   ? ((Eigen::numext::abs(limit - start) +
+                       Eigen::numext::abs(delta) - T(1)) /
+                      Eigen::numext::abs(delta))
+                   : (Eigen::numext::ceil(
+                         Eigen::numext::abs((limit - start) / delta))));
+
+  // This check does not cover all cases.
+  if (size > std::numeric_limits<int64_t>::max()) {
+    return errors::InvalidArgument("Requires ((limit - start) / delta) <= ",
+                                   std::numeric_limits<int64_t>::max());
+  }
+
+  c->set_output(0, c->Vector(static_cast<int64_t>(size)));
+  return Status::OK();
+}
+```
+
+### Patches
+We have patched the issue in GitHub commit [37e64539cd29fcfb814c4451152a60f5d107b0f0](https://github.com/tensorflow/tensorflow/commit/37e64539cd29fcfb814c4451152a60f5d107b0f0).
+The fix will be included in TensorFlow 2.10.0. We will also cherrypick this commit on TensorFlow 2.9.1, TensorFlow 2.8.1, and TensorFlow 2.7.2, as these are also affected and still in supported range.
+
+
+### For more information
+Please consult [our security guide](https://github.com/tensorflow/tensorflow/blob/master/SECURITY.md) for more information regarding the security model and how to contact us with issues and questions.

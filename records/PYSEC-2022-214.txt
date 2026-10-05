@@ -1,0 +1,12 @@
+PYSEC-2022-214 PyPI/beginner — The Beginner package in PyPI v0.0.2 to v0.0.4 was discovered to contain a code execution backdoor vi
+package: beginner
+ecosystem: PyPI
+versions affected:
+  >= 0.0.2, < 0.0.5 (ECOSYSTEM)
+aliases: CVE-2022-33004
+references:
+  https://pypi.org/project/beginner/
+  https://github.com/Dreambuilder4028/coder/issues/1
+  http://pypi.doubanio.com/simple/request
+
+The Beginner package in PyPI v0.0.2 to v0.0.4 was discovered to contain a code execution backdoor via the request package. This vulnerability allows attackers to access sensitive user information and digital currency keys, as well as escalate privileges.

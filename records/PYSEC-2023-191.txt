@@ -1,0 +1,13 @@
+PYSEC-2023-191 PyPI/vyper — Vyper is a Pythonic Smart Contract Language for the EVM. The `_abi_decode()` function does not valid
+package: vyper
+ecosystem: PyPI
+versions affected:
+  >= 0.3.4, < 0.3.10 (ECOSYSTEM)
+aliases: CVE-2023-42460, GHSA-cx2q-hfxr-rj97
+references:
+  https://github.com/vyperlang/vyper/security/advisories/GHSA-cx2q-hfxr-rj97
+  https://github.com/vyperlang/vyper/security/advisories/GHSA-cx2q-hfxr-rj97
+  https://github.com/vyperlang/vyper/security/advisories/GHSA-cx2q-hfxr-rj97
+  https://github.com/vyperlang/vyper/pull/3626
+
+Vyper is a Pythonic Smart Contract Language for the EVM. The `_abi_decode()` function does not validate input when it is nested in an expression. Uses of `_abi_decode()` can be constructed which allow for bounds checking to be bypassed resulting in incorrect results. This issue has not yet been fixed, but a fix is expected in release `0.3.10`. Users are advised to reference pull request #3626.

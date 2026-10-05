@@ -1,0 +1,11 @@
+PYSEC-2026-138 PyPI/tendenci — A stored cross-site scripting (XSS) vulnerability in the Forums module of Tendenci CMS v15.3.7 allow
+package: tendenci
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 15.3.7 (ECOSYSTEM)
+aliases: CVE-2025-70960, GHSA-6fvp-wmh6-jg95
+references:
+  https://github.com/emirhanyucelll/tendenci/blob/main/Readme.md
+  https://github.com/advisories/GHSA-6fvp-wmh6-jg95
+
+A stored cross-site scripting (XSS) vulnerability in the Forums module of Tendenci CMS v15.3.7 allows attackers to execute arbitrary web scripts or HTML via injecting a crafted payload.

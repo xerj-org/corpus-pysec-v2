@@ -1,0 +1,11 @@
+PYSEC-2023-126 PyPI/paddlepaddle — PaddlePaddle before 2.5.0 has a command injection in fs.py. This resulted in the ability to execute 
+package: paddlepaddle
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.5.0 (ECOSYSTEM)
+aliases: CVE-2023-38673, GHSA-9q9v-qgwx-84mr
+references:
+  https://github.com/PaddlePaddle/Paddle/blob/develop/security/advisory/pdsa-2023-005.md
+  https://github.com/advisories/GHSA-9q9v-qgwx-84mr
+
+PaddlePaddle before 2.5.0 has a command injection in fs.py. This resulted in the ability to execute arbitrary commands on the operating system.

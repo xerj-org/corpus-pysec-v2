@@ -1,0 +1,17 @@
+PYSEC-2026-1642 PyPI/mlflow — MLflow Weak Password Requirements Authentication Bypass Vulnerability
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.22.0rc0 (ECOSYSTEM)
+aliases: CVE-2025-11200, GHSA-6xj8-rrqx-r4cv
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-11200
+  https://github.com/mlflow/mlflow/commit/1f74f3f24d8273927b8db392c23e108576936c54
+  https://github.com/mlflow/mlflow
+  https://www.zerodayinitiative.com/advisories/ZDI-25-932
+  https://pypi.org/project/mlflow
+  https://github.com/advisories/GHSA-6xj8-rrqx-r4cv
+
+MLflow Weak Password Requirements Authentication Bypass Vulnerability. This vulnerability allows remote attackers to bypass authentication on affected installations of MLflow. Authentication is not required to exploit this vulnerability.
+
+The specific flaw exists within the handling of passwords. The issue results from weak password requirements. An attacker can leverage this vulnerability to bypass authentication on the system. Was ZDI-CAN-26916.

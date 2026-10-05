@@ -1,0 +1,12 @@
+PYSEC-2017-40 PyPI/sanic — Sanic before 0.5.1 allows reading arbitrary files with directory traversal, as demonstrated by the /
+package: sanic
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.5.1 (ECOSYSTEM)
+aliases: CVE-2017-16762, GHSA-mpmf-hr8p-p49g
+references:
+  https://github.com/channelcat/sanic/releases/tag/0.5.1
+  https://github.com/channelcat/sanic/issues/633
+  https://github.com/advisories/GHSA-mpmf-hr8p-p49g
+
+Sanic before 0.5.1 allows reading arbitrary files with directory traversal, as demonstrated by the /static/..%2f substring.

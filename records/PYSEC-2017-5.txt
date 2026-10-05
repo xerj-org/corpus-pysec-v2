@@ -1,0 +1,16 @@
+PYSEC-2017-5 PyPI/ansible-vault — An exploitable vulnerability exists in the yaml loading functionality of ansible-vault before 1.0.5.
+package: ansible-vault
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3f8f659ef443ab870bb19f95d43543470168ae04 (GIT: https://github.com/tomoh1r/ansible-vault)
+  >= 0, < 1.0.5 (ECOSYSTEM)
+aliases: CVE-2017-2809, GHSA-c2w9-48qc-qpj4
+references:
+  https://www.talosintelligence.com/vulnerability_reports/TALOS-2017-0305
+  https://github.com/tomoh1r/ansible-vault/issues/4
+  https://github.com/tomoh1r/ansible-vault/commit/3f8f659ef443ab870bb19f95d43543470168ae04
+  https://github.com/tomoh1r/ansible-vault/blob/v1.0.5/CHANGES.txt
+  http://www.securityfocus.com/bid/100824
+  https://github.com/advisories/GHSA-c2w9-48qc-qpj4
+
+An exploitable vulnerability exists in the yaml loading functionality of ansible-vault before 1.0.5. A specially crafted vault can execute arbitrary python commands resulting in command execution. An attacker can insert python into the vault to trigger this vulnerability.

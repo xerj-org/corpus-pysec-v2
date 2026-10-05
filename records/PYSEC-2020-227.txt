@@ -1,0 +1,14 @@
+PYSEC-2020-227 PyPI/cabot — All versions of package cabot are vulnerable to Cross-site Scripting (XSS) via the Endpoint column.
+package: cabot
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2020-7734, SNYK-PYTHON-CABOT-609862, GHSA-mqwh-r366-4224
+references:
+  https://itsmeanonartist.tech/blogs/blog2.html
+  https://www.exploit-db.com/exploits/48791
+  https://snyk.io/vuln/SNYK-PYTHON-CABOT-609862
+  https://github.com/arachnys/cabot/pull/694
+  https://github.com/advisories/GHSA-mqwh-r366-4224
+
+All versions of package cabot are vulnerable to Cross-site Scripting (XSS) via the Endpoint column.

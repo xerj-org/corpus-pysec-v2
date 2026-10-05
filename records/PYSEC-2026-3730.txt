@@ -1,0 +1,11 @@
+PYSEC-2026-3730 PyPI/nltk — NLTK before 3.10.0 contains an arbitrary local file read vulnerability in StreamBackedCorpusView tha
+package: nltk
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.10.0 (ECOSYSTEM)
+aliases: CVE-2026-63312, GHSA-x5ph-mj9p-rfr8
+references:
+  https://www.vulncheck.com/advisories/nltk-streambackedcorpusview-bypasses-pathsec-enforce-arbitrary-file-read
+  https://github.com/nltk/nltk/security/advisories/GHSA-x5ph-mj9p-rfr8
+
+NLTK before 3.10.0 contains an arbitrary local file read vulnerability in StreamBackedCorpusView that bypasses pathsec.ENFORCE by calling builtins.open() directly instead of pathsec.open(). Attackers who control the fileid argument can read arbitrary local files regardless of the ENFORCE setting, including sensitive system files and application credentials.

@@ -1,0 +1,10 @@
+PYSEC-2026-151 PyPI/wasmtime — Wasmtime is a runtime for WebAssembly. In 43.0.0, cloning a wasmtime::Linker is unsound and can resu
+package: wasmtime
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 43.0.0 (ECOSYSTEM)
+aliases: CVE-2026-34983, GHSA-hfr4-7c6c-48w2
+references:
+  https://github.com/bytecodealliance/wasmtime/security/advisories/GHSA-hfr4-7c6c-48w2
+
+Wasmtime is a runtime for WebAssembly. In 43.0.0, cloning a wasmtime::Linker is unsound and can result in use-after-free bugs. This bug is not controllable by guest Wasm programs. It can only be triggered by a specific sequence of embedder API calls made by the host. Specifically, the following steps must occur to trigger the bug clone a wasmtime::Linker, drop the original linker instance, use the new, cloned linker instance, resulting in a use-after-free. This vulnerability is fixed in 43.0.1.

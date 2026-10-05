@@ -1,0 +1,18 @@
+PYSEC-2026-607 PyPI/pantheon-agents — Malicious code in pantheon-agents (PyPI)
+package: pantheon-agents
+ecosystem: PyPI
+versions affected:
+  0.6.1, 0.6.2
+aliases: MAL-2026-5299
+references:
+  https://inspector.pypi.io/project/pantheon-agents/0.6.2/packages/79/8e/574d52f7284699283d5365a384263d22c96be8256814d048d8d2df9d2ada/pantheon_agents-0.6.2-py3-none-any.whl//pantheon_agents-setup.pth
+  https://www.endorlabs.com/learn/shai-hulud-hades-wave-hits-six-pypi-bioinformatics-packages
+  https://www.stepsecurity.io/blog/the-hades-campaign-pypi-packages
+
+Part of the "Hades" wave of the Shai-Hulud supply-chain campaign. On 2026-06-08,
+malicious phantom releases of pantheon-agents were published to PyPI using stolen
+credentials. The package executes a bundled JavaScript payload (via the Bun
+runtime) on import that harvests and exfiltrates credentials and attempts
+self-propagation. This entry is a summary; behavior may not be fully
+characterized here. See the linked references for detailed analysis and
+indicators of compromise.

@@ -1,0 +1,39 @@
+PYSEC-2026-111 PyPI/pretix — A new API endpoint introduced in pretix 2025 that is supposed to return all check-in events of a spe
+package: pretix
+ecosystem: PyPI
+versions affected:
+  >= 2025.10.0, < 2026.1.2, >= 2026.2.0, < 2026.2.1, >= 2026.3.0, < 2026.3.1 (ECOSYSTEM)
+aliases: CVE-2026-5600, GHSA-wr8q-c73g-m7gp
+references:
+  https://pretix.eu/about/en/blog/20260408-release-2026-3-1/
+  https://github.com/advisories/GHSA-wr8q-c73g-m7gp
+
+A new API endpoint introduced in pretix 2025 that is supposed to 
+return all check-in events of a specific event in fact returns all 
+check-in events belonging to the respective organizer. This allows an 
+API consumer to access information for all other events under the same 
+organizer, even those they should not have access to.
+
+
+These records contain information on the time and result of every ticket scan as well as the ID of the matched ticket. Example:
+
+
+{
+  "id": 123,
+  "successful": true,
+  "error_reason": null,
+  "error_explanation": null,
+  "position": 321,
+  "datetime": "2020-08-23T09:00:00+02:00",
+  "list": 456,
+  "created": "2020-08-23T09:00:00+02:00",
+  "auto_checked_in": false,
+  "gate": null,
+  "device": 1,
+  "device_id": 1,
+  "type": "entry"
+}
+
+
+
+An unauthorized user usually has no way to match these IDs (position) back to individual people.

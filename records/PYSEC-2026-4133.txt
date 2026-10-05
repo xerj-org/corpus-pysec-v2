@@ -1,0 +1,45 @@
+PYSEC-2026-4133 PyPI/picklescan — Picklescan has a missing detection when calling built-in python idlelib.autocomplete.AutoComplete.fetch_completions
+package: picklescan
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.0.29 (ECOSYSTEM)
+aliases: CVE-2025-71376, GHSA-7cq8-mj8x-j263
+references:
+  https://github.com/mmaitre314/picklescan/security/advisories/GHSA-7cq8-mj8x-j263
+  https://nvd.nist.gov/vuln/detail/CVE-2025-71376
+  https://github.com/mmaitre314/picklescan/commit/aecd11be98702caa9ba9b12189d91ad596a36114
+  https://github.com/mmaitre314/picklescan
+  https://www.vulncheck.com/advisories/picklescan-arbitrary-code-execution-via-undetected-idlelib-autocomplete-autocomplete-fetch-completions
+  https://pypi.org/project/picklescan
+  https://github.com/advisories/GHSA-7cq8-mj8x-j263
+
+### Summary
+
+Using idlelib.autocomplete.AutoComplete.fetch_completions, which is a built-in python library function to execute remote pickle file.
+
+### Details
+
+The attack payload executes in the following steps:
+
+First, the attacker craft the payload by calling to idlelib.autocomplete.AutoComplete.fetch_completions function in reduce method
+Then when the victim after checking whether the pickle file is safe by using Picklescan library and this library doesn't dectect any dangerous functions, decide to pickle.load() this malicious pickle file, thus lead to remote code execution.
+
+### PoC
+
+```
+class EvilIdlelibAutocompleteFetchCompletions:
+    def __reduce__(self):
+        from idlelib.autocomplete import AutoComplete, ATTRS
+        return AutoComplete().fetch_completions, ("__import__('os').system('whoami')", ATTRS)
+```
+
+### Impact
+
+Who is impacted? Any organization or individual relying on picklescan to detect malicious pickle files inside PyTorch models.
+What is the impact? Attackers can embed malicious code in pickle file that remains undetected but executes when the pickle file is loaded.
+Supply Chain Attack: Attackers can distribute infected pickle files across ML models, APIs, or saved Python objects.
+
+### Corresponding
+
+https://github.com/FredericDT
+https://github.com/Qhaoduoyu

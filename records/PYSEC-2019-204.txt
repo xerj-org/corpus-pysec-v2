@@ -1,0 +1,11 @@
+PYSEC-2019-204 PyPI/tensorflow — Invalid memory access and/or a heap buffer overflow in the TensorFlow XLA compiler in Google TensorF
+package: tensorflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.7.1 (ECOSYSTEM)
+aliases: CVE-2018-10055, GHSA-q492-f7gr-27rp
+references:
+  https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/advisory/tfsa-2018-006.md
+  https://github.com/advisories/GHSA-q492-f7gr-27rp
+
+Invalid memory access and/or a heap buffer overflow in the TensorFlow XLA compiler in Google TensorFlow before 1.7.1 could cause a crash or read from other parts of process memory via a crafted configuration file.

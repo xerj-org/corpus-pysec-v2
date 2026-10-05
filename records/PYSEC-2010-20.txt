@@ -1,0 +1,14 @@
+PYSEC-2010-20 PyPI/pyftpdlib — Multiple directory traversal vulnerabilities in FTPServer.py in pyftpdlib before 0.2.0 allow remote 
+package: pyftpdlib
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.2.0 (ECOSYSTEM)
+aliases: CVE-2007-6736, GHSA-f8wg-36r9-7f4q
+references:
+  http://code.google.com/p/pyftpdlib/source/browse/trunk/HISTORY
+  http://code.google.com/p/pyftpdlib/issues/detail?id=9
+  http://code.google.com/p/pyftpdlib/source/detail?r=16
+  http://code.google.com/p/pyftpdlib/source/diff?spec=svn16&r=16&format=side&path=/trunk/pyftpdlib/FTPServer.py
+  https://github.com/advisories/GHSA-f8wg-36r9-7f4q
+
+Multiple directory traversal vulnerabilities in FTPServer.py in pyftpdlib before 0.2.0 allow remote authenticated users to access arbitrary files and directories via a .. (dot dot) in a (1) LIST, (2) STOR, or (3) RETR command.

@@ -1,0 +1,20 @@
+PYSEC-2026-2340 PyPI/ajenti-plugin-core — ajenti.plugin.core has race conditions in 2FA
+package: ajenti-plugin-core
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.112 (ECOSYSTEM)
+aliases: CVE-2026-40178, GHSA-8647-755q-fw9p
+references:
+  https://github.com/ajenti/ajenti/security/advisories/GHSA-8647-755q-fw9p
+  https://nvd.nist.gov/vuln/detail/CVE-2026-40178
+  https://github.com/ajenti/ajenti
+  https://pypi.org/project/ajenti-plugin-core
+  https://github.com/advisories/GHSA-8647-755q-fw9p
+
+### Impact
+
+If the 2FA was activated, it was possible during a short moment after the authentication of an user to bypass its authentication.
+
+### Patches
+
+This is fixed in the version 0.112. Users should upgrade to this version as soon as possible.

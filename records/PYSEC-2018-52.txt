@@ -1,0 +1,14 @@
+PYSEC-2018-52 PyPI/cryptography — A flaw was found in python-cryptography versions between >=1.9.0 and <2.3. The finalize_with_tag API
+package: cryptography
+ecosystem: PyPI
+versions affected:
+  >= 1.9, < 2.3 (ECOSYSTEM)
+aliases: CVE-2018-10903, GHSA-fcf9-3qw3-gxmj
+references:
+  https://github.com/pyca/cryptography/pull/4342/commits/688e0f673bfbf43fa898994326c6877f00ab19ef
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2018-10903
+  https://usn.ubuntu.com/3720-1/
+  https://access.redhat.com/errata/RHSA-2018:3600
+  https://github.com/advisories/GHSA-fcf9-3qw3-gxmj
+
+A flaw was found in python-cryptography versions between >=1.9.0 and <2.3. The finalize_with_tag API did not enforce a minimum tag length. If a user did not validate the input length prior to passing it to finalize_with_tag an attacker could craft an invalid payload with a shortened tag (e.g. 1 byte) such that they would have a 1 in 256 chance of passing the MAC check. GCM tag forgeries can cause key leakage.

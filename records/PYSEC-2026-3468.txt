@@ -1,0 +1,19 @@
+PYSEC-2026-3468 PyPI/gptcache — GPTCache: File and image cache keys collide because BufferedReader.peek() only reads the buffered prefix
+package: gptcache
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.1.44 (ECOSYSTEM)
+aliases: CVE-2026-10812, GHSA-xfqj-4cr9-9gr5
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-10812
+  https://github.com/zilliztech/GPTCache/issues/684
+  https://github.com/zilliztech/GPTCache/pull/678
+  https://github.com/zilliztech/GPTCache
+  https://vuldb.com/cve/CVE-2026-10812
+  https://vuldb.com/submit/831636
+  https://vuldb.com/vuln/368260
+  https://vuldb.com/vuln/368260/cti
+  https://pypi.org/project/gptcache
+  https://github.com/advisories/GHSA-xfqj-4cr9-9gr5
+
+A vulnerability was detected in zilliztech GPTCache up to 0.1.44. Affected by this issue is the function BufferedReader.peek of the file gptcache/processor/pre.py of the component Cache Key Handler. Performing a manipulation of the argument input_data["image"] results in use of weak hash. The attack must be initiated from a local position. The attack is considered to have high complexity. The exploitation is known to be difficult. The exploit is now public and may be used. The pull request to fix this issue awaits acceptance.

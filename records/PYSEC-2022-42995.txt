@@ -1,0 +1,14 @@
+PYSEC-2022-42995 PyPI/keylime — A vulnerability was found in keylime. This security issue happens in some circumstances, due to some
+package: keylime
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.5.1 (ECOSYSTEM)
+aliases: CVE-2022-3500, GHSA-hff2-x2j9-gxgv
+references:
+  https://github.com/keylime/keylime/pull/1128
+  https://github.com/keylime/keylime/pull/1128
+  https://github.com/keylime/keylime/pull/1128
+  https://access.redhat.com/security/cve/CVE-2022-3500
+  https://github.com/advisories/GHSA-hff2-x2j9-gxgv
+
+A vulnerability was found in keylime. This security issue happens in some circumstances, due to some improperly handled exceptions, there exists the possibility that a rogue agent could create errors on the verifier that stopped attestation attempts for that host leaving it in an attested state but not verifying that anymore.

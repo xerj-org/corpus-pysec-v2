@@ -1,0 +1,13 @@
+PYSEC-2022-271 PyPI/rdiffweb — Sensitive Cookie in HTTPS Session Without 'Secure' Attribute in GitHub repository ikus060/rdiffweb p
+package: rdiffweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < f2de2371c5e13ce1c6fd6f9a1ed3e5d46b93cd7e (GIT: https://github.com/ikus060/rdiffweb)
+  >= 0, < 2.4.2 (ECOSYSTEM)
+aliases: CVE-2022-3174, GHSA-mjw4-xvx6-3grg
+references:
+  https://huntr.dev/bounties/d8a32bd6-c76d-4140-a5ca-ef368a3058ce
+  https://github.com/ikus060/rdiffweb/commit/f2de2371c5e13ce1c6fd6f9a1ed3e5d46b93cd7e
+  https://github.com/advisories/GHSA-mjw4-xvx6-3grg
+
+Sensitive Cookie in HTTPS Session Without 'Secure' Attribute in GitHub repository ikus060/rdiffweb prior to 2.4.2.

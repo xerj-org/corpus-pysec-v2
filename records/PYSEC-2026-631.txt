@@ -1,0 +1,15 @@
+PYSEC-2026-631 PyPI/django-spirit — Open Redirect in django-spirit
+package: django-spirit
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.12.3 (ECOSYSTEM)
+aliases: CVE-2022-0869, GHSA-5p9j-w2wx-qx4c
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2022-0869
+  https://github.com/nitely/spirit/commit/8f32f89654d6c30d56e0dd167059d32146fb32ef
+  https://github.com/nitely/spirit
+  https://huntr.dev/bounties/ed335a88-f68c-4e4d-ac85-f29a51b03342
+  https://pypi.org/project/django-spirit
+  https://github.com/advisories/GHSA-5p9j-w2wx-qx4c
+
+django-spirit prior to version 0.12.3 is vulnerable to open redirect. In the /user/login endpoint, it doesn't check the value of the next parameter when the user is logged in and passes it directly to redirect which result to open redirect. This also affects /user/logout, /user/register, /user/login, /user/resend-activation.

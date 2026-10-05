@@ -1,0 +1,29 @@
+PYSEC-2026-4014 PyPI/virtualenv — Command injection via --prompt in activate.bat (batch activator)
+package: virtualenv
+ecosystem: PyPI
+versions affected:
+  >= 0, < 21.7.12 (ECOSYSTEM)
+aliases: CVE-2026-102937, GHSA-x78j-v8h9-3j2q
+references:
+  https://github.com/pypa/virtualenv/security/advisories/GHSA-x78j-v8h9-3j2q
+  https://github.com/pypa/virtualenv/pull/3250
+  https://github.com/pypa/virtualenv/commit/d721ff140ce4afdc2a9b76751e4584e25d9fbea6
+  https://github.com/pypa/virtualenv/releases/tag/21.7.12
+  https://github.com/pypa/virtualenv
+  https://pypi.org/project/virtualenv
+
+`BatchActivator.quote()` returned its input unchanged, the only activator with
+no escaping at all. `--prompt`, the `VIRTUALENV_PROMPT` environment variable,
+and the config file all set the prompt, and `activate.bat` writes it straight
+into `@set "VAR=value"`. A prompt containing a double quote closes that string
+early, and whatever follows runs as live cmd.exe syntax. For example, a venv
+created with `--prompt 'x" & calc & "'` runs `calc` the moment someone runs
+`activate.bat`.
+
+Anyone who templates a prompt from untrusted input (a CI job using a branch
+name, a wrapper script deriving an environment name from user input) hands an
+attacker code execution in the shell of anyone who activates the resulting venv
+on Windows.
+
+Fixed in 21.7.12 by escaping the characters cmd.exe treats as live syntax
+inside this construct.

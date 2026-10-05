@@ -1,0 +1,16 @@
+PYSEC-2026-2090 PyPI/django — An issue was discovered in Django 6.0 before 6.0.7 and 5.2 before 5.2.16. `UpdateCacheMiddleware` an
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 5.2, < 5.2.16, >= 6.0, < 6.0.7 (ECOSYSTEM)
+aliases: CVE-2026-48588, GHSA-3h9f-r86x-qvjx
+references:
+  https://groups.google.com/g/django-announce
+  https://docs.djangoproject.com/en/dev/releases/security/
+  https://www.djangoproject.com/weblog/2026/jul/07/security-releases/
+  https://github.com/advisories/GHSA-3h9f-r86x-qvjx
+
+An issue was discovered in Django 6.0 before 6.0.7 and 5.2 before 5.2.16.
+`UpdateCacheMiddleware` and the `cache_page()` decorator cache responses that vary on cookies when the incoming request carries unrelated cookies, which allows remote attackers to read private data from the shared cache.
+Earlier, unsupported Django series (such as 5.0.x, 4.1.x, and 3.2.x) were not evaluated and may also be affected.
+Django would like to thank Chris Whyland for reporting this issue.

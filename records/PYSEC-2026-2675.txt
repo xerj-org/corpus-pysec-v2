@@ -1,0 +1,15 @@
+PYSEC-2026-2675 PyPI/nemo-toolkit — NVIDIA NeMo Framework contains a vulnerability leading to Remote Code Execution
+package: nemo-toolkit
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.6.2 (ECOSYSTEM)
+aliases: CVE-2026-24159, GHSA-v7v2-m736-cf3c
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-24159
+  https://github.com/NVIDIA-NeMo/NeMo
+  https://nvidia.custhelp.com/app/answers/detail/a_id/5800
+  https://www.cve.org/CVERecord?id=CVE-2026-24159
+  https://pypi.org/project/nemo-toolkit
+  https://github.com/advisories/GHSA-v7v2-m736-cf3c
+
+NVIDIA NeMo Framework contains a vulnerability where an attacker may cause remote code execution. A successful exploit of this vulnerability might lead to code execution, escalation of privileges, information disclosure and data tampering.

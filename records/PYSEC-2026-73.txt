@@ -1,0 +1,11 @@
+PYSEC-2026-73 PyPI/keras — Allocation of Resources Without Limits or Throttling in the HDF5 weight loading component in Google 
+package: keras
+ecosystem: PyPI
+versions affected:
+  >= 3.0.0, < 3.13.1 (ECOSYSTEM)
+aliases: CVE-2026-0897, GHSA-mgx6-5cf9-rr43
+references:
+  https://github.com/keras-team/keras/pull/21880
+  https://github.com/advisories/GHSA-mgx6-5cf9-rr43
+
+Allocation of Resources Without Limits or Throttling in the HDF5 weight loading component in Google Keras 3.0.0 through 3.13.0 on all platforms allows a remote attacker to cause a Denial of Service (DoS) through memory exhaustion and a crash of the Python interpreter via a crafted .keras archive containing a valid model.weights.h5 file whose dataset declares an extremely large shape.

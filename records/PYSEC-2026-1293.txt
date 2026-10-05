@@ -1,0 +1,18 @@
+PYSEC-2026-1293 PyPI/dcnnt — dcnnt-py is vulnerable to command injection via Notification Handler
+package: dcnnt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.9.1 (ECOSYSTEM)
+aliases: CVE-2023-1000, GHSA-8p42-7597-p2f6
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-1000
+  https://github.com/cyanomiko/dcnnt-py/pull/23
+  https://github.com/cyanomiko/dcnnt-py/commit/b4021d784a97e25151a5353aa763a741e9a148f5
+  https://github.com/cyanomiko/dcnnt-py
+  https://github.com/cyanomiko/dcnnt-py/releases/tag/0.9.1
+  https://vuldb.com/?ctiid.262230
+  https://vuldb.com/?id.262230
+  https://pypi.org/project/dcnnt
+  https://github.com/advisories/GHSA-8p42-7597-p2f6
+
+A vulnerability was found in cyanomiko dcnnt-py up to 0.9.0. It has been classified as critical. Affected is the function main of the file dcnnt/plugins/notifications.py of the component Notification Handler. The manipulation leads to command injection. It is possible to launch the attack remotely. Upgrading to version 0.9.1 is able to address this issue. The patch is identified as b4021d784a97e25151a5353aa763a741e9a148f5. It is recommended to upgrade the affected component. VDB-262230 is the identifier assigned to this vulnerability.

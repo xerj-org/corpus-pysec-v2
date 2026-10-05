@@ -1,0 +1,14 @@
+PYSEC-2017-124 PyPI/exiv2 — There is a Floating point exception in the Exiv2::ValueType function in Exiv2 0.26 that will lead to
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2017-11591
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=1473888
+  https://bugzilla.redhat.com/show_bug.cgi?id=1473888
+  https://usn.ubuntu.com/3852-1/
+  https://lists.debian.org/debian-lts-announce/2023/01/msg00004.html
+  https://lists.debian.org/debian-lts-announce/2023/01/msg00004.html
+
+There is a Floating point exception in the Exiv2::ValueType function in Exiv2 0.26 that will lead to a remote denial of service attack via crafted input.

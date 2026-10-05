@@ -1,0 +1,15 @@
+PYSEC-2026-3657 PyPI/nltk — NLTK (Natural Language Toolkit) before version 3.9.3 contains an eval injection vulnerability in the
+package: nltk
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.9.3 (ECOSYSTEM)
+aliases: CVE-2025-71408, GHSA-848c-c2cx-j7qx
+references:
+  https://github.com/nltk/nltk/releases/tag/3.9.3
+  https://github.com/nltk/nltk/commit/66f14096d952ec8f04934f515e027534bd4eb0ac
+  https://github.com/nltk/nltk/pull/3465
+  https://www.vulncheck.com/advisories/nltk-eval-injection-via-collocations-py-command-line-arguments
+  https://aydinnyunus.github.io/2026/06/07/command-injection-nltk-collocations-eval/
+  https://github.com/advisories/GHSA-848c-c2cx-j7qx
+
+NLTK (Natural Language Toolkit) before version 3.9.3 contains an eval injection vulnerability in the nltk.collocations module that allows an attacker who controls command-line arguments to execute arbitrary Python code. When collocations.py is invoked directly, the __main__ block passes command-line arguments directly to eval() as suffixes of BigramAssocMeasures without allowlist validation or sanitization, enabling an attacker to supply a Python expression that escapes the intended attribute lookup and executes arbitrary code including OS commands via the os module.

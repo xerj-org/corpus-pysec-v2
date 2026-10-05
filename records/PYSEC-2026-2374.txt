@@ -1,0 +1,19 @@
+PYSEC-2026-2374 PyPI/apache-superset — Apache Superset allows privileged users to conduct error-based SQL Injection
+package: apache-superset
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.0.0 (ECOSYSTEM)
+aliases: CVE-2026-23980, GHSA-gvxg-9hqx-f4rg
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-23980
+  https://github.com/apache/superset
+  https://lists.apache.org/thread/h4l02zw1pr2vywv0dc5zjn3grdcdhwf4
+  http://www.openwall.com/lists/oss-security/2026/02/24/5
+  https://pypi.org/project/apache-superset
+  https://github.com/advisories/GHSA-gvxg-9hqx-f4rg
+
+Improper Neutralization of Special Elements used in a SQL Command ('SQL Injection') vulnerability in Apache Superset allows an authenticated user with read access to conduct error-based SQL injection via the sqlExpression or where parameters.
+
+This issue affects Apache Superset: before 6.0.0.
+
+Users are recommended to upgrade to version 6.0.0, which fixes the issue.

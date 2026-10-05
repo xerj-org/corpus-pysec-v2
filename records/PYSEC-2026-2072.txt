@@ -1,0 +1,17 @@
+PYSEC-2026-2072 PyPI/zenml — ZenML Server Remote Privilege Escalation Vulnerability
+package: zenml
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.42.2, >= 0.43.0, < 0.43.1, >= 0.44.0, < 0.44.4, >= 0.45.0, < 0.46.7 (ECOSYSTEM)
+aliases: CVE-2024-25723, GHSA-vf7j-cmrj-pmmm
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-25723
+  https://github.com/zenml-io/zenml
+  https://github.com/zenml-io/zenml/compare/0.42.1...0.42.2
+  https://github.com/zenml-io/zenml/compare/0.43.0...0.43.1
+  https://github.com/zenml-io/zenml/compare/0.44.3...0.44.4
+  https://www.zenml.io/blog/critical-security-update-for-zenml-users
+  https://pypi.org/project/zenml
+  https://github.com/advisories/GHSA-vf7j-cmrj-pmmm
+
+ZenML Server in the ZenML package before 0.46.7 for Python allows remote privilege escalation because the `/api/v1/users/{user_name_or_id}/activate` REST API endpoint allows access on the basis of a valid username along with a new password in the request body. These are also patched versions: 0.44.4, 0.43.1, and 0.42.2.

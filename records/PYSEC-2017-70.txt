@@ -1,0 +1,13 @@
+PYSEC-2017-70 PyPI/salt — salt before 2015.5.5 leaks git usernames and passwords to the log.
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 28aa9b105804ff433d8f663b2f9b804f2b75495a (GIT: https://github.com/saltstack/salt)
+  >= 0, < 2015.5.5 (ECOSYSTEM)
+aliases: CVE-2015-6918, GHSA-q2x6-8gfj-hjxw
+references:
+  https://github.com/saltstack/salt/commit/28aa9b105804ff433d8f663b2f9b804f2b75495a
+  https://bugzilla.redhat.com/show_bug.cgi?id=1257154
+  https://github.com/advisories/GHSA-q2x6-8gfj-hjxw
+
+salt before 2015.5.5 leaks git usernames and passwords to the log.

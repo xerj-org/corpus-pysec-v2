@@ -1,0 +1,12 @@
+PYSEC-2020-331 PyPI/tensorflow-gpu — In Tensorflow before version 2.4.0, when the `boxes` argument of `tf.image.crop_and_resize` has a ve
+package: tensorflow-gpu
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.4.0 (ECOSYSTEM)
+aliases: CVE-2020-15266, GHSA-xwhf-g6j5-j5gc
+references:
+  https://github.com/tensorflow/tensorflow/pull/42143/commits/3ade2efec2e90c6237de32a19680caaa3ebc2845
+  https://github.com/tensorflow/tensorflow/issues/42129
+  https://github.com/tensorflow/tensorflow/security/advisories/GHSA-xwhf-g6j5-j5gc
+
+In Tensorflow before version 2.4.0, when the `boxes` argument of `tf.image.crop_and_resize` has a very large value, the CPU kernel implementation receives it as a C++ `nan` floating point value. Attempting to operate on this is undefined behavior which later produces a segmentation fault. The issue is patched in eccb7ec454e6617738554a255d77f08e60ee0808 and TensorFlow 2.4.0 will be released containing the patch. TensorFlow nightly packages after this commit will also have the issue resolved.

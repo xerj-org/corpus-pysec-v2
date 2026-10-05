@@ -1,0 +1,58 @@
+PYSEC-2026-3918 PyPI/scrapy — Scrapy: S3DownloadHandler sends signed S3 requests over plaintext HTTP by default
+package: scrapy
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.17.0 (ECOSYSTEM)
+aliases: CVE-2026-84366, GHSA-76g3-c3x4-crvx
+references:
+  https://github.com/scrapy/scrapy/security/advisories/GHSA-76g3-c3x4-crvx
+  https://nvd.nist.gov/vuln/detail/CVE-2026-84366
+  https://github.com/scrapy/scrapy/commit/9523e1ec8c41fde265a26d14563d178b6f1ad04b
+  https://github.com/scrapy/scrapy
+  https://github.com/scrapy/scrapy/releases/tag/2.17.0
+  https://pypi.org/project/scrapy
+  https://github.com/advisories/GHSA-76g3-c3x4-crvx
+
+### Problem
+
+Scrapy’s `S3DownloadHandler` sends signed S3 requests over plaintext HTTP by default.
+
+A normal request like `s3://bucket/key` is converted into `http://bucket.s3.amazonaws.com/key` unless `request.meta["is_secure"]` is explicitly set. The generated request is then signed with configured AWS credentials, so AWS authorization material can be sent without TLS.
+
+Vulnerable code in `scrapy/core/downloader/handlers/s3.py`:
+
+```python
+scheme = "https" if request.meta.get("is_secure") else "http"
+url = f"{scheme}://{bucket}.s3.amazonaws.com{path}"
+```
+
+The request is then signed and dispatched:
+
+```python
+self._signer.add_auth(awsrequest)
+request = request.replace(url=url, headers=awsrequest.headers.items())
+```
+
+### Impact
+
+Users making Scrapy `s3://` requests with AWS credentials are impacted.
+
+A network attacker able to observe traffic between Scrapy and S3, such as a public Wi-Fi attacker, compromised router, ISP/corporate network observer, or local network attacker using ARP spoofing, can read:
+
+```text
+bucket/key path
+AWS Authorization header
+X-Amz-Security-Token, if temporary credentials are used
+S3 object contents
+S3 response headers
+```
+
+An active MITM attacker can also modify the plaintext S3 response body, status code, and headers before Scrapy processes it. This can cause scraped data poisoning, poisoned exports, HTTP cache poisoning when cache is enabled, and influence over later crawl targets through forged redirects or attacker-controlled links.
+
+
+Suggested classification: **CWE-319: Cleartext Transmission of Sensitive Information**.
+
+
+### PoC
+
+A minimal PoC creates an `s3://` request, enables fake AWS settings, captures the request produced by `S3DownloadHandler`, and prints the rewritten URL and auth headers.

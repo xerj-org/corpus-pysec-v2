@@ -1,0 +1,10 @@
+PYSEC-2025-124 PyPI/label-studio — Label Studio is a multi-type data labeling and annotation tool. A vulnerability in versions prior to
+package: label-studio
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.18.0 (ECOSYSTEM)
+aliases: CVE-2025-47783, GHSA-8jhr-wpcm-hh4h
+references:
+  https://github.com/HumanSignal/label-studio/security/advisories/GHSA-8jhr-wpcm-hh4h
+
+Label Studio is a multi-type data labeling and annotation tool. A vulnerability in versions prior to 1.18.0 allows an attacker to inject a malicious script into the context of a web page, which can lead to data theft, session hijacking, unauthorized actions on behalf of the user, and other attacks. The vulnerability is reproducible when sending a properly formatted request to the `POST /projects/upload-example/` endpoint. In the source code, the vulnerability is located at `label_studio/projects/views.py`. Version 1.18.0 contains a patch for the issue.

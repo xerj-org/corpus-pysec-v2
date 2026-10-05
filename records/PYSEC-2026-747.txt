@@ -1,0 +1,14 @@
+PYSEC-2026-747 PyPI/saleor — Missing Authentication for Critical Function in Saleor
+package: saleor
+ecosystem: PyPI
+versions affected:
+  >= 2.0.0, < 2.9.1 (ECOSYSTEM)
+aliases: CVE-2020-7964, GHSA-rgcm-rpq9-9cgr
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2020-7964
+  https://github.com/mirumee/saleor/commit/233b8890c60fa6d90daf99e4d90fea85867732c3
+  https://github.com/mirumee/saleor/releases/tag/2.9.1
+  https://pypi.org/project/saleor
+  https://github.com/advisories/GHSA-rgcm-rpq9-9cgr
+
+An issue was discovered in Mirumee Saleor 2.x before 2.9.1. Incorrect access control in the checkoutCustomerAttach mutations allows attackers to attach their checkouts to any user ID and consequently leak user data (e.g., name, address, and previous orders of any other customer).

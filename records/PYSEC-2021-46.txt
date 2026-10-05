@@ -1,0 +1,13 @@
+PYSEC-2021-46 PyPI/proxy-py — before_upstream_connection in AuthPlugin in http/proxy/auth.py in proxy.py before 2.3.1 accepts inco
+package: proxy-py
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.3.1 (ECOSYSTEM)
+aliases: CVE-2021-3116, GHSA-cmc7-mfmr-xqrx
+references:
+  https://pypi.org/project/proxy.py/2.3.1/#history
+  https://cardaci.xyz/advisories/2021/01/10/proxy.py-2.3.0-broken-basic-authentication/
+  https://github.com/abhinavsingh/proxy.py/pull/482/commits/9b00093288237f5073c403f2c4f62acfdfa8ed46
+  https://github.com/advisories/GHSA-cmc7-mfmr-xqrx
+
+before_upstream_connection in AuthPlugin in http/proxy/auth.py in proxy.py before 2.3.1 accepts incorrect Proxy-Authorization header data because of a boolean confusion (and versus or).

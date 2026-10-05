@@ -1,0 +1,17 @@
+PYSEC-2026-1174 PyPI/apache-superset — Apache Superset Exposure of Sensitive Information to an Unauthorized Actor vulnerability
+package: apache-superset
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.0.0 (ECOSYSTEM)
+aliases: CVE-2023-42505, GHSA-fgpw-4w69-j256
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-42505
+  https://github.com/apache/superset
+  https://lists.apache.org/thread/bd0fhtfzrtgo1q8x35tpm8ms144d1t2y
+  http://www.openwall.com/lists/oss-security/2023/11/28/5
+  https://pypi.org/project/apache-superset
+  https://github.com/advisories/GHSA-fgpw-4w69-j256
+
+An authenticated user with read permissions on database connections metadata could potentially access sensitive information such as the connection's username.
+
+This issue affects Apache Superset before 3.0.0.

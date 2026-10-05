@@ -1,0 +1,16 @@
+PYSEC-2023-32 PyPI/modoboa — Authentication Bypass by Primary Weakness in GitHub repository modoboa/modoboa prior to 2.0.4.
+package: modoboa
+ecosystem: PyPI
+versions affected:
+  >= 0, < 47d17ac6643f870719691073956a26e4be0a4806 (GIT: https://github.com/modoboa/modoboa)
+  >= 0, < 2.0.4 (ECOSYSTEM)
+aliases: CVE-2023-0777, GHSA-rfhw-fm4m-52j6
+references:
+  https://github.com/modoboa/modoboa/commit/47d17ac6643f870719691073956a26e4be0a4806
+  https://huntr.dev/bounties/a17e7a9f-0fee-4130-a522-5a0466fc17c7
+  https://huntr.dev/bounties/a17e7a9f-0fee-4130-a522-5a0466fc17c7
+  https://huntr.dev/bounties/a17e7a9f-0fee-4130-a522-5a0466fc17c7
+  https://huntr.dev/bounties/a17e7a9f-0fee-4130-a522-5a0466fc17c7
+  https://github.com/advisories/GHSA-rfhw-fm4m-52j6
+
+Authentication Bypass by Primary Weakness in GitHub repository modoboa/modoboa prior to 2.0.4.

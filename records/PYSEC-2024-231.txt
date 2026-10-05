@@ -1,0 +1,12 @@
+PYSEC-2024-231 PyPI/lightgbm — LightGBM Remote Code Execution Vulnerability
+package: lightgbm
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.6.0 (ECOSYSTEM)
+aliases: CVE-2024-43598, GHSA-2586-f3p4-hq84
+references:
+  https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-43598
+  https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-43598
+  https://github.com/advisories/GHSA-2586-f3p4-hq84
+
+LightGBM Remote Code Execution Vulnerability

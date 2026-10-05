@@ -1,0 +1,16 @@
+PYSEC-2026-1848 PyPI/python-libarchive — python-libarchive directory traversal
+package: python-libarchive
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 4.2.1 (ECOSYSTEM)
+aliases: CVE-2024-55587, GHSA-75mx-hw5q-pvx3
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-55587
+  https://github.com/smartfile/python-libarchive/issues/42
+  https://github.com/smartfile/python-libarchive/pull/41
+  https://github.com/smartfile/python-libarchive
+  https://github.com/smartfile/python-libarchive/blob/c7677411bfc4ab5701d343bc6ebd9e35c990e80e/libarchive/zip.py#L107
+  https://pypi.org/project/python-libarchive
+  https://github.com/advisories/GHSA-75mx-hw5q-pvx3
+
+python-libarchive through 4.2.1 allows directory traversal (to create files) in extract in zip.py for ZipFile.extractall and ZipFile.extract.

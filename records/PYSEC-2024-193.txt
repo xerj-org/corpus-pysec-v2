@@ -1,0 +1,16 @@
+PYSEC-2024-193 PyPI/zenml — An issue was discovered in zenml-io/zenml versions up to and including 0.55.4. Due to improper authe
+package: zenml
+ecosystem: PyPI
+versions affected:
+  >= 0, < 58cb3d987372c91eb605853c35325701733337c2, < 58cb3d987372c91eb605853c35325701733337c2 (GIT: https://github.com/zenml-io/zenml)
+  >= 0, < 0.56.3 (ECOSYSTEM)
+aliases: CVE-2024-2213, GHSA-j527-v579-m98h
+references:
+  https://huntr.com/bounties/8f5534ac-fd08-4b8b-8c2e-35949aa36e48
+  https://github.com/zenml-io/zenml/commit/58cb3d987372c91eb605853c35325701733337c2
+  https://huntr.com/bounties/8f5534ac-fd08-4b8b-8c2e-35949aa36e48
+  https://huntr.com/bounties/8f5534ac-fd08-4b8b-8c2e-35949aa36e48
+  https://huntr.com/bounties/8f5534ac-fd08-4b8b-8c2e-35949aa36e48
+  https://github.com/advisories/GHSA-j527-v579-m98h
+
+An issue was discovered in zenml-io/zenml versions up to and including 0.55.4. Due to improper authentication mechanisms, an attacker with access to an active user session can change the account password without needing to know the current password. This vulnerability allows for unauthorized account takeover by bypassing the standard password change verification process. The issue was fixed in version 0.56.3.

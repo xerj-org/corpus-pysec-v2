@@ -1,0 +1,13 @@
+PYSEC-2022-43071 PyPI/api-res-py — api-res-py package in PyPI 0.1 is vulnerable to a code execution backdoor in the request package.
+package: api-res-py
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.1 (ECOSYSTEM)
+aliases: CVE-2022-31313, GHSA-6978-4w92-428p
+references:
+  https://github.com/rakeshrkz7/as_api_res/issues/1
+  http://pypi.doubanio.com/simple/request
+  https://pypi.org/project/api-res-py/
+  https://github.com/advisories/GHSA-6978-4w92-428p
+
+api-res-py package in PyPI 0.1 is vulnerable to a code execution backdoor in the request package.

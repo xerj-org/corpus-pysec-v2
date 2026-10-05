@@ -1,0 +1,15 @@
+PYSEC-2017-112 PyPI/exiv2 — An issue was discovered in Exiv2 0.26. When the data structure of the structure ifd is incorrect, th
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2017-9239
+references:
+  http://dev.exiv2.org/issues/1295
+  http://www.securityfocus.com/bid/98720
+  http://www.securityfocus.com/bid/98720
+  https://usn.ubuntu.com/3852-1/
+  http://lists.opensuse.org/opensuse-security-announce/2020-04/msg00009.html
+  https://github.com/lolo-pop/poc/tree/master/Segmentation%20fault%20in%20convert-test%28exiv2%29
+
+An issue was discovered in Exiv2 0.26. When the data structure of the structure ifd is incorrect, the program assigns pValue_ to 0x0, and the value of pValue() is 0x0. TiffImageEntry::doWriteImage will use the value of pValue() to cause a segmentation fault. To exploit this vulnerability, someone must open a crafted tiff file.

@@ -1,0 +1,16 @@
+PYSEC-2026-1901 PyPI/salt — Salt vulnerable to directory traversal attack in minion file cache creation
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 3006.0rc1, < 3006.12, >= 3007.0rc1, < 3007.4 (ECOSYSTEM)
+aliases: CVE-2025-22238, GHSA-r546-h3ff-q585
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2025-22238
+  https://github.com/saltstack/salt/commit/4b30218edf1a979855ea191d72b30c89f4a5a582
+  https://docs.saltproject.io/en/3006/topics/releases/3006.12.html
+  https://docs.saltproject.io/en/3007/topics/releases/3007.4.html
+  https://github.com/saltstack/salt
+  https://pypi.org/project/salt
+  https://github.com/advisories/GHSA-r546-h3ff-q585
+
+Directory traversal attack in minion file cache creation. The master's default cache is vulnerable to a directory traversal attack. Which could be leveraged to write or overwrite 'cache' files outside of the cache directory.

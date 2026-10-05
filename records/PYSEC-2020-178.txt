@@ -1,0 +1,14 @@
+PYSEC-2020-178 PyPI/waitress — Waitress through version 1.3.1 allows request smuggling by sending the Content-Length header twice. 
+package: waitress
+ecosystem: PyPI
+versions affected:
+  >= 0, < 575994cd42e83fd772a5f7ec98b2c56751bd3f65 (GIT: https://github.com/Pylons/waitress)
+  >= 0, < 1.4.0 (ECOSYSTEM)
+aliases: CVE-2019-16792, GHSA-4ppp-gpcr-7qf6, GHSA-j7j6-7hfx-5522
+references:
+  https://docs.pylonsproject.org/projects/waitress/en/latest/#security-fixes
+  https://github.com/Pylons/waitress/commit/575994cd42e83fd772a5f7ec98b2c56751bd3f65
+  https://github.com/Pylons/waitress/security/advisories/GHSA-4ppp-gpcr-7qf6
+  https://github.com/advisories/GHSA-j7j6-7hfx-5522
+
+Waitress through version 1.3.1 allows request smuggling by sending the Content-Length header twice. Waitress would header fold a double Content-Length header and due to being unable to cast the now comma separated value to an integer would set the Content-Length to 0 internally. If two Content-Length headers are sent in a single request, Waitress would treat the request as having no body, thereby treating the body of the request as a new request in HTTP pipelining. This issue is fixed in Waitress 1.4.0.

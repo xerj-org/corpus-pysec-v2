@@ -1,0 +1,14 @@
+PYSEC-2026-375 PyPI/langchain-experimental — LangChain Experimental vulnerable to arbitrary code execution
+package: langchain-experimental
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.0.52 (ECOSYSTEM)
+aliases: CVE-2024-27444, GHSA-v8vj-cv27-hjv8
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-27444
+  https://github.com/langchain-ai/langchain/commit/de9a6cdf163ed00adaf2e559203ed0a9ca2f1de7
+  https://github.com/langchain-ai/langchain
+  https://pypi.org/project/langchain-experimental
+  https://github.com/advisories/GHSA-v8vj-cv27-hjv8
+
+langchain_experimental (aka LangChain Experimental) before 0.0.52, part of LangChain before 0.1.8, allows an attacker to bypass the CVE-2023-44467 fix and execute arbitrary code via the `__import__`, `__subclasses__`, `__builtins__`, `__globals__`, `__getattribute__`, `__bases__`, `__mro__`, or `__base__` attribute in Python code. These are not prohibited by `pal_chain/base.py`.

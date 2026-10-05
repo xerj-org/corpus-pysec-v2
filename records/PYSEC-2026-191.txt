@@ -1,0 +1,10 @@
+PYSEC-2026-191 PyPI/matrix-synapse — Synapse is an open source Matrix homeserver implementation. Prior to 1.152.1, local authenticated us
+package: matrix-synapse
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.152.1 (ECOSYSTEM)
+aliases: CVE-2026-45078, GHSA-8q93-326v-3m7g
+references:
+  https://github.com/element-hq/synapse/security/advisories/GHSA-8q93-326v-3m7g
+
+Synapse is an open source Matrix homeserver implementation. Prior to 1.152.1, local authenticated users can cause Synapse to starve other requests of CPU and lead to other requests failing, causing other users to be denied service. This vulnerability is fixed in 1.152.1.

@@ -1,0 +1,59 @@
+PYSEC-2026-2789 PyPI/openbabel — Open Babel has Use-after-free in GAMESS GAMESSOutputFormat::ReadMolecule
+package: openbabel
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.2.0 (ECOSYSTEM)
+aliases: CVE-2025-10994, GHSA-pp85-5j63-xpq3
+references:
+  https://github.com/openbabel/openbabel/security/advisories/GHSA-pp85-5j63-xpq3
+  https://nvd.nist.gov/vuln/detail/CVE-2025-10994
+  https://github.com/openbabel/openbabel/issues/2834
+  https://github.com/openbabel/openbabel/commit/95033d27d23c07f98daa92d3cd3ae5ea07594a91
+  https://github.com/openbabel/openbabel
+  https://github.com/user-attachments/files/22318611/poc.zip
+  https://vuldb.com/?ctiid.325922
+  https://vuldb.com/?id.325922
+  https://vuldb.com/?submit.654057
+  https://pypi.org/project/openbabel
+  https://github.com/advisories/GHSA-pp85-5j63-xpq3
+
+### Summary
+
+A memory-safety vulnerability in Open Babel's GAMESS output parser
+caused a use-after-free when reading a crafted input file.
+
+### Details
+
+The flaw was in `GAMESSOutputFormat::ReadMolecule`. A malformed input
+caused the parser to dereference a stale pointer after the underlying
+object had been freed.
+
+### Impact
+
+Open Babel is a C++ library and CLI used to read and write chemistry
+file formats; it is shipped by Linux distributions and embedded in
+services that may parse untrusted input. Triggering this vulnerability
+requires the victim to open a malicious GAMESS output file with the
+`obabel` tool, the `OBConversion` API, or any of the language
+bindings (Python, Ruby, Java, R, Perl, C#, PHP).
+
+### Affected versions
+
+All releases up to and including 3.1.1.
+
+### Patched version
+
+3.2.0 (released 2026-05-26).
+
+### Patch
+
+Fix commit: https://github.com/openbabel/openbabel/commit/95033d27
+Originally reported as #2834; fixes consolidated in #2913.
+
+A minimized reproducer for this CVE is checked in under
+`test/files/fuzz_regress/` and is exercised on every CI build under
+ASAN+UBSAN by the `fuzzregresstest` harness.
+
+### Credit
+
+Reported via OSS-Fuzz.

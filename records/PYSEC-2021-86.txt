@@ -1,0 +1,12 @@
+PYSEC-2021-86 PyPI/pyqlib — This affects all versions of package qlib. The workflow function in cli part of qlib was using an un
+package: pyqlib
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.6.3 (ECOSYSTEM)
+aliases: CVE-2021-23338, SNYK-PYTHON-QLIB-1054635, GHSA-hjr4-fhgp-23g9
+references:
+  https://github.com/418sec/huntr/pull/1329
+  https://snyk.io/vuln/SNYK-PYTHON-QLIB-1054635
+  https://github.com/advisories/GHSA-hjr4-fhgp-23g9
+
+This affects all versions of package qlib. The workflow function in cli part of qlib was using an unsafe YAML load function.

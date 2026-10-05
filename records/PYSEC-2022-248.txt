@@ -1,0 +1,12 @@
+PYSEC-2022-248 PyPI/streamlit — Streamlit is a data oriented application development framework for python. Users hosting Streamlit a
+package: streamlit
+ecosystem: PyPI
+versions affected:
+  >= 0, < 80d9979d5f4a00217743d607078a1d867fad8acf (GIT: https://github.com/streamlit/streamlit)
+  >= 0.63.0, < 1.11.1 (ECOSYSTEM)
+aliases: CVE-2022-35918, GHSA-v4hr-4jpx-56gc
+references:
+  https://github.com/streamlit/streamlit/security/advisories/GHSA-v4hr-4jpx-56gc
+  https://github.com/streamlit/streamlit/commit/80d9979d5f4a00217743d607078a1d867fad8acf
+
+Streamlit is a data oriented application development framework for python. Users hosting Streamlit app(s) that use custom components are vulnerable to a directory traversal attack that could leak data from their web server file-system such as: server logs, world readable files, and potentially other sensitive information. An attacker can craft a malicious URL with file paths and the streamlit server would process that URL and return the contents of that file or overwrite existing files on the web-server. This issue has been resolved in version 1.11.1. Users are advised to upgrade. There are no known workarounds for this issue.

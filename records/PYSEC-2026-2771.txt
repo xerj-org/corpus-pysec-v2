@@ -1,0 +1,59 @@
+PYSEC-2026-2771 PyPI/openbabel — Open Babel has out-of-bounds write in MOPAC translationVectors[] (UNIT CELL TRANSLATION)
+package: openbabel
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.2.0 (ECOSYSTEM)
+aliases: CVE-2022-46292, GHSA-55f6-pf8r-c2f4
+references:
+  https://github.com/openbabel/openbabel/security/advisories/GHSA-55f6-pf8r-c2f4
+  https://nvd.nist.gov/vuln/detail/CVE-2022-46292
+  https://github.com/openbabel/openbabel/commit/40e852138f21d586b7ccdce6329e7b23a87168bb
+  https://github.com/openbabel/openbabel
+  https://talosintelligence.com/vulnerability_reports/TALOS-2022-1666
+  https://www.talosintelligence.com/vulnerability_reports/TALOS-2022-1666
+  https://pypi.org/project/openbabel
+  https://github.com/advisories/GHSA-55f6-pf8r-c2f4
+
+### Summary
+
+A memory-safety vulnerability in Open Babel's MOPAC output parser
+allowed an out-of-bounds write into the `translationVectors[]` array
+when reading the "UNIT CELL TRANSLATION" block of a crafted input
+file.
+
+### Details
+
+The MOPAC output reader stored translation vectors from the UNIT CELL
+TRANSLATION block into a fixed-size `translationVectors[]` array. A
+malformed block could push more vectors than the array had slots,
+causing a write past the end of the array. One of five
+`translationVectors[]` OOB writes in the TALOS 2022 batch.
+
+### Impact
+
+Open Babel is a C++ library and CLI used to read and write chemistry
+file formats; it is shipped by Linux distributions and embedded in
+services that may parse untrusted input. Triggering this vulnerability
+requires the victim to open a malicious MOPAC output file with the
+`obabel` tool, the `OBConversion` API, or any of the language
+bindings (Python, Ruby, Java, R, Perl, C#, PHP).
+
+### Affected versions
+
+All releases up to and including 3.1.1.
+
+### Patched version
+
+3.2.0 (released 2026-05-26).
+
+### Patch
+
+Fix commit: https://github.com/openbabel/openbabel/commit/40e85213
+
+A minimized reproducer for this CVE is checked in under
+`test/files/fuzz_regress/` and is exercised on every CI build under
+ASAN+UBSAN by the `fuzzregresstest` harness.
+
+### Credit
+
+Reported by Cisco TALOS.

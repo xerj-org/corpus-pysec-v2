@@ -1,0 +1,13 @@
+PYSEC-2024-280 PyPI/lief — An issue in LIEF v.0.14.1 allows a local attacker to obtain sensitive information via the name param
+package: lief
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 0.14.1 (ECOSYSTEM)
+aliases: CVE-2024-31636, GHSA-377p-g8gr-5wpg
+references:
+  http://lief.com
+  https://github.com/lief-project/LIEF/issues/1038
+  https://github.com/lief-project/LIEF
+  https://github.com/advisories/GHSA-377p-g8gr-5wpg
+
+An issue in LIEF v.0.14.1 allows a local attacker to obtain sensitive information via the name parameter of the machd_reader.c component.

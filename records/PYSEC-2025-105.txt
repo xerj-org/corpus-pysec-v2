@@ -1,0 +1,16 @@
+PYSEC-2025-105 PyPI/django — An issue was discovered in Django 4.2 before 4.2.24, 5.1 before 5.1.12, and 5.2 before 5.2.6. Filter
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 4.2, < 4.2.24, >= 5.1, < 5.1.12, >= 5.2, < 5.2.6 (ECOSYSTEM)
+aliases: CVE-2025-57833, GHSA-6w2r-r2m5-xq5w
+references:
+  http://www.openwall.com/lists/oss-security/2025/09/03/3
+  https://lists.debian.org/debian-lts-announce/2025/09/msg00017.html
+  https://docs.djangoproject.com/en/dev/releases/security/
+  https://groups.google.com/g/django-announce
+  https://www.djangoproject.com/weblog/2025/sep/03/security-releases/
+  https://medium.com/@EyalSec/django-unauthenticated-0-click-rce-and-sql-injection-using-default-configuration-059964f3f898
+  https://github.com/advisories/GHSA-6w2r-r2m5-xq5w
+
+An issue was discovered in Django 4.2 before 4.2.24, 5.1 before 5.1.12, and 5.2 before 5.2.6. FilteredRelation is subject to SQL injection in column aliases, using a suitably crafted dictionary, with dictionary expansion, as the **kwargs passed QuerySet.annotate() or QuerySet.alias().

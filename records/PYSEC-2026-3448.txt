@@ -1,0 +1,11 @@
+PYSEC-2026-3448 PyPI/crawl4ai — Crawl4AI before 0.8.8 contains credential exfiltration vulnerabilities in the Docker API server that
+package: crawl4ai
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.8.8 (ECOSYSTEM)
+aliases: CVE-2026-56259, GHSA-f989-c77f-r2cq
+references:
+  https://github.com/unclecode/crawl4ai/security/advisories/GHSA-f989-c77f-r2cq
+  https://www.vulncheck.com/advisories/crawl4ai-llm-credential-exfiltration-via-base-url-and-environment-variable-resolution
+
+Crawl4AI before 0.8.8 contains credential exfiltration vulnerabilities in the Docker API server that allow attackers to redirect LLM API calls to attacker-controlled endpoints and read arbitrary environment variables. Attackers can exploit the unauthenticated /md, /llm, and /llm/job endpoints by supplying a malicious base_url parameter and setting api_token to env:VARIABLE_NAME to exfiltrate provider API keys and server secrets including JWT SECRET_KEY for authentication bypass.

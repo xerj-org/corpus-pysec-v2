@@ -1,0 +1,13 @@
+PYSEC-2024-67 PyPI/django — An issue was discovered in Django 5.0 before 5.0.8 and 4.2 before 4.2.15. The floatformat template f
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 5.0, < 5.0.8, >= 4.2, < 4.2.15 (ECOSYSTEM)
+aliases: CVE-2024-41989, GHSA-jh75-99hh-qvx9
+references:
+  https://docs.djangoproject.com/en/dev/releases/security/
+  https://groups.google.com/forum/#%21forum/django-announce
+  https://www.djangoproject.com/weblog/2024/aug/06/security-releases/
+  https://github.com/advisories/GHSA-jh75-99hh-qvx9
+
+An issue was discovered in Django 5.0 before 5.0.8 and 4.2 before 4.2.15. The floatformat template filter is subject to significant memory consumption when given a string representation of a number in scientific notation with a large exponent.

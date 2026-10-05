@@ -1,0 +1,14 @@
+PYSEC-2023-153 PyPI/horizon — Open Redirect vulnerability in Horizon Web Dashboard 19.4.0 thru 20.1.4 via the success_url paramete
+package: horizon
+ecosystem: PyPI
+versions affected:
+  >= 19.4.0, < 20.2.0 (ECOSYSTEM)
+aliases: CVE-2022-45582, GHSA-5pv6-rprw-82wv
+references:
+  https://bugs.launchpad.net/horizon/+bug/1982676
+  https://bugs.launchpad.net/horizon/+bug/1982676
+  https://bugs.launchpad.net/horizon/+bug/1982676
+  https://github.com/openstack/horizon/blob/master/horizon/workflows/views.py#L96-L102
+  https://github.com/advisories/GHSA-5pv6-rprw-82wv
+
+Open Redirect vulnerability in Horizon Web Dashboard 19.4.0 thru 20.1.4 via the success_url parameter.

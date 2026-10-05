@@ -1,0 +1,12 @@
+PYSEC-2022-203 PyPI/werkzeug — ** DISPUTED ** Improper parsing of HTTP requests in Pallets Werkzeug v2.1.0 and below allows attacke
+package: werkzeug
+ecosystem: PyPI
+versions affected:
+  >= 0, < 9a3a981d70d2e9ec3344b5192f86fcaf3210cd85 (GIT: https://github.com/pallets/werkzeug)
+  >= 0, < 2.1.1 (ECOSYSTEM)
+aliases: CVE-2022-29361
+references:
+  https://github.com/pallets/werkzeug/commit/9a3a981d70d2e9ec3344b5192f86fcaf3210cd85
+  https://github.com/pallets/werkzeug/issues/2420
+
+** DISPUTED ** Improper parsing of HTTP requests in Pallets Werkzeug v2.1.0 and below allows attackers to perform HTTP Request Smuggling using a crafted HTTP request with multiple requests included inside the body. NOTE: the vendor's position is that this behavior can only occur in unsupported configurations involving development mode and an HTTP server from outside the Werkzeug project.

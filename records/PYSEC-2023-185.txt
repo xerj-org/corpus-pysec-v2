@@ -1,0 +1,12 @@
+PYSEC-2023-185 PyPI/matrix-synapse — Synapse is an open-source Matrix homeserver written and maintained by the Matrix.org Foundation. Whe
+package: matrix-synapse
+ecosystem: PyPI
+versions affected:
+  >= 1.66.0, < 1.93.0 (ECOSYSTEM)
+aliases: CVE-2023-41335, GHSA-4f74-84v3-j9q5
+references:
+  https://github.com/matrix-org/synapse/pull/16272
+  https://github.com/matrix-org/synapse/security/advisories/GHSA-4f74-84v3-j9q5
+  https://github.com/matrix-org/synapse/security/advisories/GHSA-4f74-84v3-j9q5
+
+Synapse is an open-source Matrix homeserver written and maintained by the Matrix.org Foundation. When users update their passwords, the new credentials may be briefly held in the server database. While this doesn't grant the server any added capabilities—it already learns the users' passwords as part of the authentication process—it does disrupt the expectation that passwords won't be stored in the database. As a result, these passwords could inadvertently be captured in database backups for a longer duration. These temporarily stored passwords are automatically erased after a 48-hour window. This issue has been addressed in version 1.93.0. Users are advised to upgrade. There are no known workarounds for this issue.

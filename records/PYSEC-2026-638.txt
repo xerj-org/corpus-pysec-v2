@@ -1,0 +1,14 @@
+PYSEC-2026-638 PyPI/freetakserver-ui — Exposure of Sensitive Information to an Unauthorized Actor in FreeTAKServer-UI
+package: freetakserver-ui
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 1.9.8 (ECOSYSTEM)
+aliases: CVE-2022-25512, GHSA-9988-f88m-mr42
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2022-25512
+  https://github.com/FreeTAKTeam/UI/issues/26
+  https://github.com/FreeTAKTeam/UI
+  https://pypi.org/project/freetakserver-ui
+  https://github.com/advisories/GHSA-9988-f88m-mr42
+
+FreeTAKServer-UI v1.9.8 was discovered to leak sensitive API and Websocket keys.

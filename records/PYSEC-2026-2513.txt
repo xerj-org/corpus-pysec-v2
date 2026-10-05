@@ -1,0 +1,19 @@
+PYSEC-2026-2513 PyPI/hermes-agent — hermes-agent has an Injection issue
+package: hermes-agent
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.18.0 (ECOSYSTEM)
+aliases: CVE-2026-10222, GHSA-mv8x-fg99-32mf
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-10222
+  https://github.com/NousResearch/hermes-agent/commit/b944c6e821c2177eac6da857c99ff24566aa56b0
+  https://gist.github.com/YLChen-007/7ee2eeaa383b3540d2e8854250c03fb0
+  https://github.com/NousResearch/hermes-agent
+  https://vuldb.com/cve/CVE-2026-10222
+  https://vuldb.com/submit/822020
+  https://vuldb.com/vuln/367501
+  https://vuldb.com/vuln/367501/cti
+  https://pypi.org/project/hermes-agent
+  https://github.com/advisories/GHSA-mv8x-fg99-32mf
+
+A security flaw has been discovered in NousResearch hermes-agent up to 2026.4.30. Affected by this issue is the function _sanitize_env_lines of the file hermes_cli/config.py. The manipulation results in injection. It is possible to launch the attack remotely. The attack requires a high level of complexity. The exploitation is known to be difficult. The exploit has been released to the public and may be used for attacks. The vendor was contacted early about this disclosure but did not respond in any way.

@@ -1,0 +1,26 @@
+PYSEC-2026-4053 PyPI/hpack — hpack: Unbounded variable integer decoding can cause run-away computation on malformed input
+package: hpack
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.2.0 (ECOSYSTEM)
+aliases: CVE-2026-59980, GHSA-8v8h-hg4w-mvq2
+references:
+  https://github.com/python-hyper/hpack/security/advisories/GHSA-8v8h-hg4w-mvq2
+  https://nvd.nist.gov/vuln/detail/CVE-2026-59980
+  https://github.com/python-hyper/hpack/commit/8cfb02c547740e16dbfe7aba77bad84b297cec2c
+  https://cs.opensource.google/go/x/net/+/master:http2/hpack/hpack.go;l=468;drc=8e2b117aee74f6b86c207a808b0255de45c0a18a
+  https://docs.rs/http2/0.5.19/src/http2/hpack/decoder.rs.html#403
+  https://github.com/python-hyper/hpack
+  https://github.com/python-hyper/hpack/releases/tag/v4.2.0
+  https://pypi.org/project/hpack
+  https://github.com/advisories/GHSA-8v8h-hg4w-mvq2
+
+### Impact
+
+Users of the python-hyper/hpack library, most commonly used as downstream dependency of the python-hyper/h2 library (an HTTP/2 client and server implementation). Unbounded variable integer decoding can cause run-away computation on malformed input leading to O(n^2) runtime, effectively blocking further processing with large enough unsanitized input.
+
+### Patches
+A fix is available in python-hyper/hpack v4.2.0 to restricted variable integer decoding to uint32 to prevent run-away computation.
+
+### Workarounds
+Sanitize input to hpack decoder for long sequences of `0xFF` values to prevent malicious use.

@@ -1,0 +1,15 @@
+PYSEC-2024-40 PyPI/orjson — orjson.loads in orjson before 3.9.15 does not limit recursion for deeply nested JSON documents.
+package: orjson
+ecosystem: PyPI
+versions affected:
+  >= 0, < b0e4d2c06ce06c6e63981bf0276e4b7c74e5845e (GIT: https://github.com/ijl/orjson)
+  >= 0, < 3.9.15 (ECOSYSTEM)
+aliases: CVE-2024-27454, GHSA-pwr2-4v36-6qpr
+references:
+  https://github.com/ijl/orjson/issues/458
+  https://github.com/ijl/orjson/commit/b0e4d2c06ce06c6e63981bf0276e4b7c74e5845e
+  https://github.com/ijl/orjson/blob/master/CHANGELOG.md#3915
+  https://monicz.dev/CVE-2024-27454
+  https://github.com/advisories/GHSA-pwr2-4v36-6qpr
+
+orjson.loads in orjson before 3.9.15 does not limit recursion for deeply nested JSON documents.

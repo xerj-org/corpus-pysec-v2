@@ -1,0 +1,11 @@
+PYSEC-2018-102 PyPI/tripleo-heat-templates — A vulnerability was found in openstack-tripleo-heat-templates before version 8.0.2-40. When deployed
+package: tripleo-heat-templates
+ecosystem: PyPI
+versions affected:
+  >= 0, < 8.0.3 (ECOSYSTEM)
+aliases: CVE-2018-10898
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2018-10898
+  https://access.redhat.com/errata/RHSA-2018:2214
+
+A vulnerability was found in openstack-tripleo-heat-templates before version 8.0.2-40. When deployed using Director using default configuration, Opendaylight in RHOSP13 is configured with easily guessable default credentials.

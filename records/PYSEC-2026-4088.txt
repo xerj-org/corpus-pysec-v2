@@ -1,0 +1,72 @@
+PYSEC-2026-4088 PyPI/mcp-atlassian — MCP Atlassian: Arbitrary file read/exfiltration via upload_attachment missing validate_safe_path()
+package: mcp-atlassian
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.22.0 (ECOSYSTEM)
+aliases: CVE-2026-77258, GHSA-93xw-j965-9mx3
+references:
+  https://github.com/sooperset/mcp-atlassian/security/advisories/GHSA-93xw-j965-9mx3
+  https://nvd.nist.gov/vuln/detail/CVE-2026-77258
+  https://github.com/sooperset/mcp-atlassian/pull/1448
+  https://github.com/sooperset/mcp-atlassian/commit/b041733473f95119dd539542a43c280737a8e460
+  https://github.com/sooperset/mcp-atlassian
+  https://github.com/sooperset/mcp-atlassian/releases/tag/v0.22.0
+  https://pypi.org/project/mcp-atlassian
+  https://github.com/advisories/GHSA-93xw-j965-9mx3
+
+## Summary
+
+The `upload_attachment` method in `confluence/attachments.py` reads and uploads arbitrary local files to Confluence without calling `validate_safe_path()`. Both download methods (`download_attachment` at line 223, `download_content_attachments` at line 272) correctly call `validate_safe_path()` before writing files, but the upload path at lines 35-79 skips this check entirely.
+
+An AI agent connected via MCP (or an attacker influencing that agent through prompt injection) can read any file on the host and exfiltrate it by uploading it as a Confluence page attachment.
+
+## Vulnerable Code
+
+File: `src/mcp_atlassian/confluence/attachments.py`, lines 62-79
+
+```python
+# No validate_safe_path() call anywhere in this method
+if not os.path.isabs(file_path):
+    file_path = os.path.abspath(file_path)
+
+if not os.path.exists(file_path):
+    return {"success": False, "error": f"File not found: {file_path}"}
+
+filename = os.path.basename(file_path)
+attachment = self._upload_attachment_direct(
+    content_id, file_path, filename, comment, minor_edit
+)
+```
+
+The `validate_safe_path` function is already imported at line 9 of the same file, and used in the download methods. It was just not added to the upload path.
+
+## Proof of Concept
+
+Tested with mcp-atlassian 0.21.1 on Python 3.11 (EC2, Amazon Linux 2023).
+
+```python
+import inspect
+from mcp_atlassian.confluence.attachments import AttachmentsMixin
+
+# Confirm: no validate_safe_path in upload
+source = inspect.getsource(AttachmentsMixin.upload_attachment)
+assert "validate_safe_path" not in source  # passes
+
+# Confirm: validate_safe_path IS in downloads
+assert "validate_safe_path" in inspect.getsource(AttachmentsMixin.download_attachment)  # passes
+assert "validate_safe_path" in inspect.getsource(AttachmentsMixin.download_content_attachments)  # passes
+```
+
+An MCP tool call like this reads /etc/passwd and uploads it to Confluence:
+
+```json
+{"tool": "confluence_upload_attachment", "arguments": {"content_id": "123456", "file_path": "/etc/passwd"}}
+```
+
+## Impact
+
+Exfiltration of any file readable by the MCP server process: SSH keys, AWS credentials, .env files, /etc/passwd, application secrets. Data leaves the local machine and lands on a remote Confluence instance accessible to other users.
+
+## Suggested Fix
+
+Add `validate_safe_path(file_path)` before the `os.path.exists()` check in `upload_attachment`, matching the existing pattern in the download methods. The function is already imported.

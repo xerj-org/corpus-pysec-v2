@@ -1,0 +1,14 @@
+PYSEC-2018-51 PyPI/bleach — An issue was discovered in Bleach 2.1.x before 2.1.3. Attributes that have URI values weren't proper
+package: bleach
+ecosystem: PyPI
+versions affected:
+  >= 0, < c5df5789ec3471a31311f42c2d19fc2cf21b35ef (GIT: https://github.com/mozilla/bleach)
+  >= 2.1, < 2.1.3 (ECOSYSTEM)
+aliases: CVE-2018-7753, GHSA-m9mq-p2f9-cfqv
+references:
+  https://github.com/mozilla/bleach/releases/tag/v2.1.3
+  https://github.com/mozilla/bleach/commit/c5df5789ec3471a31311f42c2d19fc2cf21b35ef
+  https://bugs.debian.org/892252
+  https://github.com/advisories/GHSA-m9mq-p2f9-cfqv
+
+An issue was discovered in Bleach 2.1.x before 2.1.3. Attributes that have URI values weren't properly sanitized if the values contained character entities. Using character entities, it was possible to construct a URI value with a scheme that was not allowed that would slide through unsanitized.

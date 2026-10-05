@@ -1,0 +1,12 @@
+PYSEC-2019-167 PyPI/colander — In Pylons Colander through 1.6, the URL validator allows an attacker to potentially cause an infinit
+package: colander
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.7.0 (ECOSYSTEM)
+aliases: CVE-2017-18361, GHSA-rv95-4wxj-6fqq
+references:
+  https://github.com/Pylons/colander/pull/323
+  https://github.com/Pylons/colander/issues/290
+  https://github.com/advisories/GHSA-rv95-4wxj-6fqq
+
+In Pylons Colander through 1.6, the URL validator allows an attacker to potentially cause an infinite loop thereby causing a denial of service via an unclosed parenthesis.

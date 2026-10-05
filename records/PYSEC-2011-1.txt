@@ -1,0 +1,18 @@
+PYSEC-2011-1 PyPI/django — django.contrib.sessions in Django before 1.2.7 and 1.3.x before 1.3.1, when session data is stored i
+package: django
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.2.7, >= 1.3, < 1.3.1 (ECOSYSTEM)
+aliases: CVE-2011-4136, GHSA-x88j-93vc-wpmp
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=737366
+  http://openwall.com/lists/oss-security/2011/09/13/2
+  https://www.djangoproject.com/weblog/2011/sep/09/
+  https://www.djangoproject.com/weblog/2011/sep/10/127/
+  http://openwall.com/lists/oss-security/2011/09/11/1
+  http://secunia.com/advisories/46614
+  http://www.debian.org/security/2011/dsa-2332
+  https://hermes.opensuse.org/messages/14700881
+  https://github.com/advisories/GHSA-x88j-93vc-wpmp
+
+django.contrib.sessions in Django before 1.2.7 and 1.3.x before 1.3.1, when session data is stored in the cache, uses the root namespace for both session identifiers and application-data keys, which allows remote attackers to modify a session by triggering use of a key that is equal to that session's identifier.

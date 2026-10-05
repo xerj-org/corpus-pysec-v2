@@ -1,0 +1,11 @@
+PYSEC-2026-3778 PyPI/openssl-encrypt — openssl_encrypt versions before 1.4.9 use a denylist to identify trusted built-in plugins, allowing 
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.9 (ECOSYSTEM)
+aliases: CVE-2026-81701, GHSA-wxx9-p55f-wm34
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-wxx9-p55f-wm34
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-1.4.9-arbitrary-code-execution-via-unsigned-plugin
+
+openssl_encrypt versions before 1.4.9 use a denylist to identify trusted built-in plugins, allowing unsigned plugins in top-level plugins/ directories and unknown subdirectories to bypass signature verification. Attackers can place malicious unsigned plugins following documented installation paths to achieve arbitrary code execution in the CLI process with access to passwords and cryptographic keys.

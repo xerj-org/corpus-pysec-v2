@@ -1,0 +1,11 @@
+PYSEC-2022-43186 PyPI/pycti — In OpenCTI through 5.2.4, a broken access control vulnerability has been identified in the profile e
+package: pycti
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.3.0 (ECOSYSTEM)
+aliases: CVE-2022-30290
+references:
+  https://github.com/OpenCTI-Platform/opencti/releases
+  https://www.enisa.europa.eu/topics/threat-risk-management/vulnerability-disclosure
+
+In OpenCTI through 5.2.4, a broken access control vulnerability has been identified in the profile endpoint. An attacker can abuse the identified vulnerability in order to arbitrarily change their registered e-mail address as well as their API key, even though such action is not possible through the interface, legitimately.

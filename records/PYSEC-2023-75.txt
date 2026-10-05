@@ -1,0 +1,12 @@
+PYSEC-2023-75 PyPI/tornado — Open redirect vulnerability in Tornado versions 6.3.1 and earlier allows a remote unauthenticated at
+package: tornado
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.3.2 (ECOSYSTEM)
+aliases: CVE-2023-28370, GHSA-hj3f-6gcp-jg8j
+references:
+  https://jvn.jp/en/jp/JVN45127776/
+  https://github.com/tornadoweb/tornado/releases/tag/v6.3.2
+  https://github.com/advisories/GHSA-hj3f-6gcp-jg8j
+
+Open redirect vulnerability in Tornado versions 6.3.1 and earlier allows a remote unauthenticated attacker to redirect a user to an arbitrary web site and conduct a phishing attack by having user access a specially crafted URL.

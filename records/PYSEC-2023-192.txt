@@ -1,0 +1,16 @@
+PYSEC-2023-192 PyPI/urllib3 — urllib3 is a user-friendly HTTP client library for Python. urllib3 doesn't treat the `Cookie` HTTP h
+package: urllib3
+ecosystem: PyPI
+versions affected:
+  >= 0, < 644124ecd0b6e417c527191f866daa05a5a2056d, < 01220354d389cd05474713f8c982d05c9b17aafb (GIT: https://github.com/urllib3/urllib3)
+  >= 2.0.0, < 2.0.6, >= 0, < 1.26.17 (ECOSYSTEM)
+aliases: CVE-2023-43804, GHSA-v845-jxx5-vc9f
+references:
+  https://github.com/urllib3/urllib3/commit/644124ecd0b6e417c527191f866daa05a5a2056d
+  https://github.com/urllib3/urllib3/security/advisories/GHSA-v845-jxx5-vc9f
+  https://github.com/urllib3/urllib3/security/advisories/GHSA-v845-jxx5-vc9f
+  https://github.com/urllib3/urllib3/commit/01220354d389cd05474713f8c982d05c9b17aafb
+  https://lists.debian.org/debian-lts-announce/2023/10/msg00012.html
+  https://lists.debian.org/debian-lts-announce/2023/10/msg00012.html
+
+urllib3 is a user-friendly HTTP client library for Python. urllib3 doesn't treat the `Cookie` HTTP header special or provide any helpers for managing cookies over HTTP, that is the responsibility of the user. However, it is possible for a user to specify a `Cookie` header and unknowingly leak information via HTTP redirects to a different origin if that user doesn't disable redirects explicitly. This issue has been patched in urllib3 version 1.26.17 or 2.0.5.

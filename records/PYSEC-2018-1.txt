@@ -1,0 +1,11 @@
+PYSEC-2018-1 PyPI/cloudtoken — Unauthenticated access to cloudtoken daemon on Linux via network from version 0.1.1 before version 0
+package: cloudtoken
+ecosystem: PyPI
+versions affected:
+  >= 0.1.1, < 0.1.24 (ECOSYSTEM)
+aliases: CVE-2018-13390, GHSA-4fpg-j5mp-783g
+references:
+  https://bitbucket.org/atlassian/cloudtoken/wiki/CVE-2018-13390%20-%20Exposed%20credentials%20in%20daemon%20mode%20on%20Linux
+  https://github.com/advisories/GHSA-4fpg-j5mp-783g
+
+Unauthenticated access to cloudtoken daemon on Linux via network from version 0.1.1 before version 0.1.24 allows attackers on the same subnet to gain temporary AWS credentials for the users' roles.

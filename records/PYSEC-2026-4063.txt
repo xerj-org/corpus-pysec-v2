@@ -1,0 +1,195 @@
+PYSEC-2026-4063 PyPI/lightrag-hku — lightrag-hku: Sensitive Information Exposure Through Raw Exception Messages in API Error Responses
+package: lightrag-hku
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.5.5 (ECOSYSTEM)
+aliases: CVE-2026-85709, GHSA-hrmj-7rvj-4hg8
+references:
+  https://github.com/HKUDS/LightRAG/security/advisories/GHSA-hrmj-7rvj-4hg8
+  https://nvd.nist.gov/vuln/detail/CVE-2026-85709
+  https://github.com/HKUDS/LightRAG/pull/3422
+  https://github.com/HKUDS/LightRAG/commit/4d90a0eb35d40b45f3a9045e308ec126897a3364
+  https://github.com/HKUDS/LightRAG/commit/dcab315d7dc1eea682e9b2c4fcb1b06474484c47
+  https://github.com/HKUDS/LightRAG
+  https://github.com/HKUDS/LightRAG/releases/tag/v1.5.5
+  https://pypi.org/project/lightrag-hku
+  https://github.com/advisories/GHSA-hrmj-7rvj-4hg8
+
+### Summary
+
+The LightRAG API server passes raw Python exception messages directly into HTTP
+error responses across 30+ error handlers in every router. When combined with
+the default unauthenticated configuration (see companion report on CWE-306), any
+network-reachable client can trigger exceptions whose raw text discloses
+internal infrastructure — server filesystem paths, database host/port/user, LLM
+provider error details, and Python library internals. No global exception
+handler sanitizes error messages before they reach the client.
+
+### Details
+
+Throughout the API route handlers, exceptions are caught and their string
+representation is returned verbatim via `detail=str(e)` / `detail=str(exc)`
+(and f-string variants such as `detail=f"...: {str(e)}"`). This occurs in every
+router file. Location breakdown on the current `main` branch:
+
+**HTTP 500 — raw exception passthrough (`except Exception as e`):**
+- `document_routes.py` — 13
+- `graph_routes.py` — 12 (mix of `detail=f"...{str(e)}"` and `detail=error_msg`)
+- `query_routes.py` — 3
+- `ollama_api.py` — 2
+- `lightrag_server.py` — 1 (health endpoint)
+
+**HTTP 422 — raw exception passthrough (`except ValueError as exc`):**
+- `document_routes.py` — 2 (chunking-config validation)
+
+**Total: ~33 raw-exception-to-HTTP-response locations.** The only pre-existing
+custom exception handler in `lightrag_server.py` is specific to
+`RequestValidationError` for `/query/data`; it does not cover the generic
+`Exception` handlers in route code.
+
+Example pattern (`document_routes.py`, upload handler):
+
+```python
+except Exception as e:
+    logger.error(f"Error /documents/upload: {file.filename}: {str(e)}")
+    raise HTTPException(status_code=500, detail=str(e))
+```
+
+**Categories of sensitive information that can leak through these responses:**
+
+1. **Server filesystem paths.** File-I/O errors from the default JSON storage
+   backend expose the server's directory layout
+   (e.g. `[Errno 13] Permission denied: '/app/data/rag_storage/default/kv_store_full_docs.json'`),
+   aiding path-traversal or targeted attacks. *(Verified — see PoC Step 1.)*
+
+2. **Database host / port / user / database name.** Connection errors from the
+   PostgreSQL, MongoDB, Redis, or Neo4j backends surface the target the driver
+   was trying to reach — e.g. asyncpg raises
+   `password authentication failed for user "lightrag"` (username) or a socket
+   error naming the unreachable host and port.
+   **Note on credentials:** the PostgreSQL backend uses `asyncpg`, which is
+   built from keyword parameters and does **not** echo the password in its
+   exception strings — so a raw asyncpg error leaks host/port/user/db, not the
+   password. URI-configured backends behave differently: the MongoDB backend is
+   built with `AsyncMongoClient(MONGO_URI, ...)`, and a malformed-URI /
+   configuration error from pymongo can surface the connection string itself,
+   which may embed credentials (`mongodb://user:password@host:port/`). The leak
+   surface is therefore backend- and error-type-dependent.
+
+3. **LLM provider error details.** Errors from OpenAI / Gemini / Bedrock and
+   other providers may include model names, organization ids, or partial API
+   error context that reveal the deployment.
+
+4. **Python library internals.** Unexpected exceptions expose class names,
+   library-internal messages, and stack fragments that fingerprint the server
+   stack and version.
+
+5. **Configuration details.** Errors during configuration/parsing may reveal
+   storage backend types and other configuration values.
+
+The risk is amplified by the default unauthenticated configuration (CWE-306,
+companion report), which lets any network client trigger and read these errors
+without credentials.
+
+### PoC
+
+Tested on a clean checkout with the `[api]` extras installed and the server run
+via `lightrag-server`.
+
+#### Step 1 — Filesystem path disclosure (default JSON storage)
+
+With the default storage backend, a file-permission error is returned verbatim:
+
+```bash
+# Make a storage file unreadable to force an I/O error.
+chmod 000 ./rag_storage/default/kv_store_full_docs.json
+curl -s http://localhost:9621/documents | python3 -m json.tool
+```
+
+Vulnerable response — the full server-side path is disclosed:
+
+```json
+{
+    "detail": "[Errno 13] Permission denied: '/app/data/rag_storage/default/kv_store_full_docs.json'"
+}
+```
+
+#### Step 2 — Database infrastructure disclosure (PostgreSQL backend)
+
+Configure a PostgreSQL KV backend pointed at an unreachable / misconfigured host:
+
+```
+LIGHTRAG_KV_STORAGE=PGKVStorage
+POSTGRES_HOST=nonexistent-host-12345.example.com
+POSTGRES_PORT=5432
+POSTGRES_USER=lightrag
+POSTGRES_DATABASE=lightrag
+```
+
+A request that touches storage returns the raw connection error, disclosing the
+host / port / user the server is configured to reach (the asyncpg password is
+not echoed — see the credentials note above):
+
+```json
+{
+    "detail": "[Errno -2] Name or service not known"
+}
+```
+
+For a URI-configured backend such as MongoDB (`MONGO_URI=mongodb://user:pass@host:port/db`),
+a malformed-URI / configuration error can instead surface the connection string
+itself, including any embedded credentials.
+
+### Impact
+
+Error-message information exposure. A client able to reach the LightRAG
+server can extract:
+
+- **Confidentiality (C:L):** server filesystem paths, database host/port/user/db,
+  LLM provider configuration hints, and Python stack internals from raw
+  exception messages; for URI-configured backends, potentially the connection
+  string (with embedded credentials).
+- **Escalation risk:** leaked hosts/paths aid follow-on attacks; a leaked
+  connection URI could enable direct database access if the database is
+  network-reachable.
+
+When combined with the default unauthenticated configuration, any
+network client can trigger and read these responses without authentication,
+which is why this is scored `PR:N`.
+
+### Suggested remediation
+
+1. **Replace every `detail=str(e)` / `detail=str(exc)` pattern** with a generic
+   client message. Log the full exception server-side (message + traceback) and
+   return only a generic message plus a correlation id:
+
+   ```python
+   except Exception as e:
+       logger.error(f"Error /documents/upload: {file.filename}: {e!r}")
+       raise HTTPException(status_code=500, detail="Internal server error")
+   ```
+
+2. **Register a last-resort global handler** as defense-in-depth so any
+   exception that escapes a route is sanitized identically:
+
+   ```python
+   @app.exception_handler(Exception)
+   async def unhandled_exception_handler(request, exc):
+       logger.error(f"Unhandled exception: {exc!r}", exc_info=True)
+       return JSONResponse(status_code=500, content={"detail": "Internal server error"})
+   ```
+
+3. **Preserve genuine client-input validation feedback.** The two HTTP 422
+   chunking-config validators emit controlled, non-sensitive messages; keep them
+   as 422 feedback rather than genericizing to 500 — but wrap the raw exception
+   so it is never a bare passthrough.
+
+**Fix status:** implemented in HKUDS/LightRAG#3422 — a shared
+`internal_server_error()` helper routes all 500 handlers through a generic body
+carrying a correlation id (full detail logged server-side), a global
+`@app.exception_handler(Exception)` is registered in `create_app`, and the two
+422 validators are wrapped.
+
+### Credits
+- Thai Son Dinh from VinSOC Labs (R&D)
+- Nguyen Huy Vu Dung from VinSOC Labs (AppSec)

@@ -1,0 +1,12 @@
+PYSEC-2019-256 PyPI/webp — In libwebp 0.5.1, there is a double free bug in libwebpmux.
+package: webp
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2016-9969
+references:
+  https://bugs.chromium.org/p/webp/issues/detail?id=322
+  https://bugs.chromium.org/p/webp/issues/detail?id=322
+  https://bugs.chromium.org/p/webp/issues/detail?id=322
+
+In libwebp 0.5.1, there is a double free bug in libwebpmux.

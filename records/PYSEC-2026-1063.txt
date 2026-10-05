@@ -1,0 +1,15 @@
+PYSEC-2026-1063 PyPI/web2py — Web2py Reflected XSS vulnerability
+package: web2py
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 2.14.5 (ECOSYSTEM)
+aliases: CVE-2016-4807, GHSA-pvcp-73cg-6f77
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2016-4807
+  https://github.com/web2py/web2py
+  https://www.exploit-db.com/exploits/39821
+  http://packetstormsecurity.com/files/137070/Web2py-2.14.5-CSRF-XSS-Local-File-Inclusion.html
+  https://pypi.org/project/web2py
+  https://github.com/advisories/GHSA-pvcp-73cg-6f77
+
+Web2py versions 2.14.5 and below was affected by Reflected XSS vulnerability, which allows an attacker to perform an XSS attack on logged in user (admin).

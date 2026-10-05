@@ -1,0 +1,10 @@
+PYSEC-2026-29 PyPI/changedetection-io — changedetection.io is a free open source web page change detection tool. In 0.54.9 and earlier, xpat
+package: changedetection-io
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.54.10 (ECOSYSTEM)
+aliases: CVE-2026-41895, GHSA-v7cp-2cx9-x793
+references:
+  https://github.com/dgtlmoon/changedetection.io/security/advisories/GHSA-v7cp-2cx9-x793
+
+changedetection.io is a free open source web page change detection tool. In 0.54.9 and earlier, xpath_filter() switches to XML mode for XML/RSS content and creates etree.XMLParser(strip_cdata=False) without explicitly disabling external entity resolution, external DTD loading, or network-backed entity lookup. The helper then parses untrusted XML bytes directly with etree.fromstring(...).

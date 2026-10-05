@@ -1,0 +1,18 @@
+PYSEC-2011-18 PyPI/feedparser — Cross-site scripting (XSS) vulnerability in feedparser.py in Universal Feed Parser (aka feedparser o
+package: feedparser
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.0 (ECOSYSTEM)
+aliases: CVE-2009-5065, GHSA-3mwg-gp5g-fv3q
+references:
+  https://bugzilla.novell.com/show_bug.cgi?id=680074
+  http://code.google.com/p/feedparser/issues/detail?id=195
+  http://lists.opensuse.org/opensuse-updates/2011-04/msg00026.html
+  http://secunia.com/advisories/44074
+  http://www.securityfocus.com/bid/47177
+  https://bugzilla.redhat.com/show_bug.cgi?id=684877
+  http://support.novell.com/security/cve/CVE-2009-5065.html
+  http://www.mandriva.com/security/advisories?name=MDVSA-2011:082
+  https://github.com/advisories/GHSA-3mwg-gp5g-fv3q
+
+Cross-site scripting (XSS) vulnerability in feedparser.py in Universal Feed Parser (aka feedparser or python-feedparser) before 5.0 allows remote attackers to inject arbitrary web script or HTML via vectors involving nested CDATA stanzas.

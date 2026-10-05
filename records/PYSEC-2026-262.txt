@@ -1,0 +1,15 @@
+PYSEC-2026-262 PyPI/ait-core — NASA AIT-Core vulnerable to SQL Injection
+package: ait-core
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 2.5.2 (ECOSYSTEM)
+aliases: CVE-2024-35056, GHSA-gpgj-xrgw-8mx2
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-35056
+  https://github.com/NASA-AMMOS/AIT-Core/issues/527
+  https://github.com/NASA-AMMOS/AIT-Core
+  https://www.linkedin.com/pulse/remote-code-execution-via-man-in-the-middle-more-ujkze
+  https://pypi.org/project/ait-core
+  https://github.com/advisories/GHSA-gpgj-xrgw-8mx2
+
+NASA AIT-Core v2.5.2 was discovered to contain multiple SQL injection vulnerabilities via the `query_packets` and `insert` functions.

@@ -1,0 +1,12 @@
+PYSEC-2026-2218 PyPI/mistune — Mistune is a Python Markdown parser with renderers and plugins. Prior to 3.3.0, the toc plugin and T
+package: mistune
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.3.0 (ECOSYSTEM)
+aliases: CVE-2026-59930, GHSA-2hm2-hc3v-44h9
+references:
+  https://github.com/lepture/mistune/releases/tag/v3.3.0
+  https://github.com/lepture/mistune/commit/c4093c4742ed0d10d9332fb8edb455869b7b581b
+  https://github.com/lepture/mistune/security/advisories/GHSA-2hm2-hc3v-44h9
+
+Mistune is a Python Markdown parser with renderers and plugins. Prior to 3.3.0, the toc plugin and TableOfContents directive generate heading IDs as predictable toc_N values without slugifying the heading text, allowing attacker-controlled id="toc_N" content to collide with generated anchors and redirect same-page navigation, CSS selectors, or JavaScript handlers. This issue is fixed in version 3.3.0.

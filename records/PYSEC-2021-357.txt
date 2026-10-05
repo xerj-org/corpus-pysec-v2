@@ -1,0 +1,11 @@
+PYSEC-2021-357 PyPI/django-unicorn — The Unicorn framework through 0.35.3 for Django allows XSS via component.name.
+package: django-unicorn
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.36.0 (ECOSYSTEM)
+aliases: CVE-2021-42053, GHSA-c87f-fq5g-63r2
+references:
+  https://github.com/adamghill/django-unicorn/pull/288/files
+  https://github.com/advisories/GHSA-c87f-fq5g-63r2
+
+The Unicorn framework through 0.35.3 for Django allows XSS via component.name.

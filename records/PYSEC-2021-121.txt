@@ -1,0 +1,12 @@
+PYSEC-2021-121 PyPI/pywps — An XML external entity (XXE) injection in PyWPS before 4.5.0 allows an attacker to view files on the
+package: pywps
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.5.0 (ECOSYSTEM)
+aliases: CVE-2021-39371, GHSA-p9wf-3xpg-c9g5
+references:
+  https://github.com/geopython/pywps/pull/616
+  https://github.com/geopython/OWSLib/issues/790
+  https://github.com/advisories/GHSA-p9wf-3xpg-c9g5
+
+An XML external entity (XXE) injection in PyWPS before 4.5.0 allows an attacker to view files on the application server filesystem by assigning a path to the entity. OWSLib 0.24.1 may also be affected.

@@ -1,0 +1,11 @@
+PYSEC-2026-3985 PyPI/vllm — vLLM before 0.28.0 contains a remote code execution vulnerability in the LlavaOnevision2 processor l
+package: vllm
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.28.0 (ECOSYSTEM)
+aliases: CVE-2026-90553, GHSA-3c86-2m5g-59q7
+references:
+  https://github.com/vllm-project/vllm/security/advisories/GHSA-3c86-2m5g-59q7
+  https://www.vulncheck.com/advisories/vllm-before-0.28.0-remote-code-execution-via-llavaonevision2-processor
+
+vLLM before 0.28.0 contains a remote code execution vulnerability in the LlavaOnevision2 processor loader that ignores the trust_remote_code parameter when loading remote processor classes. Attackers can craft a malicious model with arbitrary code in processing_llava_onevision2.py that executes with vLLM process authority even when trust_remote_code is set to False.

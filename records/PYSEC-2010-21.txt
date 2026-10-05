@@ -1,0 +1,14 @@
+PYSEC-2010-21 PyPI/pyftpdlib — FTPServer.py in pyftpdlib before 0.2.0 does not increment the attempted_logins count for a USER comm
+package: pyftpdlib
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.2.0 (ECOSYSTEM)
+aliases: CVE-2007-6737, GHSA-9x66-ghqx-8g5r
+references:
+  http://code.google.com/p/pyftpdlib/issues/detail?id=20
+  http://code.google.com/p/pyftpdlib/source/browse/trunk/HISTORY
+  http://code.google.com/p/pyftpdlib/source/detail?r=23
+  http://code.google.com/p/pyftpdlib/source/diff?spec=svn23&r=23&format=side&path=/trunk/pyftpdlib/FTPServer.py
+  https://github.com/advisories/GHSA-9x66-ghqx-8g5r
+
+FTPServer.py in pyftpdlib before 0.2.0 does not increment the attempted_logins count for a USER command that specifies an invalid username, which makes it easier for remote attackers to obtain access via a brute-force attack.

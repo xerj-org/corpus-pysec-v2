@@ -1,0 +1,16 @@
+PYSEC-2026-2132 PyPI/click — Pallets Click, versions 8.3.2 and below, contain a command injection vulnerability in the click.edit
+package: click
+ecosystem: PyPI
+versions affected:
+  >= 0, < 8.3.3 (ECOSYSTEM)
+aliases: CVE-2026-7246, GHSA-47fr-3ffg-hgmw
+references:
+  https://access.redhat.com/security/cve/CVE-2026-7246
+  https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-7246.json
+  https://access.redhat.com/errata/RHSA-2026:24761
+  https://access.redhat.com/errata/RHSA-2026:24762
+  https://bugzilla.redhat.com/show_bug.cgi?id=2464121
+  https://github.com/pallets/click/releases/tag/8.3.3
+  https://github.com/tsigouris007/security-advisories/security/advisories/GHSA-47fr-3ffg-hgmw
+
+Pallets Click, versions 8.3.2 and below, contain a command injection vulnerability in the click.edit() function, allowing attackers to pass arbitrary OS commands from an unprivileged account.

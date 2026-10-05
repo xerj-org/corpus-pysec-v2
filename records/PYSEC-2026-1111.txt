@@ -1,0 +1,20 @@
+PYSEC-2026-1111 PyPI/aiosmtpd — aiosmtpd STARTTLS unencrypted commands injection
+package: aiosmtpd
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.6 (ECOSYSTEM)
+aliases: CVE-2024-34083, GHSA-wgjv-9j3q-jhg8
+references:
+  https://github.com/aio-libs/aiosmtpd/security/advisories/GHSA-wgjv-9j3q-jhg8
+  https://nvd.nist.gov/vuln/detail/CVE-2024-34083
+  https://github.com/aio-libs/aiosmtpd/commit/b3a4a2c6ecfd228856a20d637dc383541fcdbfda
+  https://github.com/aio-libs/aiosmtpd
+  https://nostarttls.secvuln.info
+  https://pypi.org/project/aiosmtpd
+  https://github.com/advisories/GHSA-wgjv-9j3q-jhg8
+
+### Summary
+Servers based on aiosmtpd accept extra unencrypted commands after STARTTLS, treating them as if they came from inside the encrypted connection. This could be exploited by a MitM attack.
+
+### References
+* [NO STARTTLS: Similar vulnerabilities discovered by previous researchers.](https://nostarttls.secvuln.info/)

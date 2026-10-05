@@ -1,0 +1,13 @@
+PYSEC-2021-356 PyPI/nltk — nltk is vulnerable to Inefficient Regular Expression Complexity
+package: nltk
+ecosystem: PyPI
+versions affected:
+  >= 0, < 277711ab1dec729e626b27aab6fa35ea5efbd7e6 (GIT: https://github.com/nltk/nltk)
+  >= 0, < 3.6.4 (ECOSYSTEM)
+aliases: CVE-2021-3828, GHSA-2ww3-fxvq-293j
+references:
+  https://huntr.dev/bounties/d19aed43-75bc-4a03-91a0-4d0bb516bc32
+  https://github.com/nltk/nltk/commit/277711ab1dec729e626b27aab6fa35ea5efbd7e6
+  https://github.com/advisories/GHSA-2ww3-fxvq-293j
+
+nltk is vulnerable to Inefficient Regular Expression Complexity

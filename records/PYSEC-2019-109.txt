@@ -1,0 +1,12 @@
+PYSEC-2019-109 PyPI/parso — ** DISPUTED ** A deserialization vulnerability exists in the way parso through 0.4.0 handles grammar
+package: parso
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.5.0 (ECOSYSTEM)
+aliases: CVE-2019-12760, GHSA-22mf-97vh-x8rw
+references:
+  https://gist.github.com/dhondta/f71ae7e5c4234f8edfd2f12503a5dcc7
+  https://github.com/davidhalter/parso/issues/75
+  https://github.com/advisories/GHSA-22mf-97vh-x8rw
+
+** DISPUTED ** A deserialization vulnerability exists in the way parso through 0.4.0 handles grammar parsing from the cache. Cache loading relies on pickle and, provided that an evil pickle can be written to a cache grammar file and that its parsing can be triggered, this flaw leads to Arbitrary Code Execution. NOTE: This is disputed because "the cache directory is not under control of the attacker in any common configuration."

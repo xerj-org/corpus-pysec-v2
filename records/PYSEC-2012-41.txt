@@ -1,0 +1,19 @@
+PYSEC-2012-41 PyPI/nova — OpenStack Compute (Nova) Folsom before 2012.2.2 and Grizzly, when using libvirt and LVM backed insta
+package: nova
+ecosystem: PyPI
+versions affected:
+  >= 0, < a99a802e008eed18e39fc1d98170edc495cbd354, < 9d2ea970422591f8cdc394001be9a2deca499a5f (GIT: https://github.com/openstack/nova)
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2012-5625
+references:
+  https://github.com/openstack/nova/commit/a99a802e008eed18e39fc1d98170edc495cbd354
+  http://www.ubuntu.com/usn/USN-1663-1
+  https://github.com/openstack/nova/commit/9d2ea970422591f8cdc394001be9a2deca499a5f
+  https://launchpad.net/nova/folsom/2012.2.2
+  http://osvdb.org/88419
+  http://www.openwall.com/lists/oss-security/2012/12/11/5
+  https://bugs.launchpad.net/nova/+bug/1070539
+  https://bugzilla.redhat.com/show_bug.cgi?id=884293
+  http://rhn.redhat.com/errata/RHSA-2013-0208.html
+
+OpenStack Compute (Nova) Folsom before 2012.2.2 and Grizzly, when using libvirt and LVM backed instances, does not properly clear physical volume (PV) content when reallocating for instances, which allows attackers to obtain sensitive information by reading the memory of the previous logical volume (LV).

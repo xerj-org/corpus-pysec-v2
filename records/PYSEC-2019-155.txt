@@ -1,0 +1,12 @@
+PYSEC-2019-155 PyPI/python-dbusmock — python-dbusmock before version 0.15.1 AddTemplate() D-Bus method call or DBusTestCase.spawn_server_t
+package: python-dbusmock
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4e7d0df9093 (GIT: https://github.com/martinpitt/python-dbusmock)
+  >= 0, < 0.15.1 (ECOSYSTEM)
+aliases: CVE-2015-1326, GHSA-74xw-82v7-hmrm
+references:
+  https://github.com/martinpitt/python-dbusmock/commit/4e7d0df9093
+  https://github.com/advisories/GHSA-74xw-82v7-hmrm
+
+python-dbusmock before version 0.15.1 AddTemplate() D-Bus method call or DBusTestCase.spawn_server_template() method could be tricked into executing malicious code if an attacker supplies a .pyc file.

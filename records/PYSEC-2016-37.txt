@@ -1,0 +1,21 @@
+PYSEC-2016-37 PyPI/radicale — Radicale before 1.1 allows remote authenticated users to bypass owner_write and owner_only limitatio
+package: radicale
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4bfe7c9f7991d534c8b9fbe153af9d341f925f98 (GIT: https://github.com/Unrud/Radicale)
+  >= 0, < 1.1 (ECOSYSTEM)
+aliases: CVE-2015-8748, GHSA-6w8c-6jrg-qwj2
+references:
+  https://github.com/Unrud/Radicale/commit/4bfe7c9f7991d534c8b9fbe153af9d341f925f98
+  http://www.debian.org/security/2016/dsa-3462
+  http://www.openwall.com/lists/oss-security/2016/01/05/7
+  https://github.com/Kozea/Radicale/pull/341
+  http://www.openwall.com/lists/oss-security/2016/01/06/4
+  http://www.securityfocus.com/bid/80255
+  http://lists.fedoraproject.org/pipermail/package-announce/2016-January/175776.html
+  http://lists.fedoraproject.org/pipermail/package-announce/2016-January/175738.html
+  https://pypi.org/project/radicale
+  https://nvd.nist.gov/vuln/detail/CVE-2015-8748
+  https://github.com/advisories/GHSA-6w8c-6jrg-qwj2
+
+Radicale before 1.1 allows remote authenticated users to bypass owner_write and owner_only limitations via regex metacharacters in the user name, as demonstrated by ".*".

@@ -1,0 +1,14 @@
+PYSEC-2026-2273 PyPI/ray — Ray prior to 2.56.0 contains an unsafe deserialization vulnerability in the WebDataset reader that a
+package: ray
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.56.0 (ECOSYSTEM)
+aliases: CVE-2026-57516, GHSA-hhrp-gw25-jr43
+references:
+  https://github.com/ray-project/ray/releases/tag/ray-2.56.0
+  https://www.vulncheck.com/advisories/ray-unsafe-deserialization-rce-via-webdataset-reader
+  https://github.com/ray-project/ray/pull/63469
+  https://github.com/ray-project/ray/pull/63470
+  https://github.com/ray-project/ray/security/advisories/GHSA-hhrp-gw25-jr43
+
+Ray prior to 2.56.0 contains an unsafe deserialization vulnerability in the WebDataset reader that allows attackers to achieve remote code execution by supplying a malicious tar archive to the read_webdataset() function. The _default_decoder() function in webdataset_datasource.py unconditionally calls pickle.loads() on tar entries with .pkl/.pickle extensions and torch.load() with weights_only=False on .pt/.pth entries, executing arbitrary code inside Ray remote workers on every worker that processes the malicious archive.

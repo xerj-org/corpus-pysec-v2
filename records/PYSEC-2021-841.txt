@@ -1,0 +1,11 @@
+PYSEC-2021-841 PyPI/ckan — In CKAN, versions 2.9.0 to 2.9.3 are affected by a stored XSS vulnerability via SVG file upload of u
+package: ckan
+ecosystem: PyPI
+versions affected:
+  >= 2.9.0, < 2.9.4 (ECOSYSTEM)
+aliases: CVE-2021-25967, GHSA-6w9p-88qg-p3g3
+references:
+  https://www.whitesourcesoftware.com/vulnerability-database/CVE-2021-25967
+  https://github.com/advisories/GHSA-6w9p-88qg-p3g3
+
+In CKAN, versions 2.9.0 to 2.9.3 are affected by a stored XSS vulnerability via SVG file upload of users’ profile picture. This allows low privileged application users to store malicious scripts in their profile picture. These scripts are executed in a victim’s browser when they open the malicious profile picture

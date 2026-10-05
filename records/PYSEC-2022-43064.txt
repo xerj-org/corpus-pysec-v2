@@ -1,0 +1,13 @@
+PYSEC-2022-43064 PyPI/pytigergraph — The User-Defined Functions (UDF) feature in TigerGraph 3.6.0 allows installation of a query (in the 
+package: pytigergraph
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-30331
+references:
+  https://neo4j.com/security/cve-2022-30331/
+  https://docs.tigergraph.com/home/
+  https://docs.tigergraph.com/home/
+  https://docs.tigergraph.com/home/cve-2022-30331
+
+The User-Defined Functions (UDF) feature in TigerGraph 3.6.0 allows installation of a query (in the GSQL query language) without proper validation. Consequently, an attacker can execute arbitrary C++ code. NOTE: the vendor's position is "GSQL was behaving as expected."

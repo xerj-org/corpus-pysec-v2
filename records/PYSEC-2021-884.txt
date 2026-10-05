@@ -1,0 +1,12 @@
+PYSEC-2021-884 PyPI/exiv2 — A float point exception in the printLong function in tags_int.cpp of Exiv2 0.27.99.0 allows attacker
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2020-18774
+references:
+  https://github.com/Exiv2/exiv2/issues/759
+  https://github.com/Exiv2/exiv2/issues/759
+  https://security.gentoo.org/glsa/202312-06
+
+A float point exception in the printLong function in tags_int.cpp of Exiv2 0.27.99.0 allows attackers to cause a denial of service (DOS) via a crafted tif file.

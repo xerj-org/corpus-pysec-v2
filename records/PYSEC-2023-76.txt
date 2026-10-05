@@ -1,0 +1,13 @@
+PYSEC-2023-76 PyPI/vyper — Vyper is a pythonic smart contract language for the EVM. The storage allocator does not guard agains
+package: vyper
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0bb7203b584e771b23536ba065a6efda457161bb (GIT: https://github.com/vyperlang/vyper)
+  >= 0, < 0.3.8 (ECOSYSTEM)
+aliases: CVE-2023-30837, GHSA-mgv8-gggw-mrg6
+references:
+  https://github.com/vyperlang/vyper/commit/0bb7203b584e771b23536ba065a6efda457161bb
+  https://github.com/vyperlang/vyper/security/advisories/GHSA-mgv8-gggw-mrg6
+  https://github.com/vyperlang/vyper/security/advisories/GHSA-mgv8-gggw-mrg6
+
+Vyper is a pythonic smart contract language for the EVM. The storage allocator does not guard against allocation overflows in versions prior to 0.3.8. An attacker can overwrite the owner variable. This issue was fixed in version 0.3.8.

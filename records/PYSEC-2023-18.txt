@@ -1,0 +1,14 @@
+PYSEC-2023-18 PyPI/langchain — In LangChain through 0.0.131, the LLMMathChain chain allows prompt injection attacks that can execut
+package: langchain
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.0.132 (ECOSYSTEM)
+aliases: CVE-2023-29374, GHSA-fprp-p869-w6q2
+references:
+  https://twitter.com/rharang/status/1641899743608463365/photo/1
+  https://github.com/hwchase17/langchain/pull/1119
+  https://github.com/hwchase17/langchain/issues/814
+  https://github.com/hwchase17/langchain/issues/1026
+  https://github.com/advisories/GHSA-fprp-p869-w6q2
+
+In LangChain through 0.0.131, the LLMMathChain chain allows prompt injection attacks that can execute arbitrary code via the Python exec method.

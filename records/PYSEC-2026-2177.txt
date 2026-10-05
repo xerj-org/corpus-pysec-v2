@@ -1,0 +1,12 @@
+PYSEC-2026-2177 PyPI/glances — Glances is an open-source system cross-platform monitoring tool. Prior to version 4.5.4, the Cassand
+package: glances
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.5.4 (ECOSYSTEM)
+aliases: CVE-2026-35588, GHSA-grp3-h8m8-45p7
+references:
+  https://github.com/nicolargo/glances/commit/d339181f03a14bb15506307e9d58f876e23d8160
+  https://github.com/nicolargo/glances/commit/e41b665576f9fd5374e3152078726cc59a01e48c
+  https://github.com/nicolargo/glances/security/advisories/GHSA-grp3-h8m8-45p7
+
+Glances is an open-source system cross-platform monitoring tool. Prior to version 4.5.4, the Cassandra export module (`glances/exports/glances_cassandra/__init__.py`) interpolates `keyspace`, `table`, and `replication_factor` configuration values directly into CQL statements without validation. A user with write access to `glances.conf` can redirect all monitoring data to an attacker-controlled Cassandra keyspace. Version 4.5.4 contains a fix.

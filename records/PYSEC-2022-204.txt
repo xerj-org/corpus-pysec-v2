@@ -1,0 +1,14 @@
+PYSEC-2022-204 PyPI/cookiecutter — The package cookiecutter before 2.1.1 are vulnerable to Command Injection via hg argument injection.
+package: cookiecutter
+ecosystem: PyPI
+versions affected:
+  >= 0, < fdffddb31fd2b46344dfa317531ff155e7999f77 (GIT: https://github.com/cookiecutter/cookiecutter)
+  >= 0, < 2.1.1 (ECOSYSTEM)
+aliases: CVE-2022-24065, SNYK-PYTHON-COOKIECUTTER-2414281, GHSA-f4q6-9qm4-h8j4
+references:
+  https://snyk.io/vuln/SNYK-PYTHON-COOKIECUTTER-2414281
+  https://github.com/cookiecutter/cookiecutter/commit/fdffddb31fd2b46344dfa317531ff155e7999f77
+  https://github.com/cookiecutter/cookiecutter/releases/tag/2.1.1
+  https://github.com/advisories/GHSA-f4q6-9qm4-h8j4
+
+The package cookiecutter before 2.1.1 are vulnerable to Command Injection via hg argument injection. When calling the cookiecutter function from Python code with the checkout parameter, it is passed to the hg checkout command in a way that additional flags can be set. The additional flags can be used to perform a command injection.

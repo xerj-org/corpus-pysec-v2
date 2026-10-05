@@ -1,0 +1,12 @@
+PYSEC-2026-798 PyPI/crawl4ai — Crawl4AI before 0.8.7 contains an arbitrary JavaScript execution vulnerability in the Docker API ser
+package: crawl4ai
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.8.7 (ECOSYSTEM)
+aliases: CVE-2026-56264, GHSA-g2pv-76hm-j4x9
+references:
+  https://github.com/advisories/GHSA-g2pv-76hm-j4x9
+  https://www.vulncheck.com/advisories/crawl4ai-arbitrary-javascript-execution-via-execute-js-endpoint
+  https://github.com/unclecode/crawl4ai
+
+Crawl4AI before 0.8.7 contains an arbitrary JavaScript execution vulnerability in the Docker API server's /execute_js endpoint, which accepts and executes arbitrary user-supplied JavaScript in the server's browser context with --disable-web-security enabled. An attacker can execute arbitrary JavaScript and, combined with the browser's relaxed security settings, perform server-side request forgery against internal services.

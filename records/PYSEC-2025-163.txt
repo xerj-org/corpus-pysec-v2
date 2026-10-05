@@ -1,0 +1,14 @@
+PYSEC-2025-163 PyPI/pyassimp — A vulnerability was found in Open Asset Import Library Assimp 5.4.3 and classified as problematic. T
+package: pyassimp
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 5.4.3 (ECOSYSTEM)
+aliases: CVE-2025-2752
+references:
+  https://vuldb.com/?id.300857
+  https://vuldb.com/?submit.517786
+  https://github.com/assimp/assimp/issues/6013
+  https://github.com/assimp/assimp/issues/6013#issue-2877371176
+  https://vuldb.com/?ctiid.300857
+
+A vulnerability was found in Open Asset Import Library Assimp 5.4.3 and classified as problematic. This issue affects the function fast_atoreal_move in the library include/assimp/fast_atof.h of the component CSM File Handler. The manipulation leads to out-of-bounds read. The attack may be initiated remotely. The exploit has been disclosed to the public and may be used.

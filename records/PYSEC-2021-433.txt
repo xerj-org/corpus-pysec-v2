@@ -1,0 +1,13 @@
+PYSEC-2021-433 PyPI/s3scanner — S3Scanner before 2.0.2 allows Directory Traversal via a crafted bucket, as demonstrated by a <Key>..
+package: s3scanner
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.0.2 (ECOSYSTEM)
+aliases: CVE-2021-32061, GHSA-qppg-v75c-r5ff
+references:
+  https://github.com/sa7mon/S3Scanner/releases/tag/2.0.2
+  https://github.com/sa7mon/S3Scanner/issues/122
+  https://vuln.ryotak.me/advisories/62
+  https://github.com/advisories/GHSA-qppg-v75c-r5ff
+
+S3Scanner before 2.0.2 allows Directory Traversal via a crafted bucket, as demonstrated by a <Key>../ substring in a ListBucketResult element.

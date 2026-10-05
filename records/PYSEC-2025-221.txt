@@ -1,0 +1,10 @@
+PYSEC-2025-221 PyPI/vantage6-server — vantage6 is an open-source infrastructure for privacy preserving analysis. The JWT secret key in the
+package: vantage6-server
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.11.0 (ECOSYSTEM)
+aliases: CVE-2025-43866, GHSA-m3mq-f375-5vgh
+references:
+  https://github.com/vantage6/vantage6/security/advisories/GHSA-m3mq-f375-5vgh
+
+vantage6 is an open-source infrastructure for privacy preserving analysis. The JWT secret key in the vantage6 server is auto-generated unless defined by the user. The auto-generated key is a UUID1, which is not cryptographically secure as it is predictable to some extent. This vulnerability is fixed in 4.11.0.

@@ -1,0 +1,109 @@
+PYSEC-2026-4077 PyPI/lmdeploy — LMDeploy has Remote Code Execution by Pickle Deserialization via handle_zmq_recv in lmdeploy/lmdeploy/pytorch/disagg/conn/engine_conn.py
+package: lmdeploy
+ecosystem: PyPI
+versions affected:
+  >= 0.9.2, < 0.16.0 (ECOSYSTEM)
+aliases: CVE-2025-66455, GHSA-2vh9-42vm-xmv2
+references:
+  https://github.com/InternLM/lmdeploy/security/advisories/GHSA-2vh9-42vm-xmv2
+  https://github.com/InternLM/lmdeploy/commit/f05b4ad8bf2e2d84101a1d63b3c44fadd99223b2
+  https://github.com/InternLM/lmdeploy
+  https://github.com/InternLM/lmdeploy/releases/tag/v0.16.0
+  https://pypi.org/project/lmdeploy
+  https://github.com/advisories/GHSA-2vh9-42vm-xmv2
+  https://nvd.nist.gov/vuln/detail/CVE-2025-66455
+
+## Summary
+
+LMDeploy's PyTorch DistServe/PD-disaggregation control plane used
+`recv_pyobj()` to deserialize messages received through a ZeroMQ PULL
+socket. PyZMQ implements `recv_pyobj()` using Python pickle
+deserialization, which can execute arbitrary code while reconstructing
+an object.
+
+The peer address used by the receiver was supplied through the
+`POST /distserve/p2p_connect` HTTP endpoint. An attacker who could reach
+an affected DistServe API server could cause the server to connect to an
+attacker-controlled ZeroMQ endpoint and deserialize a crafted pickle
+payload.
+
+API-key authentication is not enabled unless the operator explicitly
+configures it. As a result, affected DistServe deployments without API
+keys allowed unauthenticated remote code execution with the privileges
+of the LMDeploy serving process.
+
+This issue affects the PyTorch backend when PD-disaggregation/DistServe
+is enabled. Ordinary deployments that do not use the affected
+disaggregated-serving path do not expose this data flow.
+
+## Affected components
+
+- HTTP entry point:
+  `lmdeploy/serve/openai/endpoints/distserve.py`,
+  `POST /distserve/p2p_connect`
+- Attacker-controlled peer address:
+  `DistServeConnectionRequest.remote_engine_endpoint_info.zmq_address`
+- Vulnerable receiver:
+  `lmdeploy/pytorch/disagg/conn/engine_conn.py`,
+  `EngineP2PConnection.handle_zmq_recv()`
+- Unsafe operation: `recv_pyobj()`, which performs pickle deserialization
+
+## Vulnerable data flow
+
+1. A caller submits a DistServe P2P connection request containing a
+   ZeroMQ address.
+2. The LMDeploy engine connects its ZeroMQ PULL socket to that address.
+3. `handle_zmq_recv()` receives messages using `recv_pyobj()`.
+4. A malicious peer sends a crafted pickle object.
+5. Python code executes during deserialization, before LMDeploy can
+   perform any type or field validation.
+
+  A type check performed after `recv_pyobj()` cannot mitigate this issue
+  because pickle payload execution occurs during deserialization.
+
+## Impact
+
+Successful exploitation allows arbitrary code execution as the
+LMDeploy serving process. This can expose model weights, prompts,
+credentials, attached storage, cluster-network services, and host or
+GPU resources. An attacker may also modify or terminate the serving
+process.
+
+## Affected versions
+
+Affected versions:
+
+- `lmdeploy >= 0.9.2, < 0.16.0`
+
+The vulnerable P2P receiver was introduced in commit `b0b705f7`.
+
+## Remediation
+
+The issue was fixed by replacing the pickle-based ZeroMQ protocol with
+JSON serialization:
+
+- `send_pyobj()` was replaced with `send_json()`.
+- `recv_pyobj()` was replaced with `recv_json()`.
+- Received objects are validated using the
+  `DistServeCacheFreeRequest` Pydantic schema before use.
+- Invalid or off-schema messages are rejected without terminating the
+  receive loop.
+
+Fix commit:
+
+https://github.com/InternLM/lmdeploy/commit/f05b4ad8bf2e2d84101a1d63b3c44fadd99223b2
+
+The fix was released in LMDeploy 0.16.0.
+
+## Workarounds
+
+Users who cannot upgrade immediately should:
+
+- Prevent untrusted clients from reaching `/distserve/*` endpoints.
+- Restrict the DistServe HTTP and ZeroMQ control planes to trusted
+  cluster networks.
+- Configure API-key authentication.
+- Block arbitrary outbound ZeroMQ connections from serving nodes.
+
+These measures reduce exposure but do not make pickle deserialization
+safe. Upgrading to LMDeploy 0.16.0 or later is recommended.

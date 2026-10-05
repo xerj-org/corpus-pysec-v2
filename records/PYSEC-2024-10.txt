@@ -1,0 +1,14 @@
+PYSEC-2024-10 PyPI/portage — In Gentoo Portage before 3.0.47, there is missing PGP validation of executed code: the standalone em
+package: portage
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.0.47 (ECOSYSTEM)
+aliases: CVE-2016-20021, GHSA-pw5x-x5jw-ccmh
+references:
+  https://wiki.gentoo.org/wiki/Portage
+  https://gitweb.gentoo.org/proj/portage.git/tree/NEWS
+  https://bugs.gentoo.org/597800
+  https://bugs.gentoo.org/597800
+  https://github.com/advisories/GHSA-pw5x-x5jw-ccmh
+
+In Gentoo Portage before 3.0.47, there is missing PGP validation of executed code: the standalone emerge-webrsync downloads a .gpgsig file but does not perform signature verification. Unless emerge-webrsync is used, Portage is not vulnerable.

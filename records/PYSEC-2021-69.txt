@@ -1,0 +1,13 @@
+PYSEC-2021-69 PyPI/pillow — In Pillow before 8.1.0, PcxDecode has a buffer over-read when decoding a crafted PCX file because th
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 8.1.0 (ECOSYSTEM)
+aliases: CVE-2020-35653, GHSA-f5g8-5qq7-938w
+references:
+  https://pillow.readthedocs.io/en/stable/releasenotes/index.html
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/BF553AMNNNBW7SH4IM4MNE4M6GNZQ7YD/
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/6BYVI5G44MRIPERKYDQEL3S3YQCZTVHE/
+  https://github.com/advisories/GHSA-f5g8-5qq7-938w
+
+In Pillow before 8.1.0, PcxDecode has a buffer over-read when decoding a crafted PCX file because the user-supplied stride value is trusted for buffer calculations.

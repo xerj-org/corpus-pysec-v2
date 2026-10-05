@@ -1,0 +1,10 @@
+PYSEC-2019-25 PyPI/invenio-communities — invenio-communities before 1.0.0a20 allows XSS.
+package: invenio-communities
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0.0a20 (ECOSYSTEM)
+aliases: CVE-2019-1020005, GHSA-mfv8-q39f-mgfg
+references:
+  https://github.com/inveniosoftware/invenio-communities/security/advisories/GHSA-mfv8-q39f-mgfg
+
+invenio-communities before 1.0.0a20 allows XSS.

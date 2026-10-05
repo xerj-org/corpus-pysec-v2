@@ -1,0 +1,13 @@
+PYSEC-2022-43019 PyPI/d8s-algorithms — The d8s-algorithms package for Python, as distributed on PyPI, included a potential code-execution b
+package: d8s-algorithms
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-42040
+references:
+  https://pypi.org/project/democritus-dicts/
+  https://github.com/dadadadada111/info/issues/1
+  https://github.com/dadadadada111/info/issues/1
+  https://pypi.org/project/d8s-algorithms/
+
+The d8s-algorithms package for Python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. The backdoor is the democritus-dicts package. The affected version is 0.1.0.

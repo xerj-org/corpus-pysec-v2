@@ -1,0 +1,11 @@
+PYSEC-2026-3784 PyPI/gitpython — GitPython before 3.1.58 fails to validate submodule names from .gitmodules files, allowing attackers
+package: gitpython
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.1.58 (ECOSYSTEM)
+aliases: CVE-2026-76222, GHSA-hmq2-w58f-27jc
+references:
+  https://www.vulncheck.com/advisories/gitpython-before-path-traversal-via-gitmodules-submodule-name
+  https://github.com/gitpython-developers/GitPython/security/advisories/GHSA-hmq2-w58f-27jc
+
+GitPython before 3.1.58 fails to validate submodule names from .gitmodules files, allowing attackers to create Git repositories at arbitrary filesystem paths outside the intended clone directory. Attackers can craft malicious repositories with traversal sequences in submodule names that GitPython processes during submodule initialization, creating attacker-controlled Git repositories at escaped filesystem locations.

@@ -1,0 +1,13 @@
+PYSEC-2022-285 PyPI/rdiffweb — Cross-Site Request Forgery (CSRF) in GitHub repository ikus060/rdiffweb prior to 2.4.6.
+package: rdiffweb
+ecosystem: PyPI
+versions affected:
+  >= 0, < 18a5aabd48fa6d2d2771a25f95610c28a1a097ca (GIT: https://github.com/ikus060/rdiffweb)
+  >= 0, < 2.4.6 (ECOSYSTEM)
+aliases: CVE-2022-3233, GHSA-9vxf-mcm6-5m42
+references:
+  https://huntr.dev/bounties/5ec206e0-eca0-4957-9af4-fdd9185d1db3
+  https://github.com/ikus060/rdiffweb/commit/18a5aabd48fa6d2d2771a25f95610c28a1a097ca
+  https://github.com/advisories/GHSA-9vxf-mcm6-5m42
+
+Cross-Site Request Forgery (CSRF) in GitHub repository ikus060/rdiffweb prior to 2.4.6.

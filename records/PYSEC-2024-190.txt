@@ -1,0 +1,14 @@
+PYSEC-2024-190 PyPI/apache-airflow — Apache Airflow 2.4.0, and versions before 2.9.3, has a vulnerability that allows authenticated DAG a
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 2.4.0, < 2.9.3 (ECOSYSTEM)
+aliases: CVE-2024-39877, GHSA-g5hv-r743-v8pm
+references:
+  https://lists.apache.org/thread/1xhj9dkp37d6pzn24ll2mf94wbqnb2y1
+  https://github.com/apache/airflow/pull/40522
+  https://github.com/apache/airflow/pull/40522
+  http://www.openwall.com/lists/oss-security/2024/07/16/7
+  https://github.com/advisories/GHSA-g5hv-r743-v8pm
+
+Apache Airflow 2.4.0, and versions before 2.9.3, has a vulnerability that allows authenticated DAG authors to craft a doc_md parameter in a way that could execute arbitrary code in the scheduler context, which should be forbidden according to the Airflow Security model. Users should upgrade to version 2.9.3 or later which has removed the vulnerability.

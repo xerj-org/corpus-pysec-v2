@@ -1,0 +1,11 @@
+PYSEC-2019-170 PyPI/python-engineio — An issue was discovered in python-engineio through 3.8.2. There is a Cross-Site WebSocket Hijacking 
+package: python-engineio
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.9.0 (ECOSYSTEM)
+aliases: CVE-2019-13611, GHSA-j3jp-gvr5-7hwq
+references:
+  https://github.com/miguelgrinberg/python-engineio/issues/128
+  https://github.com/advisories/GHSA-j3jp-gvr5-7hwq
+
+An issue was discovered in python-engineio through 3.8.2. There is a Cross-Site WebSocket Hijacking (CSWSH) vulnerability that allows attackers to make WebSocket connections to a server by using a victim's credentials, because the Origin header is not restricted.

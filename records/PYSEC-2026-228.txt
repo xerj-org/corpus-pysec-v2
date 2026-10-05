@@ -1,0 +1,11 @@
+PYSEC-2026-228 PyPI/crawl4ai — Crawl4AI before 0.8.8 contains an arbitrary file write vulnerability in the screenshot and PDF endpo
+package: crawl4ai
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.8.8 (ECOSYSTEM)
+aliases: CVE-2026-56258, GHSA-7cx2-g3h9-382p
+references:
+  https://github.com/unclecode/crawl4ai/security/advisories/GHSA-7cx2-g3h9-382p
+  https://www.vulncheck.com/advisories/crawl4ai-arbitrary-file-write-via-output-path-symlink-and-toctou
+
+Crawl4AI before 0.8.8 contains an arbitrary file write vulnerability in the screenshot and PDF endpoints that allows unauthenticated attackers to write files outside the intended directory via symlink and time-of-check-time-of-use (TOCTOU) attacks on the output_path parameter. Remote attackers can exploit insufficient path validation and symlink following to achieve arbitrary file write and potential code execution on systems where the runtime user has write access to executable or cron locations.

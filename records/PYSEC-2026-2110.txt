@@ -1,0 +1,11 @@
+PYSEC-2026-2110 PyPI/aiohttp — AIOHTTP is an asynchronous HTTP client/server framework for asyncio and Python. Prior to 3.14.1, it 
+package: aiohttp
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.14.1 (ECOSYSTEM)
+aliases: CVE-2026-54277, GHSA-63hw-fmq6-xxg2
+references:
+  https://github.com/aio-libs/aiohttp/security/advisories/GHSA-63hw-fmq6-xxg2
+  https://github.com/aio-libs/aiohttp/commit/5ab61bb4cd88f19b712f12c7c9295fe262bf804d
+
+AIOHTTP is an asynchronous HTTP client/server framework for asyncio and Python. Prior to 3.14.1, it is possible to bypass the max_line_size check in parts of an HTTP request in the C parser. If using the optimised C parser (the default in pre-built wheels), then an attacker may be able to send oversized lines through the HTTP parser and use an excessive amount of memory, potentially leading to DoS. This vulnerability is fixed in 3.14.1.

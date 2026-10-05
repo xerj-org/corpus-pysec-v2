@@ -1,0 +1,17 @@
+PYSEC-2026-820 PyPI/graphite-web — Graphite Web Cross-site Scripting vulnerability
+package: graphite-web
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 1.1.10 (ECOSYSTEM)
+aliases: CVE-2022-4729, GHSA-q99p-78hp-xg5c
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2022-4729
+  https://github.com/graphite-project/graphite-web/issues/2745
+  https://github.com/graphite-project/graphite-web/pull/2785
+  https://github.com/graphite-project/graphite-web/commit/2f178f490e10efc03cd1d27c72f64ecab224eb23
+  https://github.com/graphite-project/graphite-web
+  https://vuldb.com/?id.216743
+  https://pypi.org/project/graphite-web
+  https://github.com/advisories/GHSA-q99p-78hp-xg5c
+
+A vulnerability was found in Graphite Web and classified as problematic. This issue affects some unknown processing of the component Template Name Handler. The manipulation leads to cross site scripting. The attack may be initiated remotely. The exploit has been disclosed to the public and may be used. The name of the patch is 2f178f490e10efc03cd1d27c72f64ecab224eb23. It is recommended to apply a patch to fix this issue. The associated identifier of this vulnerability is VDB-216743.

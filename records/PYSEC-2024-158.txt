@@ -1,0 +1,16 @@
+PYSEC-2024-158 PyPI/djoser — Versions of the package djoser before 2.3.0 are vulnerable to Authentication Bypass when the authent
+package: djoser
+ecosystem: PyPI
+versions affected:
+  >= 0, < d33c3993c0c735f23cbedc60fa59fce69354f19d (GIT: https://github.com/sunscrapers/djoser)
+  >= 0, < 2.3.0 (ECOSYSTEM)
+aliases: CVE-2024-21543, GHSA-v49p-m6gh-747c
+references:
+  https://github.com/sunscrapers/djoser/commit/d33c3993c0c735f23cbedc60fa59fce69354f19d
+  https://github.com/sunscrapers/djoser/issues/795
+  https://github.com/sunscrapers/djoser/pull/819
+  https://github.com/sunscrapers/djoser/releases/tag/2.3.0
+  https://security.snyk.io/vuln/SNYK-PYTHON-DJOSER-8366540
+  https://github.com/advisories/GHSA-v49p-m6gh-747c
+
+Versions of the package djoser before 2.3.0 are vulnerable to Authentication Bypass when the authenticate() function fails. This is because the system falls back to querying the database directly, granting access to users with valid credentials, and eventually bypassing custom authentication checks such as two-factor authentication, LDAP validations, or requirements from configured AUTHENTICATION_BACKENDS.

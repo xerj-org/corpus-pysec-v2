@@ -1,0 +1,17 @@
+PYSEC-2009-13 PyPI/moin — MoinMoin 1.6.2 and 1.7 does not properly enforce ACL checks when acl_hierarchic is set to True, whic
+package: moin
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.6.3, >= 1.7, < 1.7.1 (ECOSYSTEM)
+aliases: CVE-2008-6603, GHSA-wc8w-gh5m-62fv
+references:
+  http://osvdb.org/48875
+  http://hg.moinmo.in/moin/1.6/rev/543ae9bdbe26
+  http://moinmo.in/MoinMoinBugs/AclHierarchicPageAclSupercededByAclRightsAfter
+  http://www.vupen.com/english/advisories/2008/1307
+  http://hg.moinmo.in/moin/1.7/rev/88356b3f849a
+  http://moinmo.in/SecurityFixes
+  http://www.securityfocus.com/bid/34655
+  https://exchange.xforce.ibmcloud.com/vulnerabilities/41911
+
+MoinMoin 1.6.2 and 1.7 does not properly enforce ACL checks when acl_hierarchic is set to True, which might allow remote attackers to bypass intended access restrictions, a different vulnerability than CVE-2008-1937.

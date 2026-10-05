@@ -1,0 +1,11 @@
+PYSEC-2024-44 PyPI/rpyc — In RPyC before 6.0.0, when a server exposes a method that calls the attribute named __array__ for a 
+package: rpyc
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.0.0 (ECOSYSTEM)
+aliases: CVE-2024-27758, GHSA-h5cg-53g7-gqjw
+references:
+  https://gist.github.com/renbou/957f70d27470982994f12a1d70153d09
+  https://github.com/tomerfiliba-org/rpyc/security/advisories/GHSA-h5cg-53g7-gqjw
+
+In RPyC before 6.0.0, when a server exposes a method that calls the attribute named __array__ for a client-provided netref (e.g., np.array(client_netref)), a remote attacker can craft a class that results in remote code execution.

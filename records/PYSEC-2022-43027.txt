@@ -1,0 +1,13 @@
+PYSEC-2022-43027 PyPI/d8s-lists — The d8s-lists package for Python, as distributed on PyPI, included a potential code-execution backdo
+package: d8s-lists
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2022-42039
+references:
+  https://pypi.org/project/democritus-dicts/
+  https://github.com/democritus-project/d8s-lists/issues/18
+  https://github.com/democritus-project/d8s-lists/issues/18
+  https://pypi.org/project/d8s-lists/
+
+The d8s-lists package for Python, as distributed on PyPI, included a potential code-execution backdoor inserted by a third party. The backdoor is the democritus-dicts package. The affected version is 0.1.0.

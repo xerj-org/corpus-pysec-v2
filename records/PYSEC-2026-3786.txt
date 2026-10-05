@@ -1,0 +1,11 @@
+PYSEC-2026-3786 PyPI/gitpython — GitPython before 3.1.59 fails to safely re-serialize multi-line git-config values during write opera
+package: gitpython
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.1.59 (ECOSYSTEM)
+aliases: CVE-2026-78676, GHSA-284h-m62q-gf8w
+references:
+  https://www.vulncheck.com/advisories/gitpython-before-remote-code-execution-via-config-injection
+  https://github.com/gitpython-developers/GitPython/security/advisories/GHSA-284h-m62q-gf8w
+
+GitPython before 3.1.59 fails to safely re-serialize multi-line git-config values during write operations, corrupting dormant quoted values into injected directives like core.hooksPath. Attackers can craft config files with embedded newlines that become live git directives after any unrelated GitPython config write, enabling arbitrary code execution via hook invocation.

@@ -1,0 +1,11 @@
+PYSEC-2023-97 PyPI/easy-parse — easy-parse v0.1.1 was discovered to contain a XML External Entity Injection (XXE) vulnerability whic
+package: easy-parse
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2020-26710, GHSA-vv6q-6hwp-vrgp
+references:
+  https://github.com/uncmath25/easy-parse/issues/3
+  https://github.com/advisories/GHSA-vv6q-6hwp-vrgp
+
+easy-parse v0.1.1 was discovered to contain a XML External Entity Injection (XXE) vulnerability which allows attackers to execute arbitrary code via a crafted XML file.

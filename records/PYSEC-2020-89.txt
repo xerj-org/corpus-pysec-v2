@@ -1,0 +1,14 @@
+PYSEC-2020-89 PyPI/plone — Missing password strength checks on some forms in Plone 4.3 through 5.2.0 allow users to set weak pa
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 4.3, < 5.2.1 (ECOSYSTEM)
+aliases: CVE-2020-7940, GHSA-cw58-gpgw-hwx2
+references:
+  https://plone.org/security/hotfix/20200121
+  https://plone.org/security/hotfix/20200121/password-strength-checks-were-not-always-checked
+  https://www.openwall.com/lists/oss-security/2020/01/22/1
+  http://www.openwall.com/lists/oss-security/2020/01/24/1
+  https://github.com/advisories/GHSA-cw58-gpgw-hwx2
+
+Missing password strength checks on some forms in Plone 4.3 through 5.2.0 allow users to set weak passwords, leading to easier cracking.

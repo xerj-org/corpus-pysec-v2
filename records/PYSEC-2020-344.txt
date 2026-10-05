@@ -1,0 +1,18 @@
+PYSEC-2020-344 PyPI/exiv2 — In Jp2Image::readMetadata() in jp2image.cpp in Exiv2 0.27.2, an input file can result in an infinite
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0, < a82098f4f90cd86297131b5663c3dec6a34470e8 (GIT: https://github.com/Exiv2/exiv2)
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2019-20421
+references:
+  https://github.com/Exiv2/exiv2/commit/a82098f4f90cd86297131b5663c3dec6a34470e8
+  https://github.com/Exiv2/exiv2/issues/1011
+  https://github.com/Exiv2/exiv2/issues/1011
+  https://github.com/Exiv2/exiv2/issues/1011
+  https://usn.ubuntu.com/4270-1/
+  https://www.debian.org/security/2021/dsa-4958
+  https://lists.debian.org/debian-lts-announce/2021/08/msg00028.html
+  https://lists.debian.org/debian-lts-announce/2021/08/msg00028.html
+
+In Jp2Image::readMetadata() in jp2image.cpp in Exiv2 0.27.2, an input file can result in an infinite loop and hang, with high CPU consumption. Remote attackers could leverage this vulnerability to cause a denial of service via a crafted file.

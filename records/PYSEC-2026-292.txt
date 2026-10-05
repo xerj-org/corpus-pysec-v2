@@ -1,0 +1,22 @@
+PYSEC-2026-292 PyPI/bbot — BBOT's various issues in unarchive.py can cause arbitrary file write and RCE
+package: bbot
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.7.0 (ECOSYSTEM)
+aliases: CVE-2025-10284, GHSA-fhw8-8v9p-7jp7
+references:
+  https://github.com/blacklanternsecurity/bbot/security/advisories/GHSA-fhw8-8v9p-7jp7
+  https://nvd.nist.gov/vuln/detail/CVE-2025-10284
+  https://github.com/blacklanternsecurity/bbot/commit/6325f2f4f8f6f4545703e4c9b8004e69f71bec82
+  https://blog.blacklanternsecurity.com/p/bbot-security-advisory-gitdumper
+  https://github.com/blacklanternsecurity/bbot
+  https://pypi.org/project/bbot
+  https://github.com/advisories/GHSA-fhw8-8v9p-7jp7
+
+### Summary
+
+Various issues in bbot's `unarchive.py` allow a malicious site to cause bbot to write arbitrary files to arbitrary locations. This can be used to achieve Remote Code Execution (RCE).
+
+### Impact
+
+A user who uses bbot to scan a malicious webserver may have arbitrary code executed on their system.

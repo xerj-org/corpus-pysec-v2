@@ -1,0 +1,14 @@
+PYSEC-2020-229 PyPI/django-nopassword — django-nopassword before 5.0.0 stores cleartext secrets in the database.
+package: django-nopassword
+ecosystem: PyPI
+versions affected:
+  >= 0, < d8b4615f5fbfe3997d96cf4cb3e342406396193c (GIT: https://github.com/relekang/django-nopassword)
+  >= 0, < 5.0.0 (ECOSYSTEM)
+aliases: CVE-2019-10682, GHSA-37cf-r3w2-gjfw
+references:
+  https://github.com/relekang/django-nopassword/commit/d8b4615f5fbfe3997d96cf4cb3e342406396193c
+  https://github.com/relekang/django-nopassword/blob/8e8cfc765ee00adfed120c2c79bf71ef856e9022/nopassword/models.py#L14
+  https://github.com/relekang/django-nopassword/compare/v4.0.1...v5.0.0
+  https://github.com/advisories/GHSA-37cf-r3w2-gjfw
+
+django-nopassword before 5.0.0 stores cleartext secrets in the database.

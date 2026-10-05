@@ -1,0 +1,11 @@
+PYSEC-2023-243 PyPI/localstack — Missing SSL certificate validation in localstack v2.3.2 allows attackers to eavesdrop on communicati
+package: localstack
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2023-48054, GHSA-8633-g3ph-97rp
+references:
+  https://gxx777.github.io/localstack_v_2.3.2_Cryptographic_API_Misuse_Vulnerability.md
+  https://github.com/advisories/GHSA-8633-g3ph-97rp
+
+Missing SSL certificate validation in localstack v2.3.2 allows attackers to eavesdrop on communications between the host and server via a man-in-the-middle attack.

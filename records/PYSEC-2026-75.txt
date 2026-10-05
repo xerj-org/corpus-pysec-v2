@@ -1,0 +1,13 @@
+PYSEC-2026-75 PyPI/langchain-exa — LangChain versions up to and including 0.3.1 contain a regular expression denial-of-service (ReDoS) 
+package: langchain-exa
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0.0a1 (ECOSYSTEM)
+aliases: CVE-2024-58340
+references:
+  https://www.langchain.com/
+  https://www.vulncheck.com/advisories/langchain-mrkloutputparser-redos
+  https://huntr.com/bounties/e7ece02c-d4bb-4166-8e08-6baf4f8845bb
+  https://github.com/langchain-ai/langchain
+
+LangChain versions up to and including 0.3.1 contain a regular expression denial-of-service (ReDoS) vulnerability in the MRKLOutputParser.parse() method (libs/langchain/langchain/agents/mrkl/output_parser.py). The parser applies a backtracking-prone regular expression when extracting tool actions from model output. An attacker who can supply or influence the parsed text (for example via prompt injection in downstream applications that pass LLM output directly into MRKLOutputParser.parse()) can trigger excessive CPU consumption by providing a crafted payload, causing significant parsing delays and a denial-of-service condition.

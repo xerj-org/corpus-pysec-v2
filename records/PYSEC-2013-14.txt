@@ -1,0 +1,13 @@
+PYSEC-2013-14 PyPI/salt — Salt (aka SaltStack) before 0.15.0 through 0.17.0 allows remote authenticated minions to impersonate
+package: salt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.17.1 (ECOSYSTEM)
+aliases: CVE-2013-4439, GHSA-jmv9-5gx8-7xpf
+references:
+  http://www.openwall.com/lists/oss-security/2013/10/18/3
+  http://docs.saltstack.com/topics/releases/0.17.1.html
+  https://github.com/saltstack/salt/pull/7356
+  https://github.com/advisories/GHSA-jmv9-5gx8-7xpf
+
+Salt (aka SaltStack) before 0.15.0 through 0.17.0 allows remote authenticated minions to impersonate arbitrary minions via a crafted minion with a valid key.

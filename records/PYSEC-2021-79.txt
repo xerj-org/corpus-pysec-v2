@@ -1,0 +1,12 @@
+PYSEC-2021-79 PyPI/plone — Zope Products.CMFCore before 2.5.1 and Products.PluggableAuthService before 2.6.2, as used in Plone 
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.2.5 (ECOSYSTEM)
+aliases: CVE-2021-33507, GHSA-35rg-466w-77h3
+references:
+  https://plone.org/security/hotfix/20210518/reflected-xss-in-various-spots
+  http://www.openwall.com/lists/oss-security/2021/05/22/1
+  https://github.com/advisories/GHSA-35rg-466w-77h3
+
+Zope Products.CMFCore before 2.5.1 and Products.PluggableAuthService before 2.6.2, as used in Plone through 5.2.4 and other products, allow Reflected XSS.

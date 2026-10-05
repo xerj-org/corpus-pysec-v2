@@ -1,0 +1,13 @@
+PYSEC-2026-2242 PyPI/openc3 — OpenC3 COSMOS provides the functionality needed to send commands to and receive data from one or mor
+package: openc3
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.10.5 (ECOSYSTEM)
+aliases: CVE-2026-42084, GHSA-wgx6-g857-jjf7
+references:
+  https://github.com/OpenC3/cosmos/releases/tag/v6.10.5
+  https://github.com/OpenC3/cosmos/releases/tag/v7.0.0-rc3
+  https://github.com/OpenC3/cosmos/commit/2e623714e3426d5ae81b6f8239d4a2a6937ef776
+  https://github.com/OpenC3/cosmos/security/advisories/GHSA-wgx6-g857-jjf7
+
+OpenC3 COSMOS provides the functionality needed to send commands to and receive data from one or more embedded systems. Prior to versions 6.10.5 and 7.0.0-rc3, the OpenC3 password change functionality allows a user to change their password without providing the old password, by accepting a valid session token instead. In assumed breach scenarios, this behaviour can be exploited by an attacker who has already obtained a valid session token, to gain persistence in hijacked account (including admin) and prevent legitimate users from accessing the account. This issue has been patched in versions 6.10.5 and 7.0.0-rc3.

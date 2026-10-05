@@ -1,0 +1,11 @@
+PYSEC-2026-3799 PyPI/openssl-encrypt — openssl_encrypt (pip: openssl-encrypt) versions <= 1.4.8 use suffix-tolerant fingerprint matching in
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.9 (ECOSYSTEM)
+aliases: CVE-2026-81714, GHSA-xg52-638v-jc5m
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-xg52-638v-jc5m
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-1.4.9-plugin-signing-trust-anchor-enrollment-bypass
+
+openssl_encrypt (pip: openssl-encrypt) versions <= 1.4.8 use suffix-tolerant fingerprint matching in enroll_trust_key when binding a plugin-signing trust anchor. An operator who confirms a short (forgeable, ~32-bit) GPG key id could unknowingly enroll an attacker's colliding key as a trusted anchor, which then vouches for malicious plugins under the ENFORCE signature policy. Version 1.4.9 fixes this by requiring the confirmed value to exactly match the full primary-key fingerprint (case-insensitive, whitespace-stripped).

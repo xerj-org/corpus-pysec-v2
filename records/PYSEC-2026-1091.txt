@@ -1,0 +1,14 @@
+PYSEC-2026-1091 PyPI/aim — Aim Relative Path Traversal vulnerability
+package: aim
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 3.19.3 (ECOSYSTEM)
+aliases: CVE-2024-6483, GHSA-p6x3-v6g3-7557
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-6483
+  https://github.com/aimhubio/aim
+  https://huntr.com/bounties/dc45d480-e579-4af4-8603-c52ecfd5e363
+  https://pypi.org/project/aim
+  https://github.com/advisories/GHSA-p6x3-v6g3-7557
+
+A vulnerability in the `runs/delete-batch` endpoint of aimhubio/aim version 3.19.3 allows for arbitrary file or directory deletion through path traversal. The endpoint does not mitigate path traversal when handling user-specified run-names, which are used to specify log/metadata files for deletion. This can be exploited to delete arbitrary files or directories, potentially causing denial of service or data loss.

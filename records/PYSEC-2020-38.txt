@@ -1,0 +1,11 @@
+PYSEC-2020-38 PyPI/django-celery-results — django-celery-results through 1.2.1 stores task results in the database. Among the data it stores ar
+package: django-celery-results
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.0.0 (ECOSYSTEM)
+aliases: CVE-2020-17495, GHSA-fvx8-v524-8579
+references:
+  https://github.com/celery/django-celery-results/issues/142
+  https://github.com/advisories/GHSA-fvx8-v524-8579
+
+django-celery-results through 1.2.1 stores task results in the database. Among the data it stores are the variables passed into the tasks. The variables may contain sensitive cleartext information that does not belong unencrypted in the database.

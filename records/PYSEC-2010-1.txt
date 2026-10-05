@@ -1,0 +1,14 @@
+PYSEC-2010-1 PyPI/mako — Mako before 0.3.4 relies on the cgi.escape function in the Python standard library for cross-site sc
+package: mako
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.3.4 (ECOSYSTEM)
+aliases: CVE-2010-2480, GHSA-7q8x-38mc-p84f
+references:
+  http://bugs.python.org/issue9061
+  http://secunia.com/advisories/39935
+  http://www.makotemplates.org/CHANGES
+  http://lists.opensuse.org/opensuse-security-announce/2010-08/msg00001.html
+  https://github.com/advisories/GHSA-7q8x-38mc-p84f
+
+Mako before 0.3.4 relies on the cgi.escape function in the Python standard library for cross-site scripting (XSS) protection, which makes it easier for remote attackers to conduct XSS attacks via vectors involving single-quote characters and a JavaScript onLoad event handler for a BODY element.

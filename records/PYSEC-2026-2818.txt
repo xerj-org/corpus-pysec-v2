@@ -1,0 +1,17 @@
+PYSEC-2026-2818 PyPI/opencv-python — Out-of-bounds Read in OpenCV
+package: opencv-python
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.4.7.28, >= 4.0.0.21, < 4.1.1.26 (ECOSYSTEM)
+aliases: CVE-2019-14491, GHSA-fm39-cw8h-3p63
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2019-14491
+  https://github.com/opencv/opencv/issues/15125
+  https://github.com/opencv/opencv-python
+  https://github.com/opencv/opencv/compare/33b765d...4a7ca5a
+  https://github.com/opencv/opencv/compare/371bba8...ddbd10c
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/HPFLN6QAX6SUA4XR4NMKKXX26H3TYCVQ
+  https://pypi.org/project/opencv-python
+  https://github.com/advisories/GHSA-fm39-cw8h-3p63
+
+An issue was discovered in OpenCV before 3.4.7 and 4.x before 4.1.1 (OpenCV-Python before 3.4.7.28 and 4.x before 4.1.1.26). There is an out of bounds read in the function cv::predictOrdered<cv::HaarEvaluator> in modules/objdetect/src/cascadedetect.hpp, which leads to denial of service.

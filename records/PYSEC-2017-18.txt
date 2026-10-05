@@ -1,0 +1,15 @@
+PYSEC-2017-18 PyPI/mistune — Cross-site scripting (XSS) vulnerability in the _keyify function in mistune.py in Mistune before 0.8
+package: mistune
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5f06d724bc05580e7f203db2d4a4905fc1127f98 (GIT: https://github.com/lepture/mistune)
+  >= 0, < 0.8.1 (ECOSYSTEM)
+aliases: CVE-2017-16876, GHSA-98gj-wwxm-cj3h
+references:
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/NUR3GMHQBMA3UC4PFMCK6GCLOQC4LQQC/
+  https://github.com/lepture/mistune/commit/5f06d724bc05580e7f203db2d4a4905fc1127f98
+  https://github.com/lepture/mistune/blob/master/CHANGES.rst
+  https://bugzilla.redhat.com/show_bug.cgi?id=1524596
+  https://github.com/advisories/GHSA-98gj-wwxm-cj3h
+
+Cross-site scripting (XSS) vulnerability in the _keyify function in mistune.py in Mistune before 0.8.1 allows remote attackers to inject arbitrary web script or HTML by leveraging failure to escape the "key" argument.

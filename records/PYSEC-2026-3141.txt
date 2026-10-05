@@ -1,0 +1,35 @@
+PYSEC-2026-3141 PyPI/tensorflow — Core dump when loading TFLite models with quantization in TensorFlow
+package: tensorflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.6.4, >= 2.7.0, < 2.7.2, >= 2.8.0, < 2.8.1 (ECOSYSTEM)
+aliases: CVE-2022-29212, GHSA-8wwm-6264-x792
+references:
+  https://github.com/tensorflow/tensorflow/security/advisories/GHSA-8wwm-6264-x792
+  https://nvd.nist.gov/vuln/detail/CVE-2022-29212
+  https://github.com/tensorflow/tensorflow/issues/43661
+  https://github.com/tensorflow/tensorflow/commit/a989426ee1346693cc015792f11d715f6944f2b8
+  https://github.com/tensorflow/tensorflow
+  https://github.com/tensorflow/tensorflow/blob/f3b9bf4c3c0597563b289c0512e98d4ce81f886e/tensorflow/lite/kernels/internal/quantization_util.cc#L114-L123
+  https://github.com/tensorflow/tensorflow/releases/tag/v2.6.4
+  https://github.com/tensorflow/tensorflow/releases/tag/v2.7.2
+  https://github.com/tensorflow/tensorflow/releases/tag/v2.8.1
+  https://github.com/tensorflow/tensorflow/releases/tag/v2.9.0
+  https://pypi.org/project/tensorflow
+  https://github.com/advisories/GHSA-8wwm-6264-x792
+
+### Impact
+Certain TFLite models that were created using TFLite model converter would crash when loaded in the TFLite interpreter. The culprit is that during quantization the scale of values could be greater than 1 but code was always assuming sub-unit scaling.
+
+Thus, since code was calling [`QuantizeMultiplierSmallerThanOneExp`](https://github.com/tensorflow/tensorflow/blob/f3b9bf4c3c0597563b289c0512e98d4ce81f886e/tensorflow/lite/kernels/internal/quantization_util.cc#L114-L123), the `TFLITE_CHECK_LT` assertion would trigger and abort the process.
+
+### Patches
+We have patched the issue in GitHub commit [a989426ee1346693cc015792f11d715f6944f2b8](https://github.com/tensorflow/tensorflow/commit/a989426ee1346693cc015792f11d715f6944f2b8).
+
+The fix will be included in TensorFlow 2.9.0. We will also cherrypick this commit on TensorFlow 2.8.1, TensorFlow 2.7.2, and TensorFlow 2.6.4, as these are also affected and still in supported range.
+
+### For more information
+Please consult [our security guide](https://github.com/tensorflow/tensorflow/blob/master/SECURITY.md) for more information regarding the security model and how to contact us with issues and questions.
+
+### Attribution
+This vulnerability has been reported externally via a [GitHub issue](https://github.com/tensorflow/tensorflow/issues/43661).

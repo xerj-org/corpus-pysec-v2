@@ -1,0 +1,42 @@
+PYSEC-2026-4182 PyPI/zapros — Zapros: Streaming decoders ignored the requested chunk size, allowing a single compressed response chunk to allocate unbounded memory (decompression bomb)
+package: zapros
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.14.0 (ECOSYSTEM)
+aliases: CVE-2026-61652, GHSA-6cp7-3m3c-5x5c
+references:
+  https://github.com/kap-sh/zapros/security/advisories/GHSA-6cp7-3m3c-5x5c
+  https://nvd.nist.gov/vuln/detail/CVE-2026-61652
+  https://github.com/kap-sh/zapros/commit/9b59fa65857734599c34b0b3dff4c2b62293a68d
+  https://github.com/kap-sh/zapros
+  https://github.com/kap-sh/zapros/releases/tag/v0.14.0
+  https://pypi.org/project/zapros
+  https://github.com/advisories/GHSA-6cp7-3m3c-5x5c
+
+### Impact
+
+Denial of service via memory exhaustion. Affects all callers who streamed compressed responses relying on the chunk size — explicit (`iter_bytes(chunk_size=...)`) or the default — to bound memory. The decoder ignored that bound, so a chunk could be far larger than requested and a single compressed response could overflow memory.
+
+```python
+import gzip, zapros
+
+# Server returns ~1 GiB of zeros gzip-compressed to ~1 MiB,
+# with header: Content-Encoding: gzip
+bomb = gzip.compress(b"\0" * 1_000_000_000)  # ~1 MiB on the wire
+
+with zapros.stream("GET", "https://malicious.example/bomb") as response:
+    # Caller asks for 8 KiB chunks, expecting bounded memory:
+    for chunk in response.iter_bytes(chunk_size=8192):
+        ...  # first `chunk` is ~1 GiB, not 8 KiB -> memory exhaustion
+```
+
+### Patches
+
+Upgrade to `0.14.0` or later. The decoders now bound the output of each decompression step to the requested `chunk_size`: gzip/deflate via `zlib`'s `max_length` + `unconsumed_tail`, brotli via `output_buffer_limit`, and zstd via a bounded `stream_writer`. Peak memory during streaming decode is now proportional to `chunk_size` for all supported encodings.
+
+### Workarounds
+
+For unpatched versions:
+- Read the still-compressed body with `Response.iter_raw()` / `Response.async_iter_raw()`, which bypass the built-in decoders, and decompress it yourself with an explicit output-size bound (e.g. `zlib`'s `max_length`), aborting once a configured limit is exceeded.
+- Where feasible, send `Accept-Encoding: identity` to disable response compression so bodies are not decompressed client-side.
+- Avoid decoding response bodies from untrusted servers.

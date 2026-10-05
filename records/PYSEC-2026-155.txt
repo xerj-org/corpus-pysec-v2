@@ -1,0 +1,11 @@
+PYSEC-2026-155 PyPI/weblate — Weblate is a web based localization tool. In versions prior to 5.17, the user patching API endpoint 
+package: weblate
+ecosystem: PyPI
+versions affected:
+  >= 0, < 5.17 (ECOSYSTEM)
+aliases: CVE-2026-34393, GHSA-3382-gw9x-477v
+references:
+  https://github.com/WeblateOrg/weblate/security/advisories/GHSA-3382-gw9x-477v
+  https://github.com/WeblateOrg/weblate/pull/18687
+
+Weblate is a web based localization tool. In versions prior to 5.17, the user patching API endpoint didn't properly limit the scope of edits. This issue has been fixed in version 5.17.

@@ -1,0 +1,14 @@
+PYSEC-2024-53 PyPI/langchain-experimental — langchain_experimental (aka LangChain Experimental) before 0.0.61 for LangChain provides Python REPL
+package: langchain-experimental
+ecosystem: PyPI
+versions affected:
+  >= 0, < ce0b0f22a175139df8f41cdcfb4d2af411112009 (GIT: https://github.com/langchain-ai/langchain)
+  >= 0, < 0.0.61 (ECOSYSTEM)
+aliases: CVE-2024-38459, GHSA-wmvm-9vqv-5qpp
+references:
+  https://github.com/langchain-ai/langchain/pull/22860
+  https://github.com/langchain-ai/langchain/commit/ce0b0f22a175139df8f41cdcfb4d2af411112009
+  https://github.com/langchain-ai/langchain/compare/langchain-experimental==0.0.60...langchain-experimental==0.0.61
+  https://github.com/advisories/GHSA-wmvm-9vqv-5qpp
+
+langchain_experimental (aka LangChain Experimental) before 0.0.61 for LangChain provides Python REPL access without an opt-in step. NOTE; this issue exists because of an incomplete fix for CVE-2024-27444.

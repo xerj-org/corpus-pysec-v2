@@ -1,0 +1,52 @@
+PYSEC-2026-4110 PyPI/nautobot — Nautobot: Stored cross-site scripting (XSS) in object create/edit form help text
+package: nautobot
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.4.37, >= 3.0.0, < 3.1.8 (ECOSYSTEM)
+aliases: CVE-2026-83801, GHSA-56v6-2fhr-wxgq
+references:
+  https://github.com/nautobot/nautobot/security/advisories/GHSA-56v6-2fhr-wxgq
+  https://github.com/nautobot/nautobot/commit/e6ff20d50e0759135c6d278e7b2ceec56ed9b3c8
+  https://github.com/nautobot/nautobot/commit/f8a62466f3ebc42759a6373e7c79b0cad5751c2f
+  https://github.com/nautobot/nautobot
+  https://github.com/nautobot/nautobot/releases/tag/v2.4.37
+  https://github.com/nautobot/nautobot/releases/tag/v3.1.8
+  https://pypi.org/project/nautobot
+  https://github.com/advisories/GHSA-56v6-2fhr-wxgq
+  https://nvd.nist.gov/vuln/detail/CVE-2026-83801
+
+### Impact
+_What kind of vulnerability is it? Who is impacted?_
+
+It has two related instances that share the same root cause: a user-controlled model field is assigned verbatim to a form field's `help_text`, which is rendered with Django's `|safe` filter (`render_field.html`), bypassing auto-escaping.
+
+In both cases the script executes in the browser of any user who opens an affected create or edit form, **including administrators and superusers**. Because the payload runs in the victim's authenticated session, it can lead to actions performed as the victim, session/token theft, and further privilege escalation. Exploitation requires the victim to open an affected form.
+
+#### Relationship description
+
+A user who holds the add/change permission for Relationships (`extras.add_relationship` / `extras.change_relationship`) can set a Relationship's **description** to an HTML/JavaScript payload. That description is used as the help text of the relationship's form field and is rendered on the create/edit page of every object type the relationship applies to.
+
+#### Module Family name
+
+A user who holds the add/change permission for Module Families (`dcim.add_modulefamily` / `dcim.change_modulefamily`) can put a payload in a Module Family **name**, which is interpolated into the `module_family` field's help text on the Module "Install module" form for any module bay assigned to that family.
+
+### Patches
+_Has the problem been patched? What versions should users upgrade to?_
+
+Fixes are available in Nautobot v2.4.37+ & v3.1.8+
+
+> Note: The underlying weakness exists in earlier EOL versions of Nautobot (v1.x). Users on those older EOL versions are highly encouraged to upgrade to a supported version.
+
+### Workarounds
+_Is there a way for users to fix or remediate the vulnerability without upgrading?_
+
+There is no configuration-only fix. To remediate without upgrading:
+
+- Restrict the `extras.add_relationship` / `extras.change_relationship` and `dcim.add_modulefamily` / `dcim.change_modulefamily` permissions to fully trusted administrators only.
+- Audit existing Relationship **description** values and Module Family **name** values for embedded HTML / `<script>` content and remove any payloads.
+
+Note that limiting who can open create/edit forms does not fully mitigate the issue, since the payload targets any user (including admins) who opens an affected form.
+
+### Credit
+
+Credit for this discovery goes to Habibullo Izzatilloyev.

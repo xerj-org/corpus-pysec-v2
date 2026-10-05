@@ -1,0 +1,10 @@
+PYSEC-2026-92 PyPI/mitmproxy — mitmproxy is a interactive TLS-capable intercepting HTTP proxy for penetration testers and software 
+package: mitmproxy
+ecosystem: PyPI
+versions affected:
+  >= 0, < 12.2.2 (ECOSYSTEM)
+aliases: CVE-2026-40606, GHSA-527g-3w9m-29hv
+references:
+  https://github.com/mitmproxy/mitmproxy/security/advisories/GHSA-527g-3w9m-29hv
+
+mitmproxy is a interactive TLS-capable intercepting HTTP proxy for penetration testers and software developers and mitmweb is a web-based interface for mitmproxy. In mitmproxy 12.2.1 and below, the builtin LDAP proxy authentication does not correctly sanitize the username when querying the LDAP server. This allows a malicious client to bypass authentication. Only mitmproxy instances using the proxyauth option with LDAP are affected. This option is not enabled by default. The vulnerability has been fixed in mitmproxy 12.2.2 and above.

@@ -1,0 +1,20 @@
+PYSEC-2026-1933 PyPI/solara — Local File Inclusion in Solara
+package: solara
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.35.1 (ECOSYSTEM)
+aliases: CVE-2024-39903, GHSA-9794-pc4r-438w
+references:
+  https://github.com/widgetti/solara/security/advisories/GHSA-9794-pc4r-438w
+  https://nvd.nist.gov/vuln/detail/CVE-2024-39903
+  https://github.com/widgetti/solara/commit/df2fd66a7f4e8ffd36e8678697a8a4f76760dc54
+  https://github.com/widgetti/solara
+  https://pypi.org/project/solara
+  https://github.com/advisories/GHSA-9794-pc4r-438w
+
+A Local File Inclusion (LFI) vulnerability was identified in widgetti/solara, in version <1.35.1, which was fixed in version 1.35.1. This vulnerability arises from the application's failure to properly validate URI fragments for directory traversal sequences such as '../' when serving static files. An attacker can exploit this flaw by manipulating the fragment part of the URI to read arbitrary files on the local file system. 
+
+### References
+- https://github.com/widgetti/solara/security/advisories/GHSA-9794-pc4r-438w
+- https://github.com/widgetti/solara/commit/df2fd66a7f4e8ffd36e8678697a8a4f76760dc54
+- https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-39903

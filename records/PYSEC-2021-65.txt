@@ -1,0 +1,11 @@
+PYSEC-2021-65 PyPI/gramaddict — GramAddict through 1.2.3 allows remote attackers to execute arbitrary code because of use of UIAutom
+package: gramaddict
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.2.4 (ECOSYSTEM)
+aliases: CVE-2020-36245, GHSA-q5h6-49gg-2wfg
+references:
+  https://github.com/GramAddict/bot/issues/134
+  https://github.com/advisories/GHSA-q5h6-49gg-2wfg
+
+GramAddict through 1.2.3 allows remote attackers to execute arbitrary code because of use of UIAutomator2 and ATX-Agent. The attacker must be able to reach TCP port 7912, e.g., by being on the same Wi-Fi network.

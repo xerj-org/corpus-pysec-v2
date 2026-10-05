@@ -1,0 +1,13 @@
+PYSEC-2022-59 PyPI/tensorflow-cpu — Tensorflow is an Open Source Machine Learning Framework. The implementation of `FractionalMaxPool` c
+package: tensorflow-cpu
+ecosystem: PyPI
+versions affected:
+  >= 0, < ba4e8ac4dc2991e350d5cc407f8598c8d4ee70fb (GIT: https://github.com/tensorflow/tensorflow)
+  >= 0, < 2.5.3, >= 2.6.0, < 2.6.3 (ECOSYSTEM)
+aliases: CVE-2022-21735, GHSA-87v6-crgm-2gfj
+references:
+  https://github.com/tensorflow/tensorflow/blob/5100e359aef5c8021f2e71c7b986420b85ce7b3d/tensorflow/core/kernels/fractional_max_pool_op.cc#L36-L192
+  https://github.com/tensorflow/tensorflow/security/advisories/GHSA-87v6-crgm-2gfj
+  https://github.com/tensorflow/tensorflow/commit/ba4e8ac4dc2991e350d5cc407f8598c8d4ee70fb
+
+Tensorflow is an Open Source Machine Learning Framework. The implementation of `FractionalMaxPool` can be made to crash a TensorFlow process via a division by 0. The fix will be included in TensorFlow 2.8.0. We will also cherrypick this commit on TensorFlow 2.7.1, TensorFlow 2.6.3, and TensorFlow 2.5.3, as these are also affected and still in supported range.

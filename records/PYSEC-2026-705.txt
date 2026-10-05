@@ -1,0 +1,19 @@
+PYSEC-2026-705 PyPI/opencv-contrib-python — Out-of-bounds Write in OpenCV.
+package: opencv-contrib-python
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.4.1.15 (ECOSYSTEM)
+aliases: CVE-2018-5268, GHSA-9g8h-pjm4-q92p
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2018-5268
+  https://github.com/opencv/opencv/issues/10541
+  https://github.com/opencv/opencv/pull/10566/commits/435a3e337bd9d4e11af61cf8b8afca067bf1a8aa
+  https://github.com/opencv/opencv-python
+  https://lists.debian.org/debian-lts-announce/2018/04/msg00019.html
+  https://lists.debian.org/debian-lts-announce/2018/07/msg00030.html
+  https://lists.debian.org/debian-lts-announce/2021/10/msg00028.html
+  http://www.securityfocus.com/bid/106945
+  https://pypi.org/project/opencv-contrib-python
+  https://github.com/advisories/GHSA-9g8h-pjm4-q92p
+
+In OpenCV 3.3.1 (corresponding with OpenCV-Python 3.3.1.11), a heap-based buffer overflow happens in cv::Jpeg2KDecoder::readComponent8u in modules/imgcodecs/src/grfmt_jpeg2000.cpp when parsing a crafted image file.

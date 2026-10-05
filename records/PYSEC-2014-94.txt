@@ -1,0 +1,16 @@
+PYSEC-2014-94 PyPI/pywbem — PyWBEM 0.7 and earlier does not verify that the server hostname matches a domain name in the subject
+package: pywbem
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.8.1 (ECOSYSTEM)
+aliases: CVE-2013-6444, GHSA-gh2c-6m38-c78j
+references:
+  https://bugzilla.redhat.com/show_bug.cgi?id=1044246
+  http://seclists.org/oss-sec/2013/q4/524
+  http://sourceforge.net/p/pywbem/mailman/message/31757312/
+  http://sourceforge.net/p/pywbem/code/627/
+  http://www.oracle.com/technetwork/topics/security/bulletinapr2016-2952098.html
+  http://www.securityfocus.com/bid/64544
+  https://github.com/advisories/GHSA-gh2c-6m38-c78j
+
+PyWBEM 0.7 and earlier does not verify that the server hostname matches a domain name in the subject's Common Name (CN) or subjectAltName field of the X.509 certificate, which allows man-in-the-middle attackers to spoof SSL servers via an arbitrary valid certificate.

@@ -1,0 +1,14 @@
+PYSEC-2023-206 PyPI/selenium — NULL Pointer Dereference in GitHub repository seleniumhq/selenium prior to 4.14.0.
+package: selenium
+ecosystem: PyPI
+versions affected:
+  >= 0, < 023a0d52f106321838ab1c0997e76693f4dcbdf6 (GIT: https://github.com/seleniumhq/selenium)
+  >= 0, < 4.14.0 (ECOSYSTEM)
+aliases: CVE-2023-5590
+references:
+  https://github.com/seleniumhq/selenium/commit/023a0d52f106321838ab1c0997e76693f4dcbdf6
+  https://huntr.dev/bounties/e268cd68-4f34-49bd-878b-82b96dcc0c99
+  https://huntr.dev/bounties/e268cd68-4f34-49bd-878b-82b96dcc0c99
+  https://huntr.dev/bounties/e268cd68-4f34-49bd-878b-82b96dcc0c99
+
+NULL Pointer Dereference in GitHub repository seleniumhq/selenium prior to 4.14.0.

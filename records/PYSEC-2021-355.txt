@@ -1,0 +1,13 @@
+PYSEC-2021-355 PyPI/shuup — “Shuup” application in versions 0.4.2 to 2.10.8 is affected by the “Formula Injection” vulnerability
+package: shuup
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0a2db392e8518410c282412561461cd8797eea51 (GIT: https://github.com/shuup/shuup)
+  >= 0.4.2, < 2.11.0 (ECOSYSTEM)
+aliases: CVE-2021-25962, GHSA-663j-rjcr-789f
+references:
+  https://github.com/shuup/shuup/commit/0a2db392e8518410c282412561461cd8797eea51
+  https://www.whitesourcesoftware.com/vulnerability-database/CVE-2021-25962
+  https://github.com/advisories/GHSA-663j-rjcr-789f
+
+“Shuup” application in versions 0.4.2 to 2.10.8 is affected by the “Formula Injection” vulnerability. A customer can inject payloads in the name input field in the billing address while buying a product. When a store administrator accesses the reports page to export the data as an Excel file and opens it, the payload gets executed.

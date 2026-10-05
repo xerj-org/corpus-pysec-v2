@@ -1,0 +1,64 @@
+PYSEC-2026-2506 PyPI/guarddog — GuardDog: Unsanitized human-readable scan output allows terminal escape injection from malicious package content
+package: guarddog
+ecosystem: PyPI
+versions affected:
+  >= 2.6.0, <= 2.9.0 (ECOSYSTEM)
+aliases: CVE-2026-44972, GHSA-m5p4-gvpx-4mvr
+references:
+  https://github.com/DataDog/guarddog/security/advisories/GHSA-m5p4-gvpx-4mvr
+  https://nvd.nist.gov/vuln/detail/CVE-2026-44972
+  https://github.com/DataDog/guarddog
+  https://pypi.org/project/guarddog
+  https://github.com/advisories/GHSA-m5p4-gvpx-4mvr
+
+# Summary
+GuardDog includes attacker-controlled filenames, file locations, messages, and code snippets in its default human-readable output without escaping terminal control characters. A malicious package can therefore inject ANSI or OSC escape sequences into analyst terminals or CI logs.
+
+# Description
+The finding formatter stores file paths and snippets from scanned content:
+
+```python
+location = file_path + ":" + str(start_line)
+finding = {
+    "location": location,
+    "code": code,
+    "message": result["extra"]["message"],
+}
+```
+
+The human-readable reporter later prints these values directly:
+
+```python
+"  * " + finding["message"] + " at " + finding["location"] + "\n    " + _format_code_line_for_output(finding["code"])
+```
+
+No escaping is applied for control characters such as `\x1b`. A malicious package can therefore ship a filename like:
+
+```text
+evil\x1b[2J.py
+```
+
+or matched source lines containing terminal escapes, which survive into the final CLI output.
+
+# Reproduction summary
+1. Create a file whose name contains `\x1b[2J`.
+2. Feed a semgrep-style result referencing that file into `Analyzer._format_semgrep_response()`.
+3. Render the result with `HumanReadableReporter.print_scan_results()`.
+4. The output string contains the raw escape bytes, which a terminal may interpret.
+
+# Key code paths
+- `guarddog/analyzer/analyzer.py:377-392`
+- `guarddog/reporters/human_readable.py:36-42`
+- `guarddog/reporters/human_readable.py:84-91`
+
+# Practical impact
+This can be used to:
+- clear or rewrite analyst terminal output
+- inject misleading or spoofed log content in CI
+- emit clickable OSC 8 hyperlinks or title changes in compatible terminals
+
+# Prior public disclosure check
+As of 2026-03-18, no matching public GitHub advisory, CVE, or public repo issue was found for this specific bug.
+
+# Suggested fix
+Escape or strip terminal control characters before rendering any attacker-controlled value in human-readable output. This should cover package names, file paths, messages, and code snippets.

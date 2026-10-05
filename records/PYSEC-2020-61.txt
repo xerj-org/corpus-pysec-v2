@@ -1,0 +1,15 @@
+PYSEC-2020-61 PyPI/lookatme — In lookatme (python/pypi package) versions prior to 2.3.0, the package automatically loaded the buil
+package: lookatme
+ecosystem: PyPI
+versions affected:
+  >= 0, < 72fe36b784b234548d49dae60b840c37f0eb8d84 (GIT: https://github.com/d0c-s4vage/lookatme)
+  >= 0, < 2.3.0 (ECOSYSTEM)
+aliases: CVE-2020-15271, GHSA-c84h-w6cr-5v8q
+references:
+  https://github.com/d0c-s4vage/lookatme/security/advisories/GHSA-c84h-w6cr-5v8q
+  https://github.com/d0c-s4vage/lookatme/commit/72fe36b784b234548d49dae60b840c37f0eb8d84
+  https://pypi.org/project/lookatme/#history
+  https://github.com/d0c-s4vage/lookatme/releases/tag/v2.3.0
+  https://github.com/d0c-s4vage/lookatme/pull/110
+
+In lookatme (python/pypi package) versions prior to 2.3.0, the package automatically loaded the built-in "terminal" and "file_loader" extensions. Users that use lookatme to render untrusted markdown may have malicious shell commands automatically run on their system. This is fixed in version 2.3.0. As a workaround, the `lookatme/contrib/terminal.py` and `lookatme/contrib/file_loader.py` files may be manually deleted. Additionally, it is always recommended to be aware of what is being rendered with lookatme.

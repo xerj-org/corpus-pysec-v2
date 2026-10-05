@@ -1,0 +1,11 @@
+PYSEC-2018-61 PyPI/aubio — An issue was discovered in aubio 0.4.6. A SEGV signal can occur in aubio_source_avcodec_readframe in
+package: aubio
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.4.7 (ECOSYSTEM)
+aliases: CVE-2018-14521, GHSA-rcv6-7hmv-fj7h
+references:
+  https://github.com/aubio/aubio/issues/187
+  https://github.com/advisories/GHSA-rcv6-7hmv-fj7h
+
+An issue was discovered in aubio 0.4.6. A SEGV signal can occur in aubio_source_avcodec_readframe in io/source_avcodec.c, as demonstrated by aubiomfcc.

@@ -1,0 +1,22 @@
+PYSEC-2026-4044 PyPI/djust — djust has Cross-Site Request Forgery on the Server-Sent-Events transport: a cross-origin page can drive a victim-authenticated SSE session
+package: djust
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.0.7 (ECOSYSTEM)
+aliases: CVE-2026-61593, GHSA-pg97-jvmf-qfvc
+references:
+  https://github.com/djust-org/djust/security/advisories/GHSA-pg97-jvmf-qfvc
+  https://github.com/djust-org/djust
+  https://github.com/djust-org/djust/releases/tag/v1.0.7
+  https://pypi.org/project/djust
+  https://github.com/advisories/GHSA-pg97-jvmf-qfvc
+  https://nvd.nist.gov/vuln/detail/CVE-2026-61593
+
+### Impact
+The SSE client→server POST endpoints are `@csrf_exempt` and the SSE GET stream endpoint had no Origin check, so a cross-origin page could drive a victim-cookie-authenticated SSE session: force the victim's browser to GET the stream URL (which **creates and mounts** a LiveView as the victim) and POST to the message endpoint with `credentials: include` to **fire state-changing event handlers as the victim**. The URL `session_id` is client-chosen (validated only for UUID *format*), so it is not a CSRF token, and a JSON body sent as `text/plain` is a CORS *simple request* with no preflight.
+
+### Patches
+Fixed in **djust 1.0.7**. All three SSE endpoints validate the request `Origin` against `ALLOWED_HOSTS` (mirroring the WebSocket CSWSH defense) and reject cross-origin requests with **403**; the POST endpoints additionally require `Content-Type: application/json` (**415** otherwise), closing the `text/plain` simple-request bypass.
+
+### Workarounds
+Disable the SSE transport, or front it with a proxy that enforces an Origin allowlist.

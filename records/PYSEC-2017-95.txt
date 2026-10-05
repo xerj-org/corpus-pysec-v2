@@ -1,0 +1,13 @@
+PYSEC-2017-95 PyPI/tablib — An exploitable vulnerability exists in the Databook loading functionality of Tablib 0.11.4. A yaml l
+package: tablib
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.11.5 (ECOSYSTEM)
+aliases: CVE-2017-2810, GHSA-gcr6-rf47-jrgf
+references:
+  https://talosintelligence.com/vulnerability_reports/TALOS-2017-0307
+  http://www.securityfocus.com/bid/99076
+  https://security.gentoo.org/glsa/201811-18
+  https://github.com/advisories/GHSA-gcr6-rf47-jrgf
+
+An exploitable vulnerability exists in the Databook loading functionality of Tablib 0.11.4. A yaml loaded Databook can execute arbitrary python commands resulting in command execution. An attacker can insert python into loaded yaml to trigger this vulnerability.

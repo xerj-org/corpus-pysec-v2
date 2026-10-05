@@ -1,0 +1,11 @@
+PYSEC-2020-242 PyPI/netius — netius prior to 1.17.58 is vulnerable to HTTP Request Smuggling. HTTP pipelining issues and request 
+package: netius
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.17.58 (ECOSYSTEM)
+aliases: CVE-2020-7655, SNYK-PYTHON-NETIUS-569141, GHSA-wm2m-xrrp-j74c
+references:
+  https://snyk.io/vuln/SNYK-PYTHON-NETIUS-569141
+  https://github.com/advisories/GHSA-wm2m-xrrp-j74c
+
+netius prior to 1.17.58 is vulnerable to HTTP Request Smuggling. HTTP pipelining issues and request smuggling attacks might be possible due to incorrect Transfer encoding header parsing which could allow for CL:TE or TE:TE attacks.

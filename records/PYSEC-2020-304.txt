@@ -1,0 +1,13 @@
+PYSEC-2020-304 PyPI/tensorflow-gpu — TensorFlow before 1.7.0 has an integer overflow that causes an out-of-bounds read, possibly causing 
+package: tensorflow-gpu
+ecosystem: PyPI
+versions affected:
+  >= 0, < 49f73c55d56edffebde4bca4a407ad69c1cae433 (GIT: https://github.com/tensorflow/tensorflow)
+  >= 0, < 1.7.0 (ECOSYSTEM)
+aliases: CVE-2018-21233, GHSA-h98h-8mxr-m8gx
+references:
+  https://github.com/tensorflow/tensorflow/commit/49f73c55d56edffebde4bca4a407ad69c1cae433
+  https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/advisory/tfsa-2018-001.md
+  https://github.com/advisories/GHSA-h98h-8mxr-m8gx
+
+TensorFlow before 1.7.0 has an integer overflow that causes an out-of-bounds read, possibly causing disclosure of the contents of process memory. This occurs in the DecodeBmp feature of the BMP decoder in core/kernels/decode_bmp_op.cc.

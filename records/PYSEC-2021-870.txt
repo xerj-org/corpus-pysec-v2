@@ -1,0 +1,12 @@
+PYSEC-2021-870 PyPI/cvxopt — Incomplete string comparison vulnerability exits in cvxopt.org cvxop <= 1.2.6 in APIs (cvxopt.cholmo
+package: cvxopt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.2.7 (ECOSYSTEM)
+aliases: CVE-2021-41500, GHSA-8rh6-h94m-vj54
+references:
+  https://github.com/cvxopt/cvxopt/issues/193
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/CXTPM3DGVYTYQ54OFCMXZVWVOMR7JM2D/
+  https://github.com/advisories/GHSA-8rh6-h94m-vj54
+
+Incomplete string comparison vulnerability exits in cvxopt.org cvxop <= 1.2.6 in APIs (cvxopt.cholmod.diag, cvxopt.cholmod.getfactor, cvxopt.cholmod.solve, cvxopt.cholmod.spsolve), which allows attackers to conduct Denial of Service attacks by construct fake Capsule objects.

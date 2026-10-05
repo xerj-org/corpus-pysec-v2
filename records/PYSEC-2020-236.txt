@@ -1,0 +1,16 @@
+PYSEC-2020-236 PyPI/matrix-synapse — Matrix is an ecosystem for open federated Instant Messaging and VoIP. Synapse is a reference "homese
+package: matrix-synapse
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3ce2f303f15f6ac3dc352298972dc6e04d9b7a8b (GIT: https://github.com/matrix-org/synapse)
+  >= 0, < 1.23.1 (ECOSYSTEM)
+aliases: CVE-2020-26257, GHSA-hxmp-pqch-c8mm
+references:
+  https://github.com/matrix-org/synapse/security/advisories/GHSA-hxmp-pqch-c8mm
+  https://github.com/matrix-org/synapse/commit/3ce2f303f15f6ac3dc352298972dc6e04d9b7a8b
+  https://github.com/matrix-org/synapse/blob/develop/CHANGES.md#synapse-1231-2020-12-09
+  https://github.com/matrix-org/synapse/pull/8776
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/QR4MMYZKX5N5GYGH4H5LBUUC5TLAFHI7/
+  https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/DBTIU3ZNBFWZ56V4X7JIAD33V5H2GOMC/
+
+Matrix is an ecosystem for open federated Instant Messaging and VoIP. Synapse is a reference "homeserver" implementation of Matrix. A malicious or poorly-implemented homeserver can inject malformed events into a room by specifying a different room id in the path of a `/send_join`, `/send_leave`, `/invite` or `/exchange_third_party_invite` request. This can lead to a denial of service in which future events will not be correctly sent to other servers over federation. This affects any server which accepts federation requests from untrusted servers. The Matrix Synapse reference implementation before version 1.23.1 the implementation is vulnerable to this injection attack. Issue is fixed in version 1.23.1. As a workaround homeserver administrators could limit access to the federation API to trusted servers (for example via `federation_domain_whitelist`).

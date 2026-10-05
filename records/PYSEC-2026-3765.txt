@@ -1,0 +1,11 @@
+PYSEC-2026-3765 PyPI/openssl-encrypt — openssl_encrypt versions before 1.4.0 use HKDF with no salt and static info parameter in key normali
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.0 (ECOSYSTEM)
+aliases: CVE-2026-74889, GHSA-j9mh-57cc-665x
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-j9mh-57cc-665x
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-weak-key-derivation-via-hkdf
+
+openssl_encrypt versions before 1.4.0 use HKDF with no salt and static info parameter in key normalization functions, reducing entropy extraction and determinism. Attackers can exploit predictable key derivation with identical inputs to weaken cryptographic security against multi-target attacks.

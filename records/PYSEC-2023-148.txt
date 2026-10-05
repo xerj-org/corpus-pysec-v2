@@ -1,0 +1,12 @@
+PYSEC-2023-148 PyPI/llama-index — An issue in llama_index v.0.7.13 and before allows a remote attacker to execute arbitrary code via t
+package: llama-index
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.7.14 (ECOSYSTEM)
+aliases: CVE-2023-39662, GHSA-2xxc-73fv-36f7
+references:
+  https://github.com/jerryjliu/llama_index/issues/7054
+  https://github.com/jerryjliu/llama_index/issues/7054
+  https://github.com/advisories/GHSA-2xxc-73fv-36f7
+
+An issue in llama_index v.0.7.13 and before allows a remote attacker to execute arbitrary code via the `exec` parameter in PandasQueryEngine function.

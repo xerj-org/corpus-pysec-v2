@@ -1,0 +1,86 @@
+PYSEC-2026-1868 PyPI/reflex — reflex-dev/reflex has an Open Redirect vulnerability
+package: reflex
+ecosystem: PyPI
+versions affected:
+  >= 0.5.4, <= 0.8.14 (ECOSYSTEM)
+aliases: CVE-2025-62379, GHSA-rfh5-c9h5-q8jm
+references:
+  https://github.com/reflex-dev/reflex/security/advisories/GHSA-rfh5-c9h5-q8jm
+  https://nvd.nist.gov/vuln/detail/CVE-2025-62379
+  https://github.com/reflex-dev/reflex/commit/ade12549f3c0ddab3d7382c581bc04a3c1f989ec
+  https://file.notion.so/f/f/d105d145-04bc-45c5-b46c-ed880895e9de/a86c3e3b-f67f-45d1-8fa2-4aa0ba7d0068/poc.mp4?table=block&id=26955717-5d2e-805a-b53c-e25ee03f1d4b&spaceId=d105d145-04bc-45c5-b46c-ed880895e9de&expirationTimestamp=1760508000000&signature=ZPp8PVldfGOh0gB5tVElRV6GN789R-EG0oxZgkFjjLU&downloadName=poc.mp4
+  https://github.com/reflex-dev/reflex
+  https://github.com/reflex-dev/reflex/blob/51f9f2c2f52cac4d66c07683a12bc0237311b6be/reflex/utils/codespaces.py#L18-L46
+  https://pypi.org/project/reflex
+  https://github.com/advisories/GHSA-rfh5-c9h5-q8jm
+
+### Mitigation
+
+Make sure `GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN` is not set in a production environment. So the following is correct:
+
+```
+assert os.getenv("GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN") is None
+```
+
+### **Vulnerability Description**
+
+---
+
+**Vulnerability Overview**
+ 
+- When the GET /auth-codespace page loads in a GitHub Codespaces environment, it automatically assigns the redirect_to query parameter value directly to client-side links without any validation and triggers automatic clicks. This allows attackers to redirect users to arbitrary external URLs.
+- The route is only registered when a Codespaces environment is detected, and the detection is controlled by environment variables. This means that the same behavior can be activated in production if the corresponding environment variable is set.
+
+**Vulnerable Code Analysis**
+ 
+
+https://github.com/reflex-dev/reflex/blob/51f9f2c2f52cac4d66c07683a12bc0237311b6be/reflex/utils/codespaces.py#L18-L46
+
+- This code assigns the redirect_to query parameter directly to a.href without any validation and immediately triggers a click (automatic navigation), allowing users to be sent to arbitrary external domains, resulting in an open redirect vulnerability.
+- The execution condition is simply based on the presence of a sessionStorage flag, meaning it triggers immediately on first visits or in incognito/private browsing windows, with no server-side origin/scheme whitelist or internal path enforcement defenses in place.
+
+### PoC
+
+---
+
+**PoC Description**
+ 
+
+<img width="623" height="497" alt="image" src="https://github.com/user-attachments/assets/55ef4828-09fa-451b-a7cc-8fcaad6a2a21" />
+
+
+- Used the production configuration from docker-example (docker-example/production-compose).
+- Added a Codespaces detection environment variable to the app container in compose.yaml to forcibly expose the route.
+- GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN: dummy
+- The reverse proxy (Caddy) needs to be configured to forward /auth-codespace to the backend (required depending on the environment).
+
+**curl Example**
+
+
+```
+https://localhost/auth-codespace?redirect_to=http://google.com
+```
+
+**PoC MP4**
+https://file.notion.so/f/f/d105d145-04bc-45c5-b46c-ed880895e9de/a86c3e3b-f67f-45d1-8fa2-4aa0ba7d0068/poc.mp4?table=block&id=26955717-5d2e-805a-b53c-e25ee03f1d4b&spaceId=d105d145-04bc-45c5-b46c-ed880895e9de&expirationTimestamp=1760508000000&signature=ZPp8PVldfGOh0gB5tVElRV6GN789R-EG0oxZgkFjjLU&downloadName=poc.mp4
+
+<img width="1917" height="949" alt="image" src="https://github.com/user-attachments/assets/e565dc4e-a59b-44d4-a92a-ebf128489e88" />
+
+<img width="1913" height="977" alt="image" src="https://github.com/user-attachments/assets/496fa585-76ea-4d2d-80f8-0ab79f51229e" />
+
+
+
+
+### Impact
+
+---
+
+**Phishing/Social Engineering Attacks**
+
+
+Users can be exploited by immediately redirecting from a trusted domain to external malicious sites, taking advantage of user trust. This enables login page spoofing, credential harvesting, and redirection to malware distribution pages.
+
+**Authentication/Session Flow Disruption**
+ 
+
+When users with valid sessions/cookies from the same origin click the link, they are redirected to unintended external domains, which can bypass or disrupt authentication/authorization flows. When combined with redirect-based flows like OAuth/OIDC, this can escalate into security incidents.

@@ -1,0 +1,17 @@
+PYSEC-2026-1793 PyPI/pillow — Pillow buffer overflow vulnerability
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 10.3.0 (ECOSYSTEM)
+aliases: CVE-2024-28219, GHSA-44wm-f244-xhp3
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2024-28219
+  https://github.com/python-pillow/Pillow/commit/2a93aba5cfcf6e241ab4f9392c13e3b74032c061
+  https://github.com/python-pillow/Pillow
+  https://lists.debian.org/debian-lts-announce/2024/04/msg00008.html
+  https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/4XLPUT3VK4GQ6EVY525TT2QNUIXNRU5M
+  https://pillow.readthedocs.io/en/stable/releasenotes/10.3.0.html#security
+  https://pypi.org/project/pillow
+  https://github.com/advisories/GHSA-44wm-f244-xhp3
+
+In _imagingcms.c in Pillow before 10.3.0, a buffer overflow exists because strcpy is used instead of strncpy.

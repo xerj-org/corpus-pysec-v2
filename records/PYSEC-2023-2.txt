@@ -1,0 +1,12 @@
+PYSEC-2023-2 PyPI/apache-airflow — Generation of Error Message Containing Sensitive Information vulnerability in Apache Software Founda
+package: apache-airflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.5.2 (ECOSYSTEM)
+aliases: CVE-2023-25695, GHSA-h6g5-wqqr-3mw3
+references:
+  https://github.com/apache/airflow/pull/29501
+  https://lists.apache.org/thread/z8w6ckzs61ql365tv4d19k82o67r15p2
+  https://github.com/advisories/GHSA-h6g5-wqqr-3mw3
+
+Generation of Error Message Containing Sensitive Information vulnerability in Apache Software Foundation Apache Airflow.This issue affects Apache Airflow: before 2.5.2.

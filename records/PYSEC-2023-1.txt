@@ -1,0 +1,10 @@
+PYSEC-2023-1 PyPI/adyen — Adyen has utility methods for validating notification HMAC signatures. The is_valid_hmac and is_vali
+package: adyen
+ecosystem: PyPI
+versions affected:
+  >= 2.2.0, < 7.1.0 (ECOSYSTEM)
+references:
+  https://github.com/Adyen/adyen-python-api-library/issues/168
+  https://github.com/Adyen/adyen-python-api-library/pull/170
+
+Adyen has utility methods for validating notification HMAC signatures. The is_valid_hmac and is_valid_hmac_notification methods are vulnerable to a timing attack, you should compare the hash of the HMACs instead.

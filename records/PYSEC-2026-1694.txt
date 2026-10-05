@@ -1,0 +1,15 @@
+PYSEC-2026-1694 PyPI/neutron — Denial of service in neutron
+package: neutron
+ecosystem: PyPI
+versions affected:
+  >= 0, <= 22.0.2 (ECOSYSTEM)
+aliases: CVE-2023-3637, GHSA-r3jh-qhgj-gvr8
+references:
+  https://nvd.nist.gov/vuln/detail/CVE-2023-3637
+  https://access.redhat.com/errata/RHSA-2023:4283
+  https://access.redhat.com/security/cve/CVE-2023-3637
+  https://bugzilla.redhat.com/show_bug.cgi?id=2222270
+  https://pypi.org/project/neutron
+  https://github.com/advisories/GHSA-r3jh-qhgj-gvr8
+
+An uncontrolled resource consumption flaw was found in openstack-neutron. This flaw allows a remote authenticated user to query a list of security groups for an invalid project. This issue creates resources that are unconstrained by the user's quota. If a malicious user were to submit a significant number of requests, this could lead to a denial of service.

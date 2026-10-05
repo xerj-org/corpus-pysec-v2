@@ -1,0 +1,11 @@
+PYSEC-2021-35 PyPI/pillow — An issue was discovered in Pillow before 8.1.1. TiffDecode has a heap-based buffer overflow when dec
+package: pillow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 8.1.1 (ECOSYSTEM)
+aliases: CVE-2021-25289, GHSA-57h3-9rgr-c24m
+references:
+  https://pillow.readthedocs.io/en/stable/releasenotes/8.1.1.html
+  https://github.com/advisories/GHSA-57h3-9rgr-c24m
+
+An issue was discovered in Pillow before 8.1.1. TiffDecode has a heap-based buffer overflow when decoding crafted YCbCr files because of certain interpretation conflicts with LibTIFF in RGBA mode. NOTE: this issue exists because of an incomplete fix for CVE-2020-35654.

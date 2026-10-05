@@ -1,0 +1,12 @@
+PYSEC-2026-56 PyPI/django-allauth — An open redirect vulnerability exists in django-allauth versions prior to 65.14.1 when SAML IdP init
+package: django-allauth
+ecosystem: PyPI
+versions affected:
+  >= 0, < 65.14.1 (ECOSYSTEM)
+aliases: CVE-2026-27982, GHSA-2jpr-83rg-v67j
+references:
+  https://allauth.org/news/2026/02/django-allauth-65.14.1-released/
+  https://jvn.jp/en/jp/JVN23669411/
+  https://github.com/advisories/GHSA-2jpr-83rg-v67j
+
+An open redirect vulnerability exists in django-allauth versions prior to 65.14.1 when SAML IdP initiated SSO is enabled (it is disabled by default), which may allow an attacker to redirect users to an arbitrary external website via a crafted URL.

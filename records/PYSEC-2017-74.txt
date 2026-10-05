@@ -1,0 +1,14 @@
+PYSEC-2017-74 PyPI/tqdm — The tqdm._version module in tqdm versions 4.4.1 and 4.10 allows local users to execute arbitrary cod
+package: tqdm
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.11.2 (ECOSYSTEM)
+aliases: CVE-2016-10075, GHSA-r7q7-xcjw-qx8q
+references:
+  https://github.com/tqdm/tqdm/issues/328
+  http://www.securityfocus.com/bid/95143
+  http://www.openwall.com/lists/oss-security/2016/12/28/8
+  https://security.gentoo.org/glsa/201807-01
+  https://github.com/advisories/GHSA-r7q7-xcjw-qx8q
+
+The tqdm._version module in tqdm versions 4.4.1 and 4.10 allows local users to execute arbitrary code via a crafted repo with a malicious git log in the current working directory.

@@ -1,0 +1,19 @@
+PYSEC-2026-3694 PyPI/resdata — resdata has Classic Buffer Overflow, Improper Validation of Array Index, NULL Pointer Dereference and Out-of-bounds Read
+package: resdata
+ecosystem: PyPI
+versions affected:
+  >= 0, < 6.2.9 (ECOSYSTEM)
+aliases: CVE-2026-55209, GHSA-pr85-w493-9w3x
+references:
+  https://github.com/equinor/resdata/security/advisories/GHSA-pr85-w493-9w3x
+  https://github.com/equinor/resdata
+  https://github.com/equinor/resdata/releases/tag/6.2.9
+  https://pypi.org/project/resdata
+  https://github.com/advisories/GHSA-pr85-w493-9w3x
+  https://nvd.nist.gov/vuln/detail/CVE-2026-55209
+
+### Impact
+Prior to version 6.2.9 resdata would not correctly validate input in GRDECL files. The severity rating assumes that resdata is used to parse untrused files in a networking context such as a webservice.
+
+### Patches
+The bug has been patched starting with version 6.2.9.

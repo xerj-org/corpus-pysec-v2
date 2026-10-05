@@ -1,0 +1,19 @@
+PYSEC-2026-2044 PyPI/werkzeug — Werkzeug safe_join() allows Windows special device names with compound extensions
+package: werkzeug
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.1.5 (ECOSYSTEM)
+aliases: CVE-2026-21860, GHSA-87hc-h4r5-73f7
+references:
+  https://github.com/pallets/werkzeug/security/advisories/GHSA-87hc-h4r5-73f7
+  https://nvd.nist.gov/vuln/detail/CVE-2026-21860
+  https://github.com/pallets/werkzeug/commit/7ae1d254e04a0c33e241ac1cca4783ce6c875ca3
+  https://github.com/pallets/werkzeug
+  https://pypi.org/project/werkzeug
+  https://github.com/advisories/GHSA-87hc-h4r5-73f7
+
+Werkzeug's `safe_join` function allows path segments with Windows device names that have file extensions or trailing spaces. On Windows, there are special device names such as `CON`, `AUX`, etc that are implicitly present and readable in every directory. Windows still accepts them with any file extension, such as `CON.txt`, or trailing spaces such as `CON `.
+
+This was previously reported as https://github.com/pallets/werkzeug/security/advisories/GHSA-hgf8-39gv-g3f2, but the fix failed to account for compound extensions such as `CON.txt.html` or trailing spaces. It also missed some additional special names.
+
+`send_from_directory` uses `safe_join` to safely serve files at user-specified paths under a directory. If the application is running on Windows, and the requested path ends with a special device name, the file will be opened successfully, but reading will hang indefinitely.

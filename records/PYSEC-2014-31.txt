@@ -1,0 +1,15 @@
+PYSEC-2014-31 PyPI/plone — The App.Undo.UndoSupport.get_request_var_or_attr function in Zope before 2.12.21 and 3.13.x before 2
+package: plone
+ecosystem: PyPI
+versions affected:
+  >= 0, < 4.2.3, >= 4.3a0, < 4.3b1 (ECOSYSTEM)
+aliases: CVE-2012-5489, GHSA-879r-7f3w-8jj3
+references:
+  https://bugs.launchpad.net/zope2/+bug/1079238
+  https://plone.org/products/plone/security/advisories/20121106/05
+  https://plone.org/products/plone-hotfix/releases/20121106
+  https://github.com/plone/Products.CMFPlone/blob/4.2.3/docs/CHANGES.txt
+  http://www.openwall.com/lists/oss-security/2012/11/10/1
+  https://github.com/advisories/GHSA-879r-7f3w-8jj3
+
+The App.Undo.UndoSupport.get_request_var_or_attr function in Zope before 2.12.21 and 3.13.x before 2.13.11, as used in Plone before 4.2.3 and 4.3 before beta 1, allows remote authenticated users to gain access to restricted attributes via unspecified vectors.

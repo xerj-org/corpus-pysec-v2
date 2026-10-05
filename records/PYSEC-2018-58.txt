@@ -1,0 +1,13 @@
+PYSEC-2018-58 PyPI/ansible — An input validation vulnerability was found in Ansible's mysql_user module before 2.2.1.0, which may
+package: ansible
+ecosystem: PyPI
+versions affected:
+  >= 0, < 2.2.1.0 (ECOSYSTEM)
+aliases: CVE-2016-8647, GHSA-x4cm-m36h-c6qj
+references:
+  https://github.com/ansible/ansible-modules-core/pull/5388
+  https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2016-8647
+  https://access.redhat.com/errata/RHSA-2017:1685
+  https://github.com/advisories/GHSA-x4cm-m36h-c6qj
+
+An input validation vulnerability was found in Ansible's mysql_user module before 2.2.1.0, which may fail to correctly change a password in certain circumstances. Thus the previous password would still be active when it should have been changed.

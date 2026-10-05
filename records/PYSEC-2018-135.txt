@@ -1,0 +1,13 @@
+PYSEC-2018-135 PyPI/exiv2 — Exiv2::Internal::PngChunk::parseTXTChunk in Exiv2 v0.26 allows remote attackers to cause a denial of
+package: exiv2
+ecosystem: PyPI
+versions affected:
+  >= 0 (ECOSYSTEM)
+aliases: CVE-2018-16336
+references:
+  https://github.com/Exiv2/exiv2/issues/400
+  https://lists.debian.org/debian-lts-announce/2018/10/msg00012.html
+  https://lists.debian.org/debian-lts-announce/2018/10/msg00012.html
+  https://usn.ubuntu.com/3852-1/
+
+Exiv2::Internal::PngChunk::parseTXTChunk in Exiv2 v0.26 allows remote attackers to cause a denial of service (heap-based buffer over-read) via a crafted image file, a different vulnerability than CVE-2018-10999.

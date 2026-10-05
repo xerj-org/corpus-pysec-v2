@@ -1,0 +1,11 @@
+PYSEC-2026-3964 PyPI/openssl-encrypt — openssl_encrypt (pip package openssl-encrypt) versions <= 1.4.8 do not redact the keyserver bearer t
+package: openssl-encrypt
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.4.9 (ECOSYSTEM)
+aliases: CVE-2026-81715, GHSA-jqqp-pf9j-889j
+references:
+  https://github.com/jahlives/openssl_encrypt/security/advisories/GHSA-jqqp-pf9j-889j
+  https://www.vulncheck.com/advisories/openssl-encrypt-before-1.4.9-credential-exposure-via-debug-output
+
+openssl_encrypt (pip package openssl-encrypt) versions <= 1.4.8 do not redact the keyserver bearer token passed as the positional argument to 'keyserver set-token' in the --debug argv dump, because sanitize_argv_for_debug fails to sanitize it. As a result the token is printed in cleartext to stderr under --debug (even without --unsafe-show-secrets), persisting the credential in logs and terminal history. Fixed in 1.4.9.

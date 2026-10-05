@@ -1,0 +1,10 @@
+PYSEC-2026-76 PyPI/langchain-openai — LangChain is a framework for building agents and LLM-powered applications. Prior to 1.1.14, langchai
+package: langchain-openai
+ecosystem: PyPI
+versions affected:
+  >= 0, < 1.1.14 (ECOSYSTEM)
+aliases: CVE-2026-41488, GHSA-r7w7-9xr2-qq2r
+references:
+  https://github.com/langchain-ai/langchain/security/advisories/GHSA-r7w7-9xr2-qq2r
+
+LangChain is a framework for building agents and LLM-powered applications. Prior to 1.1.14, langchain-openai's _url_to_size() helper (used by get_num_tokens_from_messages for image token counting) validated URLs for SSRF protection and then fetched them in a separate network operation with independent DNS resolution. This left a TOCTOU / DNS rebinding window: an attacker-controlled hostname could resolve to a public IP during validation and then to a private/localhost IP during the actual fetch.

@@ -1,0 +1,14 @@
+PYSEC-2025-52 PyPI/mlflow — gateway_proxy_handler in MLflow before 3.1.0 lacks gateway_path validation.
+package: mlflow
+ecosystem: PyPI
+versions affected:
+  >= 0, < 39a419b4ec8fd11b59b3e50ab397042a490f2324 (GIT: https://github.com/mlflow/mlflow)
+  >= 0, < 3.1.0 (ECOSYSTEM)
+aliases: CVE-2025-52967, GHSA-wxj7-3fx5-pp9m
+references:
+  https://github.com/mlflow/mlflow/issues/15944
+  https://github.com/mlflow/mlflow/pull/15970
+  https://github.com/mlflow/mlflow/releases/tag/v3.1.0
+  https://github.com/advisories/GHSA-wxj7-3fx5-pp9m
+
+gateway_proxy_handler in MLflow before 3.1.0 lacks gateway_path validation.

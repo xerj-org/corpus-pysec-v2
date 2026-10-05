@@ -1,0 +1,13 @@
+PYSEC-2026-166 PyPI/apache-airflow-providers-google — Apache Airflow providers-google's `ComputeEngineSSHHook` disables SSH host-key verification by defau
+package: apache-airflow-providers-google
+ecosystem: PyPI
+versions affected:
+  >= 0, < 22.0.0 (ECOSYSTEM)
+aliases: CVE-2026-45361, GHSA-g9v5-gjwf-9rwx
+references:
+  http://www.openwall.com/lists/oss-security/2026/05/24/9
+  https://lists.apache.org/thread/3lpj7ppwxp7jtp81rnxk75xvln7qd7h2
+  https://github.com/apache/airflow/pull/66746
+  https://github.com/advisories/GHSA-g9v5-gjwf-9rwx
+
+Apache Airflow providers-google's `ComputeEngineSSHHook` disables SSH host-key verification by default, exposing SSH traffic between an Airflow worker and a Compute Engine VM to in-path network attackers who can intercept or modify the session. Users are advised to upgrade to `apache-airflow-providers-google` 22.0.0 or later.

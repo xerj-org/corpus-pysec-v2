@@ -1,0 +1,34 @@
+PYSEC-2026-2483 PyPI/frigate — Frigte has broken access control viewer user can delete admin and other users account
+package: frigate
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.16.3 (ECOSYSTEM)
+aliases: CVE-2026-33125, GHSA-vg28-83rp-8xx4
+references:
+  https://github.com/blakeblackshear/frigate/security/advisories/GHSA-vg28-83rp-8xx4
+  https://nvd.nist.gov/vuln/detail/CVE-2026-33125
+  https://github.com/blakeblackshear/frigate
+  https://github.com/blakeblackshear/frigate/releases/tag/v0.16.3
+  https://pypi.org/project/frigate
+  https://github.com/advisories/GHSA-vg28-83rp-8xx4
+
+### Summary
+Users with the viewer role can delete admin and other users account. It this leads to denial of service and affects data integrity.
+
+### Details
+Endpoint `DELETE /api/users/admin` is enable to anonymous user.
+
+<img width="436" height="100" alt="obraz" src="https://github.com/user-attachments/assets/817f9c47-7bd9-4247-a2f1-0f40778ab229" />
+
+### PoC
+I deleted admin user on `demo.frigate.video`:
+
+<img width="1091" height="222" alt="obraz" src="https://github.com/user-attachments/assets/34f50a13-3bb7-4aa8-99fa-bd815b3dc915" />
+
+
+### Impact
+It this leads to denial of service and affects data integrity.
+
+### Recommended Fixes
+Restrict access to the endpoint to authenticated admin users only:
+Add `dependencies=[Depends(require_role(["admin"]))])` to this endpoint.

@@ -1,0 +1,18 @@
+PYSEC-2024-172 PyPI/streampipes — Time-of-check Time-of-use (TOCTOU) Race Condition vulnerability in Apache StreamPipes in user self-r
+package: streampipes
+ecosystem: PyPI
+versions affected:
+  >= 0, < 0.95.0 (ECOSYSTEM)
+aliases: CVE-2024-30471, GHSA-2qph-v9p2-q2gv
+references:
+  https://lists.apache.org/thread/8yodrmohgcybq900or3d4hc1msl230fr
+  https://lists.apache.org/thread/8yodrmohgcybq900or3d4hc1msl230fr
+  http://www.openwall.com/lists/oss-security/2024/07/16/9
+  https://github.com/advisories/GHSA-2qph-v9p2-q2gv
+
+Time-of-check Time-of-use (TOCTOU) Race Condition vulnerability in Apache StreamPipes in user self-registration.
+This allows an attacker to potentially request the creation of multiple accounts with the same email address until the email address is registered, creating many identical users and corrupting StreamPipe's user management.
+This issue affects Apache StreamPipes: through 0.93.0.
+
+Users are recommended to upgrade to version 0.95.0, which fixes the issue.
+

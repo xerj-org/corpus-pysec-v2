@@ -1,0 +1,31 @@
+PYSEC-2026-2457 PyPI/docling-core — Docling Core: Unsafe remote filename resolution
+package: docling-core
+ecosystem: PyPI
+versions affected:
+  >= 1.5.0, < 2.74.1 (ECOSYSTEM)
+aliases: CVE-2026-44023, GHSA-jmmv-h3mp-59v8
+references:
+  https://github.com/docling-project/docling-core/security/advisories/GHSA-jmmv-h3mp-59v8
+  https://github.com/docling-project/docling-core
+  https://github.com/docling-project/docling-core/releases/tag/v2.74.1
+  https://pypi.org/project/docling-core
+  https://github.com/advisories/GHSA-jmmv-h3mp-59v8
+  https://nvd.nist.gov/vuln/detail/CVE-2026-44023
+
+### Impact
+In versions `>= 1.5.0, < 2.74.1`, `docling-core` did not sufficiently restrict remote request destinations and could resolve a server-provided `Content-Disposition` to a local path in an unsafe manner.
+
+In applications that accept untrusted URLs, this could allow SSRF attacks targeting local files outside the user-defined cache directory.
+
+### Patches
+Patched in `docling-core` `2.74.1`.
+The fix adds stricter validation for remote destinations and normalizes server-provided filenames before use.
+
+Users should upgrade to:
+- `docling-core` `>= 2.74.1`
+
+### Workarounds
+If upgrading is not immediately possible, avoid passing untrusted URLs into remote fetch functionality.
+
+### References
+- Fix release: [`v2.74.1`](https://github.com/docling-project/docling-core/releases/tag/v2.74.1)

@@ -1,0 +1,63 @@
+PYSEC-2026-2776 PyPI/openbabel — Open Babel has out-of-bounds write (overlapping memcpy) in zipstream basic_unzip_streambuf::underflow
+package: openbabel
+ecosystem: PyPI
+versions affected:
+  >= 0, < 3.2.0 (ECOSYSTEM)
+aliases: CVE-2025-10995, GHSA-8j3x-m868-cpw8
+references:
+  https://github.com/openbabel/openbabel/security/advisories/GHSA-8j3x-m868-cpw8
+  https://nvd.nist.gov/vuln/detail/CVE-2025-10995
+  https://github.com/openbabel/openbabel/issues/2832
+  https://github.com/openbabel/openbabel/issues/2913
+  https://github.com/openbabel/openbabel/commit/d4621d417c167b50cc8ce7aa3a02557e5b2b81c5
+  https://github.com/openbabel/openbabel
+  https://github.com/user-attachments/files/22318572/poc.zip
+  https://vuldb.com/?ctiid.325923
+  https://vuldb.com/?id.325923
+  https://vuldb.com/?submit.654059
+  https://pypi.org/project/openbabel
+  https://github.com/advisories/GHSA-8j3x-m868-cpw8
+
+### Summary
+
+A memory-safety vulnerability in Open Babel's bundled zipstream
+decompression code caused an out-of-bounds write via overlapping
+`memcpy` when reading a crafted gzip-compressed chemistry file.
+
+### Details
+
+The flaw was in `basic_unzip_streambuf::underflow`. The decompression
+buffer refill path invoked `memcpy` with overlapping source and
+destination regions, which is undefined behavior and produced
+out-of-bounds writes in practice. Any file format read through the
+gzip-wrapped reader was a potential trigger.
+
+### Impact
+
+Open Babel is a C++ library and CLI used to read and write chemistry
+file formats; it is shipped by Linux distributions and embedded in
+services that may parse untrusted input. Triggering this vulnerability
+requires the victim to open a malicious gzip-compressed chemistry file
+with the `obabel` tool, the `OBConversion` API, or any of the language
+bindings (Python, Ruby, Java, R, Perl, C#, PHP).
+
+### Affected versions
+
+All releases up to and including 3.1.1.
+
+### Patched version
+
+3.2.0 (released 2026-05-26).
+
+### Patch
+
+Fix commit: https://github.com/openbabel/openbabel/commit/d4621d41
+Originally reported as #2832; fixes consolidated in #2913.
+
+A minimized reproducer for this CVE is checked in under
+`test/files/fuzz_regress/` and is exercised on every CI build under
+ASAN+UBSAN by the `fuzzregresstest` harness.
+
+### Credit
+
+Reported via OSS-Fuzz.
